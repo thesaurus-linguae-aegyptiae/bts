@@ -30,7 +30,7 @@ import org.bbaw.bts.ui.commons.validator.StringIsRegexPatternValidator;
 import org.bbaw.bts.ui.commons.validator.StringNotEmptyValidator;
 import org.bbaw.bts.ui.commons.viewerSorter.BTSObjectByNameViewerSorter;
 import org.bbaw.bts.ui.commons.widgets.TranslationEditorComposite;
-import org.bbaw.bts.ui.main.dialogs.btsConfigDialog.provider.BTSObjectPivot;
+//import org.bbaw.bts.ui.main.dialogs.btsConfigDialog.provider.BTSObjectPivot;
 import org.bbaw.bts.ui.main.handlers.NewConfigurationHandler;
 import org.bbaw.bts.ui.main.objectTypeSelector.ObjectTypeSelectionTreeComposite;
 import org.bbaw.bts.ui.main.objectTypeSelector.RelationSubjectObjectTypesSelectionComposite;
@@ -79,10 +79,7 @@ import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.ViewerSorter;
-import org.eclipse.ocl.examples.pivot.delegate.OCLDelegateDomain;
-import org.eclipse.ocl.examples.xtext.essentialocl.EssentialOCLStandaloneSetup;
-import org.eclipse.ocl.examples.xtext.essentialocl.ui.internal.EssentialOCLActivator;
-import org.eclipse.ocl.examples.xtext.essentialocl.ui.model.BaseDocument;
+
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.SashForm;
 import org.eclipse.swt.events.KeyEvent;
@@ -1167,61 +1164,61 @@ public class BTSConfigurationDialog extends TitleAreaDialog {
 			ownerTypeSelector.setPathInput(configItem,
 					getEditingDomain(configItem), null, null, false);
 		}
-		{
-
-			TabItem ownerstabItem = new TabItem(tabfolder, SWT.NONE);
-			ownerstabItem.setText("OCL");
-			EssentialOCLStandaloneSetup.doSetup();
-
-			// inititae static access controller
-			StaticAccessController sa = context
-					.get(StaticAccessController.class);
-			EssentialOCLActivator activator = EssentialOCLActivator
-					.getInstance();
-			Injector injector = activator
-					.getInjector(EssentialOCLActivator.ORG_ECLIPSE_OCL_EXAMPLES_XTEXT_ESSENTIALOCL_ESSENTIALOCL);
-			embeddedEditorFactory = injector
-					.getInstance(EmbeddedEditorFactory.class);
-			Composite ownerEditComp = new Composite(tabfolder, SWT.NONE);
-			ownerEditComp.setLayout(new GridLayout(1, false));
-			ownerstabItem.setControl(ownerEditComp);
-			OCLDelegateDomain.initialize(configItem.eResource()
-					.getResourceSet());
-			// MetaModelManager mmm =
-			// mmm.loadResource(configItem.eResource().getURI(), null, null);
-			IEditedResourceProvider resourceProvider = new IEditedResourceProvider() {
-
-				@Override
-				public XtextResource createResource() {
-					try {
-						ResourceSet resourceSet = new ResourceSetImpl();
-						Resource resource = resourceSet
-								.createResource(URI
-										.createURI("file://E:/AAEW/test/runtime-EclipseXtext/tt/btstest.essentialocl"));
-
-						return (XtextResource) resource;
-					} catch (Exception e) {
-						return null;
-					}
-				}
-			};
-
-			embeddedEditor = embeddedEditorFactory.newEditor(resourceProvider)
-					.showErrorAndWarningAnnotations().withParent(ownerEditComp);
-			embeddedEditorModelAccess = embeddedEditor.createPartialEditor(
-					"\r", "hallo", "\r", false);
-			// TestPivot tp = new TestPivot();
-			if (selectedCorpusObject != null) {
-				BTSObjectPivot cp = new BTSObjectPivot(
-						selectedCorpusObject);
-				Map<String, EClassifier> map = new HashMap<String, EClassifier>();
-				map.put("second", selectedCorpusObject.eClass());
-				getEditorDocument().setContext(cp.getClassifierForContext(),
-						map);
-			}
-			getEditorDocument().set("self");
-			ownerEditComp.layout();
-		}
+//		{
+//
+//			TabItem ownerstabItem = new TabItem(tabfolder, SWT.NONE);
+//			ownerstabItem.setText("OCL");
+//			EssentialOCLStandaloneSetup.doSetup();
+//
+//			// inititae static access controller
+//			StaticAccessController sa = context
+//					.get(StaticAccessController.class);
+//			EssentialOCLActivator activator = EssentialOCLActivator
+//					.getInstance();
+//			Injector injector = activator
+//					.getInjector(EssentialOCLActivator.ORG_ECLIPSE_OCL_EXAMPLES_XTEXT_ESSENTIALOCL_ESSENTIALOCL);
+//			embeddedEditorFactory = injector
+//					.getInstance(EmbeddedEditorFactory.class);
+//			Composite ownerEditComp = new Composite(tabfolder, SWT.NONE);
+//			ownerEditComp.setLayout(new GridLayout(1, false));
+//			ownerstabItem.setControl(ownerEditComp);
+//			OCLDelegateDomain.initialize(configItem.eResource()
+//					.getResourceSet());
+//			// MetaModelManager mmm =
+//			// mmm.loadResource(configItem.eResource().getURI(), null, null);
+//			IEditedResourceProvider resourceProvider = new IEditedResourceProvider() {
+//
+//				@Override
+//				public XtextResource createResource() {
+//					try {
+//						ResourceSet resourceSet = new ResourceSetImpl();
+//						Resource resource = resourceSet
+//								.createResource(URI
+//										.createURI("file://E:/AAEW/test/runtime-EclipseXtext/tt/btstest.essentialocl"));
+//
+//						return (XtextResource) resource;
+//					} catch (Exception e) {
+//						return null;
+//					}
+//				}
+//			};
+//
+//			embeddedEditor = embeddedEditorFactory.newEditor(resourceProvider)
+//					.showErrorAndWarningAnnotations().withParent(ownerEditComp);
+//			embeddedEditorModelAccess = embeddedEditor.createPartialEditor(
+//					"\r", "hallo", "\r", false);
+//			// TestPivot tp = new TestPivot();
+//			if (selectedCorpusObject != null) {
+//				BTSObjectPivot cp = new BTSObjectPivot(
+//						selectedCorpusObject);
+//				Map<String, EClassifier> map = new HashMap<String, EClassifier>();
+//				map.put("second", selectedCorpusObject.eClass());
+//				getEditorDocument().setContext(cp.getClassifierForContext(),
+//						map);
+//			}
+//			getEditorDocument().set("self");
+//			ownerEditComp.layout();
+//		}
 		tabfolder.addSelectionListener(new SelectionListener() {
 
 			@Override
@@ -1247,9 +1244,9 @@ public class BTSConfigurationDialog extends TitleAreaDialog {
 		sashForm.layout();
 	}
 
-	public BaseDocument getEditorDocument() {
-		return (BaseDocument) embeddedEditor.getDocument();
-	}
+//	public BaseDocument getEditorDocument() {
+//		return (BaseDocument) embeddedEditor.getDocument();
+//	}
 
 	private DataBindingContext initializeConfigItemEditBindings(
 			BTSConfigItem configItem) {

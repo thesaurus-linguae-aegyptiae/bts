@@ -3,11 +3,12 @@
 
 <product name="Berlin Text System" uid="org.bbaw.bts.app.product" id="org.bbaw.bts.app.product" application="org.eclipse.e4.ui.workbench.swt.E4Application" version="2.0.0.qualifier" useFeatures="true" includeLaunchers="true">
 
+
    <configIni use="default">
    </configIni>
 
    <launcherArgs>
-      <vmArgs>-Dosgi.requiredJavaVersion=1.8 -Xms140m -Xmx512m -XX:MaxPermSize=256M
+      <vmArgs>-Dosgi.requiredJavaVersion=1.8 -Xms256m -Xmx1024m -XX:MaxPermSize=512M
       </vmArgs>
       <vmArgsMac>-XstartOnFirstThread -Dorg.eclipse.swt.internal.carbon.smallFonts
       </vmArgsMac>
@@ -15,11 +16,12 @@
 
    <windowImages i16="/org.bbaw.bts.app.product/icons/bts16.bmp" i32="/org.bbaw.bts.app.product/icons/bts32.bmp" i48="/org.bbaw.bts.app.product/icons/bts48.bmp" i64="/org.bbaw.bts.app.product/icons/bts64.bmp" i128="/org.bbaw.bts.app.product/icons/bts128.bmp" i256="/org.bbaw.bts.app.product/icons/bts256.bmp"/>
 
+
    <launcher name="BTS">
       <macosx icon="/icons/bts256.icns"/>
       <solaris/>
       <win useIco="false">
-         <ico path="/icons/bts.ico"/>
+         <ico path="/org.bbaw.bts.app.product/icons/bts.ico"/>
          <bmp
             winSmallHigh="/org.bbaw.bts.app.product/icons/bts16.bmp"
             winSmallLow="/org.bbaw.bts.app.product/icons/bts16-8.bmp"
@@ -31,8 +33,10 @@
       </win>
    </launcher>
 
+
    <vm>
    </vm>
+
 
    <plugins>
       <plugin id="com.ibm.icu"/>
@@ -126,8 +130,8 @@
    </plugins>
 
    <features>
-      <feature id="org.bbaw.bts.app.feature" version="2.0.0.qualifier" installMode="root"/>
       <feature id="org.bbaw.bts.corpus.egy.feature" version="1.0.0.qualifier"/>
+      <feature id="org.bbaw.bts.app.feature" version="2.0.1.qualifier"/>
    </features>
 
    <configurations>
@@ -136,5 +140,12 @@
       <plugin id="org.eclipse.equinox.event" autoStart="true" startLevel="3" />
       <property name="eclipse.log.level" value="ERROR" />
    </configurations>
+
+   <preferencesInfo>
+      <targetfile overwrite="false"/>
+   </preferencesInfo>
+
+   <cssInfo>
+   </cssInfo>
 
 </product>

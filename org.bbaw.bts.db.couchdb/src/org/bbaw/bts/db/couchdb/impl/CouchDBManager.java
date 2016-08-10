@@ -666,6 +666,7 @@ public class CouchDBManager implements DBManager {
 			target = m.replaceAll("$1$3");
 		}
 		String url = dbConnection.getMasterServer();
+		if (url == null) return true;
 		url = url.replaceAll("\\/", "\\\\/");
 		Pattern pattern = Pattern.compile(url + "\\/*" + collectionName);
 		Matcher m = pattern.matcher(target);
@@ -687,6 +688,7 @@ public class CouchDBManager implements DBManager {
 			source = m.replaceAll("$1$3");
 		}
 		String url = dbConnection.getMasterServer();
+		if (url == null) return true;
 		url = url.replaceAll("\\/", "\\\\/");
 		Pattern pattern = Pattern.compile(url + "\\/*" + collectionName);
 		Matcher m = pattern.matcher(source);

@@ -22,59 +22,25 @@
   
   <repositories>
 	
-	
-		<repository>
+	<repository>
 			<id>bts-mvn-build-repository</id>
 			<name>BTS BUILD Rep</name>
-			<url>http://telota.bbaw.de/bts-update/bts-build-repository</url>
+			<url>http://telota.bbaw.de/bts-update/bts-build-neon</url>
 			<layout>p2</layout>
 		</repository>
 		
 		<repository>
-			<id>bts-mvn-telota-all</id>
-			<name>BTS Maven local Rep</name>
-			<url>http://telota.bbaw.de/bts-update/bts-mvn-p2all</url>
-			<layout>p2</layout>
-		</repository>
-		<repository>
-			<id>kepler</id>
-			<url>${kepler-repo.url}</url>
-			<layout>p2</layout>
-		</repository>
-
-		<!--
-		
-			<repository>
-			<id>bts-mvn-telota</id>
-			<name>BTS Maven local Rep</name>
-			<url>http://telota.bbaw.de/bts-update/bts-mvn-p2rep</url>
-			<layout>p2</layout>
-		</repository>
-		
-		<repository>
-			<id>bts-mvn-telota-all</id>
-			<name>BTS Maven local Rep</name>
-			<url>http://telota.bbaw.de/bts-update/bts-mvn-p2all</url>
-			<layout>p2</layout>
-		</repository>
-		<repository>
-			<id>bts-mvn-build-repository</id>
+			<id>bts-mvn-build-extras</id>
 			<name>BTS BUILD Rep</name>
-			<url>http://telota.bbaw.de/bts-update/bts-build-repository</url>
+			<url>http://telota.bbaw.de/bts-update/extras</url>
 			<layout>p2</layout>
 		</repository>
 		
 		<repository>
-			<id>e4-tools</id>
-			<url>http://download.vogella.com/luna/e4tools</url>
+			<id>neon</id>
+			<url>http://download.eclipse.org/releases/neon</url>
 			<layout>p2</layout>
 		</repository>
-
-		<repository>
-			<id>emfjson-repository</id>
-			<url>http://repository-ghillairet.forge.cloudbees.com/snapshot</url>
-		</repository>
-		-->
 
 	</repositories>
 	

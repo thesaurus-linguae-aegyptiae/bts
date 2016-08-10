@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: org.bbaw.bts.model;singleton:=true
-Bundle-Version: 1.0.0.qualifier
+Bundle-Version: 2.0.0.qualifier
 Bundle-ClassPath: .
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
@@ -19,7 +19,7 @@ Export-Package: org.bbaw.bts.btsmodel,
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore;visibility:=reexport
 Bundle-ActivationPolicy: lazy
-Import-Package: com.google.gson;version="2.1.0",
+Import-Package: com.google.gson,
  org.bbaw.bts.commons,
  org.eclipse.emf.ecore.xmi.impl,
  org.eclipse.jface.viewers,

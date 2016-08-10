@@ -36,7 +36,7 @@ import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryContentProvider;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
-import org.eclipse.jface.databinding.swt.SWTObservables;
+import org.eclipse.jface.databinding.swt.DisplayRealm;
 import org.eclipse.jface.databinding.viewers.ObservableListContentProvider;
 import org.eclipse.jface.viewers.ComboViewer;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
@@ -326,7 +326,7 @@ public class ObjectUpdaterReaderEditorPart extends Composite {
 	}
 
 	private void loadAllUserGroups() {
-		Realm.runWithDefault(SWTObservables.getRealm(Display.getDefault()), new Runnable() {
+		Realm.runWithDefault(DisplayRealm.getRealm(Display.getDefault()), new Runnable() {
 			@Override
 			public void run() {
 				List<BTSUserGroup> groups = userManagerController.listUserGroups(null);
@@ -340,7 +340,7 @@ public class ObjectUpdaterReaderEditorPart extends Composite {
 	}
 
 	private void loadAllUsers() {
-		Realm.runWithDefault(SWTObservables.getRealm(Display.getDefault()), new Runnable() {
+		Realm.runWithDefault(DisplayRealm.getRealm(Display.getDefault()), new Runnable() {
 			@Override
 			public void run() {
 				List<BTSUser> users = userManagerController.listUsers(null);

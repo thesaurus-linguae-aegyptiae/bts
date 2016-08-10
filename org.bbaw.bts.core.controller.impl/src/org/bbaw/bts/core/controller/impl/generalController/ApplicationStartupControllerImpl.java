@@ -2,7 +2,6 @@ package org.bbaw.bts.core.controller.impl.generalController;
 
 import java.lang.reflect.InvocationTargetException;
 import java.net.MalformedURLException;
-import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -15,12 +14,8 @@ import java.util.Vector;
 import javax.inject.Inject;
 
 import org.bbaw.bts.app.login.Login;
-import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.btsmodel.BTSProject;
 import org.bbaw.bts.btsmodel.BTSUser;
-import org.bbaw.bts.btsviewmodel.BtsviewmodelFactory;
-import org.bbaw.bts.btsviewmodel.DBCollectionStatusInformation;
-import org.bbaw.bts.btsviewmodel.TreeNodeWrapper;
 import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.commons.BTSPluginIDs;
 import org.bbaw.bts.core.commons.BTSCoreConstants;
@@ -38,7 +33,6 @@ import org.bbaw.bts.db.DBManager;
 import org.bbaw.bts.ui.font.BTSFontManager;
 import org.bbaw.bts.ui.main.wizards.installation.InstallationWizard;
 import org.bbaw.bts.ui.main.wizards.newProject.NewProjectWizard;
-import org.bbaw.bts.ui.resources.BTSResourceProvider;
 import org.eclipse.core.commands.Command;
 import org.eclipse.core.commands.ParameterizedCommand;
 import org.eclipse.core.databinding.observable.Realm;
@@ -47,12 +41,8 @@ import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IExtensionRegistry;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Status;
-import org.eclipse.core.runtime.SubMonitor;
-import org.eclipse.core.runtime.jobs.IJobChangeEvent;
 import org.eclipse.core.runtime.jobs.Job;
-import org.eclipse.core.runtime.jobs.JobChangeAdapter;
 import org.eclipse.core.runtime.preferences.ConfigurationScope;
 import org.eclipse.core.runtime.preferences.DefaultScope;
 import org.eclipse.core.runtime.preferences.IEclipsePreferences;
@@ -68,15 +58,10 @@ import org.eclipse.e4.ui.workbench.IWorkbench;
 import org.eclipse.e4.ui.workbench.UIEvents;
 import org.eclipse.equinox.app.IApplicationContext;
 import org.eclipse.equinox.p2.core.IProvisioningAgent;
-import org.eclipse.equinox.p2.operations.ProvisioningJob;
-import org.eclipse.equinox.p2.operations.ProvisioningSession;
-import org.eclipse.equinox.p2.operations.Update;
-import org.eclipse.equinox.p2.operations.UpdateOperation;
 import org.eclipse.equinox.security.storage.ISecurePreferences;
 import org.eclipse.equinox.security.storage.SecurePreferencesFactory;
 import org.eclipse.equinox.security.storage.StorageException;
-import org.eclipse.jface.databinding.swt.SWTObservables;
-import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.jface.databinding.swt.DisplayRealm;
 import org.eclipse.jface.dialogs.ProgressMonitorDialog;
 import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.jface.resource.JFaceResources;
@@ -192,15 +177,6 @@ public class ApplicationStartupControllerImpl implements
 			font.getFontData()[0].setHeight(12);
 			JFaceResources.getFontRegistry().put(JFaceResources.DEFAULT_FONT,
 					new FontData[] { font.getFontData()[0] });
-			// Font f = JFaceResources.getFontRegistry().get(
-			// JFaceResources.DEFAULT_FONT);
-			// Font f2 = JFaceResources.getDefaultFont();
-			// Font f3 = JFaceResources.getFont("BBAWLibertine");
-			// System.out.println(f +"="+ f2 +"="+ f3 +"="+ font);
-			// for (Object s : JFaceResources.getFontRegistry().getKeySet())
-			// {
-			// System.out.println(s);
-			// }
 		}
 
 		try {
@@ -231,7 +207,8 @@ public class ApplicationStartupControllerImpl implements
 				logger.error(e);
 			}
 		}
-
+		
+		
 		if (first_startup == null || first_startup.equals("true")) {
 			logger.info("Application very first startup");
 			listen2Backend = false;
@@ -476,7 +453,7 @@ public class ApplicationStartupControllerImpl implements
 			public void run() {
 				// needs to init realm
 				Realm.runWithDefault(
-						SWTObservables.getRealm(Display.getDefault()),
+						DisplayRealm.getRealm(Display.getDefault()),
 						new Runnable() {
 							public void run() {
 								boolean success = openInstallationWizard();
@@ -776,7 +753,7 @@ public class ApplicationStartupControllerImpl implements
 		final BTSProject project = projectService.createNew();
 		final NewProjectWizard wizard = new NewProjectWizard(project,
 				projectService);
-		Realm.runWithDefault(SWTObservables.getRealm(Display.getDefault()),
+		Realm.runWithDefault(DisplayRealm.getRealm(Display.getDefault()),
 				new Runnable() {
 					public void run() {
 						WizardDialog dialog = new WizardDialog(new Shell(

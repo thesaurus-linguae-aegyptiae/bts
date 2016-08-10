@@ -16,7 +16,6 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.databinding.EMFProperties;
 import org.eclipse.emf.databinding.EMFUpdateValueStrategy;
 import org.eclipse.jface.databinding.fieldassist.ControlDecorationSupport;
-import org.eclipse.jface.databinding.swt.SWTObservables;
 import org.eclipse.jface.databinding.swt.WidgetProperties;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
@@ -142,7 +141,7 @@ public class ProjectNamePage extends WizardPage
 		ControlDecorationSupport.create(binding2, SWT.TOP | SWT.LEFT);
 
 		//
-		uiElement = SWTObservables.observeText(errorLabelServer);
+		uiElement = WidgetProperties.text().observe(errorLabelServer);  
 		// This one listenes to all changes
 		bindingContext.bindValue(uiElement, new AggregateValidationStatus(bindingContext.getBindings(),
 				AggregateValidationStatus.MAX_SEVERITY), null, null);
@@ -167,7 +166,6 @@ public class ProjectNamePage extends WizardPage
 
 			}
 		});
-		uiElement.setValue("");
 		return bindingContext;
 	}
 }

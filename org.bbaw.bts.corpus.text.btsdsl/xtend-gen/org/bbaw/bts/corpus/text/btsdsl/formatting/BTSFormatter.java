@@ -22,13 +22,14 @@ public class BTSFormatter extends AbstractDeclarativeFormatter {
   @Extension
   private /* BTSGrammarAccess */Object _bTSGrammarAccess;
   
+  @Override
   protected void configureFormatting(final FormattingConfig c) {
     throw new Error("Unresolved compilation problems:"
-      + "\nThe method findKeywordPairs is undefined for the type BTSFormatter"
-      + "\nThe method findKeywords is undefined for the type BTSFormatter"
-      + "\nThe method or field SL_COMMENTRule is undefined for the type BTSFormatter"
-      + "\nThe method or field ML_COMMENTRule is undefined for the type BTSFormatter"
-      + "\nThe method or field ML_COMMENTRule is undefined for the type BTSFormatter"
+      + "\nThe method findKeywordPairs(String, String) is undefined"
+      + "\nThe method findKeywords(String) is undefined"
+      + "\nThe method or field SL_COMMENTRule is undefined"
+      + "\nThe method or field ML_COMMENTRule is undefined"
+      + "\nThe method or field ML_COMMENTRule is undefined"
       + "\nfirst cannot be resolved"
       + "\nsecond cannot be resolved"
       + "\nfirst cannot be resolved"

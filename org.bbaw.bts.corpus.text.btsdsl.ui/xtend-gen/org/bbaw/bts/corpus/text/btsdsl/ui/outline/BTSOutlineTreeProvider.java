@@ -3,13 +3,11 @@
  */
 package org.bbaw.bts.corpus.text.btsdsl.ui.outline;
 
-import org.eclipse.xtext.ui.editor.outline.impl.DefaultOutlineTreeProvider;
-
 /**
  * Customization of the default outline structure.
  * 
  * see http://www.eclipse.org/Xtext/documentation.html#outline
  */
 @SuppressWarnings("all")
-public class BTSOutlineTreeProvider extends DefaultOutlineTreeProvider {
+public class BTSOutlineTreeProvider /* implements org.eclipse.xtext.ui.editor.outline.impl.DefaultOutlineTreeProvider  */{
 }
