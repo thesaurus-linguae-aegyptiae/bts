@@ -10,7 +10,7 @@
   -->
   <groupId>org.bbaw.bts</groupId>
   <artifactId>org.bbaw.bts.app.product</artifactId>
-  <version>2.0.0-SNAPSHOT</version>
+  <version>3.1.0-SNAPSHOT</version>
  <packaging>eclipse-repository</packaging>
  
  <properties>
