@@ -880,7 +880,7 @@ public class BTSConfigurationDialog extends TitleAreaDialog {
 			
 			@Override
 			public void keyReleased(KeyEvent e) {
-				if (e.keyCode == SWT.CR) {
+				if (e.keyCode == SWT.CR || e.keyCode == SWT.KEYPAD_CR) {
 					BTSConfigItem ci = configurationController
 							.createNewConfigItem(newCIText_ConfigurationEdit
 									.getText());
@@ -1119,7 +1119,7 @@ public class BTSConfigurationDialog extends TitleAreaDialog {
 				
 				@Override
 				public void keyReleased(KeyEvent e) {
-					if (e.keyCode == SWT.CR) {
+					if (e.keyCode == SWT.CR || e.keyCode == SWT.KEYPAD_CR) {
 						BTSConfigItem ci = configurationController
 								.createNewConfigItem(newCIText_ConfigurationEdit
 										.getText());
@@ -1450,7 +1450,7 @@ public class BTSConfigurationDialog extends TitleAreaDialog {
 				
 				@Override
 				public void keyReleased(KeyEvent e) {
-					if (e.keyCode == SWT.CR) {
+					if (e.keyCode == SWT.CR || e.keyCode == SWT.KEYPAD_CR) {
 						BTSConfigItem ci = configurationController
 								.createNewConfigItem(newCGroupText_ConfigurationEdit
 										.getText());
@@ -1524,7 +1524,7 @@ public class BTSConfigurationDialog extends TitleAreaDialog {
 				
 				@Override
 				public void keyReleased(KeyEvent e) {
-					if (e.keyCode == SWT.CR) {
+					if (e.keyCode == SWT.CR || e.keyCode == SWT.KEYPAD_CR) {
 						BTSConfigItem ci = configurationController
 								.createNewConfigItem(newCIText_ConfigurationEdit
 										.getText());
@@ -1774,7 +1774,7 @@ public class BTSConfigurationDialog extends TitleAreaDialog {
 			
 			@Override
 			public void keyReleased(KeyEvent e) {
-				if (e.keyCode == SWT.CR) {
+				if (e.keyCode == SWT.CR || e.keyCode == SWT.KEYPAD_CR) {
 					BTSConfigItem ci = configurationController
 							.createNewConfigItem(newCIText_ConfigurationEdit
 									.getText());
@@ -2426,7 +2426,7 @@ public class BTSConfigurationDialog extends TitleAreaDialog {
 			
 			@Override
 			public void keyReleased(KeyEvent e) {
-				if (e.keyCode == SWT.CR) {
+				if (e.keyCode == SWT.CR || e.keyCode == SWT.KEYPAD_CR) {
 					BTSConfigItem ci = configurationController
 							.createNewConfigItem(newCIText_ConfigurationEdit
 									.getText());

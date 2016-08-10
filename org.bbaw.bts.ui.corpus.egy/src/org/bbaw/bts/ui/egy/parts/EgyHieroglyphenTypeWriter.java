@@ -292,7 +292,7 @@ public class EgyHieroglyphenTypeWriter implements ScatteredCachingPart,
 
 			@Override
 			public void keyPressed(KeyEvent e) {
-				if (e.keyCode == SWT.CR) {
+				if (e.keyCode == SWT.CR || e.keyCode == SWT.KEYPAD_CR) {
 					shiftCaret(BTSUIConstants.EVENT_TEXT_SELECTION_NEXT);
 				}
 				else if(e.stateMask == SWT.CTRL && Character.isDigit(e.character)){
