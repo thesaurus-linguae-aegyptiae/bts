@@ -2,7 +2,7 @@
 <feature
       id="org.bbaw.bts.app.feature"
       label="Berlin Text System Core Application"
-      version="3.1.0.qualifier"
+      version="3.1.1.qualifier"
       provider-name="BBAW"
       os="linux,macosx,win32"
       ws="carbon,cocoa,gtk,win32"
