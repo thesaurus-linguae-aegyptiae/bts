@@ -253,7 +253,18 @@ public class ApplicationUpdateControllerImpl extends Job implements
         operation.getProvisioningContext().setMetadataRepositories(new URI[] { uri });
         
         // perform operation
-        IStatus updateStatus = operation.resolveModal(monitor);
+        IStatus updateStatus = null;
+		try {
+			updateStatus = operation.resolveModal(monitor);
+			info("P2 Update Status : " + updateStatus.getCode());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			info("P2 Update Status not OK due to errors: ");
+			e.printStackTrace();
+			status = EUpdateStatusType.CHECK_FAILED;
+        	return Status.CANCEL_STATUS;
+		}
+		
         info("P2 Update Status : " + updateStatus.getCode());
         
         // if nothing to do, do nothing
