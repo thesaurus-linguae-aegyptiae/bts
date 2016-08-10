@@ -2,7 +2,6 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: org.bbaw.bts.corpus.text.btsdsl
 Bundle-Vendor: My Company
-Bundle-Version: 1.0.0.qualifier
 Bundle-SymbolicName: org.bbaw.bts.corpus.text.btsdsl; singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.xtext;visibility:=reexport,
@@ -28,3 +27,4 @@ Export-Package: org.bbaw.bts.corpus.text.btsdsl,
  org.bbaw.bts.corpus.text.btsdsl.scoping,
  org.bbaw.bts.corpus.text.btsdsl.generator,
  org.bbaw.bts.corpus.text.btsdsl.formatting
+Bundle-Version: 3.1.0.qualifier

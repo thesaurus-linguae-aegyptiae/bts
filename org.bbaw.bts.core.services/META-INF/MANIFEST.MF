@@ -2,7 +2,6 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Services
 Bundle-SymbolicName: org.bbaw.bts.core.services;singleton:=true
-Bundle-Version: 2.0.0.qualifier
 Bundle-Activator: org.bbaw.bts.core.services.internal.Activator
 Bundle-Vendor: BBAW
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
@@ -25,3 +24,4 @@ Require-Bundle: org.bbaw.bts.model;bundle-version="0.1.0",
  org.eclipse.equinox.ds;bundle-version="1.4.100",
  org.eclipse.osgi.services;bundle-version="3.3.100"
 Export-Package: org.bbaw.bts.core.services
+Bundle-Version: 3.1.0.qualifier

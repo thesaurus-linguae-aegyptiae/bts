@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: CouchdbWin64
 Bundle-SymbolicName: org.bbaw.bts.db.couchdb.win64
-Bundle-Version: 1.0.2.qualifier
+Bundle-Version: 3.1.0.qualifier
 Fragment-Host: org.bbaw.bts.db.couchdb;bundle-version="1.0.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Eclipse-PlatformFilter: (& (osgi.ws=win32) (osgi.os=win32) (osgi.arch=x86_64))
