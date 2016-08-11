@@ -54,6 +54,7 @@ import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.draw2d.Figure;
 import org.eclipse.draw2d.FigureCanvas;
 import org.eclipse.draw2d.FigureListener;
+import org.eclipse.draw2d.FigureUtilities;
 import org.eclipse.draw2d.FlowLayout;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.ImageFigure;
@@ -74,10 +75,12 @@ import org.eclipse.e4.ui.services.internal.events.EventBroker;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
+import org.eclipse.jface.resource.JFaceResources;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.FocusListener;
 import org.eclipse.swt.events.TypedEvent;
 import org.eclipse.swt.graphics.Color;
+import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.ImageData;
 import org.eclipse.swt.graphics.PaletteData;
@@ -164,6 +167,7 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 	private BTSObject btsObject;
 	private List<Image> imageList = new Vector<Image>(1000);
 	private boolean enabled;
+	private Font font = JFaceResources.getFontRegistry().get(JFaceResources.DEFAULT_FONT);
 
 	private static final String VERS_FRONTER_MARKER = "\uDB80\uDC81"; //mv
 	private static final String VERS_BREAK_MARKER = "\uDB80\uDC80"; //v
@@ -1152,10 +1156,10 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 		{
 			return figure.getLength();
 		}
-		
+
 		BTSWord word = (BTSWord) ((WordFigure)figure).getModelObject();
 
-		len = Math.max(len, word.getWChar().length() * 2);
+		len = Math.max(len,  FigureUtilities.getStringExtents(word.getWChar(), font).width);
 
 		// if word calculate according to settings!
 		if (showHieroglyphs)
@@ -1166,17 +1170,20 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 		{
 				len = Math.max(len, ((WordFigure)figure).getImageWidth());
 				// determine minimal width required by translation text
-				for (int i=0; i<BTSCoreConstants.LANGS.length; i++) {
-					String lang = BTSCoreConstants.LANGS[i];
-					if ((showTransLangMask>>i & 1) == 1) {
-						String trans = word.getTranslation().getTranslationStrict(lang);
-						if (trans != null)
-						{
-							len = Math.max(len, trans.length() * 2);
+				for (Object fig : figure.getChildren()) {
+					if (fig instanceof TypedLabel) {
+						TypedLabel label = ((TypedLabel)fig);
+						if (label.typeOf(TypedLabel.TRANSLATION)) {
+							if (preferences.getBoolean(BTSEGYUIConstants.SIGN_TEXT_SHOW_TRANSLATION_PREF_PREFIX+label.getTranslationLang(), false)) {
+								int width = FigureUtilities.getStringExtents(label.getText(), font).width;
+								len = Math.max(len, width);
+							}
 						}
+						
 					}
 				}
 		}
+		System.out.println("figure width: "+len);
 		return len;
 	}
 
