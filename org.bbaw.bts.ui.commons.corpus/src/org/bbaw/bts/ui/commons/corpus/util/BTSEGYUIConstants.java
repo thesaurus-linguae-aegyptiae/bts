@@ -61,6 +61,7 @@ public class BTSEGYUIConstants {
 	public static final String SIGN_TEXT_SHOW_TRANSLATION_PREF_PREFIX = "sign-text-editor_show_translation_"; 
 	public static final Map<String, String> SIGN_TEXT_SHOW_TRANSLATION; 
 	static {
+		assert BTSCoreConstants.LANGS.length < Integer.SIZE + 1;
 		SIGN_TEXT_SHOW_TRANSLATION = new HashMap<>();
 		for (String lang : BTSCoreConstants.LANGS) {
 			SIGN_TEXT_SHOW_TRANSLATION.put(lang, SIGN_TEXT_SHOW_TRANSLATION_PREF_PREFIX+lang);

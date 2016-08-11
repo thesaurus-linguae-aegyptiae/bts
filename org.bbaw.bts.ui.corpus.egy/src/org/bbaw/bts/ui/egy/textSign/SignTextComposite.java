@@ -128,7 +128,7 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 	@Preference(nodePath = "org.bbaw.bts.ui.corpus.egy")
 	IEclipsePreferences preferences;
 
-	private long showTransLangMask = 0;
+	private Integer showTransLangMask = 0;
 
 	@Inject
 	@Preference(value = BTSEGYUIConstants.SIGN_TEXT_SHOW_LINE_WIDTH, nodePath = "org.bbaw.bts.ui.corpus.egy")
@@ -1170,7 +1170,7 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 				len = hieroLen;
 			}
 		}
-		if (word != null && word.getTranslation() != null && (showTransLangMask > 0))
+		if (word != null && word.getTranslation() != null && (showTransLangMask != 0))
 		{
 				// determine minimal width required by translation text
 				int transLen = 0;
