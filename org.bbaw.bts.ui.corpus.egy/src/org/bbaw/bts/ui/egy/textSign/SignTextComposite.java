@@ -1061,7 +1061,7 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 
 		for (int i=0; i<BTSCoreConstants.LANGS.length; i++) {
 			String lang = BTSCoreConstants.LANGS[i];
-			if ((showTransLangMask & 1<<i) == 1<<i) {
+			if ((showTransLangMask>>i & 1) == 1) {
 				addTransToWordFigure(word, rect, lang);
 			}
 		}
@@ -1155,41 +1155,27 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 		
 		BTSWord word = (BTSWord) ((WordFigure)figure).getModelObject();
 
-		int wCharLen  = word.getWChar().length() * 2;
-		if (wCharLen > 2)
-		{
-			len = wCharLen;
-		
+		len = Math.max(len, word.getWChar().length() * 2);
+
 		// if word calculate according to settings!
 		if (showHieroglyphs)
 		{
-			
-			int hieroLen = ((WordFigure)figure).getImageWidth();
-			if (hieroLen > len)
-			{
-				len = hieroLen;
-			}
+			len = Math.max(len, ((WordFigure)figure).getImageWidth());
 		}
 		if (word != null && word.getTranslation() != null && (showTransLangMask != 0))
 		{
+				len = Math.max(len, ((WordFigure)figure).getImageWidth());
 				// determine minimal width required by translation text
-				int transLen = 0;
 				for (int i=0; i<BTSCoreConstants.LANGS.length; i++) {
 					String lang = BTSCoreConstants.LANGS[i];
-					if ((showTransLangMask & 1<<i) == 1<<i) {
+					if ((showTransLangMask>>i & 1) == 1) {
 						String trans = word.getTranslation().getTranslationStrict(lang);
 						if (trans != null)
 						{
-							transLen = trans.length();
+							len = Math.max(len, trans.length() * 2);
 						}
 					}
 				}
-				transLen = transLen * 2; // from chars to pixel length
-				if (transLen > len)
-				{
-					len = transLen;
-				}
-				len = ((WordFigure)figure).getImageWidth();}
 		}
 		return len;
 	}
