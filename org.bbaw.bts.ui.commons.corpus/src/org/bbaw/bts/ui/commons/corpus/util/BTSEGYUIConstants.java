@@ -1,5 +1,10 @@
 package org.bbaw.bts.ui.commons.corpus.util;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import org.bbaw.bts.core.commons.BTSCoreConstants;
+
 public class BTSEGYUIConstants {
 
 	
@@ -53,12 +58,14 @@ public class BTSEGYUIConstants {
 	public static final String SIGN_TEXT_SHOW_HIEROGLYPHS = "sign-text-editor_show_hieroglyphs";
 	public static final String SIGN_TEXT_SHOW_LEMMAID = "sign-text-editor_show_lemmaid";
 	public static final String SIGN_TEXT_SHOW_FLEXION = "sign-text-editor_show_flexion";
-	public static final String SIGN_TEXT_SHOW_TRANSLATION_DE = "sign-text-editor_show_translation_de";
-	public static final String SIGN_TEXT_SHOW_TRANSLATION_EN = "sign-text-editor_show_translation_en";
-	public static final String SIGN_TEXT_SHOW_TRANSLATION_FR = "sign-text-editor_show_translation_fr";
-	public static final String SIGN_TEXT_SHOW_TRANSLATION_ES = "sign-text-editor_show_translation_es";
-	public static final String SIGN_TEXT_SHOW_TRANSLATION_AR = "sign-text-editor_show_translation_ar";
-	public static final String SIGN_TEXT_SHOW_TRANSLATION_IT = "sign-text-editor_show_translation_it";
+	public static final String SIGN_TEXT_SHOW_TRANSLATION_PREFNODE_PREFIX = "sign-text-editor_show_translation_"; 
+	public static final Map<String, String> SIGN_TEXT_SHOW_TRANSLATION; 
+	static {
+		SIGN_TEXT_SHOW_TRANSLATION = new HashMap<>();
+		for (String lang : BTSCoreConstants.LANGS) {
+			SIGN_TEXT_SHOW_TRANSLATION.put(lang, SIGN_TEXT_SHOW_TRANSLATION_PREFNODE_PREFIX+lang);
+		}
+	}
 	public static final String SIGN_TEXT_SHOW_LINE_WIDTH = "sign-text-editor_line_width";
 	public static final String PREF_LEMMATIZER_FELXION_DEFAULT = "pref_lemmatizer_flexion_default";
 	public static final String EVENT_CLEAR_TOKEN_DATA = "event_clear_token_data";

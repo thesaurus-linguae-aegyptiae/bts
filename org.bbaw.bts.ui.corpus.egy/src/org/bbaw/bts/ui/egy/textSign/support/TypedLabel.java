@@ -25,7 +25,7 @@ public class TypedLabel extends Label{
 
 	public String getTranslationLang() {
 		if (Integer.highestOneBit(type) == TRANSLATION) {
-			assert BTSCoreConstants.LANGS.length < 9;
+			assert BTSCoreConstants.LANGS.length < TRANSLATION + 1;
 			int langId = type ^ TRANSLATION;
 			if (langId > -1) {
 				return BTSCoreConstants.LANGS[langId];
