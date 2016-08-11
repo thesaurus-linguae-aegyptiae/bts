@@ -28,6 +28,8 @@ public class SignTextEditorPage extends FieldEditorPreferencePage {
 		addField(new BooleanFieldEditor(BTSEGYUIConstants.SIGN_TEXT_SHOW_TRANSLATION_EN, "Show Translation: EN", BooleanFieldEditor.DEFAULT, getFieldEditorParent()));
 		addField(new BooleanFieldEditor(BTSEGYUIConstants.SIGN_TEXT_SHOW_TRANSLATION_FR, "Show Translation: FR", BooleanFieldEditor.DEFAULT, getFieldEditorParent()));
 		addField(new BooleanFieldEditor(BTSEGYUIConstants.SIGN_TEXT_SHOW_TRANSLATION_ES, "Show Translation: ES", BooleanFieldEditor.DEFAULT, getFieldEditorParent()));
+		addField(new BooleanFieldEditor(BTSEGYUIConstants.SIGN_TEXT_SHOW_TRANSLATION_AR, "Show Translation: AR", BooleanFieldEditor.DEFAULT, getFieldEditorParent()));
+		addField(new BooleanFieldEditor(BTSEGYUIConstants.SIGN_TEXT_SHOW_TRANSLATION_IT, "Show Translation: IT", BooleanFieldEditor.DEFAULT, getFieldEditorParent()));
 		addField(new IntegerFieldEditor(BTSEGYUIConstants.SIGN_TEXT_SHOW_LINE_WIDTH, "Line Width in Pixel", getFieldEditorParent()));
 	}
 

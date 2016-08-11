@@ -137,7 +137,15 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 	@Inject
 	@Preference(value = BTSEGYUIConstants.SIGN_TEXT_SHOW_TRANSLATION_ES, nodePath = "org.bbaw.bts.ui.corpus.egy")
 	private Boolean showTransES;
-	
+
+	@Inject
+	@Preference(value = BTSEGYUIConstants.SIGN_TEXT_SHOW_TRANSLATION_AR, nodePath = "org.bbaw.bts.ui.corpus.egy")
+	private Boolean showTransAR;
+
+	@Inject
+	@Preference(value = BTSEGYUIConstants.SIGN_TEXT_SHOW_TRANSLATION_IT, nodePath = "org.bbaw.bts.ui.corpus.egy")
+	private Boolean showTransIT;
+
 	@Inject
 	@Preference(value = BTSEGYUIConstants.SIGN_TEXT_SHOW_LINE_WIDTH, nodePath = "org.bbaw.bts.ui.corpus.egy")
 	private Integer max_line_length;
@@ -1076,6 +1084,14 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 		{
 			addTransToWordFigure(word, rect, "es");
 		}
+		if (showTransAR)
+		{
+			addTransToWordFigure(word, rect, "ar");
+		}
+		if (showTransIT)
+		{
+			addTransToWordFigure(word, rect, "it");
+		}
 		rect.setSize(90, 290);
 		rect.addFigureListener(new FigureListener() {
 
@@ -1181,7 +1197,7 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 				len = hieroLen;
 			}
 		}
-		if (word != null && word.getTranslation() != null && (showTransDE || showTransEN || showTransES || showTransFR))
+		if (word != null && word.getTranslation() != null && (showTransDE || showTransEN || showTransES || showTransFR || showTransAR || showTransIT))
 		{
 				int transLen = 0;
 				if (showTransDE)
@@ -1211,6 +1227,22 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 				if (showTransFR)
 				{
 					String trans = word.getTranslation().getTranslationStrict("fr");
+					if (trans != null && trans.length() > transLen)
+					{
+						transLen = trans.length();
+					}
+				}
+				if (showTransAR)
+				{
+					String trans = word.getTranslation().getTranslationStrict("ar");
+					if (trans != null && trans.length() > transLen)
+					{
+						transLen = trans.length();
+					}
+				}
+				if (showTransIT)
+				{
+					String trans = word.getTranslation().getTranslationStrict("it");
 					if (trans != null && trans.length() > transLen)
 					{
 						transLen = trans.length();
