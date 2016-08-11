@@ -1,4 +1,4 @@
-package org.bbaw.bts.ui.corpus.parts.annotationsPart;
+ package org.bbaw.bts.ui.corpus.parts.annotationsPart;
 
 import javax.inject.Inject;
 
@@ -41,27 +41,28 @@ public class RelatedObjectGroupComment extends RelatedObjectGroup {
 	protected void addButtons(Composite composite) {
 		Label editButton = new Label(composite, SWT.PUSH);
 		editButton.setImage(resourceProvider.getImage(Display.getCurrent(), BTSResourceProvider.IMG_EDIT));
-		editButton.setToolTipText("Edit Comment");
+		if (mayEdit())
+		{
+			editButton.setToolTipText("Edit Comment");
+		}
+		else
+		{
+			editButton.setToolTipText("Open Comment");
+		}
 		editButton.setLayoutData(new RowData());
 		editButton.addMouseListener(new MouseAdapter() {
 
 			@Override
 			public void mouseDown(MouseEvent e) {
-				if (mayEdit())
-				{
-					Label l = (Label) e.getSource();
-					l.setBackground(BTSUIConstants.VIEW_BACKGROUND_LABEL_PRESSED);
-				}
+				Label l = (Label) e.getSource();
+				l.setBackground(BTSUIConstants.VIEW_BACKGROUND_LABEL_PRESSED);
 			}
 
 			@Override
 			public void mouseUp(MouseEvent e) {
-				if (mayEdit())
-				{
-					Label l = (Label) e.getSource();
-					l.setBackground(l.getParent().getBackground());
-					editObject();
-				}
+				Label l = (Label) e.getSource();
+				l.setBackground(l.getParent().getBackground());
+				editObject();
 			}
 		});
 

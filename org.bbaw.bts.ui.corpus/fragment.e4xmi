@@ -120,7 +120,6 @@
               <children xsi:type="menu:MenuSeparator" xmi:id="_6zVwMNeeEeSkNoCa1fqIXg" elementId="org.bbaw.bts.ui.corpus.menuseparator.11"/>
               <children xsi:type="menu:HandledMenuItem" xmi:id="_hkFjtKY0EeSMm_n5aML7dg" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.moveObjectAmongProjectDBCollection" label="Move Object among Projects..." command="_DoUHkDTiEeS85dzIPjkaNA"/>
               <children xsi:type="menu:HandledMenuItem" xmi:id="_hkFjpaY0EeSMm_n5aML7dg" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.14" label="Open Conflict Dialog" command="_LECdIOpCEeO86qCMpbd0dw"/>
-              <children xsi:type="menu:HandledMenuItem" xmi:id="_hkFjpKY0EeSMm_n5aML7dg" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.5" label="Present"/>
               <children xsi:type="menu:HandledMenuItem" xmi:id="_hkFjpqY0EeSMm_n5aML7dg" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.15" label="Open Revision History" iconURI="platform:/plugin/org.bbaw.bts.ui.resources.impl/icons/full/icon16/history.png" command="_YDmDwOsGEeOLEqD8tMK6Eg"/>
               <children xsi:type="menu:HandledMenuItem" xmi:id="_hkFjqKY0EeSMm_n5aML7dg" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.corpus.editUpdaters" label="Edit Updaters/Readers" iconURI="platform:/plugin/org.bbaw.bts.ui.resources.impl/icons/full/icon16/userrole.png" command="_0MnaMNm-EeO-3cFwhVZ23Q"/>
               <children xsi:type="menu:Menu" xmi:id="_hkFjqaY0EeSMm_n5aML7dg" elementId="org.bbaw.bts.ui.corpus.menu.filter" label="Filter">
@@ -428,7 +427,6 @@
               <children xsi:type="menu:MenuSeparator" xmi:id="_Y9xKf_TKEeSQXI5ezOq8Qg" elementId="org.bbaw.bts.ui.corpus.menuseparator.11"/>
               <children xsi:type="menu:HandledMenuItem" xmi:id="_Y9xKgPTKEeSQXI5ezOq8Qg" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.moveObjectAmongProjectDBCollection" label="Move Object among Projects..." command="_DoUHkDTiEeS85dzIPjkaNA"/>
               <children xsi:type="menu:HandledMenuItem" xmi:id="_Y9xKgfTKEeSQXI5ezOq8Qg" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.14" label="Open Conflict Dialog" command="_LECdIOpCEeO86qCMpbd0dw"/>
-              <children xsi:type="menu:HandledMenuItem" xmi:id="_Y9xKgvTKEeSQXI5ezOq8Qg" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.5" label="Present"/>
               <children xsi:type="menu:HandledMenuItem" xmi:id="_Y9xKg_TKEeSQXI5ezOq8Qg" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.15" label="Open Revision History" iconURI="platform:/plugin/org.bbaw.bts.ui.resources.impl/icons/full/icon16/history.png" command="_YDmDwOsGEeOLEqD8tMK6Eg"/>
               <children xsi:type="menu:HandledMenuItem" xmi:id="_Y9xKhPTKEeSQXI5ezOq8Qg" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.corpus.editUpdaters" label="Edit Updaters/Readers" iconURI="platform:/plugin/org.bbaw.bts.ui.resources.impl/icons/full/icon16/userrole.png" command="_0MnaMNm-EeO-3cFwhVZ23Q"/>
               <children xsi:type="menu:Menu" xmi:id="_Y9xKhfTKEeSQXI5ezOq8Qg" elementId="org.bbaw.bts.ui.corpus.menu.filter" label="Filter">

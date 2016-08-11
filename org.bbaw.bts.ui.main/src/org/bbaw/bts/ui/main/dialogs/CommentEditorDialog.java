@@ -11,6 +11,7 @@ import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.btsmodel.BtsmodelPackage;
 import org.bbaw.bts.core.controller.generalController.CommentController;
 import org.bbaw.bts.core.controller.generalController.EditingDomainController;
+import org.bbaw.bts.core.controller.generalController.PermissionsAndExpressionsEvaluationController;
 import org.bbaw.bts.ui.commons.utils.BTSUIConstants;
 import org.bbaw.bts.ui.commons.validator.StringNotEmptyValidator;
 import org.bbaw.bts.ui.main.widgets.CompoundRelationsEditorComposite;
@@ -60,6 +61,9 @@ public class CommentEditorDialog extends TitleAreaDialog {
 	
 	@Inject
 	private CommentController commentController;
+	
+	@Inject
+	protected PermissionsAndExpressionsEvaluationController permissionsController;
 
 	private EditingDomain editingDomain;
 	private CompoundRelationsEditorComposite relationsEditor;
@@ -70,6 +74,7 @@ public class CommentEditorDialog extends TitleAreaDialog {
 	private boolean dirty;
 	private Composite container;
 	private Composite innerCompositeRelations;
+	private boolean editable;
 
 	/**
 	 * Create the dialog.
@@ -168,7 +173,15 @@ public class CommentEditorDialog extends TitleAreaDialog {
 				getCommandStackListener());
 		
 		loadRelations();
+		checkRightsAndSetEditable();
 		
+	}
+
+	private void checkRightsAndSetEditable() {
+		editable = permissionsController.authenticatedUserMayEditObject(comment);
+		txtTitletxt.setEditable(editable);
+		txtCommenttxt.setEditable(editable);
+		relationsEditor.setEnabled(editable);
 	}
 
 	private CommandStackListener getCommandStackListener() {

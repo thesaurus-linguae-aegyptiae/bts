@@ -32,6 +32,8 @@ public class PassportEditorDialog extends TitleAreaDialog {
 	@Inject
 	private CorpusNavigatorController corpusNavigator;
 	private PassportEditorPart editor;
+
+	private boolean editable;
 	/**
 	 * Create the dialog.
 	 * @param parentShell
@@ -70,6 +72,7 @@ public class PassportEditorDialog extends TitleAreaDialog {
 		editor = ContextInjectionFactory.make(
 				PassportEditorPart.class, child);
 		editor.setInputObjectDirect((BTSCorpusObject) selectionObject);
+		editor.setUserMayEdit(editable);
 		return area;
 	}
 
@@ -105,4 +108,8 @@ public class PassportEditorDialog extends TitleAreaDialog {
 		super.okPressed();
 	}
 
+	public void setEditable(boolean editable)
+	{
+		this.editable = editable;
+	}
 }
