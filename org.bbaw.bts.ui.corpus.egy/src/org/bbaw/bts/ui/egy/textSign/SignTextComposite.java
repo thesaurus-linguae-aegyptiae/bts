@@ -595,11 +595,11 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 		container.addKeyListener(keyListener);
 
 		// initialize translation languages mask
+		showTransLangMask = 0;
 		for (int i=0; i < BTSCoreConstants.LANGS.length; i++) {
 			String lang = BTSCoreConstants.LANGS[i];
-			String prefNode = BTSEGYUIConstants.SIGN_TEXT_SHOW_TRANSLATION_PREFNODE_PREFIX + lang;
-			Boolean showTranslation = preferences.getBoolean(prefNode, false);
-			if (showTranslation) {
+			String prefVal = BTSEGYUIConstants.SIGN_TEXT_SHOW_TRANSLATION_PREF_PREFIX + lang;
+			if (preferences.getBoolean(prefVal, false)) {
 				showTransLangMask |= 1<<i;
 			}
 		}
@@ -1061,7 +1061,7 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 
 		for (int i=0; i<BTSCoreConstants.LANGS.length; i++) {
 			String lang = BTSCoreConstants.LANGS[i];
-			if ((showTransLangMask & i) == i) {
+			if ((showTransLangMask & 1<<i) == 1<<i) {
 				addTransToWordFigure(word, rect, lang);
 			}
 		}
@@ -1176,7 +1176,7 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 				int transLen = 0;
 				for (int i=0; i<BTSCoreConstants.LANGS.length; i++) {
 					String lang = BTSCoreConstants.LANGS[i];
-					if ((showTransLangMask & i) == i) {
+					if ((showTransLangMask & 1<<i) == 1<<i) {
 						String trans = word.getTranslation().getTranslationStrict(lang);
 						if (trans != null)
 						{

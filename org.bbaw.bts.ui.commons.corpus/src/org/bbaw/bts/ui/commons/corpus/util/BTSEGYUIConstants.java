@@ -58,12 +58,12 @@ public class BTSEGYUIConstants {
 	public static final String SIGN_TEXT_SHOW_HIEROGLYPHS = "sign-text-editor_show_hieroglyphs";
 	public static final String SIGN_TEXT_SHOW_LEMMAID = "sign-text-editor_show_lemmaid";
 	public static final String SIGN_TEXT_SHOW_FLEXION = "sign-text-editor_show_flexion";
-	public static final String SIGN_TEXT_SHOW_TRANSLATION_PREFNODE_PREFIX = "sign-text-editor_show_translation_"; 
+	public static final String SIGN_TEXT_SHOW_TRANSLATION_PREF_PREFIX = "sign-text-editor_show_translation_"; 
 	public static final Map<String, String> SIGN_TEXT_SHOW_TRANSLATION; 
 	static {
 		SIGN_TEXT_SHOW_TRANSLATION = new HashMap<>();
 		for (String lang : BTSCoreConstants.LANGS) {
-			SIGN_TEXT_SHOW_TRANSLATION.put(lang, SIGN_TEXT_SHOW_TRANSLATION_PREFNODE_PREFIX+lang);
+			SIGN_TEXT_SHOW_TRANSLATION.put(lang, SIGN_TEXT_SHOW_TRANSLATION_PREF_PREFIX+lang);
 		}
 	}
 	public static final String SIGN_TEXT_SHOW_LINE_WIDTH = "sign-text-editor_line_width";

@@ -26,7 +26,7 @@ public class SignTextEditorPage extends FieldEditorPreferencePage {
 		addField(new BooleanFieldEditor(BTSEGYUIConstants.SIGN_TEXT_SHOW_LEMMAID, "Show Lemma ID", BooleanFieldEditor.DEFAULT, getFieldEditorParent()));
 		addField(new BooleanFieldEditor(BTSEGYUIConstants.SIGN_TEXT_SHOW_FLEXION, "Show Flexion", BooleanFieldEditor.DEFAULT, getFieldEditorParent()));
 		for (String lang : BTSCoreConstants.LANGS) {
-			String prefNode = BTSEGYUIConstants.SIGN_TEXT_SHOW_TRANSLATION_PREFNODE_PREFIX + lang;
+			String prefNode = BTSEGYUIConstants.SIGN_TEXT_SHOW_TRANSLATION_PREF_PREFIX + lang;
 			addField(new BooleanFieldEditor(prefNode, "Show Translation: "+lang.toUpperCase(),
 					BooleanFieldEditor.DEFAULT, getFieldEditorParent()));
 		}
