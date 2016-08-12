@@ -6,16 +6,11 @@ import java.io.InputStreamReader;
 import java.util.List;
 import java.util.Map;
 import java.util.Vector;
-import java.util.regex.Matcher;
-
 import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.core.dao.corpus.BTSLemmaEntryDao;
 import org.bbaw.bts.core.dao.util.DaoConstants;
-import org.bbaw.bts.corpus.btsCorpusModel.BTSAnnotation;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSLemmaEntry;
-import org.bbaw.bts.corpus.btsCorpusModel.BTSText;
 import org.bbaw.bts.corpus.btsCorpusModel.BtsCorpusModelFactory;
-import org.bbaw.bts.dao.couchDB.CouchDBDao;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 

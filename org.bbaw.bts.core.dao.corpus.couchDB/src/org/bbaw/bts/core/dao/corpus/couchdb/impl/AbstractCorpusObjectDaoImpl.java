@@ -123,12 +123,6 @@ public abstract class AbstractCorpusObjectDaoImpl<E extends BTSCorpusObject, K e
 		}
 		Resource resource = connectionProvider.getEmfResourceSet()
 				.createResource(uri);
-		// connectionProvider.getEmfResourceSet().getResource(uri, false);
-		// if (resource == null)
-		// {
-		// resource =
-		// connectionProvider.getEmfResourceSet().createResource(uri);
-		// }
 		resource.getContents().add(entity);
 		entity.set_id(extractIdFromObjectString(sourceAsString));
 

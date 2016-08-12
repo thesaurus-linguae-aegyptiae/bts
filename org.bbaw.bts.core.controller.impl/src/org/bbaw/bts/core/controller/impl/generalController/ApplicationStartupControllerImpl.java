@@ -704,9 +704,8 @@ public class ApplicationStartupControllerImpl implements
 												"true");// FIXME dev!
 										for (BTSProject project : projects) {
 											
-											//XXX disabled during dev
-//											backend2ClientUpdateService
-//													.startListening2Updates(project);
+											backend2ClientUpdateService
+													.startListening2Updates(project);
 										}
 									}
 								}
