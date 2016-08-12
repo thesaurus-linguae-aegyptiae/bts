@@ -21,6 +21,7 @@ import org.bbaw.bts.btsmodel.BTSInterTextReference;
 import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.btsmodel.BTSRelation;
 import org.bbaw.bts.commons.BTSConstants;
+import org.bbaw.bts.core.commons.BTSCoreConstants;
 import org.bbaw.bts.core.corpus.controller.partController.BTSTextEditorController;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSAmbivalence;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSAmbivalenceItem;
@@ -48,6 +49,7 @@ import org.bbaw.bts.ui.egy.textSign.support.TypedLabel;
 import org.bbaw.bts.ui.egy.textSign.support.WordFigure;
 import org.bbaw.bts.ui.resources.BTSResourceProvider;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.preferences.IEclipsePreferences;
 import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.draw2d.Figure;
 import org.eclipse.draw2d.FigureCanvas;
@@ -123,21 +125,11 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 	private Boolean showLemmaId;
 	
 	@Inject
-	@Preference(value = BTSEGYUIConstants.SIGN_TEXT_SHOW_TRANSLATION_DE, nodePath = "org.bbaw.bts.ui.corpus.egy")
-	private Boolean showTransDE;
-	
-	@Inject
-	@Preference(value = BTSEGYUIConstants.SIGN_TEXT_SHOW_TRANSLATION_FR, nodePath = "org.bbaw.bts.ui.corpus.egy")
-	private Boolean showTransFR;
-	
-	@Inject
-	@Preference(value = BTSEGYUIConstants.SIGN_TEXT_SHOW_TRANSLATION_EN, nodePath = "org.bbaw.bts.ui.corpus.egy")
-	private Boolean showTransEN;
-	
-	@Inject
-	@Preference(value = BTSEGYUIConstants.SIGN_TEXT_SHOW_TRANSLATION_ES, nodePath = "org.bbaw.bts.ui.corpus.egy")
-	private Boolean showTransES;
-	
+	@Preference(nodePath = "org.bbaw.bts.ui.corpus.egy")
+	IEclipsePreferences preferences;
+
+	private Integer showTransLangMask = 0;
+
 	@Inject
 	@Preference(value = BTSEGYUIConstants.SIGN_TEXT_SHOW_LINE_WIDTH, nodePath = "org.bbaw.bts.ui.corpus.egy")
 	private Integer max_line_length;
@@ -189,7 +181,6 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 		parent.setLayout(new FillLayout());
 		this.setLayout(new FillLayout());
 		createEditor();
-
 	}
 	
 	/**
@@ -603,7 +594,15 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 		container.addMouseMotionListener(mouseMotionListener);
 		container.addKeyListener(keyListener);
 
-
+		// initialize translation languages mask
+		showTransLangMask = 0;
+		for (int i=0; i < BTSCoreConstants.LANGS.length; i++) {
+			String lang = BTSCoreConstants.LANGS[i];
+			String prefVal = BTSEGYUIConstants.SIGN_TEXT_SHOW_TRANSLATION_PREF_PREFIX + lang;
+			if (preferences.getBoolean(prefVal, false)) {
+				showTransLangMask |= 1<<i;
+			}
+		}
 
 		wordMap = new HashMap<String, IFigure>();
 		for (BTSTextItems item : textContent.getTextItems()) {
@@ -1059,22 +1058,12 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 			// add flexion code
 			addFCodeToWordFigure(word, rect);
 		}
-		
-		if (showTransDE)
-		{
-			addTransToWordFigure(word, rect, "de");
-		}
-		if (showTransEN)
-		{
-			addTransToWordFigure(word, rect, "en");
-		}
-		if (showTransFR)
-		{
-			addTransToWordFigure(word, rect, "fr");
-		}
-		if (showTransES)
-		{
-			addTransToWordFigure(word, rect, "es");
+
+		for (int i=0; i<BTSCoreConstants.LANGS.length; i++) {
+			String lang = BTSCoreConstants.LANGS[i];
+			if ((showTransLangMask>>i & 1) == 1) {
+				addTransToWordFigure(word, rect, lang);
+			}
 		}
 		rect.setSize(90, 290);
 		rect.addFigureListener(new FigureListener() {
@@ -1166,62 +1155,27 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 		
 		BTSWord word = (BTSWord) ((WordFigure)figure).getModelObject();
 
-		int wCharLen  = word.getWChar().length() * 2;
-		if (wCharLen > 2)
-		{
-			len = wCharLen;
-		
+		len = Math.max(len, word.getWChar().length() * 2);
+
 		// if word calculate according to settings!
 		if (showHieroglyphs)
 		{
-			
-			int hieroLen = ((WordFigure)figure).getImageWidth();
-			if (hieroLen > len)
-			{
-				len = hieroLen;
-			}
+			len = Math.max(len, ((WordFigure)figure).getImageWidth());
 		}
-		if (word != null && word.getTranslation() != null && (showTransDE || showTransEN || showTransES || showTransFR))
+		if (word != null && word.getTranslation() != null && (showTransLangMask != 0))
 		{
-				int transLen = 0;
-				if (showTransDE)
-				{
-					String trans = word.getTranslation().getTranslationStrict("de");
-					if (trans != null)
-					{
-						transLen = trans.length();
+				len = Math.max(len, ((WordFigure)figure).getImageWidth());
+				// determine minimal width required by translation text
+				for (int i=0; i<BTSCoreConstants.LANGS.length; i++) {
+					String lang = BTSCoreConstants.LANGS[i];
+					if ((showTransLangMask>>i & 1) == 1) {
+						String trans = word.getTranslation().getTranslationStrict(lang);
+						if (trans != null)
+						{
+							len = Math.max(len, trans.length() * 2);
+						}
 					}
 				}
-				if (showTransEN)
-				{
-					String trans = word.getTranslation().getTranslationStrict("en");
-					if (trans != null && trans.length() > transLen)
-					{
-						transLen = trans.length();
-					}
-				}
-				if (showTransES)
-				{
-					String trans = word.getTranslation().getTranslationStrict("es");
-					if (trans != null && trans.length() > transLen)
-					{
-						transLen = trans.length();
-					}
-				}
-				if (showTransFR)
-				{
-					String trans = word.getTranslation().getTranslationStrict("fr");
-					if (trans != null && trans.length() > transLen)
-					{
-						transLen = trans.length();
-					}
-				}
-				transLen = transLen * 2; // from chars to pixel length
-				if (transLen > len)
-				{
-					len = transLen;
-				}
-				len = ((WordFigure)figure).getImageWidth();}
 		}
 		return len;
 	}
