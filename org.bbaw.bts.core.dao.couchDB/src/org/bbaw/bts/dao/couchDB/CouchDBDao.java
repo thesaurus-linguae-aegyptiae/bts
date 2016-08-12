@@ -1090,6 +1090,24 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 		return allDocs;
 	}
 	
+	protected InputStream loadViewIntoInputStream(String viewId, String path, String sourcePath) {
+		View view;
+		CouchDbClient dbClient = connectionProvider.getDBClient(CouchDbClient.class, path);
+		InputStream inStream = null;
+		try
+		{
+			view = dbClient.view(viewId);
+
+		} catch (NoDocumentException e)
+		{
+			e.printStackTrace();
+			System.out.println("create view, view id: " + viewId);
+			createView(path, sourcePath, viewId);
+			view = dbClient.view(viewId);
+		}
+		inStream = view.includeDocs(false).queryForStream();
+		return inStream;
+	}
 	
 	
 	@Override

@@ -1430,7 +1430,10 @@ public class PassportEditorPart {
 
 	@PreDestroy
 	public void preDestroy() {
-		editingDomain.getCommandStack().removeCommandStackListener(commandStackListener);
+		if (editingDomain != null)
+		{
+			editingDomain.getCommandStack().removeCommandStackListener(commandStackListener);
+		}
 	}
 
 	@Focus

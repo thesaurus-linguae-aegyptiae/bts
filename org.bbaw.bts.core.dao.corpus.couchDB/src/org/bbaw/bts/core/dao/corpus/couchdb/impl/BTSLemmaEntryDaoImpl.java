@@ -1,6 +1,10 @@
 package org.bbaw.bts.core.dao.corpus.couchdb.impl;
 
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.List;
+import java.util.Map;
 import java.util.Vector;
 import java.util.regex.Matcher;
 
@@ -48,6 +52,10 @@ public class BTSLemmaEntryDaoImpl extends AbstractCorpusObjectDaoImpl<BTSLemmaEn
 	@Override
 	public List<BTSLemmaEntry> list(String dbPath, String staticQueryId,
 			String objectState) {
+		if (DaoConstants.VIEW_LEMMA_ROOT_ENTRIES.equals(staticQueryId))
+		{
+			return listRootEntriesFromStream(dbPath, objectState);
+		}
 		List<String> allDocs = loadDocsFromView(staticQueryId, dbPath, "lemma");
 		List<BTSLemmaEntry> results = loadPartialObjectsFromStrings(allDocs, dbPath);
 		if (!results.isEmpty())
@@ -55,6 +63,32 @@ public class BTSLemmaEntryDaoImpl extends AbstractCorpusObjectDaoImpl<BTSLemmaEn
 			registerQueryIdWithInternalRegistry(staticQueryId, dbPath);
 		}
 		return results;
+	}
+
+	private List<BTSLemmaEntry> listRootEntriesFromStream(String dbPath, String objectState) {
+		int lemmaListSize = 50000;
+		InputStream is = loadViewIntoInputStream(DaoConstants.VIEW_LEMMA_ROOT_ENTRIES, dbPath, "lemma");
+		List<BTSLemmaEntry> results; 
+		try {
+	        BufferedReader reader = new BufferedReader(new InputStreamReader(
+	                is, "UTF-8"), lemmaListSize);
+	        String line = null;
+	        Map<URI, Resource> cache = getObjectCache();
+	        results = new Vector<BTSLemmaEntry>(lemmaListSize);
+	        BTSLemmaEntry entry;
+	        // ignore the first line containing metadata
+	        line = reader.readLine();
+	        while (!(line = reader.readLine()).equals("]}")) {
+            	entry = loadPartialObjectFromString(line, dbPath, cache);
+	            results.add(entry);
+	        }
+	        is.close();
+	        return results;
+
+	    } catch (Exception e) {
+	    	e.printStackTrace();
+	    }
+		return new Vector<BTSLemmaEntry>(0);
 	}
 
 	@Override
