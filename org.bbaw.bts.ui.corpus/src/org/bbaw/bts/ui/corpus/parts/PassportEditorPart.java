@@ -1084,12 +1084,9 @@ public class PassportEditorPart {
 
 		// scrollComposite.layout();
 
-		CompoundIdentifiersEditorComposite relationsEditor = ContextInjectionFactory
+		ContextInjectionFactory
 				.make(CompoundIdentifiersEditorComposite.class, child);
 
-		// foreach relation in object.relations
-		// make relation widget
-		// add plus and minus button
 	}
 
 	private CommandStackListener getCommandStackListener() {
@@ -1143,8 +1140,7 @@ public class PassportEditorPart {
 				|| command instanceof RemoveCommand) {
 			CTabItem tabItem = tabFolder.getSelection();
 			reloadGenericTabItem(tabItem);
-			genericTabsReloadRequiredCounter++;
-			tabItem.setData("reloaded", genericTabsReloadRequiredCounter);
+			tabItem.setData("reloaded", genericTabsReloadRequiredCounter++);
 
 		}
 
@@ -1193,8 +1189,9 @@ public class PassportEditorPart {
 			composite.setLayout(fillLayout);
 			tabItem.setControl(composite);
 		} else {
-//			Control c = tabItem.getControl();
-//			if (!c.isDisposed()) c.dispose();
+			if (!tabItem.getControl().isDisposed()) {
+				tabItem.getControl().dispose();
+			}
 			tabItem.setControl(null);
 
 			composite = new ScrolledComposite(folder, SWT.V_SCROLL
@@ -1231,8 +1228,8 @@ public class PassportEditorPart {
 
 		// scrollComposite.layout();
 
-		CompoundRelationsEditorComposite relationsEditor = ContextInjectionFactory
-				.make(CompoundRelationsEditorComposite.class, child);
+		ContextInjectionFactory.make(
+				CompoundRelationsEditorComposite.class, child);
 
 		// foreach relation in object.relations
 		// make relation widget
@@ -1433,7 +1430,10 @@ public class PassportEditorPart {
 
 	@PreDestroy
 	public void preDestroy() {
-		// TODO Your code here
+		if (editingDomain != null)
+		{
+			editingDomain.getCommandStack().removeCommandStackListener(commandStackListener);
+		}
 	}
 
 	@Focus

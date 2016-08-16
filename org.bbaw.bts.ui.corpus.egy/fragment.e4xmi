@@ -11,6 +11,8 @@
   <imports xsi:type="commands:Command" xmi:id="_GXtaUAaxEeSOuJcvBP3MBw" elementId="org.bbaw.bts.ui.main.command.addComment"/>
   <imports xsi:type="commands:Command" xmi:id="_F_FvMJzAEeSiiMU2026qjA" elementId="org.bbaw.bts.ui.main.command.openPart"/>
   <imports xsi:type="commands:Command" xmi:id="_Bfb0YMivEeS2i8kQlGMs6w" elementId="org.bbaw.bts.ui.corpus.command.removeTokenData"/>
+  <imports xsi:type="advanced:PerspectiveStack" xmi:id="_gm5mcF1XEeaSXsxPfSlK8A" elementId="org.bbaw.bts.app.perspectivestack.main"/>
+  <imports xsi:type="advanced:Perspective" xmi:id="_murdAF1XEeaSXsxPfSlK8A" elementId="org.bbaw.bts.ui.corpus.perspective.text"/>
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_Q_x-IEChEeOsGJaKBBYPLQ" featurename="children" parentElementId="org.bbaw.bts.corpus.text.partstack.middle.top">
     <elements xsi:type="basic:Part" xmi:id="_DXXH8Fw9EeOGBIZrBx5nZQ" elementId="org.bbaw.bts.ui.corpus.egy.part.textEditor" contributionURI="bundleclass://org.bbaw.bts.ui.corpus.egy/org.bbaw.bts.ui.egy.parts.EgyTextEditorPart" label="Text Editor" iconURI="platform:/plugin/org.bbaw.bts.ui.resources.impl/icons/full/icon16/texts.png" closeable="true">
       <handlers xmi:id="_kYl6wP0_EeOsAKche49RIg" elementId="org.bbaw.bts.ui.corpus.egy.handler.0" contributionURI="bundleclass://org.bbaw.bts.ui.corpus.egy/org.bbaw.bts.ui.egy.handlers.AddAnnotationHandler" command="_ogEtgP0_EeOsAKche49RIg"/>
@@ -230,9 +232,7 @@
       </toolbar>
     </elements>
   </fragments>
-  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_Sl_xYKetEeSKc6Ry5XPLug" featurename="sharedElements" parentElementId="org.eclipse.ui.window">
-    <elements xsi:type="advanced:Placeholder" xmi:id="_jI2fsKetEeSKc6Ry5XPLug" elementId="org.bbaw.bts.ui.corpus.egy.partdescriptor.lemmaEditor"/>
-  </fragments>
+  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_Sl_xYKetEeSKc6Ry5XPLug" featurename="sharedElements" parentElementId="org.eclipse.ui.window"/>
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_F5TdcKiLEeSiSIb2uOkfLQ" featurename="children" parentElementId="org.bbaw.bts.corpus.text.partstack.right.top">
     <elements xsi:type="basic:Part" xmi:id="_MJXGQKiLEeSiSIb2uOkfLQ" elementId="org.bbaw.bts.ui.corpus.egy.part.translationPart" containerData="50" contributionURI="bundleclass://org.bbaw.bts.ui.corpus.egy/org.bbaw.bts.ui.egy.parts.EgyTextTranslationPart" label="Text Translation" iconURI="platform:/plugin/org.bbaw.bts.ui.resources.impl/icons/full/icon16/locale.png" closeable="true">
       <toolbar xmi:id="_Ps1NAKiLEeSiSIb2uOkfLQ" elementId="org.bbaw.bts.ui.corpus.egy.toolbar.9">

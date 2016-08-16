@@ -2,7 +2,6 @@ package org.bbaw.bts.core.controller.impl.generalController;
 
 import java.lang.reflect.InvocationTargetException;
 import java.net.MalformedURLException;
-import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -15,17 +14,14 @@ import java.util.Vector;
 import javax.inject.Inject;
 
 import org.bbaw.bts.app.login.Login;
-import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.btsmodel.BTSProject;
 import org.bbaw.bts.btsmodel.BTSUser;
-import org.bbaw.bts.btsviewmodel.BtsviewmodelFactory;
-import org.bbaw.bts.btsviewmodel.DBCollectionStatusInformation;
-import org.bbaw.bts.btsviewmodel.TreeNodeWrapper;
 import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.commons.BTSPluginIDs;
 import org.bbaw.bts.core.commons.BTSCoreConstants;
 import org.bbaw.bts.core.commons.staticAccess.StaticAccessController;
 import org.bbaw.bts.core.controller.generalController.ApplicationStartupController;
+import org.bbaw.bts.core.controller.generalController.ApplicationUpdateController;
 import org.bbaw.bts.core.controller.generalController.BTSUserController;
 import org.bbaw.bts.core.controller.generalController.ExtensionStartUpController;
 import org.bbaw.bts.core.controller.generalController.ISplashScreenController;
@@ -37,7 +33,6 @@ import org.bbaw.bts.db.DBManager;
 import org.bbaw.bts.ui.font.BTSFontManager;
 import org.bbaw.bts.ui.main.wizards.installation.InstallationWizard;
 import org.bbaw.bts.ui.main.wizards.newProject.NewProjectWizard;
-import org.bbaw.bts.ui.resources.BTSResourceProvider;
 import org.eclipse.core.commands.Command;
 import org.eclipse.core.commands.ParameterizedCommand;
 import org.eclipse.core.databinding.observable.Realm;
@@ -46,12 +41,8 @@ import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IExtensionRegistry;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Status;
-import org.eclipse.core.runtime.SubMonitor;
-import org.eclipse.core.runtime.jobs.IJobChangeEvent;
 import org.eclipse.core.runtime.jobs.Job;
-import org.eclipse.core.runtime.jobs.JobChangeAdapter;
 import org.eclipse.core.runtime.preferences.ConfigurationScope;
 import org.eclipse.core.runtime.preferences.DefaultScope;
 import org.eclipse.core.runtime.preferences.IEclipsePreferences;
@@ -67,15 +58,10 @@ import org.eclipse.e4.ui.workbench.IWorkbench;
 import org.eclipse.e4.ui.workbench.UIEvents;
 import org.eclipse.equinox.app.IApplicationContext;
 import org.eclipse.equinox.p2.core.IProvisioningAgent;
-import org.eclipse.equinox.p2.operations.ProvisioningJob;
-import org.eclipse.equinox.p2.operations.ProvisioningSession;
-import org.eclipse.equinox.p2.operations.Update;
-import org.eclipse.equinox.p2.operations.UpdateOperation;
 import org.eclipse.equinox.security.storage.ISecurePreferences;
 import org.eclipse.equinox.security.storage.SecurePreferencesFactory;
 import org.eclipse.equinox.security.storage.StorageException;
-import org.eclipse.jface.databinding.swt.SWTObservables;
-import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.jface.databinding.swt.DisplayRealm;
 import org.eclipse.jface.dialogs.ProgressMonitorDialog;
 import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.jface.resource.JFaceResources;
@@ -91,7 +77,7 @@ import org.osgi.service.prefs.BackingStoreException;
 
 
 public class ApplicationStartupControllerImpl implements
-		ApplicationStartupController {
+		ApplicationStartupController, EventHandler {
 
 	private static final String PLUGIN_ID = "org.bbaw.bts.app";
 
@@ -118,8 +104,6 @@ public class ApplicationStartupControllerImpl implements
 
 	@Inject
 	private UISynchronize sync;
-
-
 
 	private List<BTSProject> projects;
 
@@ -193,15 +177,6 @@ public class ApplicationStartupControllerImpl implements
 			font.getFontData()[0].setHeight(12);
 			JFaceResources.getFontRegistry().put(JFaceResources.DEFAULT_FONT,
 					new FontData[] { font.getFontData()[0] });
-			// Font f = JFaceResources.getFontRegistry().get(
-			// JFaceResources.DEFAULT_FONT);
-			// Font f2 = JFaceResources.getDefaultFont();
-			// Font f3 = JFaceResources.getFont("BBAWLibertine");
-			// System.out.println(f +"="+ f2 +"="+ f3 +"="+ font);
-			// for (Object s : JFaceResources.getFontRegistry().getKeySet())
-			// {
-			// System.out.println(s);
-			// }
 		}
 
 		try {
@@ -215,50 +190,7 @@ public class ApplicationStartupControllerImpl implements
 		}
 
 		// The should be a better way to close the Splash
-		eventBroker.subscribe(UIEvents.UILifeCycle.ACTIVATE,
-				new EventHandler() {
-					@Override
-					public void handleEvent(Event event) {
-						context.get(StaticAccessController.class);
-						context.get(PermissionsAndExpressionsEvaluationController.class);
-						IProvisioningAgent agent = context
-								.get(IProvisioningAgent.class);
-						IWorkbench workbench = context.get(IWorkbench.class);
-						if (login != null && login.isRestartRequired())
-						{
-							dbManager.shutdown();
-							workbench.restart();
-						}
-						logger.info("IProvisioningAgent loaded: "
-								+ (agent != null) + ", IWorkbench loaded: "
-								+ (workbench != null));
-						// automated software update
-						// FIXME
-						checkAndInstallSoftwareUpdates(agent, workbench);
-
-						// extension specific startup routines
-						ExtensionStartUpController[] conrollers = null;
-						try {
-							conrollers = loadExtensionStartUpControllers(context);
-						} catch (CoreException e) {
-							logger.error(e);
-						}
-						if (conrollers != null) {
-							for (ExtensionStartUpController c : conrollers) {
-								try {
-									c.startup();
-								} catch (Exception e) {
-									e.printStackTrace();
-								}
-							}
-						}
-
-						
-						splashController.close();
-						checkProjectIndexingDBCollections(projects);
-						eventBroker.unsubscribe(this);
-					}
-				});
+		eventBroker.subscribe(UIEvents.UILifeCycle.ACTIVATE, this);
 
 		logger.info("db_installation_dir " + db_installation_dir);
 
@@ -275,7 +207,8 @@ public class ApplicationStartupControllerImpl implements
 				logger.error(e);
 			}
 		}
-
+		
+		
 		if (first_startup == null || first_startup.equals("true")) {
 			logger.info("Application very first startup");
 			listen2Backend = false;
@@ -520,7 +453,7 @@ public class ApplicationStartupControllerImpl implements
 			public void run() {
 				// needs to init realm
 				Realm.runWithDefault(
-						SWTObservables.getRealm(Display.getDefault()),
+						DisplayRealm.getRealm(Display.getDefault()),
 						new Runnable() {
 							public void run() {
 								boolean success = openInstallationWizard();
@@ -608,122 +541,47 @@ public class ApplicationStartupControllerImpl implements
 		// defaultPrefs.get(BTSPluginIDs.PREF_MAIN_CORPUS_KEY, null);
 
 	}
+	
+	@Override
+	public void handleEvent(Event event) {
+		context.get(StaticAccessController.class);
+		context.get(PermissionsAndExpressionsEvaluationController.class);
+		IProvisioningAgent agent = context
+				.get(IProvisioningAgent.class);
+		IWorkbench workbench = context.get(IWorkbench.class);
+		if (login != null && login.isRestartRequired())
+		{
+			dbManager.shutdown();
+			workbench.restart();
+		}
+		logger.info("IProvisioningAgent loaded: "
+				+ (agent != null) + ", IWorkbench loaded: "
+				+ (workbench != null));
 
-	private void checkAndInstallSoftwareUpdates(final IProvisioningAgent agent,
-			final IWorkbench workbench) {
-		Job j = new Job("Update Job") {
-			private boolean doInstall = false;
-
-			@Override
-			protected IStatus run(final IProgressMonitor monitor) {
-
-				/* 1. Prepare update plumbing */
-
-				final ProvisioningSession session = new ProvisioningSession(
-						agent);
-				final UpdateOperation operation = new UpdateOperation(session);
-
-				// create uri
-				String urlString = prefs.get(BTSPluginIDs.PREF_P2_UPDATE_SITE,
-						BTSConstants.DEFAULT_PREF_P2_UPDATE_SITE);
-				logger.info("P2_UPDATE_SITE url " + urlString);
-				URI uri = null;
-				try {
-					uri = new URI(urlString);
-				} catch (final URISyntaxException e) {
-					return Status.CANCEL_STATUS;
-				}
-
-				// set location of artifact and metadata repo
-				operation.getProvisioningContext().setArtifactRepositories(
-						new URI[] { uri });
-				operation.getProvisioningContext().setMetadataRepositories(
-						new URI[] { uri });
-				/* 2. check for updates */
-
-				SubMonitor sub = SubMonitor.convert(new NullProgressMonitor(),
-						"Checking for application updates...", 200);
-				IStatus status2 = operation.resolveModal(sub.newChild(100));
-				logger.info("P2 Update Status : " + status2.getCode());
-
-				// run update checks causing I/O
-				final IStatus status = operation.resolveModal(monitor);
-
-				logger.info("P2 Update Status : " + status.getCode());
-				// failed to find updates (inform user and exit)
-				if (status.getCode() == UpdateOperation.STATUS_NOTHING_TO_UPDATE) {
-					return Status.OK_STATUS;
-				}
-
-				/* 3. Ask if updates should be installed and run installation */
-
-				// found updates, ask user if to install?
-				if (status.isOK() && status.getSeverity() != IStatus.ERROR) {
-					sync.syncExec(new Runnable() {
-						@Override
-						public void run() {
-							String updates = "";
-							Update[] possibleUpdates = operation
-									.getPossibleUpdates();
-							for (Update update : possibleUpdates) {
-								updates += update + "\n";
-							}
-							doInstall = MessageDialog.openQuestion(new Shell(),
-									"Really install updates?", updates);
-						}
-					});
-				}
-
-				// start installation
-				if (doInstall) {
-					final ProvisioningJob provisioningJob = operation
-							.getProvisioningJob(monitor);
-					// updates cannot run from within Eclipse IDE!!!
-					if (provisioningJob == null) {
-						System.err
-								.println("Running update from within Eclipse IDE? This won't work!!!");
-						throw new NullPointerException();
-					}
-
-					// register a job change listener to track
-					// installation progress and notify user upon success
-					provisioningJob
-							.addJobChangeListener(new JobChangeAdapter() {
-								@Override
-								public void done(IJobChangeEvent event) {
-									if (event.getResult().isOK()) {
-										sync.asyncExec(new Runnable() {
-
-											@Override
-											public void run() {
-												boolean restart = MessageDialog
-														.openQuestion(
-																new Shell(),
-																"Updates installed, restart?",
-																"Updates have been installed successfully, do you want to restart?");
-												if (restart) {
-													workbench.restart();
-												}
-											}
-										});
-
-									}
-									super.done(event);
-								}
-							});
-
-					provisioningJob.schedule();
-				}
-				return Status.OK_STATUS;
-			}
-		};
-		j.schedule();
+		// extension specific startup routines
+		ExtensionStartUpController[] conrollers = null;
 		try {
-			j.join();
-		} catch (InterruptedException e) {
+			conrollers = loadExtensionStartUpControllers(context);
+		} catch (CoreException e) {
 			logger.error(e);
 		}
+		if (conrollers != null) {
+			for (ExtensionStartUpController c : conrollers) {
+				try {
+					c.startup();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		}
 
+		// automated software update
+		ApplicationUpdateController updateController = context.get(ApplicationUpdateController.class);
+		updateController.isUpdateAvailable();
+
+		splashController.close();
+		checkProjectIndexingDBCollections(projects);
+		eventBroker.unsubscribe(this);
 	}
 
 	protected boolean openInstallationWizard() {
@@ -845,6 +703,7 @@ public class ApplicationStartupControllerImpl implements
 												BTSCoreConstants.LISTEN_TO_BACKEND_UPDATES,
 												"true");// FIXME dev!
 										for (BTSProject project : projects) {
+											
 											backend2ClientUpdateService
 													.startListening2Updates(project);
 										}
@@ -895,7 +754,7 @@ public class ApplicationStartupControllerImpl implements
 		final BTSProject project = projectService.createNew();
 		final NewProjectWizard wizard = new NewProjectWizard(project,
 				projectService);
-		Realm.runWithDefault(SWTObservables.getRealm(Display.getDefault()),
+		Realm.runWithDefault(DisplayRealm.getRealm(Display.getDefault()),
 				new Runnable() {
 					public void run() {
 						WizardDialog dialog = new WizardDialog(new Shell(

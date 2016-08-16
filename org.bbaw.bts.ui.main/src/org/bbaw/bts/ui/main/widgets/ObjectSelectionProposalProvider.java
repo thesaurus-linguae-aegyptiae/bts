@@ -9,10 +9,6 @@ import org.bbaw.bts.btsmodel.BTSConfig;
 import org.bbaw.bts.btsmodel.BTSConfigItem;
 import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.core.controller.generalController.GeneralBTSObjectController;
-import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.Status;
-import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.jface.fieldassist.ContentProposal;
 import org.eclipse.jface.fieldassist.IContentProposal;
 import org.eclipse.jface.fieldassist.IContentProposalProvider;
@@ -37,15 +33,17 @@ public class ObjectSelectionProposalProvider implements
 
 	@Override
 	public IContentProposal[] getProposals(String contents, int position) {
-		if (list == null || list.isEmpty()) {
-			loadList();
+		if (contents.length() > 1) {
+			list = loadList(contents);
 		}
+
 		List<ContentProposal> partialList = new Vector<ContentProposal>();
 		if (list != null && !list.isEmpty()) {
 			for (BTSObject o : list) {
-				if (o.getName() != null && o.getName().startsWith(contents)) {
-					ContentProposal p = new ContentProposal(o.getName());
-
+				if (o.getName() != null && o.getName().startsWith(contents)
+						|| o.get_id().equals(contents)) {
+					String desc = o.getName() + "\n" + o.get_id() + "\n" + o.getDBCollectionKey();
+					ContentProposal p = new ContentProposal(o.get_id(), o.getName(), desc);
 					partialList.add(p);
 				}
 			}
@@ -74,20 +72,11 @@ public class ObjectSelectionProposalProvider implements
 		return comparator;
 	}
 
-	private void loadList() {
-		Job job = new Job("loading") {
+	private List<BTSObject> loadList(final String contents) {
 
+		return gernalObjectController.getObjectProposalsFor(
+				(BTSConfigItem) configItem, contents, object, null);
 
-			@Override
-			protected IStatus run(IProgressMonitor monitor) {
-				list = gernalObjectController.getObjectProposalsFor(
-						(BTSConfigItem) configItem, "", object, monitor);
-
-				return Status.OK_STATUS;
-			}
-		};
-		job.schedule();
-		// job.g
 	}
 
 	public BTSConfig getConfigItem() {

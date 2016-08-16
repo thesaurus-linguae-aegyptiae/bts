@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="ASCII"?>
+<fragment:ModelFragments xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:commands="http://www.eclipse.org/ui/2010/UIModel/application/commands" xmlns:fragment="http://www.eclipse.org/ui/2010/UIModel/fragment" xmlns:menu="http://www.eclipse.org/ui/2010/UIModel/application/ui/menu" xmi:id="_Uw4EcPELEeWIFOC-LV35YQ">
+  <imports xsi:type="commands:Category" xmi:id="_lvEOcPEMEeWIFOC-LV35YQ" elementId="org.eclipse.ui.category.help"/>
+  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_UOzcsPEMEeWIFOC-LV35YQ" featurename="commands" parentElementId="org.bbaw.bts.application">
+    <elements xsi:type="commands:Command" xmi:id="_YMwgAPEMEeWIFOC-LV35YQ" elementId="org.bbaw.bts.core.commons.corpus.help.display.pdf" commandName="Open Manual (PDF)" category="_lvEOcPEMEeWIFOC-LV35YQ"/>
+  </fragments>
+  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_Jl-nYPENEeWIFOC-LV35YQ" featurename="children" parentElementId="org.eclipse.ui.help">
+    <elements xsi:type="menu:HandledMenuItem" xmi:id="_K0r2MPENEeWIFOC-LV35YQ" elementId="org.bbaw.bts.core.commons.corpus.help.handledmenuitem.display.pdf" label="Open Manual (PDF)" command="_YMwgAPEMEeWIFOC-LV35YQ"/>
+  </fragments>
+  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_nrpO4PEXEeWIFOC-LV35YQ" featurename="handlers" parentElementId="org.bbaw.bts.application">
+    <elements xsi:type="commands:Handler" xmi:id="_OdPQQPEYEeWIFOC-LV35YQ" elementId="org.bbaw.bts.core.commons.corpus.help.handler.display.pdf" contributionURI="bundleclass://org.bbaw.bts.core.commons.corpus.help/org.bbaw.bts.core.commons.corpus.help.OpenPDFManualHandler" command="_YMwgAPEMEeWIFOC-LV35YQ"/>
+  </fragments>
+</fragment:ModelFragments>

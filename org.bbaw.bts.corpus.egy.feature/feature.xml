@@ -2,7 +2,7 @@
 <feature
       id="org.bbaw.bts.corpus.egy.feature"
       label="EgyCorpusFeature"
-      version="0.0.14.qualifier"
+      version="3.1.0.qualifier"
       provider-name="BBAW">
 
    <description url="http://www.example.com/description">
@@ -210,13 +210,6 @@
          unpack="false"/>
 
    <plugin
-         id="org.bbaw.bts.ui.corpus.egy.commons"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
          id="org.bbaw.bts.ui.font.academy"
          download-size="0"
          install-size="0"
@@ -343,10 +336,24 @@
          unpack="false"/>
 
    <plugin
+         id="org.bbaw.bts.core.commons.corpus.help"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
          id="com.google.guava"
          download-size="0"
          install-size="0"
-         version="10.0.1"
+         version="10.0.1.v201203051515"
+         unpack="false"/>
+
+   <plugin
+         id="org.bbaw.bts.ui.corpus.egy.commons"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
          unpack="false"/>
 
 </feature>

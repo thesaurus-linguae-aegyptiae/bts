@@ -54,6 +54,9 @@ public class ThemeSwitcherHandler {
 			engine.setTheme(GREY_BIG_THEME, true);
 			break;
 		case GREY_BIG_THEME:
+			engine.setTheme(GREY_EXTRA_BIG_THEME, true);
+			break;
+		case GREY_EXTRA_BIG_THEME:
 			engine.setTheme(OLIVE_THEME, true);
 			break;
 		case OLIVE_THEME:
@@ -63,11 +66,9 @@ public class ThemeSwitcherHandler {
 			engine.setTheme(OLIVE_EXTRA_BIG_THEME, true);
 			break;
 		case OLIVE_EXTRA_BIG_THEME:
-			engine.setTheme(GREY_EXTRA_BIG_THEME, true);
-			break;
-		case GREY_EXTRA_BIG_THEME:
 			engine.setTheme(DEFAULT_THEME, true);
 			break;
+		
 		default:
 			engine.setTheme(DEFAULT_THEME, true);
 			break;

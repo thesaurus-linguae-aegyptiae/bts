@@ -11,7 +11,6 @@ import org.bbaw.bts.btsmodel.BTSInterTextReference;
 import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.btsmodel.BTSRelation;
 import org.bbaw.bts.btsmodel.BtsmodelFactory;
-import org.bbaw.bts.btsmodel.BtsmodelPackage;
 import org.bbaw.bts.core.commons.BTSCoreConstants;
 import org.bbaw.bts.core.controller.generalController.BTSUserController;
 import org.bbaw.bts.core.controller.generalController.EditingDomainController;
@@ -23,18 +22,8 @@ import org.bbaw.bts.ui.corpus.parts.AnnotationsPart;
 import org.bbaw.bts.ui.resources.BTSResourceProvider;
 import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.core.services.log.Logger;
-import org.eclipse.emf.common.command.Command;
-import org.eclipse.emf.common.command.CompoundCommand;
-import org.eclipse.emf.edit.command.AddCommand;
-import org.eclipse.emf.edit.command.RemoveCommand;
-import org.eclipse.emf.edit.command.SetCommand;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Display;
-import org.eclipse.swt.widgets.Event;
-import org.eclipse.swt.widgets.Group;
-import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.events.ControlEvent;
 import org.eclipse.swt.events.ControlListener;
 import org.eclipse.swt.events.MouseAdapter;
@@ -43,13 +32,18 @@ import org.eclipse.swt.events.PaintEvent;
 import org.eclipse.swt.events.PaintListener;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.layout.RowData;
 import org.eclipse.swt.layout.RowLayout;
+import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.ExpandBar;
-import org.eclipse.swt.widgets.Label;
-import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.ExpandItem;
+import org.eclipse.swt.widgets.Group;
+import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Listener;
 
 public abstract class RelatedObjectGroup extends Composite{
 
@@ -307,7 +301,7 @@ public abstract class RelatedObjectGroup extends Composite{
 	}
 
 	protected void editReference() {
-		BTSTextSelectionEvent selectionEvent = parentPart.getTestSelectionEvent();
+		BTSTextSelectionEvent selectionEvent = parentPart.getTextSelectionEvent();
 		if (selectionEvent == null) return;
 		
 		// in object suchen, ob relation auf Text besteht
@@ -375,7 +369,7 @@ public abstract class RelatedObjectGroup extends Composite{
 	}
 
 	protected void addReference() {
-		BTSTextSelectionEvent selectionEvent = parentPart.getTestSelectionEvent();
+		BTSTextSelectionEvent selectionEvent = parentPart.getTextSelectionEvent();
 		if (selectionEvent == null) return;
 		
 		// in object suchen, ob relation auf Text besteht
@@ -428,7 +422,7 @@ public abstract class RelatedObjectGroup extends Composite{
 	}
 
 	protected void removeReference() {
-		BTSTextSelectionEvent selectionEvent = parentPart.getTestSelectionEvent();
+		BTSTextSelectionEvent selectionEvent = parentPart.getTextSelectionEvent();
 		if (selectionEvent == null) return;
 		
 		// in object suchen, ob relation auf Text besteht

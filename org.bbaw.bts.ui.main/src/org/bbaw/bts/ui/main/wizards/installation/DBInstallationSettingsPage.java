@@ -13,9 +13,8 @@ import org.eclipse.core.databinding.observable.ChangeEvent;
 import org.eclipse.core.databinding.observable.IChangeListener;
 import org.eclipse.core.databinding.observable.value.IObservableValue;
 import org.eclipse.core.runtime.IStatus;
-import org.eclipse.jface.databinding.swt.ISWTObservable;
-import org.eclipse.jface.databinding.swt.SWTObservables;
 import org.eclipse.jface.databinding.swt.WidgetProperties;
+import org.eclipse.jface.internal.databinding.swt.SWTVetoableValueDecorator;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionEvent;
@@ -158,7 +157,7 @@ public class DBInstallationSettingsPage extends WizardPage
 		BackgroundControlDecorationSupport.create(binding2, SWT.TOP | SWT.LEFT);
 		//		setWidgetBackground(textDBInstallationDir, (IStatus) binding2.getValidationStatus().getValue());
 
-		uiElement = SWTObservables.observeText(errorLabel);
+		uiElement = WidgetProperties.text().observe(errorLabel);  
 		// This one listenes to all changes
 		bindingContext.bindValue(uiElement, new AggregateValidationStatus(bindingContext.getBindings(),
 				AggregateValidationStatus.MAX_SEVERITY), null, null);
@@ -174,10 +173,10 @@ public class DBInstallationSettingsPage extends WizardPage
 					Binding binding = (Binding) o;
 					IStatus status = (IStatus) binding.getValidationStatus().getValue();
 					Control control = null;
-					if (binding.getTarget() instanceof ISWTObservable)
+					if (binding.getTarget() instanceof SWTVetoableValueDecorator)
 					{
-						ISWTObservable swtObservable = (ISWTObservable) binding.getTarget();
-						control = (Control) swtObservable.getWidget();
+						SWTVetoableValueDecorator deco = (SWTVetoableValueDecorator) binding.getTarget();
+						control = (Control) deco.getWidget();
 						setWidgetBackground(control, status);
 
 					}
@@ -190,7 +189,6 @@ public class DBInstallationSettingsPage extends WizardPage
 
 			}
 		});
-		uiElement.setValue("");
 		return bindingContext;
 	}
 

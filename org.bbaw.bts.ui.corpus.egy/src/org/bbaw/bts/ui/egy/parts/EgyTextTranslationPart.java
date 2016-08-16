@@ -24,8 +24,6 @@ import org.bbaw.bts.corpus.btsCorpusModel.BTSSenctence;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSSentenceItem;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSText;
 import org.bbaw.bts.ui.commons.corpus.events.BTSTextSelectionEvent;
-import org.bbaw.bts.ui.commons.corpus.text.BTSAnnotationAnnotation;
-import org.bbaw.bts.ui.commons.corpus.text.BTSCommentAnnotation;
 import org.bbaw.bts.ui.commons.corpus.text.BTSModelAnnotation;
 import org.bbaw.bts.ui.commons.corpus.text.BTSSubtextAnnotation;
 import org.bbaw.bts.ui.commons.utils.BTSUIConstants;
@@ -52,6 +50,7 @@ import org.eclipse.e4.ui.di.Focus;
 import org.eclipse.e4.ui.di.UISynchronize;
 import org.eclipse.e4.ui.model.application.ui.basic.MPart;
 import org.eclipse.e4.ui.services.IServiceConstants;
+import org.eclipse.e4.ui.services.internal.events.EventBroker;
 import org.eclipse.e4.ui.workbench.modeling.EPartService;
 import org.eclipse.e4.ui.workbench.modeling.ESelectionService;
 import org.eclipse.jface.text.Document;
@@ -80,6 +79,10 @@ public class EgyTextTranslationPart {
 	/** The sync. */
 	@Inject
 	private UISynchronize sync;
+
+	/** The event broker. */
+	@Inject
+	private EventBroker eventBroker;
 	
 	/** The selection service. */
 	@Inject
@@ -197,7 +200,9 @@ public class EgyTextTranslationPart {
 		if (selectionCached)
 		{
 			loadInput(text);
-		}
+		} else
+			eventBroker.post(BTSUIConstants.EVENT_EGY_TEXT_EDITOR_INPUT_REQUESTED+"translation_part", text);
+			
 	}
 	
 	/**
@@ -329,7 +334,9 @@ public class EgyTextTranslationPart {
 			{
 //				btsEvent.getTextAnnotations().clear();
 //				btsEvent.getTextAnnotations().addAll(highlightedAnnotations);
-				selectionService.setSelection(sentence);
+				// TODO: implement selection of multiple sentences!
+				if (sentence != null)
+					selectionService.setSelection(sentence);
 			}
 		}
 	}
@@ -565,7 +572,8 @@ public class EgyTextTranslationPart {
 			highlightedAnnotations.add(a);
 			highlightAnnotations(highlightedAnnotations, true);
 			Position pos = annotationModel.getPosition(a);
-			textViewer.revealRange(pos.getOffset(), pos.getLength());
+			if (pos != null)
+				textViewer.revealRange(pos.getOffset(), pos.getLength());
 		}
 		
 	}

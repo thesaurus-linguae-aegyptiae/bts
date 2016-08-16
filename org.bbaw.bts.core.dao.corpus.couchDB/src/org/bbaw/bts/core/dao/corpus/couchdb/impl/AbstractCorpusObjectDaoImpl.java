@@ -74,50 +74,33 @@ public abstract class AbstractCorpusObjectDaoImpl<E extends BTSCorpusObject, K e
 	protected List<E> loadPartialObjectsFromStrings(List<String> allDocs,
 			String dbPath) {
 		List<E> results = new Vector<E>(allDocs.size());
-		Map<URI, Resource> cache = ((ResourceSetImpl) connectionProvider
-				.getEmfResourceSet()).getURIResourceMap();
+		Map<URI, Resource> cache = getObjectCache();
 
 		for (String jo : allDocs) {
-			// System.out.println(jo);
-			String id = extractIdFromObjectString(jo);
-			// logger.info(id);
-			URI uri = URI.createURI(getLocalDBURL() + "/" + dbPath + "/" + id);
-			E entity = retrieveFromCache(uri, cache);
-			if (entity == null) {
-				entity = loadObjectFromString(id, dbPath, uri,
-						extractEClassFromObjectString(jo), jo);
-				addEntityToCache(uri, cache, entity);
-			}
+			E entity = loadPartialObjectFromString(jo, dbPath, cache); 
 			results.add(entity);
 		}
 		return results;
 	}
 
-	// public E loadObjectFromString(String id, String indexName, URI uri,
-	// String eclassString, String sourceAsString)
-	// {
-	// Resource resource;
-	// try {
-	// resource = connectionProvider.getEmfResourceSet().getResource(uri, true);
-	// } catch (Exception e1) {
-	// logger.info(e1);
-	// } finally {
-	// resource = connectionProvider.getEmfResourceSet().createResource(uri);
-	// }
-	// fillResource(resource, sourceAsString);
-	// if (!resource.getContents().isEmpty())
-	// {
-	// E e = ((E) resource.getContents().get(0));
-	// if (e.getDBCollectionKey() == null)
-	// {
-	// e.setDBCollectionKey(indexName);
-	// }
-	// checkForConflicts(e, indexName);
-	// return e;
-	// }
-	// logger.info(sourceAsString);
-	// return find((K) id, indexName);
-	// }
+	protected Map<URI, Resource> getObjectCache() {
+		return ((ResourceSetImpl) connectionProvider
+				.getEmfResourceSet()).getURIResourceMap();
+	}
+
+	protected E loadPartialObjectFromString(String jo, String dbPath, Map<URI, Resource> cache) {
+		String id = extractIdFromObjectString(jo);
+		// logger.info(id);
+		URI uri = URI.createURI(getLocalDBURL() + "/" + dbPath + "/" + id);
+		E entity = retrieveFromCache(uri, cache);
+		if (entity == null) {
+			entity = loadObjectFromString(id, dbPath, uri,
+					extractEClassFromObjectString(jo), jo);
+			addEntityToCache(uri, cache, entity);
+		}
+		return entity;
+	}
+
 
 	@Override
 	public E loadObjectFromString(String id, String indexName, URI uri,
@@ -140,12 +123,6 @@ public abstract class AbstractCorpusObjectDaoImpl<E extends BTSCorpusObject, K e
 		}
 		Resource resource = connectionProvider.getEmfResourceSet()
 				.createResource(uri);
-		// connectionProvider.getEmfResourceSet().getResource(uri, false);
-		// if (resource == null)
-		// {
-		// resource =
-		// connectionProvider.getEmfResourceSet().createResource(uri);
-		// }
 		resource.getContents().add(entity);
 		entity.set_id(extractIdFromObjectString(sourceAsString));
 

@@ -1,7 +1,5 @@
 package org.bbaw.bts.ui.main.wizards.installation;
 
-import java.net.MalformedURLException;
-
 import org.bbaw.bts.core.controller.generalController.ApplicationStartupController;
 import org.bbaw.bts.ui.commons.controldecoration.BackgroundControlDecorationSupport;
 import org.bbaw.bts.ui.commons.utils.BTSUIConstants;
@@ -17,8 +15,8 @@ import org.eclipse.core.databinding.observable.ChangeEvent;
 import org.eclipse.core.databinding.observable.IChangeListener;
 import org.eclipse.core.databinding.observable.value.IObservableValue;
 import org.eclipse.core.runtime.IStatus;
-import org.eclipse.jface.databinding.swt.SWTObservables;
 import org.eclipse.jface.databinding.swt.WidgetProperties;
+import org.eclipse.jface.internal.databinding.swt.SWTVetoableValueDecorator;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionEvent;
@@ -189,7 +187,7 @@ public class ConnectToServerPage extends WizardPage
 		BackgroundControlDecorationSupport.create(binding2, SWT.TOP | SWT.LEFT);
 
 		//
-		uiElement = SWTObservables.observeText(errorLabelServer);
+		uiElement = WidgetProperties.text().observe(errorLabelServer);  
 		// This one listenes to all changes
 		bindingContext.bindValue(uiElement, new AggregateValidationStatus(bindingContext.getBindings(),
 				AggregateValidationStatus.MAX_SEVERITY), null, null);
@@ -204,17 +202,23 @@ public class ConnectToServerPage extends WizardPage
 				{
 					Binding binding = (Binding) o;
 					IStatus status = (IStatus) binding.getValidationStatus().getValue();
+					Control control = null;
+					if (binding.getTarget() instanceof SWTVetoableValueDecorator)
+					{
+						SWTVetoableValueDecorator deco = (SWTVetoableValueDecorator) binding.getTarget();
+						control = (Control) deco.getWidget();
+						setWidgetBackground(control, status);
 
+					}
 					if (!status.isOK())
 					{
 						allcomplete = false;
 					}
 				}
-				if (allcomplete) setPageComplete(validateConnection());
+				setPageComplete(allcomplete);
 
 			}
 		});
-		uiElement.setValue("");
 		return bindingContext;
 	}
 

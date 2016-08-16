@@ -18,8 +18,8 @@ public class BTSAnnotationAnnotation extends BTSModelAnnotation {
 
 	public static final String TYPE = "org.bbaw.bts.ui.text.modelAnnotation.annotation";
 
-	public static final String TYPE_RUBRUM = "org.bbaw.bts.ui.text.modelAnnotation.annotation.rubrum";
-	public static final String TYPE_RUBRUM_HIGHLIGHTED = "org.bbaw.bts.ui.text.modelAnnotation.annotation.rubrum.highlighted";
+	public static final String TYPE_RUBRUM = "org.bbaw.bts.ui.text.modelAnnotation.rubrum";
+	public static final String TYPE_RUBRUM_HIGHLIGHTED = "org.bbaw.bts.ui.text.modelAnnotation.rubrum.highlighted";
 	public static final String TYPE_HIGHLIGHTED = "org.bbaw.bts.ui.text.modelAnnotation.annotation.highlighted";
 	
 //	public BTSAnnotationAnnotation(BTSIdentifiableItem model, BTSInterTextReference interTextReference,
@@ -37,6 +37,7 @@ public class BTSAnnotationAnnotation extends BTSModelAnnotation {
 			BTSIdentifiableItem modelObject, BTSAnnotation btsAnnotation) {
 		super(type, document, issue, modelObject);
 		this.setRelatingObject(btsAnnotation);
+		expandType();
 	}
 
 	public BTSAnnotationAnnotation(IXtextDocument document, String type,
@@ -44,11 +45,24 @@ public class BTSAnnotationAnnotation extends BTSModelAnnotation {
 			BTSAnnotation btsAnnotation) {
 		super(type, document, issue, modelObject);
 		this.setRelatingObject(btsAnnotation);
+		expandType();
 	}
 
 	public BTSAnnotationAnnotation(String type, BTSIdentifiableItem item,
 			BTSInterTextReference interTextReference, BTSAnnotation relatingObject) {
 		super(type, item, interTextReference, relatingObject);
+		expandType();
+	}
+	
+	private void expandType() {
+		String type = getType();
+		if (getRelatingObject().getType() != null) {
+			type += "." + getRelatingObject().getType();
+			if (getRelatingObject().getSubtype() != null) {
+				type += "." + getRelatingObject().getSubtype();
+			}
+		}
+		setType(type);
 	}
 
 	@Override
@@ -56,17 +70,5 @@ public class BTSAnnotationAnnotation extends BTSModelAnnotation {
 		return super.getType();
 	}
 	
-	public void setHighlighted(boolean highlighted)
-	{
-		if (highlighted)
-		{
-			if (!getType().endsWith("highlighted")) {
-				cachedType = getType();
-				setType(getType() + ".highlighted");
-			}
-		} else {
-			setType(cachedType);
-		}
-	}
 	
 }

@@ -2,7 +2,6 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: org.bbaw.bts.model.corpus.edit;singleton:=true
-Bundle-Version: 1.0.8.qualifier
 Bundle-ClassPath: .
 Bundle-Activator: org.bbaw.bts.corpus.btsCorpusModel.provider.BTSCorpusModelEditPlugin$Implementation
 Bundle-Vendor: %providerName
@@ -27,3 +26,4 @@ Import-Package: org.bbaw.bts.commons,
  org.eclipse.jface.viewers,
  org.eclipse.swt.graphics,
  org.eclipse.swt.widgets
+Bundle-Version: 3.1.0.qualifier

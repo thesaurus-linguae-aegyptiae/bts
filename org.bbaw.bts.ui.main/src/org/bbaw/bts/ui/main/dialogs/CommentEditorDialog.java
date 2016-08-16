@@ -4,18 +4,16 @@ import java.util.EventObject;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 
 import org.bbaw.bts.btsmodel.BTSComment;
-import org.bbaw.bts.btsmodel.BTSConfigItem;
 import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.btsmodel.BtsmodelPackage;
 import org.bbaw.bts.core.controller.generalController.CommentController;
 import org.bbaw.bts.core.controller.generalController.EditingDomainController;
+import org.bbaw.bts.core.controller.generalController.PermissionsAndExpressionsEvaluationController;
 import org.bbaw.bts.ui.commons.utils.BTSUIConstants;
 import org.bbaw.bts.ui.commons.validator.StringNotEmptyValidator;
-import org.bbaw.bts.ui.commons.validator.StringRegexValidator;
 import org.bbaw.bts.ui.main.widgets.CompoundRelationsEditorComposite;
 import org.bbaw.bts.ui.resources.BTSResourceProvider;
 import org.eclipse.core.databinding.Binding;
@@ -35,14 +33,16 @@ import org.eclipse.jface.databinding.swt.WidgetProperties;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.dialogs.TitleAreaDialog;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.custom.CTabItem;
+import org.eclipse.swt.events.MouseAdapter;
+import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
-import org.eclipse.swt.widgets.Shell;
-import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
 public class CommentEditorDialog extends TitleAreaDialog {
@@ -61,15 +61,20 @@ public class CommentEditorDialog extends TitleAreaDialog {
 	
 	@Inject
 	private CommentController commentController;
+	
+	@Inject
+	protected PermissionsAndExpressionsEvaluationController permissionsController;
 
 	private EditingDomain editingDomain;
 	private CompoundRelationsEditorComposite relationsEditor;
+	private Text txtCommentId;
 	private Text txtTitletxt;
 	private CommandStackListener commandStackListener;
 	private Set<Command> localCommandCacheSet = new HashSet<Command>();
 	private boolean dirty;
 	private Composite container;
 	private Composite innerCompositeRelations;
+	private boolean editable;
 
 	/**
 	 * Create the dialog.
@@ -91,16 +96,39 @@ public class CommentEditorDialog extends TitleAreaDialog {
 		container = new Composite(area, SWT.NONE);
 		container.setLayout(new GridLayout(1, false));
 		container.setLayoutData(new GridData(GridData.FILL_BOTH));
-		
+
 		Label lblTitelText = new Label(container, SWT.NONE);
-		lblTitelText.setText("Title of Comment");
-		
+		lblTitelText.setText("Comment Title");
+
 		txtTitletxt = new Text(container, SWT.BORDER);
 		txtTitletxt.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1));
+		txtTitletxt.setFocus();
 		
+		Composite labelRow = new Composite(container, SWT.NONE);
+		labelRow.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1));
+		labelRow.setLayout(new GridLayout(3, false));
 		
-		Label lblCommentText = new Label(container, SWT.NONE);
-		lblCommentText.setText("Comment Text (test)");
+		Label lblCommentText = new Label(labelRow, SWT.NONE);
+		lblCommentText.setText("Comment Text");
+		lblCommentText.setLayoutData(new GridData(SWT.LEFT, SWT.FILL, true, false));
+
+		Label lblCommentId = new Label(labelRow, SWT.NONE);
+		lblCommentId.setText("ID:");
+		lblCommentId.setForeground(Display.getCurrent().getSystemColor(SWT.COLOR_TITLE_INACTIVE_FOREGROUND));
+
+		txtCommentId = new Text(labelRow, SWT.NONE);
+		txtCommentId.setLayoutData(new GridData(SWT.END, SWT.FILL, false, false));
+		txtCommentId.setEditable(false);
+		txtCommentId.setEnabled(false);
+		txtCommentId.setForeground(Display.getCurrent().getSystemColor(SWT.COLOR_TITLE_INACTIVE_FOREGROUND));
+		txtCommentId.setDoubleClickEnabled(true);
+		labelRow.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseDoubleClick(MouseEvent e) {
+				txtCommentId.setEnabled(true);
+				super.mouseDoubleClick(e);
+			}
+		});
 		
 		txtCommenttxt = new Text(container, SWT.BORDER | SWT.WRAP | SWT.V_SCROLL | SWT.MULTI);
 		txtCommenttxt.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
@@ -131,6 +159,9 @@ public class CommentEditorDialog extends TitleAreaDialog {
 						BtsmodelPackage.Literals.BTS_NAMED_TYPED_OBJECT__NAME)
 						.observe(comment), us, null);
 		
+		// ID
+		txtCommentId.setText(comment.get_id());
+		
 		// comment
 		Binding binding = bindingContext.bindValue(
 				WidgetProperties.text(SWT.Modify).observeDelayed(
@@ -142,7 +173,15 @@ public class CommentEditorDialog extends TitleAreaDialog {
 				getCommandStackListener());
 		
 		loadRelations();
+		checkRightsAndSetEditable();
 		
+	}
+
+	private void checkRightsAndSetEditable() {
+		editable = permissionsController.authenticatedUserMayEditObject(comment);
+		txtTitletxt.setEditable(editable);
+		txtCommenttxt.setEditable(editable);
+		relationsEditor.setEnabled(editable);
 	}
 
 	private CommandStackListener getCommandStackListener() {

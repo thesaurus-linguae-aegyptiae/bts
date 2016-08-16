@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="ASCII"?>
-<fragment:ModelFragments xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:commands="http://www.eclipse.org/ui/2010/UIModel/application/commands" xmlns:fragment="http://www.eclipse.org/ui/2010/UIModel/fragment" xmlns:menu="http://www.eclipse.org/ui/2010/UIModel/application/ui/menu" xmi:id="_WN5gEADrEeOpmPWG2KRhAA">
+<fragment:ModelFragments xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:advanced="http://www.eclipse.org/ui/2010/UIModel/application/ui/advanced" xmlns:commands="http://www.eclipse.org/ui/2010/UIModel/application/commands" xmlns:fragment="http://www.eclipse.org/ui/2010/UIModel/fragment" xmlns:menu="http://www.eclipse.org/ui/2010/UIModel/application/ui/menu" xmi:id="_WN5gEADrEeOpmPWG2KRhAA">
   <imports xsi:type="commands:Command" xmi:id="_m2YhoL8fEeOwdasqUpZnTA" elementId="org.eclipse.ui.file.exit"/>
   <imports xsi:type="commands:Command" xmi:id="_HO_yQL8hEeOwdasqUpZnTA" elementId="org.bbaw.bts.app.command.updateApplication"/>
   <imports xsi:type="commands:Command" xmi:id="_3xuZsL8lEeOwdasqUpZnTA" elementId="org.bbaw.bts.app.command.restart"/>
   <imports xsi:type="commands:Command" xmi:id="_S-Kp0KY5EeSMm_n5aML7dg" elementId="org.eclipse.e4.ui.perspectives.showPerspective"/>
   <imports xsi:type="commands:Command" xmi:id="_1ffpsA9REeW8qKX3Cn7MOQ" elementId="e4.exit"/>
-  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_XCflwADrEeOpmPWG2KRhAA" featurename="children" parentElementId="org.bbaw.bts.app.perspectivestack.main"/>
+  <imports xsi:type="advanced:PerspectiveStack" xmi:id="_c4yV8F1XEeaSXsxPfSlK8A" elementId="org.bbaw.bts.app.perspectivestack.main"/>
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_mjmYoANbEeO_KvSHBrHQXw" featurename="children" parentElementId="toolbar:org.eclipse.ui.main.toolbar">
     <elements xsi:type="menu:HandledToolItem" xmi:id="_psHVQGcSEeOBmPSxTUuwxg" elementId="org.bbaw.bts.ui.main.handledtoolitem.new" label="New" iconURI="platform:/plugin/org.bbaw.bts.ui.resources.impl/icons/full/obj16/add.png" command="_6YlhUGcMEeOBmPSxTUuwxg">
       <menu xmi:id="_Y8V2MGcbEeOBmPSxTUuwxg" elementId="org.bbaw.bts.ui.main.handledtoolitem.new.menu"/>
@@ -86,6 +86,7 @@
     <elements xsi:type="commands:Command" xmi:id="_0i50gDNpEeSLt-NtQ3Vu3A" elementId="org.bbaw.bts.ui.main.command.search" commandName="Search" category="_CXsjwAWjEeOJR9LhfOAE5w">
       <parameters xmi:id="_H_nhoPfHEeSfJveqYM1rcg" elementId="org.bbaw.bts.ui.main.commandparameter.viewerFilter" name="viewerFilter"/>
       <parameters xmi:id="_VV8fMCFsEeWVqaqjxYU-pA" elementId="org.bbaw.bts.ui.main.commandparameter.searchString" name="searchString"/>
+      <parameters xmi:id="_wSNgUNpTEeWicqdsFhlNWw" elementId="org.bbaw.bts.ui.main.commandparameter.searchOptions" name="Search Options"/>
     </elements>
     <elements xsi:type="commands:Command" xmi:id="_6orvkDTgEeS85dzIPjkaNA" elementId="org.bbaw.bts.ui.main.command.moveObjectAmongProjectDBCollection" commandName="moveObjectAmongProjectDBCollection" category="_CXsjwAWjEeOJR9LhfOAE5w">
       <parameters xmi:id="_GyhPMDThEeS85dzIPjkaNA" elementId="org.bbaw.bts.ui.main.commandparameter.targetDBCollectionKey" name="targetDBCollectionKey"/>

@@ -669,7 +669,7 @@ public class BTSConfigItemImpl extends BTSConfigImpl implements BTSConfigItem {
 		{
 			if (owner.contains(BTSConstants.OWNER_REFERENCED_TYPES_SEPERATOR))
 			{
-				EList refList = new BasicEList<String>();
+				EList<String> refList = new BasicEList<String>();
 				String own = owner.split(BTSConstants.OWNER_REFERENCED_TYPES_SEPERATOR)[0];
 				String refs = owner.split(BTSConstants.OWNER_REFERENCED_TYPES_SEPERATOR)[1];
 				if(refs.contains(BTSConstants.OWNER_REFERENCED_TYPES_LIST_SEPERATOR))
