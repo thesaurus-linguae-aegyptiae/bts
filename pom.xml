@@ -58,6 +58,7 @@
 		<module>org.eclipse.e4.ui.workbench.perspectiveswitcher</module>
 		<module>org.ramo.klevis.p2.core.service</module>
 		<module>org.bbaw.bts.app.product</module>
+		<module>org.lightcouch</module>
 	</modules>
 
 	<properties>
