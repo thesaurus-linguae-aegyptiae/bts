@@ -703,7 +703,7 @@ public class ApplicationStartupControllerImpl implements
 												BTSCoreConstants.LISTEN_TO_BACKEND_UPDATES,
 												"true");// FIXME dev!
 										for (BTSProject project : projects) {
-											
+											//XXX disable for dev
 											backend2ClientUpdateService
 													.startListening2Updates(project);
 										}

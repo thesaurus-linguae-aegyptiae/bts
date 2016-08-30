@@ -2079,7 +2079,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 							part.setLabel(btsObject.getName());
 						}
 						makePartActive(true);
-						bringPartToFront(true);
+//						bringPartToFront(true);
 						loadInput((BTSCorpusObject) selection);
 						editingDomain = editingDomainController
 								.getEditingDomain(text);
