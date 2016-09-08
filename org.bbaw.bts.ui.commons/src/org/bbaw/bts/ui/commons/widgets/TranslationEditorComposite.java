@@ -31,7 +31,6 @@ package org.bbaw.bts.ui.commons.widgets;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Vector;
 
 import org.bbaw.bts.btsmodel.BTSTranslation;
 import org.bbaw.bts.btsmodel.BTSTranslations;
@@ -45,7 +44,6 @@ import org.bbaw.bts.ui.commons.validator.StringNotEmptyValidator;
 import org.bbaw.bts.ui.resources.BTSResourceProvider;
 import org.eclipse.core.databinding.Binding;
 import org.eclipse.core.databinding.DataBindingContext;
-import org.eclipse.core.runtime.Assert;
 import org.eclipse.emf.databinding.EMFUpdateValueStrategy;
 import org.eclipse.emf.databinding.edit.EMFEditProperties;
 import org.eclipse.emf.edit.command.SetCommand;
@@ -61,9 +59,7 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
-import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Label;
-import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Text;
 
 /**
@@ -333,8 +329,8 @@ public class TranslationEditorComposite extends Composite {
 	public void setEnabled(boolean enabled) {
 		if (!combo.isDisposed())
 		{
-		combo.setEnabled(enabled);
-		text.setEnabled(enabled);
+			combo.setEnabled(enabled);
+			text.setEnabled(enabled);
 		}
 		super.setEnabled(enabled);
 	}
