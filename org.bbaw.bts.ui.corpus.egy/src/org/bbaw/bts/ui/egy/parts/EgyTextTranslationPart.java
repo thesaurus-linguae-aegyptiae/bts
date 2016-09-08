@@ -47,6 +47,7 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.ui.di.Focus;
+import org.eclipse.e4.ui.di.UIEventTopic;
 import org.eclipse.e4.ui.di.UISynchronize;
 import org.eclipse.e4.ui.model.application.ui.basic.MPart;
 import org.eclipse.e4.ui.services.IServiceConstants;
@@ -200,9 +201,9 @@ public class EgyTextTranslationPart {
 		if (selectionCached)
 		{
 			loadInput(text);
-		} else
+		} else {
 			eventBroker.post(BTSUIConstants.EVENT_EGY_TEXT_EDITOR_INPUT_REQUESTED+"translation_part", text);
-			
+		}
 	}
 	
 	/**
@@ -516,6 +517,19 @@ public class EgyTextTranslationPart {
 	}
 
 	/**
+	 * Receives {@link EgyTextEditorPart}'s response to a {@link BTSText} request sent via {@link EventBroker}
+	 * as topic {@link BTSUIConstants#EVENT_EGY_TEXT_EDITOR_INPUT_REQUESTED} <code>+"translation_part"</code>.
+	 *
+	 * When response is received, {@link #setSelection(BTSIdentifiableItem)} gets called.
+	 * @param current
+	 */
+	@Inject
+	@Optional
+	void eventReceivedTextEditorResponse(
+			@UIEventTopic(BTSUIConstants.EVENT_EGY_TEXT_EDITOR_INPUT_REQUESTED+"response") final BTSText current) {
+		setSelection(current);
+	}
+	/**
 	 * Sets the selection.
 	 *
 	 * @param selection the new selection
@@ -583,9 +597,14 @@ public class EgyTextTranslationPart {
 	 */
 	@Focus
 	public void setFocus() {
-		if (!loaded && selectionCached) // not yet loaded but has cached selection
-		{
-			loadInput(text);
+		if (!loaded) {
+			if (selectionCached) // not yet loaded but has cached selection
+			{
+				loadInput(text);
+				textViewer.refresh();
+			} else {
+				eventBroker.post(BTSUIConstants.EVENT_EGY_TEXT_EDITOR_INPUT_REQUESTED+"translation_part", text);
+			}
 		}
 	}
 	

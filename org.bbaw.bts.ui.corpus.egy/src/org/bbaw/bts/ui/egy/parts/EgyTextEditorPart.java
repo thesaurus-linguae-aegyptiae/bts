@@ -2767,9 +2767,11 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 	@Optional
 	void eventReceivedTextRequested(
 			@UIEventTopic(BTSUIConstants.EVENT_EGY_TEXT_EDITOR_INPUT_REQUESTED+"translation_part") final BTSText current) {
-		if (current == null || !current.equals(text)) 
-			if (text != null)
-				selectionService.setSelection(text);
+		if (current == null || !current.equals(text)) {
+			if (text != null) {
+				eventBroker.post(BTSUIConstants.EVENT_EGY_TEXT_EDITOR_INPUT_REQUESTED+"response", text);
+			}
+		}
 	}
 
 	@Inject
