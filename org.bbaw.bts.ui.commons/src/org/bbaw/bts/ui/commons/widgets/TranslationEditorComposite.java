@@ -302,7 +302,7 @@ public class TranslationEditorComposite extends Composite {
 			return;
 		}
 		BTSTranslation trans = translations.getBTSTranslation(combo.getItem(combo.getSelectionIndex()));
-		if ((trans.getValue() == null && !"".equals(text.getText()))
+		if ((trans.getValue() == null && !"".equals(text.getText().trim()))
 				|| !text.getText().equals(trans.getValue()))
 		{
 			org.eclipse.emf.common.command.Command command = SetCommand
