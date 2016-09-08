@@ -2264,13 +2264,6 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 		final AnnotationModelEvent ev = new AnnotationModelEvent(annotationModel);
 		if (sentence != null && !sentence.equals(selectedSentence)) {
 			selectedSentence = sentence;
-			if (selectedSentence.getTranslation() == null) {
-				Command command = AddCommand.create(editingDomain, selectedSentence,
-						BtsCorpusModelPackage.BTS_SENCTENCE__TRANSLATION,
-						BtsmodelFactory.eINSTANCE
-						.createBTSTranslations());
-				editingDomain.getCommandStack().execute(command);
-			}
 			sentenceTranslate_Editor.setEnabled(userMayEdit);
 			sentenceTranslate_Editor.load(selectedSentence.getTranslation(),
 					editingDomain, false);
