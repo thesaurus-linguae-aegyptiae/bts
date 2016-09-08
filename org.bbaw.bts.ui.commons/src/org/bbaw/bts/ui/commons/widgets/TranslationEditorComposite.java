@@ -164,68 +164,24 @@ public class TranslationEditorComposite extends Composite {
 		if (translations == null)
 		{
 			text.setText("");
-			return;
-		}
-		
-		List<String> ls = translations.getLanguages();
-		List<String> additionalInputs = new Vector<String>(ls.size());
-		for (Object o : ls) {
-			if (o instanceof String) {
-				boolean found = false;
-				for (String s : BTSCoreConstants.LANGS) {
-					if (s.equals(o)) {
-						found = true;
-						break;
-					}
-				}
-				if (!found) {
-					additionalInputs.add((String) o);
-				}
-			}
-		}
-		if (!additionalInputs.isEmpty()) {
-			for (String s : BTSCoreConstants.LANGS) {
-				if (!additionalInputs.contains(s)) {
-					additionalInputs.add(s);
-				}
-			}
-			combo.setItems(additionalInputs.toArray(new String[additionalInputs
-					.size()]));
-		}
-
-		if (lang != null) {
-			combo.select(combo.indexOf(lang));
-
-			loadTranslation(lang);
-			return;
-		}
-		if (translations.getBTSTranslation(BTSCoreConstants.LANG_EN) != null) {
-			combo.select(combo.indexOf(BTSCoreConstants.LANG_EN));
-			loadTranslation(BTSCoreConstants.LANG_EN);
-		} else if (translations.getBTSTranslation(BTSCoreConstants.LANG_DE) != null) {
-			combo.select(combo.indexOf(BTSCoreConstants.LANG_DE));
-
-			loadTranslation(BTSCoreConstants.LANG_DE);
-		} else if (translations.getBTSTranslation(BTSCoreConstants.LANG_FR) != null) {
-			combo.select(combo.indexOf(BTSCoreConstants.LANG_FR));
-
-			loadTranslation(BTSCoreConstants.LANG_FR);
-		} else if (translations.getBTSTranslation(BTSCoreConstants.LANG_ES) != null) {
-			combo.select(combo.indexOf(BTSCoreConstants.LANG_ES));
-
-			loadTranslation(BTSCoreConstants.LANG_ES);
-		} else if (translations.getBTSTranslation(BTSCoreConstants.LANG_RU) != null) {
-			combo.select(combo.indexOf(BTSCoreConstants.LANG_RU));
-
-			loadTranslation(BTSCoreConstants.LANG_RU);
-		} else {
 			combo.select(0);
-
-			loadTranslation(combo.getItem(0));
-		}
-		if (translations == null) {
 			return;
 		}
+		text.setText("");
+		combo.setText("");
+		
+		// load built-in languages
+		for (int i = 0; i < BTSCoreConstants.LANGS.length; i++) {
+			String l = BTSCoreConstants.LANGS[i];
+			String ltrans = translations.getTranslationStrict(l);
+			if (ltrans != null) {
+				combo.select(combo.indexOf(l));
+				loadTranslation(l);
+				return;
+			}
+		}
+		combo.select(0);
+		loadTranslation(combo.getItems()[0]);
 
 	}
 
@@ -241,6 +197,7 @@ public class TranslationEditorComposite extends Composite {
 		this.setBackground(BTSUIConstants.VIEW_BACKGROUND_DESELECTED_COLOR);
 		text = new Text(this, customStyle);
 		text.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
+		text.setText("");
 		
 		Label l = new Label(this, SWT.NONE);
 		l.setToolTipText("Set Language of Translation");
@@ -267,6 +224,9 @@ public class TranslationEditorComposite extends Composite {
 			}
 		});
 
+		if (translations != null) {
+			load(translations, domain, required);
+		}
 	}
 
 	/**
