@@ -97,8 +97,8 @@ public class TranslationEditorComposite extends Composite {
 	/** The binding context. */
 	private DataBindingContext bindingContext;
 
-	/** The lang. */
-	private String lang;
+	/** Whether to propagate changes via EMF databinding */
+	private boolean dataBind;
 
 	private List<SelectionListener> languageSelectionListeners = new ArrayList<SelectionListener>(2);
 
@@ -114,16 +114,10 @@ public class TranslationEditorComposite extends Composite {
 	 * @param required the required
 	 */
 	public TranslationEditorComposite(Composite parent, int style,
-			BTSTranslations translations, EditingDomain domain, boolean required) {
-		super(parent, SWT.NONE);
+			BTSTranslations translations, EditingDomain domain, boolean required, boolean dataBind) {
+		this(parent, style, required, dataBind);
 		this.translations = translations;
 		this.domain = domain;
-		this.required = required;
-		this.customStyle = style;
-		postConstruct();
-		if (translations != null) {
-			load(translations, domain, required);
-		}
 	}
 
 	/**
@@ -134,14 +128,22 @@ public class TranslationEditorComposite extends Composite {
 	 * @param required the required
 	 */
 	public TranslationEditorComposite(Composite parent, int style,
-			boolean required) {
+			boolean required, boolean dataBind) {
 		super(parent, SWT.NONE);
+		this.dataBind = dataBind;
 		this.required = required;
 		this.customStyle = style;
-		postConstruct();
-		if (translations != null) {
-			load(translations, domain, required);
-		}
+		createControls();
+	}
+
+	/**
+	 * Instantiates a new {@link TranslationEditorComposite} and activates databinding.
+	 * @param parent
+	 * @param style
+	 * @param required
+	 */
+	public TranslationEditorComposite(Composite parent, int style, boolean required) {
+		this(parent, style, required, true);
 	}
 	
 	/**
@@ -230,7 +232,7 @@ public class TranslationEditorComposite extends Composite {
 	/**
 	 * Post construct.
 	 */
-	private void postConstruct() {
+	private void createControls() {
 		setLayout(new GridLayout(3, false));
 		setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
 		((GridLayout) this.getLayout()).marginWidth = 0;
@@ -274,7 +276,6 @@ public class TranslationEditorComposite extends Composite {
 	 */
 	private void loadTranslation(String lang) {
 		if(translations == null) return;
-		this.lang = lang;
 		BTSTranslation trans = translations.getBTSTranslation(lang);
 		if (trans == null) {
 			trans = BtsmodelFactory.eINSTANCE.createBTSTranslation();
@@ -283,6 +284,14 @@ public class TranslationEditorComposite extends Composite {
 			// Command command = AddCommand.create(domain, translations,
 			// BtsmodelPackage.BTS_TRANSLATIONS__TRANSLATIONS, trans);
 			// domain.getCommandStack().execute(command);
+		}
+		if (trans.getValue() == null) {
+			trans.setValue("");
+		}
+		if (dataBind) {
+			databindTranslation(trans);
+		} else {
+			text.setText(trans.getValue());
 		}
 	}
 

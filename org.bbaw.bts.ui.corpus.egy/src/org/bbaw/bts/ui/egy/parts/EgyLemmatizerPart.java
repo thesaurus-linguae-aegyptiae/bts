@@ -631,7 +631,7 @@ public class EgyLemmatizerPart implements SearchViewer {
 
 		wordTranslate_Editor = new TranslationEditorComposite(transSashForm,
 				SWT.WRAP | SWT.MULTI | SWT.V_SCROLL | SWT.BORDER, null, null,
-				false);
+				false, false);
 		wordTranslate_Editor.setLayoutData(new GridData(SWT.FILL, SWT.FILL,
 				true, true));
 		wordTranslate_Editor.layout();

@@ -864,7 +864,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 		sentenceTranslateComp.setText("Sentence Translation");
 		sentenceTranslate_Editor = new TranslationEditorComposite(
 				sentenceTranslateComp, SWT.WRAP | SWT.MULTI | SWT.V_SCROLL
-						| SWT.BORDER, null, null, false);
+						| SWT.BORDER, null, null, false, true);
 		sentenceTranslate_Editor.setLayoutData(new GridData(SWT.FILL, SWT.FILL,
 				true, true));
 		sentenceTranslateComp.layout();
