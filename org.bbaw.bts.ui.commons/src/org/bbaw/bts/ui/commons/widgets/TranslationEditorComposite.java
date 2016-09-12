@@ -241,9 +241,6 @@ public class TranslationEditorComposite extends Composite {
 			// BtsmodelPackage.BTS_TRANSLATIONS__TRANSLATIONS, trans);
 			// domain.getCommandStack().execute(command);
 		}
-		if (trans.getValue() == null) {
-			trans.setValue("");
-		}
 		if (dataBind) {
 			databindTranslation(trans);
 		} else {
