@@ -23,10 +23,14 @@ import org.bbaw.bts.corpus.btsCorpusModel.BTSLemmaCase;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSSenctence;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSSentenceItem;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSText;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSTextItems;
 import org.bbaw.bts.ui.commons.corpus.events.BTSTextSelectionEvent;
 import org.bbaw.bts.ui.commons.corpus.text.BTSModelAnnotation;
 import org.bbaw.bts.ui.commons.corpus.text.BTSSubtextAnnotation;
 import org.bbaw.bts.ui.commons.utils.BTSUIConstants;
+import org.eclipse.core.databinding.observable.ChangeEvent;
+import org.eclipse.core.databinding.observable.IChangeListener;
+import org.eclipse.core.databinding.observable.value.IObservableValue;
 import org.bbaw.bts.ui.egy.parts.egyTextEditor.CommentDrawingStrategy;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.layout.GridLayout;
@@ -54,6 +58,8 @@ import org.eclipse.e4.ui.services.IServiceConstants;
 import org.eclipse.e4.ui.services.internal.events.EventBroker;
 import org.eclipse.e4.ui.workbench.modeling.EPartService;
 import org.eclipse.e4.ui.workbench.modeling.ESelectionService;
+import org.eclipse.emf.databinding.EMFObservables;
+import org.eclipse.emf.databinding.EObjectObservableValue;
 import org.eclipse.jface.text.Document;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IPainter;
@@ -621,6 +627,31 @@ public class EgyTextTranslationPart {
 	 		AnnotationModel tempAnnotationModel = new AnnotationModel();
 
 			String stringText = translationController.loadTranslation(text, language, tempAnnotationModel);
+
+			for (BTSTextItems ti : text.getTextContent().getTextItems()) {
+				if (ti instanceof BTSSenctence) {
+					BTSSenctence sentence = (BTSSenctence)ti;
+					IObservableValue<?> valProp =
+							EMFObservables.observeValue(sentence, BtsmodelPackage.Literals.BTS_TRANSLATION__VALUE);
+					valProp.addChangeListener(new IChangeListener() {
+
+						@Override
+						public void handleChange(ChangeEvent event) {
+
+							if (event.getSource() instanceof EObjectObservableValue) {
+								EObjectObservableValue obs = (EObjectObservableValue)event.getSource();
+								if (obs.getObserved() instanceof BTSSenctence) {
+									BTSSenctence sentence = (BTSSenctence)obs.getObserved();
+									BTSModelAnnotation ma = modelAnnotationMap.get(sentence.get_id());
+									Position pos = annotationModel.getPosition(ma);
+									textViewer.getTextWidget().replaceTextRange(pos.getOffset(), pos.getLength(), 
+											translationController.createSentenceTranslationLabel(sentence, language));
+								}
+							}
+						}
+					});
+				}
+			}
 			IDocument document = new Document();
 			document.set(stringText);
 			loadAnnotations2Editor(annotationModel, tempAnnotationModel);
