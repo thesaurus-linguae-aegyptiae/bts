@@ -70,7 +70,6 @@ import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.e4.core.di.extensions.Preference;
 import org.eclipse.e4.ui.di.UISynchronize;
-import org.eclipse.e4.ui.services.internal.events.EventBroker;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
@@ -1526,10 +1525,6 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 		// }
 		mdc = textEditorController.transformWordToMdCString(word, -1);
 		return mdc; // mdc;
-	}
-
-	public void setEventBroker(EventBroker eventBroker2) {
-		// TODO
 	}
 
 	@Override

@@ -794,7 +794,6 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 					child.set(IBTSEditor.class, EgyTextEditorPart.this);
 					signTextEditor = ContextInjectionFactory.make(
 							SignTextComposite.class, child);
-					signTextEditor.setEventBroker(eventBroker);
 					plainTextComp.layout();
 					plainTextComp.pack();
 				}

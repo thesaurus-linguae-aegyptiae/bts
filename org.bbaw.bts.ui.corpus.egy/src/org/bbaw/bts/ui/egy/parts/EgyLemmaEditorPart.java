@@ -328,7 +328,6 @@ public class EgyLemmaEditorPart extends AbstractTextEditorLogic implements IBTSE
 		child.set(IBTSEditor.class, EgyLemmaEditorPart.this);
 		signTextEditor = ContextInjectionFactory.make(
 				SignTextComposite.class, child);
-		signTextEditor.setEventBroker(eventBroker);
 		signTextEditor.addFocusListener(new FocusListener() {
 			
 			@Override
