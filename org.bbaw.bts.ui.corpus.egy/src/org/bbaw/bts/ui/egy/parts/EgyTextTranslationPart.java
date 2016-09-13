@@ -167,6 +167,7 @@ public class EgyTextTranslationPart {
 				processTextSelection(event);
 				// get char right of caret and show utf-8
 				// code in status line
+				// TODO
 				if (event.caretOffset < textViewer.getTextWidget()
 						.getText().length()) {
 					String sign = textViewer
