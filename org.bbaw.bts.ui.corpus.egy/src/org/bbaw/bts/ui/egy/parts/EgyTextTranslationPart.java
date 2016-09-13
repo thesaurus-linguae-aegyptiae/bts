@@ -327,7 +327,6 @@ public class EgyTextTranslationPart {
 				if (pos != null)
 				{
 					sync.asyncExec(new Runnable() {
-						@SuppressWarnings("restriction")
 						public void run() {
 							textViewer.revealRange(pos.getOffset(), pos.length);
 						}
@@ -406,10 +405,9 @@ public class EgyTextTranslationPart {
 	 * @param btsEvent the bts event
 	 * @return the model annotation at selection
 	 */
-	@SuppressWarnings("restriction")
 	private List<BTSModelAnnotation> getModelAnnotationAtSelection(int start,
 			int end, BTSTextSelectionEvent btsEvent) {
-		Iterator it = textViewer.getAnnotationModel()
+		Iterator<Annotation> it = textViewer.getAnnotationModel()
 				.getAnnotationIterator();
 		List<BTSModelAnnotation> annotations = new Vector<BTSModelAnnotation>(4);
 		Map<Integer, List<BTSModelAnnotation>> annotationOffsetMap = new HashMap<Integer, List<BTSModelAnnotation>>(4);
@@ -457,7 +455,7 @@ public class EgyTextTranslationPart {
 		Collections.sort(offsets);
 		for (Integer i : offsets)
 		{
-			List<BTSModelAnnotation> list = (List<BTSModelAnnotation>) annotationOffsetMap.get(i);
+			List<BTSModelAnnotation> list = annotationOffsetMap.get(i);
 			annotations.addAll(list);
 			
 			// calculate the start and end item and startId and endId
@@ -689,7 +687,6 @@ public class EgyTextTranslationPart {
 	 * @param pos the pos
 	 * @param issue the issue
 	 */
-	@SuppressWarnings("restriction")
 	protected void loadSingleAnnotation2Editor(IAnnotationModel editorModel,
 			 BTSModelAnnotation a, Position pos, Issue issue) {
 		if (a instanceof BTSModelAnnotation && ((BTSModelAnnotation)a).getModel() instanceof BTSSenctence) {
@@ -712,7 +709,6 @@ public class EgyTextTranslationPart {
 	 *
 	 * @param activate the activate
 	 */
-	@SuppressWarnings("restriction")
 	private void makePartActive(boolean activate) {
 		if (activate)
 		{
