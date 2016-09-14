@@ -626,7 +626,7 @@ public class EgyTextTranslationPart {
 
 			String stringText = translationController.loadTranslation(text, language, tempAnnotationModel);
 
-			for (BTSTextItems ti : text.getTextContent().getTextItems()) {
+			for (BTSTextItems ti : text.getTextContent().getTextItems()) { //XXX null
 				if (ti instanceof BTSSenctence) {
 					BTSSenctence sentence = (BTSSenctence)ti;
 					IObservableValue<?> valProp =
