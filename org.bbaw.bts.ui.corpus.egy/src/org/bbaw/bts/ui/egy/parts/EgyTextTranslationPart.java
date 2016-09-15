@@ -119,6 +119,9 @@ public class EgyTextTranslationPart {
 	private BTSTextSelectionEvent btsTextEvent = null;
 	private long lastSelectionTimeStamp = 0;
 
+	/** listens to changes on sentence translations */
+	private IChangeListener sentenceTranslationChangeListener = null;
+
 	@Inject
 	public EgyTextTranslationPart(EPartService partService) {
 		part = partService.findPart(BTSPluginIDs.PART_ID_EGY_TEXTTRANSLATION);
@@ -611,7 +614,56 @@ public class EgyTextTranslationPart {
 			}
 		}
 	}
-	
+
+
+	private IChangeListener getSentenceTranslationChangeListener() {
+		if (sentenceTranslationChangeListener == null) {
+			sentenceTranslationChangeListener = new IChangeListener() {
+
+				@Override
+				public void handleChange(ChangeEvent event) {
+
+					if (event.getSource() instanceof EObjectObservableValue) {
+						EObjectObservableValue obs = (EObjectObservableValue)event.getSource();
+						if (obs.getObserved() instanceof BTSSenctence) {
+							BTSSenctence sentence = (BTSSenctence)obs.getObserved();
+
+							// retrieve text range representing sentence translation
+							BTSModelAnnotation ma = modelAnnotationMap.get(sentence.get_id());
+							Position pos = annotationModel.getPosition(ma);
+							// replace text range with updated translation string
+							textViewer.getTextWidget().replaceTextRange(pos.getOffset(), pos.getLength(), 
+									translationController.createSentenceTranslationLabel(sentence, language));
+						}
+					}
+				}
+			};
+		}
+		return sentenceTranslationChangeListener;
+	}
+
+
+	/**
+	 * Adds a change listener to each sentence in this text in order to update
+	 * sentence translations in translation part representation.
+	 * @param text
+	 */
+	private void observeTextContent(BTSText text) {
+		try {
+			for (BTSTextItems ti : text.getTextContent().getTextItems()) {
+				if (ti instanceof BTSSenctence) {
+					BTSSenctence sentence = (BTSSenctence)ti;
+					IObservableValue<?> valProp =
+							EMFObservables.observeValue(sentence, BtsmodelPackage.Literals.BTS_TRANSLATION__VALUE);
+					valProp.addChangeListener(getSentenceTranslationChangeListener());
+				}
+			}
+		} catch (NullPointerException e) {
+			//
+		}
+	}
+
+
 	private void loadInput(BTSText text) {
 		if (text == null)
 		{
@@ -625,31 +677,8 @@ public class EgyTextTranslationPart {
 	 		AnnotationModel tempAnnotationModel = new AnnotationModel();
 
 			String stringText = translationController.loadTranslation(text, language, tempAnnotationModel);
+			observeTextContent(text);
 
-			for (BTSTextItems ti : text.getTextContent().getTextItems()) { //XXX null
-				if (ti instanceof BTSSenctence) {
-					BTSSenctence sentence = (BTSSenctence)ti;
-					IObservableValue<?> valProp =
-							EMFObservables.observeValue(sentence, BtsmodelPackage.Literals.BTS_TRANSLATION__VALUE);
-					valProp.addChangeListener(new IChangeListener() {
-
-						@Override
-						public void handleChange(ChangeEvent event) {
-
-							if (event.getSource() instanceof EObjectObservableValue) {
-								EObjectObservableValue obs = (EObjectObservableValue)event.getSource();
-								if (obs.getObserved() instanceof BTSSenctence) {
-									BTSSenctence sentence = (BTSSenctence)obs.getObserved();
-									BTSModelAnnotation ma = modelAnnotationMap.get(sentence.get_id());
-									Position pos = annotationModel.getPosition(ma);
-									textViewer.getTextWidget().replaceTextRange(pos.getOffset(), pos.getLength(), 
-											translationController.createSentenceTranslationLabel(sentence, language));
-								}
-							}
-						}
-					});
-				}
-			}
 			IDocument document = new Document();
 			document.set(stringText);
 			loadAnnotations2Editor(annotationModel, tempAnnotationModel);
