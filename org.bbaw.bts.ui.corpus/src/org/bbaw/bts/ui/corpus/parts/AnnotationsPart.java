@@ -670,11 +670,14 @@ public class AnnotationsPart implements EventHandler {
 		// toggle
 		//String key = "org.bbaw.bts.ui.corpus.part.annotations.viewmenu.show." + filter;
 		String key = filter;
-		filters.put(key, !filters.get(key));
-		if (this.relatingObjectsEvent != null)
-			eventReceivedRelatingObjectsLoadedEvents(relatingObjectsEvent);
-		BTSRelatingObjectsFilterEvent e = new BTSRelatingObjectsFilterEvent(filters);
-		eventBroker.post("event_anno_filters/anno_part", e);
+		if (filters.containsKey(key)) {
+			filters.put(key, !filters.get(key));
+		}
+		if (this.relatingObjectsEvent != null) {
+			eventReceivedRelatingObjectsLoadedEvent(relatingObjectsEvent);
+		}
+		eventBroker.post("event_anno_filters/anno_part", 
+				new BTSRelatingObjectsFilterEvent(filters));
 	}
 
 	private void eventReceivedRelatingObjectsSelectedEvents(Object objects) {
