@@ -572,7 +572,7 @@ public class AnnotationsPart implements EventHandler {
 			queryId = "relations.objectId-" + ((BTSCorpusObject)selection).get_id();
 			parentObject = (BTSCorpusObject)selection;
 			// if BTSText wait to receive relationObjectLoadedEvent through eventBroker!
-			if (!(selection instanceof BTSText))
+			if (!(selection instanceof BTSText) && false)
 			{
 				try {
 					relatingObjects = annotationPartController.findRelatingObjects((BTSObject) selection, null);
