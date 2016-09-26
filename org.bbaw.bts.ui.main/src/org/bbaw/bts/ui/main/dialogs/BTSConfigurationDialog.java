@@ -797,7 +797,7 @@ public class BTSConfigurationDialog extends TitleAreaDialog {
 		lblLabel_1.setText("Label");
 
 		labelText_CIEdit = new TranslationEditorComposite(configItemEditComp,
-				SWT.BORDER, null, null, true);
+				SWT.BORDER, true);
 		labelText_CIEdit.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true,
 				false, 2, 1));
 
@@ -807,7 +807,7 @@ public class BTSConfigurationDialog extends TitleAreaDialog {
 		lblDescription.setText("Description");
 
 		descText_CIEdit = new TranslationEditorComposite(configItemEditComp,
-				SWT.BORDER, null, null, false);
+				SWT.BORDER, false);
 		descText_CIEdit.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true,
 				false, 2, 1));
 
@@ -1669,7 +1669,7 @@ public class BTSConfigurationDialog extends TitleAreaDialog {
 		lblLabel_1.setText("Label");
 
 		labelText_CIEdit = new TranslationEditorComposite(configItemEditComp,
-				SWT.BORDER, null, null, true);
+				SWT.BORDER, true);
 		labelText_CIEdit.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true,
 				false, 2, 1));
 
@@ -1679,7 +1679,7 @@ public class BTSConfigurationDialog extends TitleAreaDialog {
 		lblDescription.setText("Description");
 
 		descText_CIEdit = new TranslationEditorComposite(configItemEditComp,
-				SWT.BORDER, null, null, false);
+				SWT.BORDER, false);
 		descText_CIEdit.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true,
 				false, 2, 1));
 
