@@ -631,7 +631,7 @@ public class EgyLemmatizerPart implements SearchViewer {
 
 		wordTranslate_Editor = new TranslationEditorComposite(transSashForm,
 				SWT.WRAP | SWT.MULTI | SWT.V_SCROLL | SWT.BORDER, null, null,
-				false);
+				false, false);
 		wordTranslate_Editor.setLayoutData(new GridData(SWT.FILL, SWT.FILL,
 				true, true));
 		wordTranslate_Editor.layout();
@@ -778,8 +778,8 @@ public class EgyLemmatizerPart implements SearchViewer {
 				translationViewer.setInput(subtranslations);
 				if (currentWord.getTranslation() != null) {
 					// try to autoselect current word's translation from translations list
-					String wordTrans = currentWord.getTranslation().getTranslation(lang);
-					if (wordTrans != null) {
+					String wordTrans = currentWord.getTranslation().getTranslationStrict(lang);
+					if (wordTrans != null && !wordTrans.trim().isEmpty()) {
 						translationEditorText = wordTrans;
 						for (int i=0; i<subtranslations.length; i++) {
 							if (subtranslations[i].trim().equals(wordTrans)) {
