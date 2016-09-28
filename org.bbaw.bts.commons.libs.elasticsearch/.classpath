@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
+	<classpathentry exported="true" kind="lib" path="elastic_lib/elasticsearch-head/"/>
 	<classpathentry exported="true" kind="lib" path="elastic_lib/elasticsearch-1.3.2.jar" sourcepath="D:/AAEW/additional-libs/elasticsearch-1.3.2_source.zip"/>
 	<classpathentry exported="true" kind="lib" path="elastic_lib/elasticsearch-river-couchdb-2.3.0.jar" sourcepath="D:/AAEW/additional-libs/elasticsearch-river-couchdb-master.zip"/>
 	<classpathentry exported="true" kind="lib" path="elastic_lib/jts-1.13.jar"/>

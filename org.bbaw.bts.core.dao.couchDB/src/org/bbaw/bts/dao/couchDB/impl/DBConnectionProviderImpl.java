@@ -35,7 +35,9 @@ import org.eclipse.equinox.security.storage.SecurePreferencesFactory;
 import org.eclipse.equinox.security.storage.StorageException;
 import org.eclipselabs.emfjson.couchdb.CouchDBHandler;
 import org.elasticsearch.client.Client;
+import org.elasticsearch.client.transport.TransportClient;
 import org.elasticsearch.common.settings.ImmutableSettings;
+import org.elasticsearch.common.transport.InetSocketTransportAddress;
 import org.lightcouch.CouchDbClient;
 import org.lightcouch.CouchDbProperties;
 
@@ -378,12 +380,27 @@ public class DBConnectionProviderImpl implements DBConnectionProvider
 				        .put("cluster.routing.allocation.enable", "all")
 				        .put("mappings._default_.date_detection", "0");
 
+				boolean useTransportClient = preferences.getBoolean(BTSPluginIDs.PREF_SEARCH_CLIENT_SOCKETTRANSPORT, false);
 				
-				searchClient = nodeBuilder()
+				if (useTransportClient)
+				{
+					searchClient = new TransportClient()
+                        .addTransportAddress(new InetSocketTransportAddress(
+                        		preferences.get(BTSPluginIDs.PREF_SEARCH_CLIENT_SOCKETTRANSPORT_HOST, "localhost"),
+                        		preferences.getInt(BTSPluginIDs.PREF_SEARCH_CLIENT_SOCKETTRANSPORT_PORT, 9300)))
+                        .addTransportAddress(new InetSocketTransportAddress(
+                        		preferences.get(BTSPluginIDs.PREF_SEARCH_CLIENT_SOCKETTRANSPORT_HOST2, "localhost"),
+                        		preferences.getInt(BTSPluginIDs.PREF_SEARCH_CLIENT_SOCKETTRANSPORT_PORT2, 9301)));
+				
+				}
+				else
+				{
+					searchClient = nodeBuilder()
 		                .local(true)
 		                .settings(elasticsearchSettings.build())
 		                .clusterName(esClustername)
 		                .node().client();
+				}
 				context.set(Client.class, searchClient);
 			}
 			return (T) searchClient;

@@ -23,7 +23,8 @@ Bundle-ClassPath: .,
  elastic_lib/lucene-sandbox-4.9.0.jar,
  elastic_lib/lucene-spatial-4.9.0.jar,
  elastic_lib/lucene-suggest-4.9.0.jar,
- elastic_lib/spatial4j-0.4.1.jar
+ elastic_lib/spatial4j-0.4.1.jar,
+ elastic_lib/elasticsearch-head/
 Export-Package: org.apache.lucene.util,
  org.elasticsearch,
  org.elasticsearch.action,
