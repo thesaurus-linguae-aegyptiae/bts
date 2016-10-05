@@ -148,7 +148,7 @@ public class CorpusNavigatorPart extends NavigatorPart implements ScatteredCachi
 	private ISelectionChangedListener selectionListener;
 	private Composite composite;
 
-	private Map<Control, Map> cachingMap = new HashMap<Control, Map>();
+	private Map<Control, Map<URI, Resource>> cachingMap = new HashMap<Control, Map<URI, Resource>>();
 	private TreeNodeWrapper mainRootNode;
 	private CTabFolder tabFolder;
 	private CTabItem mainTabItem;
@@ -156,7 +156,7 @@ public class CorpusNavigatorPart extends NavigatorPart implements ScatteredCachi
 	private CTabItem binTabItem;
 	private Composite binTabItemComp;
 	private TreeViewer bintreeViewer;
-	private SuppressDeletedViewerFilter deletedFilter;
+	private TreeNodeWrapper binRootNode;
 	private boolean loaded;
 	protected TreeNodeWrapper orphanNode;
 	protected TreeNodeWrapper selectedTreeNode;
@@ -202,8 +202,6 @@ public class CorpusNavigatorPart extends NavigatorPart implements ScatteredCachi
 		tabFolder.setLayoutData(new GridData(GridData.FILL_BOTH));
 		
 		tabFolder.addSelectionListener(new SelectionAdapter() {
-			
-			private TreeNodeWrapper binRootNode;
 
 			@Override
 			public void widgetSelected(SelectionEvent e) {
@@ -715,10 +713,10 @@ labelProvider));
 					{
 						parentControl.setData("objs", children);
 					}
-					Map map = null;
+					Map<URI, Resource> map = null;
 					if (cachingMap.get(parentControl) != null
 							&& cachingMap.get(parentControl) instanceof Map) {
-						map = (Map) cachingMap.get(parentControl);
+						map = cachingMap.get(parentControl);
 					} else {
 						map = new HashMap<URI, Resource>();
 						cachingMap.put(parentControl, map);
