@@ -75,7 +75,6 @@ GenericCorpusObjectNavigatorController<E, K>
 		for (E t : list) {
 			result.add(t);
 		}
-		sortEntries(result);
 		return result;
 	}
 
