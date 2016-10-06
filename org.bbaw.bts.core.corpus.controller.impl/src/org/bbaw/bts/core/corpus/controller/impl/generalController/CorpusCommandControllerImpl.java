@@ -32,6 +32,7 @@ public class CorpusCommandControllerImpl implements CorpusCommandController {
 	@Override
 	public boolean deleteFromDB(BTSDBBaseObject object) {
 		if (object instanceof BTSCorpusObject) {
+			((BTSCorpusObject)object).setState(BTSConstants.OBJECT_STATE_TERMINATED);
 			corpusObjectService.remove((BTSCorpusObject) object);
 			return true;
 		}if (object instanceof BTSComment) {
