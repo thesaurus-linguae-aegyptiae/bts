@@ -18,10 +18,12 @@ public class BTSObjectByNameComparator implements Comparator<BTSObject>{
 				return 1;
 			}
 		}
-		/*if (a != null && a.getName() != null && b != null && b.getName() != null)
-		{
-			return alphaNumComp.compare(a.getName(), b.getName());
-		}*/
+		if ((""+a.getName()).compareTo(""+b.getName()) < 0) {
+			return -1;
+		}
+		if ((""+b.getName()).compareTo(""+a.getName()) < 0) {
+			return 1;
+		}
 		return a.get_id().compareTo(b.get_id());
 	}
 
