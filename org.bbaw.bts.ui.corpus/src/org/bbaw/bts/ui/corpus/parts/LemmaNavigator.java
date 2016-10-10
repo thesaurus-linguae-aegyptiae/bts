@@ -686,7 +686,7 @@ public class LemmaNavigator extends NavigatorPart implements ScatteredCachingPar
 	@Inject
 	@Optional
 	void eventReceivedUpdates(@EventTopic("model_update/async") Object object) {
-		logger.info("LemmaNavigatorPart eventReceivedUpdates. object: " + object);
+		//logger.info("LemmaNavigatorPart eventReceivedUpdates. object: " + object);
 
 		if (object instanceof BTSLemmaEntry && selection != null
 				&& selection.getFirstElement() instanceof BTSLemmaEntry) {

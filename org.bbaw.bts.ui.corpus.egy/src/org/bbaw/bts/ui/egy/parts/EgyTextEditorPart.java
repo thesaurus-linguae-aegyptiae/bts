@@ -2835,8 +2835,8 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 	@Optional
 	void eventReceivedLoadLemmata(
 			@EventTopic("event_egy_text_editor_load_lemmata/*") Object o) {
-		logger.info("EgyTextEditorPart eventReceived "
-				+ BTSUIConstants.EVENT_EGY_TEXT_EDITOR_LOAD_LEMMATA);
+		//logger.info("EgyTextEditorPart eventReceived "
+		//		+ BTSUIConstants.EVENT_EGY_TEXT_EDITOR_LOAD_LEMMATA);
 		sync.asyncExec(new Runnable() {
 			public void run() {
 				cachedCursor = embeddedEditor.getViewer().getTextWidget()
