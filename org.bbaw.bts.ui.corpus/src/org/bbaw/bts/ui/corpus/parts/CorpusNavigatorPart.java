@@ -554,7 +554,7 @@ labelProvider));
 										treeViewer,
 										rootNode,
 										BtsviewmodelPackage.Literals.TREE_NODE_WRAPPER__CHILDREN,
-										BTSCorpusConstants.VIEW_THS_ROOT_ENTRIES, monitor);
+										BTSCorpusConstants.VIEW_ALL_ACTIVE_CORPUS_OBJECTS, monitor);
 						} else {
 							obs = corpusNavigatorController
 									.getDeletedEntries(
@@ -562,7 +562,7 @@ labelProvider));
 											treeViewer,
 											rootNode,
 											BtsviewmodelPackage.Literals.TREE_NODE_WRAPPER__CHILDREN,
-											BTSCorpusConstants.VIEW_ALL_TERMINATED_BTSTHSENTRIES, monitor);
+											BTSCorpusConstants.VIEW_ALL_TERMINATED_CORPUS_OBJECTS, monitor);
 						}
 						storeIntoMap(obs, parentControl, true);
 						List<TreeNodeWrapper> nodes = corpusNavigatorController.loadNodes(obs, monitor, true);
