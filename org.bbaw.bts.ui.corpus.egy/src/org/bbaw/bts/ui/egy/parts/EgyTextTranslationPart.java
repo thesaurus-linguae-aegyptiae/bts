@@ -10,6 +10,7 @@ import java.util.Map;
 import java.util.Vector;
 
 import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -617,6 +618,11 @@ public class EgyTextTranslationPart {
 		}
 	}
 
+	@PreDestroy
+	public void preDestroy() {
+		purgeCache();
+	}
+
 
 	private IChangeListener getSentenceTranslationChangeListener() {
 		if (sentenceTranslationChangeListener == null) {
@@ -655,14 +661,7 @@ public class EgyTextTranslationPart {
 	private void observeTextContent(BTSText text) {
 		try {
 			// unregister any listeners on previously known text contents
-			if (observableSentences != null) {
-				for (IObservableValue<?> valProp : observableSentences) {
-					valProp.removeChangeListener(getSentenceTranslationChangeListener());
-				}
-				observableSentences.clear();
-			} else {
-				observableSentences = new Vector<IObservableValue<?>>();
-			}
+			unobserveTextContent();
 			for (BTSTextItems ti : text.getTextContent().getTextItems()) {
 				if (ti instanceof BTSSenctence) {
 					BTSSenctence sentence = (BTSSenctence)ti;
@@ -674,6 +673,20 @@ public class EgyTextTranslationPart {
 			}
 		} catch (NullPointerException e) {
 			//
+		}
+	}
+
+	/**
+	 * Removes any change listeners that might be attached to observable sentences from previous content.
+	 */
+	private void unobserveTextContent() {
+		if (observableSentences != null) {
+			for (IObservableValue<?> valProp : observableSentences) {
+				valProp.removeChangeListener(getSentenceTranslationChangeListener());
+			}
+			observableSentences.clear();
+		} else {
+			observableSentences = new Vector<IObservableValue<?>>();
 		}
 	}
 
@@ -745,8 +758,9 @@ public class EgyTextTranslationPart {
 
 	private void purgeCache() {
 		// TODO Auto-generated method stub
-		
+		unobserveTextContent();
 	}
+
 	/**
 	 * Make part active.
 	 *
