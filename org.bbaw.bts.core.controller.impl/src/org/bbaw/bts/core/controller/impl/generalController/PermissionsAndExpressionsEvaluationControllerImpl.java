@@ -710,10 +710,7 @@ public class PermissionsAndExpressionsEvaluationControllerImpl implements
 	public boolean authenticatedUserMayAddToDBCollection(
 			String dbCollectionName) {
 		BTSProjectDBCollection dbCollection = getDBCollection(dbCollectionName);
-		String localUserContextRole = evaluationService.highestRoleOfUserInDBCollection(authenticatedUser, dbCollection);
-		return (localUserContextRole != null && (localUserContextRole
-				.equals(BTSCoreConstants.USER_ROLE_ADMINS) || localUserContextRole
-				.equals(BTSCoreConstants.USER_ROLE_EDITORS)));
+		return authenticatedUserMayAddToDBCollection(dbCollection);
 	}
 
 
