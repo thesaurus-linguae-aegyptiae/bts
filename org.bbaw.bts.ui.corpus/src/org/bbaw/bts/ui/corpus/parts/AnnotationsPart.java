@@ -639,7 +639,7 @@ public class AnnotationsPart implements EventHandler {
 				}
 		} else if (o instanceof BTSComment)
 			key += "comment";
-		return filters.containsKey(key) ? filters.get(key) : true;
+		return filters.containsKey(key) ? filters.get(key) : false;
 	}
 
 
