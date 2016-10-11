@@ -179,6 +179,9 @@ public class PassportEditorPart {
 	private PassportConfigurationController passportConfigurationController;
 
 	@Inject
+	private PermissionsAndExpressionsEvaluationController permissionsController;
+
+	@Inject
 	private ECommandService commandService;
 
 	@Inject
@@ -946,6 +949,9 @@ public class PassportEditorPart {
 	}
 
 	private void loadInput(BTSCorpusObject object) {
+
+		userMayEdit = permissionsController.userMayEditObject(permissionsController.getAuthenticatedUser(), object);
+		context.set(BTSCoreConstants.CORE_EXPRESSION_MAY_EDIT, userMayEdit);
 
 		purgeAll();
 		if (object.getPassport() == null) {
