@@ -11,7 +11,7 @@ import org.bbaw.bts.btsviewmodel.TreeNodeWrapper;
 import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.core.commons.comparator.BTSObjectByNameComparator;
 import org.bbaw.bts.core.commons.filter.BTSFilter;
-import org.bbaw.bts.core.corpus.controller.impl.util.BTSEgyObjectByNameComparator;
+import org.bbaw.bts.core.controller.generalController.PermissionsAndExpressionsEvaluationController;
 import org.bbaw.bts.core.corpus.controller.partController.CorpusNavigatorController;
 import org.bbaw.bts.core.dao.util.BTSQueryRequest;
 import org.bbaw.bts.core.services.Backend2ClientUpdateService;
@@ -68,6 +68,9 @@ implements CorpusNavigatorController
 
 	@Inject
 	private BTSLemmaEntryService wlistService;
+
+	@Inject
+	private PermissionsAndExpressionsEvaluationController permissionController;
 	
 	@Inject
 	private Logger logger;
@@ -375,10 +378,14 @@ implements CorpusNavigatorController
 
 	@Override
 	public List<BTSTextCorpus> listTextCorpora(IProgressMonitor monitor) {
-		List<BTSTextCorpus> corpora = textCorpusService.list(BTSConstants.OBJECT_STATE_ACTIVE, monitor);
-		for (BTSTextCorpus c : corpora)
+		List<BTSTextCorpus> corpora = new Vector<BTSTextCorpus>();
+		for (BTSTextCorpus c : textCorpusService.list(BTSConstants.OBJECT_STATE_ACTIVE, monitor))
 		{
-			checkAndFullyLoad(c, true);
+			String dbCollectionName = c.getDBCollectionKey() + "_" + c.getCorpusPrefix();
+			if (permissionController.authenticatedUserMayAddToDBCollection(dbCollectionName)) {
+				checkAndFullyLoad(c, true);
+				corpora.add(c);
+			}
 		}
 		sortBTSTextCorpus(corpora);
 		return corpora;

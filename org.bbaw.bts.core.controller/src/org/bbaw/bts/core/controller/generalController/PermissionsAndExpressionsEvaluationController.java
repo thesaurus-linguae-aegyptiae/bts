@@ -87,8 +87,11 @@ public interface PermissionsAndExpressionsEvaluationController {
 
 	boolean authenticatedUserMayAddToDBCollection(BTSProjectDBCollection dbCollection);
 
+	boolean authenticatedUserMayAddToDBCollection(String dbCollectionName);
+
 	boolean authenticatedUserMayDeleteProject(BTSProject project);
 	
 	boolean authenticatedUserMayDeleteUserOrUserGroup(BTSObject object);
+
 
 }
