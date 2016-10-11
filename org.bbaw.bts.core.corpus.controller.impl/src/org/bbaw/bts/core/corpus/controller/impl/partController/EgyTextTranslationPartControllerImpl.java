@@ -25,24 +25,30 @@ public class EgyTextTranslationPartControllerImpl implements EgyTextTranslationP
 			if (tItem instanceof BTSSenctence)
 			{
 				BTSSenctence sentence = (BTSSenctence) tItem;
-				String translation = null;
 				BTSModelAnnotation ma = new BTSSentenceAnnotation(BTSSentenceAnnotation.TYPE,sentence);
 				int start = stringBuilder.length();
-				if (sentence.getTranslation() != null)
-				{
-					translation = sentence.getTranslation().getTranslationStrict(language);
-				}
-				if (translation == null)
-				{
-					translation = NO_TRANSLATION_OF_LANG + language + END;
-				}
-				stringBuilder.append(translation + "§\n");
+				stringBuilder.append(createSentenceTranslationLabel(sentence, language));
 				int len = stringBuilder.length() - start;
 				Position pos = new Position(start, len); 
 				if (annotationModel != null) annotationModel.addAnnotation(ma, pos);
 			}
 		}
 		return stringBuilder.toString();
+	}
+
+	@Override
+	public String createSentenceTranslationLabel(BTSSenctence sentence,
+			String language) {
+		String translation = null;
+		if (sentence.getTranslation() != null)
+		{
+			translation = sentence.getTranslation().getTranslationStrict(language);
+		}
+		if (translation == null || translation.trim().isEmpty())
+		{
+			translation = NO_TRANSLATION_OF_LANG + language + END;
+		}
+		return translation + "§\n";
 	}
 
 }
