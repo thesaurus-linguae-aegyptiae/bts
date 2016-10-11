@@ -122,6 +122,8 @@ public class EgyTextTranslationPart {
 	/** listens to changes on sentence translations */
 	private IChangeListener sentenceTranslationChangeListener = null;
 
+	private List<IObservableValue<?>> observableSentences = null;
+
 	@Inject
 	public EgyTextTranslationPart(EPartService partService) {
 		part = partService.findPart(BTSPluginIDs.PART_ID_EGY_TEXTTRANSLATION);
@@ -646,16 +648,28 @@ public class EgyTextTranslationPart {
 	/**
 	 * Adds a change listener to each sentence in this text in order to update
 	 * sentence translations in translation part representation.
+	 * In case there are active listeners on observables from previous input,
+	 * those are unregistered beforehand.
 	 * @param text
 	 */
 	private void observeTextContent(BTSText text) {
 		try {
+			// unregister any listeners on previously known text contents
+			if (observableSentences != null) {
+				for (IObservableValue<?> valProp : observableSentences) {
+					valProp.removeChangeListener(getSentenceTranslationChangeListener());
+				}
+				observableSentences.clear();
+			} else {
+				observableSentences = new Vector<IObservableValue<?>>();
+			}
 			for (BTSTextItems ti : text.getTextContent().getTextItems()) {
 				if (ti instanceof BTSSenctence) {
 					BTSSenctence sentence = (BTSSenctence)ti;
 					IObservableValue<?> valProp =
 							EMFObservables.observeValue(sentence, BtsmodelPackage.Literals.BTS_TRANSLATION__VALUE);
 					valProp.addChangeListener(getSentenceTranslationChangeListener());
+					observableSentences.add(valProp);
 				}
 			}
 		} catch (NullPointerException e) {
