@@ -309,7 +309,7 @@ public class AnnotationsPart implements EventHandler {
 
 	@Inject
 	@Optional
-	void eventReceivedRelatingObjectsLoadedEvents(
+	void eventReceivedRelatingObjectsLoaded(
 			@EventTopic("event_text_relating_objects/*") final BTSRelatingObjectsLoadingEvent event) {
 		parentObject = event.getObject();
 		queryId = "relations.objectId-" + parentObject.get_id();
@@ -542,7 +542,7 @@ public class AnnotationsPart implements EventHandler {
 		}
 		case "event_text_relating_objects/selected" :
 		{
-			eventReceivedRelatingObjectsSelectedEvents(event.getProperty("org.eclipse.e4.data"));
+			eventReceivedRelatingObjectsSelected(event.getProperty("org.eclipse.e4.data"));
 			break;
 		}
 		}
@@ -591,14 +591,14 @@ public class AnnotationsPart implements EventHandler {
 				if (filteredRelatingObjects != null && !filteredRelatingObjects.isEmpty())
 				{
 					relatingObjectsQueryIDMap.put(queryId, filteredRelatingObjects);
-					eventReceivedRelatingObjectsSelectedEvents(filteredRelatingObjects);
+					eventReceivedRelatingObjectsSelected(filteredRelatingObjects);
 				}
 			}
 		}
 		else if (selection instanceof BTSTextSelectionEvent)
 		{
 			this.textSelectionEvent = (BTSTextSelectionEvent) selection;
-			eventReceivedRelatingObjectsSelectedEvents(textSelectionEvent.getRelatingObjects());
+			eventReceivedRelatingObjectsSelected(textSelectionEvent.getRelatingObjects());
 		}
 		}
 		else
@@ -674,13 +674,13 @@ public class AnnotationsPart implements EventHandler {
 			filters.put(key, !filters.get(key));
 		}
 		if (this.relatingObjectsEvent != null) {
-			eventReceivedRelatingObjectsLoadedEvent(relatingObjectsEvent);
+			eventReceivedRelatingObjectsLoaded(relatingObjectsEvent);
 		}
 		eventBroker.post("event_anno_filters/anno_part", 
 				new BTSRelatingObjectsFilterEvent(filters));
 	}
 
-	private void eventReceivedRelatingObjectsSelectedEvents(Object objects) {
+	private void eventReceivedRelatingObjectsSelected(Object objects) {
 		if (objects == null)
 		{
 			setSelectedInternal(null, false);
