@@ -75,7 +75,6 @@ GenericCorpusObjectNavigatorController<E, K>
 		for (E t : list) {
 			result.add(t);
 		}
-		sortEntries(result);
 		return result;
 	}
 
@@ -290,6 +289,7 @@ GenericCorpusObjectNavigatorController<E, K>
 		List<E> list = typedListEntries(BTSConstants.OBJECT_STATE_TERMINATED, monitor); //thsService.list(BTSConstants.OBJECT_STATE_TERMINATED);
 		List<E> result = new Vector<E>(list.size());
 		for (E t : list) {
+			t.setState(BTSConstants.OBJECT_STATE_TERMINATED);
 			result.add(t);
 		}
 		sortEntries(result);

@@ -328,7 +328,7 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 		Map<String, String> options = new HashMap<String, String>();
 		
 		options.put(XMLResource.OPTION_ENCODING, BTSConstants.ENCODING);
-		logger.info(uri.path());
+		//logger.info(uri.path());
 		try {
 			resource.load(options);
 		} catch (java.io.FileNotFoundException e) {
