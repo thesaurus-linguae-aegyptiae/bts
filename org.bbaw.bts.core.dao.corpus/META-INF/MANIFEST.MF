@@ -25,7 +25,6 @@ Require-Bundle: org.eclipse.e4.core.di.extensions,
  org.eclipse.e4.core.contexts,
  org.eclipse.emf.ecore,
  org.eclipse.equinox.registry,
- org.eclipse.e4.ui.model.workbench,
  org.eclipse.e4.core.di.extensions,
  org.eclipse.osgi,
  org.eclipse.equinox.common

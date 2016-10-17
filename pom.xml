@@ -13,6 +13,7 @@
 		<module>org.bbaw.bts.app</module>
 		<module>org.bbaw.bts.app.login</module>
 		<module>org.bbaw.bts.commons</module>
+		<module>org.bbaw.bts.commons.fsaccess</module>
 		<module>org.bbaw.bts.commons.libs.elasticsearch</module>
 		<module>org.bbaw.bts.core.commons</module>
 		<module>org.bbaw.bts.core.commons.corpus</module>

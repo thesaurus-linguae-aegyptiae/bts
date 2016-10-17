@@ -325,18 +325,18 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 			resource = connectionProvider.getEmfResourceSet().createResource(uri);
 		}
 		
-		Map<String, String> options = new HashMap<String, String>();
-		
-		options.put(XMLResource.OPTION_ENCODING, BTSConstants.ENCODING);
-		logger.info(uri.path());
+		CouchDbClient client = connectionProvider.getDBClient(CouchDbClient.class, path);
+		InputStream sourceStream = null;
 		try {
-			resource.load(options);
-		} catch (java.io.FileNotFoundException e) {
-			logger.error("Object not found: path " + path + "/" + key.toString());
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			sourceStream = client.find((String)key);
+		} catch (NoDocumentException e) {
+			logger.error(e, "Failed to loadFully object with path: " + uri.toString());
 		}
+		
+		final JSONLoad loader = new JSONLoad(sourceStream,
+				new HashMap<Object, Object>(), connectionProvider.getEmfResourceSet());
+		loader.fillResource(resource);
+		
 		if (resource.getContents().size() > 0)
 		{
 			Object o = resource.getContents().get(0);
@@ -372,7 +372,7 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 		}
 		Resource tempResource = connectionProvider.getEmfResourceSet().createResource(uri);
 		final JSONLoad loader = new JSONLoad(stream,
-				new HashMap<Object, Object>());
+				new HashMap<Object, Object>(), connectionProvider.getEmfResourceSet());
 		loader.fillResource(tempResource);
 //		EObjectMapper objectMapper = new EObjectMapper();
 //		Object o = objectMapper.from(stream, tempResource, null);
@@ -406,7 +406,7 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 			return;
 		}
 		final JSONLoad loader = new JSONLoad(new ByteArrayInputStream(objectAsString.getBytes(StandardCharsets.UTF_8)),
-				new HashMap<Object, Object>());
+				new HashMap<Object, Object>(), connectionProvider.getEmfResourceSet());
 		loader.fillResource(resource);
 		
 	}
@@ -1358,7 +1358,7 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 		Resource resource = connectionProvider.getEmfResourceSet().createResource(
 				uri);
 		final JSONLoad loader = new JSONLoad(sourceStream,
-				new HashMap<Object, Object>());
+				new HashMap<Object, Object>(), connectionProvider.getEmfResourceSet());
 		loader.fillResource(resource);
 		E source = null;
 		if (!resource.getContents().isEmpty())

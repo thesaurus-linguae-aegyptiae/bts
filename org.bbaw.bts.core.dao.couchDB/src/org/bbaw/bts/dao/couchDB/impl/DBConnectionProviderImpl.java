@@ -11,16 +11,16 @@ import java.util.Map;
 
 import javax.inject.Inject;
 
+import org.bbaw.bts.btsmodel.BtsmodelPackage;
 import org.bbaw.bts.btsmodel.DBLease;
 import org.bbaw.bts.commons.BTSConstants;
+import org.bbaw.bts.commons.fsaccess.BTSContstantsPlatformSpecific;
 import org.bbaw.bts.commons.BTSPluginIDs;
 import org.bbaw.bts.core.commons.exceptions.BTSDBException;
 import org.bbaw.bts.core.dao.DBConnectionProvider;
 import org.bbaw.bts.core.dao.util.DaoConstants;
-import org.bbaw.bts.core.dao.util.ScatteredCachingMapService;
 import org.eclipse.core.runtime.preferences.ConfigurationScope;
 import org.eclipse.core.runtime.preferences.IEclipsePreferences;
-import org.eclipse.e4.core.contexts.ContextInjectionFactory;
 import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.core.di.extensions.Preference;
@@ -362,15 +362,22 @@ public class DBConnectionProviderImpl implements DBConnectionProvider
 				
 				//node client
 				IEclipsePreferences preferences = ConfigurationScope.INSTANCE.getNode("org.bbaw.bts.app");
-				String dbdir = preferences.get(BTSPluginIDs.PREF_DB_DIR, BTSConstants.getDBInstallationDir(null));
+				String installDir = null;
+				try {
+					installDir = org.bbaw.bts.commons.fsaccess.BTSContstantsPlatformSpecific.getDBInstallationDir(null);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				String dbdir = preferences.get(BTSPluginIDs.PREF_DB_DIR, installDir);
 				ImmutableSettings.Builder elasticsearchSettings = ImmutableSettings.settingsBuilder()
 //		                .put("http.enabled", ("true".equals(search_http_enabled)))
 						//FIXME make dynamic
 		                .put("http.enabled", true)
 
 		                .put("cluster.name", esClustername)
-		                .put("path.home", dbdir + BTSConstants.FS + esClustername)
-		                .put("path.data", dbdir + BTSConstants.FS + esClustername)
+		                .put("path.home", dbdir + BTSContstantsPlatformSpecific.FS + esClustername)
+		                .put("path.data", dbdir + BTSContstantsPlatformSpecific.FS + esClustername)
 		                .put("number_of_shards",1)
 				        .put("number_of_replicas",0)
 				        .put("index.number_of_shards",1)
@@ -417,6 +424,7 @@ public class DBConnectionProviderImpl implements DBConnectionProvider
 		{
 			set = new ResourceSetImpl();
 			set.getURIConverter().getURIHandlers().add(0, new CouchDBHandler());
+			set.getPackageRegistry().put(BtsmodelPackage.eNS_URI, BtsmodelPackage.eINSTANCE);
 		}
 		if (((ResourceSetImpl) set).getURIResourceMap() == null)
 		{
