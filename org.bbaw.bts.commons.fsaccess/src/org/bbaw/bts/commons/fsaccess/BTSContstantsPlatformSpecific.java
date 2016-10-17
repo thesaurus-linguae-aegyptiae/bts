@@ -28,7 +28,7 @@
  * along with TLA.  
  * If not, see <http://www.gnu.org/licenses/lgpl-3.0.html>.
  */
-package src.org.bbaw.bts.commons.fsaccess;
+package org.bbaw.bts.commons.fsaccess;
 
 import java.io.File;
 import java.io.FileInputStream;
