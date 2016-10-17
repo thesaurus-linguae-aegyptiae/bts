@@ -325,8 +325,15 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 			resource = connectionProvider.getEmfResourceSet().createResource(uri);
 		}
 		
+<<<<<<< HEAD
 		CouchDbClient client = connectionProvider.getDBClient(CouchDbClient.class, path);
 		InputStream sourceStream = null;
+=======
+		Map<String, String> options = new HashMap<String, String>();
+		
+		options.put(XMLResource.OPTION_ENCODING, BTSConstants.ENCODING);
+		//logger.info(uri.path());
+>>>>>>> branch 'working_master' of https://github.com/cplutte/bts.git
 		try {
 			sourceStream = client.find((String)key);
 		} catch (NoDocumentException e) {

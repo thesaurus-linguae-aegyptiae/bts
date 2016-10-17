@@ -319,7 +319,7 @@ public class EgyLemmaEditorPart extends AbstractTextEditorLogic implements IBTSE
 //		
 		// sign - text
 		Group grpSigntext = new Group(parent, SWT.NONE);
-		grpSigntext.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
+		grpSigntext.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 2));
 		grpSigntext.setLayout(new GridLayout(1, false));
 		
 		grpSigntext.setText("Sign Text");
@@ -347,7 +347,7 @@ public class EgyLemmaEditorPart extends AbstractTextEditorLogic implements IBTSE
 		
 		// tranlation		
 		Group grpTranslation = new Group(parent, SWT.NONE);
-		grpTranslation.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
+		grpTranslation.setLayoutData(new GridData(SWT.FILL, SWT.NONE, true, false, 1, 1));
 		grpTranslation.setText("Translation");
 		grpTranslation.setLayout(new GridLayout(1, false));
 
@@ -1137,7 +1137,7 @@ private void bringPartToFront(boolean b) {
 	@Optional
 	void eventReceivedUpdates(@EventTopic("model_update/*") BTSModelUpdateNotification notification)
 	{
-		logger.info("EgyTextEditorPart eventReceivedUpdates. object: " + notification);
+		//logger.info("EgyTextEditorPart eventReceivedUpdates. object: " + notification);
 //		if (notification.getQueryIds() != null){
 //			for (String id : notification.getQueryIds())
 //			{

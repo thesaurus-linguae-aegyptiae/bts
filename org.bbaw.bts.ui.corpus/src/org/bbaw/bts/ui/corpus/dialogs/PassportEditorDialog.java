@@ -16,6 +16,7 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Shell;
@@ -32,6 +33,8 @@ public class PassportEditorDialog extends TitleAreaDialog {
 	@Inject
 	private CorpusNavigatorController corpusNavigator;
 	private PassportEditorPart editor;
+
+	private Button okButton;
 
 	private boolean editable;
 	/**
@@ -82,8 +85,9 @@ public class PassportEditorDialog extends TitleAreaDialog {
 	 */
 	@Override
 	protected void createButtonsForButtonBar(Composite parent) {
-		createButton(parent, IDialogConstants.OK_ID, IDialogConstants.OK_LABEL,
+		okButton = createButton(parent, IDialogConstants.OK_ID, IDialogConstants.OK_LABEL,
 				true);
+		okButton.setEnabled(editable);
 		createButton(parent, IDialogConstants.CANCEL_ID,
 				IDialogConstants.CANCEL_LABEL, false);
 	}
@@ -111,5 +115,6 @@ public class PassportEditorDialog extends TitleAreaDialog {
 	public void setEditable(boolean editable)
 	{
 		this.editable = editable;
+		this.okButton.setEnabled(editable);
 	}
 }

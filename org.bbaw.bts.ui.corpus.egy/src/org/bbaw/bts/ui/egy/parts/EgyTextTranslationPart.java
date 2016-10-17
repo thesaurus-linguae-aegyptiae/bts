@@ -9,12 +9,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.Vector;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.annotation.PostConstruct;
 
 import org.bbaw.bts.btsmodel.BTSIdentifiableItem;
 import org.bbaw.bts.btsmodel.BTSObject;
+import org.bbaw.bts.btsmodel.BtsmodelPackage;
 import org.bbaw.bts.commons.BTSPluginIDs;
 import org.bbaw.bts.core.corpus.controller.partController.EgyTextTranslationPartController;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSAmbivalence;
@@ -23,24 +25,13 @@ import org.bbaw.bts.corpus.btsCorpusModel.BTSLemmaCase;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSSenctence;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSSentenceItem;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSText;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSTextItems;
 import org.bbaw.bts.ui.commons.corpus.events.BTSTextSelectionEvent;
 import org.bbaw.bts.ui.commons.corpus.text.BTSModelAnnotation;
-import org.bbaw.bts.ui.commons.corpus.text.BTSSubtextAnnotation;
 import org.bbaw.bts.ui.commons.utils.BTSUIConstants;
-import org.bbaw.bts.ui.egy.parts.egyTextEditor.CommentDrawingStrategy;
-import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.SWT;
-import org.eclipse.swt.layout.GridData;
-import org.eclipse.swt.custom.CaretEvent;
-import org.eclipse.swt.custom.CaretListener;
-import org.eclipse.swt.custom.StyleRange;
-import org.eclipse.swt.custom.StyledText;
-import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.events.SelectionListener;
-import org.eclipse.swt.events.TypedEvent;
-import org.eclipse.swt.graphics.Color;
-import org.eclipse.xtext.validation.Issue;
+import org.eclipse.core.databinding.observable.ChangeEvent;
+import org.eclipse.core.databinding.observable.IChangeListener;
+import org.eclipse.core.databinding.observable.value.IObservableValue;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
@@ -54,6 +45,8 @@ import org.eclipse.e4.ui.services.IServiceConstants;
 import org.eclipse.e4.ui.services.internal.events.EventBroker;
 import org.eclipse.e4.ui.workbench.modeling.EPartService;
 import org.eclipse.e4.ui.workbench.modeling.ESelectionService;
+import org.eclipse.emf.databinding.EMFObservables;
+import org.eclipse.emf.databinding.EObjectObservableValue;
 import org.eclipse.jface.text.Document;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IPainter;
@@ -62,10 +55,23 @@ import org.eclipse.jface.text.source.Annotation;
 import org.eclipse.jface.text.source.AnnotationModel;
 import org.eclipse.jface.text.source.AnnotationModelEvent;
 import org.eclipse.jface.text.source.AnnotationPainter;
+import org.eclipse.jface.text.source.AnnotationPainter.ITextStyleStrategy;
 import org.eclipse.jface.text.source.IAnnotationAccess;
 import org.eclipse.jface.text.source.IAnnotationModel;
 import org.eclipse.jface.text.source.SourceViewer;
-import org.eclipse.jface.text.source.AnnotationPainter.ITextStyleStrategy;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.CaretEvent;
+import org.eclipse.swt.custom.CaretListener;
+import org.eclipse.swt.custom.StyleRange;
+import org.eclipse.swt.custom.StyledText;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.events.SelectionListener;
+import org.eclipse.swt.events.TypedEvent;
+import org.eclipse.swt.graphics.Color;
+import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Composite;
+import org.eclipse.xtext.validation.Issue;
 
 public class EgyTextTranslationPart {
 	private static final String EDITOR_PREFIX = "";
@@ -76,7 +82,7 @@ public class EgyTextTranslationPart {
 	
 	@Inject
 	private EgyTextTranslationPartController translationController;
-	
+
 	/** The sync. */
 	@Inject
 	private UISynchronize sync;
@@ -113,6 +119,11 @@ public class EgyTextTranslationPart {
 	
 	private BTSTextSelectionEvent btsTextEvent = null;
 	private long lastSelectionTimeStamp = 0;
+
+	/** listens to changes on sentence translations */
+	private IChangeListener sentenceTranslationChangeListener = null;
+
+	private List<IObservableValue<?>> observableSentences = null;
 
 	@Inject
 	public EgyTextTranslationPart(EPartService partService) {
@@ -162,6 +173,7 @@ public class EgyTextTranslationPart {
 				processTextSelection(event);
 				// get char right of caret and show utf-8
 				// code in status line
+				// TODO
 				if (event.caretOffset < textViewer.getTextWidget()
 						.getText().length()) {
 					String sign = textViewer
@@ -321,7 +333,6 @@ public class EgyTextTranslationPart {
 				if (pos != null)
 				{
 					sync.asyncExec(new Runnable() {
-						@SuppressWarnings("restriction")
 						public void run() {
 							textViewer.revealRange(pos.getOffset(), pos.length);
 						}
@@ -400,10 +411,9 @@ public class EgyTextTranslationPart {
 	 * @param btsEvent the bts event
 	 * @return the model annotation at selection
 	 */
-	@SuppressWarnings("restriction")
 	private List<BTSModelAnnotation> getModelAnnotationAtSelection(int start,
 			int end, BTSTextSelectionEvent btsEvent) {
-		Iterator it = textViewer.getAnnotationModel()
+		Iterator<Annotation> it = textViewer.getAnnotationModel()
 				.getAnnotationIterator();
 		List<BTSModelAnnotation> annotations = new Vector<BTSModelAnnotation>(4);
 		Map<Integer, List<BTSModelAnnotation>> annotationOffsetMap = new HashMap<Integer, List<BTSModelAnnotation>>(4);
@@ -451,7 +461,7 @@ public class EgyTextTranslationPart {
 		Collections.sort(offsets);
 		for (Integer i : offsets)
 		{
-			List<BTSModelAnnotation> list = (List<BTSModelAnnotation>) annotationOffsetMap.get(i);
+			List<BTSModelAnnotation> list = annotationOffsetMap.get(i);
 			annotations.addAll(list);
 			
 			// calculate the start and end item and startId and endId
@@ -607,7 +617,80 @@ public class EgyTextTranslationPart {
 			}
 		}
 	}
-	
+
+	@PreDestroy
+	public void preDestroy() {
+		purgeCache();
+	}
+
+
+	private IChangeListener getSentenceTranslationChangeListener() {
+		if (sentenceTranslationChangeListener == null) {
+			sentenceTranslationChangeListener = new IChangeListener() {
+
+				@Override
+				public void handleChange(ChangeEvent event) {
+
+					if (event.getSource() instanceof EObjectObservableValue) {
+						EObjectObservableValue obs = (EObjectObservableValue)event.getSource();
+						if (obs.getObserved() instanceof BTSSenctence) {
+							BTSSenctence sentence = (BTSSenctence)obs.getObserved();
+
+							// retrieve text range representing sentence translation
+							BTSModelAnnotation ma = modelAnnotationMap.get(sentence.get_id());
+							Position pos = annotationModel.getPosition(ma);
+							// replace text range with updated translation string
+							textViewer.getTextWidget().replaceTextRange(pos.getOffset(), pos.getLength(), 
+									translationController.createSentenceTranslationLabel(sentence, language));
+						}
+					}
+				}
+			};
+		}
+		return sentenceTranslationChangeListener;
+	}
+
+
+	/**
+	 * Adds a change listener to each sentence in this text in order to update
+	 * sentence translations in translation part representation.
+	 * In case there are active listeners on observables from previous input,
+	 * those are unregistered beforehand.
+	 * @param text
+	 */
+	private void observeTextContent(BTSText text) {
+		try {
+			// unregister any listeners on previously known text contents
+			unobserveTextContent();
+			for (BTSTextItems ti : text.getTextContent().getTextItems()) {
+				if (ti instanceof BTSSenctence) {
+					BTSSenctence sentence = (BTSSenctence)ti;
+					IObservableValue<?> valProp =
+							EMFObservables.observeValue(sentence, BtsmodelPackage.Literals.BTS_TRANSLATION__VALUE);
+					valProp.addChangeListener(getSentenceTranslationChangeListener());
+					observableSentences.add(valProp);
+				}
+			}
+		} catch (NullPointerException e) {
+			//
+		}
+	}
+
+	/**
+	 * Removes any change listeners that might be attached to observable sentences from previous content.
+	 */
+	private void unobserveTextContent() {
+		if (observableSentences != null) {
+			for (IObservableValue<?> valProp : observableSentences) {
+				valProp.removeChangeListener(getSentenceTranslationChangeListener());
+			}
+			observableSentences.clear();
+		} else {
+			observableSentences = new Vector<IObservableValue<?>>();
+		}
+	}
+
+
 	private void loadInput(BTSText text) {
 		if (text == null)
 		{
@@ -621,6 +704,8 @@ public class EgyTextTranslationPart {
 	 		AnnotationModel tempAnnotationModel = new AnnotationModel();
 
 			String stringText = translationController.loadTranslation(text, language, tempAnnotationModel);
+			observeTextContent(text);
+
 			IDocument document = new Document();
 			document.set(stringText);
 			loadAnnotations2Editor(annotationModel, tempAnnotationModel);
@@ -658,7 +743,6 @@ public class EgyTextTranslationPart {
 	 * @param pos the pos
 	 * @param issue the issue
 	 */
-	@SuppressWarnings("restriction")
 	protected void loadSingleAnnotation2Editor(IAnnotationModel editorModel,
 			 BTSModelAnnotation a, Position pos, Issue issue) {
 		if (a instanceof BTSModelAnnotation && ((BTSModelAnnotation)a).getModel() instanceof BTSSenctence) {
@@ -674,14 +758,14 @@ public class EgyTextTranslationPart {
 
 	private void purgeCache() {
 		// TODO Auto-generated method stub
-		
+		unobserveTextContent();
 	}
+
 	/**
 	 * Make part active.
 	 *
 	 * @param activate the activate
 	 */
-	@SuppressWarnings("restriction")
 	private void makePartActive(boolean activate) {
 		if (activate)
 		{
