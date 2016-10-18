@@ -32,7 +32,6 @@ package org.bbaw.bts.core.dao.util;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashSet;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
@@ -53,6 +52,8 @@ public class BTSQueryRequest {
 	}
 
 	private BTSQueryType type;
+	
+	private String groupBy;
 
 	private String queryId;
 
@@ -77,6 +78,8 @@ public class BTSQueryRequest {
 	private boolean idQuery;
 	
 	private boolean wildcardQuery;
+	
+	private String lang;
 	
 	public BTSQueryRequest() {
 		this.requestFields = new HashSet<String>();
@@ -201,6 +204,14 @@ public class BTSQueryRequest {
 		this.type = type;
 	}
 	
+	public String getGroupBy() {
+		return groupBy;
+	}
+
+	public void setGroupBy(String groupBy) {
+		this.groupBy = groupBy;
+	}
+
 	public String getSearchString() {
 		return this.searchString;
 	}
@@ -270,5 +281,14 @@ public class BTSQueryRequest {
 	public void setWildcardQuery(boolean wildcardQuery) {
 		this.wildcardQuery = wildcardQuery;
 	}
+
+	public String getLang() {
+		return lang;
+	}
+
+	public void setLang(String lang) {
+		this.lang = lang;
+	}
+
 
 }

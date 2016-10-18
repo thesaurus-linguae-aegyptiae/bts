@@ -254,4 +254,10 @@ public interface BTSWord extends BTSAmbivalenceItem, BTSSentenceItem {
 	 */
 	EList<BTSGraphic> getGraphics();
 
+	/**
+	 * @return
+	 * @generatedNOT
+	 */
+	String getGraficsAsMdC();
+
 } // BTSWord

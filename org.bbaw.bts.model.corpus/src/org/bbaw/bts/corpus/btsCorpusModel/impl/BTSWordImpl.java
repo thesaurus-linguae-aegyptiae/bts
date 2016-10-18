@@ -844,4 +844,17 @@ public class BTSWordImpl extends BTSIdentifiableItemImpl implements BTSWord {
 		return result.toString();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.bbaw.bts.corpus.btsCorpusModel.BTSWord#getGraficsAsMdC()
+	 */
+	@Override
+	public String getGraficsAsMdC() {
+		String mdc = new String();
+		for (BTSGraphic g : getGraphics())
+		{
+			mdc+= g.getCode();
+		}
+		return mdc;
+	}
+
 } //BTSWordImpl
