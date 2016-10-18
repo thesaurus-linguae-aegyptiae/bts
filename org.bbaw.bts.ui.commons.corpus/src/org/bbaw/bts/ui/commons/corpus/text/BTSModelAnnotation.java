@@ -20,7 +20,7 @@ public class BTSModelAnnotation extends XtextAnnotation
 
 	public static final String TYPE_HIGHLIGHTED = TYPE + HIGHLIGHTED;
 
-	protected IResourceProviderService resourceProvider = StaticAccessController.getResourceProvider();
+	protected IResourceProviderService resourceProvider = (IResourceProviderService) StaticAccessController.getResourceProvider();
 
 	
 	private BTSInterTextReference interTextReference;

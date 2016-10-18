@@ -29,6 +29,17 @@ public abstract class AbstractDaoFactoryContextFunction extends ContextFunction 
 				factories.add((DAOFactory) o);
 			}
 		}
+		Object o = context.get(DaoConstants.DAO_FACTORY_EXTENSION_POINT_ID);
+		if (o != null && o instanceof Vector<?>)
+		{
+			for (Object os : (List<?>) o)
+			{
+				if (os instanceof DAOFactory)
+				{
+					factories.add((DAOFactory)os);
+				}
+			}
+		}
 		if (!factories.isEmpty())
 		{
 			return factories.toArray(new DAOFactory[factories.size()]);

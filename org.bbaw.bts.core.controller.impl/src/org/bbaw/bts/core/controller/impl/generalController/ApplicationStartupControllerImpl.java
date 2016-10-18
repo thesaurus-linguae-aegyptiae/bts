@@ -17,6 +17,7 @@ import org.bbaw.bts.app.login.Login;
 import org.bbaw.bts.btsmodel.BTSProject;
 import org.bbaw.bts.btsmodel.BTSUser;
 import org.bbaw.bts.commons.BTSConstants;
+import org.bbaw.bts.commons.fsaccess.BTSContstantsPlatformSpecific;
 import org.bbaw.bts.commons.BTSPluginIDs;
 import org.bbaw.bts.core.commons.BTSCoreConstants;
 import org.bbaw.bts.core.commons.staticAccess.StaticAccessController;
@@ -134,7 +135,7 @@ public class ApplicationStartupControllerImpl implements
 
 	private String localDBUrl;
 
-	private boolean listen2Backend = true; // XXX dev!!!!!!!!!!!!!
+	private boolean listen2Backend = true; 
 
 	protected Login login;
 
@@ -195,10 +196,10 @@ public class ApplicationStartupControllerImpl implements
 		logger.info("db_installation_dir " + db_installation_dir);
 
 		if (db_installation_dir == null || "".equals(db_installation_dir)) {
-			String btsInsallationDir = BTSConstants.getInstallationDir();
+			String btsInsallationDir = BTSContstantsPlatformSpecific.getInstallationDir();
 			logger.info("btsInsallationDir " + btsInsallationDir);
 
-			db_installation_dir = BTSConstants
+			db_installation_dir = BTSContstantsPlatformSpecific
 					.getDBInstallationDir(btsInsallationDir);
 			prefs.put(BTSPluginIDs.PREF_DB_DIR, db_installation_dir);
 			try {
@@ -701,7 +702,7 @@ public class ApplicationStartupControllerImpl implements
 										context.declareModifiable(BTSCoreConstants.LISTEN_TO_BACKEND_UPDATES);
 										context.modify(
 												BTSCoreConstants.LISTEN_TO_BACKEND_UPDATES,
-												"true");// FIXME dev!
+												"true");// 
 										for (BTSProject project : projects) {
 											//XXX disable for dev
 											backend2ClientUpdateService

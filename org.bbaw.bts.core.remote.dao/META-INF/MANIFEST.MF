@@ -10,7 +10,6 @@ Require-Bundle: org.bbaw.bts.model;bundle-version="0.1.0",
  org.eclipse.e4.core.contexts,
  org.eclipse.emf.ecore,
  org.eclipse.equinox.registry,
- org.eclipse.e4.ui.model.workbench,
  org.eclipse.e4.core.di.extensions,
  org.eclipse.osgi
 Export-Package: org.bbaw.bts.core.remote.dao,
@@ -19,5 +18,6 @@ Bundle-ActivationPolicy: lazy
 Import-Package: javax.inject,
  org.bbaw.bts.core.dao.util,
  org.eclipse.e4.core.services.log,
- org.eclipse.e4.ui.model.application
+ org.eclipse.e4.ui.model.application,
+ org.eclipse.e4.ui.model.application.ui
 Bundle-Version: 3.1.0.qualifier
