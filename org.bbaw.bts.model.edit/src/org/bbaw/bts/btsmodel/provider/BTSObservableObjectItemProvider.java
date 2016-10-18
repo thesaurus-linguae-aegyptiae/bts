@@ -76,7 +76,7 @@ public class BTSObservableObjectItemProvider
 	{
 		if (resourceProvider == null)
 		{
-			resourceProvider = StaticAccessController.getResourceProvider();
+			resourceProvider = (BTSResourceProvider) StaticAccessController.getResourceProvider();
 		}
 		return resourceProvider;
 	}

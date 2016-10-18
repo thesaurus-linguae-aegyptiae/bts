@@ -343,14 +343,14 @@ public class BTSTextServiceImpl extends AbstractCorpusObjectServiceImpl<BTSText,
 	 */
 	private WordFormOccurrence processToken(BTSSentenceItem sentenceItem, BTSSenctence sentence, int sentenceIndex, BTSText text, BTSQueryRequest query,
 			Map<String, WordFormOccurrenceGroup> occurrenceGroupsMap) {
-		if (!(sentenceItem instanceof BTSWord)) return null;
+		if (sentenceItem == null || !(sentenceItem instanceof BTSWord)) return null;
 		BTSWord word = (BTSWord) sentenceItem;
 		WordFormOccurrence occurrence = null;
 		// determine grouping criteria
 		if (WordFormOccurrenceGroup.GROUP_LEMMA.equals(query.getGroupBy()))
 		{
 			// lemma
-			if (word.getWChar().equals(query.getSearchString()))
+			if (word.getLKey() != null && word.getLKey().equals(query.getSearchString()))
 			{
 				occurrence = addToGroupMap(word.getLKey(), word, sentence, sentenceIndex, text, occurrenceGroupsMap, WordFormOccurrenceGroup.GROUP_TRANSLITERATION);
 			}
@@ -358,7 +358,7 @@ public class BTSTextServiceImpl extends AbstractCorpusObjectServiceImpl<BTSText,
 		else if (WordFormOccurrenceGroup.GROUP_FLEXION.equals(query.getGroupBy()))
 		{
 			// flexion
-			if (word.getWChar().equals(query.getSearchString()))
+			if (word.getFlexCode() != null && word.getFlexCode().equals(query.getSearchString()))
 			{
 				occurrence = addToGroupMap(word.getFlexCode(), word, sentence, sentenceIndex,  text, occurrenceGroupsMap, WordFormOccurrenceGroup.GROUP_TRANSLITERATION);
 			}
@@ -366,31 +366,53 @@ public class BTSTextServiceImpl extends AbstractCorpusObjectServiceImpl<BTSText,
 		else if (WordFormOccurrenceGroup.GROUP_SPELLING.equals(query.getGroupBy()))
 		{
 			// spelling
-			if (word.getWChar().equals(query.getSearchString()))
+			String mdc = word.getGraficsAsMdC();
+			if (mdc != null)
 			{
-				occurrence = addToGroupMap(word.getGraficsAsMdC(), word, sentence, sentenceIndex,  text, occurrenceGroupsMap, WordFormOccurrenceGroup.GROUP_TRANSLITERATION);
+				if (query.isFuzzy() && mdc.contains(query.getSearchString()))
+				{
+					occurrence = addToGroupMap(word.getGraficsAsMdC(), word, sentence, sentenceIndex,  text, occurrenceGroupsMap, WordFormOccurrenceGroup.GROUP_TRANSLITERATION);
+				}
+				else if (mdc.equals(query.getSearchString()))
+				{
+					occurrence = addToGroupMap(word.getGraficsAsMdC(), word, sentence, sentenceIndex,  text, occurrenceGroupsMap, WordFormOccurrenceGroup.GROUP_TRANSLITERATION);
+				}
 			}
 		}
 		else if (WordFormOccurrenceGroup.GROUP_TRANSLATION.equals(query.getGroupBy()))
 		{
 			// translation
-			if (word.getWChar().equals(query.getSearchString()))
+			if (word.getTranslation() != null)
 			{
-				occurrence = addToGroupMap(word.getTranslation().getTranslation(query.getLang()), word, sentence,  sentenceIndex, text, occurrenceGroupsMap, WordFormOccurrenceGroup.GROUP_TRANSLITERATION);
+				if(query.isFuzzy() && word.getTranslation().getTranslation(query.getLang()).contains(query.getSearchString()))
+				{
+					
+				}
+				else if (word.getTranslation().getTranslation(query.getLang()).equals(query.getSearchString()))
+				{
+					occurrence = addToGroupMap(word.getTranslation().getTranslation(query.getLang()), word, sentence,  sentenceIndex, text, occurrenceGroupsMap, WordFormOccurrenceGroup.GROUP_TRANSLITERATION);
+				}
 			}
 		}
 		else if (WordFormOccurrenceGroup.GROUP_TRANSLITERATION.equals(query.getGroupBy()))
 		{
 			// transliteration
-			if (word.getWChar().equals(query.getSearchString()))
+			if (word.getWChar() != null)
 			{
-				occurrence = addToGroupMap(word.getWChar(), word, sentence,  sentenceIndex, text, occurrenceGroupsMap, WordFormOccurrenceGroup.GROUP_TRANSLITERATION);
+				if (query.isFuzzy() && word.getWChar().contains(query.getSearchString()))
+				{
+					occurrence = addToGroupMap(word.getWChar(), word, sentence,  sentenceIndex, text, occurrenceGroupsMap, WordFormOccurrenceGroup.GROUP_TRANSLITERATION);
+				}
+				else if (word.getWChar().equals(query.getSearchString()))
+				{
+					occurrence = addToGroupMap(word.getWChar(), word, sentence,  sentenceIndex, text, occurrenceGroupsMap, WordFormOccurrenceGroup.GROUP_TRANSLITERATION);
+				}
 			}
 		}
 		else
 		{
 			// no grouping
-			if (word.getWChar().equals(query.getSearchString()))
+			if (word.getWChar() != null && word.getWChar().equals(query.getSearchString()))
 			{
 				occurrence = addToGroupMap(null, word, sentence,  sentenceIndex, text, occurrenceGroupsMap, WordFormOccurrenceGroup.GROUP_TRANSLITERATION);
 			}
@@ -416,7 +438,7 @@ public class BTSTextServiceImpl extends AbstractCorpusObjectServiceImpl<BTSText,
 			// no grouping
 			if(occurrenceGroupsMap.isEmpty())
 			{
-				group = makeGroup(machtingValue, groupBy);
+				group = makeGroup(machtingValue, groupBy, occurrenceGroupsMap);
 			}
 			else
 			{
@@ -431,7 +453,7 @@ public class BTSTextServiceImpl extends AbstractCorpusObjectServiceImpl<BTSText,
 			}
 			else
 			{
-				group = makeGroup(machtingValue, groupBy);
+				group = makeGroup(machtingValue, groupBy, occurrenceGroupsMap);
 			}
 		}
 		WordFormOccurrence occurrence = makeWordFormOccurrence(word, sentenceIndex, text);
@@ -442,14 +464,16 @@ public class BTSTextServiceImpl extends AbstractCorpusObjectServiceImpl<BTSText,
 	/**
 	 * @param machtingValue
 	 * @param groupBy
+	 * @param occurrenceGroupsMap 
 	 * @param sentence
 	 * @param text
 	 * @return
 	 */
-	private WordFormOccurrenceGroup makeGroup(String machtingValue, String groupBy) {
+	private WordFormOccurrenceGroup makeGroup(String machtingValue, String groupBy, Map<String, WordFormOccurrenceGroup> occurrenceGroupsMap) {
 		WordFormOccurrenceGroup group = new WordFormOccurrenceGroup();
 		group.setGroupType(groupBy);
 		group.setValue(machtingValue);
+		occurrenceGroupsMap.put(machtingValue, group);
 		return group;
 	}
 
@@ -490,8 +514,7 @@ public class BTSTextServiceImpl extends AbstractCorpusObjectServiceImpl<BTSText,
 		List<BTSSenctence> sentences = new Vector<BTSSenctence>(Math.abs(cotextindex));
 		
 		int i = sentenceIndex;
-		while(sentences.size() < Math.abs(cotextindex) 
-				&& 0 <= i && i <= text.getTextContent().getTextItems().size())
+		while(sentences.size() < Math.abs(cotextindex)) 
 		{
 			if (before)
 			{
@@ -501,6 +524,7 @@ public class BTSTextServiceImpl extends AbstractCorpusObjectServiceImpl<BTSText,
 			{
 				i++;
 			}
+			if (i < 0 || i >= text.getTextContent().getTextItems().size()) break;
 			if (text.getTextContent().getTextItems().get(i) instanceof BTSSenctence)
 			{
 				sentences.add((BTSSenctence) text.getTextContent().getTextItems().get(i));

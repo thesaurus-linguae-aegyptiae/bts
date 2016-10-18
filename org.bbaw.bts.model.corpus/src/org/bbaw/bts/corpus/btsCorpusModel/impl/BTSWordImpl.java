@@ -314,9 +314,10 @@ public class BTSWordImpl extends BTSIdentifiableItemImpl implements BTSWord {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generatedNOT
 	 */
 	public String getName() {
+		if (name == null || "".equals(name)) return wChar;
 		return name;
 	}
 

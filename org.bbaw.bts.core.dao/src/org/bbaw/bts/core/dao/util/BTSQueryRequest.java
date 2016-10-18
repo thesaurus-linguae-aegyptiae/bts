@@ -81,6 +81,8 @@ public class BTSQueryRequest {
 	
 	private String lang;
 	
+	private boolean fuzzy;
+	
 	public BTSQueryRequest() {
 		this.requestFields = new HashSet<String>();
 	}
@@ -288,6 +290,14 @@ public class BTSQueryRequest {
 
 	public void setLang(String lang) {
 		this.lang = lang;
+	}
+
+	public boolean isFuzzy() {
+		return fuzzy;
+	}
+
+	public void setFuzzy(boolean fuzzy) {
+		this.fuzzy = fuzzy;
 	}
 
 
