@@ -244,7 +244,7 @@ public class TranslationEditorComposite extends Composite {
 		if (dataBind) {
 			databindTranslation(trans);
 		} else {
-			text.setText(trans.getValue());
+			text.setText((trans.getValue() != null) ? trans.getValue() : "");
 		}
 	}
 
