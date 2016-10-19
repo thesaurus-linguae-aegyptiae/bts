@@ -820,6 +820,7 @@ public class EgyHieroglyphenTypeWriter implements ScatteredCachingPart,
 						if (oldWord != null)
 						{
 							saveMdCstring(oldWord);
+							updateGraphicSelectionCounter();
 						}
 						purgeAll();
 						currentWord = (BTSWord) selection;
