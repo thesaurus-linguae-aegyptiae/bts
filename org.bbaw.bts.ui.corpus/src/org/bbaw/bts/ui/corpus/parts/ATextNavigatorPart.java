@@ -221,7 +221,7 @@ public class ATextNavigatorPart extends NavigatorPart implements ScatteredCachin
 		mainTabItem = new CTabItem(tabFolder, SWT.NONE);
 		mainTabItem.setImage(resourceProvider.getImage(Display.getDefault(),
 				BTSResourceProvider.IMG_THSS));
-		mainTabItem.setText("Ths");
+		mainTabItem.setText("AT");
 		mainTabItem.setData("key", "main");
 
 		mainTabItemComp = new Composite(tabFolder, SWT.NONE);
