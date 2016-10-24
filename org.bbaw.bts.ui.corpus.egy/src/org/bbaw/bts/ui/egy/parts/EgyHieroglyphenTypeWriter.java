@@ -355,7 +355,8 @@ public class EgyHieroglyphenTypeWriter implements ScatteredCachingPart,
 		lblNewLabel_1.setText("Order in Sentence");
 
 		glyphOrder_spinner = new Spinner(manageGlyphs_composite, SWT.BORDER);
-		 glyphOrder_spinner.addSelectionListener(new SelectionAdapter() {
+		glyphOrder_spinner.setMaximum(Integer.MAX_VALUE);
+		glyphOrder_spinner.addSelectionListener(new SelectionAdapter() {
 		
 			@Override
 			public void widgetSelected(SelectionEvent e) {
