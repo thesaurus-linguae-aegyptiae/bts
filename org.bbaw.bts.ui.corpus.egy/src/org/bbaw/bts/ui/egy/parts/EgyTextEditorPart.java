@@ -929,6 +929,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 								{
 									index = index + 1;
 									targetSentence.getSentenceItems().add(index, copiedItem);
+									dirty.setDirty(true);
 								}
 							}
 						}
@@ -950,6 +951,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 								{
 									index = index + 1;
 									targetSentence.getSentenceItems().add(index, copiedItem);
+									dirty.setDirty(true);
 								}
 							}
 						}
@@ -975,6 +977,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 								{
 									index = index + 1;
 									targettextcontent.getTextItems().add(index, copiedItem);
+									dirty.setDirty(true);
 								}
 							}
 						}
@@ -995,6 +998,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 							{
 								index = index + 1;
 								targettextcontent.getTextItems().add(index, copiedItem);
+								dirty.setDirty(true);
 							}
 						}
 					}
