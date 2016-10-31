@@ -44,9 +44,7 @@ import org.bbaw.bts.core.corpus.controller.partController.HieroglyphTypeWriterCo
 import org.bbaw.bts.core.corpus.controller.partController.LemmaEditorController;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSGraphic;
-import org.bbaw.bts.corpus.btsCorpusModel.BTSLemmaCase;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSLemmaEntry;
-import org.bbaw.bts.corpus.btsCorpusModel.BTSSentenceItem;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSText;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSWord;
 import org.bbaw.bts.corpus.btsCorpusModel.BtsCorpusModelPackage;
@@ -54,7 +52,6 @@ import org.bbaw.bts.ui.commons.corpus.events.BTSTextSelectionEvent;
 import org.bbaw.bts.ui.commons.corpus.util.BTSEGYUIConstants;
 import org.bbaw.bts.ui.commons.utils.BTSUIConstants;
 import org.bbaw.bts.ui.resources.BTSResourceProvider;
-import org.eclipse.core.databinding.DataBindingContext;
 import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.core.di.extensions.EventTopic;
 import org.eclipse.e4.ui.di.Focus;
@@ -355,7 +352,8 @@ public class EgyHieroglyphenTypeWriter implements ScatteredCachingPart,
 		lblNewLabel_1.setText("Order in Sentence");
 
 		glyphOrder_spinner = new Spinner(manageGlyphs_composite, SWT.BORDER);
-		 glyphOrder_spinner.addSelectionListener(new SelectionAdapter() {
+		glyphOrder_spinner.setMaximum(Integer.MAX_VALUE);
+		glyphOrder_spinner.addSelectionListener(new SelectionAdapter() {
 		
 			@Override
 			public void widgetSelected(SelectionEvent e) {
