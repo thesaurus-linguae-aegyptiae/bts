@@ -105,7 +105,7 @@ public class AnnotationsPart implements EventHandler {
 
 	private Map<BTSObject, RelatedObjectGroup> objectWidgetMap = new HashMap<BTSObject, RelatedObjectGroup>();
 
-	private List<RelatedObjectGroup> internalSelectedGroup = new Vector<RelatedObjectGroup>(2);
+	private List<RelatedObjectGroup> highlightedGroups = new Vector<RelatedObjectGroup>(2);
 
 	private BTSTextSelectionEvent textSelectionEvent;
 
@@ -326,11 +326,11 @@ public class AnnotationsPart implements EventHandler {
 	
 	private void clearRelatingObjects(BTSCorpusObject selection) {
 		if(selection.equals(parentObject) || parentObject == null) return;
-//		System.out.println("clearRelatingObjects selection: " + ((BTSCorpusObject)selection).get_id() + " parentObject " + parentObject.get_id());
 		part.setLabel("Annotations");
 		part.setTooltip("Annotations");
 		relatingObjectsQueryIDMap.clear();
 		objectWidgetMap.clear();
+		highlightedGroups.clear();
 		if (composite != null)
 		{
 			composite.dispose();
@@ -478,27 +478,32 @@ public class AnnotationsPart implements EventHandler {
 
 	protected void setSelectedInternal(List<RelatedObjectGroup> selectedGroups, boolean postSelection) {
 		// TODO: equals heiszt same items in same order...
-		if (internalSelectedGroup != null && internalSelectedGroup.equals(selectedGroups))
+		if (highlightedGroups != null && highlightedGroups.equals(selectedGroups)) {
 			return;
+		}
 
 		// TODO: O(n^2) might be a bit expensive for avoidance of unnecessary deselection ...
-		for (RelatedObjectGroup roGroup : internalSelectedGroup)
-			if (!roGroup.isDisposed() && !selectedGroups.contains(roGroup))
+		for (RelatedObjectGroup roGroup : highlightedGroups) {
+			if (!roGroup.isDisposed() && !selectedGroups.contains(roGroup)) {
 				setGroupSelected(roGroup, false);
+			}
+		}
 
 		if (selectedGroups == null) {
-			internalSelectedGroup.clear();
+			highlightedGroups.clear();
 			return;
-		} else
-			internalSelectedGroup = selectedGroups;
-		List<BTSObject> selObjects = new Vector<BTSObject>(internalSelectedGroup.size());
+		} else {
+			highlightedGroups = selectedGroups;
+		}
+
+		List<BTSObject> selObjects = new Vector<BTSObject>(highlightedGroups.size());
 		
 		// reveal
-		if (!internalSelectedGroup.isEmpty()) {
+		if (!highlightedGroups.isEmpty()) {
 			// position scrollbar(s)
 			if (!selfselection && !scrollComposite.isDisposed())
-				scrollComposite.setOrigin(internalSelectedGroup.get(0).getLocation());
-			for (RelatedObjectGroup roGroup : internalSelectedGroup) {
+				scrollComposite.setOrigin(highlightedGroups.get(0).getLocation());
+			for (RelatedObjectGroup roGroup : highlightedGroups) {
 				selObjects.add(roGroup.getObject());
 				setGroupSelected(roGroup, true);
 			}
@@ -810,8 +815,8 @@ public class AnnotationsPart implements EventHandler {
 	
 	public BTSObject[] getSelectedObjects()
 	{
-		List<BTSObject> objects = new ArrayList<BTSObject>(internalSelectedGroup.size());
-		for (RelatedObjectGroup rog : internalSelectedGroup)
+		List<BTSObject> objects = new ArrayList<BTSObject>(highlightedGroups.size());
+		for (RelatedObjectGroup rog : highlightedGroups)
 		{
 			objects.add(rog.getObject());
 		}
