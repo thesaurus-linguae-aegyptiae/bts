@@ -2101,8 +2101,6 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 					text = (BTSText) selection;
 					selectionCached = true;
 				}
-				if ((selection instanceof BTSText)) {
-				}
 
 				selectedTextItem = selection;
 			}
@@ -2364,6 +2362,9 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 	 */
 	private void loadInput(BTSCorpusObject o) {
 		setSentenceTranslationActive(false);
+		// wipe latest text selection event in order to avoid leak
+		this.btsTextEvent = new BTSTextSelectionEvent(new TypedEvent(this), o);
+		selectionService.setSelection(btsTextEvent);
 
 		if (tabFolder != null && o instanceof BTSText) {
 
