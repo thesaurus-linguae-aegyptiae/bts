@@ -314,9 +314,10 @@ public class BTSWordImpl extends BTSIdentifiableItemImpl implements BTSWord {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generatedNOT
 	 */
 	public String getName() {
+		if (name == null || "".equals(name)) return wChar;
 		return name;
 	}
 
@@ -842,6 +843,19 @@ public class BTSWordImpl extends BTSIdentifiableItemImpl implements BTSWord {
 		result.append(value);
 		result.append(')');
 		return result.toString();
+	}
+
+	/* (non-Javadoc)
+	 * @see org.bbaw.bts.corpus.btsCorpusModel.BTSWord#getGraficsAsMdC()
+	 */
+	@Override
+	public String getGraficsAsMdC() {
+		String mdc = new String();
+		for (BTSGraphic g : getGraphics())
+		{
+			mdc+= g.getCode();
+		}
+		return mdc;
 	}
 
 } //BTSWordImpl
