@@ -809,39 +809,39 @@ public class EgyHieroglyphenTypeWriter implements ScatteredCachingPart,
 		{
 			public void run()
 			{
-		try
-		{
-
-			if (selection == null)
-			{
-			} else if (selection instanceof BTSWord)
-			{
-				BTSWord oldWord = currentWord;
-				if (oldWord != null)
+				try
 				{
-					saveMdCstring(oldWord);
-					updateGraphicSelectionCounter();
-				}
-				purgeAll();
-				currentWord = (BTSWord) selection;
-				editingDomain = getEditingDomain(currentWord);
-				editingDomain.getCommandStack().removeCommandStackListener(
-						commandStackListener);
-				editingDomain.getCommandStack().addCommandStackListener(
-						getCommandStackListener());
-				if (currentWord != null)
+		
+					if (selection == null)
+					{
+					} else if (selection instanceof BTSWord)
+					{
+						BTSWord oldWord = currentWord;
+						if (oldWord != null)
+						{
+							saveMdCstring(oldWord);
+							updateGraphicSelectionCounter();
+						}
+						purgeAll();
+						currentWord = (BTSWord) selection;
+						editingDomain = getEditingDomain(currentWord);
+						editingDomain.getCommandStack().removeCommandStackListener(
+								commandStackListener);
+						editingDomain.getCommandStack().addCommandStackListener(
+								getCommandStackListener());
+						if (currentWord != null)
+						{
+							wordGraphics = currentWord.getGraphics();
+							String mdc = transformWordToMdCString(currentWord, -1);
+							loadMdCString(mdc);
+							beforeImageMdC = mdc;
+							loaded = true;
+						}
+					}
+				} finally
 				{
-					wordGraphics = currentWord.getGraphics();
-					String mdc = transformWordToMdCString(currentWord, -1);
-					loadMdCString(mdc);
-					beforeImageMdC = mdc;
-					loaded = true;
+					loading = false;
 				}
-			}
-		} finally
-		{
-			loading = false;
-		}
 			}
 		});
 		loading = false;
