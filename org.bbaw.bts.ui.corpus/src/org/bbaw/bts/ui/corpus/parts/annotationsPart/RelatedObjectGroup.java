@@ -242,7 +242,7 @@ public abstract class RelatedObjectGroup extends Composite{
 		});
 		
 		
-		Label editButton = new Label(composite, SWT.PUSH);
+		/*Label editButton = new Label(composite, SWT.PUSH);
 		editButton.setImage(resourceProvider.getImage(Display.getCurrent(), BTSResourceProvider.IMG_RELATION_EDIT));
 		editButton.setToolTipText("Update Current Reference");
 		editButton.setLayoutData(new RowData());
@@ -266,7 +266,8 @@ public abstract class RelatedObjectGroup extends Composite{
 					editReference();
 				}
 			}
-		});
+		});*/
+
 		Label delButton = new Label(composite, SWT.PUSH);
 		delButton.setImage(resourceProvider.getImage(Display.getCurrent(), BTSResourceProvider.IMG_RELATION_DELETE));
 		delButton.setToolTipText("Remove Current Reference");
