@@ -131,8 +131,11 @@ public class CommentEditorDialog extends TitleAreaDialog {
 		});
 		
 		txtCommenttxt = new Text(container, SWT.BORDER | SWT.WRAP | SWT.V_SCROLL | SWT.MULTI);
-		txtCommenttxt.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
-		
+		GridData gd = new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1);
+		gd.widthHint = 480;
+		gd.heightHint = 640;
+		txtCommenttxt.setLayoutData(gd);
+
 		compositeRelations = new Composite(container, SWT.NONE);
 		compositeRelations.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1));
 		compositeRelations.setLayout(new GridLayout(1, false));
@@ -293,7 +296,7 @@ public class CommentEditorDialog extends TitleAreaDialog {
 	 */
 	@Override
 	protected Point getInitialSize() {
-		return new Point(450, 450);
+		return new Point(500, 600);
 	}
 	
 	@Override
