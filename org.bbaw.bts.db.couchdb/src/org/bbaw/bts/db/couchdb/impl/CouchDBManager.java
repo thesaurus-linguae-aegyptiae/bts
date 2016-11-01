@@ -33,6 +33,7 @@ import org.bbaw.bts.btsviewmodel.BtsviewmodelFactory;
 import org.bbaw.bts.btsviewmodel.DBCollectionStatusInformation;
 import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.commons.fsaccess.BTSContstantsPlatformSpecific;
+import org.bbaw.bts.commons.BTSPluginIDs;
 import org.bbaw.bts.commons.CopyDirectory;
 import org.bbaw.bts.commons.OSValidator;
 import org.bbaw.bts.core.dao.BTSProjectDao;
@@ -127,6 +128,10 @@ public class CouchDBManager implements DBManager {
 	@Inject
 	@Preference(value = "password", nodePath = "org.bbaw.bts.app")
 	private String password;
+
+	@Inject
+	@Preference(value = BTSPluginIDs.PREF_DB_DIR, nodePath = "org.bbaw.bts.app")
+	private String dbDir;
 
 	@Inject
 	private Logger logger;
@@ -2325,8 +2330,8 @@ public class CouchDBManager implements DBManager {
 
 	@Override
 	public void addAuthenticationDBAdmin(String userName, String password) throws FileNotFoundException {
-		String localIni = getOSCouchDBLocalIniFile(BTSContstantsPlatformSpecific
-				.getDBInstallationDir(BTSContstantsPlatformSpecific.getInstallationDir()));
+		String localIni = getOSCouchDBLocalIniFile(dbDir);
+		logger.info("couch config: "+localIni);
 		File localIniFile = new File(localIni);
 		if (localIniFile.exists()) {
 			Scanner scanner = new Scanner(localIniFile);
