@@ -123,6 +123,36 @@ public class BTSTextServiceImpl extends AbstractCorpusObjectServiceImpl<BTSText,
 		}
 		return null;
 	}
+	
+	@Override
+	public BTSText findReturnOnlyMetadata(String key) {
+		BTSText text = null;
+		text = textDao.findReturnOnlyMetadata(key, main_corpus_key);
+		if (text != null)
+		{
+			return text;
+		}
+		for (String c : getActive_corpora(main_project))
+		{
+			text = textDao.findReturnOnlyMetadata(key, c);
+			if (text != null)
+			{
+				return text;
+			}
+		}
+		for (String p : getActiveProjects())
+		{
+			for (String c : getActive_corpora(p))
+			{
+				text = textDao.findReturnOnlyMetadata(key, c);
+				if (text != null)
+				{
+					return text;
+				}
+			}
+		}
+		return null;
+	}
 
 	@Override
 	public List<BTSText> list(String objectState, IProgressMonitor monitor)
@@ -541,5 +571,37 @@ public class BTSTextServiceImpl extends AbstractCorpusObjectServiceImpl<BTSText,
 		return;
 	}
 
-	
+	/* (non-Javadoc)
+	 * @see org.bbaw.bts.core.services.impl.generic.GenericObjectServiceImpl#findAsJsonString(java.io.Serializable, org.eclipse.core.runtime.IProgressMonitor)
+	 */
+	@Override
+	public String findAsJsonString(String key, IProgressMonitor monitor) {
+		String text = null;
+		text = textDao.findAsJsonString(key, main_corpus_key);
+		if (text != null)
+		{
+			return text;
+		}
+		for (String c : getActive_corpora(main_project))
+		{
+			text = textDao.findAsJsonString(key, c);
+			if (text != null)
+			{
+				return text;
+			}
+		}
+		for (String p : getActiveProjects())
+		{
+			for (String c : getActive_corpora(p))
+			{
+				text = textDao.findAsJsonString(key, c);
+				if (text != null)
+				{
+					return text;
+				}
+			}
+		}
+		return null;
+	}
+
 }

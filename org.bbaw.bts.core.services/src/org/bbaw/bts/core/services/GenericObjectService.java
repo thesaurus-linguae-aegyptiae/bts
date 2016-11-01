@@ -117,6 +117,22 @@ public interface GenericObjectService<E extends BTSDBBaseObject, K>
 	 */
 	E find(K key, IProgressMonitor monitor);
 	
+	
+	/**
+	 * Find entity by id and return json string.
+	 *
+	 * @param key the key
+	 * @return the entity
+	 */
+	String findAsJsonString(K key, IProgressMonitor monitor);
+	
+	/**
+	 * Find entity by id and return json string.
+	 *
+	 * @param key the key
+	 * @return the entity
+	 */
+	String findAsJsonString(K key, String path, IProgressMonitor monitor);
 	/**
 	 * Find given revision of entity by id and database path.
 	 *
@@ -126,6 +142,16 @@ public interface GenericObjectService<E extends BTSDBBaseObject, K>
 	 * @return the entity in the given revision
 	 */
 	E find(K key, String path, String revision, IProgressMonitor monitor);
+	
+	/**
+	 * Find given revision of entity by id and database path and return json string.
+	 *
+	 * @param key the key
+	 * @param path the path in database
+	 * @param revision the revision
+	 * @return the entity in the given revision
+	 */
+	String findAsJsonString(K key, String path, String revision, IProgressMonitor monitor);
 	
 	/**
 	 * Find given revision of entity by id and database path.

@@ -125,6 +125,24 @@ public interface GenericDao<E extends BTSDBBaseObject, K>
 	E find(K key, String path);
 	
 	/**
+	 * Find entity by key and returns it as json string.
+	 *
+	 * @param key the key
+	 * @param path the path in database
+	 * @return the entity
+	 */
+	String findAsJsonString(K key, String path);
+	
+	/**
+	 * Find revision of entity and returns it as json string.
+	 *
+	 * @param key the key
+	 * @param path the path in database
+	 * @param revision the id of the requested revision 
+	 * @return the entity in the requested revision or null if not available
+	 */
+	String findAsJsonString(K key, String path, String revision);
+	/**
 	 * Find revision of entity
 	 *
 	 * @param key the key

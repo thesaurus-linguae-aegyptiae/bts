@@ -1,9 +1,12 @@
 package org.bbaw.bts.dao.couchDB;
 
+import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.Serializable;
+import java.io.UnsupportedEncodingException;
 import java.lang.reflect.ParameterizedType;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -318,12 +321,7 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 		Map<URI, Resource> cache = ((ResourceSetImpl)connectionProvider.getEmfResourceSet()).getURIResourceMap();
 		E object = retrieveFromCache(uri, cache);
 		if (object != null) return object;
-		Resource resource = null;
-		try {
-			resource = connectionProvider.getEmfResourceSet().getResource(uri, true);
-		} catch (Exception e1) {
-			resource = connectionProvider.getEmfResourceSet().createResource(uri);
-		}
+		Resource resource = connectionProvider.getEmfResourceSet().createResource(uri);
 		
 		CouchDbClient client = connectionProvider.getDBClient(CouchDbClient.class, path);
 		InputStream sourceStream = null;
@@ -430,12 +428,7 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 		E object = retrieveFromCache(uri, cache);
 		if (object != null) return object;
 		
-		Resource resource = null;
-		try {
-			resource = connectionProvider.getEmfResourceSet().getResource(uri, true);
-		} catch (Exception e1) {
-			resource = connectionProvider.getEmfResourceSet().createResource(uri);
-		}
+		Resource resource = connectionProvider.getEmfResourceSet().createResource(uri);
 		Map<String, String> options = new HashMap<String, String>();
 		
 		options.put(XMLResource.OPTION_ENCODING, BTSConstants.ENCODING);
@@ -1381,4 +1374,39 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 		return entity;
 	}
 	
+	@Override
+	public String findAsJsonString(K key, String path) {
+		return findAsJsonString(key, path, null);
+	}
+
+	@Override
+	public String findAsJsonString(K key, String path, String revision) {
+		CouchDbClient client = connectionProvider.getDBClient(CouchDbClient.class, path);
+		//logger.info(uri.path());
+		try {
+			InputStream inputStream;
+			if (revision != null)
+			{
+				inputStream = client.find((String)key, revision);
+			}
+			else
+			{
+				inputStream = client.find((String)key);
+			}
+			BufferedReader in = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
+			String json = "";
+			String str;
+			while ((str = in.readLine()) != null) {
+	        	json += str;
+	        }
+			return json;
+		} catch (NoDocumentException e) {
+			logger.error(e, "Failed to load json string of object with path: " + (String)key);
+		} catch (UnsupportedEncodingException e) {
+			logger.error(e, "Failed to load json string of object with path: " + (String)key);
+		} catch (IOException e) {
+			logger.error(e, "Failed to load json string of object with path: " + (String)key);
+		}
+		return null;
+	}
 }

@@ -330,5 +330,10 @@ public class BTSProjectServiceImpl extends GenericObjectServiceImpl<BTSProject, 
 		return map;
 	}
 
+	@Override
+	public String findAsJsonString(String key, IProgressMonitor monitor) {
+		return projectDao.findAsJsonString(key, BTSCoreConstants.ADMIN);
+	}
+
 
 }

@@ -340,4 +340,34 @@ implements BTSLemmaEntryService, BTSObjectSearchService
 		return filtered;
 
 	}
+
+	/* (non-Javadoc)
+	 * @see org.bbaw.bts.core.services.impl.generic.GenericObjectServiceImpl#findAsJsonString(java.io.Serializable, org.eclipse.core.runtime.IProgressMonitor)
+	 */
+	@Override
+	public String findAsJsonString(String key, IProgressMonitor monitor) {
+		String entry = null;
+		try {
+			entry = lemmaEntryDao.findAsJsonString(key, main_project + BTSCorpusConstants.WLIST);
+		} catch (Exception e1) {
+		}
+		if (entry != null)
+		{
+			return entry;
+		}
+		for (String p : getActiveLemmaLists())
+		{
+			try {
+				entry = lemmaEntryDao.findAsJsonString(key, p + BTSCorpusConstants.WLIST);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			if (entry != null)
+			{
+				return entry;
+			}
+		}
+		return null;
+	}
 }

@@ -72,6 +72,7 @@ public class UserActionCounterServiceImpl extends
 		}
 		return null;
 	}
+	
 
 	@Override
 	public List<UserActionCounter> list(String objectState, IProgressMonitor monitor) {
@@ -147,6 +148,14 @@ public class UserActionCounterServiceImpl extends
 		};
 		j.schedule();
 				
+	}
+
+	/* (non-Javadoc)
+	 * @see org.bbaw.bts.core.services.impl.generic.GenericObjectServiceImpl#findAsJsonString(java.io.Serializable, org.eclipse.core.runtime.IProgressMonitor)
+	 */
+	@Override
+	public String findAsJsonString(String key, IProgressMonitor monitor) {
+		return counterDao.findAsJsonString(key, BTSCoreConstants.LOCAL);
 	}
 
 

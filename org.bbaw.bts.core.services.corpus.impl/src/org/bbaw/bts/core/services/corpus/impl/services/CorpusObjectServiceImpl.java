@@ -570,4 +570,47 @@ implements 	CorpusObjectService, BTSObjectSearchService, MoveObjectAmongProjectD
 		return false;
 		
 	}
+
+
+	/* (non-Javadoc)
+	 * @see org.bbaw.bts.core.services.impl.generic.GenericObjectServiceImpl#findAsJsonString(java.io.Serializable, org.eclipse.core.runtime.IProgressMonitor)
+	 */
+	@Override
+	public String findAsJsonString(String key, IProgressMonitor monitor) {
+		String tcObject = null;
+		try {
+			tcObject = corpusObjectDao.findAsJsonString(key, main_corpus_key);
+		} catch (Exception e) {
+		}
+		if (tcObject != null)
+		{
+			return tcObject;
+		}
+		for (String c : getActive_corpora(main_project))
+		{
+			try {
+				tcObject = corpusObjectDao.findAsJsonString(key, c);
+			} catch (Exception e) {
+			}
+			if (tcObject != null)
+			{
+				return tcObject;
+			}
+		}
+		for (String p : getActiveProjects())
+		{
+			for (String c : getActive_corpora(p))
+			{
+				try {
+					tcObject = corpusObjectDao.findAsJsonString(key, c);
+				} catch (Exception e) {
+				}
+				if (tcObject != null)
+				{
+					return tcObject;
+				}
+			}
+		}
+		return tcObject;
+	}
 }

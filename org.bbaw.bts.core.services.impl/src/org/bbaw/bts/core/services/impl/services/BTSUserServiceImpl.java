@@ -101,6 +101,10 @@ public class BTSUserServiceImpl extends GenericObjectServiceImpl<BTSUser, String
 		}
 		return null;
 	}
+	@Override
+	public String findAsJsonString(String key, IProgressMonitor monitor) {
+		return userDao.findAsJsonString(key, BTSCoreConstants.ADMIN);
+	}
 
 	@Override
 	public List<BTSUser> list(String objectState, IProgressMonitor monitor)

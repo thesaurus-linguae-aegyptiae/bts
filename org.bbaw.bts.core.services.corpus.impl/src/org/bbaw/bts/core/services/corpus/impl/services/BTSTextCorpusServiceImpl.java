@@ -271,4 +271,26 @@ public class BTSTextCorpusServiceImpl extends AbstractCorpusObjectServiceImpl<BT
 	{
 		return main_corpus_key;
 	}
+
+	/* (non-Javadoc)
+	 * @see org.bbaw.bts.core.services.impl.generic.GenericObjectServiceImpl#findAsJsonString(java.io.Serializable, org.eclipse.core.runtime.IProgressMonitor)
+	 */
+	@Override
+	public String findAsJsonString(String key, IProgressMonitor monitor) {
+		String corpus = null;
+		corpus = textCorpusDao.findAsJsonString(key, main_project + BTSCorpusConstants.CORPUS);
+		if (corpus != null)
+		{
+			return corpus;
+		}
+		for (String p : getActiveProjects())
+		{
+			corpus = textCorpusDao.findAsJsonString(key, p + BTSCorpusConstants.CORPUS);
+			if (corpus != null)
+			{
+				return corpus;
+			}
+		}
+		return null;
+	}
 }

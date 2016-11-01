@@ -281,4 +281,47 @@ implements BTSAnnotationService, BTSObjectSearchService
 		}
 		return filter(objects);
 	}
+
+	/* (non-Javadoc)
+	 * @see org.bbaw.bts.core.services.impl.generic.GenericObjectServiceImpl#findAsJsonString(java.io.Serializable, org.eclipse.core.runtime.IProgressMonitor)
+	 */
+	@Override
+	public String findAsJsonString(String key, IProgressMonitor monitor) {
+		String anno = null;
+		anno = annotationDao.findAsJsonString(key, main_corpus_key);
+		if (anno != null)
+		{
+			return anno;
+		}
+		for (String c : getActive_corpora(main_project))
+		{
+			try {
+				anno = annotationDao.findAsJsonString(key, c);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			if (anno != null)
+			{
+				return anno;
+			}
+		}
+		for (String p : getActiveProjects())
+		{
+			for (String c : getActive_corpora(p))
+			{
+				try {
+					anno = annotationDao.findAsJsonString(key, c);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				if (anno != null)
+				{
+					return anno;
+				}
+			}
+		}
+		return null;
+	}
 }

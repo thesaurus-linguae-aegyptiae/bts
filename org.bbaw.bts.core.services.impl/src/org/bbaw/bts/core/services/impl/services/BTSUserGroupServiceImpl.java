@@ -113,5 +113,13 @@ public class BTSUserGroupServiceImpl extends GenericObjectServiceImpl<BTSUserGro
 		return (Class<T>) BTSUserGroup.class;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.bbaw.bts.core.services.impl.generic.GenericObjectServiceImpl#findAsJsonString(java.io.Serializable, org.eclipse.core.runtime.IProgressMonitor)
+	 */
+	@Override
+	public String findAsJsonString(String key, IProgressMonitor monitor) {
+		return userGroupDao.findAsJsonString(key, BTSCoreConstants.ADMIN);
+	}
+
 	
 }

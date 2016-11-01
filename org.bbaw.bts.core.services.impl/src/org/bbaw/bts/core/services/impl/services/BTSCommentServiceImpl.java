@@ -136,5 +136,23 @@ public class BTSCommentServiceImpl extends GenericObjectServiceImpl<BTSComment, 
 		return (Class<T>) BTSComment.class;
 	}
 
+	@Override
+	public String findAsJsonString(String key, IProgressMonitor monitor) {
+		String comment = commentDao.findAsJsonString(key, main_project + BTSCoreConstants.ADMIN_SUFFIX);
+		if (comment != null)
+		{
+			return comment;
+		}
+		for (String p : getActiveProjects())
+		{
+			comment = commentDao.findAsJsonString(key, p + BTSCoreConstants.ADMIN_SUFFIX);
+			if (comment != null)
+			{
+				return comment;
+			}
+		}
+		return comment;
+	}
+
 	
 }

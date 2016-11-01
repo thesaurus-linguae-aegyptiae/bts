@@ -164,6 +164,9 @@ public abstract class GenericObjectServiceImpl<E extends BTSDBBaseObject, K exte
 		
 	@Override
 	public abstract E find(K key, IProgressMonitor monitor);
+	
+	@Override
+	public abstract String findAsJsonString(K key, IProgressMonitor monitor);
 
 	@Override
 	public E find(K key, String path, String revision, IProgressMonitor monitor) {
@@ -171,32 +174,24 @@ public abstract class GenericObjectServiceImpl<E extends BTSDBBaseObject, K exte
 		{
 			return (E) generalPurposeDao.find((String)key, path, revision);
 		}
-//		BTSCorpusObject tcObject = null;
-//		tcObject = corpusObjectDao.find(key, main_project + BTSCoreConstants.CORPUS_INTERFIX + main_corpus_key, revision);
-//		if (tcObject != null)
-//		{
-//			return tcObject;
-//		}
-//		for (String c : getActive_corpora())
-//		{
-//			tcObject = corpusObjectDao.find(key, main_project + BTSCoreConstants.CORPUS_INTERFIX + c, revision);
-//			if (tcObject != null)
-//			{
-//				return tcObject;
-//			}
-//		}
-//		for (String p : getActiveProjects())
-//		{
-//			for (String c : getActive_corpora())
-//			{
-//				tcObject = corpusObjectDao.find(key, p + BTSCoreConstants.CORPUS_INTERFIX + c, revision);
-//				if (tcObject != null)
-//				{
-//					return tcObject;
-//				}
-//			}
-//		}
-//		return tcObject;
+		return null;
+	}
+	
+	@Override
+	public String findAsJsonString(K key, String path, IProgressMonitor monitor) {
+		if (path != null && !"".equals(path))
+		{
+			return generalPurposeDao.findAsJsonString((String)key, path);
+		}
+		return null;
+	}
+	
+	@Override
+	public String findAsJsonString(K key, String path, String revision, IProgressMonitor monitor) {
+		if (path != null && !"".equals(path))
+		{
+			return generalPurposeDao.findAsJsonString((String)key, path, revision);
+		}
 		return null;
 	}
 	

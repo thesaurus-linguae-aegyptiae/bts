@@ -189,5 +189,29 @@ implements BTSThsEntryService, BTSObjectSearchService {
 		anno.setProject(main_ths_key);
 		return anno;
 	}
+	/* (non-Javadoc)
+	 * @see org.bbaw.bts.core.services.impl.generic.GenericObjectServiceImpl#findAsJsonString(java.io.Serializable, org.eclipse.core.runtime.IProgressMonitor)
+	 */
+	@Override
+	public String findAsJsonString(String key, IProgressMonitor monitor) {
+		String entry = null;
+		try {
+			entry = thsEntryDao.findAsJsonString(key, main_project + BTSCorpusConstants.THS);
+		} catch (Exception e) {
+		}
+		if (entry != null) {
+			return entry;
+		}
+		for (String p : getActiveThss()) {
+			try {
+				entry = thsEntryDao.findAsJsonString(key, p + BTSCorpusConstants.THS);
+			} catch (Exception e) {
+			}
+			if (entry != null) {
+				return entry;
+			}
+		}
+		return null;
+	}
 	
 }

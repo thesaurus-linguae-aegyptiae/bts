@@ -1215,6 +1215,24 @@ public class BTSConfigurationServiceImpl extends GenericObjectServiceImpl<BTSCon
 		return result;
 	}
 
+	@Override
+	public String findAsJsonString(String key, IProgressMonitor monitor) {
+		String config = configurationDao.findAsJsonString(key, main_project + BTSCoreConstants.ADMIN_SUFFIX);
+		if (config != null)
+		{
+			return config;
+		}
+		for (String p : getActiveProjects())
+		{
+			config = configurationDao.findAsJsonString(key, p + BTSCoreConstants.ADMIN_SUFFIX);
+			if (config != null)
+			{
+				return config;
+			}
+		}
+		return null;
+	}
+
 
 
 

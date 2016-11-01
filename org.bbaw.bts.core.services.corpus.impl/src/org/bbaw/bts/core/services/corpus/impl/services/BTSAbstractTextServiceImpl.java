@@ -189,5 +189,29 @@ implements BTSAbstractTextService, BTSObjectSearchService {
 		anno.setProject(main_atext_key);
 		return anno;
 	}
+	/* (non-Javadoc)
+	 * @see org.bbaw.bts.core.services.impl.generic.GenericObjectServiceImpl#findAsJsonString(java.io.Serializable, org.eclipse.core.runtime.IProgressMonitor)
+	 */
+	@Override
+	public String findAsJsonString(String key, IProgressMonitor monitor) {
+		String entry = null;
+		try {
+			entry = atextDao.findAsJsonString(key, main_project + BTSCorpusConstants.ATEXT);
+		} catch (Exception e) {
+		}
+		if (entry != null) {
+			return entry;
+		}
+		for (String p : getActiveProjects()) {
+			try {
+				entry = atextDao.findAsJsonString(key, p + BTSCorpusConstants.ATEXT);
+			} catch (Exception e) {
+			}
+			if (entry != null) {
+				return entry;
+			}
+		}
+		return null;
+	}
 	
 }

@@ -25,5 +25,7 @@ public interface BTSTextService extends GenericCorpusObjectService<BTSText, Stri
 	BTSSenctence copySentence(BTSSenctence copyItem);
 
 	List<WordFormOccurrenceGroup> queryForWordFormOccurrenceGroups(BTSQueryRequest query, IProgressMonitor monitor);
+	
+	BTSText findReturnOnlyMetadata(String key);
 
 }
