@@ -293,4 +293,21 @@ public class BTSTextCorpusServiceImpl extends AbstractCorpusObjectServiceImpl<BT
 		}
 		return null;
 	}
+
+	/* (non-Javadoc)
+	 * @see org.bbaw.bts.core.services.impl.generic.GenericObjectServiceImpl#queryAsJsonString(org.bbaw.bts.core.dao.util.BTSQueryRequest, java.lang.String, org.eclipse.core.runtime.IProgressMonitor)
+	 */
+	@Override
+	public List<String> queryAsJsonString(BTSQueryRequest query, String objectState, IProgressMonitor monitor) {
+		List<String> objects = new Vector<String>();
+		for (String p : getActiveProjects())
+		{
+
+			objects.addAll(textCorpusDao.queryAsJsonString(query, p
+					+ BTSCorpusConstants.CORPUS, p + BTSCorpusConstants.CORPUS,
+					objectState, false));
+
+		}
+		return objects;
+	}
 }

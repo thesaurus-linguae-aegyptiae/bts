@@ -192,6 +192,17 @@ public interface GenericObjectService<E extends BTSDBBaseObject, K>
 	 * @return the list of objects matching given query
 	 */
 	List<E> query(BTSQueryRequest query, String objectState, IProgressMonitor monitor);
+	
+	/**
+	 * Query objects of parametrized type and return list of json string.
+	 *
+	 * @param query the query
+	 * @param objectState the object state
+	 * @param monitor 
+	 * @return the list of objects matching given query
+	 */
+	List<String> queryAsJsonString(BTSQueryRequest query, String objectState, IProgressMonitor monitor);
+
 
 	/**
 	 * Query objects of parametrized type.

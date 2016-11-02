@@ -213,5 +213,24 @@ implements BTSAbstractTextService, BTSObjectSearchService {
 		}
 		return null;
 	}
+	/* (non-Javadoc)
+	 * @see org.bbaw.bts.core.services.impl.generic.GenericObjectServiceImpl#queryAsJsonString(org.bbaw.bts.core.dao.util.BTSQueryRequest, java.lang.String, org.eclipse.core.runtime.IProgressMonitor)
+	 */
+	@Override
+	public List<String> queryAsJsonString(BTSQueryRequest query, String objectState, IProgressMonitor monitor) {
+		List<String> objects = new Vector<String>();
+		for (String p : getActiveProjects()) {
+
+			try {
+				objects.addAll(atextDao.queryAsJsonString(query, p + BTSCorpusConstants.ATEXT, p
+						+ BTSCorpusConstants.ATEXT, objectState, false));
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		}
+		return objects;
+	}
 	
 }

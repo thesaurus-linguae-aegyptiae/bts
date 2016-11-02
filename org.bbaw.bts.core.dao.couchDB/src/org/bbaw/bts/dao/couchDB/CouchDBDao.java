@@ -802,6 +802,90 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 
 		return result;
 	}
+	
+	@Override
+	public List<String> queryAsJsonString(BTSQueryRequest query, String indexName,
+			String indexType, String objectState, boolean registerQuery) {
+		
+		// check if index exists
+		boolean hasIndex = connectionProvider.getSearchClient(Client.class).admin().indices().exists(new IndicesExistsRequest(indexName)).actionGet()
+				.isExists();
+		if (!hasIndex)
+		{
+			return new Vector<String>(0);
+		}
+		// check for ID Query
+		if (query.isIdQuery())
+		{
+			List<String> result = new Vector<String>();
+			String o = findAsJsonString((K) query.getSearchString(), indexName);
+			result.add(o);
+			return result;
+		}
+		
+		// normal query
+		SearchResponse response;
+		SearchRequestBuilder srq;
+		if (query.getSearchRequestBuilder() == null) {
+			
+			// connectionProvider.getSearchClient(Client.class).admin().cluster().prepareHealth().setWaitForGreenStatus().execute().actionGet();
+
+			srq = connectionProvider.getSearchClient(Client.class)
+					.prepareSearch(indexName)
+					// .setTypes(indexType)
+					.setSearchType(SearchType.QUERY_AND_FETCH)
+					.setQuery(query.getQueryBuilder());
+			// Query
+
+			// filter object state active or terminated
+			if (BTSConstants.OBJECT_STATE_ACTIVE.equals(objectState)) {
+				 srq.setPostFilter(
+				 FilterBuilders.termFilter("state",
+				 BTSConstants.OBJECT_STATE_ACTIVE));
+			} else if (BTSConstants.OBJECT_STATE_TERMINATED.equals(objectState)) {
+				srq.setPostFilter(FilterBuilders.termFilter("state",
+						BTSConstants.OBJECT_STATE_TERMINATED));
+			} else {
+				// nothing
+			}
+		} else {
+			
+			srq = query.getSearchRequestBuilder()
+					.setIndices(indexName)
+//					.setTypes(indexType)
+					.setSearchType(SearchType.QUERY_AND_FETCH);
+			
+		}
+		
+		// responsefields
+		srq = srq.addFields("eClass");
+		srq.setFetchSource(true);
+					
+		//execute query
+		response = srq.setFrom(0)
+				.setSize(1000)
+				.setExplain(true)
+				.execute()
+				.actionGet();
+		int size = new Long(response.getHits().getTotalHits()).intValue();
+		List<String> result = new Vector<String>(size);
+
+		for (SearchHit hit : response.getHits())
+		{
+			result.add(hit.getSourceAsString());
+		}
+		
+		
+		if (registerQuery) {
+			try {
+				registerQueryWithPercolator(query, indexName, indexType);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+
+		return result;
+	}
 
 	private List<E> loadResultFromSearchResponse(SearchResponse response, String indexName) {
 		List<E> result = new Vector<E>();

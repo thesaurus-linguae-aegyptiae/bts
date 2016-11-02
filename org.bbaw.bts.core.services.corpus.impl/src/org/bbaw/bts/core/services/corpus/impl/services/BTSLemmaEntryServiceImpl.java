@@ -370,4 +370,26 @@ implements BTSLemmaEntryService, BTSObjectSearchService
 		}
 		return null;
 	}
+
+	/* (non-Javadoc)
+	 * @see org.bbaw.bts.core.services.impl.generic.GenericObjectServiceImpl#queryAsJsonString(org.bbaw.bts.core.dao.util.BTSQueryRequest, java.lang.String, org.eclipse.core.runtime.IProgressMonitor)
+	 */
+	@Override
+	public List<String> queryAsJsonString(BTSQueryRequest query, String objectState, IProgressMonitor monitor) {
+		List<String> objects = new Vector<String>();
+		for (String p : getActiveLemmaLists())
+		{
+			System.out.println("search in index: "+p+BTSCorpusConstants.WLIST);
+			try {
+				objects.addAll(lemmaEntryDao.queryAsJsonString(query,
+						p + BTSCorpusConstants.WLIST, p + BTSCorpusConstants.WLIST,
+						objectState, false));
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		}
+		return objects;
+	}
 }

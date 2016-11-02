@@ -221,6 +221,20 @@ public interface GenericDao<E extends BTSDBBaseObject, K>
 	 */
 	List<E> query(BTSQueryRequest query, String indexName, String indexType,
 			String objectState, boolean registerQuery);
+	
+	/**
+	 * Query for entities with given query, indexname, indextype, objectstate and 
+	 * returns objects as json String.
+	 *
+	 * @param query the query
+	 * @param indexName the index name
+	 * @param indexType the index type
+	 * @param objectState the object state
+	 * @param registerQuery whether the query should be registered e.g. with percolator.
+	 * @return the list of matching entities
+	 */
+	List<String> queryAsJsonString(BTSQueryRequest query, String indexName, String indexType,
+			String objectState, boolean registerQuery);
 
 	/**
 	 * Checks whether the object is loaded and stored in cache.

@@ -1233,6 +1233,21 @@ public class BTSConfigurationServiceImpl extends GenericObjectServiceImpl<BTSCon
 		return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.bbaw.bts.core.services.impl.generic.GenericObjectServiceImpl#queryAsJsonString(org.bbaw.bts.core.dao.util.BTSQueryRequest, java.lang.String, org.eclipse.core.runtime.IProgressMonitor)
+	 */
+	@Override
+	public List<String> queryAsJsonString(BTSQueryRequest query, String objectState, IProgressMonitor monitor) {
+		List<String> objects = new Vector<String>();
+		for (String p : getActiveProjects())
+		{
+			objects.addAll(configurationDao.queryAsJsonString(query, p + BTSCoreConstants.ADMIN_SUFFIX, p
+							+ BTSCoreConstants.ADMIN_SUFFIX, objectState,
+							false));
+		}
+		return objects;
+	}
+
 
 
 

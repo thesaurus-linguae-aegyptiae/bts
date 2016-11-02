@@ -381,7 +381,7 @@ implements 	CorpusObjectService, BTSObjectSearchService, MoveObjectAmongProjectD
 			String objectState,
 			boolean registerQuery, IProgressMonitor monitor) {
 		List<BTSCorpusObject> objects = new Vector<BTSCorpusObject>();
-		
+		List<String> json = queryAsJsonString(query, objectState, monitor);
 		if (query.getDbPath() != null && query.getDbPath().endsWith(BTSCorpusConstants.THS))
 		{
 			for (String p : getActiveProjects()) {
@@ -612,5 +612,74 @@ implements 	CorpusObjectService, BTSObjectSearchService, MoveObjectAmongProjectD
 			}
 		}
 		return tcObject;
+	}
+
+
+	/* (non-Javadoc)
+	 * @see org.bbaw.bts.core.services.impl.generic.GenericObjectServiceImpl#queryAsJsonString(org.bbaw.bts.core.dao.util.BTSQueryRequest, java.lang.String, org.eclipse.core.runtime.IProgressMonitor)
+	 */
+	@Override
+	public List<String> queryAsJsonString(BTSQueryRequest query, String objectState, IProgressMonitor monitor) {
+		List<String> objects = new Vector<String>();
+		
+		if (query.getDbPath() != null && query.getDbPath().endsWith(BTSCorpusConstants.THS))
+		{
+			for (String p : getActiveProjects()) {
+				try {
+					objects.addAll(corpusObjectDao.queryAsJsonString(query, p
+							+ BTSCorpusConstants.THS, p
+							+ BTSCorpusConstants.THS, objectState,
+							false));
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				if (monitor != null)
+				{
+					if (monitor.isCanceled()) return objects;
+					monitor.worked(20);
+				}
+			}
+		}
+		else if (query.getDbPath() != null && query.getDbPath().endsWith(BTSCorpusConstants.WLIST))
+		{
+			for (String p : getActiveLemmaLists()) {
+				try {
+					objects.addAll(corpusObjectDao.queryAsJsonString(query, p
+							+ BTSCorpusConstants.WLIST, p
+							+ BTSCorpusConstants.WLIST, objectState,
+							false));
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				if (monitor != null)
+				{
+					if (monitor.isCanceled()) return objects;
+					monitor.worked(5);
+				}
+			}
+		}
+		else
+		{
+			for (String p : getActiveProjects()) {
+				for (String c : getActive_corpora(p)) {
+					
+					try {
+						objects.addAll(corpusObjectDao.queryAsJsonString(query, c, c, objectState,
+								false));
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					if (monitor != null)
+					{
+						if (monitor.isCanceled()) return objects;
+						monitor.worked(5);
+					}
+				}
+			}
+		}
+		return objects;
 	}
 }

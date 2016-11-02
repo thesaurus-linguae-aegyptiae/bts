@@ -158,6 +158,17 @@ public class UserActionCounterServiceImpl extends
 		return counterDao.findAsJsonString(key, BTSCoreConstants.LOCAL);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.bbaw.bts.core.services.impl.generic.GenericObjectServiceImpl#queryAsJsonString(org.bbaw.bts.core.dao.util.BTSQueryRequest, java.lang.String, org.eclipse.core.runtime.IProgressMonitor)
+	 */
+	@Override
+	public List<String> queryAsJsonString(BTSQueryRequest query, String objectState, IProgressMonitor monitor) {
+		List<String> counters = new Vector<String>();
+		counters.addAll(counterDao.queryAsJsonString(query, BTSCoreConstants.LOCAL,
+				BTSCoreConstants.LOCAL, objectState, false));
+		return counters;
+	}
+
 
 	
 

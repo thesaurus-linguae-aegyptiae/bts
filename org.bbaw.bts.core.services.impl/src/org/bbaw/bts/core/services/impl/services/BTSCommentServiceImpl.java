@@ -154,5 +154,30 @@ public class BTSCommentServiceImpl extends GenericObjectServiceImpl<BTSComment, 
 		return comment;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.bbaw.bts.core.services.impl.generic.GenericObjectServiceImpl#queryAsJsonString(org.bbaw.bts.core.dao.util.BTSQueryRequest, java.lang.String, org.eclipse.core.runtime.IProgressMonitor)
+	 */
+	@Override
+	public List<String> queryAsJsonString(BTSQueryRequest query, String objectState, IProgressMonitor monitor) {
+		List<String> objects = new Vector<String>();
+		for (String p : getActiveProjects())
+		{
+			try {
+				objects.addAll(commentDao.queryAsJsonString(query, p + BTSCoreConstants.ADMIN_SUFFIX, p
+						+ BTSCoreConstants.ADMIN_SUFFIX, objectState,
+						false));
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			if (monitor != null)
+			{
+				if (monitor.isCanceled()) return objects;
+				monitor.worked(20);
+			}
+		}
+		return objects;
+	}
+
 	
 }

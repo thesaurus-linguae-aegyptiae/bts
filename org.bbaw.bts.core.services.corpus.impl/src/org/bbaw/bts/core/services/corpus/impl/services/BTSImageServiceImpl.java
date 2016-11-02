@@ -216,4 +216,21 @@ public class BTSImageServiceImpl extends AbstractCorpusObjectServiceImpl<BTSImag
 		}
 		return null;
 	}
+
+	/* (non-Javadoc)
+	 * @see org.bbaw.bts.core.services.impl.generic.GenericObjectServiceImpl#queryAsJsonString(org.bbaw.bts.core.dao.util.BTSQueryRequest, java.lang.String, org.eclipse.core.runtime.IProgressMonitor)
+	 */
+	@Override
+	public List<String> queryAsJsonString(BTSQueryRequest query, String objectState, IProgressMonitor monitor) {
+		List<String> objects = new Vector<String>();
+		for (String p : getActiveProjects())
+		{
+			for (String c : getActive_corpora(p))
+			{
+				objects.addAll(imageDao.queryAsJsonString(query, c, c, objectState,
+						false));
+			}
+		}
+		return objects;
+	}
 }

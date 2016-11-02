@@ -217,6 +217,9 @@ public abstract class GenericObjectServiceImpl<E extends BTSDBBaseObject, K exte
 	@Override
 	public abstract List<E> query(BTSQueryRequest query, String objectState, IProgressMonitor monitor);
 
+	@Override
+	public abstract List<String> queryAsJsonString(BTSQueryRequest query, String objectState, IProgressMonitor monitor);
+
 	public List<E> filter(List<E> objects)
 	{
 		return evaluationService.filter(objects);
