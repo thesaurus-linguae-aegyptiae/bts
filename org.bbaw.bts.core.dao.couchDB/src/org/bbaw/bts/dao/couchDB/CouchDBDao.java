@@ -338,6 +338,13 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 				new HashMap<Object, Object>(), connectionProvider.getEmfResourceSet());
 		loader.fillResource(resource);
 		
+		try {
+			sourceStream.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		if (resource.getContents().size() > 0)
 		{
 			Object o = resource.getContents().get(0);
