@@ -36,7 +36,7 @@ public class PassportEditorDialog extends TitleAreaDialog {
 
 	private Button okButton;
 
-	private boolean editable;
+	private boolean editable = true;
 	/**
 	 * Create the dialog.
 	 * @param parentShell
@@ -115,6 +115,6 @@ public class PassportEditorDialog extends TitleAreaDialog {
 	public void setEditable(boolean editable)
 	{
 		this.editable = editable;
-		this.okButton.setEnabled(editable);
+		if (this.okButton != null) this.okButton.setEnabled(editable);
 	}
 }

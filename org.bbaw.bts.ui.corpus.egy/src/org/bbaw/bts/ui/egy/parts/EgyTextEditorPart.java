@@ -355,7 +355,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 			4);
 	
 	/** The relating objects annotation map. */
-	private Map<EObject, List<BTSModelAnnotation>> relatingObjectsAnnotationMap;
+	private Map<EObject, List<BTSModelAnnotation>> relatingObjectsAnnotationMap = new HashMap<EObject, List<BTSModelAnnotation>>();
 	
 	/** The query id. */
 	protected String queryId;
@@ -2524,7 +2524,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 		selectedSentence = null;
 		cachedCursor = 0;
 		modelAnnotationMap = new HashMap<String, BTSModelAnnotation>();
-		relatingObjectsAnnotationMap = new HashMap<EObject, List<BTSModelAnnotation>>();
+		relatingObjectsAnnotationMap.clear();
 		localCommandCacheSet.clear();
 		if (editingDomain != null) {
 			// remove commandstacklistener from old selection

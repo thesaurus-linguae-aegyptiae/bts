@@ -6,7 +6,8 @@ Bundle-ClassPath: .,
  swing2swt.jar
 Bundle-Activator: org.bbaw.bts.ui.egy.internal.Activator
 Bundle-Vendor: BBAW
-Export-Package: org.bbaw.bts.ui.egy.parts.support,
+Export-Package: org.bbaw.bts.ui.egy.handlers,
+ org.bbaw.bts.ui.egy.parts.support,
  org.bbaw.bts.ui.egy.textSign.support
 Require-Bundle: org.eclipse.swt,
  org.bbaw.bts.commons,
@@ -71,6 +72,7 @@ Import-Package: javax.annotation;version="1.0.0",
  org.bbaw.bts.ui.commons.validator,
  org.bbaw.bts.ui.commons.widgets,
  org.bbaw.bts.ui.corpus.dialogs,
+ org.bbaw.bts.ui.egy.handlers,
  org.bbaw.bts.ui.main.dialogs,
  org.bbaw.bts.ui.resources,
  org.eclipse.core.databinding.beans,

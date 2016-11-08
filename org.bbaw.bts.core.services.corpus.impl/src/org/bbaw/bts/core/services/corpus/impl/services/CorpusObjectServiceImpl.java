@@ -1,6 +1,5 @@
 package org.bbaw.bts.core.services.corpus.impl.services;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
@@ -12,7 +11,6 @@ import javax.inject.Inject;
 
 import org.bbaw.bts.btsmodel.BTSDBBaseObject;
 import org.bbaw.bts.commons.BTSConstants;
-import org.bbaw.bts.commons.BTSPluginIDs;
 import org.bbaw.bts.core.commons.BTSCoreConstants;
 import org.bbaw.bts.core.commons.BTSObjectSearchService;
 import org.bbaw.bts.core.commons.MoveObjectAmongProjectDBCollectionsService;
@@ -21,7 +19,6 @@ import org.bbaw.bts.core.commons.corpus.comparator.BTSPassportEntryComparator;
 import org.bbaw.bts.core.dao.GeneralPurposeDao;
 import org.bbaw.bts.core.dao.corpus.CorpusObjectDao;
 import org.bbaw.bts.core.dao.util.BTSQueryRequest;
-import org.bbaw.bts.core.dao.util.DaoConstants;
 import org.bbaw.bts.core.services.corpus.BTSAnnotationService;
 import org.bbaw.bts.core.services.corpus.BTSImageService;
 import org.bbaw.bts.core.services.corpus.BTSLemmaEntryService;
@@ -30,7 +27,6 @@ import org.bbaw.bts.core.services.corpus.BTSTextCorpusService;
 import org.bbaw.bts.core.services.corpus.BTSTextService;
 import org.bbaw.bts.core.services.corpus.BTSThsEntryService;
 import org.bbaw.bts.core.services.corpus.CorpusObjectService;
-import org.bbaw.bts.core.services.impl.generic.GenericObjectServiceImpl;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSAnnotation;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSImage;
@@ -42,8 +38,6 @@ import org.bbaw.bts.corpus.btsCorpusModel.BTSTextCorpus;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSThsEntry;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.e4.core.contexts.IEclipseContext;
-import org.eclipse.e4.core.di.annotations.Optional;
-import org.eclipse.e4.core.di.extensions.Preference;
 
 public class CorpusObjectServiceImpl 
 extends AbstractCorpusObjectServiceImpl<BTSCorpusObject, String> 
@@ -381,7 +375,6 @@ implements 	CorpusObjectService, BTSObjectSearchService, MoveObjectAmongProjectD
 			String objectState,
 			boolean registerQuery, IProgressMonitor monitor) {
 		List<BTSCorpusObject> objects = new Vector<BTSCorpusObject>();
-		List<String> json = queryAsJsonString(query, objectState, monitor);
 		if (query.getDbPath() != null && query.getDbPath().endsWith(BTSCorpusConstants.THS))
 		{
 			for (String p : getActiveProjects()) {

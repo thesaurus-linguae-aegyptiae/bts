@@ -1,5 +1,6 @@
 package org.bbaw.bts.ui.corpus.parts;
 
+import java.util.ArrayList;
 import java.util.EventObject;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -563,10 +564,6 @@ public class PassportEditorPart {
 						Job job = new Job("My Job") {
 							@Override
 							protected IStatus run(IProgressMonitor monitor) {
-								// do something long running
-								// ...
-
-								// If you want to update the UI
 								sync.asyncExec(new Runnable() {
 									@Override
 									public void run() {
@@ -574,6 +571,7 @@ public class PassportEditorPart {
 												.setInput(passportConfigurationController
 														.getObjectSubtypeConfigItemProcessedClones(corpusObject));
 										subtypeCMB_Main_viewer.refresh();
+										updateGenericTabItems(tabFolder);
 									}
 								});
 								return Status.OK_STATUS;
@@ -614,6 +612,36 @@ public class PassportEditorPart {
 		subtypeCMB_Main_viewer.setInput(passportConfigurationController
 				.getObjectSubtypeConfigItemProcessedClones(corpusObject));
 		}
+		subtypeCMB_Main_viewer.addSelectionChangedListener(new ISelectionChangedListener() {
+
+			@Override
+			public void selectionChanged(SelectionChangedEvent event) {
+				if (!loading) {
+				Job job = new Job("My Job") {
+					@Override
+					protected IStatus run(IProgressMonitor monitor) {
+						sync.asyncExec(new Runnable() {
+							@Override
+							public void run() {
+								updateGenericTabItems(tabFolder);
+							}
+						});
+						return Status.OK_STATUS;
+					}
+				};
+
+				// Start the Job
+				job.schedule(450);
+				}
+				// problem is: emf sets selection of viewer in secondary
+				// thread
+				// this causes listener to notice selection
+				// and start unwanted reload on subtype viewer
+				// therefore first selection is suppressed as loading
+				loading = false;
+			}
+		});
+		
 		Label lblSortkey = new Label(compTBTM_Main, SWT.NONE);
 		lblSortkey.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false,
 				false, 1, 1));
@@ -860,6 +888,24 @@ public class PassportEditorPart {
 				SWT.DEFAULT, SWT.DEFAULT).y);
 
 	}
+	
+	private void updateGenericTabItems(CTabFolder tabFolder) {
+		List<CTabItem> toDispose = new ArrayList<>();
+		for (CTabItem c : tabFolder.getItems())
+		{
+			if (tabFolder.indexOf(c) > 2)
+			{
+				toDispose.add(c);
+			}
+		}
+		for(int i = 0; i < toDispose.size(); i++)
+		{
+			CTabItem c = toDispose.get(i);
+			c.dispose();
+		}
+		createGenericTabItems(tabFolder);
+		
+	}
 
 	protected void moveObjectAmongProjects() {
 
@@ -951,7 +997,7 @@ public class PassportEditorPart {
 	private void loadInput(BTSCorpusObject object) {
 
 		userMayEdit = permissionsController.userMayEditObject(permissionsController.getAuthenticatedUser(), object);
-		context.set(BTSCoreConstants.CORE_EXPRESSION_MAY_EDIT, userMayEdit);
+//		context.set(BTSCoreConstants.CORE_EXPRESSION_MAY_EDIT, userMayEdit);
 
 		purgeAll();
 		if (object.getPassport() == null) {
