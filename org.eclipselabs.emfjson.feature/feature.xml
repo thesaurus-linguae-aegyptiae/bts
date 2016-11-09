@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="org.eclipselabs.emfjson.feature"
+      id="org.bbaw.bts.eclipselabs.emfjson.feature"
       label="EMFJs"
       version="0.4.0.qualifier"
       provider-name="Eclipse Labs">
@@ -93,7 +93,7 @@ This Agreement is governed by the laws of the State of New York and the intellec
    </requires>
 
    <plugin
-         id="org.eclipselabs.emfjson"
+         id="org.bbaw.bts.eclipselabs.emfjson"
          download-size="0"
          install-size="0"
          version="0.0.0"
