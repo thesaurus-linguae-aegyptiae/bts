@@ -561,7 +561,7 @@ public class AnnotationsPart implements EventHandler {
 		{
 			RelatedObjectGroup g = objectWidgetMap.get(selection);
 			if (g != null)
-				setSelectedInternal(Arrays.asList(g), false);
+				setSelectedInternal(new Vector<>(Arrays.asList(g)), false);
 		}
 		else if (selection instanceof BTSCorpusObject && !selection.equals(parentObject))
 		{
