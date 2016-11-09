@@ -620,8 +620,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 							.newEditor(xtextResourceProvider)
 							.showAnnotations(
 									"org.eclipse.xtext.ui.editor.error",
-									"org.eclipse.xtext.ui.editor.warning",
-									BTSSentenceAnnotation.TYPE_HIGHLIGHTED)
+									"org.eclipse.xtext.ui.editor.warning")
 							.withParent(embeddedEditorComp);
 
 					embeddedEditorModelAccess = embeddedEditor
@@ -2806,25 +2805,30 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 			@UIEventTopic("event_anno_filters/*") final BTSRelatingObjectsFilterEvent event) {
 		if (event != null) {
 			Map<String, Boolean> filters = event.getFilters();
-			//painter.removeAllAnnotationTypes();
-			for (Entry<String, Boolean> e : filters.entrySet()) {
-				String typeId = "org.bbaw.bts.ui.text.modelAnnotation."+e.getKey();
-				String strategyId = null;
-				if (e.getValue()) {
-					strategyId = e.getKey().startsWith("annotation.") ?
-							"org.bbaw.bts.ui.text.modelAnnotation.annotation" :	typeId;
-				}
-				// update editor painter and ruler annotation types
-				for (String suffix : ANNO_TYPES_SUFFIXES) {
-					if (strategyId != null) {
-						painter.addAnnotationType(typeId+suffix,
-								strategyId+suffix);
-						oruler.addAnnotationType(typeId+suffix);
-					} else {
-						painter.removeAnnotationType(typeId+suffix);
-						oruler.removeAnnotationType(typeId+suffix);
+			if (painter != null) {
+				for (Entry<String, Boolean> e : filters.entrySet()) {
+					String typeId = "org.bbaw.bts.ui.text.modelAnnotation."+e.getKey();
+					String strategyId = null;
+					if (e.getValue()) {
+						strategyId = e.getKey().startsWith("annotation.") ?
+								"org.bbaw.bts.ui.text.modelAnnotation.annotation" : typeId;
+					}
+					// update editor painter and ruler annotation types
+					for (String suffix : ANNO_TYPES_SUFFIXES) {
+						if (strategyId != null) {
+							painter.addAnnotationType(typeId+suffix,
+									strategyId+suffix);
+							painter.setAnnotationTypeColor(typeId+suffix,
+									BTSUIConstants.COLOR_ANNOTATTION);
+							oruler.addAnnotationType(typeId+suffix);
+						} else {
+							painter.removeAnnotationType(typeId+suffix);
+							oruler.removeAnnotationType(typeId+suffix);
+						}
 					}
 				}
+				painter.paint(IPainter.INTERNAL);
+				oruler.update();
 			}
 			painter.paint(IPainter.INTERNAL);
 		}

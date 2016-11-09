@@ -32,30 +32,22 @@ public class BTSAnnotationAnnotation extends BTSModelAnnotation {
 //		super(TYPE, document, issue, modelObject);
 ////		this.setAnnotation(btsAnnotation);
 //	}
-	
-	public BTSAnnotationAnnotation(String type, IXtextDocument document, Issue issue,
-			BTSIdentifiableItem modelObject, BTSAnnotation btsAnnotation) {
-		super(type, document, issue, modelObject);
-		this.setRelatingObject(btsAnnotation);
-		expandType();
-	}
 
 	public BTSAnnotationAnnotation(IXtextDocument document, String type,
 			Issue issue, BTSIdentifiableItem modelObject,
 			BTSAnnotation btsAnnotation) {
 		super(type, document, issue, modelObject);
 		this.setRelatingObject(btsAnnotation);
-		expandType();
+		expandType(type);
 	}
 
 	public BTSAnnotationAnnotation(String type, BTSIdentifiableItem item,
 			BTSInterTextReference interTextReference, BTSAnnotation relatingObject) {
 		super(type, item, interTextReference, relatingObject);
-		expandType();
+		expandType(type);
 	}
 	
-	private void expandType() {
-		String type = getType();
+	private void expandType(String type) {
 		if (getRelatingObject().getType() != null) {
 			type += "." + getRelatingObject().getType();
 			if (getRelatingObject().getSubtype() != null) {
