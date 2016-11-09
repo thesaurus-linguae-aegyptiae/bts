@@ -2811,7 +2811,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 					String strategyId = null;
 					if (e.getValue()) {
 						strategyId = e.getKey().startsWith("annotation.") ?
-								"org.bbaw.bts.ui.text.modelAnnotation.annotation" : typeId;
+								"org.bbaw.bts.ui.text.modelAnnotation.annotation" :	typeId;
 					}
 					// update editor painter and ruler annotation types
 					for (String suffix : ANNO_TYPES_SUFFIXES) {
@@ -2828,9 +2828,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 					}
 				}
 				painter.paint(IPainter.INTERNAL);
-				oruler.update();
 			}
-			painter.paint(IPainter.INTERNAL);
 		}
 	}
 

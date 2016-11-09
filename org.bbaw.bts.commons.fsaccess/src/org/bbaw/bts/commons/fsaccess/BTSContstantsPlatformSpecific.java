@@ -151,7 +151,9 @@ public class BTSContstantsPlatformSpecific {
 	/** Returns the Database Installation directory within the given btsInstallation directory. 
 	 * DBInstallationDir is the directory where the folder 'CouchDB' is located. 
 	 * Under an installation of CouchDB using e.g. msi-installer that would be the Programs/Apache Software...
-	 * In bts case it is the <btsInstallationDir>/dbdir
+	 * In bts case it is the <code>btsInstallationDir</code>/dbdir
+	 * 
+	 * @deprecated
 	 * 
 	 * @param btsInsallationDir BTS Installation Directory
 	 * @return Database Installation Directory
