@@ -18,8 +18,10 @@ import org.bbaw.bts.btsmodel.BTSIdentifiableItem;
 import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.btsmodel.BTSTranslations;
 import org.bbaw.bts.btsmodel.BtsmodelFactory;
+import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.commons.BTSPluginIDs;
 import org.bbaw.bts.core.commons.BTSCoreConstants;
+import org.bbaw.bts.core.commons.corpus.BTSCorpusConstants;
 import org.bbaw.bts.core.controller.generalController.EditingDomainController;
 import org.bbaw.bts.core.corpus.controller.partController.LemmaEditorController;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSAnnotation;
@@ -58,10 +60,12 @@ import org.eclipse.swt.widgets.Composite;
 
 import javax.annotation.PreDestroy;
 
+import org.eclipse.core.internal.preferences.EclipsePreferences;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
+import org.eclipse.core.runtime.preferences.ConfigurationScope;
 import org.eclipse.e4.core.contexts.ContextInjectionFactory;
 import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.core.di.annotations.Optional;
@@ -113,6 +117,7 @@ import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.validation.Issue;
 import org.osgi.service.event.Event;
 import org.osgi.service.event.EventHandler;
+import org.osgi.service.prefs.Preferences;
 
 import com.google.inject.Injector;
 
@@ -193,6 +198,8 @@ public class EgyLemmaEditorPart extends AbstractTextEditorLogic implements IBTSE
 	private AnnotationPainter painter;
 	private HashMap<String, List<Object>> lemmaAnnotationMap;
 	private Job processLemmaAnnotionsJob;
+	
+	private EclipsePreferences annotationSettings;
 
 	// boolean if object is loaded into gui
 	private boolean loaded;
@@ -213,6 +220,10 @@ public class EgyLemmaEditorPart extends AbstractTextEditorLogic implements IBTSE
 	public void postConstruct(Composite parent) {
 		parent.setLayout(new GridLayout(1, false));
 		
+		// load annotatin styling settings node
+		EclipsePreferences rootNode = (EclipsePreferences) ConfigurationScope.INSTANCE.getNode("org.bbaw.bts.ui.corpus");
+		annotationSettings = (EclipsePreferences) rootNode.node(BTSCorpusConstants.PREF_ANNOTATION_SETTINGS);
+
 		
 		// transliteration
 		grpTransliteration = new Group(parent, SWT.NONE);
@@ -242,8 +253,8 @@ public class EgyLemmaEditorPart extends AbstractTextEditorLogic implements IBTSE
 
 
 		embeddedEditor = embeddedEditorFactory.newEditor(xtextResourceProvider)
-				.showAnnotations(BTSAnnotationAnnotation.TYPE,
-						BTSCommentAnnotation.TYPE,
+				.showAnnotations(BTSConstants.ANNOTATION,
+						BTSConstants.COMMENT,
 						"org.eclipse.xtext.ui.editor.error",
 						"org.eclipse.xtext.ui.editor.warning")
 				.withParent(embeddedEditorComp);
@@ -269,7 +280,7 @@ public class EgyLemmaEditorPart extends AbstractTextEditorLogic implements IBTSE
 		};
 		painter = new AnnotationPainter(embeddedEditor.getViewer(),
 				annotationAccess);
-		configureEditorDrawingStrategies(painter);
+		configureEditorDrawingStrategies(painter, null, annotationSettings);
 		embeddedEditor.getViewer().addTextPresentationListener(painter);
 		embeddedEditor.getViewer().addPainter(painter);
 		grpTransliteration.layout();

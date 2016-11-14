@@ -14,5 +14,11 @@ public interface CorpusObjectService extends GenericCorpusObjectService<BTSCorpu
 	List<BTSPassportEntry> getPassportEntryProposals(BTSQueryRequest query);
 
 	String[] getActive_corpora(String projecPrefix);
+
+	/**
+	 * @param object
+	 * @param annotationTypePath
+	 */
+	void setObjectTypePath(BTSCorpusObject object, String annotationTypePath);
 	
 }

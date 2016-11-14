@@ -45,4 +45,11 @@ public interface PassportConfigurationController {
 	BTSPassportEntry findMatchingEntryGroup(BTSPassport passport,
 			BTSConfigItem category);
 
+	/**
+	 * @param annotation
+	 * @param object
+	 * @return return typeconfigs if type == null, if type is set it returns subtype configitems
+	 */
+	BTSConfigItem getObjectTypeConfigItemProcessedClones(String className, String type);
+
 }

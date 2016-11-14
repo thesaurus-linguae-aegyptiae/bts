@@ -679,8 +679,17 @@ public class BTSConfigurationServiceImpl extends GenericObjectServiceImpl<BTSCon
 
 	@Override
 	public BTSConfigItem getObjectTypeConfigItemProcessedClones(BTSObject object) {
-		BTSConfigItem typesCI = getObjectTypesConfigItem();
 		String className = findObjectClass(object);
+
+		return getObjectTypeConfigItemProcessedClonesInternal(className, object.getType());
+	}
+		/**
+	 * @param className
+	 * @param type
+	 * @return
+	 */
+	private BTSConfigItem getObjectTypeConfigItemProcessedClonesInternal(String className, String type) {
+		BTSConfigItem typesCI = getObjectTypesConfigItem();
 		BTSConfigItem typeClone = BtsmodelFactory.eINSTANCE
 				.createBTSConfigItem();
 		List<BTSConfig> children = new Vector<BTSConfig>();
@@ -698,26 +707,25 @@ public class BTSConfigurationServiceImpl extends GenericObjectServiceImpl<BTSCon
 										) {
 									children.add(
 											EcoreUtil.copy(ci));
-									if (object.getType() != null
-											&& !"".equals(object
-													.getType())
+									if (type != null
+											&& !"".equals(type)
 											&& ci.getValue() != null
 											&& ci.getValue().equals(
-													object.getType())) {
+													type)) {
 										found = true;
 									}
 								}
 							}
 						}
-						if (!found && object.getType() != null
-								&& !"".equals(object.getType())) {
+						if (!found && type != null
+								&& !"".equals(type)) {
 							BTSConfigItem ci = BtsmodelFactory.eINSTANCE
 									.createBTSConfigItem();
 							ci.setLabel(BtsmodelFactory.eINSTANCE
 									.createBTSTranslations());
 							ci.getLabel().setTranslation(
-									object.getType(), lang);
-							ci.setValue(object.getType());
+									type, lang);
+							ci.setValue(type);
 							children.add(ci);
 						}
 						Collections.sort(children, new BTSConfigSortKeyLabelSorter());
@@ -793,8 +801,18 @@ public class BTSConfigurationServiceImpl extends GenericObjectServiceImpl<BTSCon
 	@Override
 	public BTSConfigItem getObjectSubtypeConfigItemProcessedClones(
 			BTSObject object) {
-		BTSConfigItem typesCI = getObjectTypesConfigItem();
 		String className = findObjectClass(object);
+		return getObjectSubtypeConfigItemProcessedClones(className, object.getType(), object.getSubtype());
+	}
+		/**
+	 * @param className
+	 * @param type
+	 * @param subtype
+	 * @return
+	 */
+	private BTSConfigItem getObjectSubtypeConfigItemProcessedClones(String className, String type, String subtype) {
+		BTSConfigItem typesCI = getObjectTypesConfigItem();
+		
 		BTSConfigItem subtypeClone = BtsmodelFactory.eINSTANCE
 				.createBTSConfigItem();
 		List<BTSConfig> children = new Vector<BTSConfig>();
@@ -812,7 +830,7 @@ public class BTSConfigurationServiceImpl extends GenericObjectServiceImpl<BTSCon
 								if (!ci.isIgnore()
 										&& ci.getValue() != null
 										&& ci.getValue().equals(
-												object.getType())) {
+												type)) {
 									for (BTSConfig ccc : ci.getChildren()) {
 										if (cc instanceof BTSConfigItem) {
 											BTSConfigItem cci = (BTSConfigItem) ccc;
@@ -820,22 +838,19 @@ public class BTSConfigurationServiceImpl extends GenericObjectServiceImpl<BTSCon
 												children.add(
 														EcoreUtil
 														.copy(cci));
-												if (object.getSubtype() != null
-														&& !"".equals(object
-																.getSubtype())
+												if (subtype != null
+														&& !"".equals(subtype)
 														&& cci.getValue() != null
 														&& cci.getValue()
-																.equals(object
-																		.getSubtype())) {
+																.equals(subtype)) {
 													found = true;
 												}
 											}
 										}
 									}
 									if (!found
-											&& object.getSubtype() != null
-											&& !"".equals(object
-													.getSubtype())) {
+											&& subtype != null
+											&& !"".equals(subtype)) {
 										BTSConfigItem cci = BtsmodelFactory.eINSTANCE
 												.createBTSConfigItem();
 										cci.setLabel(BtsmodelFactory.eINSTANCE
@@ -843,10 +858,9 @@ public class BTSConfigurationServiceImpl extends GenericObjectServiceImpl<BTSCon
 
 										cci.getLabel()
 												.setTranslation(
-														object
-																.getSubtype(),
+														subtype,
 														lang);
-										cci.setValue(object.getSubtype());
+										cci.setValue(subtype);
 										subtypeClone.getChildren().add(cci);
 									}
 									BTSConfigItem ci2 = BtsmodelFactory.eINSTANCE
@@ -1246,6 +1260,15 @@ public class BTSConfigurationServiceImpl extends GenericObjectServiceImpl<BTSCon
 							false));
 		}
 		return objects;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.bbaw.bts.core.services.BTSConfigurationService#getObjectTypeConfigItemProcessedClones(java.lang.String, java.lang.String, java.lang.String)
+	 */
+	@Override
+	public BTSConfigItem getObjectTypeConfigItemProcessedClones(String className, String type) {
+		if (type == null) return getObjectTypeConfigItemProcessedClonesInternal(className, type);
+		else return getObjectSubtypeConfigItemProcessedClones(className, type, null);
 	}
 
 

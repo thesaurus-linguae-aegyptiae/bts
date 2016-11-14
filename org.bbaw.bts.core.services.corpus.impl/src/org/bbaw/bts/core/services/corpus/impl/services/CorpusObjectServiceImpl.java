@@ -15,6 +15,7 @@ import org.bbaw.bts.core.commons.BTSCoreConstants;
 import org.bbaw.bts.core.commons.BTSObjectSearchService;
 import org.bbaw.bts.core.commons.MoveObjectAmongProjectDBCollectionsService;
 import org.bbaw.bts.core.commons.corpus.BTSCorpusConstants;
+import org.bbaw.bts.core.commons.corpus.CorpusUtils;
 import org.bbaw.bts.core.commons.corpus.comparator.BTSPassportEntryComparator;
 import org.bbaw.bts.core.dao.GeneralPurposeDao;
 import org.bbaw.bts.core.dao.corpus.CorpusObjectDao;
@@ -674,5 +675,31 @@ implements 	CorpusObjectService, BTSObjectSearchService, MoveObjectAmongProjectD
 			}
 		}
 		return objects;
+	}
+
+
+	/* (non-Javadoc)
+	 * @see org.bbaw.bts.core.services.corpus.CorpusObjectService#setObjectTypePath(org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject, java.lang.String)
+	 */
+	@Override
+	public void setObjectTypePath(BTSCorpusObject object, String annotationTypePath) {
+		if (annotationTypePath == null) return;
+		else if (!annotationTypePath.startsWith(BTSConstants.ANNOTATION)) return;
+		else if (annotationTypePath.equals(BTSConstants.ANNOTATION)) return;
+		else
+		{
+			String[] entries = annotationTypePath.split("\\.");
+			if (entries.length > 1)
+			{
+				object.setType(entries[1]);
+				object.setName(entries[1]);
+			}
+			if (entries.length > 2)
+			{
+				object.setSubtype(entries[2]);
+				object.setName(entries[2]);
+			}
+		}
+		return;
 	}
 }

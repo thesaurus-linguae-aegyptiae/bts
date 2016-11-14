@@ -7,6 +7,7 @@ import org.bbaw.bts.btsmodel.BTSInterTextReference;
 import org.bbaw.bts.btsmodel.BTSObject;
 import org.eclipse.draw2d.RoundedRectangle;
 import org.eclipse.draw2d.geometry.Rectangle;
+import org.eclipse.swt.graphics.Color;
 
 public class ElementFigureImpl extends RoundedRectangle implements
 		ElementFigure {
@@ -18,6 +19,8 @@ public class ElementFigureImpl extends RoundedRectangle implements
 	private List<BTSObject> relatingObjects;
 	
 	private List<BTSInterTextReference> interTextReferences;
+
+	private Color baseBackgroundcolor;
 
 	public int getLength() {
 		Rectangle rec = getBounds();
@@ -79,5 +82,20 @@ public class ElementFigureImpl extends RoundedRectangle implements
 
 	public void setInterTextReferences(List<BTSInterTextReference> interTextReferences) {
 		this.interTextReferences = interTextReferences;
+	}
+	/**
+	 * @param color
+	 */
+	public void setBaseBackgroundColor(Color color) {
+		this.baseBackgroundcolor = color;
+		setBackgroundColor(color);
+		
+	}
+
+	/**
+	 * @return the baseBackgroundcolor
+	 */
+	public Color getBaseBackgroundcolor() {
+		return baseBackgroundcolor;
 	}
 }

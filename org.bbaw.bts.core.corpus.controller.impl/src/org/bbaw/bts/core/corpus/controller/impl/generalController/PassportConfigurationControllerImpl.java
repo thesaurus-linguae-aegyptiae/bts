@@ -244,6 +244,14 @@ public class PassportConfigurationControllerImpl implements
 		return defaultInput;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.bbaw.bts.core.corpus.controller.generalController.PassportConfigurationController#getObjectTypeConfigItemProcessedClones(java.lang.String, java.lang.String)
+	 */
+	@Override
+	public BTSConfigItem getObjectTypeConfigItemProcessedClones(String className, String type) {
+		return configService.getObjectTypeConfigItemProcessedClones(className, type);
+	}
+
 	
 	
 	

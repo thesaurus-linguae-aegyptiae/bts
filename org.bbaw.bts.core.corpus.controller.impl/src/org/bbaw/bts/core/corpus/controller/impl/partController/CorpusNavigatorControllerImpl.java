@@ -327,10 +327,10 @@ implements CorpusNavigatorController
 	}
 
 	@Override
-	public BTSAnnotation createNewAnnotation(BTSCorpusObject annotatedObject) {
+	public BTSAnnotation createNewAnnotation(BTSCorpusObject annotatedObject, String annotationTypePath) {
 		BTSAnnotation anno = annotationService
 				.createNewRelationPartOf(annotatedObject);
-
+		setObjectTypePath(anno, annotationTypePath);
 		return anno;
 	}
 
@@ -453,6 +453,5 @@ implements CorpusNavigatorController
 		return textCorpusService.findTextCorpusByPrefix(corpusPrefix);
 	}
 
-	
 	
 }
