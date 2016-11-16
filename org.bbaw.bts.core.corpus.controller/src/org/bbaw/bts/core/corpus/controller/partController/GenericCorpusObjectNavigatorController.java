@@ -5,6 +5,8 @@ import java.util.Map;
 
 import org.bbaw.bts.btsviewmodel.TreeNodeWrapper;
 import org.bbaw.bts.core.dao.util.BTSQueryRequest;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSAbstractText;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSAnnotation;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
 import org.bbaw.bts.searchModel.BTSModelUpdateNotification;
 import org.bbaw.bts.searchModel.BTSQueryResultAbstract;
@@ -57,4 +59,7 @@ public interface GenericCorpusObjectNavigatorController <E extends BTSCorpusObje
 	boolean checkAndFullyLoad(BTSCorpusObject object, boolean checkForConflicts);
 	
 	List<TreeNodeWrapper> loadNodes(List<E> obs, IProgressMonitor monitor, boolean asStructuredTree);
+	
+	BTSAnnotation createNewAnnotation(E selection, String annotationTypePath);
+
 }

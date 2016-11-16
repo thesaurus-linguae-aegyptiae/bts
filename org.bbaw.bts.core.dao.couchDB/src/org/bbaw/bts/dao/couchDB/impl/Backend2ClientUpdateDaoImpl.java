@@ -88,8 +88,8 @@ public class Backend2ClientUpdateDaoImpl implements Backend2ClientUpdateDao {
 		notification.setDbCollection(dbCollection);
 		if (feed.isDeleted()) {
 			notification.setDeleted(true);
-			logger.info("Notify Listener object is deleted. object id: "
-					+ docId);
+//			logger.debug("Notify Listener object is deleted. object id: "
+//					+ docId);
 		} else
 		// object not deleted
 		{
