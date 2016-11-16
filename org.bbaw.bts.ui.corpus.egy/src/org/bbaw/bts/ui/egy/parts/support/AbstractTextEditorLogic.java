@@ -1,5 +1,8 @@
 package org.bbaw.bts.ui.egy.parts.support;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.core.commons.corpus.BTSCorpusConstants;
 import org.bbaw.bts.core.commons.corpus.CorpusUtils;
@@ -28,8 +31,9 @@ public abstract class AbstractTextEditorLogic {
 	protected static final String[] ANNO_TYPES_SUFFIXES = new String[]{"", ".highlighted"};
 
 
-	protected void configureEditorDrawingStrategies(AnnotationPainter painter, OverviewRuler oruler, EclipsePreferences preferences) {
+	protected Set<String> configureEditorDrawingStrategies(AnnotationPainter painter, OverviewRuler oruler, EclipsePreferences preferences) {
 
+		Set <String> annotationStrategySet = new HashSet<String>();
 		// set basic rulers
 		if (oruler != null)
 		{
@@ -70,7 +74,8 @@ public abstract class AbstractTextEditorLogic {
 		painter.setAnnotationTypeColor(BTSSentenceAnnotation.TYPE_HIGHLIGHTED,
 				BTSUIConstants.COLOR_SENTENCE);
 		painter.addAnnotationType(BTSSentenceAnnotation.TYPE_HIGHLIGHTED, BTSSentenceAnnotation.TYPE_HIGHLIGHTED);
-
+		annotationStrategySet.add(BTSSentenceAnnotation.TYPE_HIGHLIGHTED);
+		
 		// Lemma
 		ITextStyleStrategy strategy = new org.eclipse.jface.text.source.AnnotationPainter.HighlightingStrategy();
 		painter.addTextStyleStrategy(BTSLemmaAnnotation.TYPE, strategy);
@@ -78,6 +83,7 @@ public abstract class AbstractTextEditorLogic {
 				BTSUIConstants.COLOR_LEMMA);
 		// this is done in filter
 		painter.addAnnotationType(BTSLemmaAnnotation.TYPE, BTSLemmaAnnotation.TYPE);
+		annotationStrategySet.add(BTSLemmaAnnotation.TYPE);
 
 		
 		// comment
@@ -89,6 +95,7 @@ public abstract class AbstractTextEditorLogic {
 		// this is done in filter
 		painter.addAnnotationType(BTSConstants.COMMENT,
 				BTSConstants.COMMENT);
+		annotationStrategySet.add(BTSConstants.COMMENT);
 
 		
 		// comment highlighted
@@ -101,6 +108,7 @@ public abstract class AbstractTextEditorLogic {
 		// this is done in filter
 		painter.addAnnotationType(BTSConstants.COMMENT + BTSModelAnnotation.HIGHLIGHTED,
 				BTSConstants.COMMENT + BTSModelAnnotation.HIGHLIGHTED);
+		annotationStrategySet.add(BTSConstants.COMMENT + BTSModelAnnotation.HIGHLIGHTED);
 
 		
 		// subtext
@@ -112,6 +120,7 @@ public abstract class AbstractTextEditorLogic {
 		// this is done in filter
 		painter.addAnnotationType(BTSConstants.ANNOTATION_SUBTEXT,
 				BTSConstants.ANNOTATION_SUBTEXT);
+		annotationStrategySet.add(BTSConstants.ANNOTATION_SUBTEXT);
 
 		// subtext
 		SubtextHighlightedDrawingStrategy subtexthighStrategy = new SubtextHighlightedDrawingStrategy();
@@ -123,6 +132,7 @@ public abstract class AbstractTextEditorLogic {
 		// this is done in filter
 		painter.addAnnotationType(BTSConstants.ANNOTATION_SUBTEXT  + BTSModelAnnotation.HIGHLIGHTED,
 				BTSConstants.ANNOTATION_SUBTEXT  + BTSModelAnnotation.HIGHLIGHTED);
+		annotationStrategySet.add(BTSConstants.ANNOTATION_SUBTEXT  + BTSModelAnnotation.HIGHLIGHTED);
 
 		
 		// annotations
@@ -200,7 +210,8 @@ public abstract class AbstractTextEditorLogic {
 				
 				painter.addAnnotationType(strategyType,
 						strategyType);
-			
+				annotationStrategySet.add(strategyType);
+
 				// Annotation highlighted
 				AnnotationHighlightedDrawingStrategy annotationHighlightedStrategy = new AnnotationHighlightedDrawingStrategy();
 				painter.addDrawingStrategy(strategyType + BTSModelAnnotation.HIGHLIGHTED,
@@ -210,7 +221,8 @@ public abstract class AbstractTextEditorLogic {
 				
 				painter.addAnnotationType(strategyType + BTSModelAnnotation.HIGHLIGHTED,
 						strategyType + BTSModelAnnotation.HIGHLIGHTED);
-				
+				annotationStrategySet.add(strategyType  + BTSModelAnnotation.HIGHLIGHTED);
+
 				// configure ruler
 				if (oruler != null)
 				{
@@ -238,7 +250,8 @@ public abstract class AbstractTextEditorLogic {
 					BTSUIConstants.COLOR_ANNOTATTION);
 			painter.addAnnotationType(BTSConstants.ANNOTATION,
 					BTSConstants.ANNOTATION);
-		
+			annotationStrategySet.add(BTSConstants.ANNOTATION);
+
 			// Annotation highlighted
 			AnnotationHighlightedDrawingStrategy annotationHighlightedStrategy = new AnnotationHighlightedDrawingStrategy();
 			painter.addDrawingStrategy(BTSConstants.ANNOTATION + BTSModelAnnotation.HIGHLIGHTED,
@@ -247,7 +260,8 @@ public abstract class AbstractTextEditorLogic {
 					BTSUIConstants.COLOR_ANNOTATTION);
 			painter.addAnnotationType(BTSConstants.ANNOTATION + BTSModelAnnotation.HIGHLIGHTED,
 					BTSConstants.ANNOTATION + BTSModelAnnotation.HIGHLIGHTED);
-			
+			annotationStrategySet.add(BTSConstants.ANNOTATION  + BTSModelAnnotation.HIGHLIGHTED);
+
 			if (oruler != null)
 			{
 				oruler.addAnnotationType(BTSConstants.ANNOTATION);
@@ -265,30 +279,33 @@ public abstract class AbstractTextEditorLogic {
 		{
 			// Annotation rumbrum
 			RubrumDrawingStrategy rubrumStrategy = new RubrumDrawingStrategy();
-			painter.addTextStyleStrategy(BTSConstants.ANNOTATION_RUBRUM,
+			painter.addTextStyleStrategy(BTSConstants.ANNOTATION + "." + CorpusUtils.ANNOTATION_RUBRUM_TYPE,
 					rubrumStrategy);
-			painter.setAnnotationTypeColor(BTSConstants.ANNOTATION_RUBRUM,
+			painter.setAnnotationTypeColor(BTSConstants.ANNOTATION + "." + CorpusUtils.ANNOTATION_RUBRUM_TYPE,
 					BTSUIConstants.COLOR_RUBRUM);
-			painter.addAnnotationType(BTSConstants.ANNOTATION_RUBRUM,
-					BTSConstants.ANNOTATION_RUBRUM);
-			
+			painter.addAnnotationType(BTSConstants.ANNOTATION + "." + CorpusUtils.ANNOTATION_RUBRUM_TYPE,
+					BTSConstants.ANNOTATION + "." + CorpusUtils.ANNOTATION_RUBRUM_TYPE);
+			annotationStrategySet.add(BTSConstants.ANNOTATION + "." + CorpusUtils.ANNOTATION_RUBRUM_TYPE);
+
 			// Annotation rumbrum highlighted
 			AnnotationHighlightedDrawingStrategy rubrumHighlightedStrategy = new AnnotationHighlightedDrawingStrategy();
-			painter.addDrawingStrategy(BTSConstants.ANNOTATION_RUBRUM + BTSModelAnnotation.HIGHLIGHTED,
+			painter.addDrawingStrategy(BTSConstants.ANNOTATION + "." + CorpusUtils.ANNOTATION_RUBRUM_TYPE + BTSModelAnnotation.HIGHLIGHTED,
 					rubrumHighlightedStrategy);
-			painter.setAnnotationTypeColor(BTSConstants.ANNOTATION_RUBRUM + BTSModelAnnotation.HIGHLIGHTED,
+			painter.setAnnotationTypeColor(BTSConstants.ANNOTATION + "." + CorpusUtils.ANNOTATION_RUBRUM_TYPE + BTSModelAnnotation.HIGHLIGHTED,
 					BTSUIConstants.COLOR_RUBRUM);
-			painter.addAnnotationType(BTSConstants.ANNOTATION_RUBRUM + BTSModelAnnotation.HIGHLIGHTED,
-					BTSConstants.ANNOTATION_RUBRUM + BTSModelAnnotation.HIGHLIGHTED);
-			
+			painter.addAnnotationType(BTSConstants.ANNOTATION + "." + CorpusUtils.ANNOTATION_RUBRUM_TYPE + BTSModelAnnotation.HIGHLIGHTED,
+					BTSConstants.ANNOTATION + "." + CorpusUtils.ANNOTATION_RUBRUM_TYPE + BTSModelAnnotation.HIGHLIGHTED);
+			annotationStrategySet.add(BTSConstants.ANNOTATION + "." + CorpusUtils.ANNOTATION_RUBRUM_TYPE + BTSModelAnnotation.HIGHLIGHTED);
+
 			if (oruler != null)
 			{
-				oruler.addAnnotationType(BTSConstants.ANNOTATION_RUBRUM);
-				oruler.setAnnotationTypeLayer(BTSConstants.ANNOTATION_RUBRUM, 3);
-				oruler.setAnnotationTypeColor(BTSConstants.ANNOTATION_RUBRUM,
+				oruler.addAnnotationType(BTSConstants.ANNOTATION + "." + CorpusUtils.ANNOTATION_RUBRUM_TYPE);
+				oruler.setAnnotationTypeLayer(BTSConstants.ANNOTATION + "." + CorpusUtils.ANNOTATION_RUBRUM_TYPE, 3);
+				oruler.setAnnotationTypeColor(BTSConstants.ANNOTATION + "." + CorpusUtils.ANNOTATION_RUBRUM_TYPE,
 						BTSUIConstants.COLOR_RUBRUM);
 			}
 		}
+		return annotationStrategySet;
 	}
 	
 

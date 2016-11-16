@@ -67,6 +67,7 @@ import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.commons.BTSPluginIDs;
 import org.bbaw.bts.core.commons.BTSCoreConstants;
 import org.bbaw.bts.core.commons.corpus.BTSCorpusConstants;
+import org.bbaw.bts.core.commons.corpus.CorpusUtils;
 import org.bbaw.bts.core.commons.staticAccess.StaticAccessController;
 import org.bbaw.bts.core.controller.generalController.EditingDomainController;
 import org.bbaw.bts.core.controller.generalController.PermissionsAndExpressionsEvaluationController;
@@ -190,6 +191,7 @@ import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.validation.Issue;
 import org.osgi.service.event.Event;
 import org.osgi.service.event.EventHandler;
+import org.osgi.service.prefs.BackingStoreException;
 import org.osgi.service.prefs.Preferences;
 
 import com.google.inject.Injector;
@@ -420,6 +422,8 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 	private Job delaySelectionJob;
 
 	private EclipsePreferences annotationSettings;
+
+	private Set<String> annotationStrategySet;
 
 	
 	/**
@@ -663,7 +667,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 					oruler = EmbeddedEditorFactory.getOverViewRuler();
 					
 					
-					configureEditorDrawingStrategies(painter, oruler, annotationSettings);
+					annotationStrategySet = configureEditorDrawingStrategies(painter, oruler, annotationSettings);
 					if (show_line_number_ruler)
 					{
 						lineNumberRulerColumn = new EgyLineNumberRulerColumn(LINE_SPACE);
@@ -2793,17 +2797,36 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 			for (Entry<String, Boolean> e : filters.entrySet()) {
 				String typeId = e.getKey();
 				String strategyId = null;
-				if (e.getValue()) {
-					strategyId = 	typeId;
+				if (annotationStrategySet.contains(typeId))
+				{
+					strategyId = typeId;
+				}
+				else{
+					if (typeId.startsWith(BTSConstants.COMMENT))
+					{
+						strategyId = BTSConstants.COMMENT;
+					}else if (typeId.startsWith(CorpusUtils.SUBTEXT_TYPE))
+					{
+						strategyId = CorpusUtils.SUBTEXT_TYPE;
+					}else if (typeId.startsWith(BTSConstants.ANNOTATION + "." +CorpusUtils.ANNOTATION_RUBRUM_TYPE))
+					{
+						strategyId = BTSConstants.ANNOTATION + "." +CorpusUtils.ANNOTATION_RUBRUM_TYPE;
+					}else if (typeId.startsWith(BTSConstants.ANNOTATION))
+					{
+						strategyId = BTSConstants.ANNOTATION;
+					}
+					else
+					{
+						strategyId = BTSConstants.ANNOTATION;
+					}
 				}
 				// update editor painter and ruler annotation types
 				for (String suffix : ANNO_TYPES_SUFFIXES) {
-					if (strategyId != null) {
+					if (e.getValue()) {
 						painter.addAnnotationType(typeId+suffix,
 								strategyId+suffix);
 						
-						//FIXME set generic color
-//						painter.setAnnotationTypeColor(strategyId, BTSUIConstants.COLOR_ANNOTATTION);
+						painter.setAnnotationTypeColor(typeId +suffix, getBackgroundColorTypePath(strategyId));
 						oruler.addAnnotationType(typeId+suffix);
 					} else {
 						painter.removeAnnotationType(typeId+suffix);
@@ -2815,7 +2838,56 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 		}
 	}
 
-
+	/**
+	 * @param fig
+	 * @param object
+	 */
+	private Color getBackgroundColorTypePath(String typePath) {
+		// read values from the instance scope
+		String colorString = null;
+		try {
+			for (String childNode : annotationSettings.childrenNames())
+			{
+				Preferences typeNode = annotationSettings.node(childNode);
+				String settingsTypePath = AnnotationToolbarItemCreator.getAnnotationTypePath((EclipsePreferences) typeNode);
+				if (!settingsTypePath.equals(typePath)) continue;
+				
+				colorString = typeNode.get(BTSCorpusConstants.PREF_COLOR, null);
+				
+				break;
+			}
+		} catch (BackingStoreException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		Color color = null;
+		if (colorString != null)
+		{
+			color = BTSUIConstants.getColor(colorString);
+		}
+		else
+		{
+			if (typePath.startsWith(BTSConstants.COMMENT))
+			{
+				color = BTSUIConstants.COLOR_COMMENT;
+			}else if (typePath.startsWith(BTSConstants.TEXT))
+			{
+				color = BTSUIConstants.COLOR_SUBTEXT;
+			}else if (typePath.startsWith(BTSConstants.ANNOTATION + "." +CorpusUtils.ANNOTATION_RUBRUM_TYPE))
+			{
+				color = BTSUIConstants.COLOR_RUBRUM;
+			}else if (typePath.startsWith(BTSConstants.ANNOTATION))
+			{
+				color = BTSUIConstants.COLOR_ANNOTATTION;
+			}
+			else
+			{
+				color = BTSUIConstants.COLOR_ANNOTATTION;
+			}
+		}
+		return color;
+		
+	}
 	/**
 	 * Event received load lemmata.
 	 *

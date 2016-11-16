@@ -260,6 +260,7 @@ public class AnnotationsPart implements EventHandler {
 				for (BTSConfig c : typeConf.getChildren())
 					if (c instanceof BTSConfigItem) {
 						BTSConfigItem confItem = (BTSConfigItem)c;
+						if (CorpusUtils.ANNOTATION_RUBRUM_TYPE.equals(confItem.getValue())) continue;
 						MMenuElement menuItemType = null;
 						// retrieve subtype definition from configuration node
 						BTSConfigItem subtypeConf = null;
