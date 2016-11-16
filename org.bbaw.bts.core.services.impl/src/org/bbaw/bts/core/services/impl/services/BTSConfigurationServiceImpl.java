@@ -15,6 +15,9 @@ import org.bbaw.bts.btsmodel.BTSConfig;
 import org.bbaw.bts.btsmodel.BTSConfigItem;
 import org.bbaw.bts.btsmodel.BTSConfiguration;
 import org.bbaw.bts.btsmodel.BTSObject;
+import org.bbaw.bts.btsmodel.BTSPassportEditorConfig;
+import org.bbaw.bts.btsmodel.BTSTranslation;
+import org.bbaw.bts.btsmodel.BTSTranslations;
 import org.bbaw.bts.btsmodel.BtsmodelFactory;
 import org.bbaw.bts.btsviewmodel.BTSObjectTypeTreeNode;
 import org.bbaw.bts.commons.BTSConstants;
@@ -25,6 +28,7 @@ import org.bbaw.bts.core.dao.BTSConfigurationDao;
 import org.bbaw.bts.core.dao.util.BTSQueryRequest;
 import org.bbaw.bts.core.services.BTSConfigurationService;
 import org.bbaw.bts.core.services.impl.generic.GenericObjectServiceImpl;
+import org.bbaw.bts.modelUtils.EmfModelHelper;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.preferences.ConfigurationScope;
 import org.eclipse.core.runtime.preferences.InstanceScope;
@@ -965,6 +969,7 @@ public class BTSConfigurationServiceImpl extends GenericObjectServiceImpl<BTSCon
 		config.getUpdaters().clear();
 
 		config.setDBCollectionKey(dbcoll);
+		config.setProject(main_project);
 		super.setId(config, config.getDBCollectionKey());
 		super.setRevision(config);
 
@@ -1274,34 +1279,34 @@ public class BTSConfigurationServiceImpl extends GenericObjectServiceImpl<BTSCon
 
 
 
-//	private void copyChildrenRecursively(BTSConfig config,
-//			BTSConfig originalconfiguration, Copier copier) {
-//		for (BTSConfig c : originalconfiguration.getChildren())
-//		{
-//			BTSConfigItem ci = BtsmodelFactory.eINSTANCE.createBTSConfigItem();
-//			String id = ci.get_id();
-//			ci = (BTSConfigItem) copier.copy(c);
-//			ci.set_id(id);
-//			config.getChildren().add(ci);
-//			copyChildrenRecursively(ci, c, copier);
-//		}
-//		if (originalconfiguration instanceof BTSConfigItem)
-//		{
-//			BTSTranslations t = ((BTSConfigItem)originalconfiguration).getDescription();
-//			BTSTranslations ti = (BTSTranslations) copier.copy(t);
-//			for (BTSTranslation tt : t.getTranslations())
-//			{
-//				BTSTranslation tti = BtsmodelFactory.eINSTANCE.createBTSTranslation();
-//				tti = (BTSTranslation) copier.copy(tt);
-//				ti.getTranslations().add(tti);
-//			}
-//			((BTSConfigItem)config).setDescription(ti);
-//			
-//			BTSPassportEditorConfig p = ((BTSConfigItem)originalconfiguration).getPassportEditorConfig();
-//			BTSPassportEditorConfig pi = (BTSPassportEditorConfig) copier.copy(p);
-//			((BTSConfigItem)config).setPassportEditorConfig(pi);
-//		}
-//	}
+	private void copyChildrenRecursively(BTSConfig config,
+			BTSConfig originalconfiguration, Copier copier) {
+		for (BTSConfig c : originalconfiguration.getChildren())
+		{
+			BTSConfigItem ci = BtsmodelFactory.eINSTANCE.createBTSConfigItem();
+			String id = ci.get_id();
+			ci = (BTSConfigItem) copier.copy(c);
+			ci.set_id(id);
+			config.getChildren().add(ci);
+			copyChildrenRecursively(ci, c, copier);
+		}
+		if (originalconfiguration instanceof BTSConfigItem)
+		{
+			BTSTranslations t = ((BTSConfigItem)originalconfiguration).getDescription();
+			BTSTranslations ti = (BTSTranslations) copier.copy(t);
+			for (BTSTranslation tt : t.getTranslations())
+			{
+				BTSTranslation tti = BtsmodelFactory.eINSTANCE.createBTSTranslation();
+				tti = (BTSTranslation) copier.copy(tt);
+				ti.getTranslations().add(tti);
+			}
+			((BTSConfigItem)config).setDescription(ti);
+			
+			BTSPassportEditorConfig p = ((BTSConfigItem)originalconfiguration).getPassportEditorConfig();
+			BTSPassportEditorConfig pi = (BTSPassportEditorConfig) copier.copy(p);
+			((BTSConfigItem)config).setPassportEditorConfig(pi);
+		}
+	}
 
 
 	

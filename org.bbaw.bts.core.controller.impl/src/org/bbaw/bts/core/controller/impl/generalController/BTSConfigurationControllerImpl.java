@@ -647,6 +647,15 @@ public class BTSConfigurationControllerImpl implements BTSConfigurationControlle
 		return configService.objectTypesPathsContainsObjectype(ownerTypesMap, object);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.bbaw.bts.core.controller.generalController.BTSConfigurationController#remove(org.bbaw.bts.btsmodel.BTSConfiguration)
+	 */
+	@Override
+	public void remove(BTSConfiguration btsConfiguration) {
+		configService.remove(btsConfiguration);
+		
+	}
+
 
 
 }
