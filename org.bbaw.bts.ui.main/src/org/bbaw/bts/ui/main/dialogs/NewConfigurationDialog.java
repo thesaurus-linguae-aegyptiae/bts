@@ -145,7 +145,7 @@ public class NewConfigurationDialog extends TitleAreaDialog
 		List<BTSConfiguration> list = configurationController
 				.listConfigurations(null);
 		
-		Object activeConfiguration = configurationController.getActiveConfiguration();
+		BTSConfiguration activeConfiguration = configurationController.getActiveConfiguration();
 		TreeNodeWrapper activeConfigurationTreeNode = null;
 		
 		
@@ -180,6 +180,7 @@ public class NewConfigurationDialog extends TitleAreaDialog
 		if (activeConfigurationTreeNode != null)
 		{
 			activeConfigcomboViewer.setSelection(new StructuredSelection(activeConfigurationTreeNode));
+			originalconfiguration = (BTSConfiguration) activeConfiguration;
 		}
 		activeConfigcomboViewer.addSelectionChangedListener(new ISelectionChangedListener()
 		{
