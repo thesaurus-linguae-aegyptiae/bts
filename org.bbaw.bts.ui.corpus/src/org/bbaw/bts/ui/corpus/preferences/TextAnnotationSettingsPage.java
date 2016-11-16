@@ -223,18 +223,21 @@ public class TextAnnotationSettingsPage extends FieldEditorPreferencePage {
 	 */
 	@Override
 	public boolean performOk() {
+		if (settingsEditors == null) return super.performOk();
+		
 		for (TextAnnotationSettingsEditor editor : settingsEditors)
 		{
 			editor.save();
 		}
-		eventBroker.post("event_preferences_changed/"+BTSCorpusConstants.PREF_ANNOTATION_SETTINGS, 
-				annotationsNode.absolutePath());
+		
 		try {
 			annotationsNode.flush();
 		} catch (BackingStoreException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		eventBroker.post("event_preferences_changed/"+BTSCorpusConstants.PREF_ANNOTATION_SETTINGS, 
+				annotationsNode.absolutePath());
 		return super.performOk();
 	}
 	
@@ -246,10 +249,17 @@ public class TextAnnotationSettingsPage extends FieldEditorPreferencePage {
 	public void delete(TextAnnotationSettingsEditor editor, Preferences node) {
 		annotationsNodes.remove(node);
 		annotationsNode.remove(node.name());
+		
 		settingsEditors.remove(editor);
 		editor.getParent().dispose();
 		Point p = sc.getSize();
 		sc.setSize(p.x + variant, p.y);
 		variant  = -variant;
+		try {
+			node.removeNode();
+		} catch (BackingStoreException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }
