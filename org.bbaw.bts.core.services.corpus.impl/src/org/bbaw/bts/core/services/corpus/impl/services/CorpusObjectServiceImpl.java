@@ -1,14 +1,19 @@
 package org.bbaw.bts.core.services.corpus.impl.services;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.Vector;
 
 import javax.inject.Inject;
 
+import org.bbaw.bts.btsmodel.BTSConfig;
+import org.bbaw.bts.btsmodel.BTSConfigItem;
 import org.bbaw.bts.btsmodel.BTSDBBaseObject;
 import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.core.commons.BTSCoreConstants;
@@ -20,6 +25,7 @@ import org.bbaw.bts.core.commons.corpus.comparator.BTSPassportEntryComparator;
 import org.bbaw.bts.core.dao.GeneralPurposeDao;
 import org.bbaw.bts.core.dao.corpus.CorpusObjectDao;
 import org.bbaw.bts.core.dao.util.BTSQueryRequest;
+import org.bbaw.bts.core.services.BTSConfigurationService;
 import org.bbaw.bts.core.services.corpus.BTSAnnotationService;
 import org.bbaw.bts.core.services.corpus.BTSImageService;
 import org.bbaw.bts.core.services.corpus.BTSLemmaEntryService;
@@ -33,18 +39,24 @@ import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSImage;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSLemmaEntry;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSPassportEntry;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSPassportEntryGroup;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSPassportEntryItem;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSTCObject;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSText;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSTextCorpus;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSThsEntry;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.e4.core.contexts.IEclipseContext;
+import org.eclipse.e4.core.di.extensions.Preference;
 
 public class CorpusObjectServiceImpl 
 extends AbstractCorpusObjectServiceImpl<BTSCorpusObject, String> 
 implements 	CorpusObjectService, BTSObjectSearchService, MoveObjectAmongProjectDBCollectionsService
 {
 
+	@Inject
+	@Preference(value = "locale_lang", nodePath = "org.bbaw.bts.app")
+	private String lang;
 
 	// daos
 	@Inject
@@ -75,7 +87,8 @@ implements 	CorpusObjectService, BTSObjectSearchService, MoveObjectAmongProjectD
 	private GeneralPurposeDao generalPurposeDao;
 	// services
 
-	private IEclipseContext eclipseCtx;
+	@Inject
+	private BTSConfigurationService configService;
 
 	@Override
 	public BTSCorpusObject createNew()
@@ -702,4 +715,132 @@ implements 	CorpusObjectService, BTSObjectSearchService, MoveObjectAmongProjectD
 		}
 		return;
 	}
+
+
+	/* (non-Javadoc)
+	 * @see org.bbaw.bts.core.services.corpus.CorpusObjectService#getAllPassportDataAsString(org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject)
+	 */
+	@Override
+	public String getAllPassportDataAsString(BTSCorpusObject object) {
+		String dataString ="";
+		if (object.getPassport() == null) return null;
+		// iterate over all passport entries
+		for (BTSPassportEntry c : object.getPassport().getChildren())
+		{
+			BTSPassportEntryGroup category = (BTSPassportEntryGroup) c;
+			String re = appendPassportItemData(category);
+			if (re != null && !"".equals(re))
+			{
+				dataString += getPassportConfigLabel(category.getType()) + ": \n";
+				dataString += re;
+			}
+			
+		}
+		// iterate over all entry children ...
+		if (dataString.endsWith("\n")) return 	dataString.substring(0, dataString.length() -1);
+		return dataString;
+	}
+	
+	/**
+	 * @param type
+	 * @return
+	 */
+	public String getPassportConfigLabel(String passportTypePath) {
+		Map<String, String>cache = getPassportConfigLabelCache();
+		if (cache.containsKey(passportTypePath)) return cache.get(passportTypePath);
+		return passportTypePath;
+	}
+
+
+	/**
+	 * @return
+	 */
+	private Map<String, String> getPassportConfigLabelCache() {
+		Map<String, String> cache;
+		Object o = context.get("passportConfigLabelmap");
+		if (o != null && o instanceof Map<?,?>){
+			cache = (Map<String, String>) o;
+		}
+		else
+		{
+			cache = new HashMap<String, String>();
+			for (BTSConfig c : configService.getPassportCategories(null))
+			{
+				if (c instanceof BTSConfigItem)
+				{
+					BTSConfigItem child = (BTSConfigItem) c;
+					fillCache(child, cache, child.getValue(), null);
+					cache.put(child.getValue(), child.getLabel().getTranslation(lang));
+				}
+			}
+			context.set("passportConfigLabelmap", cache);
+		}
+		return cache;
+	}
+
+
+	/**
+	 * @param activePassportConfigItem
+	 * @param cache
+	 */
+	private void fillCache(BTSConfigItem configItem, Map<String, String> cache, 
+			String valuePath, String labelPath) {
+		for (BTSConfig c : configItem.getChildren())
+		{
+			BTSConfigItem item = (BTSConfigItem) c;
+			String value = valuePath;
+			if (value == null) value = item.getValue();
+			else value += "." + item.getValue();
+			
+			String label = labelPath;
+			if (label == null) label = item.getLabel().getTranslation(lang);
+			else label += "." + item.getLabel().getTranslation(lang);
+			
+			cache.put(value, label);
+			fillCache(item, cache, value, label);
+		}
+	}
+
+
+	/**
+	 * @param category
+	 * @return
+	 */
+	private String appendPassportItemData(BTSPassportEntry entry, String... pathEntries) {
+		String response = "";
+		String[] path  = Arrays.copyOf(pathEntries, pathEntries.length +1);
+		path[path.length -1] = entry.getType();
+		if (entry instanceof BTSPassportEntryItem)
+		{
+			BTSPassportEntryItem item = (BTSPassportEntryItem) entry;
+			if (item.getValue() != null && !"".equals(item.getValue().trim()))
+			{
+				// if value is set, get config items of string
+				// build string representation: label>label>...>:value
+				for (int i = 0; i<path.length ; i++)
+				{
+					String s = path[i];
+					response += s+ ".";
+				}
+				response = response.substring(0, response.length() -1);
+				response = "-" + getPassportConfigLabel(response);
+				return  response += ":" + item.getValue() + "\n";
+			}
+			return null;
+		}
+		else
+		{
+			for (BTSPassportEntry cc : entry.getChildren())
+			{
+				String re = appendPassportItemData(cc, path);
+				if (re != null && !"".equals(re.trim()))
+				{
+					response += re;
+				}
+				
+			}
+		}
+		return response;
+	}
+
 }

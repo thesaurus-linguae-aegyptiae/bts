@@ -90,7 +90,7 @@ public class BTSConfigurationServiceImpl extends GenericObjectServiceImpl<BTSCon
 		context.set(BTSCoreConstants.CONTEXT_TYPE_SUBTYEPE_LABEL_MAP, null);
 		typeSubtypeAbbreviationLabelMap = null;
 		context.set(BTSCoreConstants.CONTEXT_TYPE_SUBTYEPE_ABBREVIATION_LABEL_MAP, typeSubtypeAbbreviationLabelMap);
-		
+		context.set("passportConfigLabelmap", null);
 	}
 
 	@Override
@@ -914,8 +914,8 @@ public class BTSConfigurationServiceImpl extends GenericObjectServiceImpl<BTSCon
 							{
 								BTSConfigItem ci = (BTSConfigItem) cc;
 								if (!ci.isIgnore()
-										&& objectTypesPathsContainsObjectype(
-										ci.getOwnerTypesMap(), object))
+										&& (objectTypesPathsContainsObjectype(
+										ci.getOwnerTypesMap(), object) || object == null))
 								{
 									categories.add(ci);
 								}

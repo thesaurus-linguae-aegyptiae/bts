@@ -1,6 +1,7 @@
 package org.bbaw.bts.core.corpus.controller.impl.generalController;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -20,10 +21,12 @@ import org.bbaw.bts.core.commons.BTSCoreConstants;
 import org.bbaw.bts.core.commons.comparator.BTSConfigSortKeyLabelSorter;
 import org.bbaw.bts.core.corpus.controller.generalController.PassportConfigurationController;
 import org.bbaw.bts.core.services.BTSConfigurationService;
+import org.bbaw.bts.core.services.corpus.CorpusObjectService;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSPassport;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSPassportEntry;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSPassportEntryGroup;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSPassportEntryItem;
 import org.bbaw.bts.corpus.btsCorpusModel.BtsCorpusModelFactory;
 import org.bbaw.bts.ui.commons.filter.BTSObjectTypeSubtypeViewerFilter;
 import org.eclipse.core.runtime.Assert;
@@ -38,6 +41,9 @@ public class PassportConfigurationControllerImpl implements
 	private String lang;
 	@Inject
 	private BTSConfigurationService configService;
+	
+	@Inject
+	private CorpusObjectService corpusObjectService;
 
 	@Override
 	public List<BTSConfig> getFilteredChildren(BTSConfigItem configItem,
@@ -252,7 +258,13 @@ public class PassportConfigurationControllerImpl implements
 		return configService.getObjectTypeConfigItemProcessedClones(className, type);
 	}
 
-	
-	
+	/* (non-Javadoc)
+	 * @see org.bbaw.bts.core.corpus.controller.generalController.PassportConfigurationController#getAllPassportDataAsString(org.bbaw.bts.btsmodel.BTSObject)
+	 */
+	@Override
+	public String getAllPassportDataAsString(BTSCorpusObject object) {
+		return corpusObjectService.getAllPassportDataAsString(object);
+	}
+
 	
 }
