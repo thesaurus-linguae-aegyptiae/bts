@@ -68,14 +68,35 @@ public class AnnotationToolbarItemCreator {
 			for (String nodeName : annotationsPreferences.childrenNames())
 			{
 				node = (EclipsePreferences) annotationsPreferences.node(nodeName);
-				if (cacheContainsShortcut(toolbarCache, node))
+				MHandledToolItem toolItem = getCachedShortcutMHandledToolItem(toolbarCache, node);
+				if (toolItem != null)
 				{
 					if (node.getBoolean(BTSCorpusConstants.PREF_TOOLBAR_VISIBLE, false))
 					{
-						
+						if (toolItem.isVisible() && toolItem.isToBeRendered()) continue;
+						if (!toolItem.isVisible())
+						{
+							toolItem.setVisible(true);
+						}
+						if (!toolItem.isToBeRendered())
+						{
+							toolItem.setToBeRendered(true);
+						}
+					}
+					else
+					{
+						if (!toolItem.isVisible() && !toolItem.isToBeRendered()) continue;
+						if (toolItem.isVisible())
+						{
+							toolItem.setVisible(false);
+						}
+						if (toolItem.isToBeRendered())
+						{
+							toolItem.setToBeRendered(false);
+						}
 					}
 				}
-				else
+				else if (node.getBoolean(BTSCorpusConstants.PREF_TOOLBAR_VISIBLE, false))
 				{
 					addToolbarShortcut(part.getToolbar(), node, command);
 				}
@@ -161,9 +182,9 @@ public class AnnotationToolbarItemCreator {
 	 * @param node
 	 * @return
 	 */
-	private static boolean cacheContainsShortcut(Map<String, MHandledToolItem> toolbarCache, EclipsePreferences node) {
+	private static MHandledToolItem getCachedShortcutMHandledToolItem(Map<String, MHandledToolItem> toolbarCache, EclipsePreferences node) {
 		String annotationTypePath = getAnnotationTypePath(node);
-		return (toolbarCache.containsKey(annotationTypePath));
+		return (toolbarCache.get(annotationTypePath));
 	}
 
 	/**

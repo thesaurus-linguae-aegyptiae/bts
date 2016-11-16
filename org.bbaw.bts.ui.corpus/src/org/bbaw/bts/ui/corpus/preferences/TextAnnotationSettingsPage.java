@@ -57,7 +57,7 @@ public class TextAnnotationSettingsPage extends FieldEditorPreferencePage {
 
 	private IEclipseContext context;
 
-	private Map<String, TextAnnotationSettingsEditor> settingsEditorMap;
+	private List<TextAnnotationSettingsEditor> settingsEditors;
 
 	private Button newBTN;
 
@@ -147,7 +147,7 @@ public class TextAnnotationSettingsPage extends FieldEditorPreferencePage {
 	 * @param scrComposite
 	 */
 	private void loadContents() {
-		settingsEditorMap = new HashMap<String, TextAnnotationSettingsEditor>(annotationsNodes.size());
+		settingsEditors = new Vector<TextAnnotationSettingsEditor>(annotationsNodes.size());
 
 		int index = 0;
 		for (Preferences node : annotationsNodes)
@@ -181,7 +181,7 @@ public class TextAnnotationSettingsPage extends FieldEditorPreferencePage {
 				this);
 		TextAnnotationSettingsEditor settingsEditor = ContextInjectionFactory
 				.make(TextAnnotationSettingsEditor.class, child);
-		settingsEditorMap.put(nodePath, settingsEditor);
+		settingsEditors.add(settingsEditor);
 	}
 
 	/**
@@ -223,7 +223,7 @@ public class TextAnnotationSettingsPage extends FieldEditorPreferencePage {
 	 */
 	@Override
 	public boolean performOk() {
-		for (TextAnnotationSettingsEditor editor : settingsEditorMap.values())
+		for (TextAnnotationSettingsEditor editor : settingsEditors)
 		{
 			editor.save();
 		}
@@ -246,6 +246,7 @@ public class TextAnnotationSettingsPage extends FieldEditorPreferencePage {
 	public void delete(TextAnnotationSettingsEditor editor, Preferences node) {
 		annotationsNodes.remove(node);
 		annotationsNode.remove(node.name());
+		settingsEditors.remove(editor);
 		editor.getParent().dispose();
 		Point p = sc.getSize();
 		sc.setSize(p.x + variant, p.y);
