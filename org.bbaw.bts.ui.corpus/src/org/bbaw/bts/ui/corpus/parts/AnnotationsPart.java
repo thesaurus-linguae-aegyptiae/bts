@@ -644,16 +644,7 @@ public class AnnotationsPart implements EventHandler {
 					if (CorpusUtils.SUBTEXT_TYPE.equalsIgnoreCase(o.getType()))
 						key += CorpusUtils.SUBTEXT_TYPE; 
 			} else if (o instanceof BTSAnnotation)
-				if (CorpusUtils.ANNOTATION_RUBRUM_TYPE.equalsIgnoreCase(o.getType())) {
-					key += BTSConstants.ANNOTATION + "." + CorpusUtils.ANNOTATION_RUBRUM_TYPE;
-				} else { // check annotation type/subtype
-					key += BTSConstants.ANNOTATION;
-					if (o.getType() != null && !o.getType().isEmpty()) {
-						key += "." + o.getType();
-						if (o.getSubtype() != null && !o.getSubtype().isEmpty())
-							key += "." + o.getSubtype();
-					}
-				}
+				key = CorpusUtils.getTypeIdentifier(o);
 		} else if (o instanceof BTSComment)
 			key += BTSConstants.COMMENT;
 		return filters.containsKey(key) ? filters.get(key) : false;
