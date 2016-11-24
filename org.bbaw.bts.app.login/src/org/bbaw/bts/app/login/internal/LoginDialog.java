@@ -36,6 +36,7 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Monitor;
 import org.eclipse.swt.widgets.Shell;
@@ -105,7 +106,8 @@ public class LoginDialog extends Dialog
 		// looks strange in multi monitor environments
 		// Rectangle displayBounds = shell.getDisplay().getBounds();
 
-		Monitor primary = shell.getDisplay().getDefault().getPrimaryMonitor();
+		shell.getDisplay();
+		Monitor primary = Display.getDefault().getPrimaryMonitor();
 		Rectangle displayBounds = primary.getBounds();
 
 		int x = (displayBounds.width - controlRect.width) / 2;
