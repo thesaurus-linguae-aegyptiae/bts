@@ -55,8 +55,6 @@ public class LoginDialog extends Dialog
 
 	private ImageDescriptor imageDescriptor;
 
-	private IEclipseContext context;
-
 	private BTSUserController userController;
 
 	private Text passwortText;
@@ -82,7 +80,6 @@ public class LoginDialog extends Dialog
 	{
 		super(parentShell);
 		this.shell = parentShell;
-		this.context = context;
 		this.userController = userController;
 		this.logger = context.get(Logger.class);
 	}
