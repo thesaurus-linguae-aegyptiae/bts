@@ -200,6 +200,7 @@ public class LoginDialog extends Dialog
 
 			}
 		});
+		userText.forceFocus();
 
 		Label passwordLabel = new Label(userPasswortComposite, SWT.RIGHT);
 		passwordLabel.setBackground(BTSUIConstants.VIEW_BACKGROUND_DESELECTED_COLOR);
@@ -243,6 +244,9 @@ public class LoginDialog extends Dialog
 				.setBackground(BTSUIConstants.VIEW_BACKGROUND_DESELECTED_COLOR);
 		rememberMeButton.setText("Remember me");
 		rememberMeButton.setLayoutData(new GridData());
+		userPasswortComposite.setTabList(new Control[] {
+				userText, passwortText, rememberMeButton
+		});
 		return composite;
 	}
 
