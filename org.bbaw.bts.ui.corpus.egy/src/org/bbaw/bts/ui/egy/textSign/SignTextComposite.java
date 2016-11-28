@@ -1786,7 +1786,6 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 						for (BTSInterTextReference ref : rel.getParts()) {
 								if (ref.getBeginId() != null)  {
 									ElementFigure fig = (ElementFigure) wordMap.get(ref.getBeginId());
-									if (fig == null) continue;
 									fig.addRelatingObject(object);
 									processStylingAnnotations(fig, object);
 									updateRelatingObjectFigureMap(object.get_id(), fig);

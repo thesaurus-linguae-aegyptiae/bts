@@ -19,6 +19,7 @@ import org.bbaw.bts.core.corpus.controller.partController.LemmaNavigatorControll
 import org.bbaw.bts.core.dao.util.BTSQueryRequest;
 import org.bbaw.bts.core.services.corpus.BTSLemmaEntryService;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSAnnotation;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSLemmaEntry;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSLemmaSubentry;
 import org.bbaw.bts.searchModel.BTSQueryResultAbstract;
@@ -84,6 +85,13 @@ implements LemmaNavigatorController{
 		return new String[]{"partOf"};
 	}
 
+	@Override
+	public BTSAnnotation createNewAnnotation(BTSCorpusObject annotatedObject) {
+		BTSAnnotation anno = lemmaService
+				.createNewAnnotationRelationPartOf(annotatedObject);
+		
+		return anno;
+	}
 
 	
 	@Override
@@ -210,17 +218,4 @@ implements LemmaNavigatorController{
 		}
 		return children;
 	}
-
-	/* (non-Javadoc)
-	 * @see org.bbaw.bts.core.corpus.controller.partController.GenericCorpusObjectNavigatorController#createNewAnnotation(org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject)
-	 */
-	@Override
-	public BTSAnnotation createNewAnnotation(BTSLemmaEntry selection, String annotationTypePath) {
-		BTSAnnotation anno = lemmaService
-				.createNewAnnotationRelationPartOf(selection);
-		setObjectTypePath(anno, annotationTypePath);
-
-		return anno;
-	}
-
 }

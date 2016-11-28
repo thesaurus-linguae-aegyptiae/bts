@@ -520,6 +520,10 @@ public class ApplicationStartupControllerImpl implements
 
 		db_installation_dir = prefs.get(BTSPluginIDs.PREF_DB_DIR,
 				defaultPrefs.get(BTSPluginIDs.PREF_DB_DIR, null));
+		logger.info("db installation dir: "+db_installation_dir);
+		if (db_installation_dir != null) {
+			prefs.put(BTSPluginIDs.PREF_DB_DIR, db_installation_dir);
+		}
 
 		prefs.get(BTSPluginIDs.PREF_MAIN_CORPUS_KEY,
 				defaultPrefs.get(BTSPluginIDs.PREF_MAIN_CORPUS_KEY, null));

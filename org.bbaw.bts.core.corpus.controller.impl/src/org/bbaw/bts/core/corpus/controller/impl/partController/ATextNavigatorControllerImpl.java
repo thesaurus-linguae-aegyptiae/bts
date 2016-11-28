@@ -52,11 +52,10 @@ implements ATextNavigatorController {
 	}
 
 	@Override
-	public BTSAnnotation createNewAnnotation(BTSAbstractText annotatedObject, String annotationTypePath) {
+	public BTSAnnotation createNewAnnotation(BTSAbstractText annotatedObject) {
 		BTSAnnotation anno = atextService
 				.createNewAnnotationRelationPartOf(annotatedObject);
-		setObjectTypePath(anno, annotationTypePath);
-
+		
 		return anno;
 	}
 

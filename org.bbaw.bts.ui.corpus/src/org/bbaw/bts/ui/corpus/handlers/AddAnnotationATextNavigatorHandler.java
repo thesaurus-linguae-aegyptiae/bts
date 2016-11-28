@@ -17,12 +17,11 @@ public class AddAnnotationATextNavigatorHandler {
 	@Execute
 	public void execute(
 			@Named(IServiceConstants.ACTIVE_SELECTION) @Optional BTSObject selection,
-			@Optional @Named("annotationTypePath") String annotationTypePath,
 			EventBroker eventBroker,
 			ATextNavigatorController atextNavigatorController) {
 		if (selection instanceof BTSAbstractText) {
 			final BTSAnnotation object = atextNavigatorController
-					.createNewAnnotation((BTSAbstractText) selection, annotationTypePath);
+					.createNewAnnotation((BTSAbstractText) selection);
 			atextNavigatorController.save(object);
 			eventBroker.post("model_add/BTSAnnotation", object);
 		}

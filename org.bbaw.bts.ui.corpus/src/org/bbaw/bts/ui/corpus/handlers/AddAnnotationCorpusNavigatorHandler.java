@@ -17,12 +17,11 @@ public class AddAnnotationCorpusNavigatorHandler {
 	@Execute
 	public void execute(
 			@Named(IServiceConstants.ACTIVE_SELECTION) @Optional BTSObject selection,
-			@Optional @Named("annotationTypePath") String annotationTypePath,
 			EventBroker eventBroker,
 			CorpusNavigatorController corpusNavigatorController) {
 		if (selection instanceof BTSCorpusObject) {
 			final BTSAnnotation object = corpusNavigatorController
-					.createNewAnnotation((BTSCorpusObject) selection, annotationTypePath);
+					.createNewAnnotation((BTSCorpusObject) selection);
 			corpusNavigatorController.save(object);
 			eventBroker.post("model_add/BTSAnnotation", object);
 		}
