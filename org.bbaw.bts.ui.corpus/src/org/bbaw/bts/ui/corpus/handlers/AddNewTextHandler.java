@@ -1,8 +1,10 @@
 package org.bbaw.bts.ui.corpus.handlers;
 
+import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.bbaw.bts.btsmodel.BTSObject;
+import org.bbaw.bts.core.controller.generalController.PermissionsAndExpressionsEvaluationController;
 import org.bbaw.bts.core.corpus.controller.partController.CorpusNavigatorController;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSAnnotation;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
@@ -14,8 +16,13 @@ import org.eclipse.e4.ui.services.IServiceConstants;
 import org.eclipse.e4.ui.services.internal.events.EventBroker;
 import org.eclipse.swt.widgets.Shell;
 
+@SuppressWarnings("restriction")
 public class AddNewTextHandler
 {
+
+	@Inject
+	private PermissionsAndExpressionsEvaluationController permissionController;
+
 	@Execute
 	public void execute(@Named(IServiceConstants.ACTIVE_SELECTION) @Optional BTSCorpusObject selection,
 			@Named(IServiceConstants.ACTIVE_SHELL) final Shell shell, EventBroker eventBroker,
@@ -30,7 +37,13 @@ public class AddNewTextHandler
 	@CanExecute
 	public boolean canExecute(
 			@Named(IServiceConstants.ACTIVE_SELECTION) @Optional BTSObject selection) {
-		return (selection instanceof BTSCorpusObject && !(selection instanceof BTSAnnotation));
+		if (selection instanceof BTSCorpusObject && !(selection instanceof BTSAnnotation)) {
+			String dbCollectionName = String.format("%s_%s",
+					selection.getDBCollectionKey(),
+					((BTSCorpusObject)selection).getCorpusPrefix());
+			return permissionController.authenticatedUserMayAddToDBCollection(dbCollectionName);
+		}
+		return false;
 	}
 
 }
