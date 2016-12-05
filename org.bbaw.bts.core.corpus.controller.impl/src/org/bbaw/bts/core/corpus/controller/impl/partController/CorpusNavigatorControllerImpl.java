@@ -393,6 +393,12 @@ implements CorpusNavigatorController
 		return corpora;
 	}
 
+	@Override
+	public boolean isWriteable(BTSTextCorpus corpus) {
+		return permissionController.authenticatedUserMayAddToDBCollection(
+				getDBCollectionName(corpus));
+	}
+
 	private void sortBTSTextCorpus(List<BTSTextCorpus> list) {
 		Collections.sort(list, new BTSObjectByNameComparator());
 		
