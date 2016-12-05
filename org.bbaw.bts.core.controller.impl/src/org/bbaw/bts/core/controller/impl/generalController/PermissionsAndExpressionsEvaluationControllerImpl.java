@@ -724,6 +724,22 @@ public class PermissionsAndExpressionsEvaluationControllerImpl implements
 	}
 
 	@Override
+	public boolean authenticatedUserMayReadDBCollection(String dbCollectionName) {
+		BTSProjectDBCollection dbCollection = getDBCollection(dbCollectionName);
+		return authenticatedUserMayReadDBCollection(dbCollection);
+	}
+
+	@Override
+	public boolean authenticatedUserMayReadDBCollection(
+			BTSProjectDBCollection dbCollection) {
+		String userRole = evaluationService.highestRoleOfUserInDBCollection(authenticatedUser, dbCollection);
+		return (userRole != null && (userRole.equals(BTSCoreConstants.USER_ROLE_ADMINS)
+				|| userRole.equals(BTSCoreConstants.USER_ROLE_EDITORS)
+				|| userRole.equals(BTSCoreConstants.USER_ROLE_TRANSCRIBERS)
+				|| userRole.equals(BTSCoreConstants.USER_ROLE_RESEARCHERS)));
+	}
+
+	@Override
 	public boolean authenticatedUserMayDeleteProject(BTSProject project) {
 		if (!authenticatedUserIsDBAdmin(true))
 		{

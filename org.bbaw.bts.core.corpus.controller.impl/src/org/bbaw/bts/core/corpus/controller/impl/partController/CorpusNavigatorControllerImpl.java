@@ -9,6 +9,7 @@ import javax.inject.Inject;
 
 import org.bbaw.bts.btsviewmodel.TreeNodeWrapper;
 import org.bbaw.bts.commons.BTSConstants;
+import org.bbaw.bts.core.commons.BTSCoreConstants;
 import org.bbaw.bts.core.commons.comparator.BTSObjectByNameComparator;
 import org.bbaw.bts.core.commons.filter.BTSFilter;
 import org.bbaw.bts.core.controller.generalController.PermissionsAndExpressionsEvaluationController;
@@ -381,8 +382,11 @@ implements CorpusNavigatorController
 		List<BTSTextCorpus> corpora = new Vector<BTSTextCorpus>();
 		for (BTSTextCorpus c : textCorpusService.list(BTSConstants.OBJECT_STATE_ACTIVE, monitor))
 		{
-			String dbCollectionName = c.getDBCollectionKey() + "_" + c.getCorpusPrefix();
-			if (permissionController.authenticatedUserMayAddToDBCollection(dbCollectionName)) {
+			String dbCollectionName = String.format("%s_%s",
+					c.getDBCollectionKey(),
+					c.getCorpusPrefix());
+			if (c.getVisibility().equals(BTSCoreConstants.VISIBILITY_PUBLIC)
+					|| permissionController.authenticatedUserMayReadDBCollection(dbCollectionName)) {
 				checkAndFullyLoad(c, true);
 				corpora.add(c);
 			}

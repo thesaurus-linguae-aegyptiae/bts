@@ -100,8 +100,23 @@ public interface PermissionsAndExpressionsEvaluationController {
 	 */
 	boolean authenticatedUserMayAddToDBCollection(String dbCollectionName);
 
+	boolean authenticatedUserMayReadDBCollection(BTSProjectDBCollection dbCollection);
+
+	/**
+	 * Evaluates whether the current user is permitted to read objects of the corpus
+	 * specified by identifier in parameter. In order to evaluate correctly, the identifier
+	 * needs to conform to this format:
+	 * <p><code>"&lt;DBCollectionKey&gt;_&lt;CorpusPrefix&gt;"</code></p>
+	 * <p>I.e. <code>BTSDBBaseObject</code>'s <i>DB Collection Key</i> attribute, followed by underscore,
+	 * followed by <code>BTSCorpusObject</code>'s <i>Corpus Prefix</i> attribute.</p>
+	 *
+	 * @param dbCollectionName collection identifier, conforming to <code>"&lt;DBCollectionKey&gt;_&lt;CorpusPrefix&gt;"</code>. 
+	 * @return true, if user is allowed to read specified corpus
+	 */
+	boolean authenticatedUserMayReadDBCollection(String dbCollectionName);
+
 	boolean authenticatedUserMayDeleteProject(BTSProject project);
-	
+
 	boolean authenticatedUserMayDeleteUserOrUserGroup(BTSObject object);
 
 
