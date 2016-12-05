@@ -483,4 +483,11 @@ GenericCorpusObjectNavigatorController<E, K>
 		}
 		return nodes;
 	}
+
+	@Override
+	public String getDBCollectionName(E o) {
+		return String.format("%s_%s",
+			o.getDBCollectionKey(),
+			o.getCorpusPrefix());
+	}
 }

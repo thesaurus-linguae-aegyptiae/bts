@@ -382,9 +382,7 @@ implements CorpusNavigatorController
 		List<BTSTextCorpus> corpora = new Vector<BTSTextCorpus>();
 		for (BTSTextCorpus c : textCorpusService.list(BTSConstants.OBJECT_STATE_ACTIVE, monitor))
 		{
-			String dbCollectionName = String.format("%s_%s",
-					c.getDBCollectionKey(),
-					c.getCorpusPrefix());
+			String dbCollectionName = getDBCollectionName(c);
 			if (c.getVisibility().equals(BTSCoreConstants.VISIBILITY_PUBLIC)
 					|| permissionController.authenticatedUserMayReadDBCollection(dbCollectionName)) {
 				checkAndFullyLoad(c, true);
