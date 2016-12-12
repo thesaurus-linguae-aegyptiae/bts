@@ -95,6 +95,10 @@ public interface PermissionsAndExpressionsEvaluationController {
 	 * <p>I.e. <code>BTSDBBaseObject</code>'s <i>DB Collection Key</i> attribute, followed by underscore,
 	 * followed by <code>BTSCorpusObject</code>'s <i>Corpus Prefix</i> attribute.</p>
 	 *
+	 * <p><code>DBCollectionKey</code> attributes set to <code>BTSCorpusObject</code>s satisfy
+	 * this requirement, only in case of <code>BTSTextCorpus</code> objects, there is
+	 * some assembly required.</p>
+	 *
 	 * @param dbCollectionName collection identifier, conforming to <code>"&lt;DBCollectionKey&gt;_&lt;CorpusPrefix&gt;"</code>. 
 	 * @return true, if user is allowed to create object in specified corpus.
 	 */
@@ -109,6 +113,10 @@ public interface PermissionsAndExpressionsEvaluationController {
 	 * <p><code>"&lt;DBCollectionKey&gt;_&lt;CorpusPrefix&gt;"</code></p>
 	 * <p>I.e. <code>BTSDBBaseObject</code>'s <i>DB Collection Key</i> attribute, followed by underscore,
 	 * followed by <code>BTSCorpusObject</code>'s <i>Corpus Prefix</i> attribute.</p>
+	 *
+	 * <p><code>DBCollectionKey</code> attributes set to <code>BTSCorpusObject</code>s satisfy
+	 * this requirement, only in case of <code>BTSTextCorpus</code> objects, there is
+	 * some assembly required.</p>
 	 *
 	 * @param dbCollectionName collection identifier, conforming to <code>"&lt;DBCollectionKey&gt;_&lt;CorpusPrefix&gt;"</code>. 
 	 * @return true, if user is allowed to read specified corpus
