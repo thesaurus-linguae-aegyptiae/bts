@@ -2819,7 +2819,9 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 							painter.addAnnotationType(typeId+suffix,
 									strategyId+suffix);
 							painter.setAnnotationTypeColor(typeId+suffix,
-									BTSUIConstants.COLOR_ANNOTATTION);
+									typeId.endsWith(BTSAnnotationAnnotation.TYPE_RUBRUM)
+									? BTSUIConstants.COLOR_RUBRUM
+									: BTSUIConstants.COLOR_ANNOTATTION);
 							oruler.addAnnotationType(typeId+suffix);
 						} else {
 							painter.removeAnnotationType(typeId+suffix);
