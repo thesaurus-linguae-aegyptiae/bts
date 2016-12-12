@@ -23,6 +23,9 @@ public class AddNewTCObjectHandler
 	@Inject
 	private PermissionsAndExpressionsEvaluationController permissionController;
 
+	@Inject
+	private CorpusNavigatorController navigatorController;
+
 	@Execute
 	public void execute(@Named(IServiceConstants.ACTIVE_SELECTION) @Optional BTSCorpusObject selection,
 			@Named(IServiceConstants.ACTIVE_SHELL) final Shell shell, EventBroker eventBroker,
@@ -37,10 +40,8 @@ public class AddNewTCObjectHandler
 	public boolean canExecute(
 			@Named(IServiceConstants.ACTIVE_SELECTION) @Optional BTSObject selection) {
 		if (selection instanceof BTSCorpusObject && !(selection instanceof BTSAnnotation)) {
-			String dbCollectionName = String.format("%s_%s",
-					selection.getDBCollectionKey(),
-					((BTSCorpusObject) selection).getCorpusPrefix());
-			System.out.println("evaluating user permissions via permissioncontroller.");
+			String dbCollectionName = navigatorController.getDBCollectionName(
+					(BTSCorpusObject)selection);
 			return permissionController.authenticatedUserMayAddToDBCollection(dbCollectionName);
 		}
 		return false;
