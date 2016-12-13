@@ -47,6 +47,8 @@ import org.eclipse.swt.widgets.Text;
 
 public class CommentEditorDialog extends TitleAreaDialog {
 	private Text txtCommenttxt;
+
+	@Inject
 	private BTSComment comment;
 	
 	@Inject
@@ -81,10 +83,8 @@ public class CommentEditorDialog extends TitleAreaDialog {
 	 * @param parentShell
 	 */
 	@Inject
-	public CommentEditorDialog(Shell parentShell, BTSComment comment) {
+	public CommentEditorDialog(Shell parentShell) {
 		super(parentShell);
-		this.comment = comment;
-		
 	}
 
 	/**
