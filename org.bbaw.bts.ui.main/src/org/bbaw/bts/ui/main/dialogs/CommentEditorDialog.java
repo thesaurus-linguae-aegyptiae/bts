@@ -181,7 +181,8 @@ public class CommentEditorDialog extends TitleAreaDialog {
 	}
 
 	private void checkRightsAndSetEditable() {
-		editable = permissionsController.authenticatedUserMayEditObject(comment);
+		editable = permissionsController.userMayEditObject(
+				permissionsController.getAuthenticatedUser(), comment);
 		txtTitletxt.setEditable(editable);
 		txtCommenttxt.setEditable(editable);
 		relationsEditor.setEnabled(editable);
