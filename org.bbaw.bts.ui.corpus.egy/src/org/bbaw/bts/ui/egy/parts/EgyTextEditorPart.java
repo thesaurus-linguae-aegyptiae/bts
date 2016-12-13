@@ -2818,8 +2818,10 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 						if (strategyId != null) {
 							painter.addAnnotationType(typeId+suffix,
 									strategyId+suffix);
-							painter.setAnnotationTypeColor(typeId+suffix,
-									BTSUIConstants.COLOR_ANNOTATTION);
+							if (typeId.startsWith(BTSAnnotationAnnotation.TYPE)) {
+								painter.setAnnotationTypeColor(typeId+suffix,
+										BTSUIConstants.COLOR_ANNOTATTION);
+							}
 							oruler.addAnnotationType(typeId+suffix);
 						} else {
 							painter.removeAnnotationType(typeId+suffix);
