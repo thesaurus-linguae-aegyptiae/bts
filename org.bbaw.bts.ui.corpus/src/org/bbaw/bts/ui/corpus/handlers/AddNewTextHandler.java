@@ -41,7 +41,6 @@ public class AddNewTextHandler
 	public boolean canExecute(
 			@Named(IServiceConstants.ACTIVE_SELECTION) @Optional BTSObject selection) {
 		if (selection instanceof BTSCorpusObject && !(selection instanceof BTSAnnotation)) {
-			System.out.println("selected object: "+selection.getClass().getName());
 			String dbCollectionName = navigatorController.getDBCollectionName(
 					(BTSCorpusObject)selection);
 			return permissionController.authenticatedUserMayAddToDBCollection(dbCollectionName);
