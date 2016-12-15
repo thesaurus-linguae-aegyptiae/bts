@@ -28,7 +28,6 @@ Bundle-ClassPath: .,
  libs/lucene-spatial-4.10.4.jar,
  libs/lucene-suggest-4.10.4.jar,
  libs/spatial4j-0.4.1.jar,
- libs/elasticsearch-head/,
  libs/elasticsearch-river-couchdb-2.6.0.jar
 Export-Package: org.apache.lucene.util,
  org.elasticsearch,

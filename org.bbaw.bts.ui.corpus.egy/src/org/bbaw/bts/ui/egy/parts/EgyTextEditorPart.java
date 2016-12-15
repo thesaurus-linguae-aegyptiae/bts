@@ -630,9 +630,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 							.newEditor(xtextResourceProvider)
 							.showAnnotations(
 									"org.eclipse.xtext.ui.editor.error",
-									"org.eclipse.xtext.ui.editor.warning",
-									BTSSentenceAnnotation.TYPE_HIGHLIGHTED,
-									BTSConstants.ANNOTATION)
+									"org.eclipse.xtext.ui.editor.warning")
 							.withParent(embeddedEditorComp);
 
 					embeddedEditorModelAccess = embeddedEditor
@@ -2833,8 +2831,8 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 						oruler.removeAnnotationType(typeId+suffix);
 					}
 				}
+				painter.paint(IPainter.INTERNAL);
 			}
-			painter.paint(IPainter.INTERNAL);
 		}
 	}
 
