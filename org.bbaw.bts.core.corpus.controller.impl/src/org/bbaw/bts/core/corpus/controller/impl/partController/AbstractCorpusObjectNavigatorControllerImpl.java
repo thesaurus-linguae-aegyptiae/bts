@@ -26,6 +26,7 @@ import org.bbaw.bts.core.services.IDService;
 import org.bbaw.bts.core.services.corpus.CorpusObjectService;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSAnnotation;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSTextCorpus;
 import org.bbaw.bts.searchModel.BTSModelUpdateNotification;
 import org.bbaw.bts.searchModel.BTSQueryResultAbstract;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -482,5 +483,16 @@ GenericCorpusObjectNavigatorController<E, K>
 			}
 		}
 		return nodes;
+	}
+
+	@Override
+	public String getDBCollectionName(E o) {
+		if (o instanceof BTSTextCorpus) {
+			return String.format("%s_%s",
+				o.getDBCollectionKey(),
+				o.getCorpusPrefix());
+		} else {
+			return o.getDBCollectionKey();
+		}
 	}
 }

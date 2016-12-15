@@ -118,7 +118,7 @@ public class CorpusNavigatorPart extends NavigatorPart implements ScatteredCachi
 	private ESelectionService selectionService;
 
 	@Inject
-	private PermissionsAndExpressionsEvaluationController evaluationController;
+	private PermissionsAndExpressionsEvaluationController permissionController;
 
 	@Inject
 	private BTSResourceProvider resourceProvider;
@@ -442,7 +442,8 @@ labelProvider));
 			mainTextCorpus = context.get(BTSPluginIDs.PREF_MAIN_CORPUS);
 		}
 		if (selectedTextCorpus != null && selectedTextCorpus.getDBCollectionKey() != null
-				&& (mainTextCorpus == null || !mainTextCorpus.equals(selectedTextCorpus)))
+				&& (mainTextCorpus == null || !mainTextCorpus.equals(selectedTextCorpus))
+				&& (corpusNavigatorController.isWriteable(selectedTextCorpus)))
 		{
 			ConfigurationScope.INSTANCE.getNode("org.bbaw.bts.app").put(BTSPluginIDs.PREF_MAIN_CORPUS_KEY, selectedTextCorpus.getDBCollectionKey()+ "_" + selectedTextCorpus.getCorpusPrefix());
 			// update instance scope so that new value is injected
@@ -466,7 +467,6 @@ labelProvider));
 				logger.error(e);
 			}
 		}
-		
 	}
 
 	private BTSTextCorpus findParentCorpusRecursively(
@@ -765,7 +765,7 @@ labelProvider));
 			loaded = true;
 			loadInput(mainTabItemComp, mainTreeViewer, mainRootNode, false);
 		}
-		evaluationController
+		permissionController
 				.activateDBCollectionContext("corpus");
 	}
 

@@ -57,4 +57,6 @@ public interface GenericCorpusObjectNavigatorController <E extends BTSCorpusObje
 	boolean checkAndFullyLoad(BTSCorpusObject object, boolean checkForConflicts);
 	
 	List<TreeNodeWrapper> loadNodes(List<E> obs, IProgressMonitor monitor, boolean asStructuredTree);
+
+	String getDBCollectionName(E o);
 }
