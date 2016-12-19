@@ -131,14 +131,10 @@ public class BTSTCObjectServiceImpl extends AbstractCorpusObjectServiceImpl<BTST
 			boolean registerQuery, IProgressMonitor monitor)
 	{
 		List<BTSTCObject> objects = new Vector<BTSTCObject>();
-		for (String p : getActiveProjects())
-		{
-			for (String c : getActive_corpora(p))
-			{
-				objects.addAll(bTSTCObjectDao.query(query, c, c, objectState,
-						registerQuery));
-			}
-		}
+		String[] indexArray = buildIndexArray();
+
+		objects.addAll(bTSTCObjectDao.query(query, indexArray, indexArray, objectState,
+				registerQuery));
 		return filter(objects);
 	}
 	@Override
@@ -213,14 +209,10 @@ public class BTSTCObjectServiceImpl extends AbstractCorpusObjectServiceImpl<BTST
 	@Override
 	public List<String> queryAsJsonString(BTSQueryRequest query, String objectState, IProgressMonitor monitor) {
 		List<String> objects = new Vector<String>();
-		for (String p : getActiveProjects())
-		{
-			for (String c : getActive_corpora(p))
-			{
-				objects.addAll(bTSTCObjectDao.queryAsJsonString(query, c, c, objectState,
-						false));
-			}
-		}
+		String[] indexArray = buildIndexArray();
+
+		objects.addAll(bTSTCObjectDao.queryAsJsonString(query, indexArray, indexArray, objectState,
+				false));
 		return objects;
 	}
 	

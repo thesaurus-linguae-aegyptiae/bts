@@ -291,14 +291,10 @@ implements 	CorpusObjectService, BTSObjectSearchService, MoveObjectAmongProjectD
 	private List<BTSCorpusObject> find(BTSQueryRequest query, String objectState)
 	{
 		List<BTSCorpusObject> objects = new Vector<BTSCorpusObject>();
-		for (String p : getActiveProjects())
-		{
-			for (String c : getActive_corpora(p))
-			{
-				objects.addAll(corpusObjectDao.query(query, c, c, objectState,
-						false));
-			}
-		}
+		String[] indexArray = buildIndexArray();
+
+		objects.addAll(corpusObjectDao.query(query, indexArray, indexArray, objectState,
+				false));
 		return filter(objects);
 	}
 
@@ -377,60 +373,51 @@ implements 	CorpusObjectService, BTSObjectSearchService, MoveObjectAmongProjectD
 		List<BTSCorpusObject> objects = new Vector<BTSCorpusObject>();
 		if (query.getDbPath() != null && query.getDbPath().endsWith(BTSCorpusConstants.THS))
 		{
-			for (String p : getActiveProjects()) {
-				try {
-					objects.addAll(corpusObjectDao.query(query, p
-							+ BTSCorpusConstants.THS, p
-							+ BTSCorpusConstants.THS, objectState,
-							registerQuery));
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				if (monitor != null)
-				{
-					if (monitor.isCanceled()) return filter(objects);
-					monitor.worked(20);
-				}
+			String[] indexArray = thsService.buildIndexArray();
+			try {
+				objects.addAll(corpusObjectDao.query(query, indexArray, indexArray, objectState,
+						registerQuery));
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			if (monitor != null)
+			{
+				if (monitor.isCanceled()) return filter(objects);
+				monitor.worked(20);
 			}
 		}
 		else if (query.getDbPath() != null && query.getDbPath().endsWith(BTSCorpusConstants.WLIST))
 		{
-			for (String p : getActiveLemmaLists()) {
-				try {
-					objects.addAll(corpusObjectDao.query(query, p
-							+ BTSCorpusConstants.WLIST, p
-							+ BTSCorpusConstants.WLIST, objectState,
-							registerQuery));
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				if (monitor != null)
-				{
-					if (monitor.isCanceled()) return filter(objects);
-					monitor.worked(5);
-				}
+			String[] indexArray = lemmaEntryService.buildIndexArray();
+			try {
+				objects.addAll(corpusObjectDao.query(query, indexArray, indexArray, objectState,
+						registerQuery));
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			if (monitor != null)
+			{
+				if (monitor.isCanceled()) return filter(objects);
+				monitor.worked(5);
 			}
 		}
 		else
 		{
-			for (String p : getActiveProjects()) {
-				for (String c : getActive_corpora(p)) {
-					
-					try {
-						objects.addAll(corpusObjectDao.query(query, c, c, objectState,
-								registerQuery));
-					} catch (Exception e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-					if (monitor != null)
-					{
-						if (monitor.isCanceled()) return filter(objects);
-						monitor.worked(5);
-					}
-				}
+			String[] indexArray = buildIndexArray();
+
+			try {
+				objects.addAll(corpusObjectDao.query(query, indexArray, indexArray, objectState,
+						false));
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			if (monitor != null)
+			{
+				if (monitor.isCanceled()) return objects;
+				monitor.worked(5);
 			}
 		}
 		return filter(objects);
@@ -617,60 +604,51 @@ implements 	CorpusObjectService, BTSObjectSearchService, MoveObjectAmongProjectD
 		
 		if (query.getDbPath() != null && query.getDbPath().endsWith(BTSCorpusConstants.THS))
 		{
-			for (String p : getActiveProjects()) {
-				try {
-					objects.addAll(corpusObjectDao.queryAsJsonString(query, p
-							+ BTSCorpusConstants.THS, p
-							+ BTSCorpusConstants.THS, objectState,
-							false));
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				if (monitor != null)
-				{
-					if (monitor.isCanceled()) return objects;
-					monitor.worked(20);
-				}
+			String[] indexArray = thsService.buildIndexArray();
+			try {
+				objects.addAll(corpusObjectDao.queryAsJsonString(query, indexArray, indexArray, objectState,
+						false));
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			if (monitor != null)
+			{
+				if (monitor.isCanceled()) return objects;
+				monitor.worked(20);
 			}
 		}
 		else if (query.getDbPath() != null && query.getDbPath().endsWith(BTSCorpusConstants.WLIST))
 		{
-			for (String p : getActiveLemmaLists()) {
-				try {
-					objects.addAll(corpusObjectDao.queryAsJsonString(query, p
-							+ BTSCorpusConstants.WLIST, p
-							+ BTSCorpusConstants.WLIST, objectState,
-							false));
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				if (monitor != null)
-				{
-					if (monitor.isCanceled()) return objects;
-					monitor.worked(5);
-				}
+			String[] indexArray = lemmaEntryService.buildIndexArray();
+			try {
+				objects.addAll(corpusObjectDao.queryAsJsonString(query, indexArray, indexArray, objectState,
+						false));
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			if (monitor != null)
+			{
+				if (monitor.isCanceled()) return objects;
+				monitor.worked(5);
 			}
 		}
 		else
 		{
-			for (String p : getActiveProjects()) {
-				for (String c : getActive_corpora(p)) {
-					
-					try {
-						objects.addAll(corpusObjectDao.queryAsJsonString(query, c, c, objectState,
-								false));
-					} catch (Exception e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-					if (monitor != null)
-					{
-						if (monitor.isCanceled()) return objects;
-						monitor.worked(5);
-					}
-				}
+			String[] indexArray = buildIndexArray();
+
+			try {
+				objects.addAll(corpusObjectDao.queryAsJsonString(query, indexArray, indexArray, objectState,
+						false));
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			if (monitor != null)
+			{
+				if (monitor.isCanceled()) return objects;
+				monitor.worked(5);
 			}
 		}
 		return objects;

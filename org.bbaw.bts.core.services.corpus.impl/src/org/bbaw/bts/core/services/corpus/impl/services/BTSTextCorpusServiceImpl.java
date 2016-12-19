@@ -1,5 +1,6 @@
 package org.bbaw.bts.core.services.corpus.impl.services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
@@ -168,15 +169,21 @@ public class BTSTextCorpusServiceImpl extends AbstractCorpusObjectServiceImpl<BT
 			boolean registerQuery, IProgressMonitor monitor)
 	{
 		List<BTSTextCorpus> objects = new Vector<BTSTextCorpus>();
+		String[] indexArray = buildIndexArray();
+
+		objects.addAll(textCorpusDao.query(query, indexArray, indexArray,
+				objectState, registerQuery));
+		return checkCorporaActive(filter(objects));
+	}
+	
+	@Override
+	public String[] buildIndexArray() {
+		List<String> indexNames = new ArrayList<String>();
 		for (String p : getActiveProjects())
 		{
-
-			objects.addAll(textCorpusDao.query(query, p
-					+ BTSCorpusConstants.CORPUS, p + BTSCorpusConstants.CORPUS,
-					objectState, registerQuery));
-
+			indexNames.add(p + BTSCorpusConstants.CORPUS);
 		}
-		return checkCorporaActive(filter(objects));
+		return indexNames.toArray(new String[indexNames.size()]);
 	}
 	@Override
 	public List<BTSTextCorpus> query(BTSQueryRequest query, String objectState, IProgressMonitor monitor) {
@@ -300,14 +307,10 @@ public class BTSTextCorpusServiceImpl extends AbstractCorpusObjectServiceImpl<BT
 	@Override
 	public List<String> queryAsJsonString(BTSQueryRequest query, String objectState, IProgressMonitor monitor) {
 		List<String> objects = new Vector<String>();
-		for (String p : getActiveProjects())
-		{
+		String[] indexArray = buildIndexArray();
 
-			objects.addAll(textCorpusDao.queryAsJsonString(query, p
-					+ BTSCorpusConstants.CORPUS, p + BTSCorpusConstants.CORPUS,
-					objectState, false));
-
-		}
+		objects.addAll(textCorpusDao.queryAsJsonString(query, indexArray, indexArray,
+				objectState, false));
 		return objects;
 	}
 }

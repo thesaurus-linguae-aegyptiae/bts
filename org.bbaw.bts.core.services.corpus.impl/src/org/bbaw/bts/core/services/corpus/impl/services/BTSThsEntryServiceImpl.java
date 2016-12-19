@@ -1,5 +1,6 @@
 package org.bbaw.bts.core.services.corpus.impl.services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Vector;
@@ -131,18 +132,25 @@ implements BTSThsEntryService, BTSObjectSearchService {
 	public List<BTSThsEntry> query(BTSQueryRequest query, String objectState,
 			boolean registerQuery, IProgressMonitor monitor) {
 		List<BTSThsEntry> objects = new Vector<BTSThsEntry>();
-		for (String p : getActiveThss()) {
+		String[] indexArray = buildIndexArray();
 
-			try {
-				objects.addAll(thsEntryDao.query(query, p + BTSCorpusConstants.THS, p
-						+ BTSCorpusConstants.THS, objectState, registerQuery));
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
+		try {
+			objects.addAll(thsEntryDao.query(query, indexArray, indexArray, objectState, registerQuery));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return filter(objects);
+	}
+	
+	@Override
+	public String[] buildIndexArray() {
+		List<String> indexNames = new ArrayList<String>();
+		for (String p : getActiveThss())
+		{
+			indexNames.add(p + BTSCorpusConstants.THS);
+		}
+		return indexNames.toArray(new String[indexNames.size()]);
 	}
 	@Override
 	public List<BTSThsEntry> query(BTSQueryRequest query, String objectState, IProgressMonitor monitor) {
@@ -219,16 +227,13 @@ implements BTSThsEntryService, BTSObjectSearchService {
 	@Override
 	public List<String> queryAsJsonString(BTSQueryRequest query, String objectState, IProgressMonitor monitor) {
 		List<String> objects = new Vector<String>();
-		for (String p : getActiveThss()) {
+		String[] indexArray = buildIndexArray();
 
-			try {
-				objects.addAll(thsEntryDao.queryAsJsonString(query, p + BTSCorpusConstants.THS, p
-						+ BTSCorpusConstants.THS, objectState, false));
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
+		try {
+			objects.addAll(thsEntryDao.queryAsJsonString(query, indexArray, indexArray, objectState, false));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return objects;
 	}

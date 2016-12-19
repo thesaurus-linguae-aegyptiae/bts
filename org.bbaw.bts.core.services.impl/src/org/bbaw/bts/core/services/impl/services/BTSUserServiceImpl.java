@@ -124,8 +124,10 @@ public class BTSUserServiceImpl extends GenericObjectServiceImpl<BTSUser, String
 	public List<BTSUser> query(BTSQueryRequest query, String objectState,
 			boolean registerQuery, IProgressMonitor monitor)
 	{
-		List<BTSUser> objects = userDao.query(query, BTSCoreConstants.ADMIN,
-				BTSCoreConstants.ADMIN, objectState, registerQuery);
+		String[] indexArray = new String[]{BTSCoreConstants.ADMIN};
+
+		List<BTSUser> objects = userDao.query(query, indexArray,
+				indexArray, objectState, registerQuery);
 		return filter(objects);
 	}
 
@@ -432,8 +434,10 @@ public class BTSUserServiceImpl extends GenericObjectServiceImpl<BTSUser, String
 	 */
 	@Override
 	public List<String> queryAsJsonString(BTSQueryRequest query, String objectState, IProgressMonitor monitor) {
-		List<String> objects = userDao.queryAsJsonString(query, BTSCoreConstants.ADMIN,
-				BTSCoreConstants.ADMIN, objectState, false);
+		String[] indexArray = new String[]{BTSCoreConstants.ADMIN};
+
+		List<String> objects = userDao.queryAsJsonString(query, indexArray,
+				indexArray, objectState, false);
 		return objects;
 	}
 

@@ -303,4 +303,19 @@ implements GenericCorpusObjectService<E, K>{
 		}
 		return false;
 	}
+	
+	/**
+	 * @return
+	 */
+	public String[] buildIndexArray() {
+		List<String> indexNames = new ArrayList<String>();
+		for (String p : getActiveProjects())
+		{
+			for (String c : getActive_corpora(p))
+			{
+				indexNames.add(c);
+			}
+		}
+		return indexNames.toArray(new String[indexNames.size()]);
+	}
 }

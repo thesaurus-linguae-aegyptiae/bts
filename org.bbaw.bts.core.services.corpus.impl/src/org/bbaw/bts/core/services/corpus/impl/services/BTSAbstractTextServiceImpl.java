@@ -1,5 +1,6 @@
 package org.bbaw.bts.core.services.corpus.impl.services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Vector;
@@ -131,19 +132,27 @@ implements BTSAbstractTextService, BTSObjectSearchService {
 	public List<BTSAbstractText> query(BTSQueryRequest query, String objectState,
 			boolean registerQuery, IProgressMonitor monitor) {
 		List<BTSAbstractText> objects = new Vector<BTSAbstractText>();
-		for (String p : getActiveProjects()) {
+		String[] indexArray = buildIndexArray();
 
-			try {
-				objects.addAll(atextDao.query(query, p + BTSCorpusConstants.ATEXT, p
-						+ BTSCorpusConstants.ATEXT, objectState, registerQuery));
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
+		try {
+			objects.addAll(atextDao.query(query, indexArray, indexArray, objectState, registerQuery));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return filter(objects);
 	}
+	
+	@Override
+	public String[] buildIndexArray() {
+		List<String> indexNames = new ArrayList<String>();
+		for (String p : getActiveProjects())
+		{
+			indexNames.add(p + BTSCorpusConstants.ATEXT);
+		}
+		return indexNames.toArray(new String[indexNames.size()]);
+	}
+	
 	@Override
 	public List<BTSAbstractText> query(BTSQueryRequest query, String objectState, IProgressMonitor monitor) {
 		return query(query, objectState, true, monitor);
@@ -219,16 +228,13 @@ implements BTSAbstractTextService, BTSObjectSearchService {
 	@Override
 	public List<String> queryAsJsonString(BTSQueryRequest query, String objectState, IProgressMonitor monitor) {
 		List<String> objects = new Vector<String>();
-		for (String p : getActiveProjects()) {
+		String[] indexArray = buildIndexArray();
 
-			try {
-				objects.addAll(atextDao.queryAsJsonString(query, p + BTSCorpusConstants.ATEXT, p
-						+ BTSCorpusConstants.ATEXT, objectState, false));
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
+		try {
+			objects.addAll(atextDao.queryAsJsonString(query, indexArray, indexArray, objectState, false));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return objects;
 	}
