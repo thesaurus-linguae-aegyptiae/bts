@@ -792,13 +792,15 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 		}
 					
 		//execute query
-		response = srq.setFrom(0)
-				.setSize(1000)
+		response = srq.setFrom(query.getFrom())
+				.setSize(query.getSize())
 				.setExplain(true)
 				.execute()
 				.actionGet();
 		List<E> result = loadResultFromSearchResponse(response, indexName);
 		
+		query.setQueryResponse(response);
+		query.setTotalResultSize(response.getHits().getTotalHits());
 		if (registerQuery) {
 			try {
 				registerQueryWithPercolator(query, indexName, indexType);
