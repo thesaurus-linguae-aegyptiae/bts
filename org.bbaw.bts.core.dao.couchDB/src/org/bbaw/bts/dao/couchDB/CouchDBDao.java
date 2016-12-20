@@ -719,12 +719,13 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 			String[] indexTypes, String objectState, boolean registerQuery) {
 		
 		// check if index exists
-		boolean hasIndex = connectionProvider.getSearchClient(Client.class).admin().indices().exists(new IndicesExistsRequest(indexNames)).actionGet()
-				.isExists();
-		if (!hasIndex)
-		{
-			return new Vector<E>(0);
-		}
+		// not necessary anymore thanks to faster search over array of indices
+//		boolean hasIndex = connectionProvider.getSearchClient(Client.class).admin().indices().exists(new IndicesExistsRequest(indexNames)).actionGet()
+//				.isExists();
+//		if (!hasIndex)
+//		{
+//			return new Vector<E>(0);
+//		}
 		// check for ID Query
 		if (query.isIdQuery())
 		{
@@ -825,12 +826,14 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 			String[] indexTypes, String objectState, boolean registerQuery) {
 		
 		// check if index exists
-		boolean hasIndex = connectionProvider.getSearchClient(Client.class).admin().indices().exists(new IndicesExistsRequest(indexNames)).actionGet()
-				.isExists();
-		if (!hasIndex)
-		{
-			return new Vector<String>(0);
-		}
+		// not necessary anymore thanks to faster search over array of indices
+
+//		boolean hasIndex = connectionProvider.getSearchClient(Client.class).admin().indices().exists(new IndicesExistsRequest(indexNames)).actionGet()
+//				.isExists();
+//		if (!hasIndex)
+//		{
+//			return new Vector<String>(0);
+//		}
 		// check for ID Query
 		if (query.isIdQuery())
 		{
@@ -887,8 +890,8 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 		srq.setFetchSource(true);
 					
 		//execute query
-		response = srq.setFrom(0)
-				.setSize(1000)
+		response = srq.setFrom(query.getFrom())
+				.setSize(query.getSize())
 				.setExplain(true)
 				.execute()
 				.actionGet();
