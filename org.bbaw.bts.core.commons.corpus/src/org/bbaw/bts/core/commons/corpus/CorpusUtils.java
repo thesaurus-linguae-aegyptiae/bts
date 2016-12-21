@@ -79,10 +79,10 @@ public class CorpusUtils {
 			if (typeConfigItem != null)
 			{
 				elementType += TYPE_PATH_DELIMITER + typeConfigItem.getValue();
-			}
-			if (subtypeConfigItem != null)
-			{
-				elementType += TYPE_PATH_DELIMITER + subtypeConfigItem.getValue();
+				if (subtypeConfigItem != null)
+				{
+					elementType += TYPE_PATH_DELIMITER + subtypeConfigItem.getValue();
+				}
 			}
 		}
 		else
