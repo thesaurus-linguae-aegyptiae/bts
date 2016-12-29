@@ -101,7 +101,7 @@ public class TextAnnotationSettingsPage extends FieldEditorPreferencePage {
 			public void widgetSelected(SelectionEvent e) {
 				Preferences newNode = annotationsNode.create(annotationsNode, "node" + annotationsNodes.size());
 				annotationsNodes.add((EclipsePreferences) newNode);
-				addEditor(newNode, annotationsNodes.size() - 1);
+				addEditor(newNode);
 				Point p = sc.getSize();
 				sc.setSize(p.x + variant, p.y);
 				variant  = -variant;
@@ -149,12 +149,9 @@ public class TextAnnotationSettingsPage extends FieldEditorPreferencePage {
 	private void loadContents() {
 		settingsEditors = new Vector<TextAnnotationSettingsEditor>(annotationsNodes.size());
 
-		int index = 0;
 		for (Preferences node : annotationsNodes)
 		{
-			addEditor(node, index);
-			
-			index++;
+			addEditor(node);
 		}
 	}
 
@@ -162,16 +159,14 @@ public class TextAnnotationSettingsPage extends FieldEditorPreferencePage {
 	 * @param node
 	 * @param index
 	 */
-	private void addEditor(Preferences node, int index) {
-		String nodePath = "node:" + index + ":" 
-				+ node.absolutePath();
+	private void addEditor(Preferences node) {
 		Composite composite = new Composite(child, SWT.NONE);
 		composite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true,
 				true, 1, 1));
 		composite.setLayout(new GridLayout(1, true));
 		((GridLayout) composite.getLayout()).marginWidth = 0;
 		((GridLayout) composite.getLayout()).marginHeight = 0;
-		IEclipseContext child = context.createChild(nodePath);
+		IEclipseContext child = context.createChild(node.absolutePath());
 
 		child.set(Composite.class, composite);
 		child.set(Preferences.class, node);
