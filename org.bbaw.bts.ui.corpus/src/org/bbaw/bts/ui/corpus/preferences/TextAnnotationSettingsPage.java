@@ -99,7 +99,7 @@ public class TextAnnotationSettingsPage extends FieldEditorPreferencePage {
 
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				Preferences newNode = annotationsNode.create(annotationsNode, "node" + (annotationsNodes.size() - 1));
+				Preferences newNode = annotationsNode.create(annotationsNode, "node" + annotationsNodes.size());
 				annotationsNodes.add((EclipsePreferences) newNode);
 				addEditor(newNode, annotationsNodes.size() - 1);
 				Point p = sc.getSize();
