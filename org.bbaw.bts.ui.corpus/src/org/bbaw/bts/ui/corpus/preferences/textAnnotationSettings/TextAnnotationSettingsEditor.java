@@ -320,7 +320,7 @@ public class TextAnnotationSettingsEditor extends Composite {
 		{
 			StructuredSelection sel = (StructuredSelection) subtypeCMB_Main_viewer.getSelection();
 			BTSConfigItem item = (BTSConfigItem) sel.getFirstElement();
-			if (item != null && !"".equals(item.getValue()))
+			if (item != null && item.getValue() != null && !"".equals(item.getValue()))
 			{
 				node.put(BTSCorpusConstants.PREF_ANNOTATION_SUBTYPE, item.getValue());
 			}
