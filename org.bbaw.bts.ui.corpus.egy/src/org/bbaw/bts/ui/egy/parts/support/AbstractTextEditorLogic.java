@@ -33,9 +33,33 @@ public abstract class AbstractTextEditorLogic {
 	protected AnnotationPainter painter;
 	private Set<String> annotationStrategySet = null;
 
-	protected Set<String> configureEditorDrawingStrategies(AnnotationPainter painter, OverviewRuler oruler, EclipsePreferences preferences) {
 
-		Set <String> annotationStrategySet = new HashSet<String>();
+	private void addStrategy(String identifier, Color color, ITextStyleStrategy strategy) {
+		painter.addTextStyleStrategy(identifier, strategy);
+		addStrategyReferences(identifier, color);
+	}
+
+	private void addStrategy(String identifier, Color color, IDrawingStrategy strategy) {
+		painter.addDrawingStrategy(identifier, strategy);
+		addStrategyReferences(identifier, color);
+	}
+
+	private void addStrategyReferences(String identifier, Color color) {
+		painter.addAnnotationType(identifier, identifier);
+		painter.setAnnotationTypeColor(identifier, color);
+		annotationStrategySet.add(identifier);
+	}
+
+	protected Set<String> getAnnotationStrategySet() {
+		if (annotationStrategySet == null) {
+			configureEditorDrawingStrategies(null, null);
+		}
+		return annotationStrategySet;
+	}
+
+	protected void configureEditorDrawingStrategies(OverviewRuler oruler, EclipsePreferences preferences) {
+		annotationStrategySet = new HashSet<String>();
+
 		// set basic rulers
 		if (oruler != null)
 		{
@@ -307,7 +331,6 @@ public abstract class AbstractTextEditorLogic {
 						BTSUIConstants.COLOR_RUBRUM);
 			}
 		}
-		return annotationStrategySet;
 	}
 	
 

@@ -660,7 +660,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 					oruler = EmbeddedEditorFactory.getOverViewRuler();
 					
 					
-					annotationStrategySet = configureEditorDrawingStrategies(painter, oruler, annotationSettings);
+					configureEditorDrawingStrategies(oruler, annotationSettings);
 					if (show_line_number_ruler)
 					{
 						lineNumberRulerColumn = new EgyLineNumberRulerColumn(LINE_SPACE);
@@ -2746,7 +2746,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 					Preferences rootNode = ConfigurationScope.INSTANCE.getNode("org.bbaw.bts.ui.corpus");
 					annotationSettings = (EclipsePreferences) rootNode.node(BTSCorpusConstants.PREF_ANNOTATION_SETTINGS);
 					AnnotationToolbarItemCreator.processAndUpateToolbarItemsAnnotationShortcut(part, annotationSettings);
-					configureEditorDrawingStrategies(painter, oruler, annotationSettings);
+					configureEditorDrawingStrategies(oruler, annotationSettings);
 
 				}
 			});
@@ -2790,7 +2790,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 			for (Entry<String, Boolean> e : filters.entrySet()) {
 				String typeId = e.getKey();
 				String strategyId = null;
-				if (annotationStrategySet.contains(typeId))
+				if (getAnnotationStrategySet().contains(typeId))
 				{
 					strategyId = typeId;
 				}

@@ -279,7 +279,7 @@ public class EgyLemmaEditorPart extends AbstractTextEditorLogic implements IBTSE
 		};
 		painter = new AnnotationPainter(embeddedEditor.getViewer(),
 				annotationAccess);
-		configureEditorDrawingStrategies(painter, null, annotationSettings);
+		configureEditorDrawingStrategies(null, annotationSettings);
 		embeddedEditor.getViewer().addTextPresentationListener(painter);
 		embeddedEditor.getViewer().addPainter(painter);
 		grpTransliteration.layout();
