@@ -195,7 +195,6 @@ public class EgyLemmaEditorPart extends AbstractTextEditorLogic implements IBTSE
 	private Set<Command> localCommandCacheSet = new HashSet<Command>();
 	protected boolean loading;
 	private TranslationEditorComposite lemmaTranslate_Editor;
-	private AnnotationPainter painter;
 	private HashMap<String, List<Object>> lemmaAnnotationMap;
 	private Job processLemmaAnnotionsJob;
 	

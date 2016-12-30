@@ -302,9 +302,6 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 	/** The embedded editor parent comp. */
 	private Composite embeddedEditorParentComp;
 
-	/** The painter. */
-	private AnnotationPainter painter;
-
 	/** The ruler. */
 	private CompositeRuler ruler;
 
@@ -423,9 +420,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 
 	private EclipsePreferences annotationSettings;
 
-	private Set<String> annotationStrategySet;
 
-	
 	/**
 	 * Instantiates a new egy text editor part.
 	 *

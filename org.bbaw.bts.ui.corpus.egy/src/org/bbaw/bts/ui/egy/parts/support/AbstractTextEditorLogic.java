@@ -30,6 +30,8 @@ public abstract class AbstractTextEditorLogic {
 	
 	protected static final String[] ANNO_TYPES_SUFFIXES = new String[]{"", ".highlighted"};
 
+	protected AnnotationPainter painter;
+	private Set<String> annotationStrategySet = null;
 
 	protected Set<String> configureEditorDrawingStrategies(AnnotationPainter painter, OverviewRuler oruler, EclipsePreferences preferences) {
 
