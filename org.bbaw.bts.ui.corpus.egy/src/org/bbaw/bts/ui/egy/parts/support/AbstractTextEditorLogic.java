@@ -113,14 +113,14 @@ public abstract class AbstractTextEditorLogic {
 		
 		// subtext
 		// XXX we need to use prefix 'Text' for this. It's in BASIC_OBJECT_TYPES[5]
-		addStrategy(//BTSConstants.BASIC_OBJECT_TYPES[5] + CorpusUtils.TYPE_PATH_DELIMITER +
-				BTSConstants.ANNOTATION_SUBTEXT,
+		addStrategy(BTSConstants.BASIC_OBJECT_TYPES[5] + CorpusUtils.TYPE_PATH_DELIMITER
+				+ BTSConstants.ANNOTATION_SUBTEXT,
 				BTSUIConstants.COLOR_SUBTEXT,
 				new SubtextdrawingStrategy());
 		// highlighted subtext
 		// XXX again: prefix needed. marked for uglyness.
-		addStrategy(//BTSConstants.BASIC_OBJECT_TYPES[5] + CorpusUtils.TYPE_PATH_DELIMITER +
-				BTSConstants.ANNOTATION_SUBTEXT + BTSModelAnnotation.HIGHLIGHTED,
+		addStrategy(BTSConstants.BASIC_OBJECT_TYPES[5] + CorpusUtils.TYPE_PATH_DELIMITER
+				+ BTSConstants.ANNOTATION_SUBTEXT + BTSModelAnnotation.HIGHLIGHTED,
 				BTSUIConstants.COLOR_SUBTEXT,
 				new SubtextHighlightedDrawingStrategy());
 

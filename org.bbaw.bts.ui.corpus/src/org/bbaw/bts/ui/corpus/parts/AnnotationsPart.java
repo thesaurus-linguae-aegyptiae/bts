@@ -214,9 +214,11 @@ public class AnnotationsPart implements EventHandler {
 		HashMap<String, Boolean> filters = new HashMap<String, Boolean>();
 		// retrieve annotations part viewmenu
 		MMenu viewmenu = null;
-		for (MMenu m : part.getMenus())
-			if (m.getTags().contains("ViewMenu"))
+		for (MMenu m : part.getMenus()) {
+			if (m.getTags().contains("ViewMenu")) {
 				viewmenu = m;
+			}
+		}
 		if (viewmenu != null) {
 			MMenu submenu = null;
 			MCommand menuFilterCommand = null;
@@ -646,14 +648,10 @@ public class AnnotationsPart implements EventHandler {
 		//String key = "org.bbaw.bts.ui.corpus.part.annotations.viewmenu.show.";
 		String key = "";
 		if (o instanceof BTSCorpusObject) {
-			if (o instanceof BTSText) {
-				if (o.getType() != null)
-					if (CorpusUtils.SUBTEXT_TYPE.equalsIgnoreCase(o.getType()))
-						key += CorpusUtils.SUBTEXT_TYPE; 
-			} else if (o instanceof BTSAnnotation)
-				key = CorpusUtils.getTypeIdentifier(o);
-		} else if (o instanceof BTSComment)
+			key = CorpusUtils.getTypeIdentifier(o);
+		} else if (o instanceof BTSComment) {
 			key += BTSConstants.COMMENT;
+		}
 		return filters.containsKey(key) ? filters.get(key) : false;
 	}
 
