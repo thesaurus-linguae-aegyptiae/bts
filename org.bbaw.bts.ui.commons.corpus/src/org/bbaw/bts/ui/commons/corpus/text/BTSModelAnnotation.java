@@ -31,8 +31,7 @@ public class BTSModelAnnotation extends XtextAnnotation
 	
 	public BTSModelAnnotation(String type, BTSIdentifiableItem model)
 	{
-		super(type, false, null, new Issue.IssueImpl(), false);
-		this.model = model;
+		this(type, null, new Issue.IssueImpl(), model);
 	}
 
 	public BTSModelAnnotation(BTSIdentifiableItem model, BTSInterTextReference interTextReference, BTSObject relatingObject)
