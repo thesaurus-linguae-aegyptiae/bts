@@ -112,6 +112,7 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.core.runtime.preferences.ConfigurationScope;
+import org.eclipse.core.runtime.preferences.IEclipsePreferences;
 import org.eclipse.e4.core.contexts.Active;
 import org.eclipse.e4.core.contexts.ContextInjectionFactory;
 import org.eclipse.e4.core.contexts.IEclipseContext;
@@ -418,8 +419,6 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 
 	private Job delaySelectionJob;
 
-	private EclipsePreferences annotationSettings;
-
 
 	/**
 	 * Instantiates a new egy text editor part.
@@ -458,9 +457,8 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 				.activateContext("org.eclipse.ui.contexts.dialogAndWindow");
 		
 		// load annotatin styling settings node
-		Preferences rootNode = ConfigurationScope.INSTANCE.getNode("org.bbaw.bts.ui.corpus");
-		annotationSettings = (EclipsePreferences) rootNode.node(BTSCorpusConstants.PREF_ANNOTATION_SETTINGS);
-		AnnotationToolbarItemCreator.processAndUpateToolbarItemsAnnotationShortcut(part, annotationSettings);
+		AnnotationToolbarItemCreator.processAndUpateToolbarItemsAnnotationShortcut(part, 
+				getAnnotationPreferences());
 		
 		SashForm sashForm = new SashForm(parent, SWT.VERTICAL);
 		sashForm.setLayoutData(new GridData(GridData.FILL_BOTH));
@@ -660,7 +658,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 					oruler = EmbeddedEditorFactory.getOverViewRuler();
 					
 					
-					configureEditorDrawingStrategies(oruler, annotationSettings);
+					configureEditorDrawingStrategies(oruler);
 					if (show_line_number_ruler)
 					{
 						lineNumberRulerColumn = new EgyLineNumberRulerColumn(LINE_SPACE);
@@ -2743,10 +2741,9 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 			sync.asyncExec(new Runnable() {
 				@Override
 				public void run() {
-					Preferences rootNode = ConfigurationScope.INSTANCE.getNode("org.bbaw.bts.ui.corpus");
-					annotationSettings = (EclipsePreferences) rootNode.node(BTSCorpusConstants.PREF_ANNOTATION_SETTINGS);
-					AnnotationToolbarItemCreator.processAndUpateToolbarItemsAnnotationShortcut(part, annotationSettings);
-					configureEditorDrawingStrategies(oruler, annotationSettings);
+					AnnotationToolbarItemCreator.processAndUpateToolbarItemsAnnotationShortcut(part, 
+							getAnnotationPreferences());
+					configureEditorDrawingStrategies(oruler);
 
 				}
 			});
@@ -2839,15 +2836,14 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 		// read values from the instance scope
 		String colorString = null;
 		try {
-			for (String childNode : annotationSettings.childrenNames())
+			for (String childNode : getAnnotationPreferences().childrenNames())
 			{
-				Preferences typeNode = annotationSettings.node(childNode);
-				String settingsTypePath = AnnotationToolbarItemCreator.getAnnotationTypePath((EclipsePreferences) typeNode);
-				if (!settingsTypePath.equals(typePath)) continue;
-				
-				colorString = typeNode.get(BTSCorpusConstants.PREF_COLOR, null);
-				
-				break;
+				Preferences typeNode = getAnnotationPreferences().node(childNode);
+				String settingsTypePath = AnnotationToolbarItemCreator.getAnnotationTypePath((IEclipsePreferences) typeNode);
+				if (settingsTypePath.equals(typePath)) {
+					colorString = typeNode.get(BTSCorpusConstants.PREF_COLOR, null);
+					break;
+				}
 			}
 		} catch (BackingStoreException e) {
 			// TODO Auto-generated catch block

@@ -17,7 +17,8 @@ import org.bbaw.bts.ui.egy.parts.egyTextEditor.CommentHighlightedDrawingStrategy
 import org.bbaw.bts.ui.egy.parts.egyTextEditor.RubrumDrawingStrategy;
 import org.bbaw.bts.ui.egy.parts.egyTextEditor.SubtextHighlightedDrawingStrategy;
 import org.bbaw.bts.ui.egy.parts.egyTextEditor.SubtextdrawingStrategy;
-import org.eclipse.core.internal.preferences.EclipsePreferences;
+import org.eclipse.core.runtime.preferences.ConfigurationScope;
+import org.eclipse.core.runtime.preferences.IEclipsePreferences;
 import org.eclipse.jface.text.source.AnnotationPainter;
 import org.eclipse.jface.text.source.AnnotationPainter.HighlightingStrategy;
 import org.eclipse.jface.text.source.AnnotationPainter.IDrawingStrategy;
@@ -25,9 +26,12 @@ import org.eclipse.jface.text.source.AnnotationPainter.ITextStyleStrategy;
 import org.eclipse.jface.text.source.OverviewRuler;
 import org.eclipse.swt.graphics.Color;
 import org.osgi.service.prefs.BackingStoreException;
+import org.osgi.service.prefs.Preferences;
 
 public abstract class AbstractTextEditorLogic {
-	
+
+	private IEclipsePreferences annotationPreferences = null;
+
 	protected static final String[] ANNO_TYPES_SUFFIXES = new String[]{"", ".highlighted"};
 
 	protected AnnotationPainter painter;
@@ -52,12 +56,20 @@ public abstract class AbstractTextEditorLogic {
 
 	protected Set<String> getAnnotationStrategySet() {
 		if (annotationStrategySet == null) {
-			configureEditorDrawingStrategies(null, null);
+			configureEditorDrawingStrategies(null);
 		}
 		return annotationStrategySet;
 	}
 
-	protected void configureEditorDrawingStrategies(OverviewRuler oruler, EclipsePreferences preferences) {
+	protected IEclipsePreferences getAnnotationPreferences() {
+		if (annotationPreferences == null) {
+			Preferences rootNode = ConfigurationScope.INSTANCE.getNode("org.bbaw.bts.ui.corpus");
+			annotationPreferences = (IEclipsePreferences) rootNode.node(BTSCorpusConstants.PREF_ANNOTATION_SETTINGS);
+		}
+		return annotationPreferences;
+	}
+
+	protected void configureEditorDrawingStrategies(OverviewRuler oruler) {
 		annotationStrategySet = new HashSet<String>();
 
 		// set basic rulers
@@ -130,9 +142,9 @@ public abstract class AbstractTextEditorLogic {
 		boolean annotationRubrumStrategyExists = false;
 		
 		try {
-			for (String childNode : preferences.childrenNames())
+			for (String childNode : getAnnotationPreferences().childrenNames())
 			{
-				EclipsePreferences node = (EclipsePreferences) preferences.node(childNode);
+				IEclipsePreferences node = (IEclipsePreferences) annotationPreferences.node(childNode);
 				String strategyType = BTSConstants.ANNOTATION;
 				String type = node.get(BTSCorpusConstants.PREF_ANNOTATION_TYPE, null);
 				String subtype = node.get(BTSCorpusConstants.PREF_ANNOTATION_SUBTYPE, null);

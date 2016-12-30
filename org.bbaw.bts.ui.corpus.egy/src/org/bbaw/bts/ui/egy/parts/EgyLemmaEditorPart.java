@@ -198,8 +198,6 @@ public class EgyLemmaEditorPart extends AbstractTextEditorLogic implements IBTSE
 	private HashMap<String, List<Object>> lemmaAnnotationMap;
 	private Job processLemmaAnnotionsJob;
 	
-	private EclipsePreferences annotationSettings;
-
 	// boolean if object is loaded into gui
 	private boolean loaded;
 
@@ -218,11 +216,6 @@ public class EgyLemmaEditorPart extends AbstractTextEditorLogic implements IBTSE
 	@PostConstruct
 	public void postConstruct(Composite parent) {
 		parent.setLayout(new GridLayout(1, false));
-		
-		// load annotatin styling settings node
-		EclipsePreferences rootNode = (EclipsePreferences) ConfigurationScope.INSTANCE.getNode("org.bbaw.bts.ui.corpus");
-		annotationSettings = (EclipsePreferences) rootNode.node(BTSCorpusConstants.PREF_ANNOTATION_SETTINGS);
-
 		
 		// transliteration
 		grpTransliteration = new Group(parent, SWT.NONE);
@@ -279,7 +272,7 @@ public class EgyLemmaEditorPart extends AbstractTextEditorLogic implements IBTSE
 		};
 		painter = new AnnotationPainter(embeddedEditor.getViewer(),
 				annotationAccess);
-		configureEditorDrawingStrategies(null, annotationSettings);
+		configureEditorDrawingStrategies(null);
 		embeddedEditor.getViewer().addTextPresentationListener(painter);
 		embeddedEditor.getViewer().addPainter(painter);
 		grpTransliteration.layout();
