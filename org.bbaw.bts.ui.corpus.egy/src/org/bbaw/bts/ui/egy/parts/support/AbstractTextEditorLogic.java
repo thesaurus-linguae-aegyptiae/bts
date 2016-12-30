@@ -19,9 +19,9 @@ import org.bbaw.bts.ui.egy.parts.egyTextEditor.SubtextHighlightedDrawingStrategy
 import org.bbaw.bts.ui.egy.parts.egyTextEditor.SubtextdrawingStrategy;
 import org.eclipse.core.internal.preferences.EclipsePreferences;
 import org.eclipse.jface.text.source.AnnotationPainter;
+import org.eclipse.jface.text.source.AnnotationPainter.HighlightingStrategy;
 import org.eclipse.jface.text.source.AnnotationPainter.IDrawingStrategy;
 import org.eclipse.jface.text.source.AnnotationPainter.ITextStyleStrategy;
-import org.eclipse.jface.text.source.CompositeRuler;
 import org.eclipse.jface.text.source.OverviewRuler;
 import org.eclipse.swt.graphics.Color;
 import org.osgi.service.prefs.BackingStoreException;
@@ -95,70 +95,34 @@ public abstract class AbstractTextEditorLogic {
 					BTSUIConstants.COLOR_SENTENCE);
 		}
 		
-		AnnotationDrawingStrategy sentenceStrategy2 = new AnnotationDrawingStrategy();
-		painter.addDrawingStrategy(BTSSentenceAnnotation.TYPE_HIGHLIGHTED, sentenceStrategy2);
-		painter.setAnnotationTypeColor(BTSSentenceAnnotation.TYPE_HIGHLIGHTED,
-				BTSUIConstants.COLOR_SENTENCE);
-		painter.addAnnotationType(BTSSentenceAnnotation.TYPE_HIGHLIGHTED, BTSSentenceAnnotation.TYPE_HIGHLIGHTED);
-		annotationStrategySet.add(BTSSentenceAnnotation.TYPE_HIGHLIGHTED);
+		// highlighted sentence
+		addStrategy(BTSSentenceAnnotation.TYPE_HIGHLIGHTED, BTSUIConstants.COLOR_SENTENCE,
+				new AnnotationDrawingStrategy());
 		
-		// Lemma
-		ITextStyleStrategy strategy = new org.eclipse.jface.text.source.AnnotationPainter.HighlightingStrategy();
-		painter.addTextStyleStrategy(BTSLemmaAnnotation.TYPE, strategy);
-		painter.setAnnotationTypeColor(BTSLemmaAnnotation.TYPE,
-				BTSUIConstants.COLOR_LEMMA);
-		// this is done in filter
-		painter.addAnnotationType(BTSLemmaAnnotation.TYPE, BTSLemmaAnnotation.TYPE);
-		annotationStrategySet.add(BTSLemmaAnnotation.TYPE);
-
+		// lemma
+		addStrategy(BTSLemmaAnnotation.TYPE, BTSUIConstants.COLOR_LEMMA,
+				new HighlightingStrategy());
 		
 		// comment
-		CommentDrawingStrategy commentStrategy = new CommentDrawingStrategy();
-		painter.addDrawingStrategy(BTSConstants.COMMENT, commentStrategy);
-		painter.setAnnotationTypeColor(BTSConstants.COMMENT,
-				BTSUIConstants.COLOR_COMMENT);
-		
-		// this is done in filter
-		painter.addAnnotationType(BTSConstants.COMMENT,
-				BTSConstants.COMMENT);
-		annotationStrategySet.add(BTSConstants.COMMENT);
-
-		
-		// comment highlighted
-		CommentHighlightedDrawingStrategy commenthighStrategy = new CommentHighlightedDrawingStrategy();
-		painter.addDrawingStrategy(BTSConstants.COMMENT + BTSModelAnnotation.HIGHLIGHTED,
-				commenthighStrategy);
-		painter.setAnnotationTypeColor(BTSConstants.COMMENT + BTSModelAnnotation.HIGHLIGHTED,
-				BTSUIConstants.COLOR_COMMENT);
-		
-		// this is done in filter
-		painter.addAnnotationType(BTSConstants.COMMENT + BTSModelAnnotation.HIGHLIGHTED,
-				BTSConstants.COMMENT + BTSModelAnnotation.HIGHLIGHTED);
-		annotationStrategySet.add(BTSConstants.COMMENT + BTSModelAnnotation.HIGHLIGHTED);
-
+		addStrategy(BTSConstants.COMMENT, BTSUIConstants.COLOR_COMMENT,
+				new CommentDrawingStrategy());
+		// highlighted comment
+		addStrategy(BTSConstants.COMMENT + BTSModelAnnotation.HIGHLIGHTED,
+				BTSUIConstants.COLOR_COMMENT,
+				new CommentHighlightedDrawingStrategy());
 		
 		// subtext
-		SubtextdrawingStrategy subtextStrategy = new SubtextdrawingStrategy();
-		painter.addDrawingStrategy(BTSConstants.ANNOTATION_SUBTEXT, subtextStrategy);
-		painter.setAnnotationTypeColor(BTSConstants.ANNOTATION_SUBTEXT,
-				BTSUIConstants.COLOR_SUBTEXT);
-		
-		// this is done in filter
-		painter.addAnnotationType(BTSConstants.ANNOTATION_SUBTEXT,
-				BTSConstants.ANNOTATION_SUBTEXT);
-		annotationStrategySet.add(BTSConstants.ANNOTATION_SUBTEXT);
-
-		// subtext
-		SubtextHighlightedDrawingStrategy subtexthighStrategy = new SubtextHighlightedDrawingStrategy();
-		painter.addDrawingStrategy(BTSConstants.ANNOTATION_SUBTEXT  + BTSModelAnnotation.HIGHLIGHTED,
-				subtexthighStrategy);
-		painter.setAnnotationTypeColor(BTSConstants.ANNOTATION_SUBTEXT  + BTSModelAnnotation.HIGHLIGHTED,
-				BTSUIConstants.COLOR_SUBTEXT);
-		
-		// this is done in filter
-		painter.addAnnotationType(BTSConstants.ANNOTATION_SUBTEXT  + BTSModelAnnotation.HIGHLIGHTED,
-				BTSConstants.ANNOTATION_SUBTEXT  + BTSModelAnnotation.HIGHLIGHTED);
-		annotationStrategySet.add(BTSConstants.ANNOTATION_SUBTEXT  + BTSModelAnnotation.HIGHLIGHTED);
+		// XXX we need to use prefix 'Text' for this. It's in BASIC_OBJECT_TYPES[5]
+		addStrategy(//BTSConstants.BASIC_OBJECT_TYPES[5] + CorpusUtils.TYPE_PATH_DELIMITER +
+				BTSConstants.ANNOTATION_SUBTEXT,
+				BTSUIConstants.COLOR_SUBTEXT,
+				new SubtextdrawingStrategy());
+		// highlighted subtext
+		// XXX again: prefix needed. marked for uglyness.
+		addStrategy(//BTSConstants.BASIC_OBJECT_TYPES[5] + CorpusUtils.TYPE_PATH_DELIMITER +
+				BTSConstants.ANNOTATION_SUBTEXT + BTSModelAnnotation.HIGHLIGHTED,
+				BTSUIConstants.COLOR_SUBTEXT,
+				new SubtextHighlightedDrawingStrategy());
 
 		
 		// annotations
