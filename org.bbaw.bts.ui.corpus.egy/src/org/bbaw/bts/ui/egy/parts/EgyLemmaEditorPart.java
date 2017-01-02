@@ -173,8 +173,6 @@ public class EgyLemmaEditorPart extends AbstractTextEditorLogic implements IBTSE
 
 	private Group grpTransliteration;
 
-	private EmbeddedEditor embeddedEditor;
-	
 	private EmbeddedEditorModelAccess embeddedEditorModelAccess;
 
 	private IAnnotationModel annotationModel;
@@ -245,10 +243,7 @@ public class EgyLemmaEditorPart extends AbstractTextEditorLogic implements IBTSE
 
 
 		embeddedEditor = embeddedEditorFactory.newEditor(xtextResourceProvider)
-				.showAnnotations(BTSConstants.ANNOTATION,
-						BTSConstants.COMMENT,
-						"org.eclipse.xtext.ui.editor.error",
-						"org.eclipse.xtext.ui.editor.warning")
+				.showAnnotations("org.eclipse.xtext.ui.editor.error")
 				.withParent(embeddedEditorComp);
 		embeddedEditor.getViewer().getTextWidget().setLineSpacing(LINE_SPACE);
 		embeddedEditorModelAccess = embeddedEditor.createPartialEditor("\r",

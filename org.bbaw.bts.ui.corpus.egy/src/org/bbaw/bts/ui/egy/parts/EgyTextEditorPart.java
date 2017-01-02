@@ -184,7 +184,6 @@ import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextSourceViewer;
-import org.eclipse.xtext.ui.editor.embedded.EmbeddedEditor;
 import org.eclipse.xtext.ui.editor.embedded.EmbeddedEditorFactory;
 import org.eclipse.xtext.ui.editor.embedded.EmbeddedEditorModelAccess;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
@@ -288,10 +287,6 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 
 	/** The xtext resource provider. */
 	private BTSTextXtextEditedResourceProvider xtextResourceProvider = new BTSTextXtextEditedResourceProvider();
-
-	/** The embedded editor. */
-	@SuppressWarnings("restriction")
-	private EmbeddedEditor embeddedEditor;
 
 	/** The embedded editor comp. */
 	private Composite embeddedEditorComp;
@@ -607,11 +602,6 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 							SWT.FILL, true, true));
 
 					context.get(StaticAccessController.class);
-					
-					// TODO old working
-//					EgyDslActivator activator = EgyDslActivator.getInstance();
-//					injector = activator
-//							.getInjector(EgyDslActivator.ORG_BBAW_BTS_CORPUS_TEXT_EGY_EGYDSL);
 					
 					// new trial
 					injector = textEditorController.findEgyDslInjector();

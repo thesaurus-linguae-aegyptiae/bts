@@ -25,6 +25,7 @@ import org.eclipse.jface.text.source.AnnotationPainter.IDrawingStrategy;
 import org.eclipse.jface.text.source.AnnotationPainter.ITextStyleStrategy;
 import org.eclipse.jface.text.source.OverviewRuler;
 import org.eclipse.swt.graphics.Color;
+import org.eclipse.xtext.ui.editor.embedded.EmbeddedEditor;
 import org.osgi.service.prefs.BackingStoreException;
 import org.osgi.service.prefs.Preferences;
 
@@ -34,6 +35,7 @@ public abstract class AbstractTextEditorLogic {
 
 	protected static final String[] ANNO_TYPES_SUFFIXES = new String[]{"", ".highlighted"};
 
+	protected EmbeddedEditor embeddedEditor;
 	protected AnnotationPainter painter;
 	private Set<String> annotationStrategySet = null;
 
