@@ -646,12 +646,7 @@ public class AnnotationsPart implements EventHandler {
 		@SuppressWarnings("unchecked")
 		HashMap<String, Boolean> filters = (HashMap<String, Boolean>) context.get("org.bbaw.bts.corpus.annotationsPart.filter");
 		//String key = "org.bbaw.bts.ui.corpus.part.annotations.viewmenu.show.";
-		String key = "";
-		if (o instanceof BTSCorpusObject) {
-			key = CorpusUtils.getTypeIdentifier(o);
-		} else if (o instanceof BTSComment) {
-			key += BTSConstants.COMMENT;
-		}
+		String key = CorpusUtils.getTypeIdentifier(o);
 		return filters.containsKey(key) ? filters.get(key) : false;
 	}
 
