@@ -106,12 +106,10 @@ import org.bbaw.bts.ui.egy.parts.egyTextEditor.BTSTextXtextEditedResourceProvide
 import org.bbaw.bts.ui.egy.parts.egyTextEditor.EgyLineNumberRulerColumn;
 import org.bbaw.bts.ui.egy.parts.support.AbstractTextEditorLogic;
 import org.bbaw.bts.ui.egy.textSign.SignTextComposite;
-import org.eclipse.core.internal.preferences.EclipsePreferences;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
-import org.eclipse.core.runtime.preferences.ConfigurationScope;
 import org.eclipse.core.runtime.preferences.IEclipsePreferences;
 import org.eclipse.e4.core.contexts.Active;
 import org.eclipse.e4.core.contexts.ContextInjectionFactory;
