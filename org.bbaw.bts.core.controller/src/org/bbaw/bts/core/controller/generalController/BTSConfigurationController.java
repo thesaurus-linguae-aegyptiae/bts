@@ -172,5 +172,10 @@ Map<String, List<String>> ownerTypesMap, boolean includingReferencedObjectTypes)
 
 	String getLabelOfTypeSubtypeString(BTSObject object, boolean prefereAbbreviation);
 
+	/**
+	 * @param btsConfiguration
+	 */
+	void remove(BTSConfiguration btsConfiguration);
+
 
 }

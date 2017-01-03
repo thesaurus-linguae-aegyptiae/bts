@@ -170,6 +170,19 @@ public interface BTSConfigurationService extends GenericObjectService<BTSConfigu
 	 */
 	BTSConfigItem getObjectTypeConfigItemProcessedClones(
 			BTSObject object);
+	
+	/**
+	 * Gets the object type config item processed clones.
+	 * if type is null it returns all config items for type.
+	 * if type is set it returns all config items for subtype.
+	 *
+	 * @param className of object
+	 * @param type type string of object
+	 * @param subtype subtype string of object
+	 * @return the object type config item processed clones
+	 */
+	BTSConfigItem getObjectTypeConfigItemProcessedClones(
+			String className, String type);
 
 	/**
 	 * Gets the visibility config item processed clones.

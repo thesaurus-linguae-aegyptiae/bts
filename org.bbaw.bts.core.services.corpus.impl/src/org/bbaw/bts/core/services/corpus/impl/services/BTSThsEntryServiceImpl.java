@@ -16,6 +16,7 @@ import org.bbaw.bts.core.dao.util.DaoConstants;
 import org.bbaw.bts.core.services.corpus.BTSAnnotationService;
 import org.bbaw.bts.core.services.corpus.BTSThsEntryService;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSAnnotation;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSThsEntry;
 import org.bbaw.bts.corpus.btsCorpusModel.BtsCorpusModelFactory;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -173,22 +174,6 @@ implements BTSThsEntryService, BTSObjectSearchService {
 			List<BTSFilter> btsFilters, IProgressMonitor monitor) {
 		return super.getOrphanEntries(map, btsFilters, monitor);
 	}
-	@Override
-	public BTSAnnotation createNewAnnotationRelationPartOf(
-			BTSThsEntry annotatedObject) {
-		BTSAnnotation anno = annotationService
-				.createNewRelationPartOf(annotatedObject);
-		if (main_ths_key == null || "".equals(main_ths_key))
-		{
-			main_ths_key = main_project;
-		}
-		anno.setVisibility(thsVisibility);
-		anno.setRevisionState(thsReviewState);
-		anno.setDBCollectionKey(main_ths_key + BTSCorpusConstants.THS);
-		anno.setCorpusPrefix(main_ths_key + BTSCorpusConstants.THS);
-		anno.setProject(main_ths_key);
-		return anno;
-	}
 	/* (non-Javadoc)
 	 * @see org.bbaw.bts.core.services.impl.generic.GenericObjectServiceImpl#findAsJsonString(java.io.Serializable, org.eclipse.core.runtime.IProgressMonitor)
 	 */
@@ -231,6 +216,24 @@ implements BTSThsEntryService, BTSObjectSearchService {
 
 		}
 		return objects;
+	}
+	/* (non-Javadoc)
+	 * @see org.bbaw.bts.core.services.corpus.BTSThsEntryService#createNewAnnotationRelationPartOf(org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject)
+	 */
+	@Override
+	public BTSAnnotation createNewAnnotationRelationPartOf(BTSCorpusObject annotatedObject) {
+		BTSAnnotation anno = annotationService
+				.createNewRelationPartOf(annotatedObject);
+		if (main_ths_key == null || "".equals(main_ths_key))
+		{
+			main_ths_key = main_project;
+		}
+		anno.setVisibility(thsVisibility);
+		anno.setRevisionState(thsReviewState);
+		anno.setDBCollectionKey(main_ths_key + BTSCorpusConstants.THS);
+		anno.setCorpusPrefix(main_ths_key + BTSCorpusConstants.THS);
+		anno.setProject(main_ths_key);
+		return anno;
 	}
 	
 }

@@ -17,6 +17,7 @@ import org.bbaw.bts.core.services.corpus.BTSAbstractTextService;
 import org.bbaw.bts.core.services.corpus.BTSAnnotationService;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSAbstractText;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSAnnotation;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
 import org.bbaw.bts.corpus.btsCorpusModel.BtsCorpusModelFactory;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.e4.core.di.annotations.Optional;
@@ -173,22 +174,6 @@ implements BTSAbstractTextService, BTSObjectSearchService {
 			List<BTSFilter> btsFilters, IProgressMonitor monitor) {
 		return super.getOrphanEntries(map, btsFilters, monitor);
 	}
-	@Override
-	public BTSAnnotation createNewAnnotationRelationPartOf(
-			BTSAbstractText annotatedObject) {
-		BTSAnnotation anno = annotationService
-				.createNewRelationPartOf(annotatedObject);
-		if (main_atext_key == null || "".equals(main_atext_key))
-		{
-			main_atext_key = main_project;
-		}
-		anno.setVisibility(atextVisibility);
-		anno.setRevisionState(atextReviewState);
-		anno.setDBCollectionKey(main_atext_key + BTSCorpusConstants.ATEXT);
-		anno.setCorpusPrefix(main_atext_key + BTSCorpusConstants.ATEXT);
-		anno.setProject(main_atext_key);
-		return anno;
-	}
 	/* (non-Javadoc)
 	 * @see org.bbaw.bts.core.services.impl.generic.GenericObjectServiceImpl#findAsJsonString(java.io.Serializable, org.eclipse.core.runtime.IProgressMonitor)
 	 */
@@ -231,6 +216,24 @@ implements BTSAbstractTextService, BTSObjectSearchService {
 
 		}
 		return objects;
+	}
+	/* (non-Javadoc)
+	 * @see org.bbaw.bts.core.services.corpus.BTSAbstractTextService#createNewAnnotationRelationPartOf(org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject)
+	 */
+	@Override
+	public BTSAnnotation createNewAnnotationRelationPartOf(BTSCorpusObject annotatedObject) {
+		BTSAnnotation anno = annotationService
+				.createNewRelationPartOf(annotatedObject);
+		if (main_atext_key == null || "".equals(main_atext_key))
+		{
+			main_atext_key = main_project;
+		}
+		anno.setVisibility(atextVisibility);
+		anno.setRevisionState(atextReviewState);
+		anno.setDBCollectionKey(main_atext_key + BTSCorpusConstants.ATEXT);
+		anno.setCorpusPrefix(main_atext_key + BTSCorpusConstants.ATEXT);
+		anno.setProject(main_atext_key);
+		return anno;
 	}
 	
 }

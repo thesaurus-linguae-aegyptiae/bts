@@ -407,11 +407,10 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 				{
 					anno.setTempSortKey(counter + GAP);
 				}
-				modelAnnotation = new BTSAnnotationAnnotation(BTSAnnotationAnnotation.TYPE, item, reference, anno);
+				modelAnnotation = new BTSAnnotationAnnotation(item, reference, anno);
 				if (anno.getType() != null && anno.getType().equalsIgnoreCase("rubrum"))
 				{
 					modelAnnotation.setText( "org.bbaw.bts.ui.text.modelAnnotation.annotation.rubrum");
-					modelAnnotation.setType(BTSAnnotationAnnotation.TYPE_RUBRUM);
 				}
 			}
 			else if (reference.eContainer().eContainer() instanceof BTSText)
@@ -422,7 +421,7 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 				{
 					text.setTempSortKey(counter + GAP);
 				}
-				modelAnnotation = new BTSSubtextAnnotation(BTSSubtextAnnotation.TYPE, item, reference, text);
+				modelAnnotation = new BTSSubtextAnnotation(item, reference, text);
 			}
 			else if (reference.eContainer().eContainer() instanceof BTSComment)
 			{
@@ -432,7 +431,7 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 				{
 					comment.setTempSortKey(counter + GAP);
 				}
-				modelAnnotation = new BTSCommentAnnotation(BTSCommentAnnotation.TYPE, item, comment, reference);
+				modelAnnotation = new BTSCommentAnnotation(item, comment, reference);
 			}
 			counter = counter + GAP;
 		}
@@ -444,7 +443,7 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 			IAnnotationModel model, Position pos) {
 		if (model == null) return;
 
-		BTSModelAnnotation annotation = new BTSModelAnnotation(BTSModelAnnotation.TYPE,
+		BTSModelAnnotation annotation = new BTSModelAnnotation(BTSModelAnnotation.TOKEN,
 				(BTSIdentifiableItem) ambivalence);
 
 		model.addAnnotation(annotation, pos);
@@ -496,7 +495,7 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 		// append to model
 		if (model == null) return;
 
-		BTSModelAnnotation annotation = new BTSModelAnnotation(BTSModelAnnotation.TYPE,
+		BTSModelAnnotation annotation = new BTSModelAnnotation(BTSModelAnnotation.TOKEN,
 				(BTSIdentifiableItem) amCase);
 
 		model.addAnnotation(annotation, pos);
@@ -529,7 +528,7 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 			Position pos)
 	{
 		if (model == null) return;
-		BTSModelAnnotation annotation = new BTSModelAnnotation(BTSModelAnnotation.TYPE,
+		BTSModelAnnotation annotation = new BTSModelAnnotation(BTSModelAnnotation.TOKEN,
 				(BTSIdentifiableItem) marker);
 
 		model.addAnnotation(annotation, pos);
@@ -687,7 +686,7 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 			}
 			
 		} else {
-			annotation = new BTSModelAnnotation(BTSModelAnnotation.TYPE,
+			annotation = new BTSModelAnnotation(BTSModelAnnotation.TOKEN,
 					(BTSIdentifiableItem) word);
 		}
 		model.addAnnotation(annotation, position);

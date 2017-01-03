@@ -6,6 +6,8 @@ import org.bbaw.bts.btsmodel.BTSInterTextReference;
 import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.btsmodel.BTSRelation;
 import org.bbaw.bts.btsmodel.BtsmodelFactory;
+import org.bbaw.bts.commons.BTSConstants;
+import org.bbaw.bts.core.commons.corpus.CorpusUtils;
 import org.bbaw.bts.core.corpus.controller.partController.CorpusNavigatorController;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSAnnotation;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
@@ -29,8 +31,8 @@ public class AddRubrumHandler {
 			if (dbbaseObject != null)
 			{
 				final BTSAnnotation object = corpusNavigatorController
-						.createNewAnnotation((BTSCorpusObject) dbbaseObject);
-				object.setType("rubrum");
+						.createNewAnnotation((BTSCorpusObject) dbbaseObject, BTSConstants.ANNOTATION +
+								CorpusUtils.TYPE_PATH_DELIMITER + CorpusUtils.ANNOTATION_RUBRUM_TYPE);
 				object.setName("Rubrum");
 				BTSRelation rel = null;
 				if (object.getRelations().isEmpty())

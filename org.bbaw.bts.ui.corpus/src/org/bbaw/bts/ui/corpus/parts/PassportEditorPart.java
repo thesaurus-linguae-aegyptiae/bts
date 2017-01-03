@@ -300,10 +300,6 @@ public class PassportEditorPart {
 			}
 		});
 
-		relationsComp.setLayout(new GridLayout(8, false));
-		((GridLayout) relationsComp.getLayout()).marginWidth = 0;
-		((GridLayout) relationsComp.getLayout()).marginHeight = 0;
-
 		relationsComp.setLayout(new GridLayout(
 				BTSUIConstants.PASSPORT_COLUMN_NUMBER, true));
 		((GridLayout) relationsComp.getLayout()).marginWidth = 0;
@@ -333,10 +329,6 @@ public class PassportEditorPart {
 						SWT.DEFAULT));
 			}
 		});
-
-		idsComp.setLayout(new GridLayout(8, false));
-		((GridLayout) idsComp.getLayout()).marginWidth = 0;
-		((GridLayout) idsComp.getLayout()).marginHeight = 0;
 
 		idsComp.setLayout(new GridLayout(
 				BTSUIConstants.PASSPORT_COLUMN_NUMBER, true));

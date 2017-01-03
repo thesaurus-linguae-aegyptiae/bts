@@ -57,6 +57,7 @@ GenericCorpusObjectNavigatorController<E, K>
 	
 	@Inject
 	private CorpusObjectService corpusObjectService;
+	
 	@Override
 	public List<E> getRootEntries(
 			Map<String, BTSQueryResultAbstract> queryResultMap,
@@ -483,6 +484,11 @@ GenericCorpusObjectNavigatorController<E, K>
 			}
 		}
 		return nodes;
+	}
+	
+	protected void setObjectTypePath(BTSCorpusObject object, String annotationTypePath)
+	{
+		corpusObjectService.setObjectTypePath(object, annotationTypePath);
 	}
 
 	@Override
