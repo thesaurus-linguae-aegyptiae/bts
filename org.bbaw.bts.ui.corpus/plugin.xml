@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugin>
 	<extension id="id" point="org.eclipse.e4.workbench.model">
-		<fragment uri="fragment.e4xmi"></fragment>
+		<fragment
+        apply="always"
+        uri="fragment.e4xmi"></fragment>
 	</extension>
  <extension
        point="com.opcoach.e4.preferences.e4PreferencePages">
@@ -52,6 +54,12 @@
           class="org.bbaw.bts.ui.corpus.preferences.ATextNavigatorSettingsPage"
           id="org.bbaw.bts.ui.corpus.atextnavigatorsettings"
           name="atextnavigatorsettings">
+    </page>
+    <page
+          category="org.bbaw.bts.ui.main.btsgeneral.page"
+          class="org.bbaw.bts.ui.corpus.preferences.TextAnnotationSettingsPage"
+          id="org.bbaw.bts.ui.corpus.textannottionssettings"
+          name="Text Annotation Settings">
     </page>
  </extension>
  <extension

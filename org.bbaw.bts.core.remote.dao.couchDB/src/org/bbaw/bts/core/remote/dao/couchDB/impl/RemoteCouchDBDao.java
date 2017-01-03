@@ -19,11 +19,11 @@ import org.bbaw.bts.btsmodel.BTSDBBaseObject;
 import org.bbaw.bts.btsmodel.BTSProject;
 import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.core.commons.exceptions.BTSRemoteDBException;
+import org.bbaw.bts.core.dao.util.BTSQueryRequest;
 import org.bbaw.bts.core.remote.dao.RemoteDBConnectionProvider;
 import org.bbaw.bts.core.remote.dao.RemoteGenericDao;
 import org.bbaw.bts.core.remote.dao.util.RemoteDaoConstants;
 import org.bbaw.bts.modelUtils.EmfModelHelper;
-import org.bbaw.bts.searchModel.BTSQueryRequest;
 import org.bbaw.bts.tempmodel.DBRevision;
 import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.core.di.annotations.Creatable;
@@ -171,7 +171,7 @@ public abstract class RemoteCouchDBDao<E extends BTSDBBaseObject, K extends Seri
 		InputStream stream = dbClient.find((String)key, revision);
 		
 		final JSONLoad loader = new JSONLoad(stream,
-				new HashMap<Object, Object>());
+				new HashMap<Object, Object>(), connectionProvider.getEmfResourceSet());
 		loader.fillResource(tempResource);
 		
 //		EObjectMapper objectMapper = new EObjectMapper();
@@ -204,7 +204,7 @@ public abstract class RemoteCouchDBDao<E extends BTSDBBaseObject, K extends Seri
 //		InputStream stream = new ByteArrayInputStream(objectAsString.getBytes(StandardCharsets.UTF_8));
 //		Object o = objectMapper.from(stream, resource, null);
 		final JSONLoad loader = new JSONLoad(new ByteArrayInputStream(objectAsString.getBytes(StandardCharsets.UTF_8)),
-				new HashMap<Object, Object>());
+				new HashMap<Object, Object>(), connectionProvider.getEmfResourceSet());
 		loader.fillResource(resource);
 		
 	}

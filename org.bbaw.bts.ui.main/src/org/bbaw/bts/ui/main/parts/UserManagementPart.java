@@ -40,7 +40,7 @@ import org.bbaw.bts.ui.commons.utils.BTSUIConstants;
 import org.bbaw.bts.ui.commons.validator.StringEmailAddressValidator;
 import org.bbaw.bts.ui.commons.validator.StringHttp_s_URLValidator;
 import org.bbaw.bts.ui.commons.validator.StringNotEmptyValidator;
-import org.bbaw.bts.ui.commons.viewerSorter.BTSObjectByNameViewerSorter;
+import org.bbaw.bts.ui.commons.viewerSorter.BTSUserManagerViewerComparator;
 import org.bbaw.bts.ui.main.dialogs.ObjectUpdaterReaderEditorDialog;
 import org.bbaw.bts.ui.main.handlers.CreateNewUserGroupHandler;
 import org.bbaw.bts.ui.main.parts.userMan.support.ProjectDBCollectionTreeFactory;
@@ -99,18 +99,14 @@ import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerFilter;
-import org.eclipse.jface.viewers.ViewerSorter;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CTabFolder;
 import org.eclipse.swt.custom.CTabItem;
 import org.eclipse.swt.custom.SashForm;
-import org.eclipse.swt.events.KeyAdapter;
-import org.eclipse.swt.events.KeyEvent;
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
@@ -441,6 +437,7 @@ public class UserManagementPart
 		user_ToolDeleteGroup.setToolTipText("Delete");
 		user_ToolDeleteGroup.setImage(resourceProvider.getImage(
 				Display.getDefault(), BTSResourceProvider.IMG_DELETE));
+		user_ToolDeleteGroup.setEnabled(false);
 		user_ToolDeleteGroup.addSelectionListener(new SelectionAdapter()
 		{
 
@@ -764,9 +761,7 @@ public class UserManagementPart
 		};
 
 		treeViewer.addSelectionChangedListener(user_selectionListener);
-		treeViewer.setSorter(new ViewerSorter()
-		{
-		});
+		treeViewer.setComparator(new BTSUserManagerViewerComparator());
 		
 		// Create sample data
 		try {
@@ -881,7 +876,7 @@ public class UserManagementPart
 			dialogTitle = "Delete Usergroup";
 			dialogMessage = "Delete selected usergroup: " + labelProvider.getText(object);
 		}
-		if (!permissionController.authenticatedUserMayDeleteUserOrUserGroup((BTSObject)object))
+		if (!permissionController.userMayEditObject(permissionController.getAuthenticatedUser(), (BTSObject)object))
 		{
 			dialogTitle = "Deletion Not Allowed";
 			dialogMessage = "You are not allowed to delete the selected user or usergroup: " + labelProvider.getText(object);
@@ -938,11 +933,10 @@ public class UserManagementPart
 		};
 
 		user_treeViewer.addSelectionChangedListener(user_selectionListener);
-		user_treeViewer.setSorter(new BTSObjectByNameViewerSorter());
+		user_treeViewer.setComparator(new BTSUserManagerViewerComparator());
 		// Create sample data
 		userGroups = new ArrayList<BTSUserGroup>();
 		Job job = new Job("load orphans") {
-			Map map;
 			@Override
 			protected IStatus run(IProgressMonitor monitor) {
 				userGroups = userManagerController.listUserGroups(monitor);
@@ -1004,48 +998,45 @@ public class UserManagementPart
 
 	private void loadChildren(final List<TreeNodeWrapper> parents, final TreeViewer treeviewer, boolean includeGrandChildren)
 	{
-		Job job = new Job("load children")
-		{
-			@Override
-			protected IStatus run(IProgressMonitor monitor)
-			{
-				new Vector<>();
-				for (final TreeNodeWrapper parent : parents)
-				{
-					if (!parent.isChildrenLoaded())
+		for (final TreeNodeWrapper parent : parents)
+			synchronized(parent) {
+				if (!parent.isChildrenLoaded()) {
+					Job job = new Job("load children")
 					{
-						final List<BTSUser> children = userManagerController.findGroupMembers(
-								(BTSUserGroup) parent.getObject(), queryResultMap, treeviewer, parent,
-								BtsviewmodelPackage.Literals.TREE_NODE_WRAPPER__CHILDREN, monitor);
-						// If you want to update the UI
-						sync.asyncExec(new Runnable()
+						@Override
+						protected IStatus run(IProgressMonitor monitor)
 						{
-
-							@Override
-							public void run()
-							{
-								System.out.println("add children" + children.size());
-								for (BTSObject o : children)
-								{
-									TreeNodeWrapper tn = wrappObject(o);
-									tn.setParent(parent);
-									// grandChildren.add(tn);
-									parent.getChildren().add(tn);
-								}
-								parent.setChildrenLoaded(true);
-
+							if (!parent.isChildrenLoaded()) {
+								final List<BTSUser> children = userManagerController.findGroupMembers(
+										(BTSUserGroup) parent.getObject(), queryResultMap, treeviewer, parent,
+										BtsviewmodelPackage.Literals.TREE_NODE_WRAPPER__CHILDREN, monitor);
+								// If you want to update the UI
+								if (!parent.isChildrenLoaded())
+									sync.asyncExec(new Runnable()
+									{
+										@Override
+										public void run()
+										{
+											System.out.println("add children" + children.size());
+											for (BTSObject o : children)
+											{
+												TreeNodeWrapper tn = wrappObject(o);
+												tn.setParent(parent);
+												// grandChildren.add(tn);
+												parent.getChildren().add(tn);
+											}
+											parent.setChildrenLoaded(true);
+										}
+								});
+								// loadChildren(grandChildren, false);
 							}
-
-						});
-					}
+							return Status.OK_STATUS;
+						}
+					};
+					// Start the Job
+					job.schedule();
 				}
-				// loadChildren(grandChildren, false);
-
-				return Status.OK_STATUS;
 			}
-		};
-		// Start the Job
-		job.schedule();
 		refreshTreeViewer(treeviewer, null);
 	}
 
@@ -1094,9 +1085,7 @@ public class UserManagementPart
 		};
 
 		roles_treeViewer.addSelectionChangedListener(roles_selectionListener);
-		roles_treeViewer.setSorter(new ViewerSorter()
-		{
-		});
+		roles_treeViewer.setComparator(new BTSUserManagerViewerComparator());
 		// Create sample data
 		projects = projectController.listProjects(null);
 
@@ -1125,9 +1114,11 @@ public class UserManagementPart
 		{
 			public void run()
 			{
-				treeviewer.removeSelectionChangedListener(user_selectionListener);
-				treeviewer.refresh();
-				treeviewer.addSelectionChangedListener(user_selectionListener);
+				if (!treeviewer.getTree().isDisposed()) {
+					treeviewer.removeSelectionChangedListener(user_selectionListener);
+					treeviewer.refresh();
+					treeviewer.addSelectionChangedListener(user_selectionListener);
+				}
 			}
 		});
 
@@ -1135,6 +1126,9 @@ public class UserManagementPart
 
 	private void handleUserTreeSelection(IStructuredSelection selection2, TreeViewer treeViewer)
 	{
+		if (!user_ToolDeleteGroup.isDisposed()) {
+			user_ToolDeleteGroup.setEnabled(false);
+		}
 		if (selection2.getFirstElement() instanceof TreeNodeWrapper)
 		{
 			TreeNodeWrapper tn = (TreeNodeWrapper) selection2.getFirstElement();
@@ -1148,6 +1142,9 @@ public class UserManagementPart
 					loadChildren(parents, treeViewer, false);
 				}
 				selectedGroup = (BTSUserGroup) tn.getObject();
+				if (!user_ToolDeleteGroup.isDisposed()) {
+					user_ToolDeleteGroup.setEnabled(true);
+				}
 				loadGroupEditComposite(selectedGroup);
 				enableUndoRedo(selectedTreeObject);
 			}
@@ -1491,6 +1488,7 @@ public class UserManagementPart
 		roles_rolesDesc_users_comboViewer.setContentProvider(new ObservableListContentProvider());
 		roles_rolesDesc_users_comboViewer.setLabelProvider(labelProvider);
 		roles_rolesDesc_users_comboViewer.setInput(observableLisAllUsers);
+		roles_rolesDesc_users_comboViewer.setComparator(new BTSUserManagerViewerComparator());
 
 		roles_roleDesc_assignUser_link = new Link(grpAssignUser, SWT.NONE);
 		roles_roleDesc_assignUser_link.setText("<a>Assign role to user</a>");
@@ -1573,7 +1571,7 @@ public class UserManagementPart
 								BtsmodelPackage.Literals.BTSDB_COLLECTION_ROLE_DESC__CACHED_CHILDREN, tn);
 						compoundCommand.append(command);
 						Command command2 = AddCommand.create(getEditingDomain(selectedDBRoleDesc), selectedDBRoleDesc,
-								BtsmodelPackage.Literals.BTSDB_COLLECTION_ROLE_DESC__USER_ROLES, ug.getName());
+								BtsmodelPackage.Literals.BTSDB_COLLECTION_ROLE_DESC__USER_ROLES, ug.get_id());
 						compoundCommand.append(command2);
 						getEditingDomain(selectedDBRoleDesc).getCommandStack().execute(compoundCommand);
 						manageDirtyObjects(selectedDBRoleDesc, selectedTreeObject);
@@ -1663,7 +1661,7 @@ public class UserManagementPart
 		userGroupMap = new HashMap<String, BTSUserGroup>(groups.size());
 		for (BTSUserGroup u : groups)
 		{
-			userGroupMap.put(u.getName(), u);
+			userGroupMap.put(u.get_id(), u);
 		}
 	}
 
@@ -1728,17 +1726,27 @@ public class UserManagementPart
 		roles_dbColl_index_btn = new Button(roles_composite_right, SWT.CHECK);
 		roles_dbColl_index_btn.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 2, 1));
 		roles_dbColl_index_btn.setText("Index Collection");
+		
+		Label l = new Label(roles_composite_right, SWT.NONE);
+		l.setText("");
+		l.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 2, 10));
 
 		lblCreateNewRoles = new Label(roles_composite_right, SWT.NONE);
-		lblCreateNewRoles.setLayoutData(new GridData(SWT.LEFT, SWT.BOTTOM, false, true, 2, 1));
-		lblCreateNewRoles.setText("Create New Roles Description");
+		lblCreateNewRoles.setLayoutData(new GridData(SWT.LEFT, SWT.BOTTOM, false, true, 2, 10));
+		lblCreateNewRoles.setText("Create New Roles Description (Select role first)");
 
+		Label lblCreateNewRoles2 = new Label(roles_composite_right, SWT.NONE);
+		lblCreateNewRoles2.setLayoutData(new GridData(SWT.LEFT, SWT.BOTTOM, false, true, 2, 1));
+		lblCreateNewRoles2.setText("Please, avoid dublicates!");
+
+		
 		roles_dbColl_newRoles_combo = new Combo(roles_composite_right, SWT.BORDER | SWT.READ_ONLY);
-		roles_dbColl_newRoles_combo.setLayoutData(new GridData(SWT.FILL, SWT.BOTTOM, true, false, 2, 1));
+		roles_dbColl_newRoles_combo.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, true, 2, 1));
 		roles_dbColl_newRoles_combo.setItems(databaseRoles);
-
+		roles_dbColl_newRoles_combo.select(0);
+		
 		roles_dbColl_newRoles_link = new Link(roles_composite_right, SWT.NONE);
-		roles_dbColl_newRoles_link.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 2, 1));
+		roles_dbColl_newRoles_link.setLayoutData(new GridData(SWT.LEFT, SWT.TOP, true, true, 2, 1));
 		roles_dbColl_newRoles_link.setText("<a>Add new User Roles Description</a>");
 		roles_dbColl_newRoles_link.addSelectionListener(new SelectionAdapter()
 		{
@@ -2166,7 +2174,7 @@ public class UserManagementPart
 
 				ECommandService commandService = context.get(ECommandService.class);
 				// Activate Handler
-				Map map = new HashMap(1);
+				Map<String, Object> map = new HashMap<>(1);
 				map.put("userId", user.get_id());
 				org.eclipse.core.commands.Command cmd = commandService.getCommand(BTSPluginIDs.CMD_OPEN_CHANGE_PASSWORD);
 				final ParameterizedCommand command = ParameterizedCommand.generateCommand(cmd, map);
@@ -2324,8 +2332,13 @@ public class UserManagementPart
 		{
 			loadAllUsers();
 		}
-		composite_right.dispose();
+		if (composite_right != null && !composite_right.isDisposed()) {
+			composite_right.dispose();
+		}
 		composite_right = null;
+		if (user_sashForm.isDisposed()) {
+			return null;
+		}
 		composite_right = new Composite(user_sashForm, SWT.NONE);
 		composite_right.setLayout(new FillLayout(SWT.HORIZONTAL));
 
@@ -2438,6 +2451,7 @@ public class UserManagementPart
 		users_groupMembers_groups_comboViewer.setContentProvider(new ObservableListContentProvider());
 		users_groupMembers_groups_comboViewer.setLabelProvider(labelProvider);
 		users_groupMembers_groups_comboViewer.setInput(observableLisAllUsers);
+		users_groupMembers_groups_comboViewer.setComparator(new BTSUserManagerViewerComparator());
 
 		users_addGroupMembers_groups_link = new Link(groupSelectUser_Group, SWT.NONE);
 		users_addGroupMembers_groups_link.setText("<a>Add User to Group</a>");
@@ -2632,6 +2646,8 @@ public class UserManagementPart
 				TreeNodeWrapper tn = wrappObject(object);
 				tn.setParent(user_root);
 				user_root.getChildren().add(tn);
+				StructuredSelection select = new StructuredSelection(tn);
+				handleUserTreeSelection((IStructuredSelection) select, user_treeViewer);
 				if (object instanceof BTSUserGroup)
 				{
 					if (observableLisAllUserGroups == null) {
@@ -2640,7 +2656,6 @@ public class UserManagementPart
 					observableLisAllUserGroups.add(object);
 					dirtyUserGroups.add((BTSUserGroup) object);
 				}
-				user_treeViewer.setSelection(new StructuredSelection(tn), true);
 			}
 		});
 

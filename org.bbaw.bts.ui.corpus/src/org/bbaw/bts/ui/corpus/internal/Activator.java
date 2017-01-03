@@ -5,6 +5,7 @@ import org.osgi.framework.BundleContext;
 
 public class Activator implements BundleActivator
 {
+	public static String BUNDLE_ID = "org.bbaw.bts.ui.corpus";
 
 	private static BundleContext context;
 

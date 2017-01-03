@@ -7,25 +7,25 @@ import org.bbaw.bts.btsmodel.BTSObject;
 public class BTSObjectByNameComparator implements Comparator<BTSObject>{
 
 	private AlphanumComparator alphaNumComp = new AlphanumComparator();
+
 	@Override
-	public int compare(BTSObject o0, BTSObject o1) {
-		if (o0.getSortKey() != 0 && o1.getSortKey() != 0)
+	public int compare(BTSObject a, BTSObject b) {
+		if (a.getSortKey() * b.getSortKey() > 0)
 		{
-			return o0.getSortKey() - o1.getSortKey();
+			if (a.getSortKey() < b.getSortKey()) {
+				return -1;
+			}
+			if (b.getSortKey() < a.getSortKey()) {
+				return 1;
+			}
 		}
-		else if (o0.getSortKey() != 0)
-		{
+		if (alphaNumComp.compare(""+a.getName(), ""+b.getName()) < 0) {
 			return -1;
 		}
-		else if (o1.getSortKey() != 0)
-		{
+		if (alphaNumComp.compare(""+b.getName(), ""+a.getName()) < 0) {
 			return 1;
 		}
-		else if (o0 != null && o0.getName() != null && o1 != null && o1.getName() != null)
-		{
-			return alphaNumComp.compare(o0.getName(), o1.getName());
-		}
-		return 0;
+		return a.get_id().compareTo(b.get_id());
 	}
 
 }

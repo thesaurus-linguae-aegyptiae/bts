@@ -2,9 +2,9 @@ package org.bbaw.bts.core.services.corpus;
 
 import java.util.List;
 
+import org.bbaw.bts.core.dao.util.BTSQueryRequest;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSPassportEntry;
-import org.bbaw.bts.searchModel.BTSQueryRequest;
 
 public interface CorpusObjectService extends GenericCorpusObjectService<BTSCorpusObject, String>
 {
@@ -14,5 +14,17 @@ public interface CorpusObjectService extends GenericCorpusObjectService<BTSCorpu
 	List<BTSPassportEntry> getPassportEntryProposals(BTSQueryRequest query);
 
 	String[] getActive_corpora(String projecPrefix);
+
+	/**
+	 * @param object
+	 * @param annotationTypePath
+	 */
+	void setObjectTypePath(BTSCorpusObject object, String annotationTypePath);
+
+	/**
+	 * @param object
+	 * @return
+	 */
+	String getAllPassportDataAsString(BTSCorpusObject object);
 	
 }

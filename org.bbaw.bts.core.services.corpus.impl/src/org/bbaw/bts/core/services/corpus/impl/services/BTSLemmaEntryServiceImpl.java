@@ -8,26 +8,21 @@ import java.util.regex.Pattern;
 import javax.inject.Inject;
 
 import org.bbaw.bts.commons.BTSConstants;
-import org.bbaw.bts.commons.BTSPluginIDs;
-import org.bbaw.bts.core.commons.BTSCoreConstants;
 import org.bbaw.bts.core.commons.BTSObjectSearchService;
 import org.bbaw.bts.core.commons.corpus.BTSCorpusConstants;
 import org.bbaw.bts.core.dao.corpus.BTSLemmaEntryDao;
+import org.bbaw.bts.core.dao.util.BTSQueryRequest;
+import org.bbaw.bts.core.dao.util.BTSQueryRequest.BTSQueryType;
 import org.bbaw.bts.core.dao.util.DaoConstants;
 import org.bbaw.bts.core.services.corpus.BTSAnnotationService;
 import org.bbaw.bts.core.services.corpus.BTSLemmaEntryService;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSAnnotation;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
-import org.bbaw.bts.corpus.btsCorpusModel.BTSImage;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSLemmaEntry;
-import org.bbaw.bts.corpus.btsCorpusModel.BTSWord;
 import org.bbaw.bts.corpus.btsCorpusModel.BtsCorpusModelFactory;
-import org.bbaw.bts.searchModel.BTSQueryRequest;
-import org.bbaw.bts.searchModel.BTSQueryResultAbstract;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.core.di.extensions.Preference;
-import org.elasticsearch.index.query.MatchQueryBuilder.Operator;
 import org.elasticsearch.index.query.QueryBuilders;
 
 public class BTSLemmaEntryServiceImpl 
@@ -155,7 +150,7 @@ implements BTSLemmaEntryService, BTSObjectSearchService
 		List<BTSLemmaEntry> objects = new Vector<BTSLemmaEntry>();
 		for (String p : getActiveLemmaLists())
 		{
-
+			System.out.println("search in index: "+p+BTSCorpusConstants.WLIST);
 			try {
 				objects.addAll(lemmaEntryDao.query(query,
 						p + BTSCorpusConstants.WLIST, p + BTSCorpusConstants.WLIST,
@@ -210,55 +205,45 @@ implements BTSLemmaEntryService, BTSObjectSearchService
 	}
 
 	@Override
-	public List<BTSLemmaEntry> findLemmaProposals(BTSWord word, IProgressMonitor monitor) {
-		String chars = processWordChars(word);
-		BTSQueryRequest query = new BTSQueryRequest();
-		// add .*
-		if (chars.contains("-"))
-		{
-			query.setQueryBuilder(QueryBuilders.matchQuery("name",
-					chars).operator(Operator.AND));
-		}
-		else
-		{
-			query.setQueryBuilder(QueryBuilders.boolQuery()
-					.should(QueryBuilders.matchQuery("name",chars).operator(Operator.AND))
-					.should(QueryBuilders.wildcardQuery("name",chars + ".*"))
-					.should(QueryBuilders.wildcardQuery("name",chars + ",*"))
-					);
-		}
-		
+	public List<BTSLemmaEntry> findLemmaProposals(String prefix, IProgressMonitor monitor) {
+		BTSQueryRequest query = createLemmaSearchQuery(prefix);
 //		query.setResponseFields(BTSConstants.SEARCH_BASIC_RESPONSE_FIELDS);
 		System.out.println(query.getQueryId());
-		List<BTSLemmaEntry> children = query(query, BTSConstants.OBJECT_STATE_ACTIVE, monitor); //thsService.query(query,BTSConstants.OBJECT_STATE_ACTIVE);
+		List<BTSLemmaEntry> children = query(query, BTSConstants.OBJECT_STATE_ACTIVE, monitor);
 		
+		children = lemmaFilterReviewStateType(children);
 		
-		children = lemmaFilterReviewState(children);
 		return filter(children);
 	}
+	
+	@Override
+	public BTSQueryRequest createLemmaSearchQuery(String chars) {
+		BTSQueryRequest query = new BTSQueryRequest(chars);
+		query.setType(BTSQueryType.LEMMA);
+		query.setQueryBuilder(QueryBuilders.boolQuery()
+					.should(QueryBuilders.matchQuery("name", chars))
+					.should(QueryBuilders.termQuery("name",chars))
+					);
+		query.setAutocompletePrefix(chars);
+		return query;
+	}
 
-	private List<BTSLemmaEntry> lemmaFilterReviewState(
+	private List<BTSLemmaEntry> lemmaFilterReviewStateType(
 			List<BTSLemmaEntry> children) {
 		List<BTSLemmaEntry> filtered = new Vector<BTSLemmaEntry>(children.size());
 		for (BTSCorpusObject entry : children)
-		{
 			if (entry instanceof BTSLemmaEntry 
-					&& entry.getRevisionState() != null && !entry.getRevisionState().contains("obsolete"))
-			{
+					&& (entry.getRevisionState() == null || !entry.getRevisionState().contains("obsolete"))
+					&& (entry.getType() == null || !entry.getType().equals("root")))
 				filtered.add((BTSLemmaEntry) entry);
-			}
-		}
 		return filtered;
 	}
 
-	private String processWordChars(BTSWord word) {
-		String chars = word.getWChar();
-		return processWordCharForLemmatizing(chars);
-	}
-	
-		
+
 	public String processWordCharForLemmatizing(String chars) {
-		// TODO Auto-generated method stub
+		
+		if (chars == null)
+			return null;
 		
 		// cut left side
 		Matcher m = doublePointPattern.matcher(chars);
@@ -278,14 +263,14 @@ implements BTSLemmaEntryService, BTSObjectSearchService
 		}
 		
 		// cut right side
-				if (chars.contains("{"))
-				{
-					m = deletionPattern.matcher(chars);
-					if (m.find())
-					{
-						chars = m.replaceAll(""); 
-					}
-				}
+		if (chars.contains("{"))
+		{
+			m = deletionPattern.matcher(chars);
+			if (m.find())
+			{
+				chars = m.replaceAll(""); 
+			}
+		}
 		
 		// replace
 		chars = chars.replaceAll(BTSCorpusConstants.LEMMATIZER_TRIPLE_POINT, ":");
@@ -300,17 +285,20 @@ implements BTSLemmaEntryService, BTSObjectSearchService
 			chars = chars.replaceAll(b, "");
 		}
 		
-		// composita
-		if (chars.contains("-"))
+
+		// XXX
+		if (chars.length() > 3 && chars.startsWith("\"") && chars.endsWith("\""))
 		{
-//			chars = chars.replaceAll("-", " AND ");
+			chars = chars.substring(1, chars.length() -1);
 		}
-		else
+		else if (chars.length() > 1 && chars.startsWith("*"))
 		{
-			// add .*
-//			chars += " OR " + chars + ".*";
+			chars = chars.substring(1, chars.length());
+		}else if (chars.length() > 1 && chars.endsWith("*"))
+		{
+			chars = chars.substring(0, chars.length()-1);
 		}
-		System.out.println("search for lemma proposals: "  + chars);
+		System.out.println("search for lemma proposals for: "  + chars);
 		return chars;
 	}
 
@@ -343,8 +331,65 @@ implements BTSLemmaEntryService, BTSObjectSearchService
 		
 	}
 
+
 	@Override
-	public String processWordCharForLemmatizing(BTSWord word) {
-		return processWordChars(word);
+	public List<BTSLemmaEntry> filterLemmaProposals(
+			List<BTSLemmaEntry> obs) {
+		List<BTSLemmaEntry> filtered;
+		filtered = lemmaFilterReviewStateType(obs);
+		return filtered;
+
+	}
+
+	/* (non-Javadoc)
+	 * @see org.bbaw.bts.core.services.impl.generic.GenericObjectServiceImpl#findAsJsonString(java.io.Serializable, org.eclipse.core.runtime.IProgressMonitor)
+	 */
+	@Override
+	public String findAsJsonString(String key, IProgressMonitor monitor) {
+		String entry = null;
+		try {
+			entry = lemmaEntryDao.findAsJsonString(key, main_project + BTSCorpusConstants.WLIST);
+		} catch (Exception e1) {
+		}
+		if (entry != null)
+		{
+			return entry;
+		}
+		for (String p : getActiveLemmaLists())
+		{
+			try {
+				entry = lemmaEntryDao.findAsJsonString(key, p + BTSCorpusConstants.WLIST);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			if (entry != null)
+			{
+				return entry;
+			}
+		}
+		return null;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.bbaw.bts.core.services.impl.generic.GenericObjectServiceImpl#queryAsJsonString(org.bbaw.bts.core.dao.util.BTSQueryRequest, java.lang.String, org.eclipse.core.runtime.IProgressMonitor)
+	 */
+	@Override
+	public List<String> queryAsJsonString(BTSQueryRequest query, String objectState, IProgressMonitor monitor) {
+		List<String> objects = new Vector<String>();
+		for (String p : getActiveLemmaLists())
+		{
+			System.out.println("search in index: "+p+BTSCorpusConstants.WLIST);
+			try {
+				objects.addAll(lemmaEntryDao.queryAsJsonString(query,
+						p + BTSCorpusConstants.WLIST, p + BTSCorpusConstants.WLIST,
+						objectState, false));
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		}
+		return objects;
 	}
 }

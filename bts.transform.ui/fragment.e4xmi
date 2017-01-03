@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="ASCII"?>
+<fragment:ModelFragments xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:commands="http://www.eclipse.org/ui/2010/UIModel/application/commands" xmlns:fragment="http://www.eclipse.org/ui/2010/UIModel/fragment" xmlns:menu="http://www.eclipse.org/ui/2010/UIModel/application/ui/menu" xmi:id="_J501EEe-EeSrdL2SmGYMdg">
+  <imports xsi:type="menu:Menu" xmi:id="_Ra0hUEe-EeSrdL2SmGYMdg" elementId="org.eclipse.ui.file"/>
+  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_T9ItEEe-EeSrdL2SmGYMdg" featurename="children" parentElementId="org.eclipse.ui.file">
+    <elements xsi:type="menu:HandledMenuItem" xmi:id="_YKQ00Ee-EeSrdL2SmGYMdg" elementId="bts.transform.ui.handledmenuitem.transform" label="Transform" command="_gztW4Ee-EeSrdL2SmGYMdg"/>
+  </fragments>
+  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_ZIc7YEe-EeSrdL2SmGYMdg" featurename="commands" parentElementId="org.bbaw.bts.application">
+    <elements xsi:type="commands:Command" xmi:id="_gztW4Ee-EeSrdL2SmGYMdg" elementId="bts.transform.ui.command.transform" commandName="Transform"/>
+  </fragments>
+  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_dM9SoEe-EeSrdL2SmGYMdg" featurename="handlers" parentElementId="org.bbaw.bts.application">
+    <elements xsi:type="commands:Handler" xmi:id="_fkaSMEe-EeSrdL2SmGYMdg" elementId="bts.transform.ui.handler.transform" contributionURI="bundleclass://bts.transform.ui/bts.transform.ui.handlers.TransformHandler" command="_gztW4Ee-EeSrdL2SmGYMdg"/>
+  </fragments>
+</fragment:ModelFragments>

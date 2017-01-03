@@ -145,7 +145,7 @@ public class NewConfigurationDialog extends TitleAreaDialog
 		List<BTSConfiguration> list = configurationController
 				.listConfigurations(null);
 		
-		Object activeConfiguration = configurationController.getActiveConfiguration();
+		BTSConfiguration activeConfiguration = configurationController.getActiveConfiguration();
 		TreeNodeWrapper activeConfigurationTreeNode = null;
 		
 		
@@ -180,6 +180,7 @@ public class NewConfigurationDialog extends TitleAreaDialog
 		if (activeConfigurationTreeNode != null)
 		{
 			activeConfigcomboViewer.setSelection(new StructuredSelection(activeConfigurationTreeNode));
+			originalconfiguration = (BTSConfiguration) activeConfiguration;
 		}
 		activeConfigcomboViewer.addSelectionChangedListener(new ISelectionChangedListener()
 		{
@@ -241,9 +242,16 @@ public class NewConfigurationDialog extends TitleAreaDialog
 	@Override
 	protected Point getInitialSize()
 	{
-		return new Point(450, 300);
+		return new Point(450, 380);
 	}
 	public BTSConfiguration getConfiguration() {
 		return configuration;
+	}
+	/* (non-Javadoc)
+	 * @see org.eclipse.jface.dialogs.Dialog#isResizable()
+	 */
+	@Override
+	protected boolean isResizable() {
+		return true;
 	}
 }

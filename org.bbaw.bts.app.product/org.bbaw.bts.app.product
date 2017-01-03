@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?pde version="3.5"?>
 
-<product name="Berlin Text System" uid="org.bbaw.bts.app.product" id="org.bbaw.bts.app.product" application="org.eclipse.e4.ui.workbench.swt.E4Application" version="1.0.8.qualifier" useFeatures="true" includeLaunchers="true">
+<product name="Berlin Text System" uid="org.bbaw.bts.app.product" id="org.bbaw.bts.app.product" application="org.eclipse.e4.ui.workbench.swt.E4Application" version="3.1.0.qualifier" useFeatures="true" includeLaunchers="true">
 
    <configIni use="default">
    </configIni>
 
    <launcherArgs>
-      <vmArgs>-Dosgi.requiredJavaVersion=1.8 -Xms140m -Xmx512m -XX:MaxPermSize=256M
+      <vmArgs>-Dosgi.requiredJavaVersion=1.8 -Xms256m -Xmx1024m -XX:MaxPermSize=512M
       </vmArgs>
       <vmArgsMac>-XstartOnFirstThread -Dorg.eclipse.swt.internal.carbon.smallFonts
       </vmArgsMac>
@@ -19,7 +19,7 @@
       <macosx icon="/icons/bts256.icns"/>
       <solaris/>
       <win useIco="false">
-         <ico path="/icons/bts.ico"/>
+         <ico path="/org.bbaw.bts.app.product/icons/bts.ico"/>
          <bmp
             winSmallHigh="/org.bbaw.bts.app.product/icons/bts16.bmp"
             winSmallLow="/org.bbaw.bts.app.product/icons/bts16-8.bmp"
@@ -123,19 +123,28 @@
       <plugin id="org.w3c.css.sac"/>
       <plugin id="org.w3c.dom.smil"/>
       <plugin id="org.w3c.dom.svg"/>
+      <plugin id="org.eclipse.update.configurator"/>
    </plugins>
 
    <features>
-      <feature id="org.bbaw.bts.app.feature" installMode="root"/>
-      <feature id="org.bbaw.bts.e4.p2.feature"/>
-      <feature id="org.bbaw.bts.corpus.egy.feature"/>
+      <feature id="org.bbaw.bts.app.feature" version="3.1.0.qualifier"/>
+      <feature id="org.bbaw.bts.corpus.egy.feature" version="3.1.0.qualifier"/>
    </features>
 
    <configurations>
-      <plugin id="org.eclipse.core.runtime" autoStart="true" startLevel="2" />
-      <plugin id="org.eclipse.equinox.ds" autoStart="true" startLevel="3" />
-      <plugin id="org.eclipse.equinox.event" autoStart="true" startLevel="3" />
-      <property name="eclipse.log.level" value="ERROR" />
+      <plugin id="org.eclipse.core.runtime" autoStart="true" startLevel="0" />
+      <plugin id="org.eclipse.equinox.common" autoStart="true" startLevel="2" />
+      <plugin id="org.eclipse.equinox.ds" autoStart="true" startLevel="2" />
+      <plugin id="org.eclipse.equinox.event" autoStart="true" startLevel="2" />
+      <plugin id="org.eclipse.equinox.simpleconfigurator" autoStart="true" startLevel="1" />
+      <plugin id="org.eclipse.osgi" autoStart="true" startLevel="-1" />
    </configurations>
+
+   <preferencesInfo>
+      <targetfile overwrite="false"/>
+   </preferencesInfo>
+
+   <cssInfo>
+   </cssInfo>
 
 </product>

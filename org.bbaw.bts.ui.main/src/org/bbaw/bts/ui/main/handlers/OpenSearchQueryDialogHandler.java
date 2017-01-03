@@ -2,7 +2,6 @@ package org.bbaw.bts.ui.main.handlers;
 
 import javax.inject.Named;
 
-import org.bbaw.bts.searchModel.BTSQueryRequest;
 import org.bbaw.bts.ui.commons.search.SearchViewer;
 import org.bbaw.bts.ui.main.dialogs.SimpleSearchQueryDialog;
 import org.eclipse.e4.core.contexts.Active;
@@ -17,20 +16,24 @@ import org.eclipse.swt.widgets.Shell;
 public class OpenSearchQueryDialogHandler {
 	@Execute
 	public void execute(@Active MPart activePart, @Active Shell shell,
-			IEclipseContext context, @Optional @Named("viewerFilter") String viewerFilterString) {
+			IEclipseContext context, @Optional @Named("org.bbaw.bts.ui.main.commandparameter.viewerFilter") String viewerFilterString,
+			@Optional @Named("org.bbaw.bts.ui.main.commandparameter.searchString") String searchString,
+			@Optional @Named("org.bbaw.bts.ui.main.commandparameter.searchOptions") String searchOptions) {
 		Object o = activePart.getObject();
 		if (o instanceof SearchViewer) {
 			SearchViewer searchViewer = (SearchViewer) o;
-			BTSQueryRequest query = new BTSQueryRequest();
-
-			SimpleSearchQueryDialog dialog = new SimpleSearchQueryDialog(shell,
-					query);
+			SimpleSearchQueryDialog dialog = new SimpleSearchQueryDialog(shell);
 			ContextInjectionFactory.inject(dialog, context);
 			dialog.create();
-			if (dialog.open() == dialog.OK) {
-				query = dialog.getQueryRequest();
-				if (query != null) {
-					searchViewer.search(query, null, viewerFilterString);
+			dialog.setSearchString(searchString);
+			if (searchOptions != null) {
+				dialog.setNameOnly(searchOptions.contains(SearchViewer.OPT_NAME_ONLY));
+				dialog.setIdOnly(searchOptions.contains(SearchViewer.OPT_ID_ONLY));
+			}
+			dialog.setTitle("Object Search");
+			if (dialog.open() == SimpleSearchQueryDialog.OK) {
+				if (dialog.getQueryRequest() != null) {
+					searchViewer.search(dialog.getQueryRequest(), null, viewerFilterString);
 				}
 			}
 		}

@@ -1,8 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: org.bbaw.bts.corpus.text.egy.egydsl
-Bundle-Vendor: My Company
-Bundle-Version: 1.0.2.qualifier
+Bundle-Vendor: BBAW
 Bundle-SymbolicName: org.bbaw.bts.corpus.text.egy.egydsl; singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.xtext;visibility:=reexport,
@@ -35,4 +34,4 @@ Export-Package: org.bbaw.bts.corpus.text.egy,
  org.bbaw.bts.corpus.text.egy.scoping,
  org.bbaw.bts.corpus.text.egy.generator,
  org.bbaw.bts.corpus.text.egy.formatting
-
+Bundle-Version: 3.1.0.qualifier

@@ -86,7 +86,7 @@ public class PassportEntryGroupEditor extends PassportEntryEditorComposite {
 	public PassportEntryGroupEditor(Composite parent) {
 		super(parent, SWT.NONE);
 		this.isGroup = (parent instanceof PassportEntryEditorComposite)
-				|| (parent instanceof Group);
+				|| (parent.getParent() instanceof Group);
 	}
 
 	@PostConstruct

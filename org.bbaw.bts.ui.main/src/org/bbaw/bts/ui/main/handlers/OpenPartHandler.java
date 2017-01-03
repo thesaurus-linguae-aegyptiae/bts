@@ -13,7 +13,7 @@ public class OpenPartHandler {
 		MPart part = partService.findPart(partId);
 		if (part == null)
 		{
-			partService.createPart(partId);
+			part = partService.createPart(partId);
 		}
 		partService.activate(part);
 	}

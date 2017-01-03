@@ -3,8 +3,11 @@ package org.bbaw.bts.corpus.text.egy.ui.custom;
 import org.bbaw.bts.corpus.text.egy.egyDsl.Marker;
 import org.bbaw.bts.corpus.text.egy.egyDsl.SentenceItem;
 import org.bbaw.bts.corpus.text.egy.egyDsl.Word;
+import org.bbaw.bts.ui.commons.corpus.util.BTSEGYUIConstants;
 import org.eclipse.core.runtime.preferences.ConfigurationScope;
+import org.eclipse.core.runtime.preferences.DefaultScope;
 import org.eclipse.core.runtime.preferences.IEclipsePreferences;
+import org.eclipse.core.runtime.preferences.InstanceScope;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.ITextViewer;
@@ -57,8 +60,10 @@ public class BTSEObjectHover extends DefaultEObjectHoverProvider {
 	{
 		boolean showHover = true;
 		try {
-			IEclipsePreferences node = ConfigurationScope.INSTANCE.getNode("org.bbaw.bts.ui.corpus.egy");
-			showHover = node.getBoolean("pref_transliteration_editor_active_hover_info", false);
+			IEclipsePreferences defaultNode = DefaultScope.INSTANCE.getNode("org.bbaw.bts.ui.corpus.egy");
+			IEclipsePreferences instanceNode = InstanceScope.INSTANCE.getNode("org.bbaw.bts.ui.corpus.egy");
+			showHover = instanceNode.getBoolean(BTSEGYUIConstants.PREF_TRANSLITERATION_EDITOR_ACTIVATE_HOVER_INFO, 
+				defaultNode.getBoolean(BTSEGYUIConstants.PREF_TRANSLITERATION_EDITOR_ACTIVATE_HOVER_INFO, true));
 		} catch (Exception e) {
 		}
 		if (showHover)

@@ -2,12 +2,14 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: CorpusServices
 Bundle-SymbolicName: org.bbaw.bts.core.services.corpus
-Bundle-Version: 1.0.8.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Import-Package: org.bbaw.bts.core.commons.filter,
+ org.bbaw.bts.core.dao.util,
  org.bbaw.bts.core.services,
  org.bbaw.bts.corpus.btsCorpusModel,
+ org.bbaw.bts.corpus.searchModel,
  org.bbaw.bts.searchModel,
  org.eclipse.core.runtime;version="3.4.0"
 Export-Package: org.bbaw.bts.core.services.corpus
 Require-Bundle: org.bbaw.bts.commons.libs.elasticsearch;bundle-version="1.0.0"
+Bundle-Version: 3.1.0.qualifier

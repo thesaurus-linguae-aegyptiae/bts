@@ -74,11 +74,18 @@ import org.eclipse.jface.viewers.ComboViewer;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.FocusAdapter;
 import org.eclipse.swt.events.FocusEvent;
+import org.eclipse.swt.events.FocusListener;
 import org.eclipse.swt.events.KeyAdapter;
 import org.eclipse.swt.events.KeyEvent;
 import org.eclipse.swt.events.KeyListener;
+import org.eclipse.swt.events.ModifyEvent;
+import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.events.MouseAdapter;
 import org.eclipse.swt.events.MouseEvent;
+import org.eclipse.swt.events.MouseWheelListener;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
@@ -88,6 +95,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Spinner;
 import org.eclipse.swt.widgets.Text;
@@ -610,7 +618,7 @@ public class PassportEntryItemEditor extends PassportEntryEditorComposite {
 
 			@Override
 			public void keyReleased(KeyEvent e) {
-				if(e.keyCode == SWT.CR){
+				if(e.keyCode == SWT.CR || e.keyCode == SWT.KEYPAD_CR){
 					// open search dialog
 					IEclipseContext child = context.createChild("searchselect");
 
@@ -630,7 +638,31 @@ public class PassportEntryItemEditor extends PassportEntryEditorComposite {
 						ths_select_text.setData(object);
 
 					}
+			    } else if (e.keyCode == SWT.BS)
+			    {
+			    	Command command = SetCommand.create(editingDomain,
+							entry, BtsCorpusModelPackage.eINSTANCE.getBTSPassportEntry_Value(),
+							null);
+					editingDomain.getCommandStack().execute(command);
+					ths_select_text.setText("");
+					ths_select_text.setData(null);
 			    }
+			}
+		});
+		
+		ths_select_text.addModifyListener(new ModifyListener() {
+			
+			@Override
+			public void modifyText(ModifyEvent e) {
+				if (ths_select_text.getText().trim().length() == 0)
+				{
+					Command command = SetCommand.create(editingDomain,
+							entry, BtsCorpusModelPackage.eINSTANCE.getBTSPassportEntry_Value(),
+							null);
+					editingDomain.getCommandStack().execute(command);
+					ths_select_text.setData(null);
+				}
+				
 			}
 		});
 
@@ -749,6 +781,10 @@ public class PassportEntryItemEditor extends PassportEntryEditorComposite {
 				BTSUIConstants.PASSPORT_COLUMN_NUMBER / 2,
 				1));
 		((GridData) spinner.getLayoutData()).horizontalIndent = 7;
+		
+		
+		
+		
 		if (itemConfig2.getDescription() != null
 				&& !itemConfig2.getDescription().getLanguages().isEmpty()) {
 			final ControlDecoration deco = new ControlDecoration(spinner,
@@ -785,7 +821,14 @@ public class PassportEntryItemEditor extends PassportEntryEditorComposite {
 			BackgroundControlDecorationSupport.create(binding, SWT.TOP
 					| SWT.LEFT);
 		}
-
+		//remove focus after selection to avoid mousewheel errors
+		spinner.addSelectionListener(new SelectionAdapter() {
+					
+					@Override
+					public void widgetSelected(SelectionEvent e) {
+						getParent().setFocus();
+					}
+				});
 	}
 
 	private void loadTextSuggestWidget(BTSConfigItem itemConfig2,
@@ -925,6 +968,8 @@ public class PassportEntryItemEditor extends PassportEntryEditorComposite {
 		combo.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false,
 				BTSUIConstants.PASSPORT_COLUMN_NUMBER / 2, 1));
 		((GridData) combo.getLayoutData()).horizontalIndent = 7;
+		
+		
 		if (itemConfig2.getDescription() != null
 				&& !itemConfig2.getDescription().getLanguages().isEmpty()) {
 			final ControlDecoration deco = new ControlDecoration(combo,
@@ -977,6 +1022,14 @@ public class PassportEntryItemEditor extends PassportEntryEditorComposite {
 					| SWT.LEFT);
 		}
 		
+		//remove focus after selection to avoid mousewheel errors
+		combo.addSelectionListener(new SelectionAdapter() {
+			
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				getParent().setFocus();
+			}
+		});
 	}
 
 	private void loadTextWidget(BTSConfigItem itemConfig2,

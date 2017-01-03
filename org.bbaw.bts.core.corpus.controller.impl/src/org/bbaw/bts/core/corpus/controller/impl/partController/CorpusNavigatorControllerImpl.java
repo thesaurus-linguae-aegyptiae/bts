@@ -9,10 +9,12 @@ import javax.inject.Inject;
 
 import org.bbaw.bts.btsviewmodel.TreeNodeWrapper;
 import org.bbaw.bts.commons.BTSConstants;
+import org.bbaw.bts.core.commons.BTSCoreConstants;
 import org.bbaw.bts.core.commons.comparator.BTSObjectByNameComparator;
 import org.bbaw.bts.core.commons.filter.BTSFilter;
-import org.bbaw.bts.core.corpus.controller.impl.util.BTSEgyObjectByNameComparator;
+import org.bbaw.bts.core.controller.generalController.PermissionsAndExpressionsEvaluationController;
 import org.bbaw.bts.core.corpus.controller.partController.CorpusNavigatorController;
+import org.bbaw.bts.core.dao.util.BTSQueryRequest;
 import org.bbaw.bts.core.services.Backend2ClientUpdateService;
 import org.bbaw.bts.core.services.IDService;
 import org.bbaw.bts.core.services.corpus.BTSAnnotationService;
@@ -27,7 +29,6 @@ import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSTCObject;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSText;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSTextCorpus;
-import org.bbaw.bts.searchModel.BTSQueryRequest;
 import org.bbaw.bts.searchModel.BTSQueryResultAbstract;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.e4.core.services.log.Logger;
@@ -68,6 +69,9 @@ implements CorpusNavigatorController
 
 	@Inject
 	private BTSLemmaEntryService wlistService;
+
+	@Inject
+	private PermissionsAndExpressionsEvaluationController permissionController;
 	
 	@Inject
 	private Logger logger;
@@ -324,10 +328,10 @@ implements CorpusNavigatorController
 	}
 
 	@Override
-	public BTSAnnotation createNewAnnotation(BTSCorpusObject annotatedObject) {
+	public BTSAnnotation createNewAnnotation(BTSCorpusObject annotatedObject, String annotationTypePath) {
 		BTSAnnotation anno = annotationService
 				.createNewRelationPartOf(annotatedObject);
-
+		setObjectTypePath(anno, annotationTypePath);
 		return anno;
 	}
 
@@ -375,13 +379,24 @@ implements CorpusNavigatorController
 
 	@Override
 	public List<BTSTextCorpus> listTextCorpora(IProgressMonitor monitor) {
-		List<BTSTextCorpus> corpora = textCorpusService.list(BTSConstants.OBJECT_STATE_ACTIVE, monitor);
-		for (BTSTextCorpus c : corpora)
+		List<BTSTextCorpus> corpora = new Vector<BTSTextCorpus>();
+		for (BTSTextCorpus c : textCorpusService.list(BTSConstants.OBJECT_STATE_ACTIVE, monitor))
 		{
-			checkAndFullyLoad(c, true);
+			String dbCollectionName = getDBCollectionName(c);
+			if (c.getVisibility().equals(BTSCoreConstants.VISIBILITY_PUBLIC)
+					|| permissionController.authenticatedUserMayReadDBCollection(dbCollectionName)) {
+				checkAndFullyLoad(c, true);
+				corpora.add(c);
+			}
 		}
 		sortBTSTextCorpus(corpora);
 		return corpora;
+	}
+
+	@Override
+	public boolean isWriteable(BTSTextCorpus corpus) {
+		return permissionController.authenticatedUserMayAddToDBCollection(
+				getDBCollectionName(corpus));
 	}
 
 	private void sortBTSTextCorpus(List<BTSTextCorpus> list) {
@@ -446,6 +461,5 @@ implements CorpusNavigatorController
 		return textCorpusService.findTextCorpusByPrefix(corpusPrefix);
 	}
 
-	
 	
 }

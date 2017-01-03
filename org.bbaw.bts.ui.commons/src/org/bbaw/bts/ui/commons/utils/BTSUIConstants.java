@@ -29,6 +29,9 @@
  */
 package org.bbaw.bts.ui.commons.utils;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import org.eclipse.jface.resource.JFaceResources;
 import org.eclipse.jface.resource.LocalResourceManager;
 import org.eclipse.swt.graphics.Color;
@@ -196,10 +199,14 @@ public class BTSUIConstants {
 	/** The Constant EVENT_TEXT_RELATING_OBJECTS_SELECTED. */
 	public static final String EVENT_TEXT_RELATING_OBJECTS_SELECTED = "event_text_relating_objects/selected";
 	
+	public static final String EVENT_TEXT_RELATING_OBJECTS_TOGGLE_FILTER = "event_text_relating_objects_toggle_filter";
+
 	/** The Constant EVENT_RELATING_OBJECTS_SELECTED. */
 	public static final String EVENT_RELATING_OBJECTS_SELECTED = "event_relating_objects/selected";
 
 	public static final String EVENT_EGY_TEXT_EDITOR_LOAD_LEMMATA = "event_egy_text_editor_load_lemmata/load";
+	
+	public static final String EVENT_EGY_TEXT_EDITOR_INPUT_REQUESTED = "event_egy_text_editor_input_requested/";
 
 	public static final Color COLOR_ERROR = _resources.createColor(new RGB(255, 0, 0));
 
@@ -221,7 +228,21 @@ public class BTSUIConstants {
 
 	public static final Color COLOR_BLACK = _resources.createColor(new RGB(0, 0, 0));
 
+	public static final Pattern RGB_PATTERN = Pattern.compile("RGB *\\{ *([0-9]+), *([0-9]+), *([0-9]+) *\\}");
 
+
+
+	public static Color getColor(String rgbString)
+	{
+		Matcher m = BTSUIConstants.RGB_PATTERN.matcher(rgbString);
+	    if (m.matches()) 
+	    {
+	    	return _resources.createColor(new RGB(Integer.valueOf(m.group(1)),  // r
+                Integer.valueOf(m.group(2)),  // g
+                Integer.valueOf(m.group(3))));
+	    }
+		return COLOR_ERROR;
+	}
 
 
 }

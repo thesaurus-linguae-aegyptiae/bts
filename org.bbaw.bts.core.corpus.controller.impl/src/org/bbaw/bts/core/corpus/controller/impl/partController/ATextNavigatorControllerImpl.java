@@ -7,10 +7,10 @@ import javax.inject.Inject;
 
 import org.bbaw.bts.core.commons.filter.BTSFilter;
 import org.bbaw.bts.core.corpus.controller.partController.ATextNavigatorController;
+import org.bbaw.bts.core.dao.util.BTSQueryRequest;
 import org.bbaw.bts.core.services.corpus.BTSAbstractTextService;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSAbstractText;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSAnnotation;
-import org.bbaw.bts.searchModel.BTSQueryRequest;
 import org.eclipse.core.runtime.IProgressMonitor;
 
 public class ATextNavigatorControllerImpl extends AbstractCorpusObjectNavigatorControllerImpl<BTSAbstractText, String> 
@@ -52,10 +52,11 @@ implements ATextNavigatorController {
 	}
 
 	@Override
-	public BTSAnnotation createNewAnnotation(BTSAbstractText annotatedObject) {
+	public BTSAnnotation createNewAnnotation(BTSAbstractText annotatedObject, String annotationTypePath) {
 		BTSAnnotation anno = atextService
 				.createNewAnnotationRelationPartOf(annotatedObject);
-		
+		setObjectTypePath(anno, annotationTypePath);
+
 		return anno;
 	}
 

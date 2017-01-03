@@ -114,9 +114,15 @@ public class BTSCoreConstants
 	/** The Constant LANG_RU. */
 	public static final String LANG_RU = "ru";
 	
+	/** The Constant LANG_RU. */
+	public static final String LANG_AR = "ar";
+	
+	/** The Constant LANG_RU. */
+	public static final String LANG_IT = "it";
+	
 	/** The Constant LANGS. */
 	public static final String[] LANGS = new String[] { LANG_DE, LANG_EN,
-			LANG_FR, LANG_ES, LANG_RU };
+			LANG_FR, LANG_ES, LANG_RU, LANG_AR, LANG_IT };
 
 	/** The Constant WIDGET_TYPE_TEXT. */
 	public static final String WIDGET_TYPE_TEXT = "Text";

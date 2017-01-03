@@ -42,6 +42,7 @@ import org.bbaw.bts.btsmodel.BTSRelation;
 import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.core.corpus.controller.impl.partController.support.TextModelHelper;
 import org.bbaw.bts.core.corpus.controller.partController.BTSTextEditorController;
+import org.bbaw.bts.core.dao.util.BTSQueryRequest;
 import org.bbaw.bts.core.services.BTSCommentService;
 import org.bbaw.bts.core.services.corpus.BTSLemmaEntryService;
 import org.bbaw.bts.core.services.corpus.BTSTextService;
@@ -65,7 +66,6 @@ import org.bbaw.bts.corpus.btsCorpusModel.BtsCorpusModelPackage;
 import org.bbaw.bts.corpus.text.egy.EgyDslStandaloneSetup;
 import org.bbaw.bts.corpus.text.egy.egyDsl.TextContent;
 import org.bbaw.bts.corpus.text.egy.ui.internal.EgyDslActivator;
-import org.bbaw.bts.searchModel.BTSQueryRequest;
 import org.bbaw.bts.ui.commons.corpus.text.BTSAnnotationAnnotation;
 import org.bbaw.bts.ui.commons.corpus.text.BTSCommentAnnotation;
 import org.bbaw.bts.ui.commons.corpus.text.BTSLemmaAnnotation;
@@ -129,13 +129,7 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 	private static final String MARKER_START_SIGN = "\u0023";
 	private static final String MARKER_END_SIGN = "\u0023";
 	
-	private static final String VERS_FRONTER_MARKER = "\uDB80\uDC81"; //mv
-	private static final String VERS_BREAK_MARKER = "\uDB80\uDC80"; //v
-	private static final String BROKEN_VERS_MARKER = "\uDB80\uDC82";
-	private static final String DISPUTALBE_VERS_MARKER = "\u2E2E\uDB80\uDC80?";
-	private static final String DELETED_VERS_MARKER = "{\uDB80\uDC80}";
-	private static final String DESTROYED_VERS_MARKER = "[\uDB80\uDC80]";
-	private static final String MISSING_VERS_MARKER = "\u2329\uDB80\uDC80\u232A";
+	
 
 //	private static final String MARKER_VERS_SIGN = "\u0040";
 	private static final String MARKER_INTERFIX = ": ";
@@ -413,11 +407,10 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 				{
 					anno.setTempSortKey(counter + GAP);
 				}
-				modelAnnotation = new BTSAnnotationAnnotation(BTSAnnotationAnnotation.TYPE, item, reference, anno);
+				modelAnnotation = new BTSAnnotationAnnotation(item, reference, anno);
 				if (anno.getType() != null && anno.getType().equalsIgnoreCase("rubrum"))
 				{
 					modelAnnotation.setText( "org.bbaw.bts.ui.text.modelAnnotation.annotation.rubrum");
-					modelAnnotation.setType(BTSAnnotationAnnotation.TYPE_RUBRUM);
 				}
 			}
 			else if (reference.eContainer().eContainer() instanceof BTSText)
@@ -428,7 +421,7 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 				{
 					text.setTempSortKey(counter + GAP);
 				}
-				modelAnnotation = new BTSSubtextAnnotation(BTSSubtextAnnotation.TYPE, item, reference, text);
+				modelAnnotation = new BTSSubtextAnnotation(item, reference, text);
 			}
 			else if (reference.eContainer().eContainer() instanceof BTSComment)
 			{
@@ -438,7 +431,7 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 				{
 					comment.setTempSortKey(counter + GAP);
 				}
-				modelAnnotation = new BTSCommentAnnotation(BTSCommentAnnotation.TYPE, item, comment, reference);
+				modelAnnotation = new BTSCommentAnnotation(item, comment, reference);
 			}
 			counter = counter + GAP;
 		}
@@ -450,7 +443,7 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 			IAnnotationModel model, Position pos) {
 		if (model == null) return;
 
-		BTSModelAnnotation annotation = new BTSModelAnnotation(BTSModelAnnotation.TYPE,
+		BTSModelAnnotation annotation = new BTSModelAnnotation(BTSModelAnnotation.TOKEN,
 				(BTSIdentifiableItem) ambivalence);
 
 		model.addAnnotation(annotation, pos);
@@ -502,7 +495,7 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 		// append to model
 		if (model == null) return;
 
-		BTSModelAnnotation annotation = new BTSModelAnnotation(BTSModelAnnotation.TYPE,
+		BTSModelAnnotation annotation = new BTSModelAnnotation(BTSModelAnnotation.TOKEN,
 				(BTSIdentifiableItem) amCase);
 
 		model.addAnnotation(annotation, pos);
@@ -535,7 +528,7 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 			Position pos)
 	{
 		if (model == null) return;
-		BTSModelAnnotation annotation = new BTSModelAnnotation(BTSModelAnnotation.TYPE,
+		BTSModelAnnotation annotation = new BTSModelAnnotation(BTSModelAnnotation.TOKEN,
 				(BTSIdentifiableItem) marker);
 
 		model.addAnnotation(annotation, pos);
@@ -548,38 +541,116 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 		Position pos = new Position(stringBuilder.length());
 		if (marker.getType() != null) {
 			if (marker.getType().equals(BTSConstants.TEXT_VERS_FRONTIER_MARKER)) {
-//				stringBuilder.append(MARKER_VERS_SIGN);
-				stringBuilder.append(VERS_FRONTER_MARKER);
+				stringBuilder.append(BTSConstants.VERS_FRONTER_MARKER_SIGN);
 			} else if (marker.getType().equals(
 					BTSConstants.TEXT_VERS_BREAK_MARKER)) {
-//				stringBuilder.append(MARKER_VERS_SIGN);
-				stringBuilder.append(VERS_BREAK_MARKER);
+				stringBuilder.append(BTSConstants.VERS_BREAK_MARKER_SIGN);
 			} else if (marker.getType().equals(
 					BTSConstants.BROKEN_VERS_MARKER)) {
-//				stringBuilder.append(MARKER_VERS_SIGN);
-				stringBuilder.append(BROKEN_VERS_MARKER);
+				stringBuilder.append(BTSConstants.BROKEN_VERS_MARKER_SIGN);
 				
 			} else if (marker.getType().equals(
 					BTSConstants.DESTROYED_VERS_MARKER)) {
-//				stringBuilder.append(MARKER_VERS_SIGN);
-				stringBuilder.append(DESTROYED_VERS_MARKER);
+				stringBuilder.append(BTSConstants.DESTROYED_VERS_MARKER_SIGN);
 				
 			}else if (marker.getType().equals(
 					BTSConstants.DELETED_VERS_MARKER)) {
-//				stringBuilder.append(MARKER_VERS_SIGN);
-				stringBuilder.append(DELETED_VERS_MARKER);
+				stringBuilder.append(BTSConstants.DELETED_VERS_MARKER_SIGN);
 				
 			}else if (marker.getType().equals(
 					BTSConstants.DISPUTABLE_VERS_MARKER)) {
-//				stringBuilder.append(MARKER_VERS_SIGN);
-				stringBuilder.append(DISPUTALBE_VERS_MARKER);
+				stringBuilder.append(BTSConstants.DISPUTALBE_VERS_MARKER_SIGN);
 				
 			}else if (marker.getType().equals(
 					BTSConstants.MISSING_VERS_MARKER)) {
-//				stringBuilder.append(MARKER_VERS_SIGN);
-				stringBuilder.append(MISSING_VERS_MARKER);
+				stringBuilder.append(BTSConstants.MISSING_VERS_MARKER_SIGN);
+				
+			}
+			
+			
+			else if (marker.getType().equals(
+					BTSConstants.DESTROYEDVERSMARKER)) {
+				stringBuilder.append(BTSConstants.DESTROYEDVERSMARKER_SIGN);
 				
 			}else if (marker.getType().equals(
+					BTSConstants.DELETEDVERSMARKER)) {
+				stringBuilder.append(BTSConstants.DELETEDVERSMARKER_SIGN);
+				
+			}else if (marker.getType().equals(
+					BTSConstants.DISPUTABLEVERSMARKER)) {
+				stringBuilder.append(BTSConstants.DISPUTABLEVERSMARKER_SIGN);
+				
+			}else if (marker.getType().equals(
+					BTSConstants.RESTORATIONOVERRASURMARKER)) {
+				stringBuilder.append(BTSConstants.RESTORATIONOVERRASURMARKER_SIGN);
+				
+			}else if (marker.getType().equals(
+					BTSConstants.ANCIENTEXPANDEDMARKER)) {
+				stringBuilder.append(BTSConstants.ANCIENTEXPANDEDMARKER_SIGN);
+				
+			}else if (marker.getType().equals(
+					BTSConstants.RASURMARKER)) {
+				stringBuilder.append(BTSConstants.RASURMARKER_SIGN);
+				
+			}else if (marker.getType().equals(
+					BTSConstants.EMENDATIONVERSMARKER)) {
+				stringBuilder.append(BTSConstants.EMENDATIONVERSMARKER_SIGN);
+				
+			}else if (marker.getType().equals(
+					BTSConstants.DESTROYEDVERSFRONTIERMARKER)) {
+				stringBuilder.append(BTSConstants.DESTROYEDVERSFRONTIERMARKER_SIGN);
+				
+			}else if (marker.getType().equals(
+					BTSConstants.PARTIALDESTROYEDVERSMARKER)) {
+				stringBuilder.append(BTSConstants.PARTIALDESTROYEDVERSMARKER_SIGN);
+				
+			}else if (marker.getType().equals(
+					BTSConstants.PARTIALDESTROYEDDISPUTABLEVERSMARKER)) {
+				stringBuilder.append(BTSConstants.PARTIALDESTROYEDDISPUTABLEVERSMARKER_SIGN);
+				
+			}else if (marker.getType().equals(
+					BTSConstants.DESTROYEDDISPUTABLEVERSFRONTIERMARKER)) {
+				stringBuilder.append(BTSConstants.DESTROYEDDISPUTABLEVERSFRONTIERMARKER_SIGN);
+				
+			}else if (marker.getType().equals(
+					BTSConstants.DISPUTABLEDESTROYEDVERSMARKER)) {
+				stringBuilder.append(BTSConstants.DISPUTABLEDESTROYEDVERSMARKER_SIGN);
+				
+			}
+			
+			else if (marker.getType().equals(
+					BTSConstants.DELETEDDISPUTABLEVERSMARKER)) {
+				stringBuilder.append(BTSConstants.DELETEDDISPUTABLEVERSMARKER_SIGN);
+				
+			}
+			else if (marker.getType().equals(
+					BTSConstants.MISSINGDISPUTABLEVERSMARKER)) {
+				stringBuilder.append(BTSConstants.MISSINGDISPUTABLEVERSMARKER_SIGN);
+				
+			}else if (marker.getType().equals(
+					BTSConstants.DISPUTABLEDELETEDVERSMARKER)) {
+				stringBuilder.append(BTSConstants.DISPUTABLEDELETEDVERSMARKER_SIGN);
+				
+			}else if (marker.getType().equals(
+					BTSConstants.PARTIALDESTROYEDDELETEDVERSMARKER)) {
+				stringBuilder.append(BTSConstants.PARTIALDESTROYEDDELETEDVERSMARKER_SIGN);
+				
+			}else if (marker.getType().equals(
+					BTSConstants.DESTROYEDDELETEDVERSMARKER)) {
+				stringBuilder.append(BTSConstants.DESTROYEDDELETEDVERSMARKER_SIGN);
+				
+			}else if (marker.getType().equals(
+					BTSConstants.DELETEDDESTROYEDVERSMARKER)) {
+				stringBuilder.append(BTSConstants.DELETEDDESTROYEDVERSMARKER_SIGN);
+				
+			}
+			
+			
+			
+			
+			
+			
+			else if (marker.getType().equals(
 					BTSConstants.DESTRUCTION_MARKER)) {
 //				stringBuilder.append(MARKER_VERS_SIGN);
 				stringBuilder.append("--" + marker.getName() + "--");
@@ -615,7 +686,7 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 			}
 			
 		} else {
-			annotation = new BTSModelAnnotation(BTSModelAnnotation.TYPE,
+			annotation = new BTSModelAnnotation(BTSModelAnnotation.TOKEN,
 					(BTSIdentifiableItem) word);
 		}
 		model.addAnnotation(annotation, position);

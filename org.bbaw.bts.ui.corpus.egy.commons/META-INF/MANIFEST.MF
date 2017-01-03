@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: UI Corpus Egy Commons
 Bundle-SymbolicName: org.bbaw.bts.ui.corpus.egy.commons
-Bundle-Version: 1.0.2.qualifier
+Bundle-Version: 3.1.0.qualifier
 Bundle-Vendor: BTS
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ClassPath: jseshlibs/bcmail-jdk14-138.jar,

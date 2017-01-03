@@ -54,16 +54,17 @@ public class JSONLoad {
 	private EClass rootClass;
 	private ResourceSet resourceSet;
 
-	public JSONLoad(InputStream inStream, Map<?,?> options) {
-		init(JSONUtil.getJsonParser(inStream), options);
+	public JSONLoad(InputStream inStream, Map<?,?> options, ResourceSet resourceSet) {
+		init(JSONUtil.getJsonParser(inStream), options, resourceSet);
 	}
 
-	public JSONLoad(URL url, Map<?,?> options) {
-		init(JSONUtil.getJsonParser(url), options);
+	public JSONLoad(URL url, Map<?,?> options, ResourceSet resourceSet) {
+		init(JSONUtil.getJsonParser(url), options, resourceSet);
 	}
 
 	@SuppressWarnings("deprecation")
-	private void init(JsonParser parser, Map<?,?> options) {
+	private void init(JsonParser parser, Map<?,?> options, ResourceSet resourceSet) {
+		this.resourceSet = resourceSet;
 		JsonNode root = JSONUtil.getRootNode(parser);
 
 		checkNotNull(root, "root node should not be null.");

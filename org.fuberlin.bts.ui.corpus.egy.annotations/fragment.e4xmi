@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="ASCII"?>
+<fragment:ModelFragments xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:advanced="http://www.eclipse.org/ui/2010/UIModel/application/ui/advanced" xmlns:basic="http://www.eclipse.org/ui/2010/UIModel/application/ui/basic" xmlns:commands="http://www.eclipse.org/ui/2010/UIModel/application/commands" xmlns:fragment="http://www.eclipse.org/ui/2010/UIModel/fragment" xmlns:menu="http://www.eclipse.org/ui/2010/UIModel/application/ui/menu" xmi:id="_BxaXACerEeWxCPrV0pAZQQ">
+  <imports xsi:type="advanced:Perspective" xmi:id="_ZpZo0F_IEeaTF8xWOerh1A" elementId="org.bbaw.bts.ui.corpus.perspective.text"/>
+  <imports xsi:type="commands:Category" xmi:id="_HKoWcKJuEeaAj_saD2lZaA" elementId="org.eclipse.ui.category.window"/>
+  <imports xsi:type="commands:Category" xmi:id="_43rkcKW-EeaAj_saD2lZaA" elementId="org.eclipse.ui.category.edit"/>
+  <imports xsi:type="commands:Command" xmi:id="_K9FMwKpjEeaIYLNaubmIBQ" elementId="org.bbaw.bts.ui.corpus.command.addAnnotation"/>
+  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_mHT7AF_IEeaTF8xWOerh1A" featurename="children" parentElementId="org.bbaw.bts.corpus.text.partstack.middle.top">
+    <elements xsi:type="basic:Part" xmi:id="_xPGu0F_IEeaTF8xWOerh1A" elementId="org.fuberlin.bts.ui.corpus.egy.annotations.TextAnnotationsPart" contributionURI="bundleclass://org.fuberlin.bts.ui.corpus.egy.annotations/org.fuberlin.bts.ui.corpus.egy.annotations.parts.TextAnnotationsPart" label="TextAnnotationsPart" iconURI="platform:/plugin/org.fuberlin.bts.ui.corpus.egy.annotations/icons/Sample.png" closeable="true">
+      <handlers xmi:id="_QGavMKWvEeaAj_saD2lZaA" elementId="org.fuberlin.bts.ui.corpus.egy.annotations.handler.addComment" contributionURI="bundleclass://org.fuberlin.bts.ui.corpus.egy.annotations/org.fuberlin.bts.ui.corpus.egy.annotations.handlers.AddCommentHandler" command="_NcrFwKWvEeaAj_saD2lZaA"/>
+      <handlers xmi:id="_9XafIKW-EeaAj_saD2lZaA" elementId="org.fuberlin.bts.ui.corpus.egy.annotations.handler.addAnnotation" contributionURI="bundleclass://org.fuberlin.bts.ui.corpus.egy.annotations/org.fuberlin.bts.ui.corpus.egy.annotations.handlers.AddAnnotationHandler" command="_K9FMwKpjEeaIYLNaubmIBQ"/>
+      <handlers xmi:id="_MnXbIKW_EeaAj_saD2lZaA" elementId="org.fuberlin.bts.ui.corpus.egy.annotations.handler.addRubrum" contributionURI="bundleclass://org.fuberlin.bts.ui.corpus.egy.annotations/org.fuberlin.bts.ui.corpus.egy.annotations.handlers.AddRubrumHandler" command="_FLSrIKW_EeaAj_saD2lZaA"/>
+      <handlers xmi:id="_O6DPcKW_EeaAj_saD2lZaA" elementId="org.fuberlin.bts.ui.corpus.egy.annotations.handler.addGlosse" contributionURI="bundleclass://org.fuberlin.bts.ui.corpus.egy.annotations/org.fuberlin.bts.ui.corpus.egy.annotations.handlers.AddGlosseHandler" command="_Hn860KW_EeaAj_saD2lZaA"/>
+      <toolbar xmi:id="_30260F_IEeaTF8xWOerh1A" elementId="org.fuberlin.bts.ui.corpus.egy.annotations.toolbar.1">
+        <children xsi:type="menu:HandledToolItem" xmi:id="_jz_ZMKUDEeaAj_saD2lZaA" elementId="org.fuberlin.bts.ui.corpus.egy.annotations.handledtoolitem.9" iconURI="platform:/plugin/org.bbaw.bts.ui.resources.impl/icons/full/icon16/annotation-add.png" tooltip="Add Annotation" command="_K9FMwKpjEeaIYLNaubmIBQ"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_UEod8KW_EeaAj_saD2lZaA" elementId="org.fuberlin.bts.ui.corpus.egy.annotations.handledtoolitem.02" iconURI="platform:/plugin/org.bbaw.bts.ui.resources.impl/icons/full/icon16/rubrum-add.png" tooltip="Add Rubrum" command="_FLSrIKW_EeaAj_saD2lZaA"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_Z2B00KW_EeaAj_saD2lZaA" elementId="org.fuberlin.bts.ui.corpus.egy.annotations.handledtoolitem.0" iconURI="platform:/plugin/org.bbaw.bts.ui.resources.impl/icons/full/icon16/subtext-add.png" tooltip="Add Glosse" command="_Hn860KW_EeaAj_saD2lZaA"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_-XeiIKUHEeaAj_saD2lZaA" elementId="org.fuberlin.bts.ui.corpus.egy.annotations.handledtoolitem.21" iconURI="platform:/plugin/org.bbaw.bts.ui.resources.impl/icons/full/icon16/comment-add.png" tooltip="Add Comment" command="_NcrFwKWvEeaAj_saD2lZaA"/>
+      </toolbar>
+    </elements>
+  </fragments>
+  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_d-ixIGCZEeaWooqVqGhUJg" featurename="commands" parentElementId="org.bbaw.bts.application">
+    <elements xsi:type="commands:Command" xmi:id="_e8CUIGCZEeaWooqVqGhUJg" elementId="org.fuberlin.bts.ui.corpus.command.annotationsPart.paramFilter" commandName="annotationsPartParamFilter">
+      <parameters xmi:id="_e8CUIWCZEeaWooqVqGhUJg" elementId="annotationsPartFilterParam" name="Filter Param"/>
+      <category href="../org.bbaw.bts.ui.corpus/fragment.e4xmi#_u7sUsF2fEeOwE8UUrLWumA"/>
+    </elements>
+    <elements xsi:type="commands:Command" xmi:id="_2txicKJtEeaAj_saD2lZaA" elementId="org.fuberlin.bts.ui.corpus.egy.annotations.command.opentextannotationpart" commandName="OpenTextAnnotationPart" description="Open TextAnnotationPart" category="_HKoWcKJuEeaAj_saD2lZaA"/>
+    <elements xsi:type="commands:Command" xmi:id="_NcrFwKWvEeaAj_saD2lZaA" elementId="org.fuberlin.bts.ui.corpus.egy.annotations.command.addComment" commandName="add Comment" category="_43rkcKW-EeaAj_saD2lZaA"/>
+    <elements xsi:type="commands:Command" xmi:id="_FLSrIKW_EeaAj_saD2lZaA" elementId="org.fuberlin.bts.ui.corpus.egy.annotations.command.addRubrum" commandName="addRubrum" category="_43rkcKW-EeaAj_saD2lZaA"/>
+    <elements xsi:type="commands:Command" xmi:id="_Hn860KW_EeaAj_saD2lZaA" elementId="org.fuberlin.bts.ui.corpus.egy.annotations.command.addGlosse" commandName="addGlosse" category="_43rkcKW-EeaAj_saD2lZaA"/>
+  </fragments>
+  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_kOXwcGCZEeaWooqVqGhUJg" featurename="handlers" parentElementId="org.bbaw.bts.application">
+    <elements xsi:type="commands:Handler" xmi:id="_2XJ6wGCZEeaWooqVqGhUJg" elementId="org.fuberlin.bts.ui.corpus.handler.annotationsPart.filterParam" contributionURI="bundleclass://org.fuberlin.bts.ui.corpus.egy.annotations/org.fuberlin.bts.ui.corpus.egy.annotations.handlers.AnnotationsPartFilterHandler">
+      <command href="../org.bbaw.bts.ui.corpus/fragment.e4xmi#_ecT_0LlkEeWW7cLsp5AL_w"/>
+    </elements>
+    <elements xsi:type="commands:Handler" xmi:id="_JzAG4KJuEeaAj_saD2lZaA" elementId="org.fuberlin.bts.ui.corpus.egy.annotations.handler.opentextannotationpart" contributionURI="bundleclass://org.fuberlin.bts.ui.corpus.egy.annotations/org.fuberlin.bts.ui.corpus.egy.annotations.handlers.OpenTextAnnotationPartHandler" command="_2txicKJtEeaAj_saD2lZaA"/>
+  </fragments>
+  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_7XsecKJuEeaAj_saD2lZaA" featurename="children" parentElementId="org.eclipse.ui.window">
+    <elements xsi:type="menu:HandledMenuItem" xmi:id="_ThLm8KJvEeaAj_saD2lZaA" elementId="org.fuberlin.bts.ui.corpus.egy.annotations.handledmenuitem.opentextannotationpart" label="Open Text Annotation Part" iconURI="platform:/plugin/org.fuberlin.bts.ui.corpus.egy.annotations/icons/Sample.png" tooltip="Open Text Annotation Part" selected="true" command="_2txicKJtEeaAj_saD2lZaA"/>
+  </fragments>
+</fragment:ModelFragments>
