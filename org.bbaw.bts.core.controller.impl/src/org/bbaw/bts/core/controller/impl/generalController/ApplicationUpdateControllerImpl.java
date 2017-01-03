@@ -159,7 +159,11 @@ public class ApplicationUpdateControllerImpl extends Job implements
 
 	@Override
 	protected IStatus run(IProgressMonitor monitor) {
-		agent = context.get(IProvisioningAgent.class);
+		try {
+			agent = context.get(IProvisioningAgent.class);
+		} catch (NullPointerException e) {
+			//
+		}
 		if (workbench != null && agent != null) {
 			IStatus runStatus = checkForUpdates(monitor);
 			schedule(TIME_UNTIL_RECHECK);
