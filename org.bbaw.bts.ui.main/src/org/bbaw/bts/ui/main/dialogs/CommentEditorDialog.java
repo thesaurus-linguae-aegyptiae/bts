@@ -47,6 +47,8 @@ import org.eclipse.swt.widgets.Text;
 
 public class CommentEditorDialog extends TitleAreaDialog {
 	private Text txtCommenttxt;
+
+	@Inject
 	private BTSComment comment;
 	
 	@Inject
@@ -81,10 +83,8 @@ public class CommentEditorDialog extends TitleAreaDialog {
 	 * @param parentShell
 	 */
 	@Inject
-	public CommentEditorDialog(Shell parentShell, BTSComment comment) {
+	public CommentEditorDialog(Shell parentShell) {
 		super(parentShell);
-		this.comment = comment;
-		
 	}
 
 	/**
@@ -181,7 +181,8 @@ public class CommentEditorDialog extends TitleAreaDialog {
 	}
 
 	private void checkRightsAndSetEditable() {
-		editable = permissionsController.authenticatedUserMayEditObject(comment);
+		editable = permissionsController.userMayEditObject(
+				permissionsController.getAuthenticatedUser(), comment);
 		txtTitletxt.setEditable(editable);
 		txtCommenttxt.setEditable(editable);
 		relationsEditor.setEnabled(editable);
@@ -279,6 +280,7 @@ public class CommentEditorDialog extends TitleAreaDialog {
 				true);
 		createButton(parent, IDialogConstants.CANCEL_ID,
 				IDialogConstants.CANCEL_LABEL, false);
+		this.getButton(IDialogConstants.OK_ID).setEnabled(editable);
 	}
 
 	@Override

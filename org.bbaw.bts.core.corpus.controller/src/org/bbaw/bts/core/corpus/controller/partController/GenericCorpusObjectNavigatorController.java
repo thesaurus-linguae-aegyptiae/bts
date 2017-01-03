@@ -62,4 +62,5 @@ public interface GenericCorpusObjectNavigatorController <E extends BTSCorpusObje
 	
 	BTSAnnotation createNewAnnotation(E selection, String annotationTypePath);
 
+	String getDBCollectionName(E o);
 }

@@ -17,7 +17,9 @@ public interface CorpusNavigatorController extends GenericCorpusObjectNavigatorC
 	BTSText createNewText(BTSCorpusObject parentObject);
 
 	List<BTSTextCorpus> listTextCorpora(IProgressMonitor monitor);
-	
+
+	boolean isWriteable(BTSTextCorpus corpus);
+
 	boolean makeAndSaveNewTextCorpus(BTSTextCorpus corpus, boolean synchronizeCorpus);
 
 	BTSTextCorpus findTextCorpusByPrefix(String corpusPrefix);

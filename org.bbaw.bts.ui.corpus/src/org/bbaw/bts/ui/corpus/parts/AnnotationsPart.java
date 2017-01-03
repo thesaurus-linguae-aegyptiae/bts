@@ -169,7 +169,7 @@ public class AnnotationsPart implements EventHandler {
 					org.eclipse.swt.widgets.Event event) {
 				RelatedObjectGroup roGroup = (RelatedObjectGroup) event.widget;
 				selfselection = true;
-				setSelectedInternal(Arrays.asList(roGroup), true);
+				setSelectedInternal(new Vector<>(Arrays.asList(roGroup)), true);
 				selfselection = false;
 			}
 
