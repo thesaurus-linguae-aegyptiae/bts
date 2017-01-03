@@ -45,7 +45,7 @@ import com.richclientgui.toolbox.duallists.DualListComposite;
 
 public class CorpusSettingsPage extends FieldEditorPreferencePage {
 
-	private ComboViewer comboViewer;
+	private ComboViewer mainCorpusComboViewer;
 	private BTSTextCorpus selectedTextCorpus;
 	private String main_corpus_key;
 	private DualListComposite<BTSCorpusObject> duallistcomposite;
@@ -78,13 +78,13 @@ public class CorpusSettingsPage extends FieldEditorPreferencePage {
 		
 		Composite container = (Composite) this.getControl();
 		activateButton = new Button(container, SWT.CHECK);
-		activateButton.setText("Activate to select main working corpus.");
+		activateButton.setText("Activate to select main working corpus. All new objects will be PHYSICALLY located in this corpus.");
 		activateButton.addSelectionListener(new SelectionListener() {
 			
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				activate = !activate;
-				comboViewer.getCombo().setEnabled(activate);
+				mainCorpusComboViewer.getCombo().setEnabled(activate);
 				
 			}
 			
@@ -100,14 +100,14 @@ public class CorpusSettingsPage extends FieldEditorPreferencePage {
 		lblSelectYourMain.setLayoutData(new GridData(SWT.LEFT, SWT.TOP, false, false, 1, 1));
 		lblSelectYourMain.setText("Select your main working corpus");
 
-		comboViewer = new ComboViewer(container, SWT.READ_ONLY);
-		comboViewer.getControl().setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false, 1, 1));
+		mainCorpusComboViewer = new ComboViewer(container, SWT.READ_ONLY);
+		mainCorpusComboViewer.getControl().setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false, 1, 1));
 
 		ComposedAdapterFactory factory = new ComposedAdapterFactory(ComposedAdapterFactory.Descriptor.Registry.INSTANCE);
 		AdapterFactoryLabelProvider labelProvider = new AdapterFactoryLabelProvider(factory);
-		comboViewer.setContentProvider(new ListContentProvider());
-		comboViewer.setLabelProvider(labelProvider);
-		comboViewer.addSelectionChangedListener(new ISelectionChangedListener()
+		mainCorpusComboViewer.setContentProvider(new ListContentProvider());
+		mainCorpusComboViewer.setLabelProvider(labelProvider);
+		mainCorpusComboViewer.addSelectionChangedListener(new ISelectionChangedListener()
 		{
 
 			@Override
@@ -157,7 +157,7 @@ public class CorpusSettingsPage extends FieldEditorPreferencePage {
 		
 		activate = prefs.getBoolean(BTSPluginIDs.PREF_CORPUS_ACTIVATE_MAIN_CORPUS_SELECTION, false);
 		initialActivate = new Boolean(activate);
-		comboViewer.getCombo().setEnabled(activate);
+		mainCorpusComboViewer.getCombo().setEnabled(activate);
 		activateButton.setSelection(activate);
 
 	}
@@ -167,7 +167,13 @@ public class CorpusSettingsPage extends FieldEditorPreferencePage {
 	{
 
 		corpora = corpusController.listTextCorpora(null);
-		comboViewer.setInput(corpora);
+
+		for (BTSTextCorpus corpus : corpora) {
+			if (corpusController.isWriteable(corpus)) {
+				mainCorpusComboViewer.add(corpus);
+			}
+		}
+
 		List<BTSCorpusObject> availableCorpora = new Vector<BTSCorpusObject>(1);
 
 		List<BTSCorpusObject> chosenCorpora = new Vector<BTSCorpusObject>(1);
@@ -187,7 +193,7 @@ public class CorpusSettingsPage extends FieldEditorPreferencePage {
 				if (main_corpus_key != null && main_corpus_key.equals(corpus.getDBCollectionKey() + "_" + corpus.getCorpusPrefix()))
 				{
 					selectedTextCorpus = corpus;
-					comboViewer.setSelection(new StructuredSelection(corpus));
+					mainCorpusComboViewer.setSelection(new StructuredSelection(corpus));
 				}
 				for (String p : pros)
 				{

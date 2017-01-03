@@ -59,7 +59,7 @@ public class LemmaNavigatorSettingsPage extends FieldEditorPreferencePage {
 		// TODO Auto-generated method stub
 		Composite container = (Composite) this.getControl();
 
-		addField(new BooleanFieldEditor(BTSCorpusConstants.PREF_LEMMA_NAVIGATOR_SORTBYKEY, "Lemma Navigator sort by sort key", BooleanFieldEditor.DEFAULT, getFieldEditorParent()));
+		addField(new BooleanFieldEditor(BTSCorpusConstants.PREF_LEMMA_NAVIGATOR_SORTBYKEY, "Lemma Navigator sort by sort key (Changes require application restart)", BooleanFieldEditor.DEFAULT, getFieldEditorParent()));
 		context = StaticAccessController.getContext();
 		configurationController = context.get(PassportConfigurationController.class);
 		

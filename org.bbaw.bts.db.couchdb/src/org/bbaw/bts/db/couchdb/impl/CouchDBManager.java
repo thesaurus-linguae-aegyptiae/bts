@@ -32,6 +32,8 @@ import org.bbaw.bts.btsmodel.BtsmodelFactory;
 import org.bbaw.bts.btsviewmodel.BtsviewmodelFactory;
 import org.bbaw.bts.btsviewmodel.DBCollectionStatusInformation;
 import org.bbaw.bts.commons.BTSConstants;
+import org.bbaw.bts.commons.fsaccess.BTSContstantsPlatformSpecific;
+import org.bbaw.bts.commons.BTSPluginIDs;
 import org.bbaw.bts.commons.CopyDirectory;
 import org.bbaw.bts.commons.OSValidator;
 import org.bbaw.bts.core.dao.BTSProjectDao;
@@ -48,6 +50,7 @@ import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.e4.core.contexts.IEclipseContext;
+import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.core.di.extensions.Preference;
 import org.eclipse.e4.core.services.log.Logger;
 import org.eclipse.equinox.app.IApplicationContext;
@@ -127,6 +130,10 @@ public class CouchDBManager implements DBManager {
 	private String password;
 
 	@Inject
+	@Preference(value = BTSPluginIDs.PREF_DB_DIR, nodePath = "org.bbaw.bts.app")
+	private String dbDir;
+
+	@Inject
 	private Logger logger;
 
 	@Inject
@@ -139,6 +146,7 @@ public class CouchDBManager implements DBManager {
 	private RemoteDBManager remoteDBManager;
 
 	@Inject
+	@Optional
 	private IApplicationContext appContext;
 
 	@Inject
@@ -666,6 +674,7 @@ public class CouchDBManager implements DBManager {
 			target = m.replaceAll("$1$3");
 		}
 		String url = dbConnection.getMasterServer();
+		if (url == null) return true;
 		url = url.replaceAll("\\/", "\\\\/");
 		Pattern pattern = Pattern.compile(url + "\\/*" + collectionName);
 		Matcher m = pattern.matcher(target);
@@ -687,6 +696,7 @@ public class CouchDBManager implements DBManager {
 			source = m.replaceAll("$1$3");
 		}
 		String url = dbConnection.getMasterServer();
+		if (url == null) return true;
 		url = url.replaceAll("\\/", "\\\\/");
 		Pattern pattern = Pattern.compile(url + "\\/*" + collectionName);
 		Matcher m = pattern.matcher(source);
@@ -946,7 +956,6 @@ public class CouchDBManager implements DBManager {
 				success = false;
 			}
 			if (monitor != null) {
-				monitor.worked(1);
 				if (monitor.isCanceled())
 					return false;
 			}
@@ -968,7 +977,6 @@ public class CouchDBManager implements DBManager {
 					success = false;
 				}
 				if (monitor != null) {
-					monitor.worked(1);
 					if (monitor.isCanceled())
 						return false;
 				}
@@ -1118,7 +1126,7 @@ public class CouchDBManager implements DBManager {
 		} catch (Exception e) {
 			logger.error(e);
 		}
-		String dbdir = dbInstallationDir + BTSConstants.FS + DB_ARCHIVE_NAME;
+		String dbdir = dbInstallationDir + BTSContstantsPlatformSpecific.FS + DB_ARCHIVE_NAME;
 		File dir = new File(dbdir);
 		File ertsDir = null;
 		if (dir.exists() && dir.isDirectory()) {
@@ -1131,7 +1139,7 @@ public class CouchDBManager implements DBManager {
 			if (ertsDir != null) {
 				logger.info("ertsDir " + ertsDir.getAbsolutePath());
 				File erlIni = new File(ertsDir.getAbsolutePath()
-						+ BTSConstants.FS + "bin" + BTSConstants.FS + "erl.ini");
+						+ BTSContstantsPlatformSpecific.FS + "bin" + BTSContstantsPlatformSpecific.FS + "erl.ini");
 				logger.info("erl.ini exists: " + erlIni.exists()
 						+ ", location: " + erlIni.getAbsolutePath());
 
@@ -1183,8 +1191,8 @@ public class CouchDBManager implements DBManager {
 		CopyDirectory.unZipIt(fis, dbInstallationDir, null);
 		logger.info("DB setup file unzipped to: " + dbInstallationDir);
 
-		File eRLInstaller = loadDBSetupFile(dbInstallationDir + BTSConstants.FS
-				+ DB_ARCHIVE_NAME + BTSConstants.FS);
+		File eRLInstaller = loadDBSetupFile(dbInstallationDir + BTSContstantsPlatformSpecific.FS
+				+ DB_ARCHIVE_NAME + BTSContstantsPlatformSpecific.FS);
 		logger.info("Erlang installer: " + eRLInstaller.getAbsolutePath());
 
 		String fileName = eRLInstaller.getAbsolutePath();
@@ -1266,15 +1274,15 @@ public class CouchDBManager implements DBManager {
 
 	private String getOSCouchDBLocalIniFile(String dbInstallationDir) {
 		if (OSValidator.isWindows()) {
-			return dbInstallationDir + BTSConstants.FS + DB_ARCHIVE_NAME
-					+ BTSConstants.FS + "etc" + BTSConstants.FS + "couchdb"
-					+ BTSConstants.FS + "local.ini";
+			return dbInstallationDir + BTSContstantsPlatformSpecific.FS + DB_ARCHIVE_NAME
+					+ BTSContstantsPlatformSpecific.FS + "etc" + BTSContstantsPlatformSpecific.FS + "couchdb"
+					+ BTSContstantsPlatformSpecific.FS + "local.ini";
 		} else if (OSValidator.isMac()) {
-			return dbInstallationDir + BTSConstants.FS + "Apache CouchDB.app"
-					+ BTSConstants.FS + "Contents" + BTSConstants.FS
-					+ "Resources" + BTSConstants.FS + "couchdbx-core"
-					+ BTSConstants.FS + "etc" + BTSConstants.FS + "couchdb"
-					+ BTSConstants.FS + "local.ini";
+			return dbInstallationDir + BTSContstantsPlatformSpecific.FS + "Apache CouchDB.app"
+					+ BTSContstantsPlatformSpecific.FS + "Contents" + BTSContstantsPlatformSpecific.FS
+					+ "Resources" + BTSContstantsPlatformSpecific.FS + "couchdbx-core"
+					+ BTSContstantsPlatformSpecific.FS + "etc" + BTSContstantsPlatformSpecific.FS + "couchdb"
+					+ BTSContstantsPlatformSpecific.FS + "local.ini";
 
 		} else if (OSValidator.isUnix()) {
 		}
@@ -1299,7 +1307,7 @@ public class CouchDBManager implements DBManager {
 
 		if (file != null && file.exists())
 			return file;
-		String fileName = BTSConstants.getInstallationDir() + BTSConstants.FS
+		String fileName = BTSContstantsPlatformSpecific.getInstallationDir() + BTSContstantsPlatformSpecific.FS
 				+ DB_ARCHIVE_NAME + ".zip";
 		file = new File(fileName);
 		System.out
@@ -1485,22 +1493,22 @@ public class CouchDBManager implements DBManager {
 
 	private String getOSCouchDBStartUpFileName(String dbInsallationDir,
 			boolean showeConsole) throws FileNotFoundException {
-		String runFileName = dbInsallationDir + BTSConstants.FS
+		String runFileName = dbInsallationDir + BTSContstantsPlatformSpecific.FS
 				+ DB_ARCHIVE_NAME;
 		if (OSValidator.isWindows()) {
 			if (!showeConsole) {
-				return runFileName + BTSConstants.FS + "bin" + BTSConstants.FS
+				return runFileName + BTSContstantsPlatformSpecific.FS + "bin" + BTSContstantsPlatformSpecific.FS
 						+ "couchdb-d.bat";
 			}
-			return runFileName + BTSConstants.FS + "bin" + BTSConstants.FS
+			return runFileName + BTSContstantsPlatformSpecific.FS + "bin" + BTSContstantsPlatformSpecific.FS
 					+ "couchdb.bat";
 		} else if (OSValidator.isMac()) {
 			// FIXME
-			return runFileName + BTSConstants.FS + "Apache CouchDB.app"
-					+ BTSConstants.FS + "Contents" + BTSConstants.FS + "MacOS"
-					+ BTSConstants.FS + "Apache CouchDB";
+			return runFileName + BTSContstantsPlatformSpecific.FS + "Apache CouchDB.app"
+					+ BTSContstantsPlatformSpecific.FS + "Contents" + BTSContstantsPlatformSpecific.FS + "MacOS"
+					+ BTSContstantsPlatformSpecific.FS + "Apache CouchDB";
 		} else if (OSValidator.isUnix()) {
-			return runFileName + BTSConstants.FS + "bin" + BTSConstants.FS
+			return runFileName + BTSContstantsPlatformSpecific.FS + "bin" + BTSContstantsPlatformSpecific.FS
 					+ "couchdb.sh";
 		}
 
@@ -1519,8 +1527,8 @@ public class CouchDBManager implements DBManager {
 		// if (ertsDir != null)
 		// {
 		// logger.info("ertsDir " + ertsDir.getAbsolutePath());
-		// runFileName = ertsDir.getAbsolutePath() + BTSConstants.FS + "bin" +
-		// BTSConstants.FS;
+		// runFileName = ertsDir.getAbsolutePath() + BTSContstantsPlatformSpecific.FS + "bin" +
+		// BTSContstantsPlatformSpecific.FS;
 		// if (OSValidator.isWindows())
 		// {
 		// return runFileName + "erl.exe";
@@ -1751,6 +1759,14 @@ public class CouchDBManager implements DBManager {
 
 		CouchDbClient dbClient = connectionProvider.getDBClient(
 				CouchDbClient.class, DaoConstants.NOTIFICATION);
+		try {
+			dbClient.context().compact();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		dbClient = connectionProvider.getDBClient(
+				CouchDbClient.class, DaoConstants.REPLICATOR);
 		try {
 			dbClient.context().compact();
 		} catch (Exception e) {
@@ -2195,8 +2211,8 @@ public class CouchDBManager implements DBManager {
 	@Override
 	public boolean changeAuthenticationDBAdmin(String userName, String password)
 			throws FileNotFoundException {
-		String localIni = getOSCouchDBLocalIniFile(BTSConstants
-				.getDBInstallationDir(BTSConstants.getInstallationDir()));
+		String localIni = getOSCouchDBLocalIniFile(BTSContstantsPlatformSpecific
+				.getDBInstallationDir(BTSContstantsPlatformSpecific.getInstallationDir()));
 		File localIniFile = new File(localIni);
 		if (localIniFile.exists()) {
 			Scanner scanner = new Scanner(localIniFile);
@@ -2314,8 +2330,8 @@ public class CouchDBManager implements DBManager {
 
 	@Override
 	public void addAuthenticationDBAdmin(String userName, String password) throws FileNotFoundException {
-		String localIni = getOSCouchDBLocalIniFile(BTSConstants
-				.getDBInstallationDir(BTSConstants.getInstallationDir()));
+		String localIni = getOSCouchDBLocalIniFile(dbDir);
+		logger.info("couch config: "+localIni);
 		File localIniFile = new File(localIni);
 		if (localIniFile.exists()) {
 			Scanner scanner = new Scanner(localIniFile);

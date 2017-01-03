@@ -2,7 +2,6 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: BTSCommons
 Bundle-SymbolicName: org.bbaw.bts.commons
-Bundle-Version: 1.0.7.qualifier
 Bundle-Vendor: BBAW
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Export-Package: org.bbaw.bts.commons,
@@ -10,15 +9,10 @@ Export-Package: org.bbaw.bts.commons,
 Import-Package: javax.annotation,
  javax.inject,
  org.apache.commons.codec.binary;version="1.6.0",
- org.eclipse.core.runtime,
- org.eclipse.core.runtime.preferences;version="3.3.0",
- org.eclipse.jface.resource,
- org.eclipse.osgi.storage.bundlefile,
- org.eclipse.osgi.storage.url.reference,
- org.eclipse.ui.plugin,
  org.osgi.framework;version="1.7.0"
 Bundle-ActivationPolicy: lazy
 Bundle-Activator: org.bbaw.bts.commons.BTSCommonsActivator
 Require-Bundle: org.eclipse.e4.core.services;bundle-version="1.1.0",
- org.eclipse.osgi;bundle-version="3.10.0",
-  org.apache.commons.codec
+ org.eclipse.osgi,
+ org.eclipse.core.runtime;bundle-version="3.9.0"
+Bundle-Version: 3.1.0.qualifier

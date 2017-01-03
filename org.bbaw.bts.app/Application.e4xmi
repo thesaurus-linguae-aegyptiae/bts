@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <application:Application xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:advanced="http://www.eclipse.org/ui/2010/UIModel/application/ui/advanced" xmlns:application="http://www.eclipse.org/ui/2010/UIModel/application" xmlns:basic="http://www.eclipse.org/ui/2010/UIModel/application/ui/basic" xmlns:menu="http://www.eclipse.org/ui/2010/UIModel/application/ui/menu" xmi:id="_oEzH4AA1EeOpmPWG2KRhAA" elementId="org.bbaw.bts.application">
-  <children xsi:type="basic:TrimmedWindow" xmi:id="_oEzH4QA1EeOpmPWG2KRhAA" elementId="org.bbaw.bts.trimmed" label="Berlin Text System 3.0.8" iconURI="platform:/plugin/org.bbaw.bts.app/icons/bts16.bmp" width="1000" height="750">
+  <children xsi:type="basic:TrimmedWindow" xmi:id="_oEzH4QA1EeOpmPWG2KRhAA" elementId="org.bbaw.bts.trimmed" label="Berlin Text System 3.1.0" iconURI="platform:/plugin/org.bbaw.bts.app/icons/bts16.bmp" width="1000" height="750">
     <children xsi:type="advanced:PerspectiveStack" xmi:id="_l1Ug4ADrEeOpmPWG2KRhAA" elementId="org.bbaw.bts.app.perspectivestack.main"/>
     <mainMenu xmi:id="_3KR2AAD1EeOpmPWG2KRhAA" elementId="org.eclipse.ui.menu">
       <children xsi:type="menu:Menu" xmi:id="_N6Q08AD2EeOpmPWG2KRhAA" elementId="org.eclipse.ui.file" label="File">
@@ -13,7 +13,7 @@
       <children xsi:type="menu:Menu" xmi:id="_Qq2GMAD2EeOpmPWG2KRhAA" elementId="org.eclipse.ui.insert" label="Insert">
         <children xsi:type="menu:MenuSeparator" xmi:id="_c7hjUAsrEeOKu70m8WT0_g" elementId="org.bbaw.bts.app.menuseparator.1"/>
       </children>
-      <children xsi:type="menu:Menu" xmi:id="_iCWMwDVoEeOv7cfx0AHTtw" elementId="org.bbaw.bts.app.menu.analyse" label="Analyse">
+      <children xsi:type="menu:Menu" xmi:id="_iCWMwDVoEeOv7cfx0AHTtw" elementId="org.bbaw.bts.app.menu.analyse" toBeRendered="false" visible="false" label="Analyse">
         <children xsi:type="menu:MenuSeparator" xmi:id="_r_EUkDVoEeOv7cfx0AHTtw" elementId="org.bbaw.bts.app.menuseparator.6"/>
       </children>
       <children xsi:type="menu:Menu" xmi:id="_6OZWgDVnEeOv7cfx0AHTtw" elementId="org.eclipse.ui.window" label="Window">
@@ -25,6 +25,9 @@
         <children xsi:type="menu:MenuSeparator" xmi:id="_di3QIAsrEeOKu70m8WT0_g" elementId="org.bbaw.bts.app.menuseparator.2"/>
       </children>
     </mainMenu>
+    <sharedElements xsi:type="basic:Part" xmi:id="_-RmcIF1UEeaSXsxPfSlK8A" elementId="org.bbaw.bts.ui.corpus.part.CorpusNavigatorPart" contributionURI="bundleclass://org.bbaw.bts.ui.corpus/org.bbaw.bts.ui.corpus.parts.CorpusNavigatorPart" label="Corpus Navigator" iconURI="platform:/plugin/org.bbaw.bts.ui.resources.impl/icons/full/icon16/corpora.png">
+      <toolbar xmi:id="_FL7xAF1VEeaSXsxPfSlK8A" elementId="org.bbaw.bts.app.toolbar.0"/>
+    </sharedElements>
     <trimBars xmi:id="_gMmj4AD2EeOpmPWG2KRhAA" elementId="org.bbaw.bts.app.trimbar.top">
       <children xsi:type="menu:ToolBar" xmi:id="_g3q6IAD2EeOpmPWG2KRhAA" elementId="toolbar:org.eclipse.ui.main.toolbar"/>
       <children xsi:type="menu:ToolControl" xmi:id="_hSo-4AD2EeOpmPWG2KRhAA" elementId="org.bbaw.bts.app.toolcontrol.0"/>

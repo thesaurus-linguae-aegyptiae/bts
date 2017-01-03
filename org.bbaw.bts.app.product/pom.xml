@@ -1,133 +1,81 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <modelVersion>4.0.0</modelVersion>
-  <!--<parent>
-    <groupId>org.bbaw.bts</groupId>
-    <artifactId>aaew-bts</artifactId>
-    <version>1.0.2-SNAPSHOT</version>
-  </parent>
-  -->
-  <groupId>org.bbaw.bts</groupId>
-  <artifactId>org.bbaw.bts.app.product</artifactId>
-  <version>1.0.8-SNAPSHOT</version>
- <packaging>eclipse-repository</packaging>
- 
- <properties>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.bbaw.bts</groupId>
+	<artifactId>org.bbaw.bts.app.product</artifactId>
+	<version>3.1.0-SNAPSHOT</version>
+	<packaging>eclipse-repository</packaging>
+
+	<properties>
 		<tycho.version>0.19.0</tycho.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<!--<kepler-repo.url>http://download.eclipse.org/releases/luna</kepler-repo.url>-->
-		<kepler-repo.url>http://download.eclipse.org/eclipse/updates/4.4-M-builds</kepler-repo.url>
 	</properties>
-  
-  <repositories>
-	
-	
+
+	<repositories>
 		<repository>
 			<id>bts-mvn-build-repository</id>
 			<name>BTS BUILD Rep</name>
-			<url>http://telota.bbaw.de/bts-update/bts-build-repository</url>
-			<layout>p2</layout>
-		</repository>
-		
-		<repository>
-			<id>bts-mvn-telota-all</id>
-			<name>BTS Maven local Rep</name>
-			<url>http://telota.bbaw.de/bts-update/bts-mvn-p2all</url>
+			<url>http://telota.bbaw.de/bts-update/bts-build-neon</url>
 			<layout>p2</layout>
 		</repository>
 		<repository>
-			<id>kepler</id>
-			<url>${kepler-repo.url}</url>
-			<layout>p2</layout>
-		</repository>
-
-		<!--
-		
-			<repository>
-			<id>bts-mvn-telota</id>
-			<name>BTS Maven local Rep</name>
-			<url>http://telota.bbaw.de/bts-update/bts-mvn-p2rep</url>
-			<layout>p2</layout>
-		</repository>
-		
-		<repository>
-			<id>bts-mvn-telota-all</id>
-			<name>BTS Maven local Rep</name>
-			<url>http://telota.bbaw.de/bts-update/bts-mvn-p2all</url>
-			<layout>p2</layout>
-		</repository>
-		<repository>
-			<id>bts-mvn-build-repository</id>
+			<id>bts-mvn-build-extras</id>
 			<name>BTS BUILD Rep</name>
-			<url>http://telota.bbaw.de/bts-update/bts-build-repository</url>
+			<url>http://telota.bbaw.de/bts-update/extras</url>
 			<layout>p2</layout>
 		</repository>
-		
 		<repository>
-			<id>e4-tools</id>
-			<url>http://download.vogella.com/luna/e4tools</url>
+			<id>neon</id>
+			<url>http://download.eclipse.org/releases/neon</url>
 			<layout>p2</layout>
 		</repository>
-
-		<repository>
-			<id>emfjson-repository</id>
-			<url>http://repository-ghillairet.forge.cloudbees.com/snapshot</url>
-		</repository>
-		-->
-
 	</repositories>
-	
-   <build>
-    <plugins>
-	<plugin>
-        <groupId>org.eclipse.tycho</groupId>
-        <artifactId>tycho-versions-plugin</artifactId>
-        <version>${tycho.version}</version>
-        <executions>
-            <execution>
-                <id>versions</id>
-                <phase>validate</phase>
-                <goals>
-                    <goal>update-pom</goal>
-                </goals>
-            </execution>
-        </executions>
-    </plugin>
-    	<plugin>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-versions-plugin</artifactId>
+				<version>${tycho.version}</version>
+				<executions>
+					<execution>
+						<id>versions</id>
+						<phase>clean</phase>
+						<goals>
+							<goal>update-pom</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
 				<groupId>org.eclipse.tycho</groupId>
 				<artifactId>tycho-maven-plugin</artifactId>
 				<version>${tycho.version}</version>
 				<extensions>true</extensions>
-		</plugin>
-		
-		<plugin>
+			</plugin>
+
+			<plugin>
 				<groupId>org.eclipse.tycho</groupId>
 				<artifactId>target-platform-configuration</artifactId>
 				<configuration>
 					<environments>
-					
-						
 						<environment>
 							<os>win32</os>
 							<ws>win32</ws>
 							<arch>x86</arch>
 						</environment>
-						
-						
-						<!--
 						<environment>
 							<os>win32</os>
 							<ws>win32</ws>
 							<arch>x86_64</arch>
 						</environment>
-						
+						<!--
 						<environment>
 							<os>macosx</os>
 							<ws>cocoa</ws>
 							<arch>x86_64</arch>
 						</environment>
-						
 						<environment>
 							<os>linux</os>
 							<ws>gtk</ws>
@@ -137,44 +85,39 @@
 							<os>linux</os>
 							<ws>gtk</ws>
 							<arch>x86_64</arch>
-						</environment>
-						<environment>
-							<os>win32</os>
-							<ws>win32</ws>
-							<arch>x86</arch>
-						</environment>
-						-->
+						</environment>-->
 					</environments>
 				</configuration>
 			</plugin>
-    
-      <plugin>
-        <groupId>org.eclipse.tycho</groupId>
-        <artifactId>tycho-p2-repository-plugin</artifactId>
-        <version>${tycho.version}</version>
-        <configuration>
-          <includeAllDependencies>true</includeAllDependencies>
-        </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.eclipse.tycho</groupId>
-        <artifactId>tycho-p2-director-plugin</artifactId>
-        <version>${tycho.version}</version>
-        <executions>
-          <execution>
-            <id>materialize-products</id>
-            <goals>
-              <goal>materialize-products</goal>
-            </goals>
-          </execution>
-          <execution>
-            <id>archive-products</id>
-            <goals>
-              <goal>archive-products</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-    </plugins>
-  </build>
+
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-p2-repository-plugin</artifactId>
+				<version>${tycho.version}</version>
+				<configuration>
+					<includeAllDependencies>true</includeAllDependencies>
+				</configuration>
+			</plugin>
+			
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-p2-director-plugin</artifactId>
+				<version>${tycho.version}</version>
+				<executions>
+					<execution>
+						<id>materialize-products</id>
+						<goals>
+							<goal>materialize-products</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>archive-products</id>
+						<goals>
+							<goal>archive-products</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
 </project>

@@ -2,9 +2,12 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: CorpusCommons
 Bundle-SymbolicName: org.bbaw.bts.core.commons.corpus
-Bundle-Version: 1.0.8.qualifier
+Bundle-Version: 3.1.0.qualifier
 Bundle-Vendor: BBAW
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
-Import-Package: org.bbaw.bts.corpus.btsCorpusModel
+Import-Package: org.bbaw.bts.btsmodel,
+ org.bbaw.bts.commons,
+ org.bbaw.bts.corpus.btsCorpusModel,
+ org.eclipse.emf.ecore
 Export-Package: org.bbaw.bts.core.commons.corpus,
  org.bbaw.bts.core.commons.corpus.comparator

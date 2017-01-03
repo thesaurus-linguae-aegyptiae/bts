@@ -27,15 +27,13 @@ import org.bbaw.bts.core.commons.BTSCoreConstants;
 import org.bbaw.bts.core.commons.corpus.BTSCorpusConstants;
 import org.bbaw.bts.core.controller.generalController.PermissionsAndExpressionsEvaluationController;
 import org.bbaw.bts.core.corpus.controller.partController.ThsNavigatorController;
+import org.bbaw.bts.core.dao.util.BTSQueryRequest;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSAnnotation;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSThsEntry;
 import org.bbaw.bts.searchModel.BTSModelUpdateNotification;
-import org.bbaw.bts.searchModel.BTSQueryRequest;
 import org.bbaw.bts.searchModel.BTSQueryResultAbstract;
 import org.bbaw.bts.ui.commons.filter.BTSObjectTypeSubtypeViewerFilter;
-import org.bbaw.bts.ui.commons.filter.SuppressDeletedViewerFilter;
-import org.bbaw.bts.ui.commons.filter.SuppressNondeletedViewerFilter;
 import org.bbaw.bts.ui.commons.navigator.StructuredViewerProvider;
 import org.bbaw.bts.ui.commons.search.SearchViewer;
 import org.bbaw.bts.ui.commons.utils.BTSUIConstants;
@@ -93,7 +91,7 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.Shell;
 
-public class ThsNavigator implements ScatteredCachingPart, SearchViewer, StructuredViewerProvider {
+public class ThsNavigator extends NavigatorPart implements ScatteredCachingPart, SearchViewer, StructuredViewerProvider {
 
 	@Inject
 	private EventBroker eventBroker;
@@ -149,7 +147,6 @@ public class ThsNavigator implements ScatteredCachingPart, SearchViewer, Structu
 	private CTabItem binTabItem;
 	private Composite binTabItemComp;
 	private TreeViewer bintreeViewer;
-	private SuppressDeletedViewerFilter deletedFilter;
 	private boolean loaded;
 	protected TreeNodeWrapper orphanNode;
 	
@@ -483,13 +480,7 @@ labelProvider));
 							@Override
 							public void run() {
 								loadTree(treeViewer, rootNode, parentControl);
-								if (!deleted) {
-									treeViewer.addFilter(getDeletedFilter());
-								}
-								else {
-									treeViewer
-											.addFilter(new SuppressNondeletedViewerFilter());
-								}
+								treeViewer.addFilter(getDeletedFilter(deleted));
 								if (BTSUIConstants.SELECTION_TYPE_SECONDARY
 										.equals(selectionType)) {
 									// register context menu on the table
@@ -559,13 +550,7 @@ labelProvider));
 			}
 		}
 	}
-	
-	private ViewerFilter getDeletedFilter() {
-		if (deletedFilter == null) {
-			deletedFilter = new SuppressDeletedViewerFilter();
-		}
-		return deletedFilter;
-	}
+
 
 	private void loadChildren(final List<TreeNodeWrapper> parents,
 			boolean includeGrandChildren, final Control parentControl) {
@@ -903,7 +888,7 @@ labelProvider));
 							@Override
 							public void run() {
 								loadTree(treeViewer, rootNode, parentControl);
-								treeViewer.addFilter(getDeletedFilter());
+								treeViewer.addFilter(getDeletedFilter(false));
 								// register context menu on the table
 								menuService.registerContextMenu(
 										treeViewer.getControl(),

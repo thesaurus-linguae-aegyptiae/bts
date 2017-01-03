@@ -34,7 +34,7 @@ import java.util.Set;
 
 import org.bbaw.bts.btsmodel.BTSDBBaseObject;
 import org.bbaw.bts.btsmodel.BTSIdentifiableItem;
-import org.bbaw.bts.searchModel.BTSQueryRequest;
+import org.bbaw.bts.core.dao.util.BTSQueryRequest;
 import org.bbaw.bts.tempmodel.DBRevision;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.elasticsearch.action.search.SearchRequestBuilder;
@@ -117,6 +117,22 @@ public interface GenericObjectService<E extends BTSDBBaseObject, K>
 	 */
 	E find(K key, IProgressMonitor monitor);
 	
+	
+	/**
+	 * Find entity by id and return json string.
+	 *
+	 * @param key the key
+	 * @return the entity
+	 */
+	String findAsJsonString(K key, IProgressMonitor monitor);
+	
+	/**
+	 * Find entity by id and return json string.
+	 *
+	 * @param key the key
+	 * @return the entity
+	 */
+	String findAsJsonString(K key, String path, IProgressMonitor monitor);
 	/**
 	 * Find given revision of entity by id and database path.
 	 *
@@ -126,6 +142,16 @@ public interface GenericObjectService<E extends BTSDBBaseObject, K>
 	 * @return the entity in the given revision
 	 */
 	E find(K key, String path, String revision, IProgressMonitor monitor);
+	
+	/**
+	 * Find given revision of entity by id and database path and return json string.
+	 *
+	 * @param key the key
+	 * @param path the path in database
+	 * @param revision the revision
+	 * @return the entity in the given revision
+	 */
+	String findAsJsonString(K key, String path, String revision, IProgressMonitor monitor);
 	
 	/**
 	 * Find given revision of entity by id and database path.
@@ -166,6 +192,17 @@ public interface GenericObjectService<E extends BTSDBBaseObject, K>
 	 * @return the list of objects matching given query
 	 */
 	List<E> query(BTSQueryRequest query, String objectState, IProgressMonitor monitor);
+	
+	/**
+	 * Query objects of parametrized type and return list of json string.
+	 *
+	 * @param query the query
+	 * @param objectState the object state
+	 * @param monitor 
+	 * @return the list of objects matching given query
+	 */
+	List<String> queryAsJsonString(BTSQueryRequest query, String objectState, IProgressMonitor monitor);
+
 
 	/**
 	 * Query objects of parametrized type.

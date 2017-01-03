@@ -7,7 +7,6 @@ import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import org.bbaw.bts.btsmodel.BTSConfig;
 import org.bbaw.bts.btsmodel.BTSConfigItem;
 import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.btsmodel.BTSRelation;
@@ -23,7 +22,6 @@ import org.bbaw.bts.ui.commons.utils.BTSUIConstants;
 import org.bbaw.bts.ui.main.dialogs.SearchSelectObjectDialog;
 import org.bbaw.bts.ui.resources.BTSResourceProvider;
 import org.eclipse.core.commands.ParameterizedCommand;
-import org.eclipse.core.databinding.Binding;
 import org.eclipse.core.databinding.DataBindingContext;
 import org.eclipse.core.databinding.observable.value.IObservableValue;
 import org.eclipse.e4.core.commands.ECommandService;
@@ -49,12 +47,13 @@ import org.eclipse.jface.fieldassist.ControlDecoration;
 import org.eclipse.jface.fieldassist.FieldDecorationRegistry;
 import org.eclipse.jface.fieldassist.IContentProposal;
 import org.eclipse.jface.fieldassist.IContentProposalListener;
-import org.eclipse.jface.fieldassist.IContentProposalProvider;
 import org.eclipse.jface.fieldassist.TextContentAdapter;
 import org.eclipse.jface.viewers.ComboViewer;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.FocusAdapter;
 import org.eclipse.swt.events.FocusEvent;
+import org.eclipse.swt.events.ModifyEvent;
+import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.events.MouseAdapter;
 import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.graphics.Image;
@@ -69,7 +68,7 @@ import org.eclipse.swt.widgets.Text;
 public class RelationEditorComposite extends Composite {
 	@Inject
 	@Optional
-	private BTSConfigItem itemConfig;
+	private BTSConfigItem relationConfig;
 	
 	@Inject
 	private IEclipseContext context;
@@ -90,7 +89,6 @@ public class RelationEditorComposite extends Composite {
 	private EHandlerService handlerService;
 
 	private ObjectSelectionProposalProvider itemProposalProvider;
-	private boolean makingProposalProvider;
 	
 	@Inject
 	private BTSResourceProvider resourceProvider;
@@ -114,6 +112,10 @@ public class RelationEditorComposite extends Composite {
 	private UISynchronize sync;
 	
 	private Text text;
+
+	private ContentProposalAdapter contentProposalAdapter;
+
+	private ControlDecoration textFieldInfoDeco;
 
 	private boolean loaded;
 
@@ -142,7 +144,7 @@ public class RelationEditorComposite extends Composite {
 	@PostConstruct
 	public void postContstruct() {
 
-		loadInput(itemConfig);
+		loadInput(relationConfig);
 
 	}
 
@@ -190,7 +192,7 @@ public class RelationEditorComposite extends Composite {
 
 		EMFUpdateValueStrategy targetToModel = new EMFUpdateValueStrategy();
 		targetToModel.setConverter(new BTSConfigItemToStringConverter());
-		// if (itemConfig.getPassportEditorConfig().isRequired()) {
+		// if (relationConfig.getPassportEditorConfig().isRequired()) {
 		// targetToModel.setBeforeSetValidator(new StringNotEmptyValidator());
 		// }
 		EMFUpdateValueStrategy modelToTarget = new EMFUpdateValueStrategy();
@@ -198,7 +200,7 @@ public class RelationEditorComposite extends Composite {
 				selectComboViewer));
 		IObservableValue target_type_viewer = ViewersObservables
 				.observeSingleSelection(selectComboViewer);
-		Binding binding = bindingContext.bindValue(
+		bindingContext.bindValue(
 				target_type_viewer,
 				EMFEditProperties.value(getEditingDomain(),
 						BtsmodelPackage.Literals.BTS_RELATION__TYPE).observe(
@@ -217,42 +219,39 @@ public class RelationEditorComposite extends Composite {
 
 		text = new Text(this, SWT.BORDER);
 		text.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
-		final char[] autoActivationCharacters = new char[] { '.', '#' };
 		text.addFocusListener(new FocusAdapter() {
-
 			@Override
 			public void focusGained(FocusEvent e) {
-
-				if (RelationEditorComposite.this.userMayEdit)
-				{
-				try {
-					KeyStroke keyStroke = KeyStroke.getInstance("Ctrl+Space");
-					ContentProposalAdapter adapter = new ContentProposalAdapter(
-							text, new TextContentAdapter(),
-							getObjectProposalProvider(itemConfig), keyStroke,
-							autoActivationCharacters);
-					adapter.setProposalAcceptanceStyle(ContentProposalAdapter.PROPOSAL_REPLACE);
-					adapter.addContentProposalListener(new IContentProposalListener() {
-
-						@Override
-						public void proposalAccepted(IContentProposal proposal) {
-							System.out.println(proposal);
-							Command command = SetCommand.create(
-									getEditingDomain(),
-									relation,
-									BtsmodelPackage.eINSTANCE.getBTSRelation_ObjectId(),
-									proposal.getContent());
-							getEditingDomain().getCommandStack().execute(
-									command);
-							text.setToolTipText(proposal.getLabel());
-							text.setText(proposal.getLabel());
+				if (RelationEditorComposite.this.userMayEdit) {
+					// make sure we have content proposal adapter for object selection
+					if (contentProposalAdapter == null) {
+						createContentProposalAdapter();
+					}
+					if (textFieldInfoDeco != null) {
+						if (text.getText().length() > 1) {
+							textFieldInfoDeco.show();
 						}
-					});
-				} catch (ParseException e1) {
-					e1.printStackTrace();
+					}
 				}
-
 			}
+			@Override
+			public void focusLost(FocusEvent e) {
+				super.focusLost(e);
+				if (textFieldInfoDeco != null) {
+					textFieldInfoDeco.hide();
+				}
+			}
+		});
+		text.addModifyListener(new ModifyListener() {
+			@Override
+			public void modifyText(ModifyEvent e) {
+				if (textFieldInfoDeco != null) {
+					if (text.getText().length() > 1) {
+						textFieldInfoDeco.show();
+					} else {
+						textFieldInfoDeco.hide();
+					}
+				}
 			}
 		});
 
@@ -260,7 +259,6 @@ public class RelationEditorComposite extends Composite {
 			text.setText(generalObjectController.getDisplayName(relation
 					.getObjectId()));
 			text.setToolTipText(text.getText());
-
 		}
 
 		Label lblSearch = new Label(this, SWT.NONE);
@@ -289,11 +287,11 @@ public class RelationEditorComposite extends Composite {
 				l.setBackground(l.getParent().getBackground());
 				// open search dialog
 				IEclipseContext child = context.createChild("searchselect");
-				context.set(BTSConfigItem.class, itemConfig);
+				context.set(BTSConfigItem.class, relationConfig);
 
 				SearchSelectObjectDialog dialog = ContextInjectionFactory.make(
 						SearchSelectObjectDialog.class, child);
-				if (dialog.open() == dialog.OK) {
+				if (dialog.open() == SearchSelectObjectDialog.OK) {
 					BTSObject object = dialog.getObject();
 					System.out.println(object.get_id());
 					EditingDomain ed = getEditingDomain();
@@ -336,7 +334,7 @@ public class RelationEditorComposite extends Composite {
 				Label l = (Label) e.getSource();
 				l.setBackground(l.getParent().getBackground());
 				// open search dialog
-				Map map = new HashMap(1);
+				Map<String, String> map = new HashMap<>(1);
 	              map.put("objectId", relation
 	  					.getObjectId());
 	
@@ -353,18 +351,59 @@ public class RelationEditorComposite extends Composite {
 		layout();
 	}
 
-	private EditingDomain getEditingDomain() {
-		return editingDomainController.getEditingDomain(corpusObject);
+	/**
+	 * Set up content proposal provider for object text field.
+	 */
+	private void createContentProposalAdapter() {
+		if (relationConfig != null) {
+			try {
+				KeyStroke keyStroke = KeyStroke.getInstance("Ctrl+Space");
+				contentProposalAdapter = new ContentProposalAdapter(
+						text,
+						new TextContentAdapter(),
+						new ObjectSelectionProposalProvider(
+								generalObjectController, relationConfig, corpusObject),
+						keyStroke,
+						null);
+				contentProposalAdapter.setProposalAcceptanceStyle(ContentProposalAdapter.PROPOSAL_REPLACE);
+				contentProposalAdapter.addContentProposalListener(new IContentProposalListener() {
+					@Override
+					public void proposalAccepted(IContentProposal proposal) {
+						Command command = SetCommand.create(
+								getEditingDomain(),
+								relation,
+								BtsmodelPackage.eINSTANCE.getBTSRelation_ObjectId(),
+								proposal.getContent());
+						getEditingDomain().getCommandStack().execute(
+								command);
+						text.setToolTipText(proposal.getLabel());
+						text.setText(proposal.getLabel());
+					}
+				});
+				// add decorator to textfield explaining all of this
+				textFieldInfoDeco = new ControlDecoration(text,
+						SWT.BOTTOM | SWT.LEFT);
+				// re-use an existing image
+				Image image = FieldDecorationRegistry
+						.getDefault()
+						.getFieldDecoration(FieldDecorationRegistry.DEC_INFORMATION)
+						.getImage();
+				// set description and image
+				textFieldInfoDeco.setDescriptionText("Hit Ctrl+Space for content assist.");
+				textFieldInfoDeco.setImage(image);
+				textFieldInfoDeco.hide();
+			} catch (ParseException e1) {
+				e1.printStackTrace();
+			}
+		}
 	}
 
-	protected IContentProposalProvider getObjectProposalProvider(
-			BTSConfig configItem) {
-		if (itemProposalProvider == null) {
-			itemProposalProvider = new ObjectSelectionProposalProvider(
-					generalObjectController, configItem, corpusObject);
-		}
-		itemProposalProvider.setConfigItem(configItem);
-		return itemProposalProvider;
+	/**
+	 * Have {@link EditingDomainController} determine the editing domain for the currently loaded {@link BTSObject}.
+	 * @return the {@link EditingDomain} for the current object.
+	 */
+	private EditingDomain getEditingDomain() {
+		return editingDomainController.getEditingDomain(corpusObject);
 	}
 
 	@Override

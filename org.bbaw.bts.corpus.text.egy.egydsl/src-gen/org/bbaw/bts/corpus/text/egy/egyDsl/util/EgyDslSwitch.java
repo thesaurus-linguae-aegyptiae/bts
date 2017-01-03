@@ -132,127 +132,6 @@ public class EgyDslSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case EgyDslPackage.VERS_MARKER:
-      {
-        VersMarker versMarker = (VersMarker)theEObject;
-        T result = caseVersMarker(versMarker);
-        if (result == null) result = caseAbstractMarker(versMarker);
-        if (result == null) result = caseSentenceItem(versMarker);
-        if (result == null) result = caseSentenceItemNoAmbivalence(versMarker);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case EgyDslPackage.DISPUTABLE_VERS_MARKER:
-      {
-        DisputableVersMarker disputableVersMarker = (DisputableVersMarker)theEObject;
-        T result = caseDisputableVersMarker(disputableVersMarker);
-        if (result == null) result = caseVersMarker(disputableVersMarker);
-        if (result == null) result = caseAbstractMarker(disputableVersMarker);
-        if (result == null) result = caseSentenceItem(disputableVersMarker);
-        if (result == null) result = caseSentenceItemNoAmbivalence(disputableVersMarker);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case EgyDslPackage.DELETED_VERS_MARKER:
-      {
-        DeletedVersMarker deletedVersMarker = (DeletedVersMarker)theEObject;
-        T result = caseDeletedVersMarker(deletedVersMarker);
-        if (result == null) result = caseVersMarker(deletedVersMarker);
-        if (result == null) result = caseAbstractMarker(deletedVersMarker);
-        if (result == null) result = caseSentenceItem(deletedVersMarker);
-        if (result == null) result = caseSentenceItemNoAmbivalence(deletedVersMarker);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case EgyDslPackage.DESTROYED_VERS_MARKER:
-      {
-        DestroyedVersMarker destroyedVersMarker = (DestroyedVersMarker)theEObject;
-        T result = caseDestroyedVersMarker(destroyedVersMarker);
-        if (result == null) result = caseVersMarker(destroyedVersMarker);
-        if (result == null) result = caseAbstractMarker(destroyedVersMarker);
-        if (result == null) result = caseSentenceItem(destroyedVersMarker);
-        if (result == null) result = caseSentenceItemNoAmbivalence(destroyedVersMarker);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case EgyDslPackage.MISSING_VERS_MARKER:
-      {
-        MissingVersMarker missingVersMarker = (MissingVersMarker)theEObject;
-        T result = caseMissingVersMarker(missingVersMarker);
-        if (result == null) result = caseVersMarker(missingVersMarker);
-        if (result == null) result = caseAbstractMarker(missingVersMarker);
-        if (result == null) result = caseSentenceItem(missingVersMarker);
-        if (result == null) result = caseSentenceItemNoAmbivalence(missingVersMarker);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case EgyDslPackage.RESTORATION_OVER_RASUR_MARKER:
-      {
-        RestorationOverRasurMarker restorationOverRasurMarker = (RestorationOverRasurMarker)theEObject;
-        T result = caseRestorationOverRasurMarker(restorationOverRasurMarker);
-        if (result == null) result = caseVersMarker(restorationOverRasurMarker);
-        if (result == null) result = caseAbstractMarker(restorationOverRasurMarker);
-        if (result == null) result = caseSentenceItem(restorationOverRasurMarker);
-        if (result == null) result = caseSentenceItemNoAmbivalence(restorationOverRasurMarker);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case EgyDslPackage.ANCIENT_EXPANDED_MARKER:
-      {
-        AncientExpandedMarker ancientExpandedMarker = (AncientExpandedMarker)theEObject;
-        T result = caseAncientExpandedMarker(ancientExpandedMarker);
-        if (result == null) result = caseRasurMarker(ancientExpandedMarker);
-        if (result == null) result = caseVersMarker(ancientExpandedMarker);
-        if (result == null) result = caseAbstractMarker(ancientExpandedMarker);
-        if (result == null) result = caseSentenceItem(ancientExpandedMarker);
-        if (result == null) result = caseSentenceItemNoAmbivalence(ancientExpandedMarker);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case EgyDslPackage.RASUR_MARKER:
-      {
-        RasurMarker rasurMarker = (RasurMarker)theEObject;
-        T result = caseRasurMarker(rasurMarker);
-        if (result == null) result = caseVersMarker(rasurMarker);
-        if (result == null) result = caseAbstractMarker(rasurMarker);
-        if (result == null) result = caseSentenceItem(rasurMarker);
-        if (result == null) result = caseSentenceItemNoAmbivalence(rasurMarker);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case EgyDslPackage.VERS_FRONTIER_MARKER:
-      {
-        VersFrontierMarker versFrontierMarker = (VersFrontierMarker)theEObject;
-        T result = caseVersFrontierMarker(versFrontierMarker);
-        if (result == null) result = caseVersMarker(versFrontierMarker);
-        if (result == null) result = caseAbstractMarker(versFrontierMarker);
-        if (result == null) result = caseSentenceItem(versFrontierMarker);
-        if (result == null) result = caseSentenceItemNoAmbivalence(versFrontierMarker);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case EgyDslPackage.VERSBREAK_MARKER:
-      {
-        VersbreakMarker versbreakMarker = (VersbreakMarker)theEObject;
-        T result = caseVersbreakMarker(versbreakMarker);
-        if (result == null) result = caseVersMarker(versbreakMarker);
-        if (result == null) result = caseAbstractMarker(versbreakMarker);
-        if (result == null) result = caseSentenceItem(versbreakMarker);
-        if (result == null) result = caseSentenceItemNoAmbivalence(versbreakMarker);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case EgyDslPackage.BROKEN_VERSBREAK_MARKER:
-      {
-        BrokenVersbreakMarker brokenVersbreakMarker = (BrokenVersbreakMarker)theEObject;
-        T result = caseBrokenVersbreakMarker(brokenVersbreakMarker);
-        if (result == null) result = caseVersMarker(brokenVersbreakMarker);
-        if (result == null) result = caseAbstractMarker(brokenVersbreakMarker);
-        if (result == null) result = caseSentenceItem(brokenVersbreakMarker);
-        if (result == null) result = caseSentenceItemNoAmbivalence(brokenVersbreakMarker);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
       case EgyDslPackage.MARKER:
       {
         Marker marker = (Marker)theEObject;
@@ -384,6 +263,18 @@ public class EgyDslSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case EgyDslPackage.ANCIENT_EXPANDED:
+      {
+        AncientExpanded ancientExpanded = (AncientExpanded)theEObject;
+        T result = caseAncientExpanded(ancientExpanded);
+        if (result == null) result = caseBrackets(ancientExpanded);
+        if (result == null) result = caseNoCartouche(ancientExpanded);
+        if (result == null) result = caseNoDisputableReading(ancientExpanded);
+        if (result == null) result = caseNoDeletion(ancientExpanded);
+        if (result == null) result = caseWordMiddle(ancientExpanded);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case EgyDslPackage.NO_EXPANDED:
       {
         NoExpanded noExpanded = (NoExpanded)theEObject;
@@ -403,6 +294,7 @@ public class EgyDslSwitch<T> extends Switch<T>
         if (result == null) result = caseNoRasur(emendation);
         if (result == null) result = caseNoAncientExpanded(emendation);
         if (result == null) result = caseNoRestorationOverRasur(emendation);
+        if (result == null) result = caseNoPartialDestruction(emendation);
         if (result == null) result = caseWordMiddle(emendation);
         if (result == null) result = defaultCase(theEObject);
         return result;
@@ -520,18 +412,6 @@ public class EgyDslSwitch<T> extends Switch<T>
       {
         NoRasur noRasur = (NoRasur)theEObject;
         T result = caseNoRasur(noRasur);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case EgyDslPackage.ANCIENT_EXPANDED:
-      {
-        AncientExpanded ancientExpanded = (AncientExpanded)theEObject;
-        T result = caseAncientExpanded(ancientExpanded);
-        if (result == null) result = caseBrackets(ancientExpanded);
-        if (result == null) result = caseNoCartouche(ancientExpanded);
-        if (result == null) result = caseNoDisputableReading(ancientExpanded);
-        if (result == null) result = caseNoDeletion(ancientExpanded);
-        if (result == null) result = caseWordMiddle(ancientExpanded);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -763,6 +643,160 @@ public class EgyDslSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case EgyDslPackage.VERS_MARKER:
+      {
+        VersMarker versMarker = (VersMarker)theEObject;
+        T result = caseVersMarker(versMarker);
+        if (result == null) result = caseAbstractMarker(versMarker);
+        if (result == null) result = caseSentenceItem(versMarker);
+        if (result == null) result = caseSentenceItemNoAmbivalence(versMarker);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case EgyDslPackage.EMENDATION_VERS_MARKER:
+      {
+        EmendationVersMarker emendationVersMarker = (EmendationVersMarker)theEObject;
+        T result = caseEmendationVersMarker(emendationVersMarker);
+        if (result == null) result = caseVersMarker(emendationVersMarker);
+        if (result == null) result = caseAbstractMarker(emendationVersMarker);
+        if (result == null) result = caseSentenceItem(emendationVersMarker);
+        if (result == null) result = caseSentenceItemNoAmbivalence(emendationVersMarker);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case EgyDslPackage.DISPUTABLE_VERS_MARKER:
+      {
+        DisputableVersMarker disputableVersMarker = (DisputableVersMarker)theEObject;
+        T result = caseDisputableVersMarker(disputableVersMarker);
+        if (result == null) result = caseVersMarker(disputableVersMarker);
+        if (result == null) result = caseAbstractMarker(disputableVersMarker);
+        if (result == null) result = caseSentenceItem(disputableVersMarker);
+        if (result == null) result = caseSentenceItemNoAmbivalence(disputableVersMarker);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case EgyDslPackage.DELETED_VERS_MARKER:
+      {
+        DeletedVersMarker deletedVersMarker = (DeletedVersMarker)theEObject;
+        T result = caseDeletedVersMarker(deletedVersMarker);
+        if (result == null) result = caseVersMarker(deletedVersMarker);
+        if (result == null) result = caseAbstractMarker(deletedVersMarker);
+        if (result == null) result = caseSentenceItem(deletedVersMarker);
+        if (result == null) result = caseSentenceItemNoAmbivalence(deletedVersMarker);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case EgyDslPackage.DESTROYED_VERS_MARKER:
+      {
+        DestroyedVersMarker destroyedVersMarker = (DestroyedVersMarker)theEObject;
+        T result = caseDestroyedVersMarker(destroyedVersMarker);
+        if (result == null) result = caseVersMarker(destroyedVersMarker);
+        if (result == null) result = caseAbstractMarker(destroyedVersMarker);
+        if (result == null) result = caseSentenceItem(destroyedVersMarker);
+        if (result == null) result = caseSentenceItemNoAmbivalence(destroyedVersMarker);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case EgyDslPackage.DESTROYED_VERS_FRONTIER_MARKER:
+      {
+        DestroyedVersFrontierMarker destroyedVersFrontierMarker = (DestroyedVersFrontierMarker)theEObject;
+        T result = caseDestroyedVersFrontierMarker(destroyedVersFrontierMarker);
+        if (result == null) result = caseVersMarker(destroyedVersFrontierMarker);
+        if (result == null) result = caseAbstractMarker(destroyedVersFrontierMarker);
+        if (result == null) result = caseSentenceItem(destroyedVersFrontierMarker);
+        if (result == null) result = caseSentenceItemNoAmbivalence(destroyedVersFrontierMarker);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case EgyDslPackage.PARTIAL_DESTROYED_VERS_MARKER:
+      {
+        PartialDestroyedVersMarker partialDestroyedVersMarker = (PartialDestroyedVersMarker)theEObject;
+        T result = casePartialDestroyedVersMarker(partialDestroyedVersMarker);
+        if (result == null) result = caseVersMarker(partialDestroyedVersMarker);
+        if (result == null) result = caseAbstractMarker(partialDestroyedVersMarker);
+        if (result == null) result = caseSentenceItem(partialDestroyedVersMarker);
+        if (result == null) result = caseSentenceItemNoAmbivalence(partialDestroyedVersMarker);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case EgyDslPackage.MISSING_VERS_MARKER:
+      {
+        MissingVersMarker missingVersMarker = (MissingVersMarker)theEObject;
+        T result = caseMissingVersMarker(missingVersMarker);
+        if (result == null) result = caseVersMarker(missingVersMarker);
+        if (result == null) result = caseAbstractMarker(missingVersMarker);
+        if (result == null) result = caseSentenceItem(missingVersMarker);
+        if (result == null) result = caseSentenceItemNoAmbivalence(missingVersMarker);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case EgyDslPackage.RESTORATION_OVER_RASUR_MARKER:
+      {
+        RestorationOverRasurMarker restorationOverRasurMarker = (RestorationOverRasurMarker)theEObject;
+        T result = caseRestorationOverRasurMarker(restorationOverRasurMarker);
+        if (result == null) result = caseVersMarker(restorationOverRasurMarker);
+        if (result == null) result = caseAbstractMarker(restorationOverRasurMarker);
+        if (result == null) result = caseSentenceItem(restorationOverRasurMarker);
+        if (result == null) result = caseSentenceItemNoAmbivalence(restorationOverRasurMarker);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case EgyDslPackage.ANCIENT_EXPANDED_MARKER:
+      {
+        AncientExpandedMarker ancientExpandedMarker = (AncientExpandedMarker)theEObject;
+        T result = caseAncientExpandedMarker(ancientExpandedMarker);
+        if (result == null) result = caseRasurMarker(ancientExpandedMarker);
+        if (result == null) result = caseVersMarker(ancientExpandedMarker);
+        if (result == null) result = caseAbstractMarker(ancientExpandedMarker);
+        if (result == null) result = caseSentenceItem(ancientExpandedMarker);
+        if (result == null) result = caseSentenceItemNoAmbivalence(ancientExpandedMarker);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case EgyDslPackage.RASUR_MARKER:
+      {
+        RasurMarker rasurMarker = (RasurMarker)theEObject;
+        T result = caseRasurMarker(rasurMarker);
+        if (result == null) result = caseVersMarker(rasurMarker);
+        if (result == null) result = caseAbstractMarker(rasurMarker);
+        if (result == null) result = caseSentenceItem(rasurMarker);
+        if (result == null) result = caseSentenceItemNoAmbivalence(rasurMarker);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case EgyDslPackage.VERS_FRONTIER_MARKER:
+      {
+        VersFrontierMarker versFrontierMarker = (VersFrontierMarker)theEObject;
+        T result = caseVersFrontierMarker(versFrontierMarker);
+        if (result == null) result = caseVersMarker(versFrontierMarker);
+        if (result == null) result = caseAbstractMarker(versFrontierMarker);
+        if (result == null) result = caseSentenceItem(versFrontierMarker);
+        if (result == null) result = caseSentenceItemNoAmbivalence(versFrontierMarker);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case EgyDslPackage.VERSBREAK_MARKER:
+      {
+        VersbreakMarker versbreakMarker = (VersbreakMarker)theEObject;
+        T result = caseVersbreakMarker(versbreakMarker);
+        if (result == null) result = caseVersMarker(versbreakMarker);
+        if (result == null) result = caseAbstractMarker(versbreakMarker);
+        if (result == null) result = caseSentenceItem(versbreakMarker);
+        if (result == null) result = caseSentenceItemNoAmbivalence(versbreakMarker);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case EgyDslPackage.BROKEN_VERSBREAK_MARKER:
+      {
+        BrokenVersbreakMarker brokenVersbreakMarker = (BrokenVersbreakMarker)theEObject;
+        T result = caseBrokenVersbreakMarker(brokenVersbreakMarker);
+        if (result == null) result = caseVersMarker(brokenVersbreakMarker);
+        if (result == null) result = caseAbstractMarker(brokenVersbreakMarker);
+        if (result == null) result = caseSentenceItem(brokenVersbreakMarker);
+        if (result == null) result = caseSentenceItemNoAmbivalence(brokenVersbreakMarker);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       default: return defaultCase(theEObject);
     }
   }
@@ -891,182 +925,6 @@ public class EgyDslSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseSentenceItemNoAmbivalence(SentenceItemNoAmbivalence object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Vers Marker</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Vers Marker</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseVersMarker(VersMarker object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Disputable Vers Marker</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Disputable Vers Marker</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseDisputableVersMarker(DisputableVersMarker object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Deleted Vers Marker</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Deleted Vers Marker</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseDeletedVersMarker(DeletedVersMarker object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Destroyed Vers Marker</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Destroyed Vers Marker</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseDestroyedVersMarker(DestroyedVersMarker object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Missing Vers Marker</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Missing Vers Marker</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseMissingVersMarker(MissingVersMarker object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Restoration Over Rasur Marker</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Restoration Over Rasur Marker</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseRestorationOverRasurMarker(RestorationOverRasurMarker object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Ancient Expanded Marker</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Ancient Expanded Marker</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseAncientExpandedMarker(AncientExpandedMarker object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Rasur Marker</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Rasur Marker</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseRasurMarker(RasurMarker object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Vers Frontier Marker</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Vers Frontier Marker</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseVersFrontierMarker(VersFrontierMarker object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Versbreak Marker</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Versbreak Marker</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseVersbreakMarker(VersbreakMarker object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Broken Versbreak Marker</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Broken Versbreak Marker</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseBrokenVersbreakMarker(BrokenVersbreakMarker object)
   {
     return null;
   }
@@ -1259,6 +1117,22 @@ public class EgyDslSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseExpanded(Expanded object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Ancient Expanded</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Ancient Expanded</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseAncientExpanded(AncientExpanded object)
   {
     return null;
   }
@@ -1467,22 +1341,6 @@ public class EgyDslSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseNoRasur(NoRasur object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Ancient Expanded</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Ancient Expanded</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseAncientExpanded(AncientExpanded object)
   {
     return null;
   }
@@ -1707,6 +1565,230 @@ public class EgyDslSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseInterfixPhoneticalComplement(InterfixPhoneticalComplement object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Vers Marker</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Vers Marker</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseVersMarker(VersMarker object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Emendation Vers Marker</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Emendation Vers Marker</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseEmendationVersMarker(EmendationVersMarker object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Disputable Vers Marker</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Disputable Vers Marker</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseDisputableVersMarker(DisputableVersMarker object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Deleted Vers Marker</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Deleted Vers Marker</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseDeletedVersMarker(DeletedVersMarker object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Destroyed Vers Marker</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Destroyed Vers Marker</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseDestroyedVersMarker(DestroyedVersMarker object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Destroyed Vers Frontier Marker</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Destroyed Vers Frontier Marker</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseDestroyedVersFrontierMarker(DestroyedVersFrontierMarker object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Partial Destroyed Vers Marker</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Partial Destroyed Vers Marker</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T casePartialDestroyedVersMarker(PartialDestroyedVersMarker object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Missing Vers Marker</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Missing Vers Marker</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseMissingVersMarker(MissingVersMarker object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Restoration Over Rasur Marker</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Restoration Over Rasur Marker</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseRestorationOverRasurMarker(RestorationOverRasurMarker object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Ancient Expanded Marker</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Ancient Expanded Marker</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseAncientExpandedMarker(AncientExpandedMarker object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Rasur Marker</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Rasur Marker</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseRasurMarker(RasurMarker object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Vers Frontier Marker</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Vers Frontier Marker</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseVersFrontierMarker(VersFrontierMarker object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Versbreak Marker</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Versbreak Marker</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseVersbreakMarker(VersbreakMarker object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Broken Versbreak Marker</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Broken Versbreak Marker</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseBrokenVersbreakMarker(BrokenVersbreakMarker object)
   {
     return null;
   }

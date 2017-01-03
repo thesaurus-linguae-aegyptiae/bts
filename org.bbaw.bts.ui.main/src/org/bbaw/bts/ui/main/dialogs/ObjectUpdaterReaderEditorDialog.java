@@ -4,6 +4,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.bbaw.bts.btsmodel.BTSDBBaseObject;
+import org.bbaw.bts.core.commons.BTSCoreConstants;
 import org.bbaw.bts.ui.main.parts.ObjectUpdaterReaderEditorPart;
 import org.eclipse.e4.core.contexts.ContextInjectionFactory;
 import org.eclipse.e4.core.contexts.IEclipseContext;
@@ -139,6 +140,7 @@ public class ObjectUpdaterReaderEditorDialog extends TitleAreaDialog {
 			}
 		}
 
+		button.setEnabled((Boolean)context.get(BTSCoreConstants.CORE_EXPRESSION_MAY_EDIT));
 		setButtonLayoutData(button);
 		return button;
 

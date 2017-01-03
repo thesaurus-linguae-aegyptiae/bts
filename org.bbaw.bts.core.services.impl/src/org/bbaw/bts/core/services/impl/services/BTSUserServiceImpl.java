@@ -22,10 +22,10 @@ import org.bbaw.bts.core.commons.exceptions.BTSDBException;
 import org.bbaw.bts.core.commons.exceptions.BTSDBLocalLoginException;
 import org.bbaw.bts.core.commons.filter.BTSFilter;
 import org.bbaw.bts.core.dao.BTSUserDao;
+import org.bbaw.bts.core.dao.util.BTSQueryRequest;
 import org.bbaw.bts.core.services.BTSUserService;
 import org.bbaw.bts.core.services.impl.generic.GenericObjectServiceImpl;
 import org.bbaw.bts.db.DBManager;
-import org.bbaw.bts.searchModel.BTSQueryRequest;
 import org.bbaw.bts.tempmodel.CacheTreeNode;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.preferences.IEclipsePreferences;
@@ -68,6 +68,8 @@ public class BTSUserServiceImpl extends GenericObjectServiceImpl<BTSUser, String
 		super.addRevisionStatement(entity);
 
 		userDao.add(entity, BTSCoreConstants.ADMIN);
+		
+		
 		//FIXME update user password if changed
 		// FIXME update user role memberships 
 		// beides in _user Object!!!!!!!!!!
@@ -98,6 +100,10 @@ public class BTSUserServiceImpl extends GenericObjectServiceImpl<BTSUser, String
 			return user;
 		}
 		return null;
+	}
+	@Override
+	public String findAsJsonString(String key, IProgressMonitor monitor) {
+		return userDao.findAsJsonString(key, BTSCoreConstants.ADMIN);
 	}
 
 	@Override
@@ -419,6 +425,16 @@ public class BTSUserServiceImpl extends GenericObjectServiceImpl<BTSUser, String
 	public void makeUserLocalDBAdmin(String userName, String passWord) throws FileNotFoundException {
 		dbManager.addAuthenticationDBAdmin(userName, passWord);
 		
+	}
+
+	/* (non-Javadoc)
+	 * @see org.bbaw.bts.core.services.impl.generic.GenericObjectServiceImpl#queryAsJsonString(org.bbaw.bts.core.dao.util.BTSQueryRequest, java.lang.String, org.eclipse.core.runtime.IProgressMonitor)
+	 */
+	@Override
+	public List<String> queryAsJsonString(BTSQueryRequest query, String objectState, IProgressMonitor monitor) {
+		List<String> objects = userDao.queryAsJsonString(query, BTSCoreConstants.ADMIN,
+				BTSCoreConstants.ADMIN, objectState, false);
+		return objects;
 	}
 
 }

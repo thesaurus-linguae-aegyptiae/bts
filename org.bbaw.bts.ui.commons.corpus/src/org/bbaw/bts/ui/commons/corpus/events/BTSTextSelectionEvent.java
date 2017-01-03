@@ -33,6 +33,7 @@ public class BTSTextSelectionEvent extends Event {
 		this.setOriginalEvent(event);
 		this.display = event.display;
 		this.widget = event.widget;
+		this.time = event.time;
 		if (event instanceof CaretEvent)
 		{
 			this.x = ((CaretEvent)event).caretOffset;

@@ -1,5 +1,6 @@
 package org.bbaw.bts.ui.corpus.parts;
 
+import java.util.ArrayList;
 import java.util.EventObject;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -179,6 +180,9 @@ public class PassportEditorPart {
 	private PassportConfigurationController passportConfigurationController;
 
 	@Inject
+	private PermissionsAndExpressionsEvaluationController permissionsController;
+
+	@Inject
 	private ECommandService commandService;
 
 	@Inject
@@ -296,10 +300,6 @@ public class PassportEditorPart {
 			}
 		});
 
-		relationsComp.setLayout(new GridLayout(8, false));
-		((GridLayout) relationsComp.getLayout()).marginWidth = 0;
-		((GridLayout) relationsComp.getLayout()).marginHeight = 0;
-
 		relationsComp.setLayout(new GridLayout(
 				BTSUIConstants.PASSPORT_COLUMN_NUMBER, true));
 		((GridLayout) relationsComp.getLayout()).marginWidth = 0;
@@ -329,10 +329,6 @@ public class PassportEditorPart {
 						SWT.DEFAULT));
 			}
 		});
-
-		idsComp.setLayout(new GridLayout(8, false));
-		((GridLayout) idsComp.getLayout()).marginWidth = 0;
-		((GridLayout) idsComp.getLayout()).marginHeight = 0;
 
 		idsComp.setLayout(new GridLayout(
 				BTSUIConstants.PASSPORT_COLUMN_NUMBER, true));
@@ -560,10 +556,6 @@ public class PassportEditorPart {
 						Job job = new Job("My Job") {
 							@Override
 							protected IStatus run(IProgressMonitor monitor) {
-								// do something long running
-								// ...
-
-								// If you want to update the UI
 								sync.asyncExec(new Runnable() {
 									@Override
 									public void run() {
@@ -571,6 +563,7 @@ public class PassportEditorPart {
 												.setInput(passportConfigurationController
 														.getObjectSubtypeConfigItemProcessedClones(corpusObject));
 										subtypeCMB_Main_viewer.refresh();
+										updateGenericTabItems(tabFolder);
 									}
 								});
 								return Status.OK_STATUS;
@@ -611,6 +604,36 @@ public class PassportEditorPart {
 		subtypeCMB_Main_viewer.setInput(passportConfigurationController
 				.getObjectSubtypeConfigItemProcessedClones(corpusObject));
 		}
+		subtypeCMB_Main_viewer.addSelectionChangedListener(new ISelectionChangedListener() {
+
+			@Override
+			public void selectionChanged(SelectionChangedEvent event) {
+				if (!loading) {
+				Job job = new Job("My Job") {
+					@Override
+					protected IStatus run(IProgressMonitor monitor) {
+						sync.asyncExec(new Runnable() {
+							@Override
+							public void run() {
+								updateGenericTabItems(tabFolder);
+							}
+						});
+						return Status.OK_STATUS;
+					}
+				};
+
+				// Start the Job
+				job.schedule(450);
+				}
+				// problem is: emf sets selection of viewer in secondary
+				// thread
+				// this causes listener to notice selection
+				// and start unwanted reload on subtype viewer
+				// therefore first selection is suppressed as loading
+				loading = false;
+			}
+		});
+		
 		Label lblSortkey = new Label(compTBTM_Main, SWT.NONE);
 		lblSortkey.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false,
 				false, 1, 1));
@@ -857,6 +880,24 @@ public class PassportEditorPart {
 				SWT.DEFAULT, SWT.DEFAULT).y);
 
 	}
+	
+	private void updateGenericTabItems(CTabFolder tabFolder) {
+		List<CTabItem> toDispose = new ArrayList<>();
+		for (CTabItem c : tabFolder.getItems())
+		{
+			if (tabFolder.indexOf(c) > 2)
+			{
+				toDispose.add(c);
+			}
+		}
+		for(int i = 0; i < toDispose.size(); i++)
+		{
+			CTabItem c = toDispose.get(i);
+			c.dispose();
+		}
+		createGenericTabItems(tabFolder);
+		
+	}
 
 	protected void moveObjectAmongProjects() {
 
@@ -946,6 +987,9 @@ public class PassportEditorPart {
 	}
 
 	private void loadInput(BTSCorpusObject object) {
+
+		userMayEdit = permissionsController.userMayEditObject(permissionsController.getAuthenticatedUser(), object);
+//		context.set(BTSCoreConstants.CORE_EXPRESSION_MAY_EDIT, userMayEdit);
 
 		purgeAll();
 		if (object.getPassport() == null) {
@@ -1084,12 +1128,9 @@ public class PassportEditorPart {
 
 		// scrollComposite.layout();
 
-		CompoundIdentifiersEditorComposite relationsEditor = ContextInjectionFactory
+		ContextInjectionFactory
 				.make(CompoundIdentifiersEditorComposite.class, child);
 
-		// foreach relation in object.relations
-		// make relation widget
-		// add plus and minus button
 	}
 
 	private CommandStackListener getCommandStackListener() {
@@ -1143,8 +1184,7 @@ public class PassportEditorPart {
 				|| command instanceof RemoveCommand) {
 			CTabItem tabItem = tabFolder.getSelection();
 			reloadGenericTabItem(tabItem);
-			genericTabsReloadRequiredCounter++;
-			tabItem.setData("reloaded", genericTabsReloadRequiredCounter);
+			tabItem.setData("reloaded", genericTabsReloadRequiredCounter++);
 
 		}
 
@@ -1193,8 +1233,9 @@ public class PassportEditorPart {
 			composite.setLayout(fillLayout);
 			tabItem.setControl(composite);
 		} else {
-//			Control c = tabItem.getControl();
-//			if (!c.isDisposed()) c.dispose();
+			if (!tabItem.getControl().isDisposed()) {
+				tabItem.getControl().dispose();
+			}
 			tabItem.setControl(null);
 
 			composite = new ScrolledComposite(folder, SWT.V_SCROLL
@@ -1231,8 +1272,8 @@ public class PassportEditorPart {
 
 		// scrollComposite.layout();
 
-		CompoundRelationsEditorComposite relationsEditor = ContextInjectionFactory
-				.make(CompoundRelationsEditorComposite.class, child);
+		ContextInjectionFactory.make(
+				CompoundRelationsEditorComposite.class, child);
 
 		// foreach relation in object.relations
 		// make relation widget
@@ -1433,7 +1474,10 @@ public class PassportEditorPart {
 
 	@PreDestroy
 	public void preDestroy() {
-		// TODO Your code here
+		if (editingDomain != null)
+		{
+			editingDomain.getCommandStack().removeCommandStackListener(commandStackListener);
+		}
 	}
 
 	@Focus

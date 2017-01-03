@@ -1,4 +1,31 @@
 /**
+ * This file is part of Berlin Text System.
+ * 
+ * The software Berlin Text System serves as a client user interface for working with
+ * text corpus data. See: aaew.bbaw.de
+ * 
+ * The software Berlin Text System was developed at the Berlin-Brandenburg Academy
+ * of Sciences and Humanities, Jägerstr. 22/23, D-10117 Berlin.
+ * www.bbaw.de
+ * 
+ * Copyright (C) 2013-2015  Berlin-Brandenburg Academy
+ * of Sciences and Humanities
+ * 
+ * The software Berlin Text System was developed by @author: Christoph Plutte.
+ * 
+ * Berlin Text System is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * Berlin Text System is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ * 
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with Berlin Text System.  
+ * If not, see <http://www.gnu.org/licenses/lgpl-3.0.html>.
  */
 package org.bbaw.bts.btsmodel;
 
@@ -1330,13 +1357,49 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_INTER_TEXT_REFERENCE_OPERATION_COUNT = 0;
 
 	/**
+	 * The feature id for the '<em><b>id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_IDENTIFIABLE_ITEM__ID = 0;
+
+	/**
+	 * The number of structural features of the '<em>BTS Identifiable Item</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_IDENTIFIABLE_ITEM_FEATURE_COUNT = 1;
+
+	/**
+	 * The number of operations of the '<em>BTS Identifiable Item</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_IDENTIFIABLE_ITEM_OPERATION_COUNT = 0;
+
+	/**
+	 * The feature id for the '<em><b>id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_TRANSLATION__ID = BTS_IDENTIFIABLE_ITEM__ID;
+
+	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_TRANSLATION__VALUE = 0;
+	int BTS_TRANSLATION__VALUE = BTS_IDENTIFIABLE_ITEM_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' attribute.
@@ -1345,7 +1408,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_TRANSLATION__TYPE = 1;
+	int BTS_TRANSLATION__TYPE = BTS_IDENTIFIABLE_ITEM_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Lang</b></em>' attribute.
@@ -1354,7 +1417,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_TRANSLATION__LANG = 2;
+	int BTS_TRANSLATION__LANG = BTS_IDENTIFIABLE_ITEM_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>BTS Translation</em>' class.
@@ -1363,7 +1426,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_TRANSLATION_FEATURE_COUNT = 3;
+	int BTS_TRANSLATION_FEATURE_COUNT = BTS_IDENTIFIABLE_ITEM_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of operations of the '<em>BTS Translation</em>' class.
@@ -1372,7 +1435,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_TRANSLATION_OPERATION_COUNT = 0;
+	int BTS_TRANSLATION_OPERATION_COUNT = BTS_IDENTIFIABLE_ITEM_OPERATION_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' attribute.
@@ -1436,33 +1499,6 @@ public interface BtsmodelPackage extends EPackage {
 	 * @ordered
 	 */
 	int BTS_DATE_OPERATION_COUNT = 0;
-
-	/**
-	 * The feature id for the '<em><b>id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_IDENTIFIABLE_ITEM__ID = 0;
-
-	/**
-	 * The number of structural features of the '<em>BTS Identifiable Item</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_IDENTIFIABLE_ITEM_FEATURE_COUNT = 1;
-
-	/**
-	 * The number of operations of the '<em>BTS Identifiable Item</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_IDENTIFIABLE_ITEM_OPERATION_COUNT = 0;
 
 	/**
 	 * The meta object id for the '{@link org.bbaw.bts.btsmodel.impl.BTSRelationImpl <em>BTS Relation</em>}' class.

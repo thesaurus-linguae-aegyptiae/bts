@@ -13,6 +13,7 @@ import org.bbaw.bts.corpus.text.egy.egyDsl.Case;
 import org.bbaw.bts.corpus.text.egy.egyDsl.Chars;
 import org.bbaw.bts.corpus.text.egy.egyDsl.DeletedVersMarker;
 import org.bbaw.bts.corpus.text.egy.egyDsl.Deletion;
+import org.bbaw.bts.corpus.text.egy.egyDsl.DestroyedVersFrontierMarker;
 import org.bbaw.bts.corpus.text.egy.egyDsl.DestroyedVersMarker;
 import org.bbaw.bts.corpus.text.egy.egyDsl.DestructionMarker;
 import org.bbaw.bts.corpus.text.egy.egyDsl.DisputableReading;
@@ -20,6 +21,7 @@ import org.bbaw.bts.corpus.text.egy.egyDsl.DisputableVersMarker;
 import org.bbaw.bts.corpus.text.egy.egyDsl.EgyDslFactory;
 import org.bbaw.bts.corpus.text.egy.egyDsl.EgyDslPackage;
 import org.bbaw.bts.corpus.text.egy.egyDsl.Emendation;
+import org.bbaw.bts.corpus.text.egy.egyDsl.EmendationVersMarker;
 import org.bbaw.bts.corpus.text.egy.egyDsl.Expanded;
 import org.bbaw.bts.corpus.text.egy.egyDsl.ExpandedColumn;
 import org.bbaw.bts.corpus.text.egy.egyDsl.Interfix;
@@ -46,6 +48,7 @@ import org.bbaw.bts.corpus.text.egy.egyDsl.NoPartialDestruction;
 import org.bbaw.bts.corpus.text.egy.egyDsl.NoRasur;
 import org.bbaw.bts.corpus.text.egy.egyDsl.NoRestorationOverRasur;
 import org.bbaw.bts.corpus.text.egy.egyDsl.Oval;
+import org.bbaw.bts.corpus.text.egy.egyDsl.PartialDestroyedVersMarker;
 import org.bbaw.bts.corpus.text.egy.egyDsl.PartialDestruction;
 import org.bbaw.bts.corpus.text.egy.egyDsl.Rasur;
 import org.bbaw.bts.corpus.text.egy.egyDsl.RasurMarker;
@@ -140,83 +143,6 @@ public class EgyDslPackageImpl extends EPackageImpl implements EgyDslPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass versMarkerEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass disputableVersMarkerEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass deletedVersMarkerEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass destroyedVersMarkerEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass missingVersMarkerEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass restorationOverRasurMarkerEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass ancientExpandedMarkerEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass rasurMarkerEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass versFrontierMarkerEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass versbreakMarkerEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass brokenVersbreakMarkerEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   private EClass markerEClass = null;
 
   /**
@@ -295,6 +221,13 @@ public class EgyDslPackageImpl extends EPackageImpl implements EgyDslPackage
    * @generated
    */
   private EClass expandedEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass ancientExpandedEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -386,13 +319,6 @@ public class EgyDslPackageImpl extends EPackageImpl implements EgyDslPackage
    * @generated
    */
   private EClass noRasurEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass ancientExpandedEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -491,6 +417,104 @@ public class EgyDslPackageImpl extends EPackageImpl implements EgyDslPackage
    * @generated
    */
   private EClass interfixPhoneticalComplementEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass versMarkerEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass emendationVersMarkerEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass disputableVersMarkerEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass deletedVersMarkerEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass destroyedVersMarkerEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass destroyedVersFrontierMarkerEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass partialDestroyedVersMarkerEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass missingVersMarkerEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass restorationOverRasurMarkerEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass ancientExpandedMarkerEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass rasurMarkerEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass versFrontierMarkerEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass versbreakMarkerEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass brokenVersbreakMarkerEClass = null;
 
   /**
    * Creates an instance of the model <b>Package</b>, registered with
@@ -683,116 +707,6 @@ public class EgyDslPackageImpl extends EPackageImpl implements EgyDslPackage
   public EClass getSentenceItemNoAmbivalence()
   {
     return sentenceItemNoAmbivalenceEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EClass getVersMarker()
-  {
-    return versMarkerEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EClass getDisputableVersMarker()
-  {
-    return disputableVersMarkerEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EClass getDeletedVersMarker()
-  {
-    return deletedVersMarkerEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EClass getDestroyedVersMarker()
-  {
-    return destroyedVersMarkerEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EClass getMissingVersMarker()
-  {
-    return missingVersMarkerEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EClass getRestorationOverRasurMarker()
-  {
-    return restorationOverRasurMarkerEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EClass getAncientExpandedMarker()
-  {
-    return ancientExpandedMarkerEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EClass getRasurMarker()
-  {
-    return rasurMarkerEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EClass getVersFrontierMarker()
-  {
-    return versFrontierMarkerEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EClass getVersbreakMarker()
-  {
-    return versbreakMarkerEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EClass getBrokenVersbreakMarker()
-  {
-    return brokenVersbreakMarkerEClass;
   }
 
   /**
@@ -1000,6 +914,26 @@ public class EgyDslPackageImpl extends EPackageImpl implements EgyDslPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  public EClass getAncientExpanded()
+  {
+    return ancientExpandedEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getAncientExpanded_WChar()
+  {
+    return (EReference)ancientExpandedEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getNoExpanded()
   {
     return noExpandedEClass;
@@ -1190,26 +1124,6 @@ public class EgyDslPackageImpl extends EPackageImpl implements EgyDslPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getAncientExpanded()
-  {
-    return ancientExpandedEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EReference getAncientExpanded_WChar()
-  {
-    return (EReference)ancientExpandedEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public EClass getNoAncientExpanded()
   {
     return noAncientExpandedEClass;
@@ -1370,6 +1284,146 @@ public class EgyDslPackageImpl extends EPackageImpl implements EgyDslPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  public EClass getVersMarker()
+  {
+    return versMarkerEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getEmendationVersMarker()
+  {
+    return emendationVersMarkerEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getDisputableVersMarker()
+  {
+    return disputableVersMarkerEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getDeletedVersMarker()
+  {
+    return deletedVersMarkerEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getDestroyedVersMarker()
+  {
+    return destroyedVersMarkerEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getDestroyedVersFrontierMarker()
+  {
+    return destroyedVersFrontierMarkerEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getPartialDestroyedVersMarker()
+  {
+    return partialDestroyedVersMarkerEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getMissingVersMarker()
+  {
+    return missingVersMarkerEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getRestorationOverRasurMarker()
+  {
+    return restorationOverRasurMarkerEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getAncientExpandedMarker()
+  {
+    return ancientExpandedMarkerEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getRasurMarker()
+  {
+    return rasurMarkerEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getVersFrontierMarker()
+  {
+    return versFrontierMarkerEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getVersbreakMarker()
+  {
+    return versbreakMarkerEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getBrokenVersbreakMarker()
+  {
+    return brokenVersbreakMarkerEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EgyDslFactory getEgyDslFactory()
   {
     return (EgyDslFactory)getEFactoryInstance();
@@ -1416,28 +1470,6 @@ public class EgyDslPackageImpl extends EPackageImpl implements EgyDslPackage
 
     sentenceItemNoAmbivalenceEClass = createEClass(SENTENCE_ITEM_NO_AMBIVALENCE);
 
-    versMarkerEClass = createEClass(VERS_MARKER);
-
-    disputableVersMarkerEClass = createEClass(DISPUTABLE_VERS_MARKER);
-
-    deletedVersMarkerEClass = createEClass(DELETED_VERS_MARKER);
-
-    destroyedVersMarkerEClass = createEClass(DESTROYED_VERS_MARKER);
-
-    missingVersMarkerEClass = createEClass(MISSING_VERS_MARKER);
-
-    restorationOverRasurMarkerEClass = createEClass(RESTORATION_OVER_RASUR_MARKER);
-
-    ancientExpandedMarkerEClass = createEClass(ANCIENT_EXPANDED_MARKER);
-
-    rasurMarkerEClass = createEClass(RASUR_MARKER);
-
-    versFrontierMarkerEClass = createEClass(VERS_FRONTIER_MARKER);
-
-    versbreakMarkerEClass = createEClass(VERSBREAK_MARKER);
-
-    brokenVersbreakMarkerEClass = createEClass(BROKEN_VERSBREAK_MARKER);
-
     markerEClass = createEClass(MARKER);
     createEAttribute(markerEClass, MARKER__TYPE);
 
@@ -1469,6 +1501,9 @@ public class EgyDslPackageImpl extends EPackageImpl implements EgyDslPackage
 
     expandedEClass = createEClass(EXPANDED);
     createEReference(expandedEClass, EXPANDED__WCHAR);
+
+    ancientExpandedEClass = createEClass(ANCIENT_EXPANDED);
+    createEReference(ancientExpandedEClass, ANCIENT_EXPANDED__WCHAR);
 
     noExpandedEClass = createEClass(NO_EXPANDED);
 
@@ -1502,9 +1537,6 @@ public class EgyDslPackageImpl extends EPackageImpl implements EgyDslPackage
 
     noRasurEClass = createEClass(NO_RASUR);
 
-    ancientExpandedEClass = createEClass(ANCIENT_EXPANDED);
-    createEReference(ancientExpandedEClass, ANCIENT_EXPANDED__WCHAR);
-
     noAncientExpandedEClass = createEClass(NO_ANCIENT_EXPANDED);
 
     restorationOverRasurEClass = createEClass(RESTORATION_OVER_RASUR);
@@ -1534,6 +1566,34 @@ public class EgyDslPackageImpl extends EPackageImpl implements EgyDslPackage
     interfixCompoundWordsEClass = createEClass(INTERFIX_COMPOUND_WORDS);
 
     interfixPhoneticalComplementEClass = createEClass(INTERFIX_PHONETICAL_COMPLEMENT);
+
+    versMarkerEClass = createEClass(VERS_MARKER);
+
+    emendationVersMarkerEClass = createEClass(EMENDATION_VERS_MARKER);
+
+    disputableVersMarkerEClass = createEClass(DISPUTABLE_VERS_MARKER);
+
+    deletedVersMarkerEClass = createEClass(DELETED_VERS_MARKER);
+
+    destroyedVersMarkerEClass = createEClass(DESTROYED_VERS_MARKER);
+
+    destroyedVersFrontierMarkerEClass = createEClass(DESTROYED_VERS_FRONTIER_MARKER);
+
+    partialDestroyedVersMarkerEClass = createEClass(PARTIAL_DESTROYED_VERS_MARKER);
+
+    missingVersMarkerEClass = createEClass(MISSING_VERS_MARKER);
+
+    restorationOverRasurMarkerEClass = createEClass(RESTORATION_OVER_RASUR_MARKER);
+
+    ancientExpandedMarkerEClass = createEClass(ANCIENT_EXPANDED_MARKER);
+
+    rasurMarkerEClass = createEClass(RASUR_MARKER);
+
+    versFrontierMarkerEClass = createEClass(VERS_FRONTIER_MARKER);
+
+    versbreakMarkerEClass = createEClass(VERSBREAK_MARKER);
+
+    brokenVersbreakMarkerEClass = createEClass(BROKEN_VERSBREAK_MARKER);
   }
 
   /**
@@ -1569,18 +1629,6 @@ public class EgyDslPackageImpl extends EPackageImpl implements EgyDslPackage
     abstractMarkerEClass.getESuperTypes().add(this.getSentenceItem());
     abstractMarkerEClass.getESuperTypes().add(this.getSentenceItemNoAmbivalence());
     ambivalenceEClass.getESuperTypes().add(this.getSentenceItem());
-    versMarkerEClass.getESuperTypes().add(this.getAbstractMarker());
-    disputableVersMarkerEClass.getESuperTypes().add(this.getVersMarker());
-    deletedVersMarkerEClass.getESuperTypes().add(this.getVersMarker());
-    destroyedVersMarkerEClass.getESuperTypes().add(this.getVersMarker());
-    missingVersMarkerEClass.getESuperTypes().add(this.getVersMarker());
-    restorationOverRasurMarkerEClass.getESuperTypes().add(this.getVersMarker());
-    ancientExpandedMarkerEClass.getESuperTypes().add(this.getVersMarker());
-    ancientExpandedMarkerEClass.getESuperTypes().add(this.getRasurMarker());
-    rasurMarkerEClass.getESuperTypes().add(this.getVersMarker());
-    versFrontierMarkerEClass.getESuperTypes().add(this.getVersMarker());
-    versbreakMarkerEClass.getESuperTypes().add(this.getVersMarker());
-    brokenVersbreakMarkerEClass.getESuperTypes().add(this.getVersMarker());
     markerEClass.getESuperTypes().add(this.getAbstractMarker());
     destructionMarkerEClass.getESuperTypes().add(this.getAbstractMarker());
     wordEClass.getESuperTypes().add(this.getSentenceItem());
@@ -1620,6 +1668,10 @@ public class EgyDslPackageImpl extends EPackageImpl implements EgyDslPackage
     expandedEClass.getESuperTypes().add(this.getNoAncientExpanded());
     expandedEClass.getESuperTypes().add(this.getNoRestorationOverRasur());
     expandedEClass.getESuperTypes().add(this.getNoPartialDestruction());
+    ancientExpandedEClass.getESuperTypes().add(this.getBrackets());
+    ancientExpandedEClass.getESuperTypes().add(this.getNoCartouche());
+    ancientExpandedEClass.getESuperTypes().add(this.getNoDisputableReading());
+    ancientExpandedEClass.getESuperTypes().add(this.getNoDeletion());
     emendationEClass.getESuperTypes().add(this.getBrackets());
     emendationEClass.getESuperTypes().add(this.getNoCartouche());
     emendationEClass.getESuperTypes().add(this.getNoDisputableReading());
@@ -1628,6 +1680,7 @@ public class EgyDslPackageImpl extends EPackageImpl implements EgyDslPackage
     emendationEClass.getESuperTypes().add(this.getNoRasur());
     emendationEClass.getESuperTypes().add(this.getNoAncientExpanded());
     emendationEClass.getESuperTypes().add(this.getNoRestorationOverRasur());
+    emendationEClass.getESuperTypes().add(this.getNoPartialDestruction());
     disputableReadingEClass.getESuperTypes().add(this.getBrackets());
     disputableReadingEClass.getESuperTypes().add(this.getNoCartouche());
     disputableReadingEClass.getESuperTypes().add(this.getNoExpanded());
@@ -1662,10 +1715,6 @@ public class EgyDslPackageImpl extends EPackageImpl implements EgyDslPackage
     rasurEClass.getESuperTypes().add(this.getBrackets());
     rasurEClass.getESuperTypes().add(this.getNoCartouche());
     rasurEClass.getESuperTypes().add(this.getNoDisputableReading());
-    ancientExpandedEClass.getESuperTypes().add(this.getBrackets());
-    ancientExpandedEClass.getESuperTypes().add(this.getNoCartouche());
-    ancientExpandedEClass.getESuperTypes().add(this.getNoDisputableReading());
-    ancientExpandedEClass.getESuperTypes().add(this.getNoDeletion());
     restorationOverRasurEClass.getESuperTypes().add(this.getBrackets());
     restorationOverRasurEClass.getESuperTypes().add(this.getNoCartouche());
     restorationOverRasurEClass.getESuperTypes().add(this.getNoDisputableReading());
@@ -1698,6 +1747,21 @@ public class EgyDslPackageImpl extends EPackageImpl implements EgyDslPackage
     interfixConnectionSyllabicGroupEClass.getESuperTypes().add(this.getInterfix());
     interfixCompoundWordsEClass.getESuperTypes().add(this.getInterfix());
     interfixPhoneticalComplementEClass.getESuperTypes().add(this.getInterfix());
+    versMarkerEClass.getESuperTypes().add(this.getAbstractMarker());
+    emendationVersMarkerEClass.getESuperTypes().add(this.getVersMarker());
+    disputableVersMarkerEClass.getESuperTypes().add(this.getVersMarker());
+    deletedVersMarkerEClass.getESuperTypes().add(this.getVersMarker());
+    destroyedVersMarkerEClass.getESuperTypes().add(this.getVersMarker());
+    destroyedVersFrontierMarkerEClass.getESuperTypes().add(this.getVersMarker());
+    partialDestroyedVersMarkerEClass.getESuperTypes().add(this.getVersMarker());
+    missingVersMarkerEClass.getESuperTypes().add(this.getVersMarker());
+    restorationOverRasurMarkerEClass.getESuperTypes().add(this.getVersMarker());
+    ancientExpandedMarkerEClass.getESuperTypes().add(this.getVersMarker());
+    ancientExpandedMarkerEClass.getESuperTypes().add(this.getRasurMarker());
+    rasurMarkerEClass.getESuperTypes().add(this.getVersMarker());
+    versFrontierMarkerEClass.getESuperTypes().add(this.getVersMarker());
+    versbreakMarkerEClass.getESuperTypes().add(this.getVersMarker());
+    brokenVersbreakMarkerEClass.getESuperTypes().add(this.getVersMarker());
 
     // Initialize classes and features; add operations and parameters
     initEClass(textContentEClass, TextContent.class, "TextContent", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1720,28 +1784,6 @@ public class EgyDslPackageImpl extends EPackageImpl implements EgyDslPackage
     initEReference(getCase_Items(), this.getSentenceItemNoAmbivalence(), null, "items", null, 0, -1, Case.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(sentenceItemNoAmbivalenceEClass, SentenceItemNoAmbivalence.class, "SentenceItemNoAmbivalence", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-    initEClass(versMarkerEClass, VersMarker.class, "VersMarker", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-    initEClass(disputableVersMarkerEClass, DisputableVersMarker.class, "DisputableVersMarker", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-    initEClass(deletedVersMarkerEClass, DeletedVersMarker.class, "DeletedVersMarker", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-    initEClass(destroyedVersMarkerEClass, DestroyedVersMarker.class, "DestroyedVersMarker", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-    initEClass(missingVersMarkerEClass, MissingVersMarker.class, "MissingVersMarker", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-    initEClass(restorationOverRasurMarkerEClass, RestorationOverRasurMarker.class, "RestorationOverRasurMarker", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-    initEClass(ancientExpandedMarkerEClass, AncientExpandedMarker.class, "AncientExpandedMarker", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-    initEClass(rasurMarkerEClass, RasurMarker.class, "RasurMarker", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-    initEClass(versFrontierMarkerEClass, VersFrontierMarker.class, "VersFrontierMarker", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-    initEClass(versbreakMarkerEClass, VersbreakMarker.class, "VersbreakMarker", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-    initEClass(brokenVersbreakMarkerEClass, BrokenVersbreakMarker.class, "BrokenVersbreakMarker", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(markerEClass, Marker.class, "Marker", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getMarker_Type(), ecorePackage.getEString(), "type", null, 0, 1, Marker.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1775,6 +1817,9 @@ public class EgyDslPackageImpl extends EPackageImpl implements EgyDslPackage
     initEClass(expandedEClass, Expanded.class, "Expanded", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getExpanded_WChar(), ecorePackage.getEObject(), null, "wChar", null, 0, -1, Expanded.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+    initEClass(ancientExpandedEClass, AncientExpanded.class, "AncientExpanded", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getAncientExpanded_WChar(), this.getNoAncientExpanded(), null, "wChar", null, 0, -1, AncientExpanded.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
     initEClass(noExpandedEClass, NoExpanded.class, "NoExpanded", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(emendationEClass, Emendation.class, "Emendation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1807,9 +1852,6 @@ public class EgyDslPackageImpl extends EPackageImpl implements EgyDslPackage
 
     initEClass(noRasurEClass, NoRasur.class, "NoRasur", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-    initEClass(ancientExpandedEClass, AncientExpanded.class, "AncientExpanded", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getAncientExpanded_WChar(), this.getNoAncientExpanded(), null, "wChar", null, 0, -1, AncientExpanded.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
     initEClass(noAncientExpandedEClass, NoAncientExpanded.class, "NoAncientExpanded", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(restorationOverRasurEClass, RestorationOverRasur.class, "RestorationOverRasur", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1839,6 +1881,34 @@ public class EgyDslPackageImpl extends EPackageImpl implements EgyDslPackage
     initEClass(interfixCompoundWordsEClass, InterfixCompoundWords.class, "InterfixCompoundWords", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(interfixPhoneticalComplementEClass, InterfixPhoneticalComplement.class, "InterfixPhoneticalComplement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(versMarkerEClass, VersMarker.class, "VersMarker", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(emendationVersMarkerEClass, EmendationVersMarker.class, "EmendationVersMarker", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(disputableVersMarkerEClass, DisputableVersMarker.class, "DisputableVersMarker", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(deletedVersMarkerEClass, DeletedVersMarker.class, "DeletedVersMarker", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(destroyedVersMarkerEClass, DestroyedVersMarker.class, "DestroyedVersMarker", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(destroyedVersFrontierMarkerEClass, DestroyedVersFrontierMarker.class, "DestroyedVersFrontierMarker", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(partialDestroyedVersMarkerEClass, PartialDestroyedVersMarker.class, "PartialDestroyedVersMarker", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(missingVersMarkerEClass, MissingVersMarker.class, "MissingVersMarker", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(restorationOverRasurMarkerEClass, RestorationOverRasurMarker.class, "RestorationOverRasurMarker", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(ancientExpandedMarkerEClass, AncientExpandedMarker.class, "AncientExpandedMarker", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(rasurMarkerEClass, RasurMarker.class, "RasurMarker", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(versFrontierMarkerEClass, VersFrontierMarker.class, "VersFrontierMarker", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(versbreakMarkerEClass, VersbreakMarker.class, "VersbreakMarker", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(brokenVersbreakMarkerEClass, BrokenVersbreakMarker.class, "BrokenVersbreakMarker", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     // Create resource
     createResource(eNS_URI);

@@ -13,10 +13,10 @@ import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.core.commons.BTSCoreConstants;
 import org.bbaw.bts.core.commons.BTSObjectSearchService;
 import org.bbaw.bts.core.commons.BTSObjectSearchServiceFactory;
+import org.bbaw.bts.core.dao.util.BTSQueryRequest;
 import org.bbaw.bts.core.services.GeneralBTSObjectService;
 import org.bbaw.bts.core.services.GenericObjectService;
 import org.bbaw.bts.modelUtils.EmfModelHelper;
-import org.bbaw.bts.searchModel.BTSQueryRequest;
 import org.bbaw.bts.tempmodel.DBRevision;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
@@ -61,7 +61,7 @@ public class GeneralBTSObjectServiceImpl implements GeneralBTSObjectService {
 			{
 				GenericObjectService<?, ?> ser = (GenericObjectService<?, ?>) service;
 				Object obj = ser.query(query, objectState, monitor);
-				if (obj instanceof BTSObject)
+				if (obj instanceof List && !((List)obj).isEmpty() && ((List)obj).get(0) instanceof BTSObject)
 				{
 					return (List<BTSObject>) obj;
 				}

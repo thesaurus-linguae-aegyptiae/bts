@@ -6,6 +6,7 @@ import org.bbaw.bts.btsmodel.BTSInterTextReference;
 import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.btsmodel.BTSRelation;
 import org.bbaw.bts.btsmodel.BtsmodelFactory;
+import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.core.corpus.controller.partController.BTSTextEditorController;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSText;
@@ -30,7 +31,7 @@ public class AddGlosseHandler {
 			{
 				final BTSText object = textController
 						.createNewText((BTSCorpusObject) dbbaseObject);
-				object.setType("Subtext");
+				object.setType(BTSConstants.ANNOTATION_SUBTEXT);
 				BTSRelation rel = null;
 				if (object.getRelations().isEmpty())
 				{

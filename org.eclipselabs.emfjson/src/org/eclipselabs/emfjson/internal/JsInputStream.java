@@ -48,7 +48,7 @@ public abstract class JsInputStream extends InputStream implements URIConverter.
 			e.printStackTrace();
 		}
 		
-		final JSONLoad loader = new JSONLoad(url, options);
+		final JSONLoad loader = new JSONLoad(url, options, resource.getResourceSet());
 		final Collection<EObject> roots = loader.fillResource(resource);
 		
 		resource.getContents().addAll(roots);

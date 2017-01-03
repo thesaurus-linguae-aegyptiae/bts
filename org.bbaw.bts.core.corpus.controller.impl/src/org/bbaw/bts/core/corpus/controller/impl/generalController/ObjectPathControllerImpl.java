@@ -10,13 +10,13 @@ import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.btsmodel.BTSRelation;
 import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.core.corpus.controller.generalController.ObjectPathController;
+import org.bbaw.bts.core.dao.util.BTSQueryRequest;
 import org.bbaw.bts.core.services.GenericObjectService;
 import org.bbaw.bts.core.services.corpus.BTSLemmaEntryService;
 import org.bbaw.bts.core.services.corpus.BTSTextCorpusService;
 import org.bbaw.bts.core.services.corpus.BTSThsEntryService;
 import org.bbaw.bts.core.services.corpus.CorpusObjectService;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
-import org.bbaw.bts.searchModel.BTSQueryRequest;
 import org.elasticsearch.index.query.QueryBuilders;
 
 
@@ -50,7 +50,7 @@ public class ObjectPathControllerImpl implements ObjectPathController {
 		
 		
 		// add last
-		for (int i = 0; i < objects.length; i++)
+		for (int i = 0; i < objects.length && i <= 12; i++)
 		{
 			fullPath.add(objects[i]);
 		}
@@ -60,6 +60,7 @@ public class ObjectPathControllerImpl implements ObjectPathController {
 	private List<BTSObject> findFullSingleParentPath(BTSObject object, GenericObjectService service) {
 		List<BTSObject> fullPath = new Vector<BTSObject>();
 		List<BTSObject> parents = null; //= findParents(object);
+		int counter = 0;
 		do
 		{
 			parents = findParents(object, service);
@@ -68,6 +69,8 @@ public class ObjectPathControllerImpl implements ObjectPathController {
 				object = parents.get(0);
 				fullPath.add(0, object);
 			}
+			counter++;
+			if (counter > 12) break;
 		}
 		while(parents != null && !parents.isEmpty() && object != null);
 		
@@ -76,7 +79,7 @@ public class ObjectPathControllerImpl implements ObjectPathController {
 
 	private List<BTSObject> findParents(BTSObject object, GenericObjectService service) {
 		List<BTSObject> parents = new Vector<BTSObject>();
-		for (BTSRelation rel : object.getRelations())
+		for (BTSRelation rel : object.getRelations().subList(0,	Math.min(object.getRelations().size(), 12)))
 		{
 			if ("partOf".equals(rel.getType()))
 			{
@@ -116,9 +119,9 @@ public class ObjectPathControllerImpl implements ObjectPathController {
 		query.setResponseFields(BTSConstants.SEARCH_BASIC_RESPONSE_FIELDS);
 		
 		query.setQueryId("relations.objectId-" + objectId);
-		List<BTSCorpusObject> rawParents = service.query(query, BTSConstants.OBJECT_STATE_ACTIVE, null);
+		List<BTSCorpusObject> rawParents = service.query(query, BTSConstants.OBJECT_STATE_ACTIVE, false, null);
 		List<BTSObject> parents = new Vector<BTSObject>();
-		for (BTSCorpusObject o : rawParents)
+		for (BTSCorpusObject o : rawParents.subList(0,	Math.min(rawParents.size(), 12)))
 		{
 			for (BTSRelation rel : o.getRelations())
 			{

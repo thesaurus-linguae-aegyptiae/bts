@@ -28,27 +28,29 @@ public class RelatedObjectGroupAnnotation extends RelatedObjectGroup {
 	protected void addButtons(Composite composite) {
 		Label editButton = new Label(composite, SWT.PUSH);
 		editButton.setImage(resourceProvider.getImage(Display.getCurrent(), BTSResourceProvider.IMG_EDIT));
-		editButton.setToolTipText("Edit Annotation");
+		if (mayEdit())
+		{
+			editButton.setToolTipText("Edit Annotation");
+		}
+		else
+		{
+			editButton.setToolTipText("Open Annotation");
+		}
 		editButton.setLayoutData(new RowData());
 		editButton.addMouseListener(new MouseAdapter() {
 
 			@Override
 			public void mouseDown(MouseEvent e) {
-				if (mayEdit())
-				{
-					Label l = (Label) e.getSource();
-					l.setBackground(BTSUIConstants.VIEW_BACKGROUND_LABEL_PRESSED);
-				}
+				
+				Label l = (Label) e.getSource();
+				l.setBackground(BTSUIConstants.VIEW_BACKGROUND_LABEL_PRESSED);
 			}
 
 			@Override
 			public void mouseUp(MouseEvent e) {
-				if (mayEdit())
-				{
-					Label l = (Label) e.getSource();
-					l.setBackground(l.getParent().getBackground());
-					editObject();
-				}
+				Label l = (Label) e.getSource();
+				l.setBackground(l.getParent().getBackground());
+				editObject();
 			}
 		});
 
@@ -61,16 +63,17 @@ public class RelatedObjectGroupAnnotation extends RelatedObjectGroup {
 		
 		PassportEditorDialog dialog = ContextInjectionFactory.make(
 				PassportEditorDialog.class, child);
+		dialog.setEditable(mayEdit());
 
-		if (dialog.open() == dialog.OK) {
-			refreschContent((BTSObject) getObject());
-		}
+		if (dialog.open() == SWT.OK)
+			refreshContent((BTSObject) getObject());
+
+		child.dispose();
 		
 	}
 
-	private void refreschContent(BTSObject object) {
+	private void refreshContent(BTSObject object) {
 		setExpandItemTitle(object.getName());
-		
 	}
 
 	@Override
@@ -78,7 +81,7 @@ public class RelatedObjectGroupAnnotation extends RelatedObjectGroup {
 		
 		setExpandBarIcon(resourceProvider.getImage(Display.getCurrent(), BTSResourceProvider.IMG_ANNOTATION));
 		setExpandBarBackground(BTSUIConstants.COLOR_WIHTE);
-		refreschContent((BTSObject) getObject());
+		refreshContent((BTSObject) getObject());
 	}
 
 }

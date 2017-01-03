@@ -30,27 +30,28 @@ public class RelatedObjectGroupRubrum extends RelatedObjectGroup {
 	protected void addButtons(Composite composite) {
 		Label editButton = new Label(composite, SWT.PUSH);
 		editButton.setImage(resourceProvider.getImage(Display.getCurrent(), BTSResourceProvider.IMG_EDIT));
-		editButton.setToolTipText("Edit Annotation");
+		if (mayEdit())
+		{
+			editButton.setToolTipText("Edit Rubrum");
+		}
+		else
+		{
+			editButton.setToolTipText("Open Rubrum");
+		}
 		editButton.setLayoutData(new RowData());
 		editButton.addMouseListener(new MouseAdapter() {
 
 			@Override
 			public void mouseDown(MouseEvent e) {
-				if (mayEdit())
-				{
-					Label l = (Label) e.getSource();
-					l.setBackground(BTSUIConstants.VIEW_BACKGROUND_LABEL_PRESSED);
-				}
+				Label l = (Label) e.getSource();
+				l.setBackground(BTSUIConstants.VIEW_BACKGROUND_LABEL_PRESSED);
 			}
 
 			@Override
 			public void mouseUp(MouseEvent e) {
-				if (mayEdit())
-				{
-					Label l = (Label) e.getSource();
-					l.setBackground(l.getParent().getBackground());
-					editObject();
-				}
+				Label l = (Label) e.getSource();
+				l.setBackground(l.getParent().getBackground());
+				editObject();
 			}
 		});
 		
@@ -63,6 +64,7 @@ public class RelatedObjectGroupRubrum extends RelatedObjectGroup {
 		
 		PassportEditorDialog dialog = ContextInjectionFactory.make(
 				PassportEditorDialog.class, child);
+		dialog.setEditable(mayEdit());
 
 		if (dialog.open() == dialog.OK) {
 			refreschContent((BTSObject) getObject());

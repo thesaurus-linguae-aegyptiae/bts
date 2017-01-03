@@ -138,7 +138,8 @@ Map<String, List<String>> ownerTypesMap, boolean includingReferencedObjectTypes)
 	boolean objectTypesPathsContainsObjectype(
 			Map<String, List<String>> ownerTypesMap,
 			BTSObject object);
-	
+
+	@Deprecated 
 	Set<String> getReferenceTypesSet(BTSObject object,
 			BTSConfigItem relationConfig);
 
@@ -170,6 +171,11 @@ Map<String, List<String>> ownerTypesMap, boolean includingReferencedObjectTypes)
 	BTSConfiguration createNew(BTSConfiguration originalconfiguration);
 
 	String getLabelOfTypeSubtypeString(BTSObject object, boolean prefereAbbreviation);
+
+	/**
+	 * @param btsConfiguration
+	 */
+	void remove(BTSConfiguration btsConfiguration);
 
 
 }

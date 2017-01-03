@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugin>
 	<extension id="id" point="org.eclipse.e4.workbench.model">
-		<fragment uri="fragment.e4xmi"></fragment>
+		<fragment
+        apply="always"
+        uri="fragment.e4xmi"></fragment>
 	</extension>
  <extension
        point="com.opcoach.e4.preferences.e4PreferencePages">
@@ -41,11 +43,5 @@
     <initializer
           class="org.bbaw.bts.ui.main.preferences.DefaultValuesInitializer">
     </initializer>
- </extension>
- <extension
-       point="org.bbaw.bts.ui.commons.compareViewerFactory">
-    <compareViewerFactory
-          class="org.bbaw.bts.ui.main.compare.CompareViewerFactoryGeneralImpl">
-    </compareViewerFactory>
  </extension>
 </plugin>

@@ -1,16 +1,13 @@
 package org.bbaw.bts.core.corpus.controller.impl.partController;
 
 import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.Vector;
 
 import javax.inject.Inject;
 
-import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.btsmodel.BTSRelation;
 import org.bbaw.bts.btsviewmodel.BtsviewmodelFactory;
 import org.bbaw.bts.btsviewmodel.TreeNodeWrapper;
@@ -19,20 +16,15 @@ import org.bbaw.bts.core.commons.BTSCoreConstants;
 import org.bbaw.bts.core.commons.filter.BTSFilter;
 import org.bbaw.bts.core.corpus.controller.impl.util.BTSEgyObjectByNameComparator;
 import org.bbaw.bts.core.corpus.controller.partController.LemmaNavigatorController;
-import org.bbaw.bts.core.services.corpus.BTSAnnotationService;
+import org.bbaw.bts.core.dao.util.BTSQueryRequest;
 import org.bbaw.bts.core.services.corpus.BTSLemmaEntryService;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSAnnotation;
-import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSLemmaEntry;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSLemmaSubentry;
-import org.bbaw.bts.corpus.btsCorpusModel.BTSText;
-import org.bbaw.bts.searchModel.BTSQueryRequest;
 import org.bbaw.bts.searchModel.BTSQueryResultAbstract;
-import org.bbaw.bts.tempmodel.CacheTreeNode;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.jface.viewers.ContentViewer;
-import org.eclipse.jface.viewers.TreeViewer;
 import org.elasticsearch.index.query.QueryBuilders;
 
 public class LemmaNavigatorControllerImpl extends AbstractCorpusObjectNavigatorControllerImpl<BTSLemmaEntry, String> 
@@ -48,6 +40,7 @@ implements LemmaNavigatorController{
 
 	@Override
 	protected List<BTSLemmaEntry> executeTypedQuery(BTSQueryRequest query, String objectState, IProgressMonitor monitor) {
+		query.setResponseFields(null);
 		return lemmaService.query(query, objectState, monitor);
 	}
 
@@ -91,147 +84,65 @@ implements LemmaNavigatorController{
 		return new String[]{"partOf"};
 	}
 
+
+	
 	@Override
-	public BTSAnnotation createNewAnnotation(BTSCorpusObject annotatedObject) {
-		BTSAnnotation anno = lemmaService
-				.createNewAnnotationRelationPartOf(annotatedObject);
-		
-		return anno;
-	}
+	public LinkedHashMap<String, TreeNodeWrapper> loadNodesWithChildren(
+			List<BTSLemmaEntry> subList, IProgressMonitor monitor, boolean b) {
+		LinkedHashMap<String, TreeNodeWrapper> nodeReg = new LinkedHashMap<String, TreeNodeWrapper>();
+		if (monitor != null)
+			monitor.beginTask("Load nodes", subList.size());
 
-	@Override
-	public List<TreeNodeWrapper> loadNodesWithChildren(
-			List<BTSLemmaEntry> obs, IProgressMonitor monitor, boolean b) {
-		List<TreeNodeWrapper> nodes;
-		
-		// kinder finden
-		
-		// eltern finden
-		Map<String, CacheTreeNode> roots = new HashMap<String, CacheTreeNode>();
-		// all nodes
-		Map<String, CacheTreeNode> allNodes = new HashMap<String, CacheTreeNode>();
-		// nodes that await a holder, key = id of holder
-		Map<String, List<CacheTreeNode>> awaitingHolder = new HashMap<String, List<CacheTreeNode>>();
-		// nodes that provide hold to children, key = id of child
-		Map<String, List<CacheTreeNode>> providingHold = new HashMap<String, List<CacheTreeNode>>();
-		// iterate over all entries
-		for (BTSLemmaEntry e : obs)
-		{
-			CacheTreeNode tn = new CacheTreeNode(e.get_id(), e);
-			allNodes.put(tn.getId(), tn);
-			boolean held = false;
-			List<CacheTreeNode> localHolders = providingHold.get(tn.getId());
-			if (localHolders != null)
-			{
-				for (CacheTreeNode holder : localHolders)
-				{
-					holder.getChildren().add(tn);
-					held = true;
-				}
-			}
-			List<CacheTreeNode> localAwaiting = awaitingHolder.get(tn.getId());
-			if (localAwaiting != null)
-			{
-				for (CacheTreeNode awaiting : localAwaiting)
-				{
-					tn.getChildren().add(awaiting);
-					roots.remove(awaiting.getId());
-				}
-			}
-			for (BTSRelation rel : e.getRelations())
-			{
-				if (BTSCoreConstants.BASIC_RELATIONS_PARTOF.equals(rel.getType()))
-				{
-					CacheTreeNode holder = allNodes.get(rel.getObjectId());
-					if (holder != null)
-					{
-						holder.getChildren().add(tn);
-						held = true;
-					}
-					else
-					{
-						addToMap(tn, rel.getObjectId(), awaitingHolder);
-					}
-				}
-				else if (BTSCoreConstants.BASIC_RELATIONS_CONTAINS.equals(rel.getType()))
-				{
-					CacheTreeNode contained = allNodes.get(rel.getObjectId());
-					if (contained != null)
-					{
-						tn.getChildren().add(contained);
-						roots.remove(contained.getId());
-					}
-					else
-					{
-						addToMap(tn, rel.getObjectId(), providingHold);
-					}
-				}
-			}
-			if (!held)
-			{
-				roots.put(tn.getId(), tn);
-			}
-			if (monitor != null)
-			{
-				monitor.worked(1);
-				if (monitor.isCanceled()) break;
-			}
-		}
-		List<TreeNodeWrapper> rootsNodes = new Vector<TreeNodeWrapper>();
-		for (CacheTreeNode cachedtn : roots.values())
-		{
-			BTSLemmaEntry e = (BTSLemmaEntry) cachedtn.getObject();
-			TreeNodeWrapper tn = BtsviewmodelFactory.eINSTANCE
+		// initialize nodes registry with lemma wrappers
+		for (BTSLemmaEntry lemma : subList) {
+			TreeNodeWrapper node = BtsviewmodelFactory.eINSTANCE
 					.createTreeNodeWrapper();
-			tn.setObject(e);
-			rootsNodes.add(tn);
-			Set<BTSLemmaEntry> addedChildren = new HashSet<BTSLemmaEntry>();
-			for (CacheTreeNode cachedChild : cachedtn.getChildren())
-			{
-				
-				BTSLemmaEntry child = (BTSLemmaEntry) cachedChild.getObject();
-				if (!addedChildren.contains(child))
-				{
-					TreeNodeWrapper childtn = BtsviewmodelFactory.eINSTANCE
-							.createTreeNodeWrapper();
-					childtn.setObject(child);
-					tn.getChildren().add(childtn);
-					addedChildren.add(child);
-				}
-			}
+			node.setObject(lemma);
+			nodeReg.put(lemma.get_id(), node);
 		}
-		
-		// kinder von allen abziehen = wurzeln
-		
-		// kindern ihren eltern anhängen
-		
-		// zusätzliche kinder suchen und anhängen, wenn nicht schon vorhanden
 
-		nodes = new Vector<TreeNodeWrapper>(obs.size());
-		for (BTSObject o : obs) {
-			TreeNodeWrapper tn = BtsviewmodelFactory.eINSTANCE
-					.createTreeNodeWrapper();
-			tn.setObject(o);
-			nodes.add(tn);
+		// nest wrappers according to subList interrelations
+		for (BTSLemmaEntry lemma : subList) {
+			TreeNodeWrapper node = nodeReg.get(lemma.get_id());
+			for (BTSRelation rel : lemma.getRelations())
+				if (BTSCoreConstants.BASIC_RELATIONS_CONTAINS.equals(rel.getType())
+						|| "successor".equals(rel.getType())) {
+					if (nodeReg.containsKey(rel.getObjectId())) {
+						TreeNodeWrapper childNode = nodeReg.get(rel.getObjectId());
+						if (!node.getChildren().contains(childNode) && !ancestry(node, childNode)) {
+							node.getChildren().add(childNode);
+							childNode.setParent(node);
+						}
+					}
+				} else if (BTSCoreConstants.BASIC_RELATIONS_PARTOF.equals(rel.getType())
+						|| "predecessor".equals(rel.getType()))
+					if (nodeReg.containsKey(rel.getObjectId())) {
+						TreeNodeWrapper parentNode = nodeReg.get(rel.getObjectId());
+						if (!parentNode.getChildren().contains(node) && !ancestry(parentNode, node)) {
+							parentNode.getChildren().add(node);
+							node.setParent(parentNode);
+						}
+					}
 			if (monitor != null)
-			{
 				monitor.worked(1);
-			}
 		}
-		return rootsNodes;
-	}
 
-	private void addToMap(CacheTreeNode tn,
-			String key, Map<String, List<CacheTreeNode>> map) {
-		List<CacheTreeNode> list = map.get(key);
-		if (list == null)
-		{
-			list = new Vector<CacheTreeNode>(4);
-			map.put(key, list);
-		}
-		list.add(tn);
+		return nodeReg;
 	}
 	
+	/**
+	 * Checks if <code>test</code> is an ancestor of <code>node</code>.
+	 * @param node
+	 * @param test
+	 * @return
+	 */
+	private static boolean ancestry(TreeNodeWrapper node, TreeNodeWrapper test) {
+		for (;node != null; node = node.getParent())
+			if (node.equals(test))
+				return true;
+		return false;
+	}
+
 	@Override
 	public List<BTSLemmaEntry> findChildrenOnlySubEntries(BTSLemmaEntry parent, Map<String, BTSQueryResultAbstract> queryResultMap,
 			ContentViewer viewer, TreeNodeWrapper parentHolder,
@@ -266,5 +177,50 @@ implements LemmaNavigatorController{
 		return result;
 	}
 
+
+	// zur liste der Kinder auch die Elemente hinzufügen, die sich aus den Relationen des Objekts selber ergeben,
+	// über Relationen iterieren und entsp. Objekte finden
+	@Override
+	public List<BTSLemmaEntry> findChildren(BTSLemmaEntry parent,
+			Map<String, BTSQueryResultAbstract> queryResultMap,
+			ContentViewer viewer, TreeNodeWrapper parentHolder,
+			EReference referenceName, IProgressMonitor monitor) {
+		// TODO Auto-generated method stub
+		List<BTSLemmaEntry> children = super.findChildren(parent, queryResultMap, viewer, parentHolder,
+				referenceName, monitor);
+		
+		if (children == null)
+		{
+			children = new Vector<BTSLemmaEntry>();
+		}
+		for (BTSRelation rel : parent.getRelations())
+		{
+			Object o = null;
+			try {
+				try {
+					o = lemmaService.find(rel.getObjectId(), null);
+				} catch (Exception e) {
+				}
+				if (o instanceof BTSLemmaEntry && !children.contains(o))
+				{
+					children.add((BTSLemmaEntry) o);
+				}
+			} catch (Exception e) {
+			}
+		}
+		return children;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.bbaw.bts.core.corpus.controller.partController.GenericCorpusObjectNavigatorController#createNewAnnotation(org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject)
+	 */
+	@Override
+	public BTSAnnotation createNewAnnotation(BTSLemmaEntry selection, String annotationTypePath) {
+		BTSAnnotation anno = lemmaService
+				.createNewAnnotationRelationPartOf(selection);
+		setObjectTypePath(anno, annotationTypePath);
+
+		return anno;
+	}
 
 }

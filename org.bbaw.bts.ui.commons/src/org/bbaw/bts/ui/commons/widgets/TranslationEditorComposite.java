@@ -31,7 +31,6 @@ package org.bbaw.bts.ui.commons.widgets;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Vector;
 
 import org.bbaw.bts.btsmodel.BTSTranslation;
 import org.bbaw.bts.btsmodel.BTSTranslations;
@@ -45,7 +44,6 @@ import org.bbaw.bts.ui.commons.validator.StringNotEmptyValidator;
 import org.bbaw.bts.ui.resources.BTSResourceProvider;
 import org.eclipse.core.databinding.Binding;
 import org.eclipse.core.databinding.DataBindingContext;
-import org.eclipse.core.runtime.Assert;
 import org.eclipse.emf.databinding.EMFUpdateValueStrategy;
 import org.eclipse.emf.databinding.edit.EMFEditProperties;
 import org.eclipse.emf.edit.command.SetCommand;
@@ -61,9 +59,7 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
-import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Label;
-import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Text;
 
 /**
@@ -97,8 +93,8 @@ public class TranslationEditorComposite extends Composite {
 	/** The binding context. */
 	private DataBindingContext bindingContext;
 
-	/** The lang. */
-	private String lang;
+	/** Whether to propagate changes via EMF databinding */
+	private boolean dataBind;
 
 	private List<SelectionListener> languageSelectionListeners = new ArrayList<SelectionListener>(2);
 
@@ -114,16 +110,10 @@ public class TranslationEditorComposite extends Composite {
 	 * @param required the required
 	 */
 	public TranslationEditorComposite(Composite parent, int style,
-			BTSTranslations translations, EditingDomain domain, boolean required) {
-		super(parent, SWT.NONE);
+			BTSTranslations translations, EditingDomain domain, boolean required, boolean dataBind) {
+		this(parent, style, required, dataBind);
 		this.translations = translations;
 		this.domain = domain;
-		this.required = required;
-		this.customStyle = style;
-		postConstruct();
-		if (translations != null) {
-			load(translations, domain, required);
-		}
 	}
 
 	/**
@@ -134,14 +124,22 @@ public class TranslationEditorComposite extends Composite {
 	 * @param required the required
 	 */
 	public TranslationEditorComposite(Composite parent, int style,
-			boolean required) {
+			boolean required, boolean dataBind) {
 		super(parent, SWT.NONE);
+		this.dataBind = dataBind;
 		this.required = required;
 		this.customStyle = style;
-		postConstruct();
-		if (translations != null) {
-			load(translations, domain, required);
-		}
+		createControls();
+	}
+
+	/**
+	 * Instantiates a new {@link TranslationEditorComposite} and activates databinding.
+	 * @param parent
+	 * @param style
+	 * @param required
+	 */
+	public TranslationEditorComposite(Composite parent, int style, boolean required) {
+		this(parent, style, required, true);
 	}
 	
 	/**
@@ -156,83 +154,37 @@ public class TranslationEditorComposite extends Composite {
 		this.translations = translations2;
 		this.domain = editingDomain;
 		this.required = required;
+		if (bindingContext == null) {
+			bindingContext = new DataBindingContext();
+		}
 		if (translations == null)
 		{
-			if (binding != null)
-			{
-				// if old translation exists, disconnect and dispose biding
-				binding.dispose();
-			}
 			text.setText("");
-			return;
-		}
-		
-		List ls = translations.getLanguages();
-		List<String> additionalInputs = new Vector<String>(ls.size());
-		for (Object o : ls) {
-			if (o instanceof String) {
-				boolean found = false;
-				for (String s : BTSCoreConstants.LANGS) {
-					if (s.equals(o)) {
-						found = true;
-						break;
-					}
-				}
-				if (!found) {
-					additionalInputs.add((String) o);
-				}
-			}
-		}
-		if (!additionalInputs.isEmpty()) {
-			for (String s : BTSCoreConstants.LANGS) {
-				if (!additionalInputs.contains(s)) {
-					additionalInputs.add(s);
-				}
-			}
-			combo.setItems(additionalInputs.toArray(new String[additionalInputs
-					.size()]));
-		}
-
-		if (lang != null) {
-			combo.select(combo.indexOf(lang));
-
-			loadTranslation(lang);
-			return;
-		}
-		if (translations.getBTSTranslation(BTSCoreConstants.LANG_EN) != null) {
-			combo.select(combo.indexOf(BTSCoreConstants.LANG_EN));
-			loadTranslation(BTSCoreConstants.LANG_EN);
-		} else if (translations.getBTSTranslation(BTSCoreConstants.LANG_DE) != null) {
-			combo.select(combo.indexOf(BTSCoreConstants.LANG_DE));
-
-			loadTranslation(BTSCoreConstants.LANG_DE);
-		} else if (translations.getBTSTranslation(BTSCoreConstants.LANG_FR) != null) {
-			combo.select(combo.indexOf(BTSCoreConstants.LANG_FR));
-
-			loadTranslation(BTSCoreConstants.LANG_FR);
-		} else if (translations.getBTSTranslation(BTSCoreConstants.LANG_ES) != null) {
-			combo.select(combo.indexOf(BTSCoreConstants.LANG_ES));
-
-			loadTranslation(BTSCoreConstants.LANG_ES);
-		} else if (translations.getBTSTranslation(BTSCoreConstants.LANG_RU) != null) {
-			combo.select(combo.indexOf(BTSCoreConstants.LANG_RU));
-
-			loadTranslation(BTSCoreConstants.LANG_RU);
-		} else {
 			combo.select(0);
-
-			loadTranslation(combo.getItem(0));
-		}
-		if (translations == null) {
 			return;
 		}
+		text.setText("");
+		combo.setText("");
+		
+		// load built-in languages
+		for (int i = 0; i < BTSCoreConstants.LANGS.length; i++) {
+			String l = BTSCoreConstants.LANGS[i];
+			String ltrans = translations.getTranslationStrict(l);
+			if (ltrans != null) {
+				combo.select(combo.indexOf(l));
+				loadTranslation(l);
+				return;
+			}
+		}
+		combo.select(0);
+		loadTranslation(combo.getItems()[0]);
 
 	}
 
 	/**
 	 * Post construct.
 	 */
-	private void postConstruct() {
+	private void createControls() {
 		setLayout(new GridLayout(3, false));
 		setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
 		((GridLayout) this.getLayout()).marginWidth = 0;
@@ -241,6 +193,7 @@ public class TranslationEditorComposite extends Composite {
 		this.setBackground(BTSUIConstants.VIEW_BACKGROUND_DESELECTED_COLOR);
 		text = new Text(this, customStyle);
 		text.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
+		text.setText("");
 		
 		Label l = new Label(this, SWT.NONE);
 		l.setToolTipText("Set Language of Translation");
@@ -267,6 +220,9 @@ public class TranslationEditorComposite extends Composite {
 			}
 		});
 
+		if (translations != null) {
+			load(translations, domain, required);
+		}
 	}
 
 	/**
@@ -276,7 +232,6 @@ public class TranslationEditorComposite extends Composite {
 	 */
 	private void loadTranslation(String lang) {
 		if(translations == null) return;
-		this.lang = lang;
 		BTSTranslation trans = translations.getBTSTranslation(lang);
 		if (trans == null) {
 			trans = BtsmodelFactory.eINSTANCE.createBTSTranslation();
@@ -286,29 +241,38 @@ public class TranslationEditorComposite extends Composite {
 			// BtsmodelPackage.BTS_TRANSLATIONS__TRANSLATIONS, trans);
 			// domain.getCommandStack().execute(command);
 		}
-		if (bindingContext != null) {
-			bindingContext.dispose();
+		if (dataBind) {
+			databindTranslation(trans);
+		} else {
+			text.setText((trans.getValue() != null) ? trans.getValue() : "");
 		}
-		bindingContext = new DataBindingContext();
+	}
 
+	private void databindTranslation(BTSTranslation trans) {
 		EMFUpdateValueStrategy us = null;
 		if (required) {
 			us = new EMFUpdateValueStrategy();
 			us.setBeforeSetValidator(new StringNotEmptyValidator());
 		}
-		binding = bindingContext.bindValue(
-				WidgetProperties.text(SWT.Modify).observeDelayed(
-						BTSUIConstants.DELAY, text),
-				EMFEditProperties.value(domain,
-						BtsmodelPackage.Literals.BTS_TRANSLATION__VALUE)
-						.observe(trans), us, null);
-
-		if (required) {
-			bindingContext.addValidationStatusProvider(binding);
-			BackgroundControlDecorationSupport.create(binding, SWT.TOP
-					| SWT.LEFT);
+		if (binding != null && !binding.isDisposed()) {
+			bindingContext.removeBinding(binding);
+			binding.dispose();
 		}
-
+		if (binding == null || binding.isDisposed()) {
+			binding = bindingContext.bindValue(
+					WidgetProperties.text(SWT.Modify).observeDelayed(
+							BTSUIConstants.DELAY, text),
+					EMFEditProperties.value(domain,
+							BtsmodelPackage.Literals.BTS_TRANSLATION__VALUE)
+							.observe(trans), us, null);
+	
+			if (required) {
+				bindingContext.addValidationStatusProvider(binding);
+				BackgroundControlDecorationSupport.create(binding, SWT.TOP
+						| SWT.LEFT);
+			}
+		}
+		
 	}
 	
 	@Override
@@ -331,7 +295,7 @@ public class TranslationEditorComposite extends Composite {
 			return;
 		}
 		BTSTranslation trans = translations.getBTSTranslation(combo.getItem(combo.getSelectionIndex()));
-		if ((trans.getValue() == null && !"".equals(text.getText()))
+		if ((trans.getValue() == null && !"".equals(text.getText().trim()))
 				|| !text.getText().equals(trans.getValue()))
 		{
 			org.eclipse.emf.common.command.Command command = SetCommand
@@ -342,12 +306,9 @@ public class TranslationEditorComposite extends Composite {
 	
 	public void setTranslationText(String text)
 	{
-		if (text != null)
-		{
-			this.text.setText(text);
-		}
+		this.text.setText(text != null ? text : "");
 	}
-	
+
 	public String getLanguage()
 	{
 		return combo.getText();
@@ -355,7 +316,7 @@ public class TranslationEditorComposite extends Composite {
 	
 	public void addLanguageSelectionListener(SelectionListener listener)
 	{
-		if (listener != null && !languageSelectionListeners .contains(listener))
+		if (listener != null && !languageSelectionListeners.contains(listener))
 		{
 			languageSelectionListeners.add(listener);
 		}
@@ -365,8 +326,8 @@ public class TranslationEditorComposite extends Composite {
 	public void setEnabled(boolean enabled) {
 		if (!combo.isDisposed())
 		{
-		combo.setEnabled(enabled);
-		text.setEnabled(enabled);
+			combo.setEnabled(enabled);
+			text.setEnabled(enabled);
 		}
 		super.setEnabled(enabled);
 	}

@@ -28,7 +28,7 @@
  */
 package org.bbaw.bts.ui.commons.search;
 
-import org.bbaw.bts.searchModel.BTSQueryRequest;
+import org.bbaw.bts.core.dao.util.BTSQueryRequest;
 
 /**
  * The Interface SearchViewer.
@@ -36,6 +36,9 @@ import org.bbaw.bts.searchModel.BTSQueryRequest;
  * @author Christoph Plutte
  */
 public interface SearchViewer {
+	
+	static final String OPT_NAME_ONLY = "search_option_name_only";
+	static final String OPT_ID_ONLY = "search_option_id_only";
 	
 	/**
 	 * Dispose.

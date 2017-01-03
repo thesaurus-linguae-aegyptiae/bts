@@ -1,33 +1,20 @@
 package org.bbaw.bts.commons;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.net.URL;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Properties;
 import java.util.UUID;
 
 import javax.xml.bind.DatatypeConverter;
 
 import org.apache.commons.codec.binary.Base64;
-import org.eclipse.core.runtime.FileLocator;
-import org.eclipse.core.runtime.IPath;
-import org.eclipse.core.runtime.Platform;
 
 public class BTSConstants
 {
 	private static final DecimalFormat timeFormat4 = new DecimalFormat("0000;0000");
 
-	private static Properties PROPERTIES;
-	private static String PROPERTIES_FILENAME = "btsConfig.properties";
-	public static final String BTS_HOME;
+	public static String PROPERTIES_FILENAME = "btsConfig.properties";
 
-	/** file separator. */
-	public static final String FS = System.getProperty("file.separator");
 
 	public static final String ENCODING = "UTF-8";
 	public static final String TEXT_VERS_BREAK_MARKER = "VersbreakMarker";
@@ -37,7 +24,59 @@ public class BTSConstants
 	public static final String DISPUTABLE_VERS_MARKER = "DisputableVersMarker";
 	public static final String DELETED_VERS_MARKER = "DeletedVersMarker";
 	public static final String MISSING_VERS_MARKER = "MissingVersMarker";
+	
+	public static final String DESTROYEDVERSMARKER   = "DestroyedVersMarker";
+	public static final String DELETEDVERSMARKER   = "DeletedVersMarker";
+	public static final String DISPUTABLEVERSMARKER  = "DisputableVersMarker";
+	public static final String  RESTORATIONOVERRASURMARKER  = "RestorationOverRasurMarker";
+	public static final String  ANCIENTEXPANDEDMARKER  = "AncientExpandedMarker";
+	public static final String  RASURMARKER  = "RasurMarker";
+	public static final String  EMENDATIONVERSMARKER  = "EmendationVersMarker";
+	public static final String  DESTROYEDVERSFRONTIERMARKER  = "DestroyedVersFrontierMarker";
+	public static final String  PARTIALDESTROYEDVERSMARKER  = "PartialDestroyedVersMarker";
+	public static final String  PARTIALDESTROYEDDISPUTABLEVERSMARKER = "PartialDestroyedDisputableVersMarker";
+	public static final String  DESTROYEDDISPUTABLEVERSFRONTIERMARKER  = "DestroyedDisputableVersFrontierMarker";
+	public static final String  DISPUTABLEDESTROYEDVERSMARKER  = "DisputableDestroyedVersMarker";
+	public static final String  DELETEDDISPUTABLEVERSMARKER = "DeletedDisputableVersMarker";
+	public static final String  MISSINGDISPUTABLEVERSMARKER  = "MissingDisputableVersMarker";
+	
+	public static final String  DISPUTABLEDELETEDVERSMARKER   = "DisputableDeletedVersMarker ";
+	public static final String  PARTIALDESTROYEDDELETEDVERSMARKER  = "PartialDestroyedDeletedVersMarker";
+	public static final String  DESTROYEDDELETEDVERSMARKER   = "DestroyedDeletedVersMarker";
+	public static final String  DELETEDDESTROYEDVERSMARKER  = "DeletedDestroyedVersMarker";
 
+
+	public static final String VERS_BREAK_MARKER_SIGN = "\uDB80\uDC80"; //v
+	public static final String VERS_FRONTER_MARKER_SIGN = "\uDB80\uDC81"; //mv
+
+	public static final String BROKEN_VERS_MARKER_SIGN = "\uDB80\uDC82";
+	public static final String DISPUTALBE_VERS_MARKER_SIGN = "\u2E2E\uDB80\uDC80?";
+	public static final String DELETED_VERS_MARKER_SIGN = "{\uDB80\uDC80}";
+	public static final String DESTROYED_VERS_MARKER_SIGN = "[\uDB80\uDC80]";
+	public static final String MISSING_VERS_MARKER_SIGN = "\u2329\uDB80\uDC80\u232A";
+	
+	public static final String DESTROYEDVERSMARKER_SIGN   = "[\uDB80\uDC80]";
+	public static final String DELETEDVERSMARKER_SIGN  = "{\uDB80\uDC80}";
+	public static final String DISPUTABLEVERSMARKER_SIGN  = "\u2E2E\uDB80\uDC80?";
+	public static final String  RESTORATIONOVERRASURMARKER_SIGN  = "[[\uDB80\uDC80]]";
+	public static final String  ANCIENTEXPANDEDMARKER_SIGN  = "((\uDB80\uDC80))";
+	public static final String  RASURMARKER_SIGN  = "{{\uDB80\uDC80}}";
+	public static final String  EMENDATIONVERSMARKER_SIGN  = "(\uDB80\uDC80)";
+	public static final String  DESTROYEDVERSFRONTIERMARKER_SIGN  = "[\uDB80\uDC81]";
+	public static final String  PARTIALDESTROYEDVERSMARKER_SIGN  = "\u2E22\uDB80\uDC80\u2E23";
+	public static final String  PARTIALDESTROYEDDISPUTABLEVERSMARKER_SIGN = "\u2E22\u2E2E\uDB80\uDC80?\u2E23";
+	public static final String  DESTROYEDDISPUTABLEVERSFRONTIERMARKER_SIGN  = "[\u2E2E\uDB80\uDC81?]";
+	public static final String  DISPUTABLEDESTROYEDVERSMARKER_SIGN  = "\u2E2E[\uDB80\uDC80]?";
+	public static final String  DELETEDDISPUTABLEVERSMARKER_SIGN = "{\u2E2E\uDB80\uDC80?}";
+	public static final String  MISSINGDISPUTABLEVERSMARKER_SIGN  = "\u2329\u2E2E\uDB80\uDC80?\u232A";
+	
+	public static final String  DISPUTABLEDELETEDVERSMARKER_SIGN   = "\u2E2E{\uDB80\uDC80}? ";
+	public static final String  PARTIALDESTROYEDDELETEDVERSMARKER_SIGN  = "\u2E22{\uDB80\uDC80}\u2E23";
+	public static final String  DESTROYEDDELETEDVERSMARKER_SIGN   = "[{\uDB80\uDC80}]";
+	public static final String  DELETEDDESTROYEDVERSMARKER_SIGN  = "{[\uDB80\uDC80]}";
+	
+	
+	
 	
 	public static final String OBJECT_STATE_ACTIVE = "active";
 	public static final String OBJECT_STATE_TERMINATED = "terminated";
@@ -50,7 +89,7 @@ public class BTSConstants
 	public static final String THS_ENTRY = "Thesaurus Entry";
 	public static final String ABSTRACT_TEXT = "Abstract Text";
 
-	private static final String COMMENT = "Comment";
+	public static final String COMMENT = "Comment";
 
 	public static final String[] BASIC_OBJECT_TYPES = new String[] { BTSConstants.ABSTRACT_TEXT,
 			BTSConstants.ANNOTATION, BTSConstants.CORPUS_OBJECT,
@@ -75,6 +114,7 @@ public class BTSConstants
 	public static final String OWNER_REFERENCED_TYPES_LIST_SEPERATOR = ",";
 	public static final String OWNER_REFERENCED_TYPES_ANY = "ANY";
 	public static final String ANNOTATION_RUBRUM = "Rubrum";
+	public static final String ANNOTATION_SUBTEXT = "Subtext";
 
 	/** The Constant VIEW_ALL_DOCS. */
 	public static final String VIEW_ALL_DOCS = "objects/all_docs";
@@ -146,7 +186,7 @@ public class BTSConstants
 														+ REVISION_STRING_SEPARATOR + "(.+)";
 
 	public static final String[] SEARCH_BASIC_RESPONSE_FIELDS_TRANSLATIONS = new String[]{"_id", "eClass", "type", "subtype",
-		"updaters", "readers", "name", "revisionState", "visibility", "sortKey", "translations"};
+		"updaters", "readers", "name", "revisionState", "visibility", "sortKey"};
 
 	public static final String OBJECT_TYPES_ARRAY = "object_types_array";
 
@@ -184,118 +224,6 @@ public class BTSConstants
 
 
 	
-	private BTSConstants()
-	{
-	}
-
-	/* Initialisierung */
-	static
-	{
-		IPath actLoc = BTSCommonsActivator.getDefault().getStateLocation();
-		IPath p = Platform.getLocation();
-
-		String home = BTSCommonsActivator.getBTSHome();
-		if (home != null)
-		{
-
-			BTS_HOME = home;
-
-		} else
-		{
-			BTS_HOME = getInstallationDir();
-//			{
-//				if (System.getProperty("os.name").toLowerCase().contains("mac"))
-//				{
-//					BTS_HOME = actLoc.removeLastSegments(7).toOSString();// + FS +
-//				} else
-//				{
-//					BTS_HOME = actLoc.removeLastSegments(4).toOSString();// + FS +
-//				}
-//			}
-		}
-		/** Properties laden. */
-		PROPERTIES = new Properties();
-		File file = new File(PROPERTIES_FILENAME);
-		// try {
-		// if (_i) _l.info("Lade: " + file.toURI().toString());
-
-		if (file.exists())
-		{
-			try
-			{
-				PROPERTIES.load(new FileInputStream(file));
-			} catch (FileNotFoundException e)
-			{
-				e.printStackTrace();
-			} catch (IOException e)
-			{
-				e.printStackTrace();
-			}
-		}
-	}
-
-	public static String getInstallationDir() {
-		URL entry = Platform.getBundle("org.bbaw.bts.commons").getEntry(
-				"/META-INF");
-		if (entry != null) {
-			String fileURL = null;
-			try {
-				fileURL = FileLocator.toFileURL(entry).getPath();
-				fileURL = fileURL.substring(1, fileURL.length());
-				File file = new File(fileURL);
-				File parent = file.getParentFile();
-				while (parent != null
-						&& !(parent.getName().equals("configuration") && !(parent
-								.getName().equals("workspace")))) {
-					parent = parent.getParentFile();
-					if (parent != null)
-					{
-						System.out.println("BTSConstants getInstallationDir: " +parent.getAbsolutePath());
-					}
-				}
-				if (parent == null) {
-					File dir = new File(System.getProperty("user.home")
-							+ BTSConstants.FS + "bts");
-					if (!dir.exists()) {
-						dir.mkdirs();
-					}
-					System.out.println("BTSConstants getInstallationDir return dir: " +dir.getAbsolutePath());
-					return dir.getAbsolutePath();
-				}
-				file = parent.getParentFile();
-				String path = file.getAbsolutePath();
-				System.out.println("BTSConstants getInstallationDir return path: " +path);
-				return path;
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-
-		}
-		String userEnvPath = System.getenv("user.home"); 
-		System.out.println("BTSConstants getInstallationDir return userEnvPath: " +userEnvPath);
-		return userEnvPath;
-	}
-
-	
-	/** Returns the Database Installation directory within the given btsInstallation directory. 
-	 * DBInstallationDir is the directory where the folder 'CouchDB' is located. 
-	 * Under an installation of CouchDB using e.g. msi-installer that would be the Programs/Apache Software...
-	 * In bts case it is the <btsInstallationDir>/dbdir
-	 * 
-	 * @param btsInsallationDir BTS Installation Directory
-	 * @return Database Installation Directory
-	 */
-	public static String getDBInstallationDir(String btsInsallationDir) {
-		if (btsInsallationDir == null)
-		{
-			btsInsallationDir = getInstallationDir();
-		}
-		String dbdir = btsInsallationDir + BTSConstants.FS + BTSConstants.DB_DIR;
-
-		return dbdir;
-	}
-
-
 	public static String getSidWithCalendar()
 	{
 		Calendar cal = Calendar.getInstance();

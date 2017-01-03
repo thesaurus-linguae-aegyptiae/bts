@@ -1,37 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.bbaw.bts</groupId>
 	<artifactId>aaew-bts</artifactId>
-	<version>1.0.7</version>
+	<version>3.1.0</version>
 	<packaging>pom</packaging>
+
 	<modules>
-		<!--<module>org.eclipse.xtext.ui</module>
-		<module>org.eclipse.xtext.util</module>
-		<module>org.eclipse.xtext.common.types.ui</module>
-		<module>org.eclipse.xtext.ecore</module>
-		<module>org.eclipse.xtext.codetemplates.ui</module>
-		<module>org.eclipse.xtext.util</module>
-		
-		<module>com.google.guava</module>
-		-->
-		
-		
-		
 		<module>org.bbaw.bts.app.feature</module>
 		<module>org.bbaw.bts.corpus.egy.feature</module>
-		<module>org.bbaw.bts.e4.p2.feature</module>
-
-
 		<module>com.opcoach.e4.preferences</module>
 		<module>org.bbaw.bts.app</module>
 		<module>org.bbaw.bts.app.login</module>
 		<module>org.bbaw.bts.commons</module>
+		<module>org.bbaw.bts.commons.fsaccess</module>
 		<module>org.bbaw.bts.commons.libs.elasticsearch</module>
 		<module>org.bbaw.bts.core.commons</module>
 		<module>org.bbaw.bts.core.commons.corpus</module>
-
+		<module>org.bbaw.bts.core.commons.corpus.help</module>
 		<module>org.bbaw.bts.core.controller</module>
 		<module>org.bbaw.bts.core.controller.impl</module>
 		<module>org.bbaw.bts.core.corpus.controller</module>
@@ -47,17 +33,9 @@
 		<module>org.bbaw.bts.core.services.corpus</module>
 		<module>org.bbaw.bts.core.services.corpus.impl</module>
 		<module>org.bbaw.bts.corpus.text.egy.egydsl</module>
-		<module>org.bbaw.bts.corpus.text.egy.egydsl.sdk</module>
 		<module>org.bbaw.bts.corpus.text.egy.egydsl.ui</module>
-		
 		<module>org.bbaw.bts.db</module>
 		<module>org.bbaw.bts.db.couchdb</module>
-		<!--
-		<module>org.bbaw.bts.db.couchdb.mac</module>
-		<module>org.bbaw.bts.db.couchdb.win32</module>
-		<module>org.bbaw.bts.db.couchdb.win64</module>
-		-->
-		<module>org.bbaw.bts.e4.p2</module>
 		<module>org.bbaw.bts.model</module>
 		<module>org.bbaw.bts.model.edit</module>
 		<module>org.bbaw.bts.model.editor</module>
@@ -66,7 +44,6 @@
 		<module>org.bbaw.bts.ui.commons</module>
 		<module>org.bbaw.bts.ui.corpus</module>
 		<module>org.bbaw.bts.ui.commons.corpus</module>
-
 		<module>org.bbaw.bts.ui.corpus.egy</module>
 		<module>org.bbaw.bts.ui.corpus.egy.commons</module>
 		<module>org.bbaw.bts.ui.font</module>
@@ -74,129 +51,64 @@
 		<module>org.bbaw.bts.ui.main</module>
 		<module>org.bbaw.bts.ui.resources</module>
 		<module>org.bbaw.bts.ui.resources.impl</module>
-
 		<module>org.eclipselabs.emfjson</module>
 		<module>org.eclipselabs.emfjson.feature</module>
 		<module>org.eclipselabs.emfjson.couchdb</module>
 		<module>org.eclipselabs.emfjson.couchdb.feature</module>
 		<module>org.eclipselabs.emfjson.couchdb.ui</module>
-		
 		<module>org.eclipse.e4.ui.workbench.perspectiveswitcher</module>
 		<module>org.ramo.klevis.p2.core.service</module>
-		<!--<module>org.lightcouch</module>
-		use the one form repo bts-mvn-p2all because of constant encoding problem
-		workaround: build with eclipse, export and put into repo
-		
-		<module>org.bbaw.bts.updatesite</module>
-		
-		--> 
-		
-		
 		<module>org.bbaw.bts.app.product</module>
-		
-
 	</modules>
 
-	
 	<properties>
 		<tycho.version>0.19.0</tycho.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<!--<kepler-repo.url>http://download.eclipse.org/releases/luna</kepler-repo.url>-->
-		<kepler-repo.url>http://download.eclipse.org/eclipse/updates/4.4-M-builds </kepler-repo.url>
+		<project.build.resourceEncoding>UTF-8</project.build.resourceEncoding>
 	</properties>
 
 	<repositories>
-	
-	
-	<repository>
-			<id>bts-mvn-telota-all</id>
-			<name>BTS Maven local Rep</name>
-			<url>http://telota.bbaw.de/bts-update/bts-mvn-p2all</url>
-			<layout>p2</layout>
-		</repository>
-		
 		<repository>
 			<id>bts-mvn-build-repository</id>
 			<name>BTS BUILD Rep</name>
-			<url>http://telota.bbaw.de/bts-update/bts-build-repository</url>
+			<url>http://telota.bbaw.de/bts-update/bts-build-neon</url>
 			<layout>p2</layout>
 		</repository>
-		<!--
 		<repository>
-			<id>bts-mvn-telota</id>
-			<name>BTS Maven local Rep</name>
-			<url>http://telota.bbaw.de/bts-update/bts-mvn-p2rep</url>
+			<id>bts-mvn-build-extras</id>
+			<name>BTS BUILD Rep</name>
+			<url>http://telota.bbaw.de/bts-update/extras</url>
 			<layout>p2</layout>
 		</repository>
-		
-		
-		
-		
-
 		<repository>
-			<id>e4-tools</id>
-			<url>http://download.vogella.com/luna/e4tools</url>
+			<id>neon</id>
+			<url>http://download.eclipse.org/releases/neon</url>
 			<layout>p2</layout>
 		</repository>
-
-		<repository>
-			<id>emfjson-repository</id>
-			<url>http://repository-ghillairet.forge.cloudbees.com/snapshot</url>
-		</repository>
--->
-
-	
-		
-		<repository>
-			<id>kepler</id>
-			<url>${kepler-repo.url}</url>
-			<layout>p2</layout>
-		</repository>
-		<!--
-	<repository>
-		<id>xtext-p2</id>
-		<url>http://download.eclipse.org/modeling/tmf/xtext/updates/releases/</url>
-		<layout>p2</layout>
-	</repository>
-	
-	<repository>
-		<id>emfjson-couch</id>
-		<layout>p2</layout>
-		<url>http://ghillairet.github.com/p2</url>
-	</repository>
-	
-	<repository>
-		<id>xtext-p2</id>
-		<layout>p2</layout>
-		<url>http://www.eclipse.org/modeling/updates/releases</url>
-		<url>https://hera.uni.lu/update-site/xtext-2.4.3/plugins/</url>
-		<url>http://download.eclipse.org/modeling/tmf/xtext/updates/releases/</url>
-	</repository>
-
-	<repository>
-		<id>jackson-p2</id>
-		<layout>p2</layout>
-		<url>http://ghillairet.github.com/p2/releases/jackson/2.3.1</url>
-	</repository>
-	-->
-
-
-
 	</repositories>
 
-
-
-
 	<build>
-
 		<plugins>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-versions-plugin</artifactId>
+				<version>${tycho.version}</version>
+				<executions>
+					<execution>
+						<id>versions</id>
+						<phase>clean</phase>
+						<goals>
+							<goal>update-pom</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 			<plugin>
 				<groupId>org.eclipse.tycho</groupId>
 				<artifactId>tycho-maven-plugin</artifactId>
 				<version>${tycho.version}</version>
 				<extensions>true</extensions>
 			</plugin>
-
 			<plugin>
 				<groupId>org.eclipse.tycho</groupId>
 				<artifactId>target-platform-configuration</artifactId>
@@ -212,45 +124,20 @@
 							<os>linux</os>
 							<ws>gtk</ws>
 							<arch>x86_64</arch>
-						</environment>
-						-->
+						</environment>-->
 						<environment>
 							<os>win32</os>
 							<ws>win32</ws>
 							<arch>x86</arch>
 						</environment>
-						
 						<environment>
 							<os>win32</os>
 							<ws>win32</ws>
 							<arch>x86_64</arch>
 						</environment>
-						
-						<!--
-						<environment>
-							<os>macosx</os>
-							<ws>cocoa</ws>
-							<arch>x86_64</arch>
-						</environment>
-						-->
 					</environments>
 				</configuration>
 			</plugin>
 		</plugins>
-
 	</build>
-
-	<!--
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.sonatype.tycho</groupId>
-        <artifactId>tycho-maven-plugin</artifactId>
-        <version>0.11.1</version>
-        <extensions>true</extensions>
-      </plugin>
-    </plugins>
-  </build>
-  -->
-</project> 
-
+</project>

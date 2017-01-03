@@ -2,7 +2,6 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: org.bbaw.bts.corpus.text.egy.egydsl.tests
 Bundle-Vendor: My Company
-Bundle-Version: 1.0.0.qualifier
 Bundle-SymbolicName: org.bbaw.bts.corpus.text.egy.egydsl.tests; singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: org.bbaw.bts.corpus.text.egy.egydsl,
@@ -21,3 +20,4 @@ Import-Package: org.apache.log4j,
  org.hamcrest.core
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: org.bbaw.bts.corpus.text.egy
+Bundle-Version: 3.1.0.qualifier

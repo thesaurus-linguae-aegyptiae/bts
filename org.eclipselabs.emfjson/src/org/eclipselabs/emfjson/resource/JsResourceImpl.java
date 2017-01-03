@@ -45,7 +45,7 @@ public class JsResourceImpl extends ResourceImpl {
 			options = Collections.<String, Object> emptyMap();
 		}
 		
-		final JSONLoad loader = new JSONLoad(inputStream, options);
+		final JSONLoad loader = new JSONLoad(inputStream, options, this.getResourceSet());
 		final Collection<EObject> roots = loader.fillResource(this);
 		
 		this.getContents().addAll(roots);

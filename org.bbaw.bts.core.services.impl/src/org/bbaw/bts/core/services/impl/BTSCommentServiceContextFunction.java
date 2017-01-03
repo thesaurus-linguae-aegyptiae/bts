@@ -12,7 +12,7 @@ public class BTSCommentServiceContextFunction extends ContextFunction
 	@Override
 	public Object compute(IEclipseContext context)
 	{
-		System.out.println("Intitialize  BTSCommentService");
+//		System.out.println("Intitialize  BTSCommentService");
 		// Add the new object to the application context
 		MApplication application = context.get(MApplication.class);
 		IEclipseContext ctx = context;

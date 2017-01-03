@@ -5,7 +5,7 @@
          id="product"
          point="org.eclipse.core.runtime.products">
       <product
-            name="org.bbaw.bts.app.product"
+            name="Berlin Text System"
             application="org.eclipse.e4.ui.workbench.swt.E4Application">
          <property
                name="clearPersistedState"
@@ -17,7 +17,7 @@
          </property>
          <property
                name="appName"
-               value="org.bbaw.bts.app.product">
+               value="Berlin Text System">
          </property>
          <!--<property
                name="lifeCycleURI"
@@ -29,6 +29,14 @@
          <property
                name="lifeCycleURI"
                value="bundleclass://org.bbaw.bts.app/org.bbaw.bts.app.lifeCycle.ApplicationLifeCyleManager">
+         </property>
+         <property
+               name="windowImages"
+               value="/org.bbaw.bts.app.product/icons/bts16.bmp,/org.bbaw.bts.app.product/icons/bts32.bmp,/org.bbaw.bts.app.product/icons/bts48.bmp,/org.bbaw.bts.app.product/icons/bts64.bmp,/org.bbaw.bts.app.product/icons/bts128.bmp,/org.bbaw.bts.app.product/icons/bts256.bmp">
+         </property>
+          <property
+               name="applicationCSSResources"
+               value="platform:/plugin/org.bbaw.bts.app.product/images/">
          </property>
       </product>
    </extension>

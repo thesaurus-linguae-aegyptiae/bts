@@ -34,11 +34,6 @@ public class AnnotationHighlightedDrawingStrategy implements IDrawingStrategy {
 			gc.setLineWidth(1);
 			gc.setLineStyle(SWT.LINE_SOLID);
 			gc.drawLine(bounds.x + bounds.width - 3, y+2, bounds.x + bounds.width - 4, y+2);
-			
-			// draw connector to actual annotation presentation
-			gc.setLineWidth(1);
-			gc.setLineStyle(SWT.LINE_SOLID);
-			gc.drawLine(bounds.x + bounds.width - 3, y+3, textWidget.getSize().x, y+3);
 
 		} else {
 			textWidget.redrawRange(offset, length, true);

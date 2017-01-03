@@ -1,5 +1,7 @@
 /*/bin
 /*/target
+*.xtendbin
+*.class
 org.bbaw.bts.corpus.text.btsdsl
 org.bbaw.bts.corpus.text.btsdsl.tests
 org.bbaw.bts.corpus.text.btsdsl.ui

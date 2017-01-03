@@ -1,6 +1,5 @@
 package org.bbaw.bts.ui.main.parts;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Vector;
@@ -21,12 +20,10 @@ import org.bbaw.bts.btsviewmodel.TreeNodeWrapper;
 import org.bbaw.bts.core.controller.dialogControllers.UserManagerController;
 import org.bbaw.bts.core.controller.generalController.BTSUserController;
 import org.bbaw.bts.core.controller.generalController.EditingDomainController;
+import org.bbaw.bts.ui.commons.viewerSorter.BTSUserManagerViewerComparator;
 import org.bbaw.bts.ui.resources.BTSResourceProvider;
+import org.eclipse.core.databinding.observable.Realm;
 import org.eclipse.core.databinding.observable.list.WritableList;
-import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.Status;
-import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.e4.core.contexts.Active;
 import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.ui.di.UISynchronize;
@@ -39,9 +36,8 @@ import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryContentProvider;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
+import org.eclipse.jface.databinding.swt.DisplayRealm;
 import org.eclipse.jface.databinding.viewers.ObservableListContentProvider;
-import org.eclipse.jface.dialogs.ProgressMonitorDialog;
-import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.jface.viewers.ComboViewer;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.IStructuredSelection;
@@ -143,8 +139,7 @@ public class ObjectUpdaterReaderEditorPart extends Composite {
 	private Text roles_rolesDesc_name_text;
 
 	private static final String[] databaseRoles = new String[] {
- "Readers",
-			"Updaters" };
+			"Readers", "Updaters"};
 
 	private static final String[] databaseRolesDescs = new String[] {
 			"Readers may view the object.", "Updaters may modify the object.", };
@@ -168,6 +163,7 @@ public class ObjectUpdaterReaderEditorPart extends Composite {
 	@Inject
 	public ObjectUpdaterReaderEditorPart(Composite parent) {
 		super(parent, SWT.None);
+		parentShell = parent.getShell();
 	}
 
 	private void init() {
@@ -175,6 +171,8 @@ public class ObjectUpdaterReaderEditorPart extends Composite {
 		for (int i = 0; i < databaseRoles.length; i++) {
 			roleDescMap.put(databaseRoles[i], databaseRolesDescs[i]);
 		}
+		loadAllUsers();
+		loadAllUserGroups();
 
 	}
 	@PostConstruct
@@ -183,11 +181,11 @@ public class ObjectUpdaterReaderEditorPart extends Composite {
 		this.setLayout(new GridLayout(1, false));
 		((GridLayout) this.getLayout()).marginHeight = 0;
 		((GridLayout) this.getLayout()).marginHeight = 0;
-		this.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
+		GridData gridLayoutData = new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1);
+		this.setLayoutData(gridLayoutData);
 
 		composite = new Composite(this, SWT.NONE);
-		composite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1,
-				1));
+		composite.setLayoutData(gridLayoutData);
 		composite.setLayout(new GridLayout(1, false));
 
 		ToolBar roles_toolbar = new ToolBar(composite, SWT.FLAT | SWT.RIGHT);
@@ -197,11 +195,9 @@ public class ObjectUpdaterReaderEditorPart extends Composite {
 		roles_ToolUndo.setImage(resourceProvider.getImage(Display.getDefault(),
 				BTSResourceProvider.IMG_UNDO));
 		roles_ToolUndo.addSelectionListener(new SelectionAdapter() {
-
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				getEditingDomain(dbBaseObject).getCommandStack().undo();
-
 			}
 		});
 
@@ -210,16 +206,14 @@ public class ObjectUpdaterReaderEditorPart extends Composite {
 		roles_ToolRedo.setImage(resourceProvider.getImage(Display.getDefault(),
 				BTSResourceProvider.IMG_REDO));
 		roles_ToolRedo.addSelectionListener(new SelectionAdapter() {
-
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				getEditingDomain(dbBaseObject).getCommandStack().redo();
-
 			}
 		});
+
 		roles_sashForm = new SashForm(composite, SWT.NONE);
-		roles_sashForm.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true,
-				true, 1, 1));
+		roles_sashForm.setLayoutData(gridLayoutData);
 
 		roles_composite_Left = new Composite(roles_sashForm, SWT.NONE);
 		roles_composite_Left.setLayout(new GridLayout(1, false));
@@ -232,8 +226,8 @@ public class ObjectUpdaterReaderEditorPart extends Composite {
 
 		roles_treeViewer = new TreeViewer(roles_composite_Left, SWT.BORDER);
 		Tree roles_tree = roles_treeViewer.getTree();
-		roles_tree.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true,
-				1, 1));
+		roles_tree.setLayoutData(gridLayoutData);
+		roles_treeViewer.setComparator(new BTSUserManagerViewerComparator());
 
 		roles_composite_right = new Composite(roles_sashForm, SWT.NONE);
 		roles_composite_right.setLayout(new GridLayout(2, false));
@@ -267,12 +261,10 @@ public class ObjectUpdaterReaderEditorPart extends Composite {
 			public void selectionChanged(SelectionChangedEvent event) {
 				IStructuredSelection selection = (StructuredSelection) event
 						.getSelection();
-				if (selection.getFirstElement() instanceof TreeNodeWrapper) {
+				if (selection.getFirstElement() instanceof TreeNodeWrapper)
 					selectedTreeNode = (TreeNodeWrapper) selection
 							.getFirstElement();
-				}
 				handleRolesTreeSelection(selection);
-
 			}
 
 		};
@@ -282,12 +274,12 @@ public class ObjectUpdaterReaderEditorPart extends Composite {
 				.createTreeNodeWrapper();
 		TreeNodeWrapper readers = BtsviewmodelFactory.eINSTANCE
 				.createTreeNodeWrapper();
-		readers.setLabel("Readers");
+		readers.setLabel(databaseRoles[0]); // "Readers"
 		readers.setChildrenLoaded(false);
 		roles.getChildren().add(readers);
 		TreeNodeWrapper updaters = BtsviewmodelFactory.eINSTANCE
 				.createTreeNodeWrapper();
-		updaters.setLabel("Updaters");
+		updaters.setLabel(databaseRoles[1]); // "Updaters"
 		updaters.setChildrenLoaded(false);
 
 		roles.getChildren().add(updaters);
@@ -300,102 +292,64 @@ public class ObjectUpdaterReaderEditorPart extends Composite {
 					.getFirstElement();
 			if (selectedTreeObject instanceof BTSUser) {
 				loadDBRoleDescUserEditComposite((BTSUser) selectedTreeObject);
-				enableReolesUndoRedo();
+				enableRolesUndoRedo();
 			} else if (selection.getFirstElement() instanceof BTSUserGroup) {
 				loadDBRoleDescUserGroupEditComposite((BTSUserGroup) selectedTreeObject);
-				enableReolesUndoRedo();
+				enableRolesUndoRedo();
 			}
 			if (selectedTreeObject == null
-					|| !selectedTreeObject.equals(selection.getFirstElement())) {
-				Object oldSelection = selectedTreeObject;
+					|| !selectedTreeObject.equals(selection.getFirstElement()))
 				selectedTreeObject = (BTSIdentifiableItem) selection
 						.getFirstElement();
-			}
 		} else if (selection.getFirstElement() instanceof TreeNodeWrapper) {
 			TreeNodeWrapper tn = (TreeNodeWrapper) selection.getFirstElement();
 			selectedTreeNode = tn;
 			if (tn.getObject() == null) {
 				if (!tn.isChildrenLoaded()) {
-					List<TreeNodeWrapper> parents = new Vector<TreeNodeWrapper>(
-							1);
+					List<TreeNodeWrapper> parents = new Vector<>(1);
 					parents.add(tn);
 					loadChildren(parents);
 				}
 				loadDBRoleDescEditComposite();
-				enableReolesUndoRedo();
+				enableRolesUndoRedo();
 			}
 			if (tn.getObject() instanceof BTSUserGroup) {
 				loadDBRoleDescUserGroupEditComposite((BTSUserGroup) tn
 						.getObject());
-				enableReolesUndoRedo();
+				enableRolesUndoRedo();
 			} else if (tn.getObject() instanceof BTSUser) {
 				loadDBRoleDescUserEditComposite((BTSUser) tn.getObject());
-				enableReolesUndoRedo();
+				enableRolesUndoRedo();
 			}
 		}
 
 	}
 
 	private void loadAllUserGroups() {
-		try {
-			 IRunnableWithProgress op = new IRunnableWithProgress() {
-
-					@Override
-					public void run(final IProgressMonitor monitor)
-							throws InvocationTargetException, InterruptedException 
-					{
-						sync.asyncExec(new Runnable() {
-							@Override
-							public void run() {
-								List<BTSUserGroup> groups = userManagerController.listUserGroups(monitor);
-								observableLisAllUserGroups = new WritableList(groups,
-										BTSUserGroup.class);
-								userGroupMap = new HashMap<String, BTSUserGroup>(groups.size());
-								for (BTSUserGroup u : groups) {
-									userGroupMap.put(u.get_id(), u);
-								}
-							}
-						});
-						
-					}};
-		       new ProgressMonitorDialog(parentShell).run(true, true, op);
-		    } catch (InvocationTargetException e) {
-		       // handle exception
-		    } catch (InterruptedException e) {
-		       // handle cancelation
-		    }
-		
+		Realm.runWithDefault(DisplayRealm.getRealm(Display.getDefault()), new Runnable() {
+			@Override
+			public void run() {
+				List<BTSUserGroup> groups = userManagerController.listUserGroups(null);
+				observableLisAllUserGroups = new WritableList(groups,
+						BTSUserGroup.class);
+				userGroupMap = new HashMap<String, BTSUserGroup>(groups.size());
+				for (BTSUserGroup u : groups)
+					userGroupMap.put(u.get_id(), u);
+			}
+		});
 	}
 
 	private void loadAllUsers() {
-		try {
-			 IRunnableWithProgress op = new IRunnableWithProgress() {
-
-					@Override
-					public void run(final IProgressMonitor monitor)
-							throws InvocationTargetException, InterruptedException 
-					{
-						sync.asyncExec(new Runnable() {
-							@Override
-							public void run() {
-								List<BTSUser> users = userManagerController.listUsers(monitor);
-								observableLisAllUsers = new WritableList(users, BTSUser.class);
-								userMap = new HashMap<String, BTSUser>(users.size());
-								for (BTSUser u : users) {
-									userMap.put(u.getUserName(), u);
-								}
-							}
-						});
-						
-					}};
-		       new ProgressMonitorDialog(parentShell).run(true, true, op);
-		    } catch (InvocationTargetException e) {
-		       // handle exception
-		    } catch (InterruptedException e) {
-		       // handle cancelation
-		    }
-		
-
+		Realm.runWithDefault(DisplayRealm.getRealm(Display.getDefault()), new Runnable() {
+			@Override
+			public void run() {
+				List<BTSUser> users = userManagerController.listUsers(null);
+				observableLisAllUsers = new WritableList(users, BTSUser.class);
+				userMap = new HashMap<String, BTSUser>(users.size());
+				for (BTSUser u : users)
+					userMap.put(u.getUserName(), u);
+			}
+		});
 	}
 
 	private void loadDBRoleDescEditComposite() {
@@ -403,12 +357,10 @@ public class ObjectUpdaterReaderEditorPart extends Composite {
 			roles_composite_right.dispose();
 			roles_composite_right = null;
 		}
-		if (observableLisAllUsers == null) {
+		if (observableLisAllUsers == null)
 			loadAllUsers();
-		}
-		if (observableLisAllUserGroups == null) {
+		if (observableLisAllUserGroups == null)
 			loadAllUserGroups();
-		}
 		roles_composite_right = new Composite(roles_sashForm, SWT.NONE);
 		roles_composite_right.setLayout(new GridLayout(3, false));
 		lblUserRoleDefinition = new Label(roles_composite_right, SWT.NONE);
@@ -426,11 +378,9 @@ public class ObjectUpdaterReaderEditorPart extends Composite {
 				SWT.CENTER, true, false, 1, 1));
 		roles_rolesDesc_name_text.setEditable(false);
 		if (selectedTreeNode.getLabel() != null)
-		{
 			roles_rolesDesc_name_text
-	.setText(((TreeNodeWrapper) selectedTreeNode)
+				.setText(((TreeNodeWrapper) selectedTreeNode)
 					.getLabel());
-		}
 		// Label lblRoleDesc = new Label(roles_composite_right, SWT.NONE);
 		// lblRoleDesc.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false,
 		// false, 1, 1));
@@ -468,6 +418,7 @@ public class ObjectUpdaterReaderEditorPart extends Composite {
 		roles_rolesDesc_users_comboViewer
 				.setContentProvider(new ObservableListContentProvider());
 		roles_rolesDesc_users_comboViewer.setLabelProvider(labelProvider);
+		roles_rolesDesc_users_comboViewer.setComparator(new BTSUserManagerViewerComparator());
 		roles_rolesDesc_users_comboViewer.setInput(observableLisAllUsers);
 
 		roles_roleDesc_assignUser_link = new Link(grpAssignUser, SWT.NONE);
@@ -496,25 +447,28 @@ public class ObjectUpdaterReaderEditorPart extends Composite {
 												BtsviewmodelPackage.TREE_NODE_WRAPPER__CHILDREN,
 												tn);
 								compoundCommand.append(c1);
-								Command command;
+								Command command = null;
 								if (selectedTreeNode.getLabel().equals(
-										"Readers")) {
+										databaseRoles[0])) { // "Readers"
 									command = AddCommand
 											.create(getEditingDomain(dbBaseObject),
 													dbBaseObject,
 													BtsmodelPackage.Literals.BTSDB_BASE_OBJECT__READERS,
 													u.getUserName());
-								} else {
+								} else if (selectedTreeNode.getLabel().equals(
+										databaseRoles[1])) { // "Updaters"
 									command = AddCommand
 											.create(getEditingDomain(dbBaseObject),
 													dbBaseObject,
 													BtsmodelPackage.Literals.BTSDB_BASE_OBJECT__UPDATERS,
 												u.getUserName());
 								}
-								compoundCommand.append(command);
-								getEditingDomain(dbBaseObject)
-										.getCommandStack().execute(
-												compoundCommand);
+								if (command != null) {
+									compoundCommand.append(command);
+									getEditingDomain(dbBaseObject)
+											.getCommandStack().execute(
+													compoundCommand);
+								}
 								roles_treeViewer.refresh();
 
 							}
@@ -571,25 +525,28 @@ public class ObjectUpdaterReaderEditorPart extends Composite {
 												BtsviewmodelPackage.TREE_NODE_WRAPPER__CHILDREN,
 												tn);
 								compoundCommand.append(c1);
-								Command command;
+								Command command = null;
 								if (selectedTreeNode.getLabel().equals(
-										"Readers")) {
+										databaseRoles[0])) { // "Readers"
 									command = AddCommand
 											.create(getEditingDomain(dbBaseObject),
 													dbBaseObject,
 													BtsmodelPackage.Literals.BTSDB_BASE_OBJECT__READERS,
 													ug.get_id());
-								} else {
+								} else if (selectedTreeNode.getLabel().equals(
+										databaseRoles[1])){ // "Updaters";
 									command = AddCommand
 											.create(getEditingDomain(dbBaseObject),
 													dbBaseObject,
 													BtsmodelPackage.Literals.BTSDB_BASE_OBJECT__UPDATERS,
 													ug.get_id());
 								}
-								compoundCommand.append(command);
-								getEditingDomain(dbBaseObject)
-										.getCommandStack().execute(
-												compoundCommand);
+								if (command != null) {
+									compoundCommand.append(command);
+									getEditingDomain(dbBaseObject)
+											.getCommandStack().execute(
+													compoundCommand);
+								}
 								roles_treeViewer.refresh();
 
 							}
@@ -648,24 +605,27 @@ public class ObjectUpdaterReaderEditorPart extends Composite {
 									getEditingDomain(dbBaseObject),
 									selectedTreeNode);
 							compoundCommand.append(c1);
-							Command command;
+							Command command = null;
 							if (((TreeNodeWrapper) parent).getLabel().equals(
-									"Readers")) {
+									databaseRoles[0])) { // "Readers"
 								command = RemoveCommand
 										.create(getEditingDomain(dbBaseObject),
 												dbBaseObject,
 												BtsmodelPackage.Literals.BTSDB_BASE_OBJECT__READERS,
 												u.get_id());
-							} else {
+							} else if (((TreeNodeWrapper)parent).getLabel().equals(
+									databaseRoles[1])){ // "Updaters"
 								command = RemoveCommand
 										.create(getEditingDomain(dbBaseObject),
 												dbBaseObject,
 												BtsmodelPackage.Literals.BTSDB_BASE_OBJECT__UPDATERS,
 												u.get_id());
 							}
-							compoundCommand.append(command);
-							getEditingDomain(dbBaseObject).getCommandStack()
-									.execute(compoundCommand);
+							if (command != null) {
+								compoundCommand.append(command);
+								getEditingDomain(dbBaseObject).getCommandStack()
+										.execute(compoundCommand);
+							}
 							roles_treeViewer.refresh();
 						}
 
@@ -735,24 +695,27 @@ public class ObjectUpdaterReaderEditorPart extends Composite {
 									getEditingDomain(dbBaseObject),
 									selectedTreeNode);
 							compoundCommand.append(c1);
-							Command command;
+							Command command = null;
 							if (((TreeNodeWrapper) parent).getLabel().equals(
-									"Readers")) {
+									databaseRoles[0])) { // "Readers"
 								command = RemoveCommand
 										.create(getEditingDomain(dbBaseObject),
 												dbBaseObject,
 												BtsmodelPackage.Literals.BTSDB_BASE_OBJECT__READERS,
 												u.getUserName());
-							} else {
+							} else if (((TreeNodeWrapper) parent).getLabel().equals(
+									databaseRoles[1])){ // "Updaters"
 								command = RemoveCommand
 										.create(getEditingDomain(dbBaseObject),
 												dbBaseObject,
 												BtsmodelPackage.Literals.BTSDB_BASE_OBJECT__UPDATERS,
 												u.getUserName());
 							}
-							compoundCommand.append(command);
-							getEditingDomain(dbBaseObject).getCommandStack()
-									.execute(compoundCommand);
+							if (command != null) {
+								compoundCommand.append(command);
+								getEditingDomain(dbBaseObject).getCommandStack()
+										.execute(compoundCommand);
+							}
 							roles_treeViewer.refresh();
 
 						}
@@ -765,7 +728,7 @@ public class ObjectUpdaterReaderEditorPart extends Composite {
 
 	}
 
-	private void enableReolesUndoRedo() {
+	private void enableRolesUndoRedo() {
 		roles_ToolUndo.setEnabled(getEditingDomain(dbBaseObject)
 				.getCommandStack().canUndo());
 		roles_ToolRedo.setEnabled(getEditingDomain(dbBaseObject)
@@ -773,65 +736,35 @@ public class ObjectUpdaterReaderEditorPart extends Composite {
 	}
 
 	private void loadChildren(final List<TreeNodeWrapper> parents) {
-		Job job = new Job("load children")
+		for (TreeNodeWrapper parent : parents)
 		{
-
-			@Override
-			protected IStatus run(IProgressMonitor monitor)
+			if (!parent.isChildrenLoaded())
 			{
-				new Vector<>();
-				for (final TreeNodeWrapper parent : parents)
-				{
-					if (!parent.isChildrenLoaded())
-					{
-						//XXX hard coded make dynamic and independent from label
-						List<BTSObject> cc = new Vector<BTSObject>();
-						List<String> ids = null;
-						if (parent.getLabel().equals("Readers"))
-						{
-							ids = dbBaseObject.getReaders();
-						}else 
-						{
-							ids = dbBaseObject.getUpdaters();
-						}
-						for (String id : ids) {
-							BTSObject o = userMap.get(id);// userController.findUserOrUserGroup(id);
-							if (o == null) {
-								o = userGroupMap.get(id);
-							}
-							cc.add(o);
-						}
-						final List<BTSObject> children = cc;
-						// If you want to update the UI
-						sync.asyncExec(new Runnable()
-						{
-							@Override
-							public void run()
-							{
-								System.out.println("add children" + children.size());
-								for (BTSObject o : children)
-								{
-									TreeNodeWrapper tn = wrappObject(o);
-									tn.setParent(parent);
-									// grandChildren.add(tn);
-									parent.getChildren().add(tn);
-								}
-								parent.setChildrenLoaded(true);
-								roles_treeViewer.refresh();
-
-								// roles_treeViewer.refresh();
-							}
-						});
-					}
+				List<BTSObject> children = new Vector<BTSObject>();
+				List<String> ids = null;
+				if (parent.getLabel().equals(databaseRoles[0])) {
+					ids = dbBaseObject.getReaders();
+				}else {
+					ids = dbBaseObject.getUpdaters();
 				}
-				// loadChildren(grandChildren, false);
-
-				return Status.OK_STATUS;
+				for (String id : ids) {
+					BTSObject o = userMap.get(id);
+					o = (o == null) ? userGroupMap.get(id) : o;
+					if (o != null)
+						children.add(o);
+				}
+				for (BTSObject o : children)
+				{
+					TreeNodeWrapper tn = wrapObject(o);
+					tn.setParent(parent);
+					// grandChildren.add(tn);
+					parent.getChildren().add(tn);
+					roles_treeViewer.expandToLevel(tn, 0);
+				}
+				parent.setChildrenLoaded(true);
+				roles_treeViewer.refresh();
 			}
-		};
-		// Start the Job
-		job.schedule();
-
+		}
 	}
 
 	@Inject
@@ -845,7 +778,7 @@ public class ObjectUpdaterReaderEditorPart extends Composite {
 		}
 	}
 
-	private TreeNodeWrapper wrappObject(BTSObject o) {
+	private TreeNodeWrapper wrapObject(BTSObject o) {
 		return BtsviewmodelFactory.eINSTANCE.wrappObject(o);
 	}
 

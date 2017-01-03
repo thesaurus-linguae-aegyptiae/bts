@@ -59,6 +59,13 @@ public class RemoteDBManagerContextFunction extends ContextFunction {
 				return (RemoteDAOFactory) o;
 			}
 		}
+		
+		// in case no extension point found, look up context
+		// this is necessary to run the same plugins on a Eclipse Virgo server for the web application
+		RemoteDAOFactory factory = context.get(RemoteDAOFactory.class);
+		if (factory != null) return factory;
+		
+		// if nothing found, throw exception
 		throw new BTSDBException("No DaoFactory found for GeneralPurposeDao and factory name: " + daoFactoryName);
 
 	}

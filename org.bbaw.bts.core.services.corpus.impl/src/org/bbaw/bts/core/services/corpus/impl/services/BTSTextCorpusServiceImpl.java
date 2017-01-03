@@ -15,6 +15,7 @@ import org.bbaw.bts.core.commons.BTSCoreConstants;
 import org.bbaw.bts.core.commons.BTSObjectSearchService;
 import org.bbaw.bts.core.commons.corpus.BTSCorpusConstants;
 import org.bbaw.bts.core.dao.corpus.BTSTextCorpusDao;
+import org.bbaw.bts.core.dao.util.BTSQueryRequest;
 import org.bbaw.bts.core.dao.util.DaoConstants;
 import org.bbaw.bts.core.services.BTSProjectService;
 import org.bbaw.bts.core.services.Backend2ClientUpdateService;
@@ -26,7 +27,6 @@ import org.bbaw.bts.corpus.btsCorpusModel.BTSTCObject;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSTextCorpus;
 import org.bbaw.bts.corpus.btsCorpusModel.BtsCorpusModelFactory;
 import org.bbaw.bts.db.DBManager;
-import org.bbaw.bts.searchModel.BTSQueryRequest;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.core.di.extensions.Preference;
@@ -270,5 +270,44 @@ public class BTSTextCorpusServiceImpl extends AbstractCorpusObjectServiceImpl<BT
 	public String getMainCorpusPrefix()
 	{
 		return main_corpus_key;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.bbaw.bts.core.services.impl.generic.GenericObjectServiceImpl#findAsJsonString(java.io.Serializable, org.eclipse.core.runtime.IProgressMonitor)
+	 */
+	@Override
+	public String findAsJsonString(String key, IProgressMonitor monitor) {
+		String corpus = null;
+		corpus = textCorpusDao.findAsJsonString(key, main_project + BTSCorpusConstants.CORPUS);
+		if (corpus != null)
+		{
+			return corpus;
+		}
+		for (String p : getActiveProjects())
+		{
+			corpus = textCorpusDao.findAsJsonString(key, p + BTSCorpusConstants.CORPUS);
+			if (corpus != null)
+			{
+				return corpus;
+			}
+		}
+		return null;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.bbaw.bts.core.services.impl.generic.GenericObjectServiceImpl#queryAsJsonString(org.bbaw.bts.core.dao.util.BTSQueryRequest, java.lang.String, org.eclipse.core.runtime.IProgressMonitor)
+	 */
+	@Override
+	public List<String> queryAsJsonString(BTSQueryRequest query, String objectState, IProgressMonitor monitor) {
+		List<String> objects = new Vector<String>();
+		for (String p : getActiveProjects())
+		{
+
+			objects.addAll(textCorpusDao.queryAsJsonString(query, p
+					+ BTSCorpusConstants.CORPUS, p + BTSCorpusConstants.CORPUS,
+					objectState, false));
+
+		}
+		return objects;
 	}
 }

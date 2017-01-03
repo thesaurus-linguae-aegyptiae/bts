@@ -32,7 +32,6 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
 
-import com.opcoach.e4.preferences.handlers.E4PreferencesHandler;
 
 public class ProjectToolControl {
 

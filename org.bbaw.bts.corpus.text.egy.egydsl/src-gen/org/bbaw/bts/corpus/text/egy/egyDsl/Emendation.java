@@ -20,7 +20,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface Emendation extends Brackets, NoCartouche, NoDisputableReading, NoLacuna, NoExpandedColumn, NoRasur, NoAncientExpanded, NoRestorationOverRasur
+public interface Emendation extends Brackets, NoCartouche, NoDisputableReading, NoLacuna, NoExpandedColumn, NoRasur, NoAncientExpanded, NoRestorationOverRasur, NoPartialDestruction
 {
   /**
    * Returns the value of the '<em><b>WChar</b></em>' containment reference list.

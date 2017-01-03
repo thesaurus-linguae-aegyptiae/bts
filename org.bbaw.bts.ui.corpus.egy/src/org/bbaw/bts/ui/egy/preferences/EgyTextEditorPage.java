@@ -23,7 +23,7 @@ public class EgyTextEditorPage extends FieldEditorPreferencePage {
 				"Activate mouse-over pop-up with information on lemmata", getFieldEditorParent()));
 		
 		addField(new BooleanFieldEditor(BTSEGYUIConstants.PREF_TRANSLITERATION_EDITOR_SHOW_LINE_NUMBER_RULER,
-				"Show line number ruler on left side", getFieldEditorParent()));
+				"Show line number ruler on left side (Changes require application restart)", getFieldEditorParent()));
 
 	}
 
