@@ -10,26 +10,23 @@ import java.util.Map;
 import java.util.Set;
 import java.util.Vector;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.annotation.PostConstruct;
 
 import org.bbaw.bts.btsmodel.BTSIdentifiableItem;
 import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.btsmodel.BTSTranslations;
 import org.bbaw.bts.btsmodel.BtsmodelFactory;
-import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.commons.BTSPluginIDs;
 import org.bbaw.bts.core.commons.BTSCoreConstants;
-import org.bbaw.bts.core.commons.corpus.BTSCorpusConstants;
 import org.bbaw.bts.core.controller.generalController.EditingDomainController;
 import org.bbaw.bts.core.corpus.controller.partController.LemmaEditorController;
-import org.bbaw.bts.corpus.btsCorpusModel.BTSAnnotation;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSLemmaEntry;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSSenctence;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSSentenceItem;
-import org.bbaw.bts.corpus.btsCorpusModel.BTSText;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSTextContent;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSTextItems;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSWord;
@@ -46,26 +43,13 @@ import org.bbaw.bts.ui.commons.corpus.text.BTSModelAnnotation;
 import org.bbaw.bts.ui.commons.corpus.text.BTSSubtextAnnotation;
 import org.bbaw.bts.ui.commons.utils.BTSUIConstants;
 import org.bbaw.bts.ui.commons.widgets.TranslationEditorComposite;
-import org.bbaw.bts.ui.egy.parts.egyTextEditor.AnnotationDrawingStrategy;
-import org.bbaw.bts.ui.egy.parts.egyTextEditor.AnnotationHighlightedDrawingStrategy;
 import org.bbaw.bts.ui.egy.parts.egyTextEditor.BTSTextXtextEditedResourceProvider;
-import org.bbaw.bts.ui.egy.parts.egyTextEditor.CommentDrawingStrategy;
-import org.bbaw.bts.ui.egy.parts.egyTextEditor.CommentHighlightedDrawingStrategy;
-import org.bbaw.bts.ui.egy.parts.egyTextEditor.RubrumDrawingStrategy;
-import org.bbaw.bts.ui.egy.parts.egyTextEditor.SubtextHighlightedDrawingStrategy;
-import org.bbaw.bts.ui.egy.parts.egyTextEditor.SubtextdrawingStrategy;
 import org.bbaw.bts.ui.egy.parts.support.AbstractTextEditorLogic;
 import org.bbaw.bts.ui.egy.textSign.SignTextComposite;
-import org.eclipse.swt.widgets.Composite;
-
-import javax.annotation.PreDestroy;
-
-import org.eclipse.core.internal.preferences.EclipsePreferences;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
-import org.eclipse.core.runtime.preferences.ConfigurationScope;
 import org.eclipse.e4.core.contexts.ContextInjectionFactory;
 import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.core.di.annotations.Optional;
@@ -95,7 +79,7 @@ import org.eclipse.jface.text.source.AnnotationModel;
 import org.eclipse.jface.text.source.AnnotationPainter;
 import org.eclipse.jface.text.source.IAnnotationAccess;
 import org.eclipse.jface.text.source.IAnnotationModel;
-import org.eclipse.jface.text.source.AnnotationPainter.ITextStyleStrategy;
+import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CaretEvent;
 import org.eclipse.swt.custom.CaretListener;
 import org.eclipse.swt.events.FocusEvent;
@@ -103,13 +87,12 @@ import org.eclipse.swt.events.FocusListener;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.events.TypedEvent;
-import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.widgets.Label;
-import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
+import org.eclipse.swt.widgets.Label;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.ui.editor.embedded.EmbeddedEditor;
 import org.eclipse.xtext.ui.editor.embedded.EmbeddedEditorFactory;
 import org.eclipse.xtext.ui.editor.embedded.EmbeddedEditorModelAccess;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
@@ -117,7 +100,6 @@ import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.validation.Issue;
 import org.osgi.service.event.Event;
 import org.osgi.service.event.EventHandler;
-import org.osgi.service.prefs.Preferences;
 
 import com.google.inject.Injector;
 
@@ -173,8 +155,6 @@ public class EgyLemmaEditorPart extends AbstractTextEditorLogic implements IBTSE
 
 	private Group grpTransliteration;
 
-	private EmbeddedEditor embeddedEditor;
-	
 	private EmbeddedEditorModelAccess embeddedEditorModelAccess;
 
 	private IAnnotationModel annotationModel;
@@ -195,12 +175,9 @@ public class EgyLemmaEditorPart extends AbstractTextEditorLogic implements IBTSE
 	private Set<Command> localCommandCacheSet = new HashSet<Command>();
 	protected boolean loading;
 	private TranslationEditorComposite lemmaTranslate_Editor;
-	private AnnotationPainter painter;
 	private HashMap<String, List<Object>> lemmaAnnotationMap;
 	private Job processLemmaAnnotionsJob;
 	
-	private EclipsePreferences annotationSettings;
-
 	// boolean if object is loaded into gui
 	private boolean loaded;
 
@@ -219,11 +196,6 @@ public class EgyLemmaEditorPart extends AbstractTextEditorLogic implements IBTSE
 	@PostConstruct
 	public void postConstruct(Composite parent) {
 		parent.setLayout(new GridLayout(1, false));
-		
-		// load annotatin styling settings node
-		EclipsePreferences rootNode = (EclipsePreferences) ConfigurationScope.INSTANCE.getNode("org.bbaw.bts.ui.corpus");
-		annotationSettings = (EclipsePreferences) rootNode.node(BTSCorpusConstants.PREF_ANNOTATION_SETTINGS);
-
 		
 		// transliteration
 		grpTransliteration = new Group(parent, SWT.NONE);
@@ -253,10 +225,7 @@ public class EgyLemmaEditorPart extends AbstractTextEditorLogic implements IBTSE
 
 
 		embeddedEditor = embeddedEditorFactory.newEditor(xtextResourceProvider)
-				.showAnnotations(BTSConstants.ANNOTATION,
-						BTSConstants.COMMENT,
-						"org.eclipse.xtext.ui.editor.error",
-						"org.eclipse.xtext.ui.editor.warning")
+				.showAnnotations("org.eclipse.xtext.ui.editor.error")
 				.withParent(embeddedEditorComp);
 		embeddedEditor.getViewer().getTextWidget().setLineSpacing(LINE_SPACE);
 		embeddedEditorModelAccess = embeddedEditor.createPartialEditor("\r",
@@ -280,7 +249,7 @@ public class EgyLemmaEditorPart extends AbstractTextEditorLogic implements IBTSE
 		};
 		painter = new AnnotationPainter(embeddedEditor.getViewer(),
 				annotationAccess);
-		configureEditorDrawingStrategies(painter, null, annotationSettings);
+		configureEditorDrawingStrategies(null);
 		embeddedEditor.getViewer().addTextPresentationListener(painter);
 		embeddedEditor.getViewer().addPainter(painter);
 		grpTransliteration.layout();

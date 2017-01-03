@@ -341,10 +341,12 @@ public class BTSConfigurationServiceImpl extends GenericObjectServiceImpl<BTSCon
 	
 	public BTSConfigItem getVisibilityConfigItem() {
 		BTSConfiguration config = getActiveConfiguration();
-		for (BTSConfig c : config.getChildren()) {
-			if (BTSCoreConstants.VISIBILITY_CONFIG.equals(((BTSConfigItem) c)
-					.getValue())) {
-				return (BTSConfigItem) c;
+		if (config != null) {
+			for (BTSConfig c : config.getChildren()) {
+				if (BTSCoreConstants.VISIBILITY_CONFIG.equals(((BTSConfigItem) c)
+						.getValue())) {
+					return (BTSConfigItem) c;
+				}
 			}
 		}
 		return null;

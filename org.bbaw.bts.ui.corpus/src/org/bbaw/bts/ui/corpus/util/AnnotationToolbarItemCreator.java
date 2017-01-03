@@ -36,7 +36,7 @@ import java.util.Map;
 import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.core.commons.corpus.BTSCorpusConstants;
 import org.bbaw.bts.core.commons.corpus.CorpusUtils;
-import org.eclipse.core.internal.preferences.EclipsePreferences;
+import org.eclipse.core.runtime.preferences.IEclipsePreferences;
 import org.eclipse.e4.ui.model.application.commands.MCommand;
 import org.eclipse.e4.ui.model.application.commands.MCommandsFactory;
 import org.eclipse.e4.ui.model.application.commands.MParameter;
@@ -59,15 +59,15 @@ public class AnnotationToolbarItemCreator {
 		
 	}
 	
-	public static void processAndUpateToolbarItemsAnnotationShortcut(MPart part, EclipsePreferences annotationsPreferences)
+	public static void processAndUpateToolbarItemsAnnotationShortcut(MPart part, IEclipsePreferences annotationsPreferences)
 	{
-		EclipsePreferences node;
+		IEclipsePreferences node;
 		Map<String, MHandledToolItem> toolbarCache = loadToolbarCache(part.getToolbar());
 		MCommand command = findCommand(part.getToolbar());
 		try {
 			for (String nodeName : annotationsPreferences.childrenNames())
 			{
-				node = (EclipsePreferences) annotationsPreferences.node(nodeName);
+				node = (IEclipsePreferences) annotationsPreferences.node(nodeName);
 				MHandledToolItem toolItem = getCachedShortcutMHandledToolItem(toolbarCache, node);
 				if (toolItem != null)
 				{
@@ -131,7 +131,7 @@ public class AnnotationToolbarItemCreator {
 	 * @param commandService 
 	 * @param node
 	 */
-	private static void addToolbarShortcut(MToolBar toolbar, EclipsePreferences node, MCommand command) {
+	private static void addToolbarShortcut(MToolBar toolbar, IEclipsePreferences node, MCommand command) {
 		MHandledToolItem toolitem = MMenuFactory.INSTANCE.createHandledToolItem();
 		toolitem.setCommand(command);
 		String annotationTypePath = getAnnotationTypePath(node);
@@ -162,7 +162,7 @@ public class AnnotationToolbarItemCreator {
 	 * @param node
 	 * @return
 	 */
-	public static String getAnnotationTypePath(EclipsePreferences node) {
+	public static String getAnnotationTypePath(IEclipsePreferences node) {
 		String annotationTypePath = BTSConstants.ANNOTATION;
 		String type = node.get(BTSCorpusConstants.PREF_ANNOTATION_TYPE, null);
 		String subtype = node.get(BTSCorpusConstants.PREF_ANNOTATION_SUBTYPE, null);
@@ -182,7 +182,7 @@ public class AnnotationToolbarItemCreator {
 	 * @param node
 	 * @return
 	 */
-	private static MHandledToolItem getCachedShortcutMHandledToolItem(Map<String, MHandledToolItem> toolbarCache, EclipsePreferences node) {
+	private static MHandledToolItem getCachedShortcutMHandledToolItem(Map<String, MHandledToolItem> toolbarCache, IEclipsePreferences node) {
 		String annotationTypePath = getAnnotationTypePath(node);
 		return (toolbarCache.get(annotationTypePath));
 	}

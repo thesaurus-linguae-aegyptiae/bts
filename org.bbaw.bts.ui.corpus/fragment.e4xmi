@@ -206,7 +206,7 @@
                     <parameters xmi:id="__CEKALlkEeWW7cLsp5AL_w" elementId="annotationsPartFilterParam" name="annotationsPartFilterParam" value="Comment"/>
                   </children>
                   <children xsi:type="menu:HandledMenuItem" xmi:id="_rR4D8LnbEeWW7cLsp5AL_w" elementId="org.bbaw.bts.ui.corpus.part.annotations.viewmenu.show.subtext" label="Show Glosses" selected="true" type="Check" command="_ecT_0LlkEeWW7cLsp5AL_w">
-                    <parameters xmi:id="_6CG-ELnbEeWW7cLsp5AL_w" elementId="annotationsPartFilterParam" name="annotationsPartFilterParam" value="Subtext"/>
+                    <parameters xmi:id="_6CG-ELnbEeWW7cLsp5AL_w" elementId="annotationsPartFilterParam" name="annotationsPartFilterParam" value="Text.Subtext"/>
                   </children>
                   <children xsi:type="menu:HandledMenuItem" xmi:id="_gtgS4MBVEeWn7e3vTos4TQ" elementId="org.bbaw.bts.ui.corpus.part.annotations.viewmenu.show.annotation" label="Show Annotations" selected="true" type="Check" command="_ecT_0LlkEeWW7cLsp5AL_w">
                     <parameters xmi:id="_kjklgMBVEeWn7e3vTos4TQ" elementId="annotationsPartFilterParam" name="annotationsPartFilterParam" value="Annotation"/>

@@ -106,12 +106,11 @@ import org.bbaw.bts.ui.egy.parts.egyTextEditor.BTSTextXtextEditedResourceProvide
 import org.bbaw.bts.ui.egy.parts.egyTextEditor.EgyLineNumberRulerColumn;
 import org.bbaw.bts.ui.egy.parts.support.AbstractTextEditorLogic;
 import org.bbaw.bts.ui.egy.textSign.SignTextComposite;
-import org.eclipse.core.internal.preferences.EclipsePreferences;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
-import org.eclipse.core.runtime.preferences.ConfigurationScope;
+import org.eclipse.core.runtime.preferences.IEclipsePreferences;
 import org.eclipse.e4.core.contexts.Active;
 import org.eclipse.e4.core.contexts.ContextInjectionFactory;
 import org.eclipse.e4.core.contexts.IEclipseContext;
@@ -183,7 +182,6 @@ import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextSourceViewer;
-import org.eclipse.xtext.ui.editor.embedded.EmbeddedEditor;
 import org.eclipse.xtext.ui.editor.embedded.EmbeddedEditorFactory;
 import org.eclipse.xtext.ui.editor.embedded.EmbeddedEditorModelAccess;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
@@ -288,10 +286,6 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 	/** The xtext resource provider. */
 	private BTSTextXtextEditedResourceProvider xtextResourceProvider = new BTSTextXtextEditedResourceProvider();
 
-	/** The embedded editor. */
-	@SuppressWarnings("restriction")
-	private EmbeddedEditor embeddedEditor;
-
 	/** The embedded editor comp. */
 	private Composite embeddedEditorComp;
 
@@ -301,9 +295,6 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 
 	/** The embedded editor parent comp. */
 	private Composite embeddedEditorParentComp;
-
-	/** The painter. */
-	private AnnotationPainter painter;
 
 	/** The ruler. */
 	private CompositeRuler ruler;
@@ -421,11 +412,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 
 	private Job delaySelectionJob;
 
-	private EclipsePreferences annotationSettings;
 
-	private Set<String> annotationStrategySet;
-
-	
 	/**
 	 * Instantiates a new egy text editor part.
 	 *
@@ -463,9 +450,8 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 				.activateContext("org.eclipse.ui.contexts.dialogAndWindow");
 		
 		// load annotatin styling settings node
-		Preferences rootNode = ConfigurationScope.INSTANCE.getNode("org.bbaw.bts.ui.corpus");
-		annotationSettings = (EclipsePreferences) rootNode.node(BTSCorpusConstants.PREF_ANNOTATION_SETTINGS);
-		AnnotationToolbarItemCreator.processAndUpateToolbarItemsAnnotationShortcut(part, annotationSettings);
+		AnnotationToolbarItemCreator.processAndUpateToolbarItemsAnnotationShortcut(part, 
+				getAnnotationPreferences());
 		
 		SashForm sashForm = new SashForm(parent, SWT.VERTICAL);
 		sashForm.setLayoutData(new GridData(GridData.FILL_BOTH));
@@ -615,11 +601,6 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 
 					context.get(StaticAccessController.class);
 					
-					// TODO old working
-//					EgyDslActivator activator = EgyDslActivator.getInstance();
-//					injector = activator
-//							.getInjector(EgyDslActivator.ORG_BBAW_BTS_CORPUS_TEXT_EGY_EGYDSL);
-					
 					// new trial
 					injector = textEditorController.findEgyDslInjector();
 					
@@ -630,9 +611,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 							.newEditor(xtextResourceProvider)
 							.showAnnotations(
 									"org.eclipse.xtext.ui.editor.error",
-									"org.eclipse.xtext.ui.editor.warning",
-									BTSSentenceAnnotation.TYPE_HIGHLIGHTED,
-									BTSConstants.ANNOTATION)
+									"org.eclipse.xtext.ui.editor.warning")
 							.withParent(embeddedEditorComp);
 
 					embeddedEditorModelAccess = embeddedEditor
@@ -667,7 +646,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 					oruler = EmbeddedEditorFactory.getOverViewRuler();
 					
 					
-					annotationStrategySet = configureEditorDrawingStrategies(painter, oruler, annotationSettings);
+					configureEditorDrawingStrategies(oruler);
 					if (show_line_number_ruler)
 					{
 						lineNumberRulerColumn = new EgyLineNumberRulerColumn(LINE_SPACE);
@@ -2750,10 +2729,9 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 			sync.asyncExec(new Runnable() {
 				@Override
 				public void run() {
-					Preferences rootNode = ConfigurationScope.INSTANCE.getNode("org.bbaw.bts.ui.corpus");
-					annotationSettings = (EclipsePreferences) rootNode.node(BTSCorpusConstants.PREF_ANNOTATION_SETTINGS);
-					AnnotationToolbarItemCreator.processAndUpateToolbarItemsAnnotationShortcut(part, annotationSettings);
-					configureEditorDrawingStrategies(painter, oruler, annotationSettings);
+					AnnotationToolbarItemCreator.processAndUpateToolbarItemsAnnotationShortcut(part, 
+							getAnnotationPreferences());
+					configureEditorDrawingStrategies(oruler);
 
 				}
 			});
@@ -2797,7 +2775,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 			for (Entry<String, Boolean> e : filters.entrySet()) {
 				String typeId = e.getKey();
 				String strategyId = null;
-				if (annotationStrategySet.contains(typeId))
+				if (getAnnotationStrategySet().contains(typeId))
 				{
 					strategyId = typeId;
 				}
@@ -2833,8 +2811,8 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 						oruler.removeAnnotationType(typeId+suffix);
 					}
 				}
+				painter.paint(IPainter.INTERNAL);
 			}
-			painter.paint(IPainter.INTERNAL);
 		}
 	}
 
@@ -2846,15 +2824,14 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 		// read values from the instance scope
 		String colorString = null;
 		try {
-			for (String childNode : annotationSettings.childrenNames())
+			for (String childNode : getAnnotationPreferences().childrenNames())
 			{
-				Preferences typeNode = annotationSettings.node(childNode);
-				String settingsTypePath = AnnotationToolbarItemCreator.getAnnotationTypePath((EclipsePreferences) typeNode);
-				if (!settingsTypePath.equals(typePath)) continue;
-				
-				colorString = typeNode.get(BTSCorpusConstants.PREF_COLOR, null);
-				
-				break;
+				Preferences typeNode = getAnnotationPreferences().node(childNode);
+				String settingsTypePath = AnnotationToolbarItemCreator.getAnnotationTypePath((IEclipsePreferences) typeNode);
+				if (settingsTypePath.equals(typePath)) {
+					colorString = typeNode.get(BTSCorpusConstants.PREF_COLOR, null);
+					break;
+				}
 			}
 		} catch (BackingStoreException e) {
 			// TODO Auto-generated catch block

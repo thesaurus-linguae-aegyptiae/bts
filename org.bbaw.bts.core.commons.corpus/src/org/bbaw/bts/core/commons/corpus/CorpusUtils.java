@@ -58,13 +58,14 @@ public class CorpusUtils {
 		if(object instanceof BTSObject)
 		{
 			BTSObject btsObject = (BTSObject) object;
-			if (btsObject.getType() != null && !"".equals(btsObject.getType()) 
-					&& btsObject.getSubtype() != null && !"".equals(btsObject.getSubtype()))
-			{
-				typeIdentifier += TYPE_PATH_DELIMITER + btsObject.getType() + TYPE_PATH_DELIMITER + btsObject.getSubtype();
-			} else if (btsObject.getType() != null && !"".equals(btsObject.getType()))
+			if (btsObject.getType() != null && !"".equals(btsObject.getType()))
 			{
 				typeIdentifier += TYPE_PATH_DELIMITER + btsObject.getType();
+
+				if (btsObject.getSubtype() != null && !"".equals(btsObject.getSubtype()))
+				{
+					typeIdentifier += TYPE_PATH_DELIMITER + btsObject.getSubtype();
+				}
 			}
 		}
 		return typeIdentifier;
@@ -79,10 +80,10 @@ public class CorpusUtils {
 			if (typeConfigItem != null)
 			{
 				elementType += TYPE_PATH_DELIMITER + typeConfigItem.getValue();
-			}
-			if (subtypeConfigItem != null)
-			{
-				elementType += TYPE_PATH_DELIMITER + subtypeConfigItem.getValue();
+				if (subtypeConfigItem != null)
+				{
+					elementType += TYPE_PATH_DELIMITER + subtypeConfigItem.getValue();
+				}
 			}
 		}
 		else

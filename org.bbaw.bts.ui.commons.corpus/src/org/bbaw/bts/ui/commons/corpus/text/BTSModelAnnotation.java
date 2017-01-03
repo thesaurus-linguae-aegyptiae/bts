@@ -31,25 +31,17 @@ public class BTSModelAnnotation extends XtextAnnotation
 	
 	public BTSModelAnnotation(String type, BTSIdentifiableItem model)
 	{
-		super(type, false, null, new Issue.IssueImpl(), false);
-		this.model = model;
+		this(type, null, new Issue.IssueImpl(), model);
 	}
-	public BTSModelAnnotation(String type, BTSIdentifiableItem model, BTSInterTextReference interTextReference, BTSObject relatingObject)
+
+	public BTSModelAnnotation(BTSIdentifiableItem model, BTSInterTextReference interTextReference, BTSObject relatingObject)
 	{
-		super(type, false, null, new Issue.IssueImpl(), false);
+		super(CorpusUtils.getTypeIdentifier(relatingObject),
+				false, null, new Issue.IssueImpl(), false);
 		this.model = model;
 		this.interTextReference = interTextReference;
 		this.relatingObject = relatingObject;
-		setType(CorpusUtils.getTypeIdentifier(relatingObject));
 	}
-	public BTSModelAnnotation(String type, boolean isPersistent,
-			IXtextDocument document, Issue issue, boolean isQuickfixable,
-			BTSIdentifiableItem modelObject) {
-		super(type, isPersistent, document, issue, isQuickfixable);
-		this.model = modelObject;
-		setType(CorpusUtils.getTypeIdentifier(model));
-	}
-
 
 	public BTSModelAnnotation(String type, IXtextDocument document, Issue issue,
 			BTSIdentifiableItem modelObject) {

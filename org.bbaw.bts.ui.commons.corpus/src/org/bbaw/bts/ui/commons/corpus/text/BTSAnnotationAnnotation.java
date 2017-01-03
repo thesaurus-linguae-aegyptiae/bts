@@ -18,7 +18,7 @@ public class BTSAnnotationAnnotation extends BTSModelAnnotation {
 
 	public BTSAnnotationAnnotation(BTSIdentifiableItem item,
 			BTSInterTextReference interTextReference, BTSAnnotation relatingObject) {
-		super(CorpusUtils.getTypeIdentifier(relatingObject), item, interTextReference, relatingObject);
+		super(item, interTextReference, relatingObject);
 	}
 	
 	@Override

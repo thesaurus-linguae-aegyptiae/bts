@@ -214,9 +214,11 @@ public class AnnotationsPart implements EventHandler {
 		HashMap<String, Boolean> filters = new HashMap<String, Boolean>();
 		// retrieve annotations part viewmenu
 		MMenu viewmenu = null;
-		for (MMenu m : part.getMenus())
-			if (m.getTags().contains("ViewMenu"))
+		for (MMenu m : part.getMenus()) {
+			if (m.getTags().contains("ViewMenu")) {
 				viewmenu = m;
+			}
+		}
 		if (viewmenu != null) {
 			MMenu submenu = null;
 			MCommand menuFilterCommand = null;
@@ -239,25 +241,29 @@ public class AnnotationsPart implements EventHandler {
 					// retrieve filter command in order to handle possible submenu entries
 					menuFilterCommand = ((MHandledMenuItem) mi).getCommand();
 				}
-				if (mi.getElementId().equals("org.bbaw.bts.ui.corpus.part.annotations.viewmenu.showType.annotation.type"))
+				if (mi.getElementId().
+						equals("org.bbaw.bts.ui.corpus.part.annotations.viewmenu.showType.annotation.type")) {
 					submenu = (MMenu) mi;
+				}
 			}
 			// remove submenu if already there
-			if (submenu != null)
+			if (submenu != null) {
 				submenu.setToBeRendered(false);
+			}
 			// populate menu items for annotation types
 			// retrieve configuration elements for object type annotation
 			BTSConfigItem typeConf = null;
 			try {
 				typeConf = annotationPartController.getAnnoTypesConfigItem();
-			} catch (Exception e){};
+			} catch (Exception e) {
+			};
 			if (typeConf != null && !typeConf.getChildren().isEmpty()) {
 				// initialize submenu for annotation types
 				submenu = MMenuFactory.INSTANCE.createMenu();
 				submenu.setElementId("org.bbaw.bts.ui.corpus.part.annotations.viewmenu.show.annotation.type");
 				submenu.setLabel("Annotation Types");
 				// traverse annotation types configuration branch
-				for (BTSConfig c : typeConf.getChildren())
+				for (BTSConfig c : typeConf.getChildren()) {
 					if (c instanceof BTSConfigItem) {
 						BTSConfigItem confItem = (BTSConfigItem)c;
 						if (CorpusUtils.ANNOTATION_RUBRUM_TYPE.equals(confItem.getValue())) continue;
@@ -270,10 +276,11 @@ public class AnnotationsPart implements EventHandler {
 						List<BTSConfigItem> subTypeConfItems = new Vector<BTSConfigItem>();
 						if (subtypeConf != null) {
 							// filter attached subtype definition nodes
-							for (BTSConfig cc : subtypeConf.getChildren())
-								if (cc instanceof BTSConfigItem)
-									if (((BTSConfigItem)cc).getValue() != null)
+							for (BTSConfig cc : subtypeConf.getChildren()) {
+								if (cc instanceof BTSConfigItem && ((BTSConfigItem)cc).getValue() != null) {
 										subTypeConfItems.add((BTSConfigItem)cc);
+									}
+								}
 						}
 						// if subtypes definitions exist, nest in submenu
 						if (!subTypeConfItems.isEmpty()) {
@@ -298,6 +305,7 @@ public class AnnotationsPart implements EventHandler {
 						menuItemType.setLabel(confItem.getLabel().getTranslation(lang));
 						submenu.getChildren().add(menuItemType);
 					}
+				}
 				viewmenu.getChildren().add(submenu);
 			}
 		}
@@ -574,7 +582,7 @@ public class AnnotationsPart implements EventHandler {
 		{
 			RelatedObjectGroup g = objectWidgetMap.get(selection);
 			if (g != null)
-				setSelectedInternal(Arrays.asList(g), false);
+				setSelectedInternal(new Vector<>(Arrays.asList(g)), false);
 		}
 		else if (selection instanceof BTSCorpusObject && !selection.equals(parentObject))
 		{
@@ -638,16 +646,7 @@ public class AnnotationsPart implements EventHandler {
 		@SuppressWarnings("unchecked")
 		HashMap<String, Boolean> filters = (HashMap<String, Boolean>) context.get("org.bbaw.bts.corpus.annotationsPart.filter");
 		//String key = "org.bbaw.bts.ui.corpus.part.annotations.viewmenu.show.";
-		String key = "";
-		if (o instanceof BTSCorpusObject) {
-			if (o instanceof BTSText) {
-				if (o.getType() != null)
-					if (CorpusUtils.SUBTEXT_TYPE.equalsIgnoreCase(o.getType()))
-						key += CorpusUtils.SUBTEXT_TYPE; 
-			} else if (o instanceof BTSAnnotation)
-				key = CorpusUtils.getTypeIdentifier(o);
-		} else if (o instanceof BTSComment)
-			key += BTSConstants.COMMENT;
+		String key = CorpusUtils.getTypeIdentifier(o);
 		return filters.containsKey(key) ? filters.get(key) : false;
 	}
 

@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: EMFJs Couchdb
-Bundle-SymbolicName: org.eclipselabs.emfjson.couchdb
+Bundle-SymbolicName: org.bbaw.bts.eclipselabs.emfjson.couchdb
 Bundle-Version: 2.0.0.qualifier
 Bundle-Vendor: Eclipse Labs
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
