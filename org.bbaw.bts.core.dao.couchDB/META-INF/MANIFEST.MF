@@ -20,8 +20,7 @@ Require-Bundle: org.bbaw.bts.core.dao,
  org.eclipse.emf.ecore.xmi,
  org.eclipse.e4.core.services;bundle-version="1.1.0",
  org.eclipse.equinox.preferences;bundle-version="3.5.100",
- org.lightcouch,
- jest-complete-osgi;bundle-version="2.0.3"
+ org.lightcouch
 Import-Package: com.google.common.base,
  com.google.common.io,
  com.google.gson;version="2.1.0",

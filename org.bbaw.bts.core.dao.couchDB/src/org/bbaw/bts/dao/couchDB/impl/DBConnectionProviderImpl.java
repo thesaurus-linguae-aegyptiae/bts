@@ -50,12 +50,6 @@ import com.google.gson.JsonPrimitive;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 
-import io.searchbox.client.JestClient;
-import io.searchbox.client.JestClientFactory;
-import io.searchbox.client.config.HttpClientConfig;
-import io.searchbox.core.Search;
-import io.searchbox.core.SearchResult;
-
 // TODO integrate user authentication, authenticated_user, reload dbclient pool
 // when user change
 public class DBConnectionProviderImpl implements DBConnectionProvider

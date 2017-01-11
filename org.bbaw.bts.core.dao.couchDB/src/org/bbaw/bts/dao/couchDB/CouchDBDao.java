@@ -70,12 +70,6 @@ import org.lightcouch.View;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
-import io.searchbox.client.JestClient;
-import io.searchbox.client.JestClientFactory;
-import io.searchbox.client.config.HttpClientConfig;
-import io.searchbox.core.Search;
-import io.searchbox.core.SearchResult;
-
 @Creatable
 public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializable> implements GenericDao<E, K>
 {
@@ -804,32 +798,6 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 		{
 			srq = srq.addFields("eClass");
 			srq.setFetchSource(true);
-		}
-			JestClientFactory factory = new JestClientFactory();
-			 factory.setHttpClientConfig(new HttpClientConfig
-			                        .Builder("http://localhost:9200")
-			                        .multiThreaded(true)
-			                        .build());
-			 JestClient client = factory.getObject();
-			 String queryString = srq.toString();
-			 List<String> indexNamesList = new ArrayList<String>(indexNames.length);
-			 for (String s : indexNames)
-			 {
-				 indexNamesList.add(s);
-			 }
-			 Search search = new Search.Builder(queryString)
-		                // multiple index or types can be added.
-		                .addIndex(indexNamesList)
-		                .build();
-
-		SearchResult resultJest;
-		try {
-			resultJest = client.execute(search);
-			System.out.println(resultJest.getSourceAsStringList().size());
-
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
 		}
 					
 		//execute query
