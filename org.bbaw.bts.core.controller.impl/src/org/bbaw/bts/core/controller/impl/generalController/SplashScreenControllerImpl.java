@@ -6,6 +6,7 @@ import java.net.URL;
 
 import org.bbaw.bts.core.controller.generalController.ISplashScreenController;
 import org.eclipse.core.runtime.FileLocator;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.util.Assert;
 import org.eclipse.osgi.util.NLS;
@@ -21,6 +22,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Monitor;
 import org.eclipse.swt.widgets.Shell;
+import org.osgi.framework.Version;
 
 public class SplashScreenControllerImpl implements ISplashScreenController
 {
@@ -71,6 +73,7 @@ public class SplashScreenControllerImpl implements ISplashScreenController
 
 		// TODO Set the postion and stlye of the text from outside to make the
 		// service reusable
+		Label versionTextLabel = createVersionLabel(shell);
 		msgTextLabel = createMessageLabel(shell);
 
 		Rectangle imageBounds = image.getBounds();
@@ -133,6 +136,21 @@ public class SplashScreenControllerImpl implements ISplashScreenController
 			label.setText(nextMessage);
 		}
 		return label;
+	}
+
+	private Label createVersionLabel(Composite parent) {
+		Label lbl = new Label(parent, SWT.NONE);
+		GridData gd = new GridData(SWT.RIGHT, SWT.TOP, false, true);
+		lbl.setLayoutData(gd);
+		lbl.setForeground(parent.getDisplay().getSystemColor(SWT.COLOR_RED));
+		lbl.setFont(parent.getDisplay().getSystemFont());
+		try {
+			Version v = Platform.getBundle(pluginId).getVersion();
+			lbl.setText("v"+v.getMajor()+"."+v.getMinor()+"."+v.getMicro());
+		} catch (Exception e) {
+			//
+		}
+		return lbl;
 	}
 
 	private Point getMonitorCenter(Shell shell)
