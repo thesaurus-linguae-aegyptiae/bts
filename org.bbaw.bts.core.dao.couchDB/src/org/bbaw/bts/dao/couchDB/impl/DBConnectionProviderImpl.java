@@ -50,6 +50,12 @@ import com.google.gson.JsonPrimitive;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 
+import io.searchbox.client.JestClient;
+import io.searchbox.client.JestClientFactory;
+import io.searchbox.client.config.HttpClientConfig;
+import io.searchbox.core.Search;
+import io.searchbox.core.SearchResult;
+
 // TODO integrate user authentication, authenticated_user, reload dbclient pool
 // when user change
 public class DBConnectionProviderImpl implements DBConnectionProvider
@@ -388,7 +394,8 @@ public class DBConnectionProviderImpl implements DBConnectionProvider
 				        .put("mappings._default_.date_detection", "0");
 
 				boolean useTransportClient = preferences.getBoolean(BTSPluginIDs.PREF_SEARCH_CLIENT_SOCKETTRANSPORT, false);
-				
+				boolean useJestClient = preferences.getBoolean("search_client_socket_jest", true);
+
 				if (useTransportClient)
 				{
 					searchClient = new TransportClient()
@@ -400,6 +407,7 @@ public class DBConnectionProviderImpl implements DBConnectionProvider
                         		preferences.getInt(BTSPluginIDs.PREF_SEARCH_CLIENT_SOCKETTRANSPORT_PORT2, 9301)));
 				
 				}
+				
 				else
 				{
 					searchClient = nodeBuilder()

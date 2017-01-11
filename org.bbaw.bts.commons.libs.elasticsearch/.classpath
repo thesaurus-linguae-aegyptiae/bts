@@ -5,7 +5,7 @@
 	<classpathentry exported="true" kind="lib" path="libs/apache-log4j-extras-1.2.17.jar"/>
 	<classpathentry exported="true" kind="lib" path="libs/asm-4.1.jar"/>
 	<classpathentry exported="true" kind="lib" path="libs/asm-commons-4.1.jar"/>
-	<classpathentry exported="true" kind="lib" path="libs/elasticsearch-1.7.3.jar"/>
+	<classpathentry exported="true" kind="lib" path="libs/elasticsearch-1.7.3.jar" sourcepath="C:/IT/BTS/dev/elasticsearch_sources/elasticsearch-1.7.3-sources.jar"/>
 	<classpathentry exported="true" kind="lib" path="libs/groovy-all-2.4.4.jar"/>
 	<classpathentry exported="true" kind="lib" path="libs/jna-4.1.0.jar"/>
 	<classpathentry exported="true" kind="lib" path="libs/jts-1.13.jar"/>
