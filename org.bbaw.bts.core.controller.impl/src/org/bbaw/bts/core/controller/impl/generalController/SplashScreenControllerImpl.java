@@ -27,7 +27,7 @@ public class SplashScreenControllerImpl implements ISplashScreenController
 	private String pluginId = null;
 	private String splashPath = "splash.bmp";
 	private Shell splashShell = null;
-	private Label textLabel = null;
+	private Label msgTextLabel = null;
 	private String nextMessage = "Application Starting... ";
 
 	@Override
@@ -63,16 +63,15 @@ public class SplashScreenControllerImpl implements ISplashScreenController
 		shell.setBackgroundMode(SWT.INHERIT_DEFAULT);
 
 		final GridLayout layout = new GridLayout();
+		layout.marginWidth = 10;
 		layout.numColumns = 1;
-		layout.marginHeight = 40;
-		layout.marginWidth = 20;
 		layout.verticalSpacing = 6;
 		layout.horizontalSpacing = 6;
 		shell.setLayout(layout);
 
 		// TODO Set the postion and stlye of the text from outside to make the
 		// service reusable
-		textLabel = createTextLabel(shell);
+		msgTextLabel = createMessageLabel(shell);
 
 		Rectangle imageBounds = image.getBounds();
 		shell.setSize(imageBounds.width, imageBounds.height);
@@ -116,7 +115,7 @@ public class SplashScreenControllerImpl implements ISplashScreenController
 		}
 	}
 
-	private Label createTextLabel(Composite parent)
+	private Label createMessageLabel(Composite parent)
 	{
 		Label label = new Label(parent, SWT.WRAP);
 		GridData gd = new GridData();
@@ -126,7 +125,7 @@ public class SplashScreenControllerImpl implements ISplashScreenController
 		gd.grabExcessVerticalSpace = true;
 		label.setLayoutData(gd);
 
-		label.setForeground(parent.getDisplay().getSystemColor(SWT.COLOR_WHITE));
+		label.setForeground(parent.getDisplay().getSystemColor(SWT.COLOR_GRAY));
 		label.setFont(parent.getDisplay().getSystemFont());
 
 		if (nextMessage != null)
@@ -159,14 +158,14 @@ public class SplashScreenControllerImpl implements ISplashScreenController
 	@Override
 	public void setMessage(final String message)
 	{
-		if (textLabel != null && !textLabel.isDisposed())
+		if (msgTextLabel != null && !msgTextLabel.isDisposed())
 		{
 			splashShell.getDisplay().syncExec(new Runnable()
 			{
 				@Override
 				public void run()
 				{
-					textLabel.setText(message);
+					msgTextLabel.setText(message);
 					splashShell.layout();
 					splashShell.update();
 				}
