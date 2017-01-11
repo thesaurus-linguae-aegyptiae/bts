@@ -233,12 +233,9 @@ public class BTSConfigurationServiceImpl extends GenericObjectServiceImpl<BTSCon
 			String objectState, boolean registerQuery, IProgressMonitor monitor)
 	{
 		List<BTSConfiguration> objects = new Vector<BTSConfiguration>();
-		for (String p : getActiveProjects())
-		{
-			objects.addAll(configurationDao.query(query, p + BTSCoreConstants.ADMIN_SUFFIX, p
-							+ BTSCoreConstants.ADMIN_SUFFIX, objectState,
-							registerQuery));
-		}
+		String[] indexArray = buildIndexArray();
+		objects.addAll(configurationDao.query(query, indexArray, indexArray, objectState,
+				registerQuery));
 		return filter(objects);
 	}
 	@Override
@@ -1260,12 +1257,9 @@ public class BTSConfigurationServiceImpl extends GenericObjectServiceImpl<BTSCon
 	@Override
 	public List<String> queryAsJsonString(BTSQueryRequest query, String objectState, IProgressMonitor monitor) {
 		List<String> objects = new Vector<String>();
-		for (String p : getActiveProjects())
-		{
-			objects.addAll(configurationDao.queryAsJsonString(query, p + BTSCoreConstants.ADMIN_SUFFIX, p
-							+ BTSCoreConstants.ADMIN_SUFFIX, objectState,
-							false));
-		}
+		String[] indexArray = buildIndexArray();
+		objects.addAll(configurationDao.queryAsJsonString(query, indexArray, indexArray, objectState,
+						false));
 		return objects;
 	}
 
@@ -1281,34 +1275,34 @@ public class BTSConfigurationServiceImpl extends GenericObjectServiceImpl<BTSCon
 
 
 
-	private void copyChildrenRecursively(BTSConfig config,
-			BTSConfig originalconfiguration, Copier copier) {
-		for (BTSConfig c : originalconfiguration.getChildren())
-		{
-			BTSConfigItem ci = BtsmodelFactory.eINSTANCE.createBTSConfigItem();
-			String id = ci.get_id();
-			ci = (BTSConfigItem) copier.copy(c);
-			ci.set_id(id);
-			config.getChildren().add(ci);
-			copyChildrenRecursively(ci, c, copier);
-		}
-		if (originalconfiguration instanceof BTSConfigItem)
-		{
-			BTSTranslations t = ((BTSConfigItem)originalconfiguration).getDescription();
-			BTSTranslations ti = (BTSTranslations) copier.copy(t);
-			for (BTSTranslation tt : t.getTranslations())
-			{
-				BTSTranslation tti = BtsmodelFactory.eINSTANCE.createBTSTranslation();
-				tti = (BTSTranslation) copier.copy(tt);
-				ti.getTranslations().add(tti);
-			}
-			((BTSConfigItem)config).setDescription(ti);
-			
-			BTSPassportEditorConfig p = ((BTSConfigItem)originalconfiguration).getPassportEditorConfig();
-			BTSPassportEditorConfig pi = (BTSPassportEditorConfig) copier.copy(p);
-			((BTSConfigItem)config).setPassportEditorConfig(pi);
-		}
-	}
+//	private void copyChildrenRecursively(BTSConfig config,
+//			BTSConfig originalconfiguration, Copier copier) {
+//		for (BTSConfig c : originalconfiguration.getChildren())
+//		{
+//			BTSConfigItem ci = BtsmodelFactory.eINSTANCE.createBTSConfigItem();
+//			String id = ci.get_id();
+//			ci = (BTSConfigItem) copier.copy(c);
+//			ci.set_id(id);
+//			config.getChildren().add(ci);
+//			copyChildrenRecursively(ci, c, copier);
+//		}
+//		if (originalconfiguration instanceof BTSConfigItem)
+//		{
+//			BTSTranslations t = ((BTSConfigItem)originalconfiguration).getDescription();
+//			BTSTranslations ti = (BTSTranslations) copier.copy(t);
+//			for (BTSTranslation tt : t.getTranslations())
+//			{
+//				BTSTranslation tti = BtsmodelFactory.eINSTANCE.createBTSTranslation();
+//				tti = (BTSTranslation) copier.copy(tt);
+//				ti.getTranslations().add(tti);
+//			}
+//			((BTSConfigItem)config).setDescription(ti);
+//			
+//			BTSPassportEditorConfig p = ((BTSConfigItem)originalconfiguration).getPassportEditorConfig();
+//			BTSPassportEditorConfig pi = (BTSPassportEditorConfig) copier.copy(p);
+//			((BTSConfigItem)config).setPassportEditorConfig(pi);
+//		}
+//	}
 
 
 	
