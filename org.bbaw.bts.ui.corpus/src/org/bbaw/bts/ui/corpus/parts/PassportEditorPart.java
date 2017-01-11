@@ -559,6 +559,10 @@ public class PassportEditorPart {
 								sync.asyncExec(new Runnable() {
 									@Override
 									public void run() {
+										
+										// check if underlying widget has already been disposed - editor closed.
+										if (subtypeCMB_Main_viewer.getCombo().isDisposed()) return;
+										
 										subtypeCMB_Main_viewer
 												.setInput(passportConfigurationController
 														.getObjectSubtypeConfigItemProcessedClones(corpusObject));
