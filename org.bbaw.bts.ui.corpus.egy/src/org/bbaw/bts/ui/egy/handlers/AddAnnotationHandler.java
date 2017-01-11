@@ -24,6 +24,7 @@ public class AddAnnotationHandler {
 	@Execute
 	public void execute(
 			@Named(IServiceConstants.ACTIVE_SELECTION) @Optional BTSTextSelectionEvent event,
+			@Optional @Named("annotationTypePath") String annotationTypePath,
 			@Named(IServiceConstants.ACTIVE_SHELL) final Shell shell,
 			CorpusNavigatorController corpusNavigatorController,
 			IEclipseContext context) {
@@ -32,7 +33,7 @@ public class AddAnnotationHandler {
 			if (dbbaseObject != null)
 			{
 				final BTSAnnotation object = corpusNavigatorController
-						.createNewAnnotation((BTSCorpusObject) dbbaseObject);
+						.createNewAnnotation((BTSCorpusObject) dbbaseObject, annotationTypePath);
 				BTSRelation rel = null;
 				if (object.getRelations().isEmpty())
 				{

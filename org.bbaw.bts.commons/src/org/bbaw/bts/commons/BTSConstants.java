@@ -89,7 +89,7 @@ public class BTSConstants
 	public static final String THS_ENTRY = "Thesaurus Entry";
 	public static final String ABSTRACT_TEXT = "Abstract Text";
 
-	private static final String COMMENT = "Comment";
+	public static final String COMMENT = "Comment";
 
 	public static final String[] BASIC_OBJECT_TYPES = new String[] { BTSConstants.ABSTRACT_TEXT,
 			BTSConstants.ANNOTATION, BTSConstants.CORPUS_OBJECT,

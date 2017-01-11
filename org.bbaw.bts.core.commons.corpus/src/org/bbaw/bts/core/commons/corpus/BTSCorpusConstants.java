@@ -131,6 +131,37 @@ public class BTSCorpusConstants {
 
 	public static final String PREF_ATEXT_NAVIGATOR_SORTBYKEY = "pref_atext_navigator_sortbysortkey";
 
+	public static final String PREF_COMMENT_COLOR = "pref_comment_color";
+
+	public static final String PREF_SUBTEXT_COLOR = "pref_subtext_color";
+
+	public static final String PREF_ANNOTATION_SETTINGS = "pref_annotation_settings";
+	
+	public static final String PREF_ANNOTATION_TYPE = "pref_annotation_type";
+
+	public static final String PREF_ANNOTATION_SUBTYPE = "pref_annotation_subtype";
+	
+	public static final String PREF_COLOR = "pref_color";
+
+	public static final String PREF_TOOLBAR_SHORTCUT = "pref_toolbar_shortcut";
+	
+	public static final String PREF_TOOLBAR_VISIBLE = "pref_toolbar_visible";
+
+	public static final String PREF_HIGHLIGHTING_TYPE = "pref_highlighting_type";
+
+	public static final String PREF_TOOLBAR_SHORTCUT_TIP = "pref_toolbar_shortcut_tip";
+	
+	public static final String ANNOTATION_HIGHLIGHTING_TYPE_UNDERLINE = "underline";
+
+	public static final String ANNOTATION_HIGHLIGHTING_TYPE_TEXTCOLOR = "text color";
+	
+	public static final String ANNOTATION_HIGHLIGHTING_TYPE_BACKGROUND_COLOR ="background color";
+
+
+	public static final String[] ANNOTATION_HIGHLIGHTING_TYPES = new String[]{ANNOTATION_HIGHLIGHTING_TYPE_UNDERLINE,
+			ANNOTATION_HIGHLIGHTING_TYPE_TEXTCOLOR, ANNOTATION_HIGHLIGHTING_TYPE_BACKGROUND_COLOR};
+
+	public static final String PREF_DEFAULT_HIGHLIGHTING_TYPE = ANNOTATION_HIGHLIGHTING_TYPE_UNDERLINE;
 
 
 	private BTSCorpusConstants(){}

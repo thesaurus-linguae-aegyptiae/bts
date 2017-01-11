@@ -28,6 +28,7 @@ import org.bbaw.bts.corpus.btsCorpusModel.BTSText;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSTextItems;
 import org.bbaw.bts.ui.commons.corpus.events.BTSTextSelectionEvent;
 import org.bbaw.bts.ui.commons.corpus.text.BTSModelAnnotation;
+import org.bbaw.bts.ui.commons.corpus.text.BTSSentenceAnnotation;
 import org.bbaw.bts.ui.commons.utils.BTSUIConstants;
 import org.eclipse.core.databinding.observable.ChangeEvent;
 import org.eclipse.core.databinding.observable.IChangeListener;
@@ -364,41 +365,41 @@ public class EgyTextTranslationPart {
 			boolean highlighted) {
 		if (annotationModel == null) return;
 		for (BTSModelAnnotation a : relatingObjectsAnnotations) {
-			Position pos = annotationModel.getPosition(a);
-			if (pos == null) return;
-			StyleRange[] ranges = textViewer
-					.getTextWidget()
-					.getStyleRanges(pos.getOffset(), pos.getLength());
-			Color color;
-			if (highlighted)
-			{
-				color = BTSUIConstants.COLOR_SENTENCE;
-			}
-			else
-			{
-				color = BTSUIConstants.COLOR_WIHTE;
-			}
-			if (ranges != null && !(ranges.length == 0))
-			{
-				
-				for (StyleRange sr : ranges)
-				{
-					sr.background = color;
-					try {
-						textViewer
-						.getTextWidget().setStyleRange(sr);
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-				}
-			}
-			else
-			{
-				StyleRange sr = new StyleRange(pos.getOffset(), pos.getLength(), BTSUIConstants.COLOR_BLACK, color);
-				textViewer
-				.getTextWidget().setStyleRange(sr);
-			}
-			textViewer.getTextWidget().update();
+//			Position pos = annotationModel.getPosition(a);
+//			if (pos == null) return;
+//			StyleRange[] ranges = textViewer
+//					.getTextWidget()
+//					.getStyleRanges(pos.getOffset(), pos.getLength());
+//			Color color;
+//			if (highlighted)
+//			{
+//				color = BTSUIConstants.COLOR_SENTENCE;
+//			}
+//			else
+//			{
+//				color = BTSUIConstants.COLOR_WIHTE;
+//			}
+//			if (ranges != null && !(ranges.length == 0))
+//			{
+//				
+//				for (StyleRange sr : ranges)
+//				{
+//					sr.background = color;
+//					try {
+//						textViewer
+//						.getTextWidget().setStyleRange(sr);
+//					} catch (Exception e) {
+//						e.printStackTrace();
+//					}
+//				}
+//			}
+//			else
+//			{
+//				StyleRange sr = new StyleRange(pos.getOffset(), pos.getLength(), BTSUIConstants.COLOR_BLACK, color);
+//				textViewer
+//				.getTextWidget().setStyleRange(sr);
+//			}
+//			textViewer.getTextWidget().update();
 			a.setHighlighted(highlighted);
 		}
 	}
@@ -505,16 +506,16 @@ public class EgyTextTranslationPart {
 	private void configureEditorDrawingStrategies(AnnotationPainter painter2) {
 		// Sentence
 		ITextStyleStrategy strategy = new org.eclipse.jface.text.source.AnnotationPainter.HighlightingStrategy();
-		painter2.addTextStyleStrategy(BTSModelAnnotation.TYPE + ".highlighted", strategy);
-		painter2.setAnnotationTypeColor(BTSModelAnnotation.TYPE + ".highlighted",
+		painter2.addTextStyleStrategy(BTSSentenceAnnotation.TYPE + ".highlighted", strategy);
+		painter2.setAnnotationTypeColor(BTSSentenceAnnotation.TYPE + ".highlighted",
 				BTSUIConstants.COLOR_SENTENCE);
-		painter2.addAnnotationType(BTSModelAnnotation.TYPE + ".highlighted", BTSModelAnnotation.TYPE);
+		painter2.addAnnotationType(BTSSentenceAnnotation.TYPE + ".highlighted", BTSSentenceAnnotation.TYPE);
 		
 		ITextStyleStrategy strategy2 = new org.eclipse.jface.text.source.AnnotationPainter.HighlightingStrategy();
-		painter2.addTextStyleStrategy(BTSModelAnnotation.TYPE, strategy2);
-		painter2.setAnnotationTypeColor(BTSModelAnnotation.TYPE,
+		painter2.addTextStyleStrategy(BTSSentenceAnnotation.TYPE, strategy2);
+		painter2.setAnnotationTypeColor(BTSSentenceAnnotation.TYPE,
 				BTSUIConstants.COLOR_SENTENCE);
-		painter2.addAnnotationType(BTSModelAnnotation.TYPE, BTSModelAnnotation.TYPE);
+		painter2.addAnnotationType(BTSSentenceAnnotation.TYPE, BTSSentenceAnnotation.TYPE);
 		
 //		// comment
 //				CommentDrawingStrategy commentStrategy = new CommentDrawingStrategy();

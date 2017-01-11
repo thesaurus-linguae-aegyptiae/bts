@@ -5,8 +5,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.bbaw.bts.btsviewmodel.TreeNodeWrapper;
-import org.bbaw.bts.corpus.btsCorpusModel.BTSAnnotation;
-import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSLemmaEntry;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSLemmaSubentry;
 import org.bbaw.bts.searchModel.BTSQueryResultAbstract;
@@ -17,8 +15,6 @@ import org.eclipse.jface.viewers.ContentViewer;
 public interface LemmaNavigatorController extends GenericCorpusObjectNavigatorController<BTSLemmaEntry, String>{
 
 	BTSLemmaSubentry createNewSubEntry();
-
-	BTSAnnotation createNewAnnotation(BTSCorpusObject selection);
 
 	LinkedHashMap<String, TreeNodeWrapper> loadNodesWithChildren(List<BTSLemmaEntry> subList,
 			IProgressMonitor monitor, boolean b);

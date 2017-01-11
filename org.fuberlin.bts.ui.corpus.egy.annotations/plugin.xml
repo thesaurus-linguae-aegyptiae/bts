@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+   <extension
+         id="modelContribution"
+         point="org.eclipse.e4.workbench.model">
+      <fragment
+            apply="always"
+            uri="fragment.e4xmi">
+      </fragment>
+   </extension>
+   <extension
+         point="com.opcoach.e4.preferences.e4PreferencePages">
+      <page
+            category="org.bbaw.bts.ui.main.btsgeneral.page"
+            class="org.fuberlin.bts.ui.corpus.egy.annotations.preferences.TextAnnotationsPreferencePage"
+            id="org.fuberlin.bts.ui.corpus.egy.annotations.page"
+            name="Text Annotation Part">
+      </page>
+   </extension>
+
+</plugin>

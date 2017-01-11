@@ -167,7 +167,13 @@ public class CorpusSettingsPage extends FieldEditorPreferencePage {
 	{
 
 		corpora = corpusController.listTextCorpora(null);
-		mainCorpusComboViewer.setInput(corpora);
+
+		for (BTSTextCorpus corpus : corpora) {
+			if (corpusController.isWriteable(corpus)) {
+				mainCorpusComboViewer.add(corpus);
+			}
+		}
+
 		List<BTSCorpusObject> availableCorpora = new Vector<BTSCorpusObject>(1);
 
 		List<BTSCorpusObject> chosenCorpora = new Vector<BTSCorpusObject>(1);
