@@ -1136,10 +1136,11 @@ public class BTSConfigurationServiceImpl extends GenericObjectServiceImpl<BTSCon
 						BTSConfigItem configItem = findConfigItemByConfigPath(referencedType, configuration);
 						if (configItem != null)
 						{
-							for (BTSConfig cc : configItem.getChildren())
-							{
-								rootItem.getChildren().add(EcoreUtil.copy(cc));
-							}
+							rootItem.getChildren().add(EcoreUtil.copy(configItem));
+//							for (BTSConfig cc : configItem.getChildren())
+//							{
+//								rootItem.getChildren().add(EcoreUtil.copy(cc));
+//							}
 						}
 					}
 				}

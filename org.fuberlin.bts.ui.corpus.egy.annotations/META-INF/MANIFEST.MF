@@ -37,7 +37,8 @@ Require-Bundle: javax.inject,
  org.bbaw.bts.ui.corpus.egy.commons;bundle-version="3.1.0",
  org.bbaw.bts.core.commons.corpus;bundle-version="3.1.0",
  bts.transform.aux.model;bundle-version="1.0.0",
- com.opcoach.e4.preferences;bundle-version="1.0.0"
+ com.opcoach.e4.preferences;bundle-version="1.0.0",
+ javax.annotation;bundle-version="1.2.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Import-Package: javax.annotation;version="1.2.0",
  jsesh.mdc,

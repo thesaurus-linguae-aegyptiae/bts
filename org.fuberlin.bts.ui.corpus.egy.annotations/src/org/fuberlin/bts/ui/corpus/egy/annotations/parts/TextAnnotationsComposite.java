@@ -1262,16 +1262,25 @@ public class TextAnnotationsComposite extends Composite implements IBTSEditor {
 		// read values from the instance scope
 		String colorString = null;
 		String expandedType = processExpandedObjectType(object);
+		String parentType = null;
+		if (object.getSubtype() != null && !"".equals(object.getSubtype()))
+		{
+			parentType = expandedType.substring(0, expandedType.length() - object.getSubtype().length() -1);
+		}
 		try {
 			for (String childNode : annotationSettings.childrenNames())
 			{
 				Preferences typeNode = annotationSettings.node(childNode);
 				String settingsTypePath = AnnotationToolbarItemCreator.getAnnotationTypePath((EclipsePreferences) typeNode);
-				if (!settingsTypePath.equals(expandedType)) continue;
+				if (settingsTypePath.equals(expandedType))
+				{
+					colorString = typeNode.get(BTSCorpusConstants.PREF_COLOR, null);
+					break;
+				} else if (settingsTypePath.equals(parentType))
+				{
+					colorString = typeNode.get(BTSCorpusConstants.PREF_COLOR, null);
+				}
 				
-				colorString = typeNode.get(BTSCorpusConstants.PREF_COLOR, null);
-				
-				break;
 			}
 		} catch (BackingStoreException e) {
 			// TODO Auto-generated catch block

@@ -36,5 +36,6 @@
   </fragments>
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_7XsecKJuEeaAj_saD2lZaA" featurename="children" parentElementId="org.eclipse.ui.window">
     <elements xsi:type="menu:HandledMenuItem" xmi:id="_ThLm8KJvEeaAj_saD2lZaA" elementId="org.fuberlin.bts.ui.corpus.egy.annotations.handledmenuitem.opentextannotationpart" label="Open Text Annotation Part" iconURI="platform:/plugin/org.fuberlin.bts.ui.corpus.egy.annotations/icons/Sample.png" tooltip="Open Text Annotation Part" selected="true" command="_2txicKJtEeaAj_saD2lZaA"/>
+    <elements xsi:type="menu:HandledMenuItem" xmi:id="_e0uf8NfyEea_BK6vC-GDeQ" elementId="org.fuberlin.bts.ui.corpus.egy.annotations.handledmenuitem.test" label="TEST" command="_NcrFwKWvEeaAj_saD2lZaA"/>
   </fragments>
 </fragment:ModelFragments>
