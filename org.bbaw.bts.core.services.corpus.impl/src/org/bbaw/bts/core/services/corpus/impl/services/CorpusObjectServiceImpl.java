@@ -774,7 +774,7 @@ implements 	CorpusObjectService, BTSObjectSearchService, MoveObjectAmongProjectD
 				}
 				response = response.substring(0, response.length() -1);
 				response = "-" + getPassportConfigLabel(response);
-				return  response += ":" + item.getValue() + "\n";
+				return  response += ": " + item.getValue() + "\n";
 			}
 			return null;
 		}
