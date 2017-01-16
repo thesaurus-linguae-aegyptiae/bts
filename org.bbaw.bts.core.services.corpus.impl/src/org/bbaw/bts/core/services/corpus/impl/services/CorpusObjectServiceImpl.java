@@ -422,7 +422,7 @@ implements 	CorpusObjectService, BTSObjectSearchService, MoveObjectAmongProjectD
 
 			try {
 				objects.addAll(corpusObjectDao.query(query, indexArray, indexArray, objectState,
-						false));
+						registerQuery));
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
