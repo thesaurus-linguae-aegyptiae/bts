@@ -3003,7 +3003,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 
 			// relObject ist neu
 			for (BTSRelation rel : object.getRelations()) {
-				if (rel.getObjectId() != null
+				if (rel.getObjectId() != null && text != null
 						&& rel.getObjectId().equals(text.get_id())) {
 					for (BTSInterTextReference ref : rel.getParts()) {
 						int offset = 0;
