@@ -80,6 +80,8 @@ import org.eclipse.draw2d.LineBorder;
 import org.eclipse.draw2d.MouseEvent;
 import org.eclipse.draw2d.MouseListener;
 import org.eclipse.draw2d.MouseMotionListener;
+import org.eclipse.draw2d.Panel;
+import org.eclipse.draw2d.ToolTipHelper;
 import org.eclipse.draw2d.ToolbarLayout;
 import org.eclipse.draw2d.Viewport;
 import org.eclipse.draw2d.geometry.Dimension;
@@ -177,6 +179,11 @@ public class TextAnnotationsComposite extends Composite implements IBTSEditor {
 	@Preference(value = "SHOWALLPROPERTIES", nodePath = Activator.BUNDLE_ID)
 	private Boolean showAllProperties;
 
+	
+	@Inject
+	@Preference(value = "SHOWALLPROPERTIES_ONHOVER", nodePath = Activator.BUNDLE_ID)
+	private boolean showAllProperties_onhover;
+	
 	@Inject
 	private IEclipseContext context;
 	
@@ -232,6 +239,9 @@ public class TextAnnotationsComposite extends Composite implements IBTSEditor {
 	private EclipsePreferences annotationSettings;
 	private Comparator annotationsGroupByConfigurationSortKeySorter;
 	public Map<String, Integer> annotationTypeSortOrderMap;
+	private MouseMotionListener mousemotionListener;
+	private ToolTipHelper toolTipHelper;
+
 	
 	private static final String VERS_FRONTER_MARKER = "\uDB80\uDC81"; //mv
 	private static final String VERS_BREAK_MARKER = "\uDB80\uDC80"; //v
@@ -487,6 +497,8 @@ public class TextAnnotationsComposite extends Composite implements IBTSEditor {
 		};
 		canvas = new FigureCanvas(editorComposite);
 
+	    toolTipHelper = new ToolTipHelper(editorComposite);
+		
 		canvas.setBackground(COLOR_CANVAS_BACKGROUND);
 		canvas.setLayout(new FillLayout());
 		container = new Figure();
@@ -519,6 +531,68 @@ public class TextAnnotationsComposite extends Composite implements IBTSEditor {
 				}
 			}
 		};
+		
+		mousemotionListener = new MouseMotionListener() {
+			
+			@Override
+			public void mouseMoved(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseHover(MouseEvent mouseEvent) {
+				if (!showAllProperties_onhover) return;
+				
+				AnnotationFigure af = (AnnotationFigure) mouseEvent.getSource();
+				BTSObject object = (BTSObject) af.getModelObject();
+				AnnotationFigure fig = new AnnotationFigure(object);
+				ToolbarLayout layout = new ToolbarLayout();
+				layout.setMinorAlignment(ToolbarLayout.ALIGN_CENTER);
+				layout.setStretchMinorAxis(false);
+				layout.setSpacing(0);
+				layout.setHorizontal(false);
+				fig.setLayoutManager(layout);
+				// add name
+				org.eclipse.draw2d.Label l = new org.eclipse.draw2d.Label();
+				String label = object.getName() + "\n";
+				if (object instanceof BTSCorpusObject)
+				{
+					label += passportConfigurationController.getAllPassportDataAsString((BTSCorpusObject) object);
+				}
+				else if (object instanceof BTSComment)
+				{
+					label = ((BTSComment)object).getComment();
+				}
+				if (label != null && !"".equals(label))
+				{
+					l.setText(label);
+					fig.add(l);
+				}
+			    int x = Display.getDefault().getCursorLocation().x + 20;
+			    int y = Display.getDefault().getCursorLocation().y + 20;
+				toolTipHelper.displayToolTipNear(af, fig, x, y);
+				
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseDragged(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+		};
 		container.setFocusTraversable(true);
 		container.addKeyListener(keyListener);
 
@@ -527,6 +601,8 @@ public class TextAnnotationsComposite extends Composite implements IBTSEditor {
 		max_line_length = d.intValue();
 
 	}
+	
+	
 	
 	private void enableDisableSelectionButtons() {
 		toBeginningButton.setEnabled(sentenceSeletionIndex != 0);
@@ -1159,6 +1235,7 @@ public class TextAnnotationsComposite extends Composite implements IBTSEditor {
 		
 		fig.setModelObject(object);
 		fig.addMouseListener(elementSelectionListener);
+		fig.addMouseMotionListener(mousemotionListener);
 
 		ElementFigure startFigure = annotationBaseFigureStartMap.get(object.get_id());
 		ElementFigure endFigure = annotationBaseFigureEndMap.get(object.get_id());
