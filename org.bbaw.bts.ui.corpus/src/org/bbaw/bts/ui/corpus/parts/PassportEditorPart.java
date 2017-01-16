@@ -619,6 +619,7 @@ public class PassportEditorPart {
 						sync.asyncExec(new Runnable() {
 							@Override
 							public void run() {
+								if (tabFolder == null || tabFolder.isDisposed()) return;
 								updateGenericTabItems(tabFolder);
 							}
 						});
