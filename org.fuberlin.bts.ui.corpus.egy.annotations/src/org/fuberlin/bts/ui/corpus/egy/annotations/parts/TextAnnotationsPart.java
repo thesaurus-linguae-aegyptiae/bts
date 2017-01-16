@@ -1,23 +1,15 @@
 package org.fuberlin.bts.ui.corpus.egy.annotations.parts;
 
 import java.lang.reflect.InvocationTargetException;
-import java.util.EventObject;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.Vector;
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import org.bbaw.bts.btsmodel.BTSConfig;
-import org.bbaw.bts.btsmodel.BTSConfigItem;
 import org.bbaw.bts.btsmodel.BTSIdentifiableItem;
-import org.bbaw.bts.btsmodel.BTSInterTextReference;
 import org.bbaw.bts.btsmodel.BTSObject;
-import org.bbaw.bts.commons.BTSCommonsActivator;
 import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.core.commons.corpus.BTSCorpusConstants;
 import org.bbaw.bts.core.controller.generalController.EditingDomainController;
@@ -48,22 +40,11 @@ import org.eclipse.e4.core.di.extensions.EventTopic;
 import org.eclipse.e4.core.di.extensions.Preference;
 import org.eclipse.e4.ui.di.UIEventTopic;
 import org.eclipse.e4.ui.di.UISynchronize;
-import org.eclipse.e4.ui.model.application.commands.MCommand;
-import org.eclipse.e4.ui.model.application.commands.MCommandsFactory;
-import org.eclipse.e4.ui.model.application.commands.MParameter;
-import org.eclipse.e4.ui.model.application.ui.MDirtyable;
 import org.eclipse.e4.ui.model.application.ui.basic.MPart;
-import org.eclipse.e4.ui.model.application.ui.menu.ItemType;
-import org.eclipse.e4.ui.model.application.ui.menu.MHandledMenuItem;
-import org.eclipse.e4.ui.model.application.ui.menu.MMenu;
-import org.eclipse.e4.ui.model.application.ui.menu.MMenuElement;
-import org.eclipse.e4.ui.model.application.ui.menu.MMenuFactory;
-import org.eclipse.e4.ui.services.EContextService;
 import org.eclipse.e4.ui.services.IServiceConstants;
 import org.eclipse.e4.ui.services.internal.events.EventBroker;
 import org.eclipse.e4.ui.workbench.modeling.EPartService;
 import org.eclipse.e4.ui.workbench.modeling.ESelectionService;
-import org.eclipse.emf.common.command.Command;
 import org.eclipse.emf.common.command.CommandStackListener;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.edit.domain.EditingDomain;
@@ -72,7 +53,6 @@ import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Shell;
-import org.fuberlin.bts.ui.corpus.egy.annotations.internal.Activator;
 import org.osgi.service.prefs.Preferences;
 
 public class TextAnnotationsPart implements IBTSEditor {
@@ -80,10 +60,6 @@ public class TextAnnotationsPart implements IBTSEditor {
 	public static final String PART_ID = "org.fuberlin.bts.ui.corpus.egy.annotations.TextAnnotationsPart";
 
 
-	/** The dirty. */
-	@Optional
-	@Inject
-	private MDirtyable dirty;
 
 	/** The text editor controller. */
 	@Inject
@@ -92,9 +68,6 @@ public class TextAnnotationsPart implements IBTSEditor {
 	@Inject
 	@Preference(value = "locale_lang", nodePath = "org.bbaw.bts.app")
 	private String lang;
-	
-	@Inject
-	private AnnotationPartController annotationPartController;
 	
 	/** The sync. */
 	@Inject
@@ -108,17 +81,9 @@ public class TextAnnotationsPart implements IBTSEditor {
 	@Inject
 	IEclipseContext context;
 	
-	/** The context service. */
-	@Inject
-	private EContextService contextService;
-	
 	/** The part service. */
 	@Inject
 	private EPartService partService;
-	
-	/** The editing domain controller. */
-	@Inject
-	private EditingDomainController editingDomainController;
 	
 	/** The selection service. */
 	@Inject
@@ -146,22 +111,14 @@ public class TextAnnotationsPart implements IBTSEditor {
 
 	private List<BTSObject>  relatingObjects;
 
-	private Map<String, List<BTSInterTextReference>> relatingObjectsMap;
-
 	protected String queryId;
 	
-	private BTSRelatingObjectsLoadingEvent relatingObjectsEvent;
-
 	/** The editing domain. */
 	private EditingDomain editingDomain;
 	
 	/** The command stack listener. */
 	private CommandStackListener commandStackListener;
 	
-	/** The local command cache set. */
-	private Set<Command> localCommandCacheSet = new HashSet<Command>();
-
-
 	private EclipsePreferences annotationSettings;
 	
 	public TextAnnotationsPart() {
@@ -240,22 +197,12 @@ public class TextAnnotationsPart implements IBTSEditor {
 					
 					if (selection instanceof BTSTextSelectionEvent
 							&& ((BTSTextSelectionEvent) selection).data instanceof EObject) {
-						BTSTextSelectionEvent event = (BTSTextSelectionEvent) selection;
 						// remove listener from old editingDomain
 						if (editingDomain != null) {
 							editingDomain.getCommandStack()
 									.removeCommandStackListener(
 											commandStackListener);
 						}
-						// get selected item, add listener to domain
-						if (!event.getSelectedItems().isEmpty()) {
-							editingDomain = getEditingDomain((EObject) event.getSelectedItems().get(0));
-							editingDomain.getCommandStack()
-									.addCommandStackListener(
-											getCommandStackListener());
-							 
-						}
-						
 						
 					}
 					selectionService.setSelection(selection);
@@ -304,7 +251,7 @@ public class TextAnnotationsPart implements IBTSEditor {
 	{
 		//logger.info("AnnotationsPart eventReceivedUpdates. object: " + notification);
 		if (notification.getQueryIds() != null){
-			List<BTSModelUpdateNotification> notifications = new Vector<>();
+			new Vector<>();
 			for (String id : notification.getQueryIds())
 			{
 				if (id.equals(queryId))
@@ -343,16 +290,6 @@ public class TextAnnotationsPart implements IBTSEditor {
 	}
 
 
-	/**
-	 * Gets the editing domain.
-	 *
-	 * @param editingObject the editing object
-	 * @return the editing domain
-	 */
-	private EditingDomain getEditingDomain(EObject editingObject) {
-		return editingDomainController.getEditingDomain(editingObject);
-	}
-	
 	/**
 	 * Sets the selection.
 	 *
@@ -489,102 +426,6 @@ public class TextAnnotationsPart implements IBTSEditor {
 		
 	}
 	
-	private void extendAnnotationsFilterMenu() {
-		// initialize filters from fragment model definition
-		HashMap<String, Boolean> filters = new HashMap<String, Boolean>();
-		// retrieve annotations part viewmenu
-		MMenu viewmenu = null;
-		for (MMenu m : part.getMenus())
-			if (m.getTags().contains("ViewMenu"))
-				viewmenu = m;
-		if (viewmenu != null) {
-			MMenu submenu = null;
-			MCommand menuFilterCommand = null;
-			// save menu item selection flags from application model to context
-			for (MMenuElement mi : viewmenu.getChildren()) {
-				if (mi instanceof MHandledMenuItem) {
-					String key = mi.getElementId().replace("org.bbaw.bts.ui.corpus.part.annotations.viewmenu.show.", "");
-					filters.put(key, ((MHandledMenuItem)mi).isSelected());
-					// retrieve filter command in order to handle possible submenu entries
-					menuFilterCommand = ((MHandledMenuItem) mi).getCommand();
-				}
-				if (mi.getElementId().equals("org.bbaw.bts.ui.corpus.part.annotations.viewmenu.showType.annotation.type"))
-					submenu = (MMenu) mi;
-			}
-			// remove submenu if already there
-			if (submenu != null)
-				submenu.setToBeRendered(false);
-			// populate menu items for annotation types
-			// retrieve configuration elements for object type annotation
-			BTSConfigItem typeConf = null;
-			try {
-				typeConf = annotationPartController.getAnnoTypesConfigItem();
-			} catch (Exception e){};
-			if (typeConf != null && !typeConf.getChildren().isEmpty()) {
-				// initialize submenu for annotation types
-				submenu = MMenuFactory.INSTANCE.createMenu();
-				submenu.setElementId("org.bbaw.bts.ui.corpus.part.annotations.viewmenu.show.annotation.type");
-				submenu.setLabel("Annotation Types");
-				// traverse annotation types configuration branch
-				for (BTSConfig c : typeConf.getChildren())
-					if (c instanceof BTSConfigItem) {
-						BTSConfigItem confItem = (BTSConfigItem)c;
-						MMenuElement menuItemType = null;
-						// retrieve subtype definition from configuration node
-						BTSConfigItem subtypeConf = null;
-						try {
-							subtypeConf = annotationPartController.getAnnoSubtypesConfigItem(confItem);
-						} catch (Exception e){};
-						List<BTSConfigItem> subTypeConfItems = new Vector<BTSConfigItem>();
-						if (subtypeConf != null) {
-							// filter attached subtype definition nodes
-							for (BTSConfig cc : subtypeConf.getChildren())
-								if (cc instanceof BTSConfigItem)
-									if (((BTSConfigItem)cc).getValue() != null)
-										subTypeConfItems.add((BTSConfigItem)cc);
-						}
-						// if subtypes definitions exist, nest in submenu
-						if (!subTypeConfItems.isEmpty()) {
-							menuItemType = MMenuFactory.INSTANCE.createMenu();
-							String key = null;
-							for (BTSConfigItem subTypeConfItem : subTypeConfItems) {
-								key = "annotation." + confItem.getValue() + "." + subTypeConfItem.getValue();
-								// create annotation subtype menu entry and append to type submenu
-								MHandledMenuItem menuItemSubType = newFilterMenuItem(key);
-								menuItemSubType.setCommand(menuFilterCommand);
-								menuItemSubType.setLabel(subTypeConfItem.getLabel().getTranslation(lang));
-								((MMenu)menuItemType).getChildren().add(menuItemSubType);
-								filters.put(key, ((MHandledMenuItem)menuItemSubType).isSelected());
-							}
-						} else { // create checkable menu entry for type without subtypes
-							String key = "annotation." + confItem.getValue();
-							menuItemType = newFilterMenuItem(key);
-							((MHandledMenuItem)menuItemType).setCommand(menuFilterCommand);
-							filters.put(key, ((MHandledMenuItem)menuItemType).isSelected());
-						}
-						// label annotation type menu entry and append to submenu
-						menuItemType.setLabel(confItem.getLabel().getTranslation(lang));
-						submenu.getChildren().add(menuItemType);
-					}
-				viewmenu.getChildren().add(submenu);
-			}
-		}
-		// save related object filter states to context
-		context.set("org.fuberlin.bts.corpus.annotationsPart.filter", filters);
-		eventBroker.post("event_anno_filters/anno_part", new BTSRelatingObjectsFilterEvent(filters));
-	}
-
-	private MHandledMenuItem newFilterMenuItem(String key) {
-		MHandledMenuItem menuItem = MMenuFactory.INSTANCE.createHandledMenuItem();
-		menuItem.setElementId("org.bbaw.bts.ui.corpus.part.annotations.viewmenu.showType.annotation.type." + key);
-		menuItem.setSelected(true);
-		menuItem.setType(ItemType.CHECK);
-		MParameter menuFilterParam = MCommandsFactory.INSTANCE.createParameter();
-		menuFilterParam.setName("annotationsPartFilterParam");
-		menuFilterParam.setValue(key);
-		menuItem.getParameters().add(menuFilterParam);
-		return menuItem;
-	}
 	@Inject
 	@Optional
 	void eventReceivedRelatedObjectsFilterSet(
@@ -624,7 +465,6 @@ public class TextAnnotationsPart implements IBTSEditor {
 		text = (BTSText) event.getObject();
 		queryId = "relations.objectId-" + text.get_id();
 		if (event != null) {
-			this.relatingObjectsEvent = event;
 			sync.syncExec(new Runnable() {
 				public void run() {
 					// TODO update annotations!!!!!
@@ -646,62 +486,6 @@ public class TextAnnotationsPart implements IBTSEditor {
 	}
 	
 	
-	private void save() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/**
-	 * Gets the command stack listener.
-	 *
-	 * @return the command stack listener
-	 */
-	private CommandStackListener getCommandStackListener() {
-		if (commandStackListener == null) {
-			commandStackListener = new CommandStackListener() {
-
-				@Override
-				public void commandStackChanged(EventObject event) {
-					if (editingDomain == null)
-					{
-						if (text == null) return;
-						else editingDomain = getEditingDomain(text);
-					}
-					Command mostRecentCommand = editingDomain.getCommandStack()
-							.getMostRecentCommand();
-					if (mostRecentCommand != null) {
-						if (mostRecentCommand.equals(editingDomain
-								.getCommandStack().getUndoCommand())) {
-							// normal command or redo executed
-							localCommandCacheSet.add(mostRecentCommand);
-							if (dirty != null && localCommandCacheSet.isEmpty()) {
-								dirty.setDirty(false);
-							} else if (dirty != null && !dirty.isDirty()) {
-								setDirtyInternal();
-							}
-						} else {
-							// undo executed
-							if (localCommandCacheSet.remove(mostRecentCommand)
-									&& localCommandCacheSet.isEmpty() && dirty != null) {
-								dirty.setDirty(false);
-							} else if (dirty != null && !dirty.isDirty()) {
-								setDirtyInternal();
-							}
-						}
-					}
-
-				}
-			};
-		}
-		return commandStackListener;
-	}
 
 
-	/**
-	 * 
-	 */
-	protected void setDirtyInternal() {
-		// TODO Auto-generated method stub
-		
-	}
 }
