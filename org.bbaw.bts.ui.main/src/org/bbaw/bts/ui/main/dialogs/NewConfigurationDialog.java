@@ -233,6 +233,7 @@ public class NewConfigurationDialog extends TitleAreaDialog
 		}
 		configuration.setName(text.getText());
 		configuration.setProvider(configProviderTxt.getText());
+		configuration.set_rev(null);
 		super.okPressed();
 	}
 

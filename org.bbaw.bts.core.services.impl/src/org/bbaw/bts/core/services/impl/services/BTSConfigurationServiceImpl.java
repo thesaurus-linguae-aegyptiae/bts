@@ -31,12 +31,14 @@ import org.bbaw.bts.core.services.impl.generic.GenericObjectServiceImpl;
 import org.bbaw.bts.modelUtils.EmfModelHelper;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.preferences.ConfigurationScope;
+import org.eclipse.core.runtime.preferences.IEclipsePreferences;
 import org.eclipse.core.runtime.preferences.InstanceScope;
 import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.core.di.extensions.Preference;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.EcoreUtil.Copier;
+import org.osgi.service.prefs.BackingStoreException;
 
 public class BTSConfigurationServiceImpl extends GenericObjectServiceImpl<BTSConfiguration, String> implements
 		BTSConfigurationService
@@ -952,7 +954,20 @@ public class BTSConfigurationServiceImpl extends GenericObjectServiceImpl<BTSCon
 		InstanceScope.INSTANCE.getNode("org.bbaw.bts.app").put(BTSPluginIDs.ACTIVE_CONFIGURATION, configuration.getProvider());
 
 		context.set(BTSPluginIDs.ACTIVE_CONFIGURATION, configuration);
-		
+		IEclipsePreferences prefs = ConfigurationScope.INSTANCE.getNode("org.bbaw.bts.app");
+		prefs.put(BTSPluginIDs.ACTIVE_CONFIGURATION, configuration.getProvider());
+		try {
+			prefs.flush();
+		} catch (BackingStoreException e) {
+			e.printStackTrace();
+		}
+		prefs = InstanceScope.INSTANCE.getNode("org.bbaw.bts.app");
+		prefs.put(BTSPluginIDs.ACTIVE_CONFIGURATION, configuration.getProvider());
+		try {
+			prefs.flush();
+		} catch (BackingStoreException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
