@@ -31,6 +31,7 @@ import org.bbaw.bts.core.commons.BTSCoreConstants;
 import org.bbaw.bts.core.commons.corpus.BTSCorpusConstants;
 import org.bbaw.bts.core.commons.corpus.CorpusUtils;
 import org.bbaw.bts.core.controller.generalController.BTSConfigurationController;
+import org.bbaw.bts.core.controller.generalController.PermissionsAndExpressionsEvaluationController;
 import org.bbaw.bts.core.corpus.controller.generalController.PassportConfigurationController;
 import org.bbaw.bts.core.corpus.controller.partController.AnnotationPartController;
 import org.bbaw.bts.core.corpus.controller.partController.BTSTextEditorController;
@@ -53,6 +54,7 @@ import org.bbaw.bts.ui.commons.corpus.interfaces.IBTSEditor;
 import org.bbaw.bts.ui.commons.corpus.text.BTSModelAnnotation;
 import org.bbaw.bts.ui.commons.corpus.util.BTSEGYUIConstants;
 import org.bbaw.bts.ui.commons.utils.BTSUIConstants;
+import org.bbaw.bts.ui.corpus.dialogs.PassportEditorDialog;
 import org.bbaw.bts.ui.corpus.util.AnnotationToolbarItemCreator;
 import org.bbaw.bts.ui.egy.textSign.support.AmbivalenceEndFigure;
 import org.bbaw.bts.ui.egy.textSign.support.AmbivalenceStartFigure;
@@ -62,6 +64,7 @@ import org.bbaw.bts.ui.egy.textSign.support.LineFigure;
 import org.bbaw.bts.ui.egy.textSign.support.MarkerFigure;
 import org.bbaw.bts.ui.egy.textSign.support.TypedLabel;
 import org.bbaw.bts.ui.egy.textSign.support.WordFigure;
+import org.bbaw.bts.ui.main.dialogs.CommentEditorDialog;
 import org.bbaw.bts.ui.resources.BTSResourceProvider;
 import org.eclipse.core.internal.preferences.EclipsePreferences;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -89,6 +92,7 @@ import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.draw2d.text.FlowPage;
 import org.eclipse.draw2d.text.TextFlow;
+import org.eclipse.e4.core.contexts.ContextInjectionFactory;
 import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.core.di.extensions.Preference;
 import org.eclipse.e4.ui.di.UISynchronize;
@@ -121,6 +125,7 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 import org.fuberlin.bts.ui.corpus.egy.annotations.internal.Activator;
 import org.fuberlin.bts.ui.corpus.egy.annotations.parts.textAnnoations.AnnotationFigure;
@@ -148,6 +153,9 @@ public class TextAnnotationsComposite extends Composite implements IBTSEditor {
 	private UISynchronize sync;
 	@Inject
 	private BTSResourceProvider resourceProvider;
+	
+	@Inject
+	protected PermissionsAndExpressionsEvaluationController permissionsController;
 	
 	@Inject
 	@Preference(value = BTSEGYUIConstants.SIGN_TEXT_SHOW_HIEROGLYPHS, nodePath = "org.bbaw.bts.ui.corpus.egy")
@@ -828,13 +836,57 @@ public class TextAnnotationsComposite extends Composite implements IBTSEditor {
 
 			@Override
 			public void mouseDoubleClicked(MouseEvent me) {
-				// System.out.println(me);
+				if (me.getSource() instanceof AnnotationFigure) {
+					AnnotationFigure figure = (AnnotationFigure) me.getSource();
+					if (figure.getModelObject() != null)
+					{
+						editObject(figure.getModelObject());
+					}
+				}
 
 			}
 
 		};
 		return listener;
 	}
+
+	/**
+	 * @param modelObject
+	 */
+	protected void editObject(Object modelObject) {
+		if (modelObject instanceof BTSCorpusObject)
+		{
+			BTSCorpusObject object = (BTSCorpusObject) modelObject;
+			IEclipseContext child = context.createChild();
+			child.set(BTSObject.class, object);
+			child.set(Shell.class, new Shell());
+			
+			PassportEditorDialog dialog = ContextInjectionFactory.make(
+					PassportEditorDialog.class, child);
+			dialog.setEditable(permissionsController.authenticatedUserMayEditObject(object));
+
+			if (dialog.open() == SWT.OK)
+				reloadCurrentSentence();
+			child.dispose();
+		}
+		else if (modelObject instanceof BTSComment)
+		{
+			BTSComment comment = (BTSComment) modelObject;
+			IEclipseContext child = context.createChild();
+			child.set(BTSComment.class, comment);
+			child.set(Shell.class, new Shell());
+			
+			CommentEditorDialog dialog = ContextInjectionFactory.make(
+					CommentEditorDialog.class, child);
+
+			if (dialog.open() == dialog.OK) {
+				reloadCurrentSentence();
+			}
+		}
+		
+	}
+
+
 
 	protected void updateFigureFromWord(Notification notification) {
 		BTSWord word = null;
