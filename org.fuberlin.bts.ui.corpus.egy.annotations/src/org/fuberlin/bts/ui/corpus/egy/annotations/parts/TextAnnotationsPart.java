@@ -47,7 +47,6 @@ import org.eclipse.e4.ui.workbench.modeling.EPartService;
 import org.eclipse.e4.ui.workbench.modeling.ESelectionService;
 import org.eclipse.emf.common.command.CommandStackListener;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.jface.dialogs.ProgressMonitorDialog;
 import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.swt.layout.GridLayout;
@@ -113,9 +112,6 @@ public class TextAnnotationsPart implements IBTSEditor {
 
 	protected String queryId;
 	
-	/** The editing domain. */
-	private EditingDomain editingDomain;
-	
 	/** The command stack listener. */
 	private CommandStackListener commandStackListener;
 	
@@ -168,7 +164,7 @@ public class TextAnnotationsPart implements IBTSEditor {
 
 
 	@Override
-	public void setEditorSelection(Object selection) {
+	public void setEditorSelection(final Object selection) {
 		if (selection != null) {
 			sync.asyncExec(new Runnable() {
 				public void run() {
@@ -194,17 +190,6 @@ public class TextAnnotationsPart implements IBTSEditor {
 						workaround = false;
 					}
 					
-					
-					if (selection instanceof BTSTextSelectionEvent
-							&& ((BTSTextSelectionEvent) selection).data instanceof EObject) {
-						// remove listener from old editingDomain
-						if (editingDomain != null) {
-							editingDomain.getCommandStack()
-									.removeCommandStackListener(
-											commandStackListener);
-						}
-						
-					}
 					selectionService.setSelection(selection);
 					
 					// processEditorSelection(selection);
