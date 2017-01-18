@@ -59,6 +59,10 @@
 		<module>org.eclipse.e4.ui.workbench.perspectiveswitcher</module>
 		<module>org.ramo.klevis.p2.core.service</module>
 		<module>org.bbaw.bts.app.product</module>
+		
+		<!-- optional: text annotations extension -->
+		<module>org.fuberlin.bts.ui.corpus.egy.annotations</module>
+		
 	</modules>
 
 	<properties>
@@ -135,6 +139,13 @@
 							<ws>win32</ws>
 							<arch>x86_64</arch>
 						</environment>
+						
+						<environment>
+							<os>macosx</os>
+							<ws>cocoa</ws>
+							<arch>x86_64</arch>
+						</environment>
+						
 					</environments>
 				</configuration>
 			</plugin>
