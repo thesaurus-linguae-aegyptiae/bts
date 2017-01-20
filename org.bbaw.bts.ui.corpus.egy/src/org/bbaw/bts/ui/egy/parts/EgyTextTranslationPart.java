@@ -683,7 +683,9 @@ public class EgyTextTranslationPart {
 	private void unobserveTextContent() {
 		if (observableSentences != null) {
 			for (IObservableValue<?> valProp : observableSentences) {
-				valProp.removeChangeListener(getSentenceTranslationChangeListener());
+				if (!valProp.isDisposed()) {
+					valProp.dispose();
+				}
 			}
 			observableSentences.clear();
 		} else {
