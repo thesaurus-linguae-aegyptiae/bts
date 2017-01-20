@@ -709,7 +709,7 @@ public class EgyTextTranslationPart {
 
 			IDocument document = new Document();
 			document.set(stringText);
-			loadAnnotations2Editor(annotationModel, tempAnnotationModel);
+			loadAnnotations2Editor(tempAnnotationModel);
 
 			textViewer.setDocument(document, annotationModel);
 //			annotationModel.connect(document);
@@ -722,8 +722,7 @@ public class EgyTextTranslationPart {
 	}
 	
 	@SuppressWarnings("rawtypes")
-	private void loadAnnotations2Editor(IAnnotationModel editorModel,
-			IAnnotationModel model) {
+	private void loadAnnotations2Editor(IAnnotationModel model) {
 		modelAnnotationMap.clear();
 		Iterator i = model.getAnnotationIterator();
 		Issue issue;
@@ -731,7 +730,7 @@ public class EgyTextTranslationPart {
 		while (i.hasNext()) {
 			Object a = i.next();
 			Position pos = model.getPosition((Annotation) a);
-			loadSingleAnnotation2Editor(editorModel, (BTSModelAnnotation)a, pos, issue);
+			loadSingleAnnotation2Editor((BTSModelAnnotation)a, pos, issue);
 		}
 
 	}
@@ -744,13 +743,13 @@ public class EgyTextTranslationPart {
 	 * @param pos the pos
 	 * @param issue the issue
 	 */
-	protected void loadSingleAnnotation2Editor(IAnnotationModel editorModel,
+	protected void loadSingleAnnotation2Editor(
 			 BTSModelAnnotation a, Position pos, Issue issue) {
 		if (a instanceof BTSModelAnnotation && ((BTSModelAnnotation)a).getModel() instanceof BTSSenctence) {
 
 			// Position pos = model.getPosition((Annotation) a);
 			Position pos2 = new Position(pos.getOffset() + EDITOR_PREFIX.length(), pos.getLength());
-			editorModel.addAnnotation((Annotation) a, pos2);
+			annotationModel.addAnnotation((Annotation) a, pos2);
 			modelAnnotationMap.put(
 					((BTSIdentifiableItem) a.getModel()).get_id(), a);
 		}
