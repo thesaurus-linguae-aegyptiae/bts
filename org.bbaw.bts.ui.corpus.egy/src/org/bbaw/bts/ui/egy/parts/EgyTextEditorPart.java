@@ -1694,7 +1694,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 	@SuppressWarnings("restriction")
 	private List<BTSModelAnnotation> getModelAnnotationAtSelection(int start,
 			int end, BTSTextSelectionEvent btsEvent) {
-		Iterator it = embeddedEditor.getViewer().getAnnotationModel()
+		Iterator<Annotation> it = embeddedEditor.getViewer().getAnnotationModel()
 				.getAnnotationIterator();
 		List<BTSModelAnnotation> annotations = new Vector<BTSModelAnnotation>(4);
 		Map<Integer, List<BTSModelAnnotation>> annotationOffsetMap = new HashMap<Integer, List<BTSModelAnnotation>>(4);
@@ -1827,7 +1827,6 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 	 * @param pos the pos
 	 * @param issue the issue
 	 */
-	@SuppressWarnings("restriction")
 	protected void loadSingleAnnotation2Editor(IAnnotationModel editorModel,
 			 BTSModelAnnotation a, Position pos, Issue issue) {
 		if (a instanceof BTSLemmaAnnotation) {
@@ -1909,15 +1908,6 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 		l.add(ma);
 	}
 
-	/**
-	 * Event received new.
-	 *
-	 * @param object the object
-	 */
-	@Inject
-	@Optional
-	void eventReceivedNew(@EventTopic("model_new/BTSWord*") Object object) {
-	}
 
 	/**
 	 * Event received caret events.
