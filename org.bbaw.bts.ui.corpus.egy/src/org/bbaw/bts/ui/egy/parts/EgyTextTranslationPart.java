@@ -419,7 +419,6 @@ public class EgyTextTranslationPart {
 		List<BTSModelAnnotation> annotations = new Vector<BTSModelAnnotation>(4);
 		Map<Integer, List<BTSModelAnnotation>> annotationOffsetMap = new HashMap<Integer, List<BTSModelAnnotation>>(4);
 		BTSSentenceItem startItem = null;
-		int startItemOffeset = 0;
 		BTSSentenceItem endItem = null;
 		int endItemOffeset = 0;
 		List<BTSSentenceItem> textItems = new Vector<BTSSentenceItem>();
@@ -477,7 +476,6 @@ public class EgyTextTranslationPart {
 							// move selection offset to right if within an Ambivalence
 							|| (item.eContainer() instanceof BTSLemmaCase)) {
 						startItem = item;
-						startItemOffeset = pos.getOffset();
 					}
 					if (endItem == null
 							// move selection end to right if not within an Ambivalence
