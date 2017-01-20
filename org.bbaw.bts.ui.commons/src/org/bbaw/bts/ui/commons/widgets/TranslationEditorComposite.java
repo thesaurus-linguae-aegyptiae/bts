@@ -157,6 +157,10 @@ public class TranslationEditorComposite extends Composite {
 		if (bindingContext == null) {
 			bindingContext = new DataBindingContext();
 		}
+		if (binding != null && !binding.isDisposed()) {
+			bindingContext.removeBinding(binding);
+			binding.dispose();
+		}
 		if (translations == null)
 		{
 			text.setText("");
