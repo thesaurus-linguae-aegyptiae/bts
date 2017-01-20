@@ -365,42 +365,42 @@ public class EgyTextTranslationPart {
 			boolean highlighted) {
 		if (annotationModel == null) return;
 		for (BTSModelAnnotation a : relatingObjectsAnnotations) {
-//			Position pos = annotationModel.getPosition(a);
-//			if (pos == null) return;
-//			StyleRange[] ranges = textViewer
-//					.getTextWidget()
-//					.getStyleRanges(pos.getOffset(), pos.getLength());
-//			Color color;
-//			if (highlighted)
-//			{
-//				color = BTSUIConstants.COLOR_SENTENCE;
-//			}
-//			else
-//			{
-//				color = BTSUIConstants.COLOR_WIHTE;
-//			}
-//			if (ranges != null && !(ranges.length == 0))
-//			{
-//				
-//				for (StyleRange sr : ranges)
-//				{
-//					sr.background = color;
-//					try {
-//						textViewer
-//						.getTextWidget().setStyleRange(sr);
-//					} catch (Exception e) {
-//						e.printStackTrace();
-//					}
-//				}
-//			}
-//			else
-//			{
-//				StyleRange sr = new StyleRange(pos.getOffset(), pos.getLength(), BTSUIConstants.COLOR_BLACK, color);
-//				textViewer
-//				.getTextWidget().setStyleRange(sr);
-//			}
-//			textViewer.getTextWidget().update();
-			a.setHighlighted(highlighted);
+			Position pos = annotationModel.getPosition(a);
+			if (pos == null) return;
+			StyleRange[] ranges = textViewer
+					.getTextWidget()
+					.getStyleRanges(pos.getOffset(), pos.getLength());
+			Color color;
+			if (highlighted)
+			{
+				color = BTSUIConstants.COLOR_SENTENCE;
+			}
+			else
+			{
+				color = BTSUIConstants.COLOR_WIHTE;
+			}
+			if (ranges != null && !(ranges.length == 0))
+			{
+				for (StyleRange sr : ranges)
+				{
+					sr.background = color;
+					try {
+						textViewer
+						.getTextWidget().setStyleRange(sr);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+			}
+			else
+			{
+				StyleRange sr = new StyleRange(pos.getOffset(), pos.getLength(), BTSUIConstants.COLOR_BLACK, color);
+				textViewer.getTextWidget().setStyleRange(sr);
+			}
+			textViewer.getTextWidget().update();
+			if (a != null) {
+				a.setHighlighted(highlighted);
+			}
 		}
 	}
 
