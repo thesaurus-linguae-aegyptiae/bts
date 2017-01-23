@@ -350,7 +350,7 @@ public class TextAnnotationsPart implements IBTSEditor {
 	}
 
 
-	private void loadInput(BTSCorpusObject selection) {
+	private void loadInput(final BTSCorpusObject selection) {
 		if (selection instanceof BTSText) {
 
 			this.text = (BTSText) selection;
@@ -425,7 +425,7 @@ public class TextAnnotationsPart implements IBTSEditor {
 	@Inject
 	@Optional
 	void eventReceivedPreferencesChanged(
-			@EventTopic("event_preferences_changed/*") String preferencePath) {
+			@EventTopic("event_preferences_changed/*") final String preferencePath) {
 		if (preferencePath != null && preferencePath.endsWith(BTSCorpusConstants.PREF_ANNOTATION_SETTINGS)) {
 			
 			sync.asyncExec(new Runnable() {

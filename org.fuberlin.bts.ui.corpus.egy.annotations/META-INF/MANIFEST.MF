@@ -34,9 +34,9 @@ Require-Bundle: javax.inject,
  org.bbaw.bts.ui.main,
  org.bbaw.bts.ui.corpus.egy.commons,
  org.bbaw.bts.core.commons.corpus,
- com.opcoach.e4.preferences;bundle-version="1.0.0"
+ com.opcoach.e4.preferences
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
-Import-Package: javax.annotation;version="1.0.0",
+Import-Package: javax.annotation,
  jsesh.mdc,
  jsesh.mdcDisplayer.draw,
  jsesh.mdcDisplayer.preferences,

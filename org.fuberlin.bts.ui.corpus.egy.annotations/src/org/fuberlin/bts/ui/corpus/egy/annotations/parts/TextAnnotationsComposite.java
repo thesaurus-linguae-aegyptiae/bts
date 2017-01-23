@@ -2435,7 +2435,7 @@ public class TextAnnotationsComposite extends Composite implements IBTSEditor {
 	 * @param annotations
 	 * @param b
 	 */
-	public void setSelectedAnnotations(final List<BTSObject> annotations, boolean selected) {
+	public void setSelectedAnnotations(final List<BTSObject> annotations, final boolean selected) {
 		sync.asyncExec(new Runnable() {
 			public void run() {
 				List<ElementFigure> toSelect = new ArrayList<>(annotations.size());
