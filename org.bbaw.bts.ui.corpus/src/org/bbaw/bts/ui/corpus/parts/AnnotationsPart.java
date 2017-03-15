@@ -20,8 +20,10 @@ import org.bbaw.bts.btsmodel.BTSConfig;
 import org.bbaw.bts.btsmodel.BTSConfigItem;
 import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.commons.BTSConstants;
+import org.bbaw.bts.core.commons.BTSCoreConstants;
 import org.bbaw.bts.core.commons.comparator.BTSObjectTempSortKeyComparator;
 import org.bbaw.bts.core.commons.corpus.CorpusUtils;
+import org.bbaw.bts.core.controller.generalController.PermissionsAndExpressionsEvaluationController;
 import org.bbaw.bts.core.corpus.controller.partController.AnnotationPartController;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSAnnotation;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
@@ -96,6 +98,10 @@ public class AnnotationsPart implements EventHandler {
 	
 	@Inject
 	private Logger logger;
+
+	@Inject
+	private PermissionsAndExpressionsEvaluationController permissionsController;
+
 	
 	/** The part service. */
 	@Inject
@@ -120,7 +126,7 @@ public class AnnotationsPart implements EventHandler {
 
 	protected boolean selfselection;
 
-	private BTSCorpusObject parentObject;
+	private BTSCorpusObject currentCorpusObject;
 
 	private boolean allRelatedObjectsShowed;
 
@@ -333,10 +339,7 @@ public class AnnotationsPart implements EventHandler {
 	void eventReceivedRelatingObjectsLoaded(
 			@EventTopic("event_text_relating_objects/*") final BTSRelatingObjectsLoadingEvent event) {
 		if (event != null) {
-			parentObject = event.getObject();
-			if (parentObject != null) {
-				queryId = "relations.objectId-" + parentObject.get_id();
-			}			
+			setCorpusObject(event.getObject());
 			this.relatingObjectsEvent = event;
 			sync.syncExec(new Runnable() {
 				public void run() {
@@ -348,7 +351,9 @@ public class AnnotationsPart implements EventHandler {
 	}
 	
 	private void clearRelatingObjects(BTSCorpusObject selection) {
-		if(selection.equals(parentObject) || parentObject == null) return;
+		if (currentCorpusObject == null || selection.equals(currentCorpusObject)) {
+			return;
+		}
 		part.setLabel("Annotations");
 		part.setTooltip("Annotations");
 		relatingObjectsQueryIDMap.clear();
@@ -372,7 +377,7 @@ public class AnnotationsPart implements EventHandler {
 		composite.layout();
 		scrollComposite.setMinSize(composite.computeSize(r.width,
 				SWT.DEFAULT));
-		parentObject = (BTSCorpusObject)selection;
+		setCorpusObject(selection);
 
 	}
 
@@ -586,7 +591,7 @@ public class AnnotationsPart implements EventHandler {
 			if (g != null)
 				setSelectedInternal(new Vector<>(Arrays.asList(g)), false);
 		}
-		else if (selection instanceof BTSCorpusObject && !selection.equals(parentObject))
+		else if (selection instanceof BTSCorpusObject && !selection.equals(currentCorpusObject))
 		{
 			// empty the panel
 			sync.syncExec(new Runnable() {
@@ -594,11 +599,9 @@ public class AnnotationsPart implements EventHandler {
 					clearRelatingObjects((BTSCorpusObject)selection);
 				}
 			});
-			relatingObjectsQueryIDMap.clear();
 			List<BTSObject> relatingObjects = null;
 			List<BTSObject> filteredRelatingObjects = null;
-			queryId = "relations.objectId-" + ((BTSCorpusObject)selection).get_id();
-			parentObject = (BTSCorpusObject)selection;
+			setCorpusObject(selection);
 			// if BTSText wait to receive relationObjectLoadedEvent through eventBroker!
 			if (!(selection instanceof BTSText))
 			{
@@ -635,11 +638,25 @@ public class AnnotationsPart implements EventHandler {
 			{
 				this.textSelectionEvent = (BTSTextSelectionEvent) selection;
 			}
-			else if (selection instanceof BTSCorpusObject && !selection.equals(parentObject))
+			else if (selection instanceof BTSCorpusObject)
 			{
-				parentObject = (BTSCorpusObject)selection;
-
+				setCorpusObject(selection);
 			}
+		}
+	}
+
+	private void setCorpusObject(Object corpusObject) {
+		currentCorpusObject = (BTSCorpusObject)corpusObject;
+		if (currentCorpusObject != null) {
+			queryId = "relations.objectId-" + currentCorpusObject.get_id();
+			// XXX was sind requirements damit user commenten darf?
+			// wenn er researcher ist, musz er updater sein
+			// wenn er editor ist, musz er updater sein oder
+			// text musz public sein
+			context.set(BTSCoreConstants.CORE_EXPRESSION_MAY_COMMENT, 
+					permissionsController.userMayCommentOnObject(
+							permissionsController.getAuthenticatedUser(),
+							currentCorpusObject));
 		}
 	}
 
@@ -829,6 +846,6 @@ public class AnnotationsPart implements EventHandler {
 	}
 
 	public BTSCorpusObject getCorpusObject() {
-		return parentObject;
+		return currentCorpusObject;
 	}
 }
