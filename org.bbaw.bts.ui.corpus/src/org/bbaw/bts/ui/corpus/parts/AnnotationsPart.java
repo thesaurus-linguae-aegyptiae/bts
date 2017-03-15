@@ -120,7 +120,7 @@ public class AnnotationsPart implements EventHandler {
 
 	protected boolean selfselection;
 
-	private BTSObject parentObject;
+	private BTSCorpusObject parentObject;
 
 	private boolean allRelatedObjectsShowed;
 
@@ -826,5 +826,9 @@ public class AnnotationsPart implements EventHandler {
 			objects.add(rog.getObject());
 		}
 		return objects.toArray(new BTSObject[objects.size()]);
+	}
+
+	public BTSCorpusObject getCorpusObject() {
+		return parentObject;
 	}
 }
