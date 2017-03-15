@@ -48,10 +48,6 @@ public class PermissionsAndExpressionsEvaluationControllerImpl implements
 
 	@Inject
 	private IEventBroker eventBroker;
-	
-	private static final String FALSE = "false";
-
-	private static final String TRUE = "true";
 
 	private static final long LOCKING_DELAY = 600;
 
