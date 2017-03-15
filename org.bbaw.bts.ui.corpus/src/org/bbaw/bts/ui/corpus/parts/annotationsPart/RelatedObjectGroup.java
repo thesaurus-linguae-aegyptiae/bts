@@ -44,6 +44,7 @@ import org.eclipse.swt.widgets.ExpandItem;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Listener;
+import org.eclipse.swt.widgets.Shell;
 
 public abstract class RelatedObjectGroup extends Composite{
 
@@ -297,8 +298,30 @@ public abstract class RelatedObjectGroup extends Composite{
 		
 	}
 
-	protected boolean mayEdit() {
-		return permissionsController.authenticatedUserMayEditObject(object);
+	/**
+	 * Appends new child node to current {@link IEclipseContext}, populates
+	 * it with the related object this group represents and sets an editable
+	 * flag under {@link BTSCoreConstants#CORE_EXPRESSION_MAY_EDIT} that
+	 * is true if either the related object itself or the text it has been
+	 * loaded for can be modified by current user.
+	 *
+	 * @return context child node
+	 */
+	protected IEclipseContext createDialogChildContext() {
+		IEclipseContext child = context.createChild();
+		child.set(BTSObject.class, (BTSObject) getObject());
+		child.set(Shell.class, new Shell());
+
+		boolean editable = permissionsController.userMayEditObject(
+				permissionsController.getAuthenticatedUser(),
+				object);
+		editable |= permissionsController.userMayEditObject(
+				permissionsController.getAuthenticatedUser(),
+				parentPart.getCorpusObject());
+
+		child.set(BTSCoreConstants.CORE_EXPRESSION_MAY_EDIT, editable);
+
+		return child;
 	}
 
 	protected void editReference() {

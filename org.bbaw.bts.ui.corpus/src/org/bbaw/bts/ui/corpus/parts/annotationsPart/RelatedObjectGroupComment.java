@@ -41,14 +41,7 @@ public class RelatedObjectGroupComment extends RelatedObjectGroup {
 	protected void addButtons(Composite composite) {
 		Label editButton = new Label(composite, SWT.PUSH);
 		editButton.setImage(resourceProvider.getImage(Display.getCurrent(), BTSResourceProvider.IMG_EDIT));
-		if (mayEdit())
-		{
-			editButton.setToolTipText("Edit Comment");
-		}
-		else
-		{
-			editButton.setToolTipText("Open Comment");
-		}
+		editButton.setToolTipText("Open Comment");
 		editButton.setLayoutData(new RowData());
 		editButton.addMouseListener(new MouseAdapter() {
 
@@ -69,20 +62,20 @@ public class RelatedObjectGroupComment extends RelatedObjectGroup {
 	}
 
 	protected void editObject() {
-		IEclipseContext child = context.createChild();
-		child.set(BTSComment.class, (BTSComment) getObject());
-		child.set(Shell.class, new Shell());
+		IEclipseContext child = createDialogChildContext();
+		child.set(BTSComment.class, (BTSComment)getObject());
 		
 		CommentEditorDialog dialog = ContextInjectionFactory.make(
 				CommentEditorDialog.class, child);
 
-		if (dialog.open() == dialog.OK) {
-			refreschContent((BTSComment) getObject());
+		if (dialog.open() == SWT.OK) {
+			refreshContent((BTSComment) getObject());
 		}
 		
+		child.dispose();
 	}
 
-	private void refreschContent(BTSComment object) {
+	private void refreshContent(BTSComment object) {
 		if (object.getComment() != null) commentText.setText(object.getComment());
 		if (object.getName() != null && !"".equals(object.getName())){
 			setExpandItemTitle(object.getName());
@@ -108,7 +101,7 @@ public class RelatedObjectGroupComment extends RelatedObjectGroup {
 		BTSObject o = getObject();
 		if (o instanceof BTSComment)
 		{
-			refreschContent((BTSComment) getObject());
+			refreshContent((BTSComment) getObject());
 		}
 		commentText.setToolTipText( WordUtils.wrap(((BTSComment) getObject()).getComment(), 60));
 		setExpandBarIcon(resourceProvider.getImage(Display.getCurrent(), BTSResourceProvider.IMG_COMMENT));

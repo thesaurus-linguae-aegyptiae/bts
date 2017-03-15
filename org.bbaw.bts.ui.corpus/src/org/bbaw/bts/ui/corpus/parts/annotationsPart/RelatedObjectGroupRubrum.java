@@ -30,14 +30,7 @@ public class RelatedObjectGroupRubrum extends RelatedObjectGroup {
 	protected void addButtons(Composite composite) {
 		Label editButton = new Label(composite, SWT.PUSH);
 		editButton.setImage(resourceProvider.getImage(Display.getCurrent(), BTSResourceProvider.IMG_EDIT));
-		if (mayEdit())
-		{
-			editButton.setToolTipText("Edit Rubrum");
-		}
-		else
-		{
-			editButton.setToolTipText("Open Rubrum");
-		}
+		editButton.setToolTipText("Open Rubrum");
 		editButton.setLayoutData(new RowData());
 		editButton.addMouseListener(new MouseAdapter() {
 
@@ -58,18 +51,16 @@ public class RelatedObjectGroupRubrum extends RelatedObjectGroup {
 	}
 
 	protected void editObject() {
-		IEclipseContext child = context.createChild();
-		child.set(BTSObject.class, (BTSObject) getObject());
-		child.set(Shell.class, new Shell());
+		IEclipseContext child = createDialogChildContext();
 		
 		PassportEditorDialog dialog = ContextInjectionFactory.make(
 				PassportEditorDialog.class, child);
-		dialog.setEditable(mayEdit());
 
-		if (dialog.open() == dialog.OK) {
+		if (dialog.open() == SWT.OK) {
 			refreschContent((BTSObject) getObject());
 		}
 		
+		child.dispose();
 	}
 
 	private void refreschContent(BTSObject object) {
