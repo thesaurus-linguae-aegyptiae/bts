@@ -662,7 +662,30 @@ public class PermissionsAndExpressionsEvaluationControllerImpl implements
 			}
 		}
 		return false;
-		
+	}
+
+	@Override
+	public boolean userMayCommentOnObject(BTSUser user, BTSObject object) {
+		if (user == null || object == null) {
+			return false;
+		} else {
+			if (userContextRole != null) {
+				if (userContextRole.equals(BTSCoreConstants.USER_ROLE_ADMINS)) {
+					return true;
+				}
+				if (userContextRole.equals(BTSCoreConstants.USER_ROLE_EDITORS)) {
+					if (object.getVisibility().equals(BTSCoreConstants.VISIBILITY_PUBLIC)) {
+						return true;
+					} else {
+						return evaluationService.userIsMember(user, object.getUpdaters());
+					}
+				}
+				if (userContextRole.equals(BTSCoreConstants.USER_ROLE_RESEARCHERS)) {
+					return evaluationService.userIsMember(user, object.getUpdaters());
+				}
+			}
+		}
+		return false;
 	}
 
 	private BTSProjectDBCollection getDBCollection(String dbCollectionName) {

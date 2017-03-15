@@ -127,5 +127,7 @@ public interface PermissionsAndExpressionsEvaluationController {
 
 	boolean authenticatedUserMayDeleteUserOrUserGroup(BTSObject object);
 
+	boolean userMayCommentOnObject(BTSUser user, BTSObject object);
+
 
 }
