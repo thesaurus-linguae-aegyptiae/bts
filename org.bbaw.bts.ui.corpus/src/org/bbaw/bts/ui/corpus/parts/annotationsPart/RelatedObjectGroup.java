@@ -25,6 +25,7 @@ import org.bbaw.bts.ui.resources.BTSResourceProvider;
 import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.core.services.log.Logger;
 import org.eclipse.emf.edit.domain.EditingDomain;
+import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.ControlEvent;
 import org.eclipse.swt.events.ControlListener;
@@ -305,30 +306,45 @@ public abstract class RelatedObjectGroup extends Composite{
 		
 	}
 
-	/**
-	 * Appends new child node to current {@link IEclipseContext}, populates
-	 * it with the related object this group represents and sets an editable
-	 * flag under {@link BTSCoreConstants#CORE_EXPRESSION_MAY_EDIT} that
-	 * is true if either the related object itself or the text it has been
-	 * loaded for can be modified by current user.
-	 *
-	 * @return context child node
-	 */
-	protected IEclipseContext createDialogChildContext() {
-		IEclipseContext child = context.createChild();
-		child.set(BTSObject.class, (BTSObject) getObject());
-		child.set(Shell.class, new Shell());
 
+	/**
+	 * Make whatever dialog seems suitable for editing the related object in question.
+	 * Should be done using <code>ContextInjectionFactory.make</code>.
+	 * @return
+	 */
+	protected abstract Dialog createEditorDialog();
+
+	/**
+	 * Create dialog for object editing, open it and refresh GUI according to result.
+	 */
+	protected void editObject() {
+		context.set(Shell.class, new Shell());
 		boolean editable = permissionsController.userMayEditObject(
 				permissionsController.getAuthenticatedUser(),
-				object);
-		editable |= permissionsController.userMayEditObject(
-				permissionsController.getAuthenticatedUser(),
-				parentPart.getCorpusObject());
+				getObject());
+		System.out.println("Can dialog edit object? "+editable);
+		context.set(BTSCoreConstants.CORE_EXPRESSION_MAY_EDIT, editable);
 
-		child.set(BTSCoreConstants.CORE_EXPRESSION_MAY_EDIT, editable);
+		Dialog editDialog = createEditorDialog();
 
-		return child;
+		if (editDialog.open() == SWT.OK) {
+			refreshContent(getObject());
+		}
+
+	}
+
+	/**
+	 * Update GUI elements representing object.
+	 * @param obj
+	 */
+	protected abstract void refreshContent(BTSObject obj);
+
+
+	@Inject
+	public void setEditable(@Named(BTSCoreConstants.CORE_EXPRESSION_MAY_EDIT) boolean editAnno) {
+		System.out.println("Object: "+object);
+		System.out.println("Can I edit it? "+editAnno);
+		this.mayEditObject = editAnno;
 	}
 
 	protected void editReference() {

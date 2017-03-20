@@ -6,7 +6,7 @@ import org.apache.commons.lang.WordUtils;
 import org.bbaw.bts.btsmodel.BTSComment;
 import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.btsmodel.BTSRevision;
-import org.bbaw.bts.core.controller.generalController.CommentController;
+import org.bbaw.bts.core.commons.BTSCoreConstants;
 import org.bbaw.bts.ui.commons.utils.BTSUIConstants;
 import org.bbaw.bts.ui.main.dialogs.CommentEditorDialog;
 import org.bbaw.bts.ui.resources.BTSResourceProvider;
@@ -21,7 +21,6 @@ import org.eclipse.swt.layout.RowData;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
-import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
 public class RelatedObjectGroupComment extends RelatedObjectGroup {
@@ -61,7 +60,7 @@ public class RelatedObjectGroupComment extends RelatedObjectGroup {
 
 	}
 
-	protected void editObject() {
+/*	protected void editObject() {
 		IEclipseContext child = createDialogChildContext();
 		child.set(BTSComment.class, (BTSComment)getObject());
 		
@@ -73,16 +72,23 @@ public class RelatedObjectGroupComment extends RelatedObjectGroup {
 		}
 		
 		child.dispose();
-	}
+	}*/
 
-	private void refreshContent(BTSComment object) {
-		if (object.getComment() != null) commentText.setText(object.getComment());
-		if (object.getName() != null && !"".equals(object.getName())){
-			setExpandItemTitle(object.getName());
+	@Override
+	protected org.eclipse.jface.dialogs.Dialog createEditorDialog() {
+		return ContextInjectionFactory.make(CommentEditorDialog.class, context);
+	};
+	
+	@Override
+	protected void refreshContent(BTSObject obj) {
+		BTSComment comment = (BTSComment)obj;
+		if (comment.getComment() != null) commentText.setText(comment.getComment());
+		if (comment.getName() != null && !"".equals(comment.getName())){
+			setExpandItemTitle(comment.getName());
 		}
 		else
 		{
-			setExpandItemTitle(object.getComment().substring(0, Math.min(object.getComment().length(), TITLE_LENGTH)));
+			setExpandItemTitle(comment.getComment().substring(0, Math.min(comment.getComment().length(), TITLE_LENGTH)));
 		}
 		
 	}

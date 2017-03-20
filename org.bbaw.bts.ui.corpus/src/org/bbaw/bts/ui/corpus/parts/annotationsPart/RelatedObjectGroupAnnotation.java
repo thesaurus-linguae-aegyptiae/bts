@@ -8,6 +8,7 @@ import org.bbaw.bts.ui.corpus.dialogs.PassportEditorDialog;
 import org.bbaw.bts.ui.resources.BTSResourceProvider;
 import org.eclipse.e4.core.contexts.ContextInjectionFactory;
 import org.eclipse.e4.core.contexts.IEclipseContext;
+import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.MouseAdapter;
 import org.eclipse.swt.events.MouseEvent;
@@ -49,20 +50,15 @@ public class RelatedObjectGroupAnnotation extends RelatedObjectGroup {
 
 	}
 
-	protected void editObject() {
-		IEclipseContext child = createDialogChildContext();
-		
-		PassportEditorDialog dialog = ContextInjectionFactory.make(
-				PassportEditorDialog.class, child);
 
-		if (dialog.open() == SWT.OK)
-			refreshContent((BTSObject) getObject());
-
-		child.dispose();
-		
+	@Override
+	protected Dialog createEditorDialog() {
+		return ContextInjectionFactory.make(
+				PassportEditorDialog.class, context);
 	}
 
-	private void refreshContent(BTSObject object) {
+	@Override
+	protected void refreshContent(BTSObject object) {
 		setExpandItemTitle(object.getName());
 	}
 
