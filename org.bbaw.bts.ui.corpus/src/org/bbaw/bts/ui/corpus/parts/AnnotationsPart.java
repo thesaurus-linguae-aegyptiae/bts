@@ -466,6 +466,9 @@ public class AnnotationsPart implements EventHandler {
 		child.set(Composite.class, composite);
 		child.set(AnnotationsPart.class, this);
 		child.set(BTSObject.class, (BTSObject) o);
+		child.set(BTSCoreConstants.CORE_EXPRESSION_MAY_EDIT, 
+				permissionsController.userMayEditObject(permissionsController.getAuthenticatedUser(), o));
+
 		if (o instanceof BTSAnnotation)
 		{
 			if (BTSConstants.ANNOTATION_RUBRUM.equalsIgnoreCase(o.getType()))
