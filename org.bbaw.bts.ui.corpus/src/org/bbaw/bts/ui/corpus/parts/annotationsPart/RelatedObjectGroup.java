@@ -4,7 +4,9 @@ import java.util.List;
 import java.util.Vector;
 
 import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import org.bbaw.bts.btsmodel.BTSIdentifiableItem;
 import org.bbaw.bts.btsmodel.BTSInterTextReference;
@@ -86,6 +88,9 @@ public abstract class RelatedObjectGroup extends Composite{
 
 	@Inject
 	protected Logger logger;
+
+	private boolean mayEditObject = false;
+
 
 	@Inject
 	public RelatedObjectGroup(Composite parent, BTSObject object) {
@@ -210,6 +215,12 @@ public abstract class RelatedObjectGroup extends Composite{
 		this.layout();
 	}
 
+	@PreDestroy
+	public void preDestroy() {
+		// TODO dispose of all that stuff
+		context.dispose();
+	}
+
 	protected abstract void addButtons(Composite composite);
 
 	protected abstract void fillContentComposite(Composite composite);
@@ -220,27 +231,25 @@ public abstract class RelatedObjectGroup extends Composite{
 		addButton.setImage(resourceProvider.getImage(Display.getCurrent(), BTSResourceProvider.IMG_RELATION_ADD));
 		addButton.setToolTipText("Add Current Text Selection as Reference");
 		addButton.setLayoutData(new RowData());
-		addButton.addMouseListener(new MouseAdapter() {
+		if (mayEditObject) {
+			addButton.addMouseListener(new MouseAdapter() {
 
-			@Override
-			public void mouseDown(MouseEvent e) {
-				if (mayEdit())
-				{
+				@Override
+				public void mouseDown(MouseEvent e) {
 					Label l = (Label) e.getSource();
 					l.setBackground(BTSUIConstants.VIEW_BACKGROUND_LABEL_PRESSED);
 				}
-			}
 
-			@Override
-			public void mouseUp(MouseEvent e) {
-				if (mayEdit())
-				{
+				@Override
+				public void mouseUp(MouseEvent e) {
 					Label l = (Label) e.getSource();
 					l.setBackground(l.getParent().getBackground());
 					addReference();
 				}
-			}
-		});
+			});
+		} else {
+			addButton.setEnabled(false);
+		}
 		
 		
 		/*Label editButton = new Label(composite, SWT.PUSH);
@@ -273,27 +282,25 @@ public abstract class RelatedObjectGroup extends Composite{
 		delButton.setImage(resourceProvider.getImage(Display.getCurrent(), BTSResourceProvider.IMG_RELATION_DELETE));
 		delButton.setToolTipText("Remove Current Reference");
 		delButton.setLayoutData(new RowData());
-		delButton.addMouseListener(new MouseAdapter() {
+		if (mayEditObject) {
+			delButton.addMouseListener(new MouseAdapter() {
 
-			@Override
-			public void mouseDown(MouseEvent e) {
-				if (mayEdit())
-				{
+				@Override
+				public void mouseDown(MouseEvent e) {
 					Label l = (Label) e.getSource();
 					l.setBackground(BTSUIConstants.VIEW_BACKGROUND_LABEL_PRESSED);
 				}
-			}
 
-			@Override
-			public void mouseUp(MouseEvent e) {
-				if (mayEdit())
-				{
+				@Override
+				public void mouseUp(MouseEvent e) {
 					Label l = (Label) e.getSource();
 					l.setBackground(l.getParent().getBackground());
 					removeReference();
 				}
-			}
-		});
+			});
+		} else {
+			delButton.setEnabled(false);
+		}
 
 		
 	}
