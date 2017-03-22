@@ -83,10 +83,6 @@ public class CommentEditorDialog extends TitleAreaDialog {
 	@Named(BTSCoreConstants.CORE_EXPRESSION_MAY_EDIT)
 	private boolean editable;
 
-	@Inject
-	@Named(BTSCoreConstants.CORE_EXPRESSION_MAY_COMMENT)
-	private boolean mayComment;
-
 	/**
 	 * Create the dialog.
 	 * @param parentShell
@@ -189,7 +185,7 @@ public class CommentEditorDialog extends TitleAreaDialog {
 		// comment can be modified if user is in its updaters list
 		// this will only work if permission to comment text/corpus object
 		// has been put into context under CORE_EXPRESSIONS_MAY_COMMENT
-		setEditable(editable || mayComment);
+		setEditable(editable);
 		
 	}
 
