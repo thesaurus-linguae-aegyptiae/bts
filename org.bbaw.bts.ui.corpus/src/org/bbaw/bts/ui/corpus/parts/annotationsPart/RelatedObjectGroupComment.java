@@ -62,19 +62,10 @@ public class RelatedObjectGroupComment extends RelatedObjectGroup {
 
 	}
 
-/*	protected void editObject() {
-		IEclipseContext child = createDialogChildContext();
-		child.set(BTSComment.class, (BTSComment)getObject());
-		
-		CommentEditorDialog dialog = ContextInjectionFactory.make(
-				CommentEditorDialog.class, child);
-
-		if (dialog.open() == SWT.OK) {
-			refreshContent((BTSComment) getObject());
-		}
-		
-		child.dispose();
-	}*/
+	@Override
+	protected boolean mayEdit() {
+		return super.mayEdit() || mayCommentObject;
+	}
 
 	@Override
 	protected org.eclipse.jface.dialogs.Dialog createEditorDialog() {

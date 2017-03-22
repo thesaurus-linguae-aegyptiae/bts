@@ -90,6 +90,8 @@ public abstract class RelatedObjectGroup extends Composite{
 	@Inject
 	protected Logger logger;
 
+	@Inject
+	@Named(BTSCoreConstants.CORE_EXPRESSION_MAY_EDIT)
 	private boolean mayEditObject = false;
 
 
@@ -222,6 +224,10 @@ public abstract class RelatedObjectGroup extends Composite{
 		context.dispose();
 	}
 
+	protected boolean mayEdit() {
+		return mayEditObject;
+	}
+
 	protected abstract void addButtons(Composite composite);
 
 	protected abstract void fillContentComposite(Composite composite);
@@ -232,7 +238,7 @@ public abstract class RelatedObjectGroup extends Composite{
 		addButton.setImage(resourceProvider.getImage(Display.getCurrent(), BTSResourceProvider.IMG_RELATION_ADD));
 		addButton.setToolTipText("Add Current Text Selection as Reference");
 		addButton.setLayoutData(new RowData());
-		if (mayEditObject) {
+		if (mayEdit()) {
 			addButton.addMouseListener(new MouseAdapter() {
 
 				@Override
@@ -283,7 +289,7 @@ public abstract class RelatedObjectGroup extends Composite{
 		delButton.setImage(resourceProvider.getImage(Display.getCurrent(), BTSResourceProvider.IMG_RELATION_DELETE));
 		delButton.setToolTipText("Remove Current Reference");
 		delButton.setLayoutData(new RowData());
-		if (mayEditObject) {
+		if (mayEdit()) {
 			delButton.addMouseListener(new MouseAdapter() {
 
 				@Override
@@ -338,14 +344,6 @@ public abstract class RelatedObjectGroup extends Composite{
 	 * @param obj
 	 */
 	protected abstract void refreshContent(BTSObject obj);
-
-
-	@Inject
-	public void setEditable(@Named(BTSCoreConstants.CORE_EXPRESSION_MAY_EDIT) boolean editAnno) {
-		System.out.println("Object: "+object);
-		System.out.println("Can I edit it? "+editAnno);
-		this.mayEditObject = editAnno;
-	}
 
 	protected void editReference() {
 		BTSTextSelectionEvent selectionEvent = parentPart.getTextSelectionEvent();
