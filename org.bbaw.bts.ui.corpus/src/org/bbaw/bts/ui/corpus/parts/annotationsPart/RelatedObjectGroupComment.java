@@ -1,6 +1,7 @@
  package org.bbaw.bts.ui.corpus.parts.annotationsPart;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import org.apache.commons.lang.WordUtils;
 import org.bbaw.bts.btsmodel.BTSComment;
@@ -27,9 +28,10 @@ public class RelatedObjectGroupComment extends RelatedObjectGroup {
 
 
 	private Text commentText;
-	
+
 	@Inject
-	private CommentController commentController;
+	@Named(BTSCoreConstants.CORE_EXPRESSION_MAY_COMMENT)
+	private boolean mayCommentObject;
 
 	@Inject
 	public RelatedObjectGroupComment(Composite parent, BTSObject object) {
