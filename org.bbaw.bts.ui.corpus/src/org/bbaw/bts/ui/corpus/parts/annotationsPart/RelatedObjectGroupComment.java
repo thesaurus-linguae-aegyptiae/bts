@@ -69,6 +69,11 @@ public class RelatedObjectGroupComment extends RelatedObjectGroup {
 
 	@Override
 	protected org.eclipse.jface.dialogs.Dialog createEditorDialog() {
+		// we need to replace flag in context because permission to comment
+		// must be taken into account
+		context.set(BTSCoreConstants.CORE_EXPRESSION_MAY_EDIT,
+				mayEdit());
+		context.set(BTSComment.class, (BTSComment)getObject());
 		return ContextInjectionFactory.make(CommentEditorDialog.class, context);
 	};
 	
