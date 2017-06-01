@@ -713,19 +713,27 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 		return null;
 	}
 
+	private String[] existingIndexNamesOnly(String[] indexNames) {
+		Vector<String> existingIndexNames = new Vector<>();
+		for (String indexName : indexNames) {
+			if (connectionProvider.getSearchClient(Client.class).admin().indices().exists(
+					new IndicesExistsRequest(indexName))
+					.actionGet().isExists()) {
+				existingIndexNames.add(indexName);
+			}
+		}
+		indexNames = existingIndexNames.toArray(new String[existingIndexNames.size()]);
+		return indexNames;
+	}
 	
 	@Override
 	public List<E> query(BTSQueryRequest query, String[] indexNames,
 			String[] indexTypes, String objectState, boolean registerQuery) {
 		
 		// check if index exists
-		// not necessary anymore thanks to faster search over array of indices
-//		boolean hasIndex = connectionProvider.getSearchClient(Client.class).admin().indices().exists(new IndicesExistsRequest(indexNames)).actionGet()
-//				.isExists();
-//		if (!hasIndex)
-//		{
-//			return new Vector<E>(0);
-//		}
+		// only use indexes that actually exist
+		indexNames = existingIndexNamesOnly(indexNames);
+
 		// check for ID Query
 		if (query.isIdQuery())
 		{
@@ -826,14 +834,8 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 			String[] indexTypes, String objectState, boolean registerQuery) {
 		
 		// check if index exists
-		// not necessary anymore thanks to faster search over array of indices
+		indexNames = existingIndexNamesOnly(indexNames);
 
-//		boolean hasIndex = connectionProvider.getSearchClient(Client.class).admin().indices().exists(new IndicesExistsRequest(indexNames)).actionGet()
-//				.isExists();
-//		if (!hasIndex)
-//		{
-//			return new Vector<String>(0);
-//		}
 		// check for ID Query
 		if (query.isIdQuery())
 		{
