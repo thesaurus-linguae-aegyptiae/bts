@@ -32,17 +32,21 @@ Workflow {
     	directory = "${runtimeProject}.ui/src-gen"
     }
     
-    component = DirectoryCleaner {
-    	directory = "${runtimeProject}.tests/src-gen"
-    }
+    //component = DirectoryCleaner {
+    //	directory = "${runtimeProject}.tests/src-gen"
+    //}
     
     component = Generator {
-    	pathRtProject = runtimeProject
+    	pathRtProject = "${runtimeProject}"
     	pathUiProject = "${runtimeProject}.ui"
-    	pathTestProject = "${runtimeProject}.tests"
-    	projectNameRt = projectName
+    	// pathTestProject = "${runtimeProject}.tests"
+    	projectNameRt = "${projectName}"
     	projectNameUi = "${projectName}.ui"
     	encoding = encoding
+
+	srcPath = "/src"
+	srcGenPath = "/src-gen"
+
     	language = auto-inject {
     		uri = grammarURI
     
