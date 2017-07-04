@@ -4,10 +4,10 @@ import org.eclipse.emf.mwe.utils.*
 import org.eclipse.xtext.generator.*
 import org.eclipse.xtext.ui.generator.*
 
+var projectName = "org.bbaw.bts.corpus.text.egy.egydsl"
 var grammarURI = "platform:/resource/${projectName}/src/org/bbaw/bts/corpus/text/egy/EgyDsl.xtext"
 var fileExtensions = "egydsl"
-var projectName = "org.bbaw.bts.corpus.text.egy.egydsl"
-var runtimeProject = "../${projectName}"
+var runtimeProject = "platform:/resource/${projectName}"
 var generateXtendStub = true
 var encoding = "UTF-8"
 
