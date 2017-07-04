@@ -114,5 +114,15 @@ public class BTSPluginIDs
 
 	public static final String PREF_MAIN_ATEXT_KEY = "main_atext_key";
 
+	public static final String PREF_SEARCH_CLIENT_SOCKETTRANSPORT = "search_client_socket_transport";
+
+	public static final String PREF_SEARCH_CLIENT_SOCKETTRANSPORT_HOST = "search_client_socket_transport_host";
+
+	public static final String PREF_SEARCH_CLIENT_SOCKETTRANSPORT_PORT = "search_client_socket_transport_port";
+	
+	public static final String PREF_SEARCH_CLIENT_SOCKETTRANSPORT_HOST2 = "search_client_socket_transport_host2";
+
+	public static final String PREF_SEARCH_CLIENT_SOCKETTRANSPORT_PORT2 = "search_client_socket_transport_port2";
+
 
 }

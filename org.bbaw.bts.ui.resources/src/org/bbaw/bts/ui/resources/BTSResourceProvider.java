@@ -29,14 +29,16 @@
  */
 package org.bbaw.bts.ui.resources;
 
+import javax.inject.Named;
+
 import org.eclipse.e4.tools.services.IResourceProviderService;
-import org.eclipse.swt.widgets.Display;
 
 /**
  * The Interface BTSResourceProvider provides static resource string ids.
  *
  * @author Christoph Plutte
  */
+@Named("org.bbaw.bts.ui.resources.BTSResourceProvider")
 public interface BTSResourceProvider extends IResourceProviderService {
 
 	// images

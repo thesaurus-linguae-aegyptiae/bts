@@ -46,7 +46,7 @@ import com.google.inject.Inject;
 import com.google.inject.name.Named;
 
 /**
- * @author Dennis Hübner - Initial contribution and API
+ * @author Dennis Hï¿½bner - Initial contribution and API
  * 
  */
 public abstract class AbstractPreferencePage extends FieldEditorPreferencePage implements IWorkbenchPreferencePage,
@@ -73,7 +73,7 @@ public abstract class AbstractPreferencePage extends FieldEditorPreferencePage i
 	}
 
 	public void setElement(IAdaptable element) {
-		this.project = (IProject) element.getAdapter(IProject.class);
+		this.project = element.getAdapter(IProject.class);
 	}
 
 	public IAdaptable getElement() {
@@ -98,7 +98,7 @@ public abstract class AbstractPreferencePage extends FieldEditorPreferencePage i
 		}
 		// XXX cp changed
 		if (preferenceStoreAccess != null)System.out.println(preferenceStoreAccess.getWritablePreferenceStore());
-		return StaticAccessController.getPreferenceStore();
+		return (IPreferenceStore) StaticAccessController.getPreferenceStore();
 //		return preferenceStoreAccess.getWritablePreferenceStore();
 	}
 

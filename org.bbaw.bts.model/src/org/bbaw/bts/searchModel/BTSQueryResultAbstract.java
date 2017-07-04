@@ -33,7 +33,6 @@ import javax.swing.tree.TreePath;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.jface.viewers.ContentViewer;
 
 public class BTSQueryResultAbstract
 {
@@ -46,7 +45,7 @@ public class BTSQueryResultAbstract
 
 	private EReference referenceName;
 
-	private ContentViewer viewer;
+	private Object viewer;
 
 	/**
 	 * @return the queryId
@@ -116,12 +115,12 @@ public class BTSQueryResultAbstract
 		this.referenceName = referenceName;
 	}
 
-	public ContentViewer getViewer()
+	public Object getViewer()
 	{
 		return viewer;
 	}
 
-	public void setViewer(ContentViewer viewer)
+	public void setViewer(Object viewer)
 	{
 		this.viewer = viewer;
 	}

@@ -13,6 +13,7 @@
 		<module>org.bbaw.bts.app</module>
 		<module>org.bbaw.bts.app.login</module>
 		<module>org.bbaw.bts.commons</module>
+		<module>org.bbaw.bts.commons.fsaccess</module>
 		<module>org.bbaw.bts.commons.libs.elasticsearch</module>
 		<module>org.bbaw.bts.core.commons</module>
 		<module>org.bbaw.bts.core.commons.corpus</module>
@@ -50,6 +51,7 @@
 		<module>org.bbaw.bts.ui.main</module>
 		<module>org.bbaw.bts.ui.resources</module>
 		<module>org.bbaw.bts.ui.resources.impl</module>
+		<module>org.lightcouch</module>
 		<module>org.eclipselabs.emfjson</module>
 		<module>org.eclipselabs.emfjson.feature</module>
 		<module>org.eclipselabs.emfjson.couchdb</module>
@@ -58,7 +60,6 @@
 		<module>org.eclipse.e4.ui.workbench.perspectiveswitcher</module>
 		<module>org.ramo.klevis.p2.core.service</module>
 		<module>org.bbaw.bts.app.product</module>
-		<module>org.lightcouch</module>
 	</modules>
 
 	<properties>
@@ -74,13 +75,13 @@
 			<name>BTS BUILD Rep</name>
 			<url>http://telota.bbaw.de/bts-update/bts-build-neon</url>
 			<layout>p2</layout>
-		</repository>
-		<repository>
+		</repository> 
+		<!-- <repository>
 			<id>bts-mvn-build-extras</id>
 			<name>BTS BUILD Rep</name>
 			<url>http://telota.bbaw.de/bts-update/extras</url>
 			<layout>p2</layout>
-		</repository>
+		</repository> -->
 		<repository>
 			<id>neon</id>
 			<url>http://download.eclipse.org/releases/neon</url>

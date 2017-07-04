@@ -1,27 +1,31 @@
 package org.bbaw.bts.core.services.corpus.impl.services;
 
-import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.Vector;
 
 import javax.inject.Inject;
 
+import org.bbaw.bts.btsmodel.BTSConfig;
+import org.bbaw.bts.btsmodel.BTSConfigItem;
 import org.bbaw.bts.btsmodel.BTSDBBaseObject;
 import org.bbaw.bts.commons.BTSConstants;
-import org.bbaw.bts.commons.BTSPluginIDs;
 import org.bbaw.bts.core.commons.BTSCoreConstants;
 import org.bbaw.bts.core.commons.BTSObjectSearchService;
 import org.bbaw.bts.core.commons.MoveObjectAmongProjectDBCollectionsService;
 import org.bbaw.bts.core.commons.corpus.BTSCorpusConstants;
+import org.bbaw.bts.core.commons.corpus.CorpusUtils;
 import org.bbaw.bts.core.commons.corpus.comparator.BTSPassportEntryComparator;
 import org.bbaw.bts.core.dao.GeneralPurposeDao;
 import org.bbaw.bts.core.dao.corpus.CorpusObjectDao;
 import org.bbaw.bts.core.dao.util.BTSQueryRequest;
-import org.bbaw.bts.core.dao.util.DaoConstants;
+import org.bbaw.bts.core.services.BTSConfigurationService;
 import org.bbaw.bts.core.services.corpus.BTSAnnotationService;
 import org.bbaw.bts.core.services.corpus.BTSImageService;
 import org.bbaw.bts.core.services.corpus.BTSLemmaEntryService;
@@ -30,19 +34,19 @@ import org.bbaw.bts.core.services.corpus.BTSTextCorpusService;
 import org.bbaw.bts.core.services.corpus.BTSTextService;
 import org.bbaw.bts.core.services.corpus.BTSThsEntryService;
 import org.bbaw.bts.core.services.corpus.CorpusObjectService;
-import org.bbaw.bts.core.services.impl.generic.GenericObjectServiceImpl;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSAnnotation;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSImage;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSLemmaEntry;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSPassportEntry;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSPassportEntryGroup;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSPassportEntryItem;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSTCObject;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSText;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSTextCorpus;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSThsEntry;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.e4.core.contexts.IEclipseContext;
-import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.core.di.extensions.Preference;
 
 public class CorpusObjectServiceImpl 
@@ -50,6 +54,9 @@ extends AbstractCorpusObjectServiceImpl<BTSCorpusObject, String>
 implements 	CorpusObjectService, BTSObjectSearchService, MoveObjectAmongProjectDBCollectionsService
 {
 
+	@Inject
+	@Preference(value = "locale_lang", nodePath = "org.bbaw.bts.app")
+	private String lang;
 
 	// daos
 	@Inject
@@ -80,7 +87,8 @@ implements 	CorpusObjectService, BTSObjectSearchService, MoveObjectAmongProjectD
 	private GeneralPurposeDao generalPurposeDao;
 	// services
 
-	private IEclipseContext eclipseCtx;
+	@Inject
+	private BTSConfigurationService configService;
 
 	@Override
 	public BTSCorpusObject createNew()
@@ -381,7 +389,6 @@ implements 	CorpusObjectService, BTSObjectSearchService, MoveObjectAmongProjectD
 			String objectState,
 			boolean registerQuery, IProgressMonitor monitor) {
 		List<BTSCorpusObject> objects = new Vector<BTSCorpusObject>();
-		
 		if (query.getDbPath() != null && query.getDbPath().endsWith(BTSCorpusConstants.THS))
 		{
 			for (String p : getActiveProjects()) {
@@ -570,4 +577,270 @@ implements 	CorpusObjectService, BTSObjectSearchService, MoveObjectAmongProjectD
 		return false;
 		
 	}
+
+
+	/* (non-Javadoc)
+	 * @see org.bbaw.bts.core.services.impl.generic.GenericObjectServiceImpl#findAsJsonString(java.io.Serializable, org.eclipse.core.runtime.IProgressMonitor)
+	 */
+	@Override
+	public String findAsJsonString(String key, IProgressMonitor monitor) {
+		String tcObject = null;
+		try {
+			tcObject = corpusObjectDao.findAsJsonString(key, main_corpus_key);
+		} catch (Exception e) {
+		}
+		if (tcObject != null)
+		{
+			return tcObject;
+		}
+		for (String c : getActive_corpora(main_project))
+		{
+			try {
+				tcObject = corpusObjectDao.findAsJsonString(key, c);
+			} catch (Exception e) {
+			}
+			if (tcObject != null)
+			{
+				return tcObject;
+			}
+		}
+		for (String p : getActiveProjects())
+		{
+			for (String c : getActive_corpora(p))
+			{
+				try {
+					tcObject = corpusObjectDao.findAsJsonString(key, c);
+				} catch (Exception e) {
+				}
+				if (tcObject != null)
+				{
+					return tcObject;
+				}
+			}
+		}
+		return tcObject;
+	}
+
+
+	/* (non-Javadoc)
+	 * @see org.bbaw.bts.core.services.impl.generic.GenericObjectServiceImpl#queryAsJsonString(org.bbaw.bts.core.dao.util.BTSQueryRequest, java.lang.String, org.eclipse.core.runtime.IProgressMonitor)
+	 */
+	@Override
+	public List<String> queryAsJsonString(BTSQueryRequest query, String objectState, IProgressMonitor monitor) {
+		List<String> objects = new Vector<String>();
+		
+		if (query.getDbPath() != null && query.getDbPath().endsWith(BTSCorpusConstants.THS))
+		{
+			for (String p : getActiveProjects()) {
+				try {
+					objects.addAll(corpusObjectDao.queryAsJsonString(query, p
+							+ BTSCorpusConstants.THS, p
+							+ BTSCorpusConstants.THS, objectState,
+							false));
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				if (monitor != null)
+				{
+					if (monitor.isCanceled()) return objects;
+					monitor.worked(20);
+				}
+			}
+		}
+		else if (query.getDbPath() != null && query.getDbPath().endsWith(BTSCorpusConstants.WLIST))
+		{
+			for (String p : getActiveLemmaLists()) {
+				try {
+					objects.addAll(corpusObjectDao.queryAsJsonString(query, p
+							+ BTSCorpusConstants.WLIST, p
+							+ BTSCorpusConstants.WLIST, objectState,
+							false));
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				if (monitor != null)
+				{
+					if (monitor.isCanceled()) return objects;
+					monitor.worked(5);
+				}
+			}
+		}
+		else
+		{
+			for (String p : getActiveProjects()) {
+				for (String c : getActive_corpora(p)) {
+					
+					try {
+						objects.addAll(corpusObjectDao.queryAsJsonString(query, c, c, objectState,
+								false));
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					if (monitor != null)
+					{
+						if (monitor.isCanceled()) return objects;
+						monitor.worked(5);
+					}
+				}
+			}
+		}
+		return objects;
+	}
+
+
+	/* (non-Javadoc)
+	 * @see org.bbaw.bts.core.services.corpus.CorpusObjectService#setObjectTypePath(org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject, java.lang.String)
+	 */
+	@Override
+	public void setObjectTypePath(BTSCorpusObject object, String annotationTypePath) {
+		if (annotationTypePath == null) return;
+		else if (!annotationTypePath.startsWith(BTSConstants.ANNOTATION)) return;
+		else if (annotationTypePath.equals(BTSConstants.ANNOTATION)) return;
+		else
+		{
+			String[] entries = annotationTypePath.split("\\.");
+			if (entries.length > 1)
+			{
+				object.setType(entries[1]);
+				object.setName(entries[1]);
+			}
+			if (entries.length > 2)
+			{
+				object.setSubtype(entries[2]);
+				object.setName(entries[2]);
+			}
+		}
+		return;
+	}
+
+
+	/* (non-Javadoc)
+	 * @see org.bbaw.bts.core.services.corpus.CorpusObjectService#getAllPassportDataAsString(org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject)
+	 */
+	@Override
+	public String getAllPassportDataAsString(BTSCorpusObject object) {
+		String dataString ="";
+		if (object.getPassport() == null) return null;
+		// iterate over all passport entries
+		for (BTSPassportEntry c : object.getPassport().getChildren())
+		{
+			BTSPassportEntryGroup category = (BTSPassportEntryGroup) c;
+			String re = appendPassportItemData(category);
+			if (re != null && !"".equals(re))
+			{
+				dataString += getPassportConfigLabel(category.getType()) + ": \n";
+				dataString += re;
+			}
+			
+		}
+		// iterate over all entry children ...
+		if (dataString.endsWith("\n")) return 	dataString.substring(0, dataString.length() -1);
+		return dataString;
+	}
+	
+	/**
+	 * @param type
+	 * @return
+	 */
+	public String getPassportConfigLabel(String passportTypePath) {
+		Map<String, String>cache = getPassportConfigLabelCache();
+		if (cache.containsKey(passportTypePath)) return cache.get(passportTypePath);
+		return passportTypePath;
+	}
+
+
+	/**
+	 * @return
+	 */
+	private Map<String, String> getPassportConfigLabelCache() {
+		Map<String, String> cache;
+		Object o = context.get("passportConfigLabelmap");
+		if (o != null && o instanceof Map<?,?>){
+			cache = (Map<String, String>) o;
+		}
+		else
+		{
+			cache = new HashMap<String, String>();
+			for (BTSConfig c : configService.getPassportCategories(null))
+			{
+				if (c instanceof BTSConfigItem)
+				{
+					BTSConfigItem child = (BTSConfigItem) c;
+					fillCache(child, cache, child.getValue(), null);
+					cache.put(child.getValue(), child.getLabel().getTranslation(lang));
+				}
+			}
+			context.set("passportConfigLabelmap", cache);
+		}
+		return cache;
+	}
+
+
+	/**
+	 * @param activePassportConfigItem
+	 * @param cache
+	 */
+	private void fillCache(BTSConfigItem configItem, Map<String, String> cache, 
+			String valuePath, String labelPath) {
+		for (BTSConfig c : configItem.getChildren())
+		{
+			BTSConfigItem item = (BTSConfigItem) c;
+			String value = valuePath;
+			if (value == null) value = item.getValue();
+			else value += "." + item.getValue();
+			
+			String label = labelPath;
+			if (label == null) label = item.getLabel().getTranslation(lang);
+			else label += "." + item.getLabel().getTranslation(lang);
+			
+			cache.put(value, label);
+			fillCache(item, cache, value, label);
+		}
+	}
+
+
+	/**
+	 * @param category
+	 * @return
+	 */
+	private String appendPassportItemData(BTSPassportEntry entry, String... pathEntries) {
+		String response = "";
+		String[] path  = Arrays.copyOf(pathEntries, pathEntries.length +1);
+		path[path.length -1] = entry.getType();
+		if (entry instanceof BTSPassportEntryItem)
+		{
+			BTSPassportEntryItem item = (BTSPassportEntryItem) entry;
+			if (item.getValue() != null && !"".equals(item.getValue().trim()))
+			{
+				// if value is set, get config items of string
+				// build string representation: label>label>...>:value
+				for (int i = 0; i<path.length ; i++)
+				{
+					String s = path[i];
+					response += s+ ".";
+				}
+				response = response.substring(0, response.length() -1);
+				response = "-" + getPassportConfigLabel(response);
+				return  response += ":" + item.getValue() + "\n";
+			}
+			return null;
+		}
+		else
+		{
+			for (BTSPassportEntry cc : entry.getChildren())
+			{
+				String re = appendPassportItemData(cc, path);
+				if (re != null && !"".equals(re.trim()))
+				{
+					response += re;
+				}
+				
+			}
+		}
+		return response;
+	}
+
 }

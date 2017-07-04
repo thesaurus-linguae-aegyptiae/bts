@@ -159,11 +159,14 @@ public class ApplicationUpdateControllerImpl extends Job implements
 
 	@Override
 	protected IStatus run(IProgressMonitor monitor) {
-		agent = context.get(IProvisioningAgent.class);
+		try {
+			agent = context.get(IProvisioningAgent.class);
+		} catch (NullPointerException e) {
+			//
+		}
 		if (workbench != null && agent != null) {
 			IStatus runStatus = checkForUpdates(monitor);
 			schedule(TIME_UNTIL_RECHECK);
-			info("Update Check Controller Status: "+status+"\nStatus of last check: "+runStatus);
 			if (status == EUpdateStatusType.UPDATE_AVAILABLE) {
 				if (!updatePending) {
 					confirmInstallation();
@@ -256,7 +259,6 @@ public class ApplicationUpdateControllerImpl extends Job implements
         IStatus updateStatus = null;
 		try {
 			updateStatus = operation.resolveModal(monitor);
-			info("P2 Update Status : " + updateStatus.getCode());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			info("P2 Update Status not OK due to errors: ");
@@ -265,8 +267,6 @@ public class ApplicationUpdateControllerImpl extends Job implements
         	return Status.CANCEL_STATUS;
 		}
 		
-        info("P2 Update Status : " + updateStatus.getCode());
-        
         // if nothing to do, do nothing
         if (updateStatus.getCode() == UpdateOperation.STATUS_NOTHING_TO_UPDATE) {
         	status = EUpdateStatusType.NO_UPDATE;

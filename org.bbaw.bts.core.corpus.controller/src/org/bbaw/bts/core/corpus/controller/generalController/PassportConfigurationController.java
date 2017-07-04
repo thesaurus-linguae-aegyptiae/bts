@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.bbaw.bts.btsmodel.BTSConfig;
 import org.bbaw.bts.btsmodel.BTSConfigItem;
+import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSPassport;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSPassportEntry;
@@ -44,5 +45,18 @@ public interface PassportConfigurationController {
 
 	BTSPassportEntry findMatchingEntryGroup(BTSPassport passport,
 			BTSConfigItem category);
+
+	/**
+	 * @param annotation
+	 * @param object
+	 * @return return typeconfigs if type == null, if type is set it returns subtype configitems
+	 */
+	BTSConfigItem getObjectTypeConfigItemProcessedClones(String className, String type);
+
+	/**
+	 * @param object
+	 * @return
+	 */
+	String getAllPassportDataAsString(BTSCorpusObject object);
 
 }

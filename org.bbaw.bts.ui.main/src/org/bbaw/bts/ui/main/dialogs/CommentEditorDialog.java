@@ -47,6 +47,8 @@ import org.eclipse.swt.widgets.Text;
 
 public class CommentEditorDialog extends TitleAreaDialog {
 	private Text txtCommenttxt;
+
+	@Inject
 	private BTSComment comment;
 	
 	@Inject
@@ -81,10 +83,8 @@ public class CommentEditorDialog extends TitleAreaDialog {
 	 * @param parentShell
 	 */
 	@Inject
-	public CommentEditorDialog(Shell parentShell, BTSComment comment) {
+	public CommentEditorDialog(Shell parentShell) {
 		super(parentShell);
-		this.comment = comment;
-		
 	}
 
 	/**
@@ -131,8 +131,11 @@ public class CommentEditorDialog extends TitleAreaDialog {
 		});
 		
 		txtCommenttxt = new Text(container, SWT.BORDER | SWT.WRAP | SWT.V_SCROLL | SWT.MULTI);
-		txtCommenttxt.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
-		
+		GridData gd = new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1);
+		gd.widthHint = 480;
+		gd.heightHint = 640;
+		txtCommenttxt.setLayoutData(gd);
+
 		compositeRelations = new Composite(container, SWT.NONE);
 		compositeRelations.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1));
 		compositeRelations.setLayout(new GridLayout(1, false));
@@ -178,7 +181,8 @@ public class CommentEditorDialog extends TitleAreaDialog {
 	}
 
 	private void checkRightsAndSetEditable() {
-		editable = permissionsController.authenticatedUserMayEditObject(comment);
+		editable = permissionsController.userMayEditObject(
+				permissionsController.getAuthenticatedUser(), comment);
 		txtTitletxt.setEditable(editable);
 		txtCommenttxt.setEditable(editable);
 		relationsEditor.setEnabled(editable);
@@ -276,6 +280,7 @@ public class CommentEditorDialog extends TitleAreaDialog {
 				true);
 		createButton(parent, IDialogConstants.CANCEL_ID,
 				IDialogConstants.CANCEL_LABEL, false);
+		this.getButton(IDialogConstants.OK_ID).setEnabled(editable);
 	}
 
 	@Override
@@ -293,7 +298,7 @@ public class CommentEditorDialog extends TitleAreaDialog {
 	 */
 	@Override
 	protected Point getInitialSize() {
-		return new Point(450, 450);
+		return new Point(500, 600);
 	}
 	
 	@Override

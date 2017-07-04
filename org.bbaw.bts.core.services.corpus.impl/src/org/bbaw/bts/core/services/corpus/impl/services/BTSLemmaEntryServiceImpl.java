@@ -340,4 +340,56 @@ implements BTSLemmaEntryService, BTSObjectSearchService
 		return filtered;
 
 	}
+
+	/* (non-Javadoc)
+	 * @see org.bbaw.bts.core.services.impl.generic.GenericObjectServiceImpl#findAsJsonString(java.io.Serializable, org.eclipse.core.runtime.IProgressMonitor)
+	 */
+	@Override
+	public String findAsJsonString(String key, IProgressMonitor monitor) {
+		String entry = null;
+		try {
+			entry = lemmaEntryDao.findAsJsonString(key, main_project + BTSCorpusConstants.WLIST);
+		} catch (Exception e1) {
+		}
+		if (entry != null)
+		{
+			return entry;
+		}
+		for (String p : getActiveLemmaLists())
+		{
+			try {
+				entry = lemmaEntryDao.findAsJsonString(key, p + BTSCorpusConstants.WLIST);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			if (entry != null)
+			{
+				return entry;
+			}
+		}
+		return null;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.bbaw.bts.core.services.impl.generic.GenericObjectServiceImpl#queryAsJsonString(org.bbaw.bts.core.dao.util.BTSQueryRequest, java.lang.String, org.eclipse.core.runtime.IProgressMonitor)
+	 */
+	@Override
+	public List<String> queryAsJsonString(BTSQueryRequest query, String objectState, IProgressMonitor monitor) {
+		List<String> objects = new Vector<String>();
+		for (String p : getActiveLemmaLists())
+		{
+			System.out.println("search in index: "+p+BTSCorpusConstants.WLIST);
+			try {
+				objects.addAll(lemmaEntryDao.queryAsJsonString(query,
+						p + BTSCorpusConstants.WLIST, p + BTSCorpusConstants.WLIST,
+						objectState, false));
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		}
+		return objects;
+	}
 }

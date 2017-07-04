@@ -125,6 +125,24 @@ public interface GenericDao<E extends BTSDBBaseObject, K>
 	E find(K key, String path);
 	
 	/**
+	 * Find entity by key and returns it as json string.
+	 *
+	 * @param key the key
+	 * @param path the path in database
+	 * @return the entity
+	 */
+	String findAsJsonString(K key, String path);
+	
+	/**
+	 * Find revision of entity and returns it as json string.
+	 *
+	 * @param key the key
+	 * @param path the path in database
+	 * @param revision the id of the requested revision 
+	 * @return the entity in the requested revision or null if not available
+	 */
+	String findAsJsonString(K key, String path, String revision);
+	/**
 	 * Find revision of entity
 	 *
 	 * @param key the key
@@ -202,6 +220,20 @@ public interface GenericDao<E extends BTSDBBaseObject, K>
 	 * @return the list of matching entities
 	 */
 	List<E> query(BTSQueryRequest query, String indexName, String indexType,
+			String objectState, boolean registerQuery);
+	
+	/**
+	 * Query for entities with given query, indexname, indextype, objectstate and 
+	 * returns objects as json String.
+	 *
+	 * @param query the query
+	 * @param indexName the index name
+	 * @param indexType the index type
+	 * @param objectState the object state
+	 * @param registerQuery whether the query should be registered e.g. with percolator.
+	 * @return the list of matching entities
+	 */
+	List<String> queryAsJsonString(BTSQueryRequest query, String indexName, String indexType,
 			String objectState, boolean registerQuery);
 
 	/**

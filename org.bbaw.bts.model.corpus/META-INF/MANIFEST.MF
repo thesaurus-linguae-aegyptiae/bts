@@ -9,7 +9,8 @@ Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Export-Package: org.bbaw.bts.corpus.btsCorpusModel,
  org.bbaw.bts.corpus.btsCorpusModel.impl,
- org.bbaw.bts.corpus.btsCorpusModel.util
+ org.bbaw.bts.corpus.btsCorpusModel.util,
+ org.bbaw.bts.corpus.searchModel
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore;visibility:=reexport,
  org.bbaw.bts.model;visibility:=reexport

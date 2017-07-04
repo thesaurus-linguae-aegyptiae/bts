@@ -101,6 +101,10 @@ public class BTSUserServiceImpl extends GenericObjectServiceImpl<BTSUser, String
 		}
 		return null;
 	}
+	@Override
+	public String findAsJsonString(String key, IProgressMonitor monitor) {
+		return userDao.findAsJsonString(key, BTSCoreConstants.ADMIN);
+	}
 
 	@Override
 	public List<BTSUser> list(String objectState, IProgressMonitor monitor)
@@ -421,6 +425,16 @@ public class BTSUserServiceImpl extends GenericObjectServiceImpl<BTSUser, String
 	public void makeUserLocalDBAdmin(String userName, String passWord) throws FileNotFoundException {
 		dbManager.addAuthenticationDBAdmin(userName, passWord);
 		
+	}
+
+	/* (non-Javadoc)
+	 * @see org.bbaw.bts.core.services.impl.generic.GenericObjectServiceImpl#queryAsJsonString(org.bbaw.bts.core.dao.util.BTSQueryRequest, java.lang.String, org.eclipse.core.runtime.IProgressMonitor)
+	 */
+	@Override
+	public List<String> queryAsJsonString(BTSQueryRequest query, String objectState, IProgressMonitor monitor) {
+		List<String> objects = userDao.queryAsJsonString(query, BTSCoreConstants.ADMIN,
+				BTSCoreConstants.ADMIN, objectState, false);
+		return objects;
 	}
 
 }

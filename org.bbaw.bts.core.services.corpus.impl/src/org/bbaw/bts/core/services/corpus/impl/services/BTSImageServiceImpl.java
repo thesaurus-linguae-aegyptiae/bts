@@ -183,4 +183,54 @@ public class BTSImageServiceImpl extends AbstractCorpusObjectServiceImpl<BTSImag
 		}
 		return filter(objects);
 	}
+
+	/* (non-Javadoc)
+	 * @see org.bbaw.bts.core.services.impl.generic.GenericObjectServiceImpl#findAsJsonString(java.io.Serializable, org.eclipse.core.runtime.IProgressMonitor)
+	 */
+	@Override
+	public String findAsJsonString(String key, IProgressMonitor monitor) {
+		String image = null;
+		image = imageDao.findAsJsonString(key, main_corpus_key);
+		if (image != null)
+		{
+			return image;
+		}
+		for (String c : getActive_corpora(main_project))
+		{
+			image = imageDao.findAsJsonString(key, c);
+			if (image != null)
+			{
+				return image;
+			}
+		}
+		for (String p : getActiveProjects())
+		{
+			for (String c : getActive_corpora(p))
+			{
+				image = imageDao.findAsJsonString(key, c);
+				if (image != null)
+				{
+					return image;
+				}
+			}
+		}
+		return null;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.bbaw.bts.core.services.impl.generic.GenericObjectServiceImpl#queryAsJsonString(org.bbaw.bts.core.dao.util.BTSQueryRequest, java.lang.String, org.eclipse.core.runtime.IProgressMonitor)
+	 */
+	@Override
+	public List<String> queryAsJsonString(BTSQueryRequest query, String objectState, IProgressMonitor monitor) {
+		List<String> objects = new Vector<String>();
+		for (String p : getActiveProjects())
+		{
+			for (String c : getActive_corpora(p))
+			{
+				objects.addAll(imageDao.queryAsJsonString(query, c, c, objectState,
+						false));
+			}
+		}
+		return objects;
+	}
 }

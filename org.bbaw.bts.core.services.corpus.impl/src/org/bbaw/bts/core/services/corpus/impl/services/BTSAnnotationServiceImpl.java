@@ -281,4 +281,69 @@ implements BTSAnnotationService, BTSObjectSearchService
 		}
 		return filter(objects);
 	}
+
+	/* (non-Javadoc)
+	 * @see org.bbaw.bts.core.services.impl.generic.GenericObjectServiceImpl#findAsJsonString(java.io.Serializable, org.eclipse.core.runtime.IProgressMonitor)
+	 */
+	@Override
+	public String findAsJsonString(String key, IProgressMonitor monitor) {
+		String anno = null;
+		anno = annotationDao.findAsJsonString(key, main_corpus_key);
+		if (anno != null)
+		{
+			return anno;
+		}
+		for (String c : getActive_corpora(main_project))
+		{
+			try {
+				anno = annotationDao.findAsJsonString(key, c);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			if (anno != null)
+			{
+				return anno;
+			}
+		}
+		for (String p : getActiveProjects())
+		{
+			for (String c : getActive_corpora(p))
+			{
+				try {
+					anno = annotationDao.findAsJsonString(key, c);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				if (anno != null)
+				{
+					return anno;
+				}
+			}
+		}
+		return null;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.bbaw.bts.core.services.impl.generic.GenericObjectServiceImpl#queryAsJsonString(org.bbaw.bts.core.dao.util.BTSQueryRequest, java.lang.String, org.eclipse.core.runtime.IProgressMonitor)
+	 */
+	@Override
+	public List<String> queryAsJsonString(BTSQueryRequest query, String objectState, IProgressMonitor monitor) {
+		List<String> objects = new Vector<String>();
+		for (String p : getActiveProjects())
+		{
+			for (String c : getActive_corpora(p))
+			{
+				try {
+					objects.addAll(annotationDao.queryAsJsonString(query, c, c, objectState,
+							false));
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+		return objects;
+	}
 }

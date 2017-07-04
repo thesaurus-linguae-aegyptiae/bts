@@ -1,24 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry exported="true" kind="lib" path="elastic_lib/elasticsearch-1.3.2.jar" sourcepath="D:/AAEW/additional-libs/elasticsearch-1.3.2_source.zip"/>
-	<classpathentry exported="true" kind="lib" path="elastic_lib/elasticsearch-river-couchdb-2.3.0.jar" sourcepath="D:/AAEW/additional-libs/elasticsearch-river-couchdb-master.zip"/>
-	<classpathentry exported="true" kind="lib" path="elastic_lib/jts-1.13.jar"/>
-	<classpathentry exported="true" kind="lib" path="elastic_lib/lucene-analyzers-common-4.9.0.jar"/>
-	<classpathentry exported="true" kind="lib" path="elastic_lib/lucene-codecs-4.9.0.jar"/>
-	<classpathentry exported="true" kind="lib" path="elastic_lib/lucene-core-4.9.0.jar"/>
-	<classpathentry exported="true" kind="lib" path="elastic_lib/lucene-expressions-4.9.0.jar"/>
-	<classpathentry exported="true" kind="lib" path="elastic_lib/lucene-grouping-4.9.0.jar"/>
-	<classpathentry exported="true" kind="lib" path="elastic_lib/lucene-highlighter-4.9.0.jar"/>
-	<classpathentry exported="true" kind="lib" path="elastic_lib/lucene-join-4.9.0.jar"/>
-	<classpathentry exported="true" kind="lib" path="elastic_lib/lucene-memory-4.9.0.jar"/>
-	<classpathentry exported="true" kind="lib" path="elastic_lib/lucene-misc-4.9.0.jar"/>
-	<classpathentry exported="true" kind="lib" path="elastic_lib/lucene-queries-4.9.0.jar"/>
-	<classpathentry exported="true" kind="lib" path="elastic_lib/lucene-queryparser-4.9.0.jar"/>
-	<classpathentry exported="true" kind="lib" path="elastic_lib/lucene-sandbox-4.9.0.jar"/>
-	<classpathentry exported="true" kind="lib" path="elastic_lib/lucene-spatial-4.9.0.jar"/>
-	<classpathentry exported="true" kind="lib" path="elastic_lib/lucene-suggest-4.9.0.jar"/>
-	<classpathentry exported="true" kind="lib" path="elastic_lib/spatial4j-0.4.1.jar"/>
-	<classpathentry exported="true" kind="lib" path="elastic_lib/log4j-1.2.17.jar"/>
+	<classpathentry exported="true" kind="lib" path="libs/elasticsearch-river-couchdb-2.6.0.jar"/>
+	<classpathentry exported="true" kind="lib" path="libs/antlr-runtime-3.5.jar"/>
+	<classpathentry exported="true" kind="lib" path="libs/apache-log4j-extras-1.2.17.jar"/>
+	<classpathentry exported="true" kind="lib" path="libs/asm-4.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="libs/asm-commons-4.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="libs/elasticsearch-1.7.3.jar"/>
+	<classpathentry exported="true" kind="lib" path="libs/groovy-all-2.4.4.jar"/>
+	<classpathentry exported="true" kind="lib" path="libs/jna-4.1.0.jar"/>
+	<classpathentry exported="true" kind="lib" path="libs/jts-1.13.jar"/>
+	<classpathentry exported="true" kind="lib" path="libs/log4j-1.2.17.jar"/>
+	<classpathentry exported="true" kind="lib" path="libs/lucene-analyzers-common-4.10.4.jar"/>
+	<classpathentry exported="true" kind="lib" path="libs/lucene-core-4.10.4.jar"/>
+	<classpathentry exported="true" kind="lib" path="libs/lucene-expressions-4.10.4.jar"/>
+	<classpathentry exported="true" kind="lib" path="libs/lucene-grouping-4.10.4.jar"/>
+	<classpathentry exported="true" kind="lib" path="libs/lucene-highlighter-4.10.4.jar"/>
+	<classpathentry exported="true" kind="lib" path="libs/lucene-join-4.10.4.jar"/>
+	<classpathentry exported="true" kind="lib" path="libs/lucene-memory-4.10.4.jar"/>
+	<classpathentry exported="true" kind="lib" path="libs/lucene-misc-4.10.4.jar"/>
+	<classpathentry exported="true" kind="lib" path="libs/lucene-queries-4.10.4.jar"/>
+	<classpathentry exported="true" kind="lib" path="libs/lucene-queryparser-4.10.4.jar"/>
+	<classpathentry exported="true" kind="lib" path="libs/lucene-sandbox-4.10.4.jar"/>
+	<classpathentry exported="true" kind="lib" path="libs/lucene-spatial-4.10.4.jar"/>
+	<classpathentry exported="true" kind="lib" path="libs/lucene-suggest-4.10.4.jar"/>
+	<classpathentry exported="true" kind="lib" path="libs/spatial4j-0.4.1.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
 	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
 	<classpathentry kind="src" path="src"/>
