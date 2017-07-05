@@ -31,16 +31,16 @@
   					<configuration>
   						<filesets combine.children="append">
   							<fileset>
-  								<directory>${basedir}/src-gen/</directory>
+  								<directory>${project.basedir}/src-gen/</directory>
   							</fileset>
   							<fileset>
-  								<directory>${basedir}/model/generated/</directory>
+  								<directory>${project.basedir}/model/generated/</directory>
   							</fileset>
   							<fileset>
-								<directory>${basedir}/../${project.artifactId}.ui/src-gen/</directory>
+								<directory>${project.basedir}/../${project.artifactId}.ui/src-gen/</directory>
 							</fileset>
 							<fileset>
-								<directory>${basedir}/../${project.artifactId}.tests/src-gen/</directory>
+								<directory>${project.basedir}/../${project.artifactId}.tests/src-gen/</directory>
 							</fileset>
   						</filesets>
   					</configuration>
@@ -98,7 +98,7 @@
                         <goal>compile</goal>
                     </goals>
                     <configuration>
-                        <outputDirectory>${basedir}/xtend-gen</outputDirectory>
+                        <outputDirectory>${project.basedir}/xtend-gen</outputDirectory>
                     </configuration>
                 </execution>
             </executions>
