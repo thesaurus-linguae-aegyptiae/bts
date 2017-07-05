@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>org.bbaw.bts</groupId>
@@ -11,16 +10,15 @@
     <artifactId>org.bbaw.bts.corpus.text.egy.egydsl</artifactId>
     <version>3.1.0-SNAPSHOT</version>
     <packaging>eclipse-plugin</packaging>
-
+ 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <xtext.version>2.9.0</xtext.version>
     </properties>
-
+ 
     <build>
-
-
         <plugins>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-clean-plugin</artifactId>
@@ -48,7 +46,6 @@
                 </executions>
             </plugin>
 
-
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>exec-maven-plugin</artifactId>
@@ -68,58 +65,58 @@
                             which might run from either the module dir or the top-level project dir. This breaks the
                             MWE2 script's working directory assumption so we're just running a subprocess here via exec.
                             This is always run in the module dir so the MWE2 script's pwd assumption works. -->
-                        <goal>exec</goal>
-                    </goals>
-                </execution>
-            </executions>
-            <configuration>
-                <includeProjectDependencies>true</includeProjectDependencies>
-                <includePluginDependencies>true</includePluginDependencies>
-                <!-- necessary for the java process to find the mwe2 launcher -->
-                <classpathScope>compile</classpathScope>
-                <executable>java</executable>
-                <arguments>
+                            <goal>exec</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <includeProjectDependencies>true</includeProjectDependencies>
+                    <includePluginDependencies>true</includePluginDependencies>
                     <!-- necessary for the java process to find the mwe2 launcher -->
-                    <argument>-classpath</argument>
-                    <classpath/>
-                    <argument>org.eclipse.emf.mwe2.launch.runtime.Mwe2Launcher</argument>
-                    <argument>file://${project.basedir}/src/org/bbaw/bts/corpus/text/egy/GenerateEgyDsl.mwe2</argument>
-                </arguments>
-            </configuration>
-            <dependencies>
-                <dependency>
-                    <groupId>org.eclipse.xtext</groupId>
-                    <artifactId>org.eclipse.xtext.xtext</artifactId>
-                    <version>${xtext.version}</version>
-                </dependency>
-                <dependency>
-                    <groupId>org.eclipse.xtext</groupId>
-                    <artifactId>org.eclipse.xtext.xbase</artifactId>
-                    <version>${xtext.version}</version>
-                </dependency>
-                <dependency>
-                    <groupId>org.eclipse.equinox</groupId>
-                    <artifactId>common</artifactId>
-                    <version>3.6.200-v20130402-1505</version>
-                </dependency>
-            </dependencies>
-        </plugin>
+                    <classpathScope>compile</classpathScope>
+                    <executable>java</executable>
+                    <arguments>
+                        <!-- necessary for the java process to find the mwe2 launcher -->
+                        <argument>-classpath</argument>
+                        <classpath/>
+                        <argument>org.eclipse.emf.mwe2.launch.runtime.Mwe2Launcher</argument>
+                        <argument>file://${project.basedir}/src/org/bbaw/bts/corpus/text/egy/GenerateEgyDsl.mwe2</argument>
+                    </arguments>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.eclipse.xtext</groupId>
+                        <artifactId>org.eclipse.xtext.xtext</artifactId>
+                        <version>${xtext.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.eclipse.xtext</groupId>
+                        <artifactId>org.eclipse.xtext.xbase</artifactId>
+                        <version>${xtext.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.eclipse.equinox</groupId>
+                        <artifactId>common</artifactId>
+                        <version>3.6.200-v20130402-1505</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
 
-        <plugin>
-            <groupId>org.eclipse.xtend</groupId>
-            <artifactId>xtend-maven-plugin</artifactId>
-            <version>2.7.0</version>
-            <executions>
-                <execution>
-                    <goals>
-                        <goal>compile</goal>
-                    </goals>
-                    <configuration>
-                        <outputDirectory>${basedir}/xtend-gen</outputDirectory>
-                    </configuration>
-                </execution>
-            </executions>
-        </plugin>
-    </plugins>
-</build>
+            <plugin>
+                <groupId>org.eclipse.xtend</groupId>
+                <artifactId>xtend-maven-plugin</artifactId>
+                <version>2.7.0</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>compile</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${basedir}/xtend-gen</outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 </project>
