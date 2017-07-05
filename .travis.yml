@@ -2,5 +2,5 @@ language: java
 jdk:
   - oraclejdk8
 script:
-  mvn clean install -X
+  mvn clean install
 
