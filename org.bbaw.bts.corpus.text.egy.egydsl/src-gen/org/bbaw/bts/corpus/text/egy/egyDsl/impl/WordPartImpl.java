@@ -21,10 +21,10 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.bbaw.bts.corpus.text.egy.egyDsl.impl.WordPartImpl#getWChar <em>WChar</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

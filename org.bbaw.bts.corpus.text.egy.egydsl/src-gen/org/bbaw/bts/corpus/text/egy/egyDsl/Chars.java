@@ -10,10 +10,10 @@ package org.bbaw.bts.corpus.text.egy.egyDsl;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.bbaw.bts.corpus.text.egy.egyDsl.Chars#getName <em>Name</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.bbaw.bts.corpus.text.egy.egyDsl.EgyDslPackage#getChars()
  * @model

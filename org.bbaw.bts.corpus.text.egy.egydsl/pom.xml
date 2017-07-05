@@ -67,12 +67,6 @@
 				<mainClass>org.eclipse.emf.mwe2.launch.runtime.Mwe2Launcher</mainClass>
 				<arguments>
 					<argument>file://${project.basedir}/src/org/bbaw/bts/corpus/text/egy/GenerateEgyDsl.mwe2</argument>
-					<argument>
-						-p
-					</argument>
-					<argument>
-						runtimeProject=/${project.basedir}
-					</argument>
 				</arguments>
 			</configuration>
 			<dependencies>

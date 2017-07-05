@@ -10,10 +10,10 @@ package org.bbaw.bts.corpus.text.egy.egyDsl;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.bbaw.bts.corpus.text.egy.egyDsl.Marker#getType <em>Type</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.bbaw.bts.corpus.text.egy.egyDsl.EgyDslPackage#getMarker()
  * @model

@@ -7,7 +7,7 @@ import org.eclipse.xtext.ui.generator.*
 var projectName = "org.bbaw.bts.corpus.text.egy.egydsl"
 var grammarURI = "platform:/resource/${projectName}/src/org/bbaw/bts/corpus/text/egy/EgyDsl.xtext"
 var fileExtensions = "egydsl"
-var runtimeProject = "platform:/resource/${projectName}"
+var runtimeProject = "../${projectName}"
 var generateXtendStub = true
 var encoding = "UTF-8"
 
