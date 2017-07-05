@@ -1,96 +1,109 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <modelVersion>4.0.0</modelVersion>
-  <parent>
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.bbaw.bts</groupId>
+        <artifactId>aaew-bts</artifactId>
+        <version>3.1.0</version>
+    </parent>
     <groupId>org.bbaw.bts</groupId>
-    <artifactId>aaew-bts</artifactId>
-    <version>3.1.0</version>
-  </parent>
-  <groupId>org.bbaw.bts</groupId>
-  <artifactId>org.bbaw.bts.corpus.text.egy.egydsl</artifactId>
-  <version>3.1.0-SNAPSHOT</version>
-  <packaging>eclipse-plugin</packaging>
-  
-  <properties>
-  	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-  	<xtext.version>2.9.0</xtext.version>
-  </properties>
-  
-  <build>
-  	
-  
-  	<plugins>
-  		<plugin>
-  			<groupId>org.apache.maven.plugins</groupId>
-  			<artifactId>maven-clean-plugin</artifactId>
-  			<executions>
-  				<execution>
-  					<id>gen-clean</id>
-  					<phase>clean</phase>
-  					<configuration>
-  						<filesets combine.children="append">
-  							<fileset>
-  								<directory>${project.basedir}/src-gen/</directory>
-  							</fileset>
-  							<fileset>
-  								<directory>${project.basedir}/model/generated/</directory>
-  							</fileset>
-  							<fileset>
-								<directory>${project.basedir}/../${project.artifactId}.ui/src-gen/</directory>
-							</fileset>
-							<fileset>
-								<directory>${project.basedir}/../${project.artifactId}.tests/src-gen/</directory>
-							</fileset>
-  						</filesets>
-  					</configuration>
-  				</execution>
-  			</executions>
-  		</plugin>
-  		
-  		
-  		<plugin>
-			<groupId>org.codehaus.mojo</groupId>
-			<artifactId>exec-maven-plugin</artifactId>
-			<version>1.2.1</version>
-			<executions>
-				<execution>
-					<phase>generate-sources</phase>
-					<goals>
-						<goal>exec</goal>
-					</goals>
-				</execution>
-			</executions>
-			<configuration>
-				<includeProjectDependencies>true</includeProjectDependencies>
-				<includePluginDependencies>true</includePluginDependencies>
+    <artifactId>org.bbaw.bts.corpus.text.egy.egydsl</artifactId>
+    <version>3.1.0-SNAPSHOT</version>
+    <packaging>eclipse-plugin</packaging>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <xtext.version>2.9.0</xtext.version>
+    </properties>
+
+    <build>
+
+
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-clean-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>gen-clean</id>
+                        <phase>clean</phase>
+                        <configuration>
+                            <filesets combine.children="append">
+                                <fileset>
+                                    <directory>${basedir}/src-gen/</directory>
+                                </fileset>
+                                <fileset>
+                                    <directory>${basedir}/model/generated/</directory>
+                                </fileset>
+                                <fileset>
+                                    <directory>${basedir}/../${project.artifactId}.ui/src-gen/</directory>
+                                </fileset>
+                                <fileset>
+                                    <directory>${basedir}/../${project.artifactId}.tests/src-gen/</directory>
+                                </fileset>
+                            </filesets>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>1.2.1</version>
+                <executions>
+                    <execution>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <!--We have to use the "exec" goal instead of the "java" goal here. The MWE2 generator places a
+                            bunch of files all over the project and most of the paths are relative to the generator
+                            processes current working directory. Though theoretically it should be possible to make all
+                            of these paths relative to some module location variable from what I can tell by a quick
+                            google search nobody seemst to be doing that and I'm not in the mood of figuring that out
+                            right now.
+
+                            Now, if we're using the "java" goal here the MWE2 launcher is run in the host maven process
+                            which might run from either the module dir or the top-level project dir. This breaks the
+                            MWE2 script's working directory assumption so we're just running a subprocess here via exec.
+                            This is always run in the module dir so the MWE2 script's pwd assumption works. -->
+                        <goal>exec</goal>
+                    </goals>
+                </execution>
+            </executions>
+            <configuration>
+                <includeProjectDependencies>true</includeProjectDependencies>
+                <includePluginDependencies>true</includePluginDependencies>
+                <!-- necessary for the java process to find the mwe2 launcher -->
                 <classpathScope>compile</classpathScope>
                 <executable>java</executable>
-				<arguments>
+                <arguments>
+                    <!-- necessary for the java process to find the mwe2 launcher -->
                     <argument>-classpath</argument>
                     <classpath/>
-				    <argument>org.eclipse.emf.mwe2.launch.runtime.Mwe2Launcher</argument>
-					<argument>file://${project.basedir}/src/org/bbaw/bts/corpus/text/egy/GenerateEgyDsl.mwe2</argument>
-				</arguments>
-			</configuration>
-			<dependencies>
-				<dependency>
-					<groupId>org.eclipse.xtext</groupId>
-					<artifactId>org.eclipse.xtext.xtext</artifactId>
-					<version>${xtext.version}</version>
-				</dependency>
-				<dependency>
-					<groupId>org.eclipse.xtext</groupId>
-					<artifactId>org.eclipse.xtext.xbase</artifactId>
-					<version>${xtext.version}</version>
-				</dependency>
-				<dependency>
-					<groupId>org.eclipse.equinox</groupId>
-					<artifactId>common</artifactId>
-					<version>3.6.200-v20130402-1505</version>
-				</dependency>
-			</dependencies>
-		</plugin>
+                    <argument>org.eclipse.emf.mwe2.launch.runtime.Mwe2Launcher</argument>
+                    <argument>file://${project.basedir}/src/org/bbaw/bts/corpus/text/egy/GenerateEgyDsl.mwe2</argument>
+                </arguments>
+            </configuration>
+            <dependencies>
+                <dependency>
+                    <groupId>org.eclipse.xtext</groupId>
+                    <artifactId>org.eclipse.xtext.xtext</artifactId>
+                    <version>${xtext.version}</version>
+                </dependency>
+                <dependency>
+                    <groupId>org.eclipse.xtext</groupId>
+                    <artifactId>org.eclipse.xtext.xbase</artifactId>
+                    <version>${xtext.version}</version>
+                </dependency>
+                <dependency>
+                    <groupId>org.eclipse.equinox</groupId>
+                    <artifactId>common</artifactId>
+                    <version>3.6.200-v20130402-1505</version>
+                </dependency>
+            </dependencies>
+        </plugin>
 
         <plugin>
             <groupId>org.eclipse.xtend</groupId>
@@ -102,11 +115,11 @@
                         <goal>compile</goal>
                     </goals>
                     <configuration>
-                        <outputDirectory>${project.basedir}/xtend-gen</outputDirectory>
+                        <outputDirectory>${basedir}/xtend-gen</outputDirectory>
                     </configuration>
                 </execution>
             </executions>
         </plugin>
-  	</plugins>
-  </build>
+    </plugins>
+</build>
 </project>
