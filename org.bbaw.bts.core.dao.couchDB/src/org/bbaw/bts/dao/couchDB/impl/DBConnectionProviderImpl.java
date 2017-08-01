@@ -362,14 +362,10 @@ public class DBConnectionProviderImpl implements DBConnectionProvider
 				
 				//node client
 				IEclipsePreferences preferences = ConfigurationScope.INSTANCE.getNode("org.bbaw.bts.app");
-				String installDir = null;
-				try {
-					installDir = org.bbaw.bts.commons.fsaccess.BTSContstantsPlatformSpecific.getDBInstallationDir(null);
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				String installDir = org.bbaw.bts.commons.fsaccess.BTSContstantsPlatformSpecific.getInstallationDir();
+
 				String dbdir = preferences.get(BTSPluginIDs.PREF_DB_DIR, installDir);
+
 				ImmutableSettings.Builder elasticsearchSettings = ImmutableSettings.settingsBuilder()
 //		                .put("http.enabled", ("true".equals(search_http_enabled)))
 						//FIXME make dynamic
