@@ -14,6 +14,7 @@ import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.core.commons.BTSCoreConstants;
 import org.bbaw.bts.core.controller.generalController.BTSConfigurationController;
 import org.bbaw.bts.core.controller.generalController.GeneralBTSObjectController;
+import org.bbaw.bts.core.controller.generalController.PermissionsAndExpressionsEvaluationController;
 import org.bbaw.bts.core.corpus.controller.generalController.PassportConfigurationController;
 import org.bbaw.bts.core.corpus.controller.partController.PassportEditorPartController;
 import org.bbaw.bts.core.corpus.controller.partController.ThsNavigatorController;
@@ -154,6 +155,9 @@ public class PassportEntryItemEditor extends PassportEntryEditorComposite {
 	private Text text;
 	@Inject
 	private PassportConfigurationController passportConfigurationController;
+	
+	@Inject
+	private PermissionsAndExpressionsEvaluationController permissionController;
 
 	@Inject
 	public PassportEntryItemEditor(Composite parent) {
@@ -743,6 +747,10 @@ public class PassportEntryItemEditor extends PassportEntryEditorComposite {
 					IEclipseContext child = context.createChild();
 					child.set(BTSObject.class, btso);
 					child.set(Shell.class, new Shell());
+					child.set(BTSCoreConstants.CORE_EXPRESSION_MAY_EDIT, 
+							permissionController.userMayEditObject(
+									permissionController.getAuthenticatedUser(), 
+									btso));
 					
 					PassportEditorDialog dialog = ContextInjectionFactory.make(
 							PassportEditorDialog.class, child);
