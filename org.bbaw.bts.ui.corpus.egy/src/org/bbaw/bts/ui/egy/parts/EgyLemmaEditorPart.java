@@ -22,6 +22,7 @@ import org.bbaw.bts.btsmodel.BtsmodelFactory;
 import org.bbaw.bts.commons.BTSPluginIDs;
 import org.bbaw.bts.core.commons.BTSCoreConstants;
 import org.bbaw.bts.core.controller.generalController.EditingDomainController;
+import org.bbaw.bts.core.controller.generalController.PermissionsAndExpressionsEvaluationController;
 import org.bbaw.bts.core.corpus.controller.partController.LemmaEditorController;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSLemmaEntry;
@@ -186,6 +187,9 @@ public class EgyLemmaEditorPart extends AbstractTextEditorLogic implements IBTSE
 
 	// boolean if selection is cached and can be loaded when gui becomes visible or constructed
 	private boolean selectionCached;
+
+	@Inject
+	private PermissionsAndExpressionsEvaluationController permissionsController;
 
 	@Inject
 	public EgyLemmaEditorPart(EPartService partService) {
@@ -828,10 +832,13 @@ private void bringPartToFront(boolean b) {
 		l.add(ma);
 	}
 	protected void setDirtyInternal() {
-		if (selectedLemmaEntry != null && dirty != null && !dirty.isDirty()) {
-			dirty.setDirty(true);
+		if (permissionsController.userMayEditObject(
+				permissionsController.getAuthenticatedUser(), 
+				selectedLemmaEntry)) {
+			if (selectedLemmaEntry != null && dirty != null && !dirty.isDirty()) {
+				dirty.setDirty(true);
+			}
 		}
-		
 	}
 
 	private void loadSignText(BTSLemmaEntry lemma) {
