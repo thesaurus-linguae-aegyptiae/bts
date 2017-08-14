@@ -1151,27 +1151,14 @@ public class PassportEditorPart {
 								.getCommandStack().getUndoCommand())) {
 							// normal command or redo executed
 							localCommandCacheSet.add(mostRecentCommand);
-							if (dirty != null)
-							{	
-								if (localCommandCacheSet.isEmpty()) {
-									dirty.setDirty(false);
-								} else if (!dirty.isDirty()) {
-									dirty.setDirty(true);
-								}
-							}
+							// XXX here
+							setDirty(true);
 							// if redo, check if reload required
 							checkAndReload(mostRecentCommand);
 						} else {
 							// undo executed
-							if (dirty != null)
-							{
-								if (localCommandCacheSet.remove(mostRecentCommand)
-										&& localCommandCacheSet.isEmpty()) {
-									dirty.setDirty(false);
-								} else if (!dirty.isDirty()) {
-									dirty.setDirty(true);
-								}
-							}
+							setDirty(!(localCommandCacheSet.remove(mostRecentCommand)
+										&& localCommandCacheSet.isEmpty()));
 							checkAndReload(mostRecentCommand);
 						}
 					}
@@ -1285,11 +1272,13 @@ public class PassportEditorPart {
 		// add plus and minus button
 	}
 
-	private void setDirty(boolean dirty) {
-		if (this.dirty != null)
-		{
-			this.dirty.setDirty(dirty);
-			System.out.println("passporteditor set dirty");
+	private void setDirty(boolean isDirty) {
+		if (evaluationController.userMayEditObject(evaluationController.getAuthenticatedUser(), corpusObject)) {
+			if (dirty != null)
+			{
+				dirty.setDirty(isDirty);
+				System.out.println("passporteditor set dirty: "+isDirty);
+			}
 		}
 	}
 
