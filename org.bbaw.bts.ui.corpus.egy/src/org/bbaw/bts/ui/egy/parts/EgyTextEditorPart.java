@@ -241,7 +241,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 
 	/** The evaluation controller. */
 	@Inject
-	private PermissionsAndExpressionsEvaluationController evaluationController;
+	private PermissionsAndExpressionsEvaluationController permissionsController;
 
 	/** The Constant EDITOR_PREFIX_LENGTH. */
 	private static final int EDITOR_PREFIX_LENGTH = 1;
@@ -931,7 +931,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 								{
 									index = index + 1;
 									targetSentence.getSentenceItems().add(index, copiedItem);
-									dirty.setDirty(true);
+									setDirtyInternal();
 								}
 							}
 						}
@@ -953,7 +953,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 								{
 									index = index + 1;
 									targetSentence.getSentenceItems().add(index, copiedItem);
-									dirty.setDirty(true);
+									setDirtyInternal();
 								}
 							}
 						}
@@ -979,7 +979,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 								{
 									index = index + 1;
 									targettextcontent.getTextItems().add(index, copiedItem);
-									dirty.setDirty(true);
+									setDirtyInternal();
 								}
 							}
 						}
@@ -1000,7 +1000,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 							{
 								index = index + 1;
 								targettextcontent.getTextItems().add(index, copiedItem);
-								dirty.setDirty(true);
+								setDirtyInternal();
 							}
 						}
 					}
@@ -1677,10 +1677,11 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 	 * Sets the dirty internal.
 	 */
 	protected void setDirtyInternal() {
-		if (text != null && dirty != null && !dirty.isDirty()) {
-			dirty.setDirty(true);
+		if (permissionsController.userMayEditObject(permissionsController.getAuthenticatedUser(), text)) {
+			if (text != null && dirty != null && !dirty.isDirty()) {
+				dirty.setDirty(true);
+			}
 		}
-
 	}
 
 	/**
@@ -2510,7 +2511,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 			}
 
 		}
-		evaluationController
+		permissionsController
 				.activateDBCollectionContext(BTSPluginIDs.PREF_MAIN_CORPUS_KEY);
 	}
 

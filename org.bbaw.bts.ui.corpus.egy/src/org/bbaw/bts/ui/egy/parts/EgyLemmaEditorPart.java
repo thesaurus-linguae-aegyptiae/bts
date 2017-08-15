@@ -296,6 +296,7 @@ public class EgyLemmaEditorPart extends AbstractTextEditorLogic implements IBTSE
 				contextService
 				.activateContext("org.eclipse.xtext.ui.embeddedTextEditorScope");
 				loadTextContent(selectedLemmaEntry);
+				// XXX why?
 				loadTransliteration(selectedLemmaEntry);
 			}
 		});
