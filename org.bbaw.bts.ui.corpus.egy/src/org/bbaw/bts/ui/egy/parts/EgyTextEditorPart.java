@@ -482,12 +482,10 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 							break;
 						}
 						case 1: {
-							updateModelFromSignText();
 							signTextEditor.clearContent();
 							break;
 						}
 						case 2: {
-							updateModelFromJSesh();
 							break;
 						}
 						}
@@ -1060,21 +1058,6 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 
 	
 
-	/**
-	 * Update model from sign text.
-	 */
-	protected void updateModelFromSignText() {
-		// TODO Auto-generated method stub
-
-	}
-
-	/**
-	 * Update model from j sesh.
-	 */
-	protected void updateModelFromJSesh() {
-		// TODO Auto-generated method stub
-
-	}
 
 	/**
 	 * Update model from transcription.
@@ -2127,7 +2110,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 							localCommandCacheSet.add(mostRecentCommand);
 							if (dirty != null && localCommandCacheSet.isEmpty()) {
 								dirty.setDirty(false);
-							} else if (dirty != null && !dirty.isDirty()) {
+							} else  {
 								setDirtyInternal();
 							}
 						} else {
@@ -2135,7 +2118,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 							if (localCommandCacheSet.remove(mostRecentCommand)
 									&& localCommandCacheSet.isEmpty() && dirty != null) {
 								dirty.setDirty(false);
-							} else if (dirty != null && !dirty.isDirty()) {
+							} else  {
 								setDirtyInternal();
 							}
 						}
@@ -2530,11 +2513,9 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 				break;
 			}
 			case 1: {
-				updateModelFromSignText();
 				break;
 			}
 			case 2: {
-				updateModelFromJSesh();
 				break;
 			}
 			}
