@@ -2505,7 +2505,9 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 	 */
 	@Persist
 	public boolean save() {
-		if (text != null && dirty != null && dirty.isDirty()) {
+		if (text != null && dirty != null && dirty.isDirty() && 
+			permissionsController.userMayEditObject(
+					permissionsController.getAuthenticatedUser(), this.text)) {
 			boolean canSave = true;
 			switch (tabFolder.getSelectionIndex()) {
 			case 0: {
@@ -2529,12 +2531,13 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 			signTextEditor.setNotifyWords(false);
 			sentenceTranslate_Editor.save();
 			boolean success = textEditorController.save(this.text);
+			
 			dirty.setDirty(!success);
 			// turn word-wise update back on
 			signTextEditor.setNotifyWords(true);
 			return success;
 		}
-		return true;
+		return false;
 	}
 
 	/**

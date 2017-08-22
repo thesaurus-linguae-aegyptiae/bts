@@ -1273,12 +1273,10 @@ public class PassportEditorPart {
 	}
 
 	private void setDirty(boolean isDirty) {
-		if (evaluationController.userMayEditObject(evaluationController.getAuthenticatedUser(), corpusObject)) {
-			if (dirty != null)
-			{
-				dirty.setDirty(isDirty);
-				System.out.println("passporteditor set dirty: "+isDirty);
-			}
+		if (evaluationController.userMayEditObject(
+				evaluationController.getAuthenticatedUser(), corpusObject) 
+				&& dirty != null) {
+			dirty.setDirty(isDirty);
 		}
 	}
 
@@ -1495,7 +1493,9 @@ public class PassportEditorPart {
 
 	@Persist
 	public boolean save() {
-		if (dirty != null && dirty.isDirty()) {
+		if (dirty != null && dirty.isDirty() &&
+			permissionsController.userMayEditObject(
+					permissionsController.getAuthenticatedUser(), corpusObject)) {
 
 			boolean success = passportEditorController.save(corpusObject);
 			dirty.setDirty(!success);
@@ -1504,7 +1504,7 @@ public class PassportEditorPart {
 			}
 			return success;
 		}
-		return true;
+		return false;
 	}
 	
 	@Inject
