@@ -259,33 +259,26 @@ public class EgyLemmaEditorPart extends AbstractTextEditorLogic implements IBTSE
 		grpTransliteration.layout();
 		// embeddedEditor.getViewer().getControl().setFocus();
 
-		
-
 		embeddedEditor.getViewer().getTextWidget()
 				.addCaretListener(new CaretListener() {
-
 					@Override
 					public void caretMoved(CaretEvent event) {
 						processTextSelection(event);
-
 					}
 				});
+
 		embeddedEditor.getViewer().getTextWidget().addSelectionListener(new SelectionListener() {
-			
 			@Override
 			public void widgetSelected(SelectionEvent event) {
 				processTextSelection(event);
-
-				
 			}
 			
 			@Override
 			public void widgetDefaultSelected(SelectionEvent e) {
-				
 			}
 		});
+
 		embeddedEditor.getViewer().getTextWidget().addFocusListener(new FocusListener() {
-			
 			@Override
 			public void focusLost(FocusEvent e) {
 				updateModelFromTranscription();
@@ -293,11 +286,10 @@ public class EgyLemmaEditorPart extends AbstractTextEditorLogic implements IBTSE
 			
 			@Override
 			public void focusGained(FocusEvent e) {
-				contextService
-				.activateContext("org.eclipse.xtext.ui.embeddedTextEditorScope");
-				loadTextContent(selectedLemmaEntry);
+				contextService.activateContext("org.eclipse.xtext.ui.embeddedTextEditorScope");
 				// XXX why?
-				loadTransliteration(selectedLemmaEntry);
+				//loadTextContent(selectedLemmaEntry);
+				//loadTransliteration(selectedLemmaEntry);
 			}
 		});
 		
@@ -317,14 +309,13 @@ public class EgyLemmaEditorPart extends AbstractTextEditorLogic implements IBTSE
 			
 			@Override
 			public void focusLost(FocusEvent e) {
-
 			}
 			
 			@Override
 			public void focusGained(FocusEvent e) {
-				loadTextContent(selectedLemmaEntry);
-				loadSignText(selectedLemmaEntry);
-				
+				// XXX why?
+				//loadTextContent(selectedLemmaEntry);
+				//loadSignText(selectedLemmaEntry);
 			}
 		});
 		grpSigntext.layout();
