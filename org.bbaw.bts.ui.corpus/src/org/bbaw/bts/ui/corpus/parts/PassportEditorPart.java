@@ -999,7 +999,6 @@ public class PassportEditorPart {
 		purgeAll();
 		if (object.getPassport() == null) {
 			object.setPassport(BtsCorpusModelFactory.eINSTANCE.createBTSPassport());
-			setDirty(true);
 		}
 		if (mainComposite == null || mainComposite.isDisposed())
 		{
