@@ -343,23 +343,22 @@ public class EgyLemmaEditorPart extends AbstractTextEditorLogic implements IBTSE
 		}
 
 		embeddedEditor.getDocument().addDocumentListener(
-				embeddedDocumentListener);
+			new IDocumentListener() {
+				@Override
+				public void documentChanged(DocumentEvent event) {
+					System.out.println("editor is currently loading content: "+loading);
+					if (!loading) {
+						setDirtyInternal();
+					}
+				}
+
+				@Override
+				public void documentAboutToBeChanged(DocumentEvent event) {
+				}
+			});
 
 	}
 
-	private IDocumentListener embeddedDocumentListener = new IDocumentListener() {
-		@Override
-		public void documentChanged(DocumentEvent event) {
-			System.out.println("editor is currently loading content: "+loading);
-			if (!loading) {
-				//setDirtyInternal();
-			}
-		}
-
-		@Override
-		public void documentAboutToBeChanged(DocumentEvent event) {
-		}
-	};
 
 	
 	
