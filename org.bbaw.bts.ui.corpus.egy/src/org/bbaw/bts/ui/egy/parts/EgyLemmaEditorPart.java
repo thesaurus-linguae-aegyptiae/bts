@@ -341,8 +341,26 @@ public class EgyLemmaEditorPart extends AbstractTextEditorLogic implements IBTSE
 		{
 			loadInput(selectedLemmaEntry);
 		}
+
+		embeddedEditor.getDocument().addDocumentListener(
+				embeddedDocumentListener);
+
 	}
-	
+
+	private IDocumentListener embeddedDocumentListener = new IDocumentListener() {
+		@Override
+		public void documentChanged(DocumentEvent event) {
+			System.out.println("editor is currently loading content: "+loading);
+			if (!loading) {
+				//setDirtyInternal();
+			}
+		}
+
+		@Override
+		public void documentAboutToBeChanged(DocumentEvent event) {
+		}
+	};
+
 	
 	
 	@Inject
@@ -491,27 +509,11 @@ private void bringPartToFront(boolean b) {
 		annotationModel = embeddedEditor.getViewer().getAnnotationModel();
 
 		loadAnnotations2Editor(annotationModel, tempAnnotationModel);
-		if (selectedLemmaEntry != null) {
-			embeddedEditor.getDocument().addDocumentListener(
-					new IDocumentListener() {
 
-					@Override
-					public void documentChanged(DocumentEvent event) {
-						if (!loading)
-						{
-							setDirtyInternal();
-						}
-
-					}
-
-					@Override
-					public void documentAboutToBeChanged(DocumentEvent event) {
-
-					}
-				});
-		}
 		processLemmaAnnotions(lemmaAnnotationMap);
 	}
+
+
 	private void processLemmaAnnotions(
 			final HashMap<String, List<Object>> localLemmaAnnotationMap) {
 		
