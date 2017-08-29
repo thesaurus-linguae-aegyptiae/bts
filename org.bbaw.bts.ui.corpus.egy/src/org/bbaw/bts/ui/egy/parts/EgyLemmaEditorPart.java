@@ -16,6 +16,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.bbaw.bts.btsmodel.BTSIdentifiableItem;
+import org.bbaw.bts.btsmodel.BTSInterTextReference;
 import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.btsmodel.BTSTranslations;
 import org.bbaw.bts.btsmodel.BtsmodelFactory;
@@ -160,7 +161,7 @@ public class EgyLemmaEditorPart extends AbstractTextEditorLogic implements IBTSE
 
 	private IAnnotationModel annotationModel;
 
-	private Map relatingObjectsMap;
+	private Map<String, List<BTSInterTextReference>> relatingObjectsMap;
 
 	private BTSTextXtextEditedResourceProvider xtextResourceProvider = new BTSTextXtextEditedResourceProvider();
 	private Map<String, BTSModelAnnotation> modelAnnotationMap;
@@ -414,35 +415,32 @@ public class EgyLemmaEditorPart extends AbstractTextEditorLogic implements IBTSE
 			}
 		}
 	}
-	private void makePartActive(boolean activate) {
-	embeddedEditor.getViewer().setEditable(activate);
-	embeddedEditor.getViewer().getTextWidget().setEnabled(activate);
-	signTextEditor.setEnabled(activate);
-	lemmaTranslate_Editor.setEnabled(activate);
-	if (activate)
-	{
-		embeddedEditor.getViewer().getTextWidget().setBackground(BTSUIConstants.COLOR_WIHTE);
-		signTextEditor.setBackground(BTSUIConstants.COLOR_WIHTE);
-	}
-	else
-	{
-		embeddedEditor.getViewer().getTextWidget().setBackground(BTSUIConstants.COLOR_BACKGROUND_DISABLED);
-		signTextEditor.setBackground(BTSUIConstants.COLOR_BACKGROUND_DISABLED);
-	}
-	
-}
 
-private void bringPartToFront(boolean b) {
-	try {
-		partService.bringToTop(part);
-	} catch (Exception e) {
-	}
+	private void makePartActive(boolean activate) {
+		embeddedEditor.getViewer().setEditable(activate);
+		embeddedEditor.getViewer().getTextWidget().setEnabled(activate);
+		signTextEditor.setEnabled(activate);
+		lemmaTranslate_Editor.setEnabled(activate);
+		if (activate) {
+			embeddedEditor.getViewer().getTextWidget().setBackground(BTSUIConstants.COLOR_WIHTE);
+			signTextEditor.setBackground(BTSUIConstants.COLOR_WIHTE);
+		} else {
+			embeddedEditor.getViewer().getTextWidget().setBackground(BTSUIConstants.COLOR_BACKGROUND_DISABLED);
+			signTextEditor.setBackground(BTSUIConstants.COLOR_BACKGROUND_DISABLED);
+		}
 	
-}
+	}
+
+	private void bringPartToFront(boolean b) {
+		try {
+			partService.bringToTop(part);
+		} catch (Exception e) {}
+	}
 	
 	private void loadInput(final BTSLemmaEntry selection) {
 		
 		loading = true;
+
 		if (selection != null)
 		{
 			Job job = new Job("load children")
