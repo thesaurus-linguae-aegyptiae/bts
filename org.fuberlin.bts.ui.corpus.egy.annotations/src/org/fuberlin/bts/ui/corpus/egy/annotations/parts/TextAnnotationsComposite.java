@@ -31,6 +31,7 @@ import org.bbaw.bts.core.commons.BTSCoreConstants;
 import org.bbaw.bts.core.commons.corpus.BTSCorpusConstants;
 import org.bbaw.bts.core.commons.corpus.CorpusUtils;
 import org.bbaw.bts.core.controller.generalController.BTSConfigurationController;
+import org.bbaw.bts.core.controller.generalController.PermissionsAndExpressionsEvaluationController;
 import org.bbaw.bts.core.corpus.controller.generalController.PassportConfigurationController;
 import org.bbaw.bts.core.corpus.controller.partController.AnnotationPartController;
 import org.bbaw.bts.core.corpus.controller.partController.BTSTextEditorController;
@@ -53,6 +54,7 @@ import org.bbaw.bts.ui.commons.corpus.interfaces.IBTSEditor;
 import org.bbaw.bts.ui.commons.corpus.text.BTSModelAnnotation;
 import org.bbaw.bts.ui.commons.corpus.util.BTSEGYUIConstants;
 import org.bbaw.bts.ui.commons.utils.BTSUIConstants;
+import org.bbaw.bts.ui.corpus.dialogs.PassportEditorDialog;
 import org.bbaw.bts.ui.corpus.util.AnnotationToolbarItemCreator;
 import org.bbaw.bts.ui.egy.textSign.support.AmbivalenceEndFigure;
 import org.bbaw.bts.ui.egy.textSign.support.AmbivalenceStartFigure;
@@ -62,6 +64,7 @@ import org.bbaw.bts.ui.egy.textSign.support.LineFigure;
 import org.bbaw.bts.ui.egy.textSign.support.MarkerFigure;
 import org.bbaw.bts.ui.egy.textSign.support.TypedLabel;
 import org.bbaw.bts.ui.egy.textSign.support.WordFigure;
+import org.bbaw.bts.ui.main.dialogs.CommentEditorDialog;
 import org.bbaw.bts.ui.resources.BTSResourceProvider;
 import org.eclipse.core.internal.preferences.EclipsePreferences;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -80,6 +83,8 @@ import org.eclipse.draw2d.LineBorder;
 import org.eclipse.draw2d.MouseEvent;
 import org.eclipse.draw2d.MouseListener;
 import org.eclipse.draw2d.MouseMotionListener;
+import org.eclipse.draw2d.Panel;
+import org.eclipse.draw2d.ToolTipHelper;
 import org.eclipse.draw2d.ToolbarLayout;
 import org.eclipse.draw2d.Viewport;
 import org.eclipse.draw2d.geometry.Dimension;
@@ -87,6 +92,7 @@ import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.draw2d.text.FlowPage;
 import org.eclipse.draw2d.text.TextFlow;
+import org.eclipse.e4.core.contexts.ContextInjectionFactory;
 import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.core.di.extensions.Preference;
 import org.eclipse.e4.ui.di.UISynchronize;
@@ -119,6 +125,7 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 import org.fuberlin.bts.ui.corpus.egy.annotations.internal.Activator;
 import org.fuberlin.bts.ui.corpus.egy.annotations.parts.textAnnoations.AnnotationFigure;
@@ -146,6 +153,9 @@ public class TextAnnotationsComposite extends Composite implements IBTSEditor {
 	private UISynchronize sync;
 	@Inject
 	private BTSResourceProvider resourceProvider;
+	
+	@Inject
+	protected PermissionsAndExpressionsEvaluationController permissionsController;
 	
 	@Inject
 	@Preference(value = BTSEGYUIConstants.SIGN_TEXT_SHOW_HIEROGLYPHS, nodePath = "org.bbaw.bts.ui.corpus.egy")
@@ -177,6 +187,11 @@ public class TextAnnotationsComposite extends Composite implements IBTSEditor {
 	@Preference(value = "SHOWALLPROPERTIES", nodePath = Activator.BUNDLE_ID)
 	private Boolean showAllProperties;
 
+	
+	@Inject
+	@Preference(value = "SHOWALLPROPERTIES_ONHOVER", nodePath = Activator.BUNDLE_ID)
+	private boolean showAllProperties_onhover;
+	
 	@Inject
 	private IEclipseContext context;
 	
@@ -199,7 +214,6 @@ public class TextAnnotationsComposite extends Composite implements IBTSEditor {
 	private Map<String, List<LineFigure>> annotationslineMap = new HashMap<String, List<LineFigure>>();
 	private MouseListener elementSelectionListener;
 	private int cachedIndex;
-	private MouseMotionListener mouseMotionListener;
 	private KeyListener keyListener;
 	private FigureCanvas canvas;
 	private Map<String, List<BTSInterTextReference>> relatingObjectsMap;
@@ -230,10 +244,12 @@ public class TextAnnotationsComposite extends Composite implements IBTSEditor {
 	private Map<LineFigure, Integer> lineFigureEndIndexMap = new HashMap<LineFigure, Integer>();
 	private Map<String, ElementFigure> annotationFigureMap = new HashMap<>();
 	private Map<String, Boolean> filterMap;
-	protected boolean multiSelection;
 	private EclipsePreferences annotationSettings;
 	private Comparator annotationsGroupByConfigurationSortKeySorter;
 	public Map<String, Integer> annotationTypeSortOrderMap;
+	private MouseMotionListener mousemotionListener;
+	private ToolTipHelper toolTipHelper;
+
 	
 	private static final String VERS_FRONTER_MARKER = "\uDB80\uDC81"; //mv
 	private static final String VERS_BREAK_MARKER = "\uDB80\uDC80"; //v
@@ -489,6 +505,8 @@ public class TextAnnotationsComposite extends Composite implements IBTSEditor {
 		};
 		canvas = new FigureCanvas(editorComposite);
 
+	    toolTipHelper = new ToolTipHelper(editorComposite);
+		
 		canvas.setBackground(COLOR_CANVAS_BACKGROUND);
 		canvas.setLayout(new FillLayout());
 		container = new Figure();
@@ -504,45 +522,10 @@ public class TextAnnotationsComposite extends Composite implements IBTSEditor {
 
 		elementSelectionListener = makeElementSelectionListener();
 
-		mouseMotionListener = new MouseMotionListener() {
-
-			@Override
-			public void mouseMoved(MouseEvent me) {
-				// TODO Auto-generated method stub
-
-			}
-
-			@Override
-			public void mouseHover(MouseEvent me) {
-				// TODO Auto-generated method stub
-
-			}
-
-			@Override
-			public void mouseExited(MouseEvent me) {
-				// TODO Auto-generated method stub
-
-			}
-
-			@Override
-			public void mouseEntered(MouseEvent me) {
-				// TODO Auto-generated method stub
-
-			}
-
-			@Override
-			public void mouseDragged(MouseEvent me) {
-				// TODO Auto-generated method stub
-
-			}
-		};
 		keyListener = new KeyListener() {
 
 			@Override
 			public void keyReleased(KeyEvent ke) {
-				if (ke.keycode == SWT.CONTROL) {
-					multiSelection = false;
-				}
 
 			}
 
@@ -553,20 +536,72 @@ public class TextAnnotationsComposite extends Composite implements IBTSEditor {
 				}
 				else if (ke.keycode == SWT.ARROW_LEFT) {
 					shiftSelection(-1, false);
-				}else if (ke.keycode == SWT.CONTROL) {
-					multiSelection = true;
 				}
-				// annotations selection
-//				else if (ke.keycode == SWT.ARROW_DOWN) {
-//					shiftLineSelection(1);
-//				} else if (ke.keycode == SWT.ARROW_UP) {
-//					shiftLineSelection(-1);
-//				}
-
+			}
+		};
+		
+		mousemotionListener = new MouseMotionListener() {
+			
+			@Override
+			public void mouseMoved(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseHover(MouseEvent mouseEvent) {
+				if (!showAllProperties_onhover) return;
+				
+				AnnotationFigure af = (AnnotationFigure) mouseEvent.getSource();
+				BTSObject object = (BTSObject) af.getModelObject();
+				AnnotationFigure fig = new AnnotationFigure(object);
+				ToolbarLayout layout = new ToolbarLayout();
+				layout.setMinorAlignment(ToolbarLayout.ALIGN_CENTER);
+				layout.setStretchMinorAxis(false);
+				layout.setSpacing(0);
+				layout.setHorizontal(false);
+				fig.setLayoutManager(layout);
+				// add name
+				org.eclipse.draw2d.Label l = new org.eclipse.draw2d.Label();
+				String label = object.getName() + "\n";
+				if (object instanceof BTSCorpusObject)
+				{
+					label += passportConfigurationController.getAllPassportDataAsString((BTSCorpusObject) object);
+				}
+				else if (object instanceof BTSComment)
+				{
+					label = ((BTSComment)object).getComment();
+				}
+				if (label != null && !"".equals(label))
+				{
+					l.setText(label);
+					fig.add(l);
+				}
+			    int x = Display.getDefault().getCursorLocation().x + 20;
+			    int y = Display.getDefault().getCursorLocation().y + 20;
+				toolTipHelper.displayToolTipNear(af, fig, x, y);
+				
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseDragged(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
 			}
 		};
 		container.setFocusTraversable(true);
-		container.addMouseMotionListener(mouseMotionListener);
 		container.addKeyListener(keyListener);
 
 		canvas.setContents(container);
@@ -574,6 +609,8 @@ public class TextAnnotationsComposite extends Composite implements IBTSEditor {
 		max_line_length = d.intValue();
 
 	}
+	
+	
 	
 	private void enableDisableSelectionButtons() {
 		toBeginningButton.setEnabled(sentenceSeletionIndex != 0);
@@ -761,18 +798,21 @@ public class TextAnnotationsComposite extends Composite implements IBTSEditor {
 			public void mousePressed(MouseEvent me) {
 				if (me.getSource() instanceof ElementFigure) {
 					ElementFigure figure = (ElementFigure) me.getSource();
-					if (multiSelection)
+					if (me.getState() == SWT.CTRL)
 					{
 						if (selectedElements.contains(figure))
 						{
-							selectedElements.remove(figure);
-							ElementFigure[] selectedArray = selectedElements.toArray(new ElementFigure[selectedElements.size()]);
+							Vector<ElementFigure> tempSelectedElements = new Vector<>(selectedElements.size());
+							for (ElementFigure e : selectedElements)
+							{
+								if (!e.equals(figure)) tempSelectedElements.add(e);
+							}
+							ElementFigure[] selectedArray = tempSelectedElements.toArray(new ElementFigure[tempSelectedElements.size()]);
 							setSelectionInternal(selectedArray);
 							sendSelectionToParentEditor(0, selectedArray);
 						}
 						else
 						{
-							selectedElements.add(figure);
 							ElementFigure[] selectedArray = selectedElements.toArray(new ElementFigure[selectedElements.size() +1]);
 							selectedArray[selectedArray.length - 1] = figure;
 							setSelectionInternal(selectedArray);
@@ -796,13 +836,57 @@ public class TextAnnotationsComposite extends Composite implements IBTSEditor {
 
 			@Override
 			public void mouseDoubleClicked(MouseEvent me) {
-				// System.out.println(me);
+				if (me.getSource() instanceof AnnotationFigure) {
+					AnnotationFigure figure = (AnnotationFigure) me.getSource();
+					if (figure.getModelObject() != null)
+					{
+						editObject(figure.getModelObject());
+					}
+				}
 
 			}
 
 		};
 		return listener;
 	}
+
+	/**
+	 * @param modelObject
+	 */
+	protected void editObject(Object modelObject) {
+		if (modelObject instanceof BTSCorpusObject)
+		{
+			BTSCorpusObject object = (BTSCorpusObject) modelObject;
+			IEclipseContext child = context.createChild();
+			child.set(BTSObject.class, object);
+			child.set(Shell.class, new Shell());
+			
+			PassportEditorDialog dialog = ContextInjectionFactory.make(
+					PassportEditorDialog.class, child);
+			dialog.setEditable(permissionsController.authenticatedUserMayEditObject(object));
+
+			if (dialog.open() == SWT.OK)
+				reloadCurrentSentence();
+			child.dispose();
+		}
+		else if (modelObject instanceof BTSComment)
+		{
+			BTSComment comment = (BTSComment) modelObject;
+			IEclipseContext child = context.createChild();
+			child.set(BTSComment.class, comment);
+			child.set(Shell.class, new Shell());
+			
+			CommentEditorDialog dialog = ContextInjectionFactory.make(
+					CommentEditorDialog.class, child);
+
+			if (dialog.open() == dialog.OK) {
+				reloadCurrentSentence();
+			}
+		}
+		
+	}
+
+
 
 	protected void updateFigureFromWord(Notification notification) {
 		BTSWord word = null;
@@ -892,7 +976,6 @@ public class TextAnnotationsComposite extends Composite implements IBTSEditor {
 		container.setBackgroundColor(COLOR_CANVAS_BACKGROUND);
 
 		container.setFocusTraversable(true);
-		container.addMouseMotionListener(mouseMotionListener);
 		container.addKeyListener(keyListener);
 
 
@@ -1034,7 +1117,7 @@ public class TextAnnotationsComposite extends Composite implements IBTSEditor {
 		for (BTSObject o : annotations)
 		{
 			List<BTSObject> groupAnnos;
-			String expandedObjectType = processExpandedObjectType(o);
+			String expandedObjectType = processExpandedObjectType(o, false);
 			if (annotationsGroups.containsKey(expandedObjectType))
 			{
 				groupAnnos = annotationsGroups.get(expandedObjectType);
@@ -1095,10 +1178,17 @@ public class TextAnnotationsComposite extends Composite implements IBTSEditor {
 
 	/**
 	 * @param o
+	 * @param includeSubtype 
 	 * @return
 	 */
-	private String processExpandedObjectType(BTSObject o) {
-		return CorpusUtils.getTypeIdentifier(o);
+	private String processExpandedObjectType(BTSObject o, boolean includeSubtype) {
+		String expandedType = CorpusUtils.getTypeIdentifier(o);
+
+		if (includeSubtype || o.getSubtype() == null || o.getSubtype().length() == 0)
+		{
+			return expandedType;
+		}
+		return expandedType.substring(0, expandedType.length() - o.getSubtype().length() -1);
 	}
 
 
@@ -1197,6 +1287,7 @@ public class TextAnnotationsComposite extends Composite implements IBTSEditor {
 		
 		fig.setModelObject(object);
 		fig.addMouseListener(elementSelectionListener);
+		fig.addMouseMotionListener(mousemotionListener);
 
 		ElementFigure startFigure = annotationBaseFigureStartMap.get(object.get_id());
 		ElementFigure endFigure = annotationBaseFigureEndMap.get(object.get_id());
@@ -1261,17 +1352,26 @@ public class TextAnnotationsComposite extends Composite implements IBTSEditor {
 	private void determineAndSetBackgroundColor(AnnotationFigure fig, BTSObject object) {
 		// read values from the instance scope
 		String colorString = null;
-		String expandedType = processExpandedObjectType(object);
+		String expandedType = processExpandedObjectType(object, true);
+		String parentType = null;
+		if (object.getSubtype() != null && !"".equals(object.getSubtype()))
+		{
+			parentType = processExpandedObjectType(object, false);
+		}
 		try {
 			for (String childNode : annotationSettings.childrenNames())
 			{
 				Preferences typeNode = annotationSettings.node(childNode);
 				String settingsTypePath = AnnotationToolbarItemCreator.getAnnotationTypePath((EclipsePreferences) typeNode);
-				if (!settingsTypePath.equals(expandedType)) continue;
+				if (settingsTypePath.equals(expandedType))
+				{
+					colorString = typeNode.get(BTSCorpusConstants.PREF_COLOR, null);
+					break;
+				} else if (settingsTypePath.equals(parentType))
+				{
+					colorString = typeNode.get(BTSCorpusConstants.PREF_COLOR, null);
+				}
 				
-				colorString = typeNode.get(BTSCorpusConstants.PREF_COLOR, null);
-				
-				break;
 			}
 		} catch (BackingStoreException e) {
 			// TODO Auto-generated catch block
@@ -1762,16 +1862,7 @@ public class TextAnnotationsComposite extends Composite implements IBTSEditor {
 			}
 		}
 		rect.setSize(90, 290);
-		rect.addFigureListener(new FigureListener() {
-
-			@Override
-			public void figureMoved(IFigure source) {
-
-				// Integer n = null;
-				// System.out.println(n.toString());
-
-			}
-		});
+		
 		rect.addMouseListener(elementSelectionListener);
 		rect.setLayoutManager(tl);
 		appendFigure(rect);
@@ -1908,7 +1999,7 @@ public class TextAnnotationsComposite extends Composite implements IBTSEditor {
 				toSelect.add(ef);
 			}
 		}
-		// deselect olrd
+		// deselect old
 		for (ElementFigure ef : toDeselect)
 		{
 			setSingleFigureDeselected(ef, 0);
@@ -2306,16 +2397,20 @@ public class TextAnnotationsComposite extends Composite implements IBTSEditor {
 
 		@Override
 		public int compare(BTSObject a1, BTSObject a2) {
-			PositionCache pc1 = annotationPositionMap.get(a1);
-			PositionCache pc2 = annotationPositionMap.get(a2);
+			ElementFigure startFigure1 = annotationBaseFigureStartMap.get(a1.get_id());
+			ElementFigure endFigure1 = annotationBaseFigureEndMap.get(a1.get_id());
+			int currentEndFigureIndex1 = sentenceLineFigure.getChildren().indexOf(endFigure1);
+			int currentStartFigureIndex1 = sentenceLineFigure.getChildren().indexOf(startFigure1);
 			
-			// if a position is null than sort behind
+			ElementFigure startFigure2 = annotationBaseFigureStartMap.get(a2.get_id());
+			ElementFigure endFigure2 = annotationBaseFigureEndMap.get(a2.get_id());
+			int currentEndFigureIndex2 = sentenceLineFigure.getChildren().indexOf(endFigure2);
+			int currentStartFigureIndex2 = sentenceLineFigure.getChildren().indexOf(startFigure2);
+			
 			// if both start positions are equal, sort the shorter one first
-			if (pc1 == null) return 1;
-			else if (pc2 == null) return -1;
-			if (pc1.getStart() < pc2.getStart()) return -1;
-			else if (pc1.getStart() > pc2.getStart()) return 1;
-			else return pc1.getEnd()-pc2.getEnd();
+			if (currentStartFigureIndex1 < currentStartFigureIndex2) return -1;
+			else if (currentStartFigureIndex1 > currentStartFigureIndex2) return 1;
+			else return currentEndFigureIndex1-currentEndFigureIndex2;
 		}
 		
 	}
@@ -2340,7 +2435,7 @@ public class TextAnnotationsComposite extends Composite implements IBTSEditor {
 	 * @param annotations
 	 * @param b
 	 */
-	public void setSelectedAnnotations(List<BTSObject> annotations, boolean selected) {
+	public void setSelectedAnnotations(final List<BTSObject> annotations, final boolean selected) {
 		sync.asyncExec(new Runnable() {
 			public void run() {
 				List<ElementFigure> toSelect = new ArrayList<>(annotations.size());
@@ -2372,7 +2467,7 @@ public class TextAnnotationsComposite extends Composite implements IBTSEditor {
 	/**
 	 * @param relatingObjects
 	 */
-	public void updateRelatingObjects(List<BTSObject> relatingObjects) {
+	public void updateRelatingObjects(final List<BTSObject> relatingObjects) {
 		sync.asyncExec(new Runnable()
 		{
 			public void run()

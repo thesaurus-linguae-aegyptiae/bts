@@ -174,14 +174,10 @@ public class BTSTextServiceImpl extends AbstractCorpusObjectServiceImpl<BTSText,
 			boolean registerQuery, IProgressMonitor monitor)
 	{
 		List<BTSText> objects = new Vector<BTSText>();
-		for (String p : getActiveProjects())
-		{
-			for (String c : getActive_corpora(p))
-			{
-				objects.addAll(textDao.query(query, c, c, objectState,
-						registerQuery));
-			}
-		}
+		String[] indexArray = buildIndexArray();
+
+		objects.addAll(textDao.query(query, indexArray, indexArray, objectState,
+				registerQuery));
 		return filter(objects);
 	}
 
@@ -610,14 +606,10 @@ public class BTSTextServiceImpl extends AbstractCorpusObjectServiceImpl<BTSText,
 	@Override
 	public List<String> queryAsJsonString(BTSQueryRequest query, String objectState, IProgressMonitor monitor) {
 		List<String> objects = new Vector<String>();
-		for (String p : getActiveProjects())
-		{
-			for (String c : getActive_corpora(p))
-			{
-				objects.addAll(textDao.queryAsJsonString(query, c, c, objectState,
-						false));
-			}
-		}
+		String[] indexArray = buildIndexArray();
+
+		objects.addAll(textDao.queryAsJsonString(query, indexArray, indexArray, objectState,
+				false));
 		return objects;
 	}
 

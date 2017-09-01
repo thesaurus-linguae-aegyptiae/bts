@@ -217,18 +217,14 @@ implements BTSAnnotationService, BTSObjectSearchService
 			boolean registerQuery, IProgressMonitor monitor)
 	{
 		List<BTSAnnotation> objects = new Vector<BTSAnnotation>();
-		for (String p : getActiveProjects())
-		{
-			for (String c : getActive_corpora(p))
-			{
-				try {
-					objects.addAll(annotationDao.query(query, c, c, objectState,
-							registerQuery));
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
+		String[] indexArray = buildIndexArray();
+
+		try {
+			objects.addAll(annotationDao.query(query, indexArray, indexArray, objectState,
+					registerQuery));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return filter(objects);
 
@@ -331,18 +327,14 @@ implements BTSAnnotationService, BTSObjectSearchService
 	@Override
 	public List<String> queryAsJsonString(BTSQueryRequest query, String objectState, IProgressMonitor monitor) {
 		List<String> objects = new Vector<String>();
-		for (String p : getActiveProjects())
-		{
-			for (String c : getActive_corpora(p))
-			{
-				try {
-					objects.addAll(annotationDao.queryAsJsonString(query, c, c, objectState,
-							false));
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
+		String[] indexArray = buildIndexArray();
+
+		try {
+			objects.addAll(annotationDao.queryAsJsonString(query, indexArray, indexArray, objectState,
+					false));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return objects;
 	}

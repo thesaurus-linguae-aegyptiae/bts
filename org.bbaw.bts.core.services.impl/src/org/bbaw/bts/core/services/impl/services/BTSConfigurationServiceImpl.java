@@ -31,12 +31,14 @@ import org.bbaw.bts.core.services.impl.generic.GenericObjectServiceImpl;
 import org.bbaw.bts.modelUtils.EmfModelHelper;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.preferences.ConfigurationScope;
+import org.eclipse.core.runtime.preferences.IEclipsePreferences;
 import org.eclipse.core.runtime.preferences.InstanceScope;
 import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.core.di.extensions.Preference;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.EcoreUtil.Copier;
+import org.osgi.service.prefs.BackingStoreException;
 
 public class BTSConfigurationServiceImpl extends GenericObjectServiceImpl<BTSConfiguration, String> implements
 		BTSConfigurationService
@@ -233,12 +235,9 @@ public class BTSConfigurationServiceImpl extends GenericObjectServiceImpl<BTSCon
 			String objectState, boolean registerQuery, IProgressMonitor monitor)
 	{
 		List<BTSConfiguration> objects = new Vector<BTSConfiguration>();
-		for (String p : getActiveProjects())
-		{
-			objects.addAll(configurationDao.query(query, p + BTSCoreConstants.ADMIN_SUFFIX, p
-							+ BTSCoreConstants.ADMIN_SUFFIX, objectState,
-							registerQuery));
-		}
+		String[] indexArray = buildIndexArray();
+		objects.addAll(configurationDao.query(query, indexArray, indexArray, objectState,
+				registerQuery));
 		return filter(objects);
 	}
 	@Override
@@ -955,7 +954,20 @@ public class BTSConfigurationServiceImpl extends GenericObjectServiceImpl<BTSCon
 		InstanceScope.INSTANCE.getNode("org.bbaw.bts.app").put(BTSPluginIDs.ACTIVE_CONFIGURATION, configuration.getProvider());
 
 		context.set(BTSPluginIDs.ACTIVE_CONFIGURATION, configuration);
-		
+		IEclipsePreferences prefs = ConfigurationScope.INSTANCE.getNode("org.bbaw.bts.app");
+		prefs.put(BTSPluginIDs.ACTIVE_CONFIGURATION, configuration.getProvider());
+		try {
+			prefs.flush();
+		} catch (BackingStoreException e) {
+			e.printStackTrace();
+		}
+		prefs = InstanceScope.INSTANCE.getNode("org.bbaw.bts.app");
+		prefs.put(BTSPluginIDs.ACTIVE_CONFIGURATION, configuration.getProvider());
+		try {
+			prefs.flush();
+		} catch (BackingStoreException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
@@ -1139,10 +1151,11 @@ public class BTSConfigurationServiceImpl extends GenericObjectServiceImpl<BTSCon
 						BTSConfigItem configItem = findConfigItemByConfigPath(referencedType, configuration);
 						if (configItem != null)
 						{
-							for (BTSConfig cc : configItem.getChildren())
-							{
-								rootItem.getChildren().add(EcoreUtil.copy(cc));
-							}
+							rootItem.getChildren().add(EcoreUtil.copy(configItem));
+//							for (BTSConfig cc : configItem.getChildren())
+//							{
+//								rootItem.getChildren().add(EcoreUtil.copy(cc));
+//							}
 						}
 					}
 				}
@@ -1260,12 +1273,9 @@ public class BTSConfigurationServiceImpl extends GenericObjectServiceImpl<BTSCon
 	@Override
 	public List<String> queryAsJsonString(BTSQueryRequest query, String objectState, IProgressMonitor monitor) {
 		List<String> objects = new Vector<String>();
-		for (String p : getActiveProjects())
-		{
-			objects.addAll(configurationDao.queryAsJsonString(query, p + BTSCoreConstants.ADMIN_SUFFIX, p
-							+ BTSCoreConstants.ADMIN_SUFFIX, objectState,
-							false));
-		}
+		String[] indexArray = buildIndexArray();
+		objects.addAll(configurationDao.queryAsJsonString(query, indexArray, indexArray, objectState,
+						false));
 		return objects;
 	}
 
@@ -1281,34 +1291,34 @@ public class BTSConfigurationServiceImpl extends GenericObjectServiceImpl<BTSCon
 
 
 
-	private void copyChildrenRecursively(BTSConfig config,
-			BTSConfig originalconfiguration, Copier copier) {
-		for (BTSConfig c : originalconfiguration.getChildren())
-		{
-			BTSConfigItem ci = BtsmodelFactory.eINSTANCE.createBTSConfigItem();
-			String id = ci.get_id();
-			ci = (BTSConfigItem) copier.copy(c);
-			ci.set_id(id);
-			config.getChildren().add(ci);
-			copyChildrenRecursively(ci, c, copier);
-		}
-		if (originalconfiguration instanceof BTSConfigItem)
-		{
-			BTSTranslations t = ((BTSConfigItem)originalconfiguration).getDescription();
-			BTSTranslations ti = (BTSTranslations) copier.copy(t);
-			for (BTSTranslation tt : t.getTranslations())
-			{
-				BTSTranslation tti = BtsmodelFactory.eINSTANCE.createBTSTranslation();
-				tti = (BTSTranslation) copier.copy(tt);
-				ti.getTranslations().add(tti);
-			}
-			((BTSConfigItem)config).setDescription(ti);
-			
-			BTSPassportEditorConfig p = ((BTSConfigItem)originalconfiguration).getPassportEditorConfig();
-			BTSPassportEditorConfig pi = (BTSPassportEditorConfig) copier.copy(p);
-			((BTSConfigItem)config).setPassportEditorConfig(pi);
-		}
-	}
+//	private void copyChildrenRecursively(BTSConfig config,
+//			BTSConfig originalconfiguration, Copier copier) {
+//		for (BTSConfig c : originalconfiguration.getChildren())
+//		{
+//			BTSConfigItem ci = BtsmodelFactory.eINSTANCE.createBTSConfigItem();
+//			String id = ci.get_id();
+//			ci = (BTSConfigItem) copier.copy(c);
+//			ci.set_id(id);
+//			config.getChildren().add(ci);
+//			copyChildrenRecursively(ci, c, copier);
+//		}
+//		if (originalconfiguration instanceof BTSConfigItem)
+//		{
+//			BTSTranslations t = ((BTSConfigItem)originalconfiguration).getDescription();
+//			BTSTranslations ti = (BTSTranslations) copier.copy(t);
+//			for (BTSTranslation tt : t.getTranslations())
+//			{
+//				BTSTranslation tti = BtsmodelFactory.eINSTANCE.createBTSTranslation();
+//				tti = (BTSTranslation) copier.copy(tt);
+//				ti.getTranslations().add(tti);
+//			}
+//			((BTSConfigItem)config).setDescription(ti);
+//			
+//			BTSPassportEditorConfig p = ((BTSConfigItem)originalconfiguration).getPassportEditorConfig();
+//			BTSPassportEditorConfig pi = (BTSPassportEditorConfig) copier.copy(p);
+//			((BTSConfigItem)config).setPassportEditorConfig(pi);
+//		}
+//	}
 
 
 	

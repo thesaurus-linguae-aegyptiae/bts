@@ -1,5 +1,6 @@
 package org.bbaw.bts.core.services.corpus.impl.services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Vector;
@@ -132,18 +133,25 @@ implements BTSThsEntryService, BTSObjectSearchService {
 	public List<BTSThsEntry> query(BTSQueryRequest query, String objectState,
 			boolean registerQuery, IProgressMonitor monitor) {
 		List<BTSThsEntry> objects = new Vector<BTSThsEntry>();
-		for (String p : getActiveThss()) {
+		String[] indexArray = buildIndexArray();
 
-			try {
-				objects.addAll(thsEntryDao.query(query, p + BTSCorpusConstants.THS, p
-						+ BTSCorpusConstants.THS, objectState, registerQuery));
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
+		try {
+			objects.addAll(thsEntryDao.query(query, indexArray, indexArray, objectState, registerQuery));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return filter(objects);
+	}
+	
+	@Override
+	public String[] buildIndexArray() {
+		List<String> indexNames = new ArrayList<String>();
+		for (String p : getActiveThss())
+		{
+			indexNames.add(p + BTSCorpusConstants.THS);
+		}
+		return indexNames.toArray(new String[indexNames.size()]);
 	}
 	@Override
 	public List<BTSThsEntry> query(BTSQueryRequest query, String objectState, IProgressMonitor monitor) {
@@ -175,6 +183,24 @@ implements BTSThsEntryService, BTSObjectSearchService {
 		return super.getOrphanEntries(map, btsFilters, monitor);
 	}
 	/* (non-Javadoc)
+	 * @see org.bbaw.bts.core.services.corpus.BTSThsEntryService#createNewAnnotationRelationPartOf(org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject)
+	 */
+	@Override
+	public BTSAnnotation createNewAnnotationRelationPartOf(BTSCorpusObject annotatedObject) {
+		BTSAnnotation anno = annotationService
+				.createNewRelationPartOf(annotatedObject);
+		if (main_ths_key == null || "".equals(main_ths_key))
+		{
+			main_ths_key = main_project;
+		}
+		anno.setVisibility(thsVisibility);
+		anno.setRevisionState(thsReviewState);
+		anno.setDBCollectionKey(main_ths_key + BTSCorpusConstants.THS);
+		anno.setCorpusPrefix(main_ths_key + BTSCorpusConstants.THS);
+		anno.setProject(main_ths_key);
+		return anno;
+	}
+	/* (non-Javadoc)
 	 * @see org.bbaw.bts.core.services.impl.generic.GenericObjectServiceImpl#findAsJsonString(java.io.Serializable, org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	@Override
@@ -204,36 +230,15 @@ implements BTSThsEntryService, BTSObjectSearchService {
 	@Override
 	public List<String> queryAsJsonString(BTSQueryRequest query, String objectState, IProgressMonitor monitor) {
 		List<String> objects = new Vector<String>();
-		for (String p : getActiveThss()) {
+		String[] indexArray = buildIndexArray();
 
-			try {
-				objects.addAll(thsEntryDao.queryAsJsonString(query, p + BTSCorpusConstants.THS, p
-						+ BTSCorpusConstants.THS, objectState, false));
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
+		try {
+			objects.addAll(thsEntryDao.queryAsJsonString(query, indexArray, indexArray, objectState, false));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return objects;
-	}
-	/* (non-Javadoc)
-	 * @see org.bbaw.bts.core.services.corpus.BTSThsEntryService#createNewAnnotationRelationPartOf(org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject)
-	 */
-	@Override
-	public BTSAnnotation createNewAnnotationRelationPartOf(BTSCorpusObject annotatedObject) {
-		BTSAnnotation anno = annotationService
-				.createNewRelationPartOf(annotatedObject);
-		if (main_ths_key == null || "".equals(main_ths_key))
-		{
-			main_ths_key = main_project;
-		}
-		anno.setVisibility(thsVisibility);
-		anno.setRevisionState(thsReviewState);
-		anno.setDBCollectionKey(main_ths_key + BTSCorpusConstants.THS);
-		anno.setCorpusPrefix(main_ths_key + BTSCorpusConstants.THS);
-		anno.setProject(main_ths_key);
-		return anno;
 	}
 	
 }

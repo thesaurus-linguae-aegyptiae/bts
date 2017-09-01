@@ -20,7 +20,6 @@ import org.bbaw.bts.core.commons.BTSCoreConstants;
 import org.bbaw.bts.core.commons.BTSObjectSearchService;
 import org.bbaw.bts.core.commons.MoveObjectAmongProjectDBCollectionsService;
 import org.bbaw.bts.core.commons.corpus.BTSCorpusConstants;
-import org.bbaw.bts.core.commons.corpus.CorpusUtils;
 import org.bbaw.bts.core.commons.corpus.comparator.BTSPassportEntryComparator;
 import org.bbaw.bts.core.dao.GeneralPurposeDao;
 import org.bbaw.bts.core.dao.corpus.CorpusObjectDao;
@@ -305,14 +304,10 @@ implements 	CorpusObjectService, BTSObjectSearchService, MoveObjectAmongProjectD
 	private List<BTSCorpusObject> find(BTSQueryRequest query, String objectState)
 	{
 		List<BTSCorpusObject> objects = new Vector<BTSCorpusObject>();
-		for (String p : getActiveProjects())
-		{
-			for (String c : getActive_corpora(p))
-			{
-				objects.addAll(corpusObjectDao.query(query, c, c, objectState,
-						false));
-			}
-		}
+		String[] indexArray = buildIndexArray();
+
+		objects.addAll(corpusObjectDao.query(query, indexArray, indexArray, objectState,
+				false));
 		return filter(objects);
 	}
 
@@ -391,60 +386,51 @@ implements 	CorpusObjectService, BTSObjectSearchService, MoveObjectAmongProjectD
 		List<BTSCorpusObject> objects = new Vector<BTSCorpusObject>();
 		if (query.getDbPath() != null && query.getDbPath().endsWith(BTSCorpusConstants.THS))
 		{
-			for (String p : getActiveProjects()) {
-				try {
-					objects.addAll(corpusObjectDao.query(query, p
-							+ BTSCorpusConstants.THS, p
-							+ BTSCorpusConstants.THS, objectState,
-							registerQuery));
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				if (monitor != null)
-				{
-					if (monitor.isCanceled()) return filter(objects);
-					monitor.worked(20);
-				}
+			String[] indexArray = thsService.buildIndexArray();
+			try {
+				objects.addAll(corpusObjectDao.query(query, indexArray, indexArray, objectState,
+						registerQuery));
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			if (monitor != null)
+			{
+				if (monitor.isCanceled()) return filter(objects);
+				monitor.worked(20);
 			}
 		}
 		else if (query.getDbPath() != null && query.getDbPath().endsWith(BTSCorpusConstants.WLIST))
 		{
-			for (String p : getActiveLemmaLists()) {
-				try {
-					objects.addAll(corpusObjectDao.query(query, p
-							+ BTSCorpusConstants.WLIST, p
-							+ BTSCorpusConstants.WLIST, objectState,
-							registerQuery));
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				if (monitor != null)
-				{
-					if (monitor.isCanceled()) return filter(objects);
-					monitor.worked(5);
-				}
+			String[] indexArray = lemmaEntryService.buildIndexArray();
+			try {
+				objects.addAll(corpusObjectDao.query(query, indexArray, indexArray, objectState,
+						registerQuery));
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			if (monitor != null)
+			{
+				if (monitor.isCanceled()) return filter(objects);
+				monitor.worked(5);
 			}
 		}
 		else
 		{
-			for (String p : getActiveProjects()) {
-				for (String c : getActive_corpora(p)) {
-					
-					try {
-						objects.addAll(corpusObjectDao.query(query, c, c, objectState,
-								registerQuery));
-					} catch (Exception e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-					if (monitor != null)
-					{
-						if (monitor.isCanceled()) return filter(objects);
-						monitor.worked(5);
-					}
-				}
+			String[] indexArray = buildIndexArray();
+
+			try {
+				objects.addAll(corpusObjectDao.query(query, indexArray, indexArray, objectState,
+						registerQuery));
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			if (monitor != null)
+			{
+				if (monitor.isCanceled()) return objects;
+				monitor.worked(5);
 			}
 		}
 		return filter(objects);
@@ -631,92 +617,56 @@ implements 	CorpusObjectService, BTSObjectSearchService, MoveObjectAmongProjectD
 		
 		if (query.getDbPath() != null && query.getDbPath().endsWith(BTSCorpusConstants.THS))
 		{
-			for (String p : getActiveProjects()) {
-				try {
-					objects.addAll(corpusObjectDao.queryAsJsonString(query, p
-							+ BTSCorpusConstants.THS, p
-							+ BTSCorpusConstants.THS, objectState,
-							false));
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				if (monitor != null)
-				{
-					if (monitor.isCanceled()) return objects;
-					monitor.worked(20);
-				}
+			String[] indexArray = thsService.buildIndexArray();
+			try {
+				objects.addAll(corpusObjectDao.queryAsJsonString(query, indexArray, indexArray, objectState,
+						false));
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			if (monitor != null)
+			{
+				if (monitor.isCanceled()) return objects;
+				monitor.worked(20);
 			}
 		}
 		else if (query.getDbPath() != null && query.getDbPath().endsWith(BTSCorpusConstants.WLIST))
 		{
-			for (String p : getActiveLemmaLists()) {
-				try {
-					objects.addAll(corpusObjectDao.queryAsJsonString(query, p
-							+ BTSCorpusConstants.WLIST, p
-							+ BTSCorpusConstants.WLIST, objectState,
-							false));
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				if (monitor != null)
-				{
-					if (monitor.isCanceled()) return objects;
-					monitor.worked(5);
-				}
+			String[] indexArray = lemmaEntryService.buildIndexArray();
+			try {
+				objects.addAll(corpusObjectDao.queryAsJsonString(query, indexArray, indexArray, objectState,
+						false));
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			if (monitor != null)
+			{
+				if (monitor.isCanceled()) return objects;
+				monitor.worked(5);
 			}
 		}
 		else
 		{
-			for (String p : getActiveProjects()) {
-				for (String c : getActive_corpora(p)) {
-					
-					try {
-						objects.addAll(corpusObjectDao.queryAsJsonString(query, c, c, objectState,
-								false));
-					} catch (Exception e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-					if (monitor != null)
-					{
-						if (monitor.isCanceled()) return objects;
-						monitor.worked(5);
-					}
-				}
+			String[] indexArray = buildIndexArray();
+
+			try {
+				objects.addAll(corpusObjectDao.queryAsJsonString(query, indexArray, indexArray, objectState,
+						false));
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			if (monitor != null)
+			{
+				if (monitor.isCanceled()) return objects;
+				monitor.worked(5);
 			}
 		}
 		return objects;
 	}
-
-
-	/* (non-Javadoc)
-	 * @see org.bbaw.bts.core.services.corpus.CorpusObjectService#setObjectTypePath(org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject, java.lang.String)
-	 */
-	@Override
-	public void setObjectTypePath(BTSCorpusObject object, String annotationTypePath) {
-		if (annotationTypePath == null) return;
-		else if (!annotationTypePath.startsWith(BTSConstants.ANNOTATION)) return;
-		else if (annotationTypePath.equals(BTSConstants.ANNOTATION)) return;
-		else
-		{
-			String[] entries = annotationTypePath.split("\\.");
-			if (entries.length > 1)
-			{
-				object.setType(entries[1]);
-				object.setName(entries[1]);
-			}
-			if (entries.length > 2)
-			{
-				object.setSubtype(entries[2]);
-				object.setName(entries[2]);
-			}
-		}
-		return;
-	}
-
-
+	
 	/* (non-Javadoc)
 	 * @see org.bbaw.bts.core.services.corpus.CorpusObjectService#getAllPassportDataAsString(org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject)
 	 */
@@ -824,7 +774,7 @@ implements 	CorpusObjectService, BTSObjectSearchService, MoveObjectAmongProjectD
 				}
 				response = response.substring(0, response.length() -1);
 				response = "-" + getPassportConfigLabel(response);
-				return  response += ":" + item.getValue() + "\n";
+				return  response += ": " + item.getValue() + "\n";
 			}
 			return null;
 		}
@@ -843,4 +793,29 @@ implements 	CorpusObjectService, BTSObjectSearchService, MoveObjectAmongProjectD
 		return response;
 	}
 
+
+	/* (non-Javadoc)
+	 * @see org.bbaw.bts.core.services.corpus.CorpusObjectService#setObjectTypePath(org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject, java.lang.String)
+	 */
+	@Override
+	public void setObjectTypePath(BTSCorpusObject object, String annotationTypePath) {
+		if (annotationTypePath == null) return;
+		else if (!annotationTypePath.startsWith(BTSConstants.ANNOTATION)) return;
+		else if (annotationTypePath.equals(BTSConstants.ANNOTATION)) return;
+		else
+		{
+			String[] entries = annotationTypePath.split("\\.");
+			if (entries.length > 1)
+			{
+				object.setType(entries[1]);
+				object.setName(entries[1]);
+			}
+			if (entries.length > 2)
+			{
+				object.setSubtype(entries[2]);
+				object.setName(entries[2]);
+			}
+		}
+		return;
+	}
 }

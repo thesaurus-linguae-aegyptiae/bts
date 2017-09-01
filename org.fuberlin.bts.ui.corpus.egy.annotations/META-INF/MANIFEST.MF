@@ -4,11 +4,10 @@ Bundle-Name: Annotations
 Bundle-SymbolicName: org.fuberlin.bts.ui.corpus.egy.annotations;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: org.fuberlin.bts.ui.corpus.egy.annotations.internal.Activator
-Bundle-Vendor: FU Berlin
+Bundle-Vendor: CPlutte
 Require-Bundle: javax.inject,
  org.eclipse.osgi,
  org.eclipse.jface,
- org.eclipse.e4.ui.model.workbench,
  org.eclipse.e4.ui.di,
  org.eclipse.e4.ui.services,
  org.eclipse.e4.core.di.annotations,
@@ -23,29 +22,32 @@ Require-Bundle: javax.inject,
  org.bbaw.bts.model,
  org.bbaw.bts.model.corpus,
  org.bbaw.bts.commons,
- org.eclipse.e4.tools.services;bundle-version="4.5.0",
+ org.eclipse.e4.tools.services,
  org.eclipse.e4.core.contexts,
  org.eclipse.e4.ui.workbench,
  org.bbaw.bts.core.controller,
- org.eclipse.e4.core.di;bundle-version="1.6.0",
- org.eclipse.emf.edit,
+ org.eclipse.e4.core.di,
  org.bbaw.bts.core.commons,
- org.eclipse.e4.core.services;bundle-version="2.0.100",
- org.bbaw.bts.app;bundle-version="3.1.0",
- org.bbaw.bts.ui.corpus;bundle-version="3.1.0",
- org.bbaw.bts.ui.main;bundle-version="3.1.0",
- org.bbaw.bts.ui.corpus.egy.commons;bundle-version="3.1.0",
- org.bbaw.bts.core.commons.corpus;bundle-version="3.1.0",
- bts.transform.aux.model;bundle-version="1.0.0",
- com.opcoach.e4.preferences;bundle-version="1.0.0"
-Bundle-RequiredExecutionEnvironment: JavaSE-1.8
-Import-Package: javax.annotation;version="1.2.0",
+ org.eclipse.e4.core.services,
+ org.bbaw.bts.app,
+ org.bbaw.bts.ui.corpus,
+ org.bbaw.bts.ui.main,
+ org.bbaw.bts.ui.corpus.egy.commons,
+ org.bbaw.bts.core.commons.corpus,
+ com.opcoach.e4.preferences
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Import-Package: javax.annotation,
  jsesh.mdc,
  jsesh.mdcDisplayer.draw,
  jsesh.mdcDisplayer.preferences,
  org.bbaw.bts.ui.corpus.dialogs,
  org.bbaw.bts.ui.main.dialogs,
- org.eclipse.e4.core.services.log
+ org.eclipse.e4.core.services.log,
+ org.eclipse.e4.ui.model.application,
+ org.eclipse.e4.ui.model.application.commands,
+ org.eclipse.e4.ui.model.application.ui,
+ org.eclipse.e4.ui.model.application.ui.basic,
+ org.eclipse.e4.ui.model.application.ui.menu
 Bundle-ActivationPolicy: lazy
 Export-Package: org.fuberlin.bts.ui.corpus.egy.annotations.handlers,
  org.fuberlin.bts.ui.corpus.egy.annotations.parts

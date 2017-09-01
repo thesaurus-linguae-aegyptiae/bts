@@ -1,5 +1,6 @@
 package org.bbaw.bts.core.services.corpus.impl.services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 import java.util.regex.Matcher;
@@ -148,22 +149,29 @@ implements BTSLemmaEntryService, BTSObjectSearchService
 			boolean registerQuery, IProgressMonitor monitor)
 	{
 		List<BTSLemmaEntry> objects = new Vector<BTSLemmaEntry>();
-		for (String p : getActiveLemmaLists())
-		{
-			System.out.println("search in index: "+p+BTSCorpusConstants.WLIST);
-			try {
-				objects.addAll(lemmaEntryDao.query(query,
-						p + BTSCorpusConstants.WLIST, p + BTSCorpusConstants.WLIST,
-						objectState, registerQuery));
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+		String[] indexArray = buildIndexArray();
 
+		try {
+			objects.addAll(lemmaEntryDao.query(query,
+					indexArray, indexArray,
+					objectState, registerQuery));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return filter(objects);
 	}
 
+	@Override
+	public String[] buildIndexArray() {
+		List<String> indexNames = new ArrayList<String>();
+		for (String p : getActiveLemmaLists())
+		{
+			indexNames.add(p + BTSCorpusConstants.WLIST);
+		}
+		return indexNames.toArray(new String[indexNames.size()]);
+	}
+	
 	@Override
 	public List<BTSLemmaEntry> query(BTSQueryRequest query, String objectState, IProgressMonitor monitor) {
 		return query(query, objectState, true, monitor);
@@ -377,18 +385,15 @@ implements BTSLemmaEntryService, BTSObjectSearchService
 	@Override
 	public List<String> queryAsJsonString(BTSQueryRequest query, String objectState, IProgressMonitor monitor) {
 		List<String> objects = new Vector<String>();
-		for (String p : getActiveLemmaLists())
-		{
-			System.out.println("search in index: "+p+BTSCorpusConstants.WLIST);
-			try {
-				objects.addAll(lemmaEntryDao.queryAsJsonString(query,
-						p + BTSCorpusConstants.WLIST, p + BTSCorpusConstants.WLIST,
-						objectState, false));
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+		String[] indexArray = buildIndexArray();
 
+		try {
+			objects.addAll(lemmaEntryDao.queryAsJsonString(query,
+					indexArray, indexArray,
+					objectState, false));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return objects;
 	}
