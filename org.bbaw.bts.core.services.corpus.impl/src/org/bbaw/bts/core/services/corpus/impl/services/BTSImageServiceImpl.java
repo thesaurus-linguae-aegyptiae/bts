@@ -131,14 +131,10 @@ public class BTSImageServiceImpl extends AbstractCorpusObjectServiceImpl<BTSImag
 			boolean registerQuery, IProgressMonitor monitor)
 	{
 		List<BTSImage> objects = new Vector<BTSImage>();
-		for (String p : getActiveProjects())
-		{
-			for (String c : getActive_corpora(p))
-			{
-				objects.addAll(imageDao.query(query, c, c, objectState,
-						registerQuery));
-			}
-		}
+		String[] indexArray = buildIndexArray();
+
+		objects.addAll(imageDao.query(query, indexArray, indexArray, objectState,
+				registerQuery));
 		return filter(objects);
 	}
 	@Override
@@ -223,14 +219,9 @@ public class BTSImageServiceImpl extends AbstractCorpusObjectServiceImpl<BTSImag
 	@Override
 	public List<String> queryAsJsonString(BTSQueryRequest query, String objectState, IProgressMonitor monitor) {
 		List<String> objects = new Vector<String>();
-		for (String p : getActiveProjects())
-		{
-			for (String c : getActive_corpora(p))
-			{
-				objects.addAll(imageDao.queryAsJsonString(query, c, c, objectState,
-						false));
-			}
-		}
+		String[] indexArray = buildIndexArray();
+		objects.addAll(imageDao.queryAsJsonString(query, indexArray, indexArray, objectState,
+				false));
 		return objects;
 	}
 }

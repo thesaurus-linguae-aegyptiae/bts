@@ -2,6 +2,7 @@ package org.bbaw.bts.core.services.impl.generic;
 
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -342,5 +343,18 @@ public abstract class GenericObjectServiceImpl<E extends BTSDBBaseObject, K exte
 			}
 		}
 		return projectPrefixes.toArray(new String[projectPrefixes.size()]);
+	}
+	
+	/**
+	 * @return
+	 */
+	protected String[] buildIndexArray() {
+		List<String> indexNames = new ArrayList<String>();
+		for (String p : getActiveProjects())
+		{
+			String n = p + BTSCoreConstants.ADMIN_SUFFIX;
+			indexNames.add(n);
+		}
+		return indexNames.toArray(new String[indexNames.size()]);
 	}
 }

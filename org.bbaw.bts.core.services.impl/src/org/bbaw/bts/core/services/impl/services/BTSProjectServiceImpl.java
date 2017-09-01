@@ -185,8 +185,10 @@ public class BTSProjectServiceImpl extends GenericObjectServiceImpl<BTSProject, 
 			boolean registerQuery, IProgressMonitor monitor)
 	{
 		List<BTSProject> objects = new Vector<BTSProject>();
-		objects.addAll(projectDao.query(query, BTSCoreConstants.ADMIN,
-				BTSCoreConstants.ADMIN, objectState, registerQuery));
+		String[] indexArray = new String[]{BTSCoreConstants.ADMIN};
+
+		objects.addAll(projectDao.query(query, indexArray,
+				indexArray, objectState, registerQuery));
 		return filter(objects);
 	}
 
@@ -338,8 +340,10 @@ public class BTSProjectServiceImpl extends GenericObjectServiceImpl<BTSProject, 
 	@Override
 	public List<String> queryAsJsonString(BTSQueryRequest query, String objectState, IProgressMonitor monitor) {
 		List<String> objects = new Vector<String>();
-		objects.addAll(projectDao.queryAsJsonString(query, BTSCoreConstants.ADMIN,
-				BTSCoreConstants.ADMIN, objectState, false));
+		String[] indexArray = new String[]{BTSCoreConstants.ADMIN};
+
+		objects.addAll(projectDao.queryAsJsonString(query, indexArray,
+				indexArray, objectState, false));
 		return objects;
 	}
 

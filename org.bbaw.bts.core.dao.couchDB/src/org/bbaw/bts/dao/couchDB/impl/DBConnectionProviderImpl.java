@@ -388,7 +388,8 @@ public class DBConnectionProviderImpl implements DBConnectionProvider
 				        .put("mappings._default_.date_detection", "0");
 
 				boolean useTransportClient = preferences.getBoolean(BTSPluginIDs.PREF_SEARCH_CLIENT_SOCKETTRANSPORT, false);
-				
+				boolean useJestClient = preferences.getBoolean("search_client_socket_jest", true);
+
 				if (useTransportClient)
 				{
 					searchClient = new TransportClient()
@@ -400,6 +401,7 @@ public class DBConnectionProviderImpl implements DBConnectionProvider
                         		preferences.getInt(BTSPluginIDs.PREF_SEARCH_CLIENT_SOCKETTRANSPORT_PORT2, 9301)));
 				
 				}
+				
 				else
 				{
 					searchClient = nodeBuilder()
