@@ -157,6 +157,10 @@ public class TranslationEditorComposite extends Composite {
 		if (bindingContext == null) {
 			bindingContext = new DataBindingContext();
 		}
+		if (binding != null && !binding.isDisposed()) {
+			bindingContext.removeBinding(binding);
+			binding.dispose();
+		}
 		if (translations == null)
 		{
 			text.setText("");
@@ -167,8 +171,7 @@ public class TranslationEditorComposite extends Composite {
 		combo.setText("");
 		
 		// load built-in languages
-		for (int i = 0; i < BTSCoreConstants.LANGS.length; i++) {
-			String l = BTSCoreConstants.LANGS[i];
+		for (String l : BTSCoreConstants.LANGS) {
 			String ltrans = translations.getTranslationStrict(l);
 			if (ltrans != null) {
 				combo.select(combo.indexOf(l));
@@ -294,7 +297,7 @@ public class TranslationEditorComposite extends Composite {
 		{
 			return;
 		}
-		BTSTranslation trans = translations.getBTSTranslation(combo.getItem(combo.getSelectionIndex()));
+		BTSTranslation trans = translations.getBTSTranslation(getLanguage());
 		if ((trans.getValue() == null && !"".equals(text.getText().trim()))
 				|| !text.getText().equals(trans.getValue()))
 		{
