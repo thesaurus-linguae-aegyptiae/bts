@@ -241,7 +241,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 
 	/** The evaluation controller. */
 	@Inject
-	private PermissionsAndExpressionsEvaluationController evaluationController;
+	private PermissionsAndExpressionsEvaluationController permissionsController;
 
 	/** The Constant EDITOR_PREFIX_LENGTH. */
 	private static final int EDITOR_PREFIX_LENGTH = 1;
@@ -482,12 +482,10 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 							break;
 						}
 						case 1: {
-							updateModelFromSignText();
 							signTextEditor.clearContent();
 							break;
 						}
 						case 2: {
-							updateModelFromJSesh();
 							break;
 						}
 						}
@@ -931,7 +929,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 								{
 									index = index + 1;
 									targetSentence.getSentenceItems().add(index, copiedItem);
-									dirty.setDirty(true);
+									setDirtyInternal();
 								}
 							}
 						}
@@ -953,7 +951,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 								{
 									index = index + 1;
 									targetSentence.getSentenceItems().add(index, copiedItem);
-									dirty.setDirty(true);
+									setDirtyInternal();
 								}
 							}
 						}
@@ -979,7 +977,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 								{
 									index = index + 1;
 									targettextcontent.getTextItems().add(index, copiedItem);
-									dirty.setDirty(true);
+									setDirtyInternal();
 								}
 							}
 						}
@@ -1000,7 +998,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 							{
 								index = index + 1;
 								targettextcontent.getTextItems().add(index, copiedItem);
-								dirty.setDirty(true);
+								setDirtyInternal();
 							}
 						}
 					}
@@ -1060,21 +1058,6 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 
 	
 
-	/**
-	 * Update model from sign text.
-	 */
-	protected void updateModelFromSignText() {
-		// TODO Auto-generated method stub
-
-	}
-
-	/**
-	 * Update model from j sesh.
-	 */
-	protected void updateModelFromJSesh() {
-		// TODO Auto-generated method stub
-
-	}
 
 	/**
 	 * Update model from transcription.
@@ -1677,10 +1660,11 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 	 * Sets the dirty internal.
 	 */
 	protected void setDirtyInternal() {
-		if (text != null && dirty != null && !dirty.isDirty()) {
-			dirty.setDirty(true);
+		if (permissionsController.userMayEditObject(permissionsController.getAuthenticatedUser(), text)) {
+			if (text != null && dirty != null && !dirty.isDirty()) {
+				dirty.setDirty(true);
+			}
 		}
-
 	}
 
 	/**
@@ -2116,7 +2100,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 							localCommandCacheSet.add(mostRecentCommand);
 							if (dirty != null && localCommandCacheSet.isEmpty()) {
 								dirty.setDirty(false);
-							} else if (dirty != null && !dirty.isDirty()) {
+							} else  {
 								setDirtyInternal();
 							}
 						} else {
@@ -2124,7 +2108,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 							if (localCommandCacheSet.remove(mostRecentCommand)
 									&& localCommandCacheSet.isEmpty() && dirty != null) {
 								dirty.setDirty(false);
-							} else if (dirty != null && !dirty.isDirty()) {
+							} else  {
 								setDirtyInternal();
 							}
 						}
@@ -2500,7 +2484,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 			}
 
 		}
-		evaluationController
+		permissionsController
 				.activateDBCollectionContext(BTSPluginIDs.PREF_MAIN_CORPUS_KEY);
 	}
 
@@ -2511,7 +2495,9 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 	 */
 	@Persist
 	public boolean save() {
-		if (text != null && dirty != null && dirty.isDirty()) {
+		if (text != null && dirty != null && dirty.isDirty() && 
+			permissionsController.userMayEditObject(
+					permissionsController.getAuthenticatedUser(), this.text)) {
 			boolean canSave = true;
 			switch (tabFolder.getSelectionIndex()) {
 			case 0: {
@@ -2519,11 +2505,9 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 				break;
 			}
 			case 1: {
-				updateModelFromSignText();
 				break;
 			}
 			case 2: {
-				updateModelFromJSesh();
 				break;
 			}
 			}
@@ -2537,12 +2521,13 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 			signTextEditor.setNotifyWords(false);
 			sentenceTranslate_Editor.save();
 			boolean success = textEditorController.save(this.text);
+			
 			dirty.setDirty(!success);
 			// turn word-wise update back on
 			signTextEditor.setNotifyWords(true);
 			return success;
 		}
-		return true;
+		return false;
 	}
 
 	/**

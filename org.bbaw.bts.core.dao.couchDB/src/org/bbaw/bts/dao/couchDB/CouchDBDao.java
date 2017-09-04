@@ -329,12 +329,17 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 		try {
 			sourceStream = client.find((String)key);
 		} catch (NoDocumentException e) {
-			logger.error(e, "Failed to loadFully object with path: " + uri.toString());
+			logger.warn("Failed to loadFully object with path: " + uri.toString()+"\n "+e.getMessage());
 		}
 		
-		final JSONLoad loader = new JSONLoad(sourceStream,
-				new HashMap<Object, Object>(), connectionProvider.getEmfResourceSet());
-		loader.fillResource(resource);
+		try {
+			final JSONLoad loader = new JSONLoad(sourceStream,
+					new HashMap<Object, Object>(), connectionProvider.getEmfResourceSet());
+			loader.fillResource(resource);
+		} catch (Exception e) {
+			logger.warn("Failed to deserialize object from JSON: "+e.getMessage());
+			return null;
+		}
 		
 		try {
 			sourceStream.close();
