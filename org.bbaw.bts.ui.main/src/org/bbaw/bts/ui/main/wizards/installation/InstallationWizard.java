@@ -184,6 +184,7 @@ public class InstallationWizard extends Wizard {
 		preferences.put(BTSPluginIDs.PREF_LOCAL_DB_URL, localUrl);
 
 		if (welcomePage.isConnectToServer()) {
+			// XXX
 			userController.setAuthenticatedUser(getUser());
 
 			serverURL = connectServerPage.getServerURL();
