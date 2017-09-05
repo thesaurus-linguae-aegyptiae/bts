@@ -10,7 +10,6 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.bbaw.bts.btsmodel.BTSDBBaseObject;
-import org.bbaw.bts.btsmodel.BTSDBCollectionRoleDesc;
 import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.btsmodel.BTSProject;
 import org.bbaw.bts.btsmodel.BTSProjectDBCollection;
@@ -48,10 +47,6 @@ public class PermissionsAndExpressionsEvaluationControllerImpl implements
 
 	@Inject
 	private IEventBroker eventBroker;
-	
-	private static final String FALSE = "false";
-
-	private static final String TRUE = "true";
 
 	private static final long LOCKING_DELAY = 600;
 
@@ -667,7 +662,30 @@ public class PermissionsAndExpressionsEvaluationControllerImpl implements
 			}
 		}
 		return false;
-		
+	}
+
+	@Override
+	public boolean userMayCommentOnObject(BTSUser user, BTSObject object) {
+		if (user == null || object == null) {
+			return false;
+		} else {
+			if (userContextRole != null) {
+				if (userContextRole.equals(BTSCoreConstants.USER_ROLE_ADMINS)) {
+					return true;
+				}
+				if (userContextRole.equals(BTSCoreConstants.USER_ROLE_EDITORS)) {
+					if (object.getVisibility().equals(BTSCoreConstants.VISIBILITY_PUBLIC)) {
+						return true;
+					} else {
+						return evaluationService.userIsMember(user, object.getUpdaters());
+					}
+				}
+				if (userContextRole.equals(BTSCoreConstants.USER_ROLE_RESEARCHERS)) {
+					return evaluationService.userIsMember(user, object.getUpdaters());
+				}
+			}
+		}
+		return false;
 	}
 
 	private BTSProjectDBCollection getDBCollection(String dbCollectionName) {
