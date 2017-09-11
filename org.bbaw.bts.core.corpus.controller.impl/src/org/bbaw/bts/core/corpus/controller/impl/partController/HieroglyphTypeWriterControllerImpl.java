@@ -43,10 +43,13 @@ public class HieroglyphTypeWriterControllerImpl implements
 		// due to scattered cache map system loaded resources are not cached
 		// when loaded through emf
 		if (counterCacheMap != null) {
-			for (UserActionCounter c : counters) {
-				if (!counterCacheMap.containsKey(c.eResource().getURI())) {
-
-					counterCacheMap.put(c.eResource().getURI(), c.eResource());
+			for (Object o : counters) {
+				if (o instanceof UserActionCounter) {
+					UserActionCounter c = (UserActionCounter)o;
+					if (!counterCacheMap.containsKey(c.eResource().getURI())) {
+	
+						counterCacheMap.put(c.eResource().getURI(), c.eResource());
+					}
 				}
 			}
 		}
