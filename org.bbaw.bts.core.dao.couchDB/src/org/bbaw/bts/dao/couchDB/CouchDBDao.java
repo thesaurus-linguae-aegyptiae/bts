@@ -739,6 +739,11 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 		// only use indexes that actually exist
 		indexNames = existingIndexNamesOnly(indexNames);
 
+		//if those don't actually exist, beat it
+		if (indexNames.length < 1) {
+			return new Vector<E>(); 
+		}
+
 		// check for ID Query
 		if (query.isIdQuery())
 		{
