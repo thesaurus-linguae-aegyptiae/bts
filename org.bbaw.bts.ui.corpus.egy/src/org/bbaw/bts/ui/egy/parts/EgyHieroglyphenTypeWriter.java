@@ -1129,7 +1129,7 @@ public class EgyHieroglyphenTypeWriter implements ScatteredCachingPart,
 	}
 
 	@Override
-	public List<Map> getScatteredCashMaps() {
+	public List<Map> getScatteredCacheMaps() {
 		final List<Map> maps = new Vector<Map>(1);
 		maps.add(hieroglyphSelectionCounterCacheMap);
 		return maps;

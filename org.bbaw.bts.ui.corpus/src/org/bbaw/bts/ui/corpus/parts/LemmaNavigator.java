@@ -735,7 +735,7 @@ public class LemmaNavigator extends NavigatorPart implements ScatteredCachingPar
 	}
 
 	@Override
-	public List<Map> getScatteredCashMaps() {
+	public List<Map> getScatteredCacheMaps() {
 		final List<Map> maps = new Vector<Map>(1);
 		for (Map map : cachingMap.values()) {
 			maps.add(map);
