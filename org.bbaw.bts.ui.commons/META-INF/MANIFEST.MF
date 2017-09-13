@@ -70,4 +70,4 @@ Import-Package: javax.inject,
  org.eclipse.xtext.ui.editor.validation,
  org.eclipse.xtext.validation
 Bundle-ActivationPolicy: lazy
-Bundle-Version: 3.1.0.qualifier
+Bundle-Version: 3.1.1.qualifier

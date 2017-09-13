@@ -22,4 +22,4 @@ Import-Package: com.google.gson,
  org.bbaw.bts.commons,
  org.eclipse.emf.ecore.xmi.impl,
  org.eclipselabs.emfjson
-Bundle-Version: 3.1.0.qualifier
+Bundle-Version: 3.1.1.qualifier

@@ -40,4 +40,4 @@ Import-Package: javax.inject,
 Bundle-ActivationPolicy: lazy
 Export-Package: org.bbaw.bts.core.services.impl,
  org.bbaw.bts.core.services.impl.generic
-Bundle-Version: 3.1.0.qualifier
+Bundle-Version: 3.1.1.qualifier

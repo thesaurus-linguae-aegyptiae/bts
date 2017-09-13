@@ -20,4 +20,4 @@ Import-Package: javax.inject,
  org.eclipse.e4.core.services.log,
  org.eclipse.e4.ui.model.application,
  org.eclipse.e4.ui.model.application.ui
-Bundle-Version: 3.1.0.qualifier
+Bundle-Version: 3.1.1.qualifier
