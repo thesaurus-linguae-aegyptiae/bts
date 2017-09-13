@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.bbaw.bts</groupId>
 	<artifactId>aaew-bts</artifactId>
-	<version>3.1.0</version>
+	<version>3.1.1</version>
 	<packaging>pom</packaging>
 
 	<modules>
@@ -67,7 +67,7 @@
 	</modules>
 
 	<properties>
-		<tycho.version>0.19.0</tycho.version>
+		<tycho.version>1.0.0</tycho.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.build.resourceEncoding>UTF-8</project.build.resourceEncoding>
 	</properties>
@@ -101,7 +101,7 @@
 				<executions>
 					<execution>
 						<id>versions</id>
-						<phase>clean</phase>
+						<phase>package</phase>
 						<goals>
 							<goal>update-pom</goal>
 						</goals>
@@ -117,6 +117,7 @@
 			<plugin>
 				<groupId>org.eclipse.tycho</groupId>
 				<artifactId>target-platform-configuration</artifactId>
+				<version>${tycho.version}</version>
 				<configuration>
 					<environments>
 						<!--
