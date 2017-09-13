@@ -999,7 +999,6 @@ public class PassportEditorPart {
 		purgeAll();
 		if (object.getPassport() == null) {
 			object.setPassport(BtsCorpusModelFactory.eINSTANCE.createBTSPassport());
-			setDirty(true);
 		}
 		if (mainComposite == null || mainComposite.isDisposed())
 		{
@@ -1151,27 +1150,14 @@ public class PassportEditorPart {
 								.getCommandStack().getUndoCommand())) {
 							// normal command or redo executed
 							localCommandCacheSet.add(mostRecentCommand);
-							if (dirty != null)
-							{	
-								if (localCommandCacheSet.isEmpty()) {
-									dirty.setDirty(false);
-								} else if (!dirty.isDirty()) {
-									dirty.setDirty(true);
-								}
-							}
+							// XXX here
+							setDirty(true);
 							// if redo, check if reload required
 							checkAndReload(mostRecentCommand);
 						} else {
 							// undo executed
-							if (dirty != null)
-							{
-								if (localCommandCacheSet.remove(mostRecentCommand)
-										&& localCommandCacheSet.isEmpty()) {
-									dirty.setDirty(false);
-								} else if (!dirty.isDirty()) {
-									dirty.setDirty(true);
-								}
-							}
+							setDirty(!(localCommandCacheSet.remove(mostRecentCommand)
+										&& localCommandCacheSet.isEmpty()));
 							checkAndReload(mostRecentCommand);
 						}
 					}
@@ -1285,11 +1271,11 @@ public class PassportEditorPart {
 		// add plus and minus button
 	}
 
-	private void setDirty(boolean dirty) {
-		if (this.dirty != null)
-		{
-			this.dirty.setDirty(dirty);
-			System.out.println("passporteditor set dirty");
+	private void setDirty(boolean isDirty) {
+		if (evaluationController.userMayEditObject(
+				evaluationController.getAuthenticatedUser(), corpusObject) 
+				&& dirty != null) {
+			dirty.setDirty(isDirty);
 		}
 	}
 
@@ -1506,7 +1492,9 @@ public class PassportEditorPart {
 
 	@Persist
 	public boolean save() {
-		if (dirty != null && dirty.isDirty()) {
+		if (dirty != null && dirty.isDirty() &&
+			permissionsController.userMayEditObject(
+					permissionsController.getAuthenticatedUser(), corpusObject)) {
 
 			boolean success = passportEditorController.save(corpusObject);
 			dirty.setDirty(!success);
@@ -1515,7 +1503,7 @@ public class PassportEditorPart {
 			}
 			return success;
 		}
-		return true;
+		return false;
 	}
 	
 	@Inject
