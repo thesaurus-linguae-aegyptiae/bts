@@ -155,7 +155,7 @@ public class EgyHieroglyphenTypeWriter implements ScatteredCachingPart,
 	private MDCNormalizer mdcNormalizer;
 	private BTSGraphic selectedGlyphe;
 	private String beforeImageMdC;
-	private Map hieroglyphSelectionCounterCacheMap = new HashMap<URI, Object>();
+	private Map<URI, Object> hieroglyphSelectionCounterCacheMap = new HashMap<URI, Object>();
 	private String htwProposals;
 	private BTSIdentifiableItem selectionObject;
 	// boolean if object is loaded into gui
@@ -1129,7 +1129,7 @@ public class EgyHieroglyphenTypeWriter implements ScatteredCachingPart,
 	}
 
 	@Override
-	public List<Map> getScatteredCashMaps() {
+	public List<Map> getScatteredCacheMaps() {
 		final List<Map> maps = new Vector<Map>(1);
 		maps.add(hieroglyphSelectionCounterCacheMap);
 		return maps;

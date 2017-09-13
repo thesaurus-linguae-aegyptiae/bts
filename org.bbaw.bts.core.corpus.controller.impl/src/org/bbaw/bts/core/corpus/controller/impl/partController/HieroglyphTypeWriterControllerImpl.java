@@ -22,6 +22,7 @@ import jsesh.mdc.utils.MDCNormalizer;
 import org.bbaw.bts.btsmodel.UserActionCounter;
 import org.bbaw.bts.core.corpus.controller.partController.HieroglyphTypeWriterController;
 import org.bbaw.bts.core.services.UserActionCounterService;
+import org.eclipse.emf.common.util.URI;
 
 public class HieroglyphTypeWriterControllerImpl implements
 		HieroglyphTypeWriterController {
@@ -37,7 +38,7 @@ public class HieroglyphTypeWriterControllerImpl implements
 
 	@Override
 	public String getHieroglypheProposalsAsMdCString(String code,
-			Map counterCacheMap) {
+			Map<URI, Object> counterCacheMap) {
 		List<UserActionCounter> counters = actionCounterService
 				.getCountersForPrefix(code);
 		// due to scattered cache map system loaded resources are not cached
@@ -45,7 +46,6 @@ public class HieroglyphTypeWriterControllerImpl implements
 		if (counterCacheMap != null) {
 			for (UserActionCounter c : counters) {
 				if (!counterCacheMap.containsKey(c.eResource().getURI())) {
-
 					counterCacheMap.put(c.eResource().getURI(), c.eResource());
 				}
 			}

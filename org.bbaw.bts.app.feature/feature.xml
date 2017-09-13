@@ -429,7 +429,7 @@
          unpack="false"/>
 
    <plugin
-         id="org.eclipselabs.emfjson"
+         id="org.bbaw.bts.eclipselabs.emfjson"
          download-size="0"
          install-size="0"
          version="0.0.0"
@@ -947,7 +947,7 @@
          unpack="false"/>
 
    <plugin
-         id="org.eclipselabs.emfjson.couchdb"
+         id="org.bbaw.bts.eclipselabs.emfjson.couchdb"
          download-size="0"
          install-size="0"
          version="0.0.0"
