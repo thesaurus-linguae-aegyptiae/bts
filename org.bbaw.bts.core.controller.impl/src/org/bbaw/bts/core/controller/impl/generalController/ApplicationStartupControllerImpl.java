@@ -196,14 +196,20 @@ public class ApplicationStartupControllerImpl implements
 		logger.info("db_installation_dir " + db_installation_dir);
 
 		if (db_installation_dir == null || "".equals(db_installation_dir)) {
-			String btsInsallationDir = BTSContstantsPlatformSpecific.getInstallationDir();
-			logger.info("btsInsallationDir " + btsInsallationDir);
+			/// XXX retrieve db installation location from user by opening a dialog when in doubt
+			// XXX or at least make "dbdir" a constant amk
+			String btsInstallationDir = BTSContstantsPlatformSpecific.getInstallationDir()
+					+ BTSContstantsPlatformSpecific.FS + "dbdir";
+			logger.info("btsInstallationDir " + btsInstallationDir);
+			
+			// XXX if we don't know database location, we need to find out.
+			// if its not at expected location (installdir/dbdir/) then
+			// we have to ask the user
 
-			db_installation_dir = BTSContstantsPlatformSpecific
-					.getDBInstallationDir(btsInsallationDir);
-			prefs.put(BTSPluginIDs.PREF_DB_DIR, db_installation_dir);
+			prefs.put(BTSPluginIDs.PREF_DB_DIR, btsInstallationDir);
 			try {
 				prefs.flush();
+				db_installation_dir = btsInstallationDir;
 			} catch (BackingStoreException e) {
 				logger.error(e);
 			}

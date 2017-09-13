@@ -2211,8 +2211,7 @@ public class CouchDBManager implements DBManager {
 	@Override
 	public boolean changeAuthenticationDBAdmin(String userName, String password)
 			throws FileNotFoundException {
-		String localIni = getOSCouchDBLocalIniFile(BTSContstantsPlatformSpecific
-				.getDBInstallationDir(BTSContstantsPlatformSpecific.getInstallationDir()));
+		String localIni = getOSCouchDBLocalIniFile(dbDir);
 		File localIniFile = new File(localIni);
 		if (localIniFile.exists()) {
 			Scanner scanner = new Scanner(localIniFile);
