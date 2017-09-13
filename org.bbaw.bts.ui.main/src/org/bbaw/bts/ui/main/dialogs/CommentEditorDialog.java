@@ -5,10 +5,12 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import org.bbaw.bts.btsmodel.BTSComment;
 import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.btsmodel.BtsmodelPackage;
+import org.bbaw.bts.core.commons.BTSCoreConstants;
 import org.bbaw.bts.core.controller.generalController.CommentController;
 import org.bbaw.bts.core.controller.generalController.EditingDomainController;
 import org.bbaw.bts.core.controller.generalController.PermissionsAndExpressionsEvaluationController;
@@ -76,6 +78,9 @@ public class CommentEditorDialog extends TitleAreaDialog {
 	private boolean dirty;
 	private Composite container;
 	private Composite innerCompositeRelations;
+
+	@Inject
+	@Named(BTSCoreConstants.CORE_EXPRESSION_MAY_EDIT)
 	private boolean editable;
 
 	/**
@@ -176,16 +181,26 @@ public class CommentEditorDialog extends TitleAreaDialog {
 				getCommandStackListener());
 		
 		loadRelations();
-		checkRightsAndSetEditable();
+
+		// comment can be modified if user is in its updaters list
+		// this will only work if permission to comment text/corpus object
+		// has been put into context under CORE_EXPRESSIONS_MAY_COMMENT
+		setEditable(editable);
 		
 	}
 
-	private void checkRightsAndSetEditable() {
-		editable = permissionsController.userMayEditObject(
-				permissionsController.getAuthenticatedUser(), comment);
+	/**
+	 * Set editable flag and update controls accordingly.
+	 * @param editable
+	 */
+	public void setEditable(boolean editable) {
+		this.editable = editable;
 		txtTitletxt.setEditable(editable);
 		txtCommenttxt.setEditable(editable);
 		relationsEditor.setEnabled(editable);
+		try {
+			this.getButton(IDialogConstants.OK_ID).setEnabled(editable);
+		} catch (Exception e) {}
 	}
 
 	private CommandStackListener getCommandStackListener() {

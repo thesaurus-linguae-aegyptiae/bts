@@ -1,8 +1,10 @@
 package org.bbaw.bts.ui.corpus.dialogs;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import org.bbaw.bts.btsmodel.BTSObject;
+import org.bbaw.bts.core.commons.BTSCoreConstants;
 import org.bbaw.bts.core.corpus.controller.partController.CorpusNavigatorController;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
 import org.bbaw.bts.ui.corpus.parts.PassportEditorPart;
@@ -36,7 +38,9 @@ public class PassportEditorDialog extends TitleAreaDialog {
 
 	private Button okButton;
 
-	private boolean editable = true;
+	@Inject
+	@Named(BTSCoreConstants.CORE_EXPRESSION_MAY_EDIT)
+	private boolean editable;
 	/**
 	 * Create the dialog.
 	 * @param parentShell
@@ -69,6 +73,7 @@ public class PassportEditorDialog extends TitleAreaDialog {
 		{
 			corpusNavigator.checkAndFullyLoad((BTSCorpusObject) selectionObject, false);
 		}
+		setEditable(editable);
 		
 		IEclipseContext child = context.createChild("passportEditorDialog");
 		child.set(Composite.class, composite);
