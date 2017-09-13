@@ -5,7 +5,7 @@
   <parent>
     <groupId>org.bbaw.bts</groupId>
     <artifactId>aaew-bts</artifactId>
-    <version>3.1.0</version>
+    <version>3.1.1</version>
   </parent>
   <groupId>org.bbaw.bts</groupId>
   <artifactId>org.fuberlin.bts.ui.corpus.egy.annotations</artifactId>
