@@ -239,7 +239,7 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 		
 		canvas = new FigureCanvas(this);
 		// lightWeightSystem = new LightweightSystem(canvas);
-
+		canvas.setData("org.eclipse.e4.ui.css.CssClassName", "SignTextCanvas");
 		canvas.setBackground(COLOR_CANVAS_BACKGROUND);
 		canvas.setLayout(new FillLayout());
 		container = new Figure();
