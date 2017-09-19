@@ -35,4 +35,4 @@ Import-Package: com.google.gson;version="2.1.0",
 Export-Package: org.bbaw.bts.core.remote.dao.couchDB
 Bundle-ClassPath: .
 Bundle-ActivationPolicy: lazy
-Bundle-Version: 3.1.0.qualifier
+Bundle-Version: 3.1.1.qualifier
