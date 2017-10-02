@@ -74,7 +74,7 @@ public class ConnectToServerPage extends WizardPage
 		errorLabelServer = new Label(container, SWT.NONE);
 		errorLabelServer.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
 		Label lblPleaseEnterYou = new Label(container, SWT.NONE);
-		lblPleaseEnterYou.setText("Please enter you connection information, URL, username and password.");
+		lblPleaseEnterYou.setText("Please enter your connection information, URL, username and password.");
 
 		Label lblServerUrl = new Label(container, SWT.NONE);
 		lblServerUrl.setFont(SWTResourceManager.getFont("Tahoma", 8, SWT.BOLD));
