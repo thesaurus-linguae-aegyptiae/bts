@@ -248,7 +248,7 @@ public class ATextNavigatorPart extends NavigatorPart implements ScatteredCachin
 		
 		// create bin tab item
 		binTabItem = new CTabItem(tabFolder, SWT.NONE);
-		binTabItem.setText("Bin");
+		binTabItem.setText("Trash");
 		binTabItem.setData("key", "bin");
 		binTabItem.setImage(resourceProvider.getImage(Display.getDefault(),
 				BTSResourceProvider.IMG_BIN));
