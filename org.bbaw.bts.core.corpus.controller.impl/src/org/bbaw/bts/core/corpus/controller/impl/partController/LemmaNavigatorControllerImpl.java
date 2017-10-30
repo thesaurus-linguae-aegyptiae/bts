@@ -1,9 +1,13 @@
 package org.bbaw.bts.core.corpus.controller.impl.partController;
 
 import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.TreeMap;
 import java.util.Vector;
 
 import javax.inject.Inject;
@@ -85,22 +89,56 @@ implements LemmaNavigatorController{
 	}
 
 
+	private TreeNodeWrapper createNodeRelationRepresentingBTSRelation(Map<String, TreeNodeWrapper> nodeReg, TreeNodeWrapper node, 
+			BTSRelation rel, boolean asChild) {
+		if (nodeReg.containsKey(rel.getObjectId())) {
+			TreeNodeWrapper relNode = nodeReg.get(rel.getObjectId());
+			TreeNodeWrapper parentNode = asChild ? node : relNode;
+			TreeNodeWrapper childNode = asChild ? relNode : node;
+			if (!parentNode.getChildren().contains(childNode) && !ancestry(parentNode, childNode)) {
+				parentNode.getChildren().add(childNode);
+				childNode.setParent(parentNode);
+			}
+			return relNode;
+		}
+		return null;
+	}
 	
 	@Override
 	public LinkedHashMap<String, TreeNodeWrapper> loadNodesWithChildren(
 			List<BTSLemmaEntry> subList, IProgressMonitor monitor, boolean b) {
-		LinkedHashMap<String, TreeNodeWrapper> nodeReg = new LinkedHashMap<String, TreeNodeWrapper>();
-		if (monitor != null)
+
+		if (monitor != null) {
 			monitor.beginTask("Load nodes", subList.size());
+		}
+
+		final HashMap<String, Integer> lemmaPositions = new HashMap<String, Integer>();
+		
+		TreeMap<String, TreeNodeWrapper> nodeReg = new TreeMap<String, TreeNodeWrapper>(
+				new Comparator<String>() {
+					@Override
+					public int compare(String o1, String o2) {
+						try {
+							return lemmaPositions.get(o2) - lemmaPositions.get(o1);
+						} catch (NullPointerException e) {
+							System.out.println("WZF!!! " + o1 + "/" + o2);
+							return 0;
+						}
+					}
+				});
+		
 
 		// initialize nodes registry with lemma wrappers
+		int pos = 0;
 		for (BTSLemmaEntry lemma : subList) {
 			TreeNodeWrapper node = BtsviewmodelFactory.eINSTANCE
 					.createTreeNodeWrapper();
 			node.setObject(lemma);
+			node.setLabel(lemma.getName());
+			lemmaPositions.put(lemma.get_id(), pos);
 			nodeReg.put(lemma.get_id(), node);
+			pos ++;
 		}
-		
 
 		// nest wrappers according to subList interrelations
 		for (BTSLemmaEntry lemma : subList) {
@@ -108,30 +146,34 @@ implements LemmaNavigatorController{
 			for (BTSRelation rel : lemma.getRelations())
 				// XXX meh
 				if (BTSCoreConstants.BASIC_RELATIONS_CONTAINS.equals(rel.getType())
-						|| "successor".equals(rel.getType())
-						|| "referencing".equals(rel.getType())) {
-					if (nodeReg.containsKey(rel.getObjectId())) {
-						TreeNodeWrapper childNode = nodeReg.get(rel.getObjectId());
-						if (!node.getChildren().contains(childNode) && !ancestry(node, childNode)) {
-							node.getChildren().add(childNode);
-							childNode.setParent(node);
+						|| BTSCoreConstants.BASIC_RELATIONS_HAS_SUCCESSOR.equals(rel.getType())
+						|| BTSCoreConstants.BASIC_RELATIONS_REFERENCES.equals(rel.getType())) {
+					createNodeRelationRepresentingBTSRelation(nodeReg, node, rel, true);
+					// maintain list order
+					if (lemmaPositions.containsKey(rel.getObjectId())) {
+						if (lemmaPositions.get(rel.getObjectId()) < lemmaPositions.get(lemma.get_id())) {
+							lemmaPositions.put(lemma.get_id(), lemmaPositions.get(rel.getObjectId()));
 						}
 					}
 				} else if (BTSCoreConstants.BASIC_RELATIONS_PARTOF.equals(rel.getType())
-						|| "predecessor".equals(rel.getType())
-						|| "referencedBy".equals(rel.getType()))
-					if (nodeReg.containsKey(rel.getObjectId())) {
-						TreeNodeWrapper parentNode = nodeReg.get(rel.getObjectId());
-						if (!parentNode.getChildren().contains(node) && !ancestry(parentNode, node)) {
-							parentNode.getChildren().add(node);
-							node.setParent(parentNode);
+						|| BTSCoreConstants.BASIC_RELATIONS_SUCCESSOR_OF.equals(rel.getType())
+						|| BTSCoreConstants.BASIC_RELATIONS_REFERENCED_BY.equals(rel.getType())) {
+					createNodeRelationRepresentingBTSRelation(nodeReg, node, rel, false);
+					if (lemmaPositions.containsKey(rel.getObjectId())) {
+						// maintain lemma list sort order
+						if (lemmaPositions.get(lemma.get_id()) < lemmaPositions.get(rel.getObjectId())) {
+							// swap
+							lemmaPositions.put(rel.getObjectId(), lemmaPositions.get(lemma.get_id()));
 						}
 					}
+				}
+
 			if (monitor != null)
 				monitor.worked(1);
 		}
 
-		return nodeReg;
+
+		return new LinkedHashMap<String, TreeNodeWrapper>(nodeReg);
 	}
 	
 	/**

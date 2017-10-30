@@ -93,11 +93,17 @@ public class BTSCoreConstants
 	
 	/** The Constant BASIC_RELATIONS_PARTOF. */
 	public static final String BASIC_RELATIONS_PARTOF = "partOf";
+	public static final String BASIC_RELATIONS_CONTAINS = "contains";
+	
+	public static final String BASIC_RELATIONS_HAS_SUCCESSOR = "successor";
+	public static final String BASIC_RELATIONS_SUCCESSOR_OF = "predecessor";
+	
+	public static final String BASIC_RELATIONS_REFERENCES = "referencing";
+	public static final String BASIC_RELATIONS_REFERENCED_BY = "referencedBy";
 	
 	/** The Constant BASIC_RELATIONS_ANNOTATION_TARGET. */
 	public static final String BASIC_RELATIONS_ANNOTATION_TARGET = "annotationTarget";
 	
-	public static final String BASIC_RELATIONS_CONTAINS = "contains";
 
 	/** The Constant LANG_DE. */
 	public static final String LANG_DE = "de";
