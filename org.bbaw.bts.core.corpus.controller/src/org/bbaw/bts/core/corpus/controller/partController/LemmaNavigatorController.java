@@ -1,6 +1,5 @@
 package org.bbaw.bts.core.corpus.controller.partController;
 
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -16,16 +15,12 @@ public interface LemmaNavigatorController extends GenericCorpusObjectNavigatorCo
 
 	BTSLemmaSubentry createNewSubEntry();
 
-	LinkedHashMap<String, TreeNodeWrapper> loadNodesWithChildren(List<BTSLemmaEntry> subList,
-			IProgressMonitor monitor, boolean b);
+	List<TreeNodeWrapper> loadLemmataIntoTree(List<BTSLemmaEntry> entries,
+			Map<String, TreeNodeWrapper> registry,
+			IProgressMonitor monitor);
 
 	List<BTSLemmaEntry> findChildrenOnlySubEntries(BTSLemmaEntry parent, Map<String, BTSQueryResultAbstract> queryResultMap,
 			ContentViewer viewer, TreeNodeWrapper parentHolder,
 			EReference referenceName, IProgressMonitor monitor);
 
-	List<TreeNodeWrapper> loadLemmataIntoTree(List<BTSLemmaEntry> entries,
-			Map<String, TreeNodeWrapper> registry,
-			IProgressMonitor monitor);
-
-	
 }

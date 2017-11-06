@@ -3,10 +3,8 @@ package org.bbaw.bts.ui.egy.parts;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Vector;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
@@ -75,7 +73,6 @@ import org.eclipse.e4.ui.workbench.modeling.EPartService;
 import org.eclipse.emf.common.command.CompoundCommand;
 import org.eclipse.emf.databinding.EMFUpdateValueStrategy;
 import org.eclipse.emf.databinding.edit.EMFEditProperties;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.edit.command.SetCommand;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
@@ -987,17 +984,6 @@ public class EgyLemmatizerPart implements SearchViewer {
 
 	}
 
-	private EObject findRecursivelyParent(EObject object) {
-		if (object.eContainer() == null) {
-			return object;
-		} else {
-			if (object.eContainer() instanceof BTSText) {
-				return (BTSText) object.eContainer();
-			} else {
-				return findRecursivelyParent(object.eContainer());
-			}
-		}
-	}
 
 	private void clearProposals() {
 		final TreeNodeWrapper lemmaRootNode = BtsviewmodelFactory.eINSTANCE
@@ -1326,19 +1312,6 @@ public class EgyLemmatizerPart implements SearchViewer {
 		return nodes;
 	}
 
-	
-	private List<TreeNodeWrapper> loadNodesWithChildren(List<BTSLemmaEntry> entries, IProgressMonitor monitor) {
-		this.lemmaNodeRegistry = lemmaNavigatorController.loadNodesWithChildren(entries, monitor, false);
-		Vector<TreeNodeWrapper> nodes = new Vector<TreeNodeWrapper>();
-		// extract root nodes
-		for (BTSLemmaEntry lemma : entries) {
-			TreeNodeWrapper node = lemmaNodeRegistry.get(lemma.get_id());
-			if (node.getParent() == null)
-				nodes.add(node);
-		}
-		return nodes;
-	}
-	
 	/**
 	 * Has given list of {@link BTSLemmaEntry} objects filtered based on their review state,
 	 * brings remaining elements in an order defined by {@link BTSEgyLemmaEntryComparator} 
