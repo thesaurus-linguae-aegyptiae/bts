@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.TreeMap;
 import java.util.Vector;
 
@@ -19,6 +18,7 @@ import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.core.commons.BTSCoreConstants;
 import org.bbaw.bts.core.commons.filter.BTSFilter;
 import org.bbaw.bts.core.corpus.controller.impl.util.BTSEgyObjectByNameComparator;
+import org.bbaw.bts.core.corpus.controller.impl.util.BTSObjectTreeGenerator;
 import org.bbaw.bts.core.corpus.controller.partController.LemmaNavigatorController;
 import org.bbaw.bts.core.dao.util.BTSQueryRequest;
 import org.bbaw.bts.core.services.corpus.BTSLemmaEntryService;
@@ -102,6 +102,14 @@ implements LemmaNavigatorController{
 			return relNode;
 		}
 		return null;
+	}
+
+	@Override
+	public List<TreeNodeWrapper> loadLemmataIntoTree(List<BTSLemmaEntry> entries,
+			Map<String, TreeNodeWrapper> registry,
+			IProgressMonitor monitor) {
+		BTSObjectTreeGenerator<BTSLemmaEntry> treeGen = new BTSObjectTreeGenerator<>(entries, registry, monitor);
+		return treeGen.getRootNodes();
 	}
 	
 	@Override

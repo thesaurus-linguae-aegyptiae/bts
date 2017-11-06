@@ -23,5 +23,9 @@ public interface LemmaNavigatorController extends GenericCorpusObjectNavigatorCo
 			ContentViewer viewer, TreeNodeWrapper parentHolder,
 			EReference referenceName, IProgressMonitor monitor);
 
+	List<TreeNodeWrapper> loadLemmataIntoTree(List<BTSLemmaEntry> entries,
+			Map<String, TreeNodeWrapper> registry,
+			IProgressMonitor monitor);
+
 	
 }

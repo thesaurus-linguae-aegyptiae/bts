@@ -209,11 +209,11 @@ public class EgyLemmatizerPart implements SearchViewer {
 	private Job searchjob;
 	private Button activateButton;
 	
-	private LinkedHashMap<String, TreeNodeWrapper> lemmaNodeRegistry;
+	private HashMap<String, TreeNodeWrapper> lemmaNodeRegistry;
 
 	@Inject
 	public EgyLemmatizerPart() {
-		// TODO Your code here
+		lemmaNodeRegistry = new HashMap<String, TreeNodeWrapper>();
 	}
 
 	@PostConstruct
@@ -1064,8 +1064,9 @@ public class EgyLemmatizerPart implements SearchViewer {
 							TreeItem first = lemmaViewer.getTree().getItem(0);
 							selection = new StructuredSelection(first.getData());
 						}
-					if (selection != null)
+					if (selection != null) {
 						lemmaViewer.setSelection(selection);
+					}
 				}
 			}
 		};
@@ -1287,7 +1288,7 @@ public class EgyLemmatizerPart implements SearchViewer {
 					return Status.CANCEL_STATUS;
 
 				if (filtered != null && filtered.size() > 0) {
-					List<TreeNodeWrapper> nodes = loadNodesWithChildren(filtered, monitor);
+					List<TreeNodeWrapper> nodes = generateSearchResultTree(filtered, monitor);
 					lemmaRootNode.getChildren().addAll(nodes);
 				} else {
 					TreeNodeWrapper emptyNode = BtsviewmodelFactory.eINSTANCE
@@ -1308,6 +1309,21 @@ public class EgyLemmatizerPart implements SearchViewer {
 
 		// Start the Job
 		searchjob.schedule();
+	}
+
+	private List<TreeNodeWrapper> generateSearchResultTree(List<BTSLemmaEntry> entries, IProgressMonitor monitor) {
+		List<TreeNodeWrapper> nodes = lemmaNavigatorController.loadLemmataIntoTree(entries, lemmaNodeRegistry, monitor);
+		if (lemmaNodeRegistry == null) {
+			lemmaNodeRegistry = new HashMap<>();
+		}
+		try {
+			for (TreeNodeWrapper node : nodes) {
+				this.lemmaNodeRegistry.put(((BTSLemmaEntry)node.getObject()).get_id(), node);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return nodes;
 	}
 
 	
