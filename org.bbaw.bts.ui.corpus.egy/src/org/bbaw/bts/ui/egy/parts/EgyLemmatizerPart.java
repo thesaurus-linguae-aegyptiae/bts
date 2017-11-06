@@ -421,7 +421,7 @@ public class EgyLemmatizerPart implements SearchViewer {
 
 					SearchSelectObjectDialog dialog = ContextInjectionFactory
 							.make(SearchSelectObjectDialog.class, child);
-					if (dialog.open() == dialog.OK) {
+					if (dialog.open() == SWT.OK) {
 						BTSObject object = dialog.getObject();
 						System.out.println(object.get_id());
 						// Command command = SetCommand.create(editingDomain,
@@ -687,7 +687,7 @@ public class EgyLemmatizerPart implements SearchViewer {
 								.trim());
 					}
 				});
-		translationViewer.setSorter(new BTSEgyObjectByNameViewerSorter());
+		translationViewer.setComparator(new BTSEgyObjectByNameViewerSorter());
 		flexionViewer.setContentProvider(contentProvider_flex);
 		flexionViewer.setLabelProvider(labelProvider_flex);
 		flexSashForm.setWeights(new int[] { 1, 4 });
