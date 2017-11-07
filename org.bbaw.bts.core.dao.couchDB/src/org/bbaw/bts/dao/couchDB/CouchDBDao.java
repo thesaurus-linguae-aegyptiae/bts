@@ -366,6 +366,7 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 	@SuppressWarnings("unchecked")
 	@Override
 	public E find(K key, String path, String revision)
+	// XXX apparently not used at all ever
 	{
 		CouchDbClient dbClient = connectionProvider.getDBClient(
 				CouchDbClient.class, path);
