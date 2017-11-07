@@ -14,6 +14,18 @@ import org.bbaw.bts.btsviewmodel.TreeNodeWrapper;
 import org.bbaw.bts.core.commons.BTSCoreConstants;
 import org.eclipse.core.runtime.IProgressMonitor;
 
+/**
+ * Instantiation of this class will take a list of specified generic type objects and transfer them into
+ * a tree/forest-like structure in which every object is wrapped within a {@link TreeNodeWrapper} instance that
+ * represents its object's relationships to any other object in the input list.
+ * 
+ * Root elements of resulting tree structure can be retrieved with {@link #getRootNodes()}. The returned
+ * {@link TreeNodeWrapper} list can be put into a <code>TreeViewer</code>.
+ * 
+ * @author jhoeper
+ *
+ * @param <T> {@link BTSObject} or subclass.
+ */
 public class BTSObjectTreeGenerator<T extends BTSObject> {
 
 	class BTSObjectTreePositionComparator implements Comparator<TreeNodeWrapper> {
