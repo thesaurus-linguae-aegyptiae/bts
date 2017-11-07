@@ -10,6 +10,8 @@ import javax.inject.Inject;
 import org.bbaw.bts.btsmodel.BTSRelation;
 import org.bbaw.bts.btsviewmodel.TreeNodeWrapper;
 import org.bbaw.bts.commons.BTSConstants;
+import org.bbaw.bts.core.commons.BTSCoreConstants;
+import org.bbaw.bts.core.commons.corpus.BTSCorpusConstants;
 import org.bbaw.bts.core.commons.filter.BTSFilter;
 import org.bbaw.bts.core.corpus.controller.impl.util.BTSEgyObjectByNameComparator;
 import org.bbaw.bts.core.corpus.controller.impl.util.BTSObjectTreeGenerator;
@@ -98,6 +100,8 @@ implements LemmaNavigatorController{
 		query.setQueryBuilder(QueryBuilders.boolQuery().must(
 				QueryBuilders.matchQuery("relations.objectId",	parent.get_id()))
 				.must(QueryBuilders.matchQuery("relations.type", "partOf"))
+				.must(QueryBuilders.matchQuery("relations.type", BTSCoreConstants.BASIC_RELATIONS_SUCCESSOR_OF))
+				.must(QueryBuilders.matchQuery("relations.type", BTSCoreConstants.BASIC_RELATIONS_REFERENCED_BY))
 				);
 		query.setResponseFields(BTSConstants.SEARCH_BASIC_RESPONSE_FIELDS);
 		
