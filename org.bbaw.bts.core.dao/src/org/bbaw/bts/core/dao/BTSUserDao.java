@@ -44,8 +44,6 @@ public interface BTSUserDao extends GenericDao<BTSUser, String>
 	/**
 	 * Removes the bts user.
 	 *
-	 * @param btsUser the bts user
-	 * @param path the path
 	 * @return true, if successful
 	 */
 	boolean removeBTSUser(BTSUser btsUser, String path);
@@ -53,13 +51,8 @@ public interface BTSUserDao extends GenericDao<BTSUser, String>
 	/**
 	 * List user objects using the given credentials to access the database.
 	 *
-	 * @param admin the admin
-	 * @param objectState the object state
-	 * @param userName the user name
-	 * @param passWord the pass word
-	 * @return the list
 	 */
-	List<BTSUser> list(String admin, String objectState, String userName,
+	List<BTSUser> list(String path, String objectState, String userName,
 			String passWord);
 
 	/** Remove database user leaving the btsUser unmodified.
