@@ -19,9 +19,14 @@ import org.eclipse.e4.core.di.annotations.Execute;
 import org.eclipse.e4.core.di.annotations.CanExecute;
 import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.ui.services.IServiceConstants;
+import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.swt.widgets.Shell;
 
 public class MoveObjectAmongProjectDBCollectionHandler {
+
+	private BTSObject latestSelection = null;
+	private boolean latestStatus = false;
+
 	@Execute
 	public void execute(@Optional @Named(IServiceConstants.ACTIVE_SELECTION) BTSDBBaseObject selection,
 			@Named(IServiceConstants.ACTIVE_SHELL) final Shell shell,
@@ -48,10 +53,10 @@ public class MoveObjectAmongProjectDBCollectionHandler {
 			MoveObjectAmongProjectDBCollectionSelectionDialog dialog = new MoveObjectAmongProjectDBCollectionSelectionDialog(shell, 
 					rootNode, moveDBCollectionFilter, selection, currentProject);
 			dialog.create();
-			
+
 			ContextInjectionFactory.inject(dialog, context);
-			
-			if (dialog.open() == dialog.OK)
+
+			if (dialog.open() == Dialog.OK)
 			{
 				// get selection result
 				targetDBCollectionPath = dialog.getTargetDBCollectionPath();
@@ -69,13 +74,13 @@ public class MoveObjectAmongProjectDBCollectionHandler {
 	
 	
 	@CanExecute
-	public boolean canExecute(@Optional @Named(IServiceConstants.ACTIVE_SELECTION) BTSDBBaseObject selection,
-			PermissionsAndExpressionsEvaluationController evaluationController) {
-		if (selection instanceof BTSObject)
-		{
-			return evaluationController.authenticatedUserMayEditObject((BTSObject) selection);
+	public boolean canExecute(@Optional @Named(IServiceConstants.ACTIVE_SELECTION) BTSObject selection,
+			PermissionsAndExpressionsEvaluationController permissionController) {
+		if ((latestSelection == null) || !selection.get_id().equals(latestSelection.get_id())) {
+			latestStatus = permissionController.authenticatedUserMayEditObject(selection);
+			latestSelection = selection;
 		}
-		return false;
+		return latestStatus;
 	}
 		
 }
