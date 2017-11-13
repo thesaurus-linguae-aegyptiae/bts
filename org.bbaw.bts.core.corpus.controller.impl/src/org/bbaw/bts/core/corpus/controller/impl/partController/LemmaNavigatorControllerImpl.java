@@ -99,9 +99,9 @@ implements LemmaNavigatorController{
 		BTSQueryRequest query = new BTSQueryRequest();
 		query.setQueryBuilder(QueryBuilders.boolQuery().must(
 				QueryBuilders.matchQuery("relations.objectId",	parent.get_id()))
-				.must(QueryBuilders.matchQuery("relations.type", "partOf"))
-				.must(QueryBuilders.matchQuery("relations.type", BTSCoreConstants.BASIC_RELATIONS_SUCCESSOR_OF))
-				.must(QueryBuilders.matchQuery("relations.type", BTSCoreConstants.BASIC_RELATIONS_REFERENCED_BY))
+				.should(QueryBuilders.matchQuery("relations.type", BTSCoreConstants.BASIC_RELATIONS_PARTOF))
+				.should(QueryBuilders.matchQuery("relations.type", BTSCoreConstants.BASIC_RELATIONS_SUCCESSOR_OF))
+				.should(QueryBuilders.matchQuery("relations.type", BTSCoreConstants.BASIC_RELATIONS_REFERENCED_BY))
 				);
 		query.setResponseFields(BTSConstants.SEARCH_BASIC_RESPONSE_FIELDS);
 		
