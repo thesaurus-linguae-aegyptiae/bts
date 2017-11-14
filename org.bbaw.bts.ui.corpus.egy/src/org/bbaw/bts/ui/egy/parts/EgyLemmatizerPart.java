@@ -421,7 +421,7 @@ public class EgyLemmatizerPart implements SearchViewer {
 
 					SearchSelectObjectDialog dialog = ContextInjectionFactory
 							.make(SearchSelectObjectDialog.class, child);
-					if (dialog.open() == SWT.OK) {
+					if (dialog.open() == Dialog.OK) {
 						BTSObject object = dialog.getObject();
 						System.out.println(object.get_id());
 						// Command command = SetCommand.create(editingDomain,
