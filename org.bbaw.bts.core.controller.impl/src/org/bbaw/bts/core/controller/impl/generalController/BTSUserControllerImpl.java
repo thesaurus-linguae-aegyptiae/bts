@@ -1,7 +1,9 @@
 package org.bbaw.bts.core.controller.impl.generalController;
 
 import java.io.FileNotFoundException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Vector;
 
 import javax.inject.Inject;
@@ -52,6 +54,8 @@ public class BTSUserControllerImpl implements BTSUserController {
 	@Inject
 	private IEclipseContext context;
 
+	// user object cache
+	private Map<String, BTSUser> userCache;
 
 	@Inject
 	public BTSUserControllerImpl(IEclipseContext ctx) {
@@ -67,8 +71,20 @@ public class BTSUserControllerImpl implements BTSUserController {
 
 	@Override
 	public String getUserDisplayName(String userId) {
-		return userService.getDisplayName(userId, null);
-		
+		BTSUser user = getUser(userId);
+		return (user != null) ? user.getName() : userId;
+	}
+
+	private BTSUser getUser(String userId) {
+		if (userCache == null) {
+			userCache = new HashMap<String, BTSUser>();
+		}
+		BTSUser user = userCache.getOrDefault(userId, null);
+		if (user == null) {
+			user = userService.find(userId, null);
+			userCache.put(userId, user);
+		}
+		return user;
 	}
 
 	@Override
