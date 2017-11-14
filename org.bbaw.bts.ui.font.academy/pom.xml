@@ -5,7 +5,7 @@
   <parent>
     <groupId>org.bbaw.bts</groupId>
     <artifactId>aaew-bts</artifactId>
-    <version>3.1.1</version>
+    <version>3.1.2</version>
   </parent>
   <groupId>org.bbaw.bts</groupId>
   <artifactId>org.bbaw.bts.ui.font.academy</artifactId>
