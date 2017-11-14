@@ -167,7 +167,7 @@ public class EgyLemmatizerPart implements SearchViewer {
 	private Text lemmaID_text;
 	private Text flex_text;
 	private boolean selfSelecting;
-	private BTSLemmaEntry seletectedEntry;
+	private BTSLemmaEntry selectedEntry;
 
 	private MPart part;
 	private TranslationEditorComposite wordTranslate_Editor;
@@ -422,21 +422,33 @@ public class EgyLemmatizerPart implements SearchViewer {
 
 					SearchSelectObjectDialog dialog = ContextInjectionFactory
 							.make(SearchSelectObjectDialog.class, child);
+
 					if (dialog.open() == Dialog.OK) {
 						BTSObject object = dialog.getObject();
-						System.out.println(object.get_id());
+
 						// Command command = SetCommand.create(editingDomain,
 						// entry,
 						// BtsCorpusModelPackage.eINSTANCE.getBTSPassportEntry_Value(),
 						// object.get_id());
 						// editingDomain.getCommandStack().execute(command);
+
 						if (object instanceof BTSLemmaEntry) {
-							seletectedEntry = (BTSLemmaEntry) object;
+							selectedEntry = (BTSLemmaEntry) object;
+
 							lemmaNavigatorController.checkAndFullyLoad(
-									seletectedEntry, true);
-							lemmaID_text.setText(seletectedEntry.get_id());
-							lemmaName_text.setText(seletectedEntry.getName());
-							loadTranslationProposals(seletectedEntry);
+									selectedEntry, true);
+							lemmaID_text.setText(selectedEntry.get_id());
+							lemmaName_text.setText(selectedEntry.getName());
+							loadTranslationProposals(selectedEntry);
+
+							// try and select chosen lemma in search result list
+							if (lemmaNodeRegistry != null) {
+								TreeNodeWrapper node = lemmaNodeRegistry.get(selectedEntry.get_id());
+								if (node != null) {
+									lemmaViewer.setSelection(new StructuredSelection(node));
+								}
+							}
+
 						}
 					}
 				}
@@ -510,12 +522,12 @@ public class EgyLemmatizerPart implements SearchViewer {
 					if (tn.getObject() != null) {
 						BTSObject o = (BTSObject) tn.getObject();
 						if (o instanceof BTSLemmaEntry) {
-							seletectedEntry = (BTSLemmaEntry) o;
+							selectedEntry = (BTSLemmaEntry) o;
 							lemmaNavigatorController.checkAndFullyLoad(
-									seletectedEntry, false);
-							lemmaID_text.setText(seletectedEntry.get_id());
-							lemmaName_text.setText(seletectedEntry.getName());
-							loadTranslationProposals(seletectedEntry);
+									selectedEntry, false);
+							lemmaID_text.setText(selectedEntry.get_id());
+							lemmaName_text.setText(selectedEntry.getName());
+							loadTranslationProposals(selectedEntry);
 						}
 					}
 					if (!tn.isChildrenLoaded() || tn.getChildren().isEmpty()) {
@@ -640,7 +652,7 @@ public class EgyLemmatizerPart implements SearchViewer {
 					public void widgetSelected(SelectionEvent e) {
 						// language selection in wordTranslation editor changes.
 						// reload translation viewer.
-						loadTranslationProposals(seletectedEntry);
+						loadTranslationProposals(selectedEntry);
 					}
 				});
 
@@ -1362,6 +1374,6 @@ public class EgyLemmatizerPart implements SearchViewer {
 	}
 
 	public BTSLemmaEntry getSelectedLemmaProposal() {
-		return seletectedEntry;
+		return selectedEntry;
 	}
 }
