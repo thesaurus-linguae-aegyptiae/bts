@@ -59,9 +59,7 @@ public class AddCommentHandler {
 				CommentEditorDialog dialog = ContextInjectionFactory.make(
 						CommentEditorDialog.class, child);
 
-				if (dialog.open() == SWT.OK) {
-					
-				}
+				dialog.open();
 
 				child.dispose();
 

@@ -333,7 +333,7 @@ public abstract class RelatedObjectGroup extends Composite{
 
 		Dialog editDialog = createEditorDialog();
 
-		if (editDialog.open() == SWT.OK) {
+		if (editDialog.open() == Dialog.OK) {
 			refreshContent(getObject());
 		}
 

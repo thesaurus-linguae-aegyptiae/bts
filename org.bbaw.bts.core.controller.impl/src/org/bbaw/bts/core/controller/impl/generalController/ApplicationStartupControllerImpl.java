@@ -185,7 +185,7 @@ public class ApplicationStartupControllerImpl implements
 			splashController.setSplashImagePath("/" + "splash" + "/"
 					+ "btsStart.jpg");
 			splashController.open();
-			splashController.setMessage("Starting Applikation ...");
+			splashController.setMessage("Starting Application ...");
 		} catch (Exception e) {
 			System.out.println("Kein splash.");
 		}
