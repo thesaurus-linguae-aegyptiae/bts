@@ -314,17 +314,17 @@ public abstract class GenericObjectServiceImpl<E extends BTSDBBaseObject, K exte
 	}
 	
 	
-	public String getDisplayName(String userId, IProgressMonitor monitor)
+	public String getDisplayName(String objectId, IProgressMonitor monitor)
 	{
 		BTSObject o = null;
 		try {
-			o = (BTSObject) find((K) userId, monitor);
+			o = (BTSObject) find((K) objectId, monitor);
 		} catch (Exception e) {
 		}
 		if (o != null) {
 			return o.getName();
 		}
-		return userId;
+		return objectId;
 		
 	}
 	protected String[] getActiveProjects() {

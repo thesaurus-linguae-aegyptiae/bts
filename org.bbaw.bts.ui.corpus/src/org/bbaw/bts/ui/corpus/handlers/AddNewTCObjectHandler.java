@@ -3,7 +3,6 @@ package org.bbaw.bts.ui.corpus.handlers;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.core.controller.generalController.PermissionsAndExpressionsEvaluationController;
 import org.bbaw.bts.core.corpus.controller.partController.CorpusNavigatorController;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSAnnotation;
@@ -26,11 +25,15 @@ public class AddNewTCObjectHandler
 	@Inject
 	private CorpusNavigatorController navigatorController;
 
+	private BTSCorpusObject latestSelection = null;
+	private boolean latestStatus = false;
+
 	@Execute
 	public void execute(@Named(IServiceConstants.ACTIVE_SELECTION) @Optional BTSCorpusObject selection,
 			@Named(IServiceConstants.ACTIVE_SHELL) final Shell shell, EventBroker eventBroker,
 			CorpusNavigatorController corpusNavigatorController)
 	{
+		latestSelection = selection;
 		final BTSTCObject object = corpusNavigatorController.createNewTCObject(selection);
 		corpusNavigatorController.save(object);
 		eventBroker.post("model_new/BTSTCObject", object);
@@ -38,11 +41,14 @@ public class AddNewTCObjectHandler
 
 	@CanExecute
 	public boolean canExecute(
-			@Named(IServiceConstants.ACTIVE_SELECTION) @Optional BTSObject selection) {
-		if (selection instanceof BTSCorpusObject && !(selection instanceof BTSAnnotation)) {
-			String dbCollectionName = navigatorController.getDBCollectionName(
-					(BTSCorpusObject)selection);
-			return permissionController.authenticatedUserMayAddToDBCollection(dbCollectionName);
+			@Named(IServiceConstants.ACTIVE_SELECTION) @Optional BTSCorpusObject selection) {
+		if (!(selection instanceof BTSAnnotation)) {
+			if ((latestSelection == null) || !selection.get_id().equals(latestSelection.get_id())) {
+				String dbCollectionName = navigatorController.getDBCollectionName(selection);
+				latestStatus = permissionController.authenticatedUserMayAddToDBCollection(dbCollectionName);
+				latestSelection = selection;
+			}
+			return latestStatus;
 		}
 		return false;
 	}
