@@ -1005,7 +1005,6 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 	{
 		// register query with percolator
 		// Index the query = register it in the percolator
-//		
 		Job job = new Job("register with percolator"){
 			@Override
 			  protected IStatus run(IProgressMonitor monitor) {
@@ -1032,7 +1031,10 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 			    return Status.OK_STATUS;
 			  }
 		};
-		job.schedule();
+
+		if (query != null) { 
+			job.schedule();
+		}
 
 	}
 

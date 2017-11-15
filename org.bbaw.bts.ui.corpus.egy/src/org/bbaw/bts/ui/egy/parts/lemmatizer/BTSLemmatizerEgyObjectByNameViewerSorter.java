@@ -126,7 +126,8 @@ public class BTSLemmatizerEgyObjectByNameViewerSorter extends ViewerComparator {
 
 
 	public void setLemmatizerWordChar(String wordChars) {
-		this.wordChars = wordChars.toLowerCase();
-		System.out.println("viewer sorter prefix set to: "+wordChars);
+		if (wordChars != null) {
+			this.wordChars = wordChars.toLowerCase();
+		}
 	}
 }

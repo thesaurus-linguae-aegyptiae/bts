@@ -52,4 +52,4 @@ Require-Bundle: org.eclipse.e4.core.di,
  org.eclipse.e4.core.services,
  org.eclipse.equinox.security;bundle-version="1.2.0",
  org.bbaw.bts.commons.fsaccess;bundle-version="1.0.0"
-Bundle-Version: 3.1.1.qualifier
+Bundle-Version: 3.1.2.qualifier
