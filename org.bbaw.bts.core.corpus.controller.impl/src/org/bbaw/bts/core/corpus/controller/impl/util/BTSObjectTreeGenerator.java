@@ -63,6 +63,7 @@ public class BTSObjectTreeGenerator<T extends BTSObject> {
 	public BTSObjectTreeGenerator(List<T> items, Map<String, TreeNodeWrapper> registry, IProgressMonitor monitor) {
 		itemPositions = new HashMap<String, Integer>(items.size());
 		nodeRegistry = registry != null ? registry : new HashMap<String, TreeNodeWrapper>(items.size());
+		nodeRegistry.clear();
 		this.items = items;
 		int pos = 0;
 		for (T item : items) {
@@ -102,12 +103,12 @@ public class BTSObjectTreeGenerator<T extends BTSObject> {
 					}
 				}
 			}
-			
+
 			// add to root nodes if root so far
 			if (node.getParent() == null) {
 				roots.add(node);
 			}
-			
+
 			if (monitor != null) {
 				monitor.worked(1);
 			}
@@ -141,8 +142,8 @@ public class BTSObjectTreeGenerator<T extends BTSObject> {
 		frontier.add(node);
 		while (node != null) {
 			position = position != null ? 
-					Math.min(itemPositions.get(((T)node.getObject()).get_id()), position) :
-						itemPositions.get(((T)node.getObject()).get_id());
+					Math.min(itemPositions.getOrDefault(((T)node.getObject()).get_id(), Integer.MAX_VALUE), position) :
+						itemPositions.getOrDefault(((T)node.getObject()).get_id(), Integer.MAX_VALUE);
 			if (node.getChildren() != null) {
 				frontier.addAll(node.getChildren());
 			}
