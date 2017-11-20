@@ -2,7 +2,7 @@
 <feature
       id="org.bbaw.bts.corpus.egy.feature"
       label="EgyCorpusFeature"
-      version="3.1.2.qualifier"
+      version="3.1.3.qualifier"
       provider-name="BBAW">
 
    <description url="http://www.example.com/description">
@@ -128,7 +128,7 @@
          id="org.bbaw.bts.core.corpus.controller.impl"
          download-size="0"
          install-size="0"
-         version="0.0.0"
+         version="3.1.3"
          unpack="false"/>
 
    <plugin
@@ -205,7 +205,7 @@
          id="org.bbaw.bts.ui.corpus.egy"
          download-size="0"
          install-size="0"
-         version="0.0.0"
+         version="3.1.3"
          unpack="false"/>
 
    <plugin
