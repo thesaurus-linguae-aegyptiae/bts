@@ -1108,7 +1108,9 @@ public class EgyLemmatizerPart implements SearchViewer {
 				lemmaID_text.setText("");
 				isLemmatized = false;
 			}
+
 			lemmaName_text.setText("");
+
 			if (word.getFlexCode() != null && !"".equals(word.getFlexCode())) {
 				flex_text.setText(word.getFlexCode());
 				flex_text.setSelection(0, flex_text.getText().length());
@@ -1255,6 +1257,9 @@ public class EgyLemmatizerPart implements SearchViewer {
 			}
 		}
 
+		// try to load lemma that has already be assigned to the word currently selected in text editor
+		final String assignedLemmaId = currentWord.getLKey();
+
 		// fill lemmaViewer
 		searchjob = new Job("load input") {
 			// // in new job, search
@@ -1286,6 +1291,14 @@ public class EgyLemmatizerPart implements SearchViewer {
 					return Status.CANCEL_STATUS;
 
 				if (filtered != null && filtered.size() > 0) {
+					// if the current word already has an assigned lemma entry, add it to the list of search results 
+					if (assignedLemmaId != null && !assignedLemmaId.isEmpty()) {
+						BTSLemmaEntry assignedLemma = lemmaNavigatorController.find(assignedLemmaId, monitor);
+						if (assignedLemma != null && !filtered.contains(assignedLemma)) {
+							filtered.add(assignedLemma);
+						}
+					}
+					// load search results into search result tree
 					List<TreeNodeWrapper> nodes = generateSearchResultTree(filtered, monitor);
 					lemmaRootNode.getChildren().addAll(nodes);
 				} else {
