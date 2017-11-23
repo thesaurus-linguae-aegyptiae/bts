@@ -1,6 +1,5 @@
 package org.bbaw.bts.core.controller.impl.generalController;
 
-import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,6 +7,7 @@ import java.util.Vector;
 
 import javax.inject.Inject;
 
+import org.bbaw.bts.btsmodel.BTSNamedTypedObject;
 import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.btsmodel.BTSProject;
 import org.bbaw.bts.btsmodel.BTSUser;
@@ -21,7 +21,6 @@ import org.bbaw.bts.core.services.BTSUserGroupService;
 import org.bbaw.bts.core.services.BTSUserService;
 import org.bbaw.bts.db.DBManager;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.e4.core.contexts.ContextInjectionFactory;
 import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.ui.di.UISynchronize;
@@ -55,7 +54,7 @@ public class BTSUserControllerImpl implements BTSUserController {
 	private IEclipseContext context;
 
 	// user object cache
-	private Map<String, BTSUser> userCache;
+	private Map<String, BTSNamedTypedObject> userCache;
 
 	@Inject
 	public BTSUserControllerImpl(IEclipseContext ctx) {
@@ -71,17 +70,21 @@ public class BTSUserControllerImpl implements BTSUserController {
 
 	@Override
 	public String getUserDisplayName(String userId) {
-		BTSUser user = getUser(userId);
-		return (user != null) ? user.getName() : userId;
+		BTSNamedTypedObject agent = getAgent(userId);
+		return (agent != null) ? agent.getName() : userId;
 	}
 
-	private BTSUser getUser(String userId) {
+	private BTSNamedTypedObject getAgent(String userId) {
 		if (userCache == null) {
-			userCache = new HashMap<String, BTSUser>();
+			userCache = new HashMap<String, BTSNamedTypedObject>();
 		}
-		BTSUser user = userCache.getOrDefault(userId, null);
+		BTSNamedTypedObject user = userCache.getOrDefault(userId, null);
 		if (user == null) {
-			user = userService.find(userId, null);
+			try {
+				user = userService.find(userId, null);
+			} catch (ClassCastException e) {
+				user = userGroupService.find(userId, null);
+			}
 			userCache.put(userId, user);
 		}
 		return user;
