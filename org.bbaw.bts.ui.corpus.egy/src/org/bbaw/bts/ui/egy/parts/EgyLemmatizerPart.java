@@ -1266,7 +1266,7 @@ public class EgyLemmatizerPart implements SearchViewer {
 		}
 
 		// try to load lemma that has already be assigned to the word currently selected in text editor
-		final String assignedLemmaId = currentWord.getLKey();
+		final String assignedLemmaId = (currentWord != null) ? currentWord.getLKey() : null;
 
 		// fill lemmaViewer
 		searchjob = new Job("load input") {
