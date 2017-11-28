@@ -70,6 +70,7 @@ import org.eclipse.swt.events.ControlEvent;
 import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Shell;
@@ -449,7 +450,7 @@ public class AnnotationsPart implements EventHandler {
 					});
 				}
 			};
-			new ProgressMonitorDialog(new Shell()).run(true, true, op);
+			new ProgressMonitorDialog(Display.getDefault().getActiveShell()).run(true, true, op);
 		} catch (InvocationTargetException e) {
 			// handle exception
 		} catch (InterruptedException e) {
