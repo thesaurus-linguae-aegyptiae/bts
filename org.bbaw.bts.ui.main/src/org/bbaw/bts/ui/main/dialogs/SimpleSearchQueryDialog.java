@@ -59,7 +59,7 @@ public class SimpleSearchQueryDialog extends TitleAreaDialog {
 	@Override
 	protected void configureShell(Shell newShell) {
 		super.configureShell(newShell);
-		newShell.setMinimumSize(getInitialSize());
+		newShell.setMinimumSize(new Point(225, 150));
 	}
 
 	/**
@@ -162,6 +162,7 @@ public class SimpleSearchQueryDialog extends TitleAreaDialog {
 				
 			}
 		});
+		area.pack();
 		return area;
 	}
 
@@ -203,14 +204,6 @@ public class SimpleSearchQueryDialog extends TitleAreaDialog {
 		super.okPressed();
 	}
 
-
-	/**
-	 * Return the initial size of the dialog.
-	 */
-	@Override
-	protected Point getInitialSize() {
-		return new Point(450, 300);
-	}
 
 	public BTSQueryRequest getQueryRequest() {
 		return queryRequest;
