@@ -69,5 +69,12 @@ public interface ApplicationUpdateController {
 	public IStatus scheduleUpdate();
 	
 	public void scheduleCheck();
+
+	/**
+	 * If an update is available and none is already in the process of being installed,
+	 * a confirmation dialog is spawned followed by the scheduling of an installation job
+	 * on affirmation by user. 
+	 */
+	public void askForConfirmationAndInstall();
 	
 }
