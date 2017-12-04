@@ -11,7 +11,7 @@ public interface ApplicationUpdateController {
 	 * <tr><td><code>CHECK_FAILED</code><td> </td><td> </td></tr>
 	 * <tr><td><code>NO_UPDATE</code><td>&#x2714;</td><td> </td></tr>
 	 * <tr><td><code>UPDATE_AVAILABLE</code><td>&#x2714;</td><td> </td></tr>
-	 * <tr><td><code>UPDATE_DECLINED</code><td>&#x2714;</td><td> </td></tr>
+	 * <tr><td><code>UPDATE_REJECTED</code><td>&#x2714;</td><td> </td></tr>
 	 * <tr><td><code>UPDATE_RUNNING</code><td>&#x2714;</td><td> </td></tr>
 	 * <tr><td><code>UPDATE_FAILED</code><td> </td><td> </td></tr>
 	 * <tr><td><code>UPDATE_SUCCESS</code><td>&#x2714;</td><td>&#x2714;</td></tr>
@@ -26,7 +26,7 @@ public interface ApplicationUpdateController {
 		CHECK_FAILED(false, false),
 		NO_UPDATE(true, false),
 		UPDATE_AVAILABLE(true, false),
-		UPDATE_DECLINED(true, false),
+		UPDATE_REJECTED(true, false),
 		UPDATE_RUNNING(true, false),
 		UPDATE_FAILED(false, false),
 		UPDATE_SUCCESS(true, true);

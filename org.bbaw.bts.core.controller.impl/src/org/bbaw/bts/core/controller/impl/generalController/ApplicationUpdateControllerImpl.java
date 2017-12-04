@@ -3,7 +3,6 @@ package org.bbaw.bts.core.controller.impl.generalController;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Iterator;
-import java.util.function.Consumer;
 
 import javax.inject.Inject;
 
@@ -210,7 +209,7 @@ public class ApplicationUpdateControllerImpl extends Job implements
 					updatePending = true;
 					scheduleUpdate();
 				} else {
-					setStatus(EUpdateStatusType.UPDATE_DECLINED);
+					setStatus(EUpdateStatusType.UPDATE_REJECTED);
 				}
 			}
 		});
@@ -227,7 +226,7 @@ public class ApplicationUpdateControllerImpl extends Job implements
 		if (now - timeStamp < TIME_UNTIL_RECHECK) {
 			info("p2 update: last checked at "+timeStamp);
 			if (updates != null) {
-				if (status != EUpdateStatusType.UPDATE_DECLINED) {
+				if (status != EUpdateStatusType.UPDATE_REJECTED) {
 					setStatus((updates.length > 0)
 							? EUpdateStatusType.UPDATE_AVAILABLE
 							: EUpdateStatusType.NO_UPDATE);
@@ -238,8 +237,13 @@ public class ApplicationUpdateControllerImpl extends Job implements
 			}
 		}
 		// if more than specified time since latest update, re-check
-		setStatus(EUpdateStatusType.CHECK_RUNNING);
-		timeStamp = now;
+		// (unless installation of updates has already been declined)
+		if (status != EUpdateStatusType.UPDATE_REJECTED) {
+			setStatus(EUpdateStatusType.CHECK_RUNNING);
+			timeStamp = now;
+		} else {
+			return Status.CANCEL_STATUS;
+		}
 
 		// set up provisioning services
 		ProvisioningSession session = new ProvisioningSession(agent);
@@ -293,9 +297,11 @@ public class ApplicationUpdateControllerImpl extends Job implements
 		// obtain updates list
 		updateJob = operation.getProvisioningJob(monitor);
 		updates = operation.getPossibleUpdates();
+
 		IProvisioningPlan provisioningPlan = operation.getProvisioningPlan();
 		IQueryable<IInstallableUnit> additions = provisioningPlan.getAdditions();
 		IQueryResult<IInstallableUnit> allUnits = additions.query(QueryUtil.ALL_UNITS, monitor);
+
 		if (!allUnits.isEmpty()) {
 			Iterator<IInstallableUnit> iterator = allUnits.iterator();
 			while (iterator.hasNext()) {
@@ -311,7 +317,7 @@ public class ApplicationUpdateControllerImpl extends Job implements
 				info(" "+u.toUpdate+" >> "+u.replacement);
 			}
 			info(operation.getResolutionDetails());
-			if (status != EUpdateStatusType.UPDATE_DECLINED) {
+			if (status != EUpdateStatusType.UPDATE_REJECTED) {
 				setStatus(EUpdateStatusType.UPDATE_AVAILABLE);
 			}
 			sendStatusMessage("Updates available: "+updates.length);
