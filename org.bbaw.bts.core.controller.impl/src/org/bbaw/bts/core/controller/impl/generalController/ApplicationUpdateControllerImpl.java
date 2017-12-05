@@ -375,6 +375,19 @@ public class ApplicationUpdateControllerImpl extends Job implements
 			return Status.CANCEL_STATUS;
 		}
 
+		IProvisioningPlan provisioningPlan = updateOperation.getProvisioningPlan();
+		IQueryable<IInstallableUnit> additions = provisioningPlan.getAdditions();
+		IQueryResult<IInstallableUnit> appFeatureUnit = additions.query(
+				QueryUtil.createIUGroupQuery(), null);
+		if (!appFeatureUnit.isEmpty()) {
+			Iterator<IInstallableUnit> iterator = appFeatureUnit.iterator();
+			while (iterator.hasNext()) {
+				IInstallableUnit feature = iterator.next();
+				String description = feature.getProperty(IInstallableUnit.PROP_DESCRIPTION);
+				info("Description of feature "+feature.getId()+":\n"+description);
+			}
+		}
+
 		// try to retrieve update job
 		// obtain updates list
 		updateJob = updateOperation.getProvisioningJob(monitor);
