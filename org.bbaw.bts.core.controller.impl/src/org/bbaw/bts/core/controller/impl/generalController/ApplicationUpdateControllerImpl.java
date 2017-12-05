@@ -2,6 +2,7 @@ package org.bbaw.bts.core.controller.impl.generalController;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Iterator;
 
 import javax.inject.Inject;
 
@@ -36,9 +37,6 @@ import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.window.Window;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.graphics.Font;
-import org.eclipse.swt.graphics.FontMetrics;
-import org.eclipse.swt.graphics.GC;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
@@ -51,8 +49,9 @@ import org.eclipse.swt.widgets.Text;
 public class ApplicationUpdateControllerImpl extends Job implements
 		ApplicationUpdateController {
 
-	private class ApplicationUpdateConfirmationDialog extends Dialog {
+	private static final String APP_FEATURE_GROUP_ID = "org.bbaw.bts.app.feature.feature.group";
 
+	private class ApplicationUpdateConfirmationDialog extends Dialog {
 		private Text changelogText;
 
 		protected ApplicationUpdateConfirmationDialog(Shell parentShell) {
@@ -65,45 +64,46 @@ public class ApplicationUpdateControllerImpl extends Job implements
 			Label messageLabel = new Label(container, SWT.BOLD);
 			messageLabel.setText("The following updates can be installed.");
 
-			Label detailsLabel = new Label(container, SWT.NONE);
+			Text updateDetailsText = new Text(container, SWT.MULTI | SWT.BORDER);
+			updateDetailsText.setEditable(false);
 			String msg = "";
 			for (Update u : updateOperation.getPossibleUpdates()) {
-				msg += "\n" + u;
+				msg += u.toUpdate.getId() + "\t\t" + u.toUpdate.getVersion() + " ===> " + u.replacement.getVersion() + "\n";
 			}
-			detailsLabel.setText(msg);
+			updateDetailsText.setText(msg);
 
 			changelogText = new Text(container, SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL | SWT.BORDER);
 			changelogText.setEditable(false);
 			changelogText.setEnabled(true);
-			changelogText.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
+			GridData changelogTextLayoutData = new GridData(SWT.FILL, SWT.FILL, true, true);
+			changelogTextLayoutData.widthHint = convertWidthInCharsToPixels(80);
+			changelogTextLayoutData.heightHint = 400;
+			changelogText.setLayoutData(changelogTextLayoutData);
 			changelogText.setTabs(2);
-			changelogText.setFont(new Font(parent.getDisplay(), "Monospaced", 10, SWT.NONE));
+			changelogText.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_LIST_BACKGROUND));
+
+			Label instructionLabel = new Label(container, SWT.NONE);
+			instructionLabel.setText("To install these updates, confirm with OK.");
 
 			initDialogArea();
 
+			container.pack();
 			return container;
 		}
 
 		protected void initDialogArea() {
-
 			IProvisioningPlan provisioningPlan = updateOperation.getProvisioningPlan();
 			IQueryable<IInstallableUnit> additions = provisioningPlan.getAdditions();
 			IQueryResult<IInstallableUnit> appFeatureUnit = additions.query(
-					QueryUtil.createMatchQuery("id == $0", "org.bbaw.bts.app.feature.feature.group"),
+					QueryUtil.createMatchQuery("id == $0", APP_FEATURE_GROUP_ID),
 					null);
 
 			if (!appFeatureUnit.isEmpty()) {
 				IInstallableUnit feature = appFeatureUnit.iterator().next();
-				String description = feature.getProperty("org.eclipse.equinox.p2.description");
+				String description = feature.getProperty(IInstallableUnit.PROP_DESCRIPTION);
 				info("Description of feature "+feature.getId()+":\n"+description);
 				changelogText.append(description);
 			}
-
-			FontMetrics fontmetrics = new GC(changelogText).getFontMetrics();
-			changelogText.setSize(changelogText.computeSize(
-					80*fontmetrics.getAverageCharWidth(),
-					32*fontmetrics.getHeight()));
-
 		}
 
 		@Override
@@ -112,6 +112,10 @@ public class ApplicationUpdateControllerImpl extends Job implements
 			newShell.setText("Software Update available");
 		}
 
+		@Override
+		protected boolean isResizable() {
+		    return true;
+		}
 	}
 
 	@Inject
