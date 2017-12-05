@@ -2,6 +2,7 @@ package org.bbaw.bts.core.controller.impl.generalController;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Arrays;
 import java.util.Iterator;
 
 import javax.inject.Inject;
@@ -43,6 +44,9 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
+import org.eclipse.swt.widgets.Table;
+import org.eclipse.swt.widgets.TableColumn;
+import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.widgets.Text;
 
 @SuppressWarnings("restriction")
@@ -64,13 +68,27 @@ public class ApplicationUpdateControllerImpl extends Job implements
 			Label messageLabel = new Label(container, SWT.BOLD);
 			messageLabel.setText("The following updates can be installed.");
 
-			Text updateDetailsText = new Text(container, SWT.MULTI | SWT.BORDER);
-			updateDetailsText.setEditable(false);
-			String msg = "";
-			for (Update u : updateOperation.getPossibleUpdates()) {
-				msg += u.toUpdate.getId() + "\t\t" + u.toUpdate.getVersion() + " ===> " + u.replacement.getVersion() + "\n";
+			Table pendingUpdatesTable = new Table(container, SWT.BORDER);
+			pendingUpdatesTable.setHeaderVisible(true);
+			// create table columns
+			for (String label : Arrays.asList("Installable unit", "Current version", "", "Version available")){
+				TableColumn column = new TableColumn(pendingUpdatesTable, SWT.NULL);
+				column.setText(label);
 			}
-			updateDetailsText.setText(msg);
+			// populate table
+			for (Update update : updateOperation.getPossibleUpdates()) {
+				TableItem row = new TableItem(pendingUpdatesTable, SWT.NULL);
+				row.setText(update.toString());
+				row.setText(0, update.toUpdate.getId());
+				row.setText(1, update.toUpdate.getVersion().toString());
+				row.setText(2, "==>");
+				row.setText(3, update.replacement.getVersion().toString());
+			}
+			// fit table in dialog composite
+			pendingUpdatesTable.setLayoutData(new GridData(SWT.FILL, SWT.NONE, true, false));
+			for (TableColumn column : pendingUpdatesTable.getColumns()) {
+				column.pack();
+			}
 
 			changelogText = new Text(container, SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL | SWT.BORDER);
 			changelogText.setEditable(false);
