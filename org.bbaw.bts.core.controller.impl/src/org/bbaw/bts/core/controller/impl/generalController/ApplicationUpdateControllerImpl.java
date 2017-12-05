@@ -143,6 +143,8 @@ public class ApplicationUpdateControllerImpl extends Job implements
 	private boolean updatePending;
 	private long timeStamp;
 
+	private ApplicationUpdateConfirmationDialog dialog = null;
+
 	final Update[] NULL_UPDATE = new Update[0];
 
 
@@ -271,13 +273,15 @@ public class ApplicationUpdateControllerImpl extends Job implements
 
 	@Override
 	public void askForConfirmationAndInstall() {
-		if (isUpdateAvailable() && !updatePending) {
+		if (isUpdateAvailable() && !updatePending && dialog == null) {
 			sync.syncExec(new Runnable() {
 
 				@Override
 				public void run() {
-					int performUpdate = new ApplicationUpdateConfirmationDialog(
-							Display.getDefault().getActiveShell()).open();
+					dialog = new ApplicationUpdateConfirmationDialog(
+							Display.getDefault().getActiveShell());
+					int performUpdate = dialog.open();
+					dialog = null;
 					if (performUpdate == Window.OK) {
 						info("Installation of Updates confirmed.");
 						updatePending = true;
