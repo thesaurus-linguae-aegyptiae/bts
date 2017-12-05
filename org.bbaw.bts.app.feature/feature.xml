@@ -9,14 +9,41 @@
       arch="x86,x86_64">
 
    <description url="http://www.example.com/description">
-      Change log
-      ==========
-      
-      Release 3.1.4
-      -------------
-      
-      - Fix potential NPE in lemmatizer search result list automatic item selection.
-      - 
+Change log
+==========
+
+Release 3.2.0
+-------------
+
+	- Fix potential NPE in lemmatizer search result list automatic item selection.
+	- Change appearance of ID field in comment editor dialog.
+	- Remember search settings specific to each navigator part.
+	- 
+
+Release 3.1.4
+-------------
+
+	- Fix class cast exception while caching of BTSUserGroup objects during display name resolution of corpus object owner. (#9149)
+
+Release 3.1.3
+-------------
+
+	- Fix NPE caused by accidental matches in BTSLemmaEntry registry during search result tree generation. (#9120)
+	- Feature: include assigned lemma entry in result list for searches invoked on already lemmatized token.
+
+Release 3.1.2
+-------------
+
+	- Fix performance issue due to repeated DAO operations because of insufficient caching of user data. (#9086)
+	- Fix lemma search result list sort order broken by processing of additional lemma relation types in result tree generation introduced in 3.1.1. (#9020)
+	- Fix multiple typos.
+	- Fix related object label update after making modifications in respective editor dialog.
+	- GUI: remove 'Delete' buttons from toolbars in navigator parts. (#8861, #6462)
+	- GUI: change labels of delete command menu entries. (#8862, #8863)
+	- GUI: rename 'Bin' tabs in navigator parts.
+	- Feature: add confirmation dialog for command (delete) that moves objects to trash.
+	- Feature: disable menu entries for delete/restore command where they don't have any effect.
+
    </description>
 
    <copyright url="http://www.example.com/copyright">
