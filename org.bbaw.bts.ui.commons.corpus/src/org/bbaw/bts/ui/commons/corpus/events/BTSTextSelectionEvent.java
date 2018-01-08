@@ -6,9 +6,9 @@ import java.util.Vector;
 import org.bbaw.bts.btsmodel.BTSIdentifiableItem;
 import org.bbaw.bts.btsmodel.BTSInterTextReference;
 import org.bbaw.bts.btsmodel.BTSObject;
-import org.bbaw.bts.corpus.btsCorpusModel.BTSSentenceItem;
 import org.eclipse.jface.text.source.Annotation;
 import org.eclipse.swt.custom.CaretEvent;
+import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.TypedEvent;
 import org.eclipse.swt.widgets.Event;
@@ -34,10 +34,18 @@ public class BTSTextSelectionEvent extends Event {
 		this.display = event.display;
 		this.widget = event.widget;
 		this.time = event.time;
+		StyledText sourceAsStyledText = event.getSource() instanceof StyledText ? (StyledText)event.getSource() : null;
 		if (event instanceof CaretEvent)
 		{
-			this.x = ((CaretEvent)event).caretOffset;
-			this.y = ((CaretEvent)event).caretOffset;
+			// catch select all with ctrl+a
+			if (sourceAsStyledText != null && 
+					sourceAsStyledText.getSelection().x != sourceAsStyledText.getSelection().y) {
+				this.x = sourceAsStyledText.getSelection().x;
+				this.y = sourceAsStyledText.getSelection().y;
+			} else {
+				this.x = ((CaretEvent)event).caretOffset;
+				this.y = ((CaretEvent)event).caretOffset;
+			}
 		}
 		else if (event instanceof SelectionEvent)
 		{
