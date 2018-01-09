@@ -893,12 +893,11 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 	}
 
 	private void copyTextWithLemmata() {
-		// action: set local copy text
-		// design:
-		// if all is selected: copy whole textContent
+
 		this.deepCopyCache = this.btsTextEvent;
 
 		final List<BTSIdentifiableItem> selectedItems = btsTextEvent.getSelectedItems();
+		// make sure sentence objects come before their own tokens
 		selectedItems.sort(new Comparator<BTSIdentifiableItem>() {
 			@Override
 			public int compare(BTSIdentifiableItem o1, BTSIdentifiableItem o2) {
@@ -916,13 +915,12 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 		// if item is sentence, remove its sentence items if all of them are present
 		// but if not all of them are present, remove sentence and leave items
 		List<BTSIdentifiableItem> filteredSelection = new Vector<>();
-		//boolean containsSentences = false;
 		for (BTSIdentifiableItem item : selectedItems) {
 			if (item instanceof BTSSenctence) {
 				// check if ALL of its items are within selection
-				if (isEntireSentenceInList((BTSSenctence)item, btsTextEvent.getSelectedItems())) {
+				if (isEntireSentenceInList((BTSSenctence)item, 
+						selectedItems)) {
 					filteredSelection.add(item);
-					//containsSentences = true;
 				}
 			} else if (item instanceof BTSSentenceItem) {
 				// if containing sentence is already in filtered selection list, we don't need to add item
@@ -934,75 +932,60 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 
 		deepCopyCache.setSelectedItems(filteredSelection);
 
-		// else if sentence and sentence items
 		// dont copy comments, annotations, rubra or any other relating object
-
-		// if local copy text set: deep paste action
-		// insert design:
-		// 
 
 	}
 
+
 	private void pasteTextWithLemmata() {
-		if (deepCopyCache instanceof BTSTextSelectionEvent)
-		{
-			BTSTextSelectionEvent ev = (BTSTextSelectionEvent) deepCopyCache;
+		if (!deepCopyCache.getSelectedItems().isEmpty()) {
 
-			if (ev.getSelectedItems().isEmpty()) return; // nothing to paste
+			cachedCursor = embeddedEditor.getViewer().getTextWidget().getCaretOffset();
 
-			cachedCursor = embeddedEditor.getViewer().getTextWidget()
-					.getCaretOffset();
-			final int len = ev.y - ev.x;
+			final int len = deepCopyCache.y - deepCopyCache.x;
+
 			updateModelFromTranscription();
 
-			//selectedTextItem
-
-			// if selecteditem Sentence
-
-			// if copyitems begin with Sentence -> add sentence after selectedItem
-			// if copyItems begin with SentenceItem -> add new Sentence with sentenceItems
-
 			try {
-				insertTextSelectionItems(ev.getSelectedItems(), selectedTextItem);
+				insertTextSelectionItems(deepCopyCache.getSelectedItems(), selectedTextItem);
 			} catch (Exception e1) {
 				e1.printStackTrace();
 			}
 
 			// update
-				try {
-					// load updated model into selected editor
-					IRunnableWithProgress op = new IRunnableWithProgress() {
+			try {
+				// load updated model into selected editor
+				IRunnableWithProgress op = new IRunnableWithProgress() {
 
-						@Override
-						public void run(final IProgressMonitor monitor)
-								throws InvocationTargetException,
-								InterruptedException {
-							sync.asyncExec(new Runnable() {
-								public void run() {
-									loadInputTranscription(text,
-											relatingObjects, monitor);
-									try {
-										embeddedEditor
-												.getViewer()
-												.getTextWidget()
-												.setCaretOffset(
-														cachedCursor);
-										embeddedEditor.getViewer().revealRange(cachedCursor, len);
-									} catch (Exception e) {
-									}
+					@Override
+					public void run(final IProgressMonitor monitor)
+							throws InvocationTargetException,
+							InterruptedException {
+						sync.asyncExec(new Runnable() {
+							public void run() {
+								loadInputTranscription(text,
+										relatingObjects, monitor);
+								try {
+									embeddedEditor
+											.getViewer()
+											.getTextWidget()
+											.setCaretOffset(
+													cachedCursor);
+									embeddedEditor.getViewer().revealRange(cachedCursor, len);
+								} catch (Exception e) {
 								}
+							}
 
-							});
-						}
-					};
-					new ProgressMonitorDialog(new Shell()).run(true, true,
-							op);
-				} catch (InvocationTargetException ee) {
-					// handle exception
-				} catch (InterruptedException ee) {
-					// handle cancelation
-				}
-
+						});
+					}
+				};
+				new ProgressMonitorDialog(new Shell()).run(true, true,
+						op);
+			} catch (InvocationTargetException ee) {
+				// handle exception
+			} catch (InterruptedException ee) {
+				// handle cancelation
+			}
 		}
 
 	}
