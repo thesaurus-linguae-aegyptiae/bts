@@ -954,111 +954,20 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 					.getCaretOffset();
 			final int len = ev.y - ev.x;
 			updateModelFromTranscription();
-			
+
 			//selectedTextItem
-			
+
 			// if selecteditem Sentence
-			
+
 			// if copyitems begin with Sentence -> add sentence after selectedItem
 			// if copyItems begin with SentenceItem -> add new Sentence with sentenceItems
-			
-			// if selectedItem sentenceItem
-			if (selectedTextItem instanceof BTSSentenceItem)
-			{
-				// if copyItems begin with SentenceItem -> add items after selected sentenceItems
-				if (ev.getSelectedItems().get(0) instanceof BTSSentenceItem)
-				{
-					if (((BTSSentenceItem) selectedTextItem).eContainer() instanceof BTSSenctence)
-					{
-						BTSSenctence targetSentence = (BTSSenctence) ((BTSSentenceItem) selectedTextItem).eContainer();
-						int index = targetSentence.getSentenceItems().indexOf(selectedTextItem);
-						for (BTSIdentifiableItem copyItem : ev.getSelectedItems())
-						{
-							if (copyItem instanceof BTSSentenceItem)
-							{
-								BTSSentenceItem copiedItem = copySentenceItem((BTSSentenceItem) copyItem);
-								if (copiedItem != null)
-								{
-									index = index + 1;
-									targetSentence.getSentenceItems().add(index, copiedItem);
-									setDirtyInternal();
-								}
-							}
-						}
-					}
-				}
-				else if (ev.getSelectedItems().get(0) instanceof BTSSenctence)
-				{
-					// ignore the fact that copied elements begin with sentence, treat as first case
-					if (((BTSSentenceItem) selectedTextItem).eContainer() instanceof BTSSenctence)
-					{
-						BTSSenctence targetSentence = (BTSSenctence) ((BTSSentenceItem) selectedTextItem).eContainer();
-						int index = targetSentence.getSentenceItems().indexOf(selectedTextItem);
-						for (BTSIdentifiableItem copyItem : ev.getSelectedItems())
-						{
-							if (copyItem instanceof BTSSentenceItem)
-							{
-								BTSSentenceItem copiedItem = copySentenceItem((BTSSentenceItem) copyItem);
-								if (copiedItem != null)
-								{
-									index = index + 1;
-									targetSentence.getSentenceItems().add(index, copiedItem);
-									setDirtyInternal();
-								}
-							}
-						}
-					}
-					
-				}
-			} else if (selectedTextItem instanceof BTSSenctence)
-			{
-				// if copyItems begin with SentenceItem -> add items after selected sentenceItems
-				if (ev.getSelectedItems().get(0) instanceof BTSSentenceItem)
-				{
-						BTSSenctence sourceSentence = (BTSSenctence) selectedTextItem;
-						BTSTextContent targettextcontent = (BTSTextContent) (sourceSentence).eContainer();
-						int index = targettextcontent.getTextItems().indexOf(sourceSentence);
-						Set<BTSSenctence> copySentences = new HashSet<BTSSenctence>();
-						for (BTSIdentifiableItem copyItem : ev.getSelectedItems())
-						{
-							if (copyItem instanceof BTSSenctence && !copySentences.contains(copyItem))
-							{
-								copySentences.add((BTSSenctence) copyItem);
-								BTSSenctence copiedItem = copySentence((BTSSenctence) copyItem);
-								if (copiedItem != null)
-								{
-									index = index + 1;
-									targettextcontent.getTextItems().add(index, copiedItem);
-									setDirtyInternal();
-								}
-							}
-						}
-				}
-				else if (ev.getSelectedItems().get(0) instanceof BTSSenctence)
-				{
-					BTSSenctence sourceSentence = (BTSSenctence) selectedTextItem;
-					BTSTextContent targettextcontent = (BTSTextContent) (sourceSentence).eContainer();
-					int index = targettextcontent.getTextItems().indexOf(sourceSentence);
-					Set<BTSSenctence> copySentences = new HashSet<BTSSenctence>();
-					for (BTSIdentifiableItem copyItem : ev.getSelectedItems())
-					{
-						if (copyItem instanceof BTSSenctence && !copySentences.contains(copyItem))
-						{
-							copySentences.add((BTSSenctence) copyItem);
-							BTSSenctence copiedItem = copySentence((BTSSenctence) copyItem);
-							if (copiedItem != null)
-							{
-								index = index + 1;
-								targettextcontent.getTextItems().add(index, copiedItem);
-								setDirtyInternal();
-							}
-						}
-					}
+
+			try {
+				insertTextSelectionItems(ev.getSelectedItems(), selectedTextItem);
+			} catch (Exception e1) {
+				e1.printStackTrace();
 			}
-				
-			}
-			
-			
+
 			// update
 				try {
 					// load updated model into selected editor
@@ -1095,10 +1004,116 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 				}
 
 		}
-		
+
 	}
-	
-	
+
+	private void insertTextSelectionItems(List<BTSIdentifiableItem> copiedItems, Object itemAtInsertPosition) throws Exception {
+		if (itemAtInsertPosition instanceof BTSText) {
+			//insertTextSelectionAtText(copiedItems, (BTSText)itemAtInsertPosition);
+		} else if (itemAtInsertPosition instanceof BTSSenctence) {
+			//insertTextSelectionAtSentence(copiedItems, (BTSSenctence)itemAtInsertPosition);
+		} else if (itemAtInsertPosition instanceof BTSSentenceItem) {
+			insertTextSelectionAtSentenceItem(copiedItems, (BTSSentenceItem)itemAtInsertPosition);
+		} else {
+			throw new Exception("Could not determine model object at insertion position.");
+		}
+	}
+
+	private void insertTextSelectionAtSentenceItem(List<BTSIdentifiableItem> copiedItems, BTSSentenceItem itemAtPosition) {
+		// items we want to insert
+		BTSSenctence currentSentence = (BTSSenctence)itemAtPosition.eContainer();
+		// retrieve textcontent object owning sentence items
+		BTSTextContent textContainer = (BTSTextContent)currentSentence.eContainer();
+		// determine index of sentence where insertion cursor currently is and move on to next sentence 
+		int lineNumber = textContainer.getTextItems().indexOf(currentSentence);
+
+		// determine cursor position within sentence 
+		int position = currentSentence.getSentenceItems().indexOf(itemAtPosition);
+
+		// loop through items to be copied at this position
+		for (BTSIdentifiableItem item : copiedItems) {
+
+			// if next item to be copied into text is a sentence token,
+			// just insert it into sentence object where insertion cursor currently is 
+			if (item instanceof BTSSentenceItem) {
+				setDirtyInternal();
+
+				// determine original text content sentence object at insertion cursor
+				if (lineNumber < textContainer.getTextItems().size()) {
+					currentSentence = (BTSSenctence)textContainer.getTextItems().get(lineNumber);
+				} else {
+					currentSentence = textEditorController.createSentence();
+					textContainer.getTextItems().add(currentSentence);
+				}
+
+				if (position < currentSentence.getSentenceItems().size()) {
+					currentSentence.getSentenceItems().add(position, 
+							textEditorController.copySentenceItem((BTSSentenceItem) item));
+				} else {
+					currentSentence.getSentenceItems().add(
+							textEditorController.copySentenceItem((BTSSentenceItem) item));
+				}
+				position++;
+
+			}
+
+			// if an entiren sentence object needs to be inserted next:
+
+			else if (item instanceof BTSSenctence) {
+
+				BTSSenctence cutOffSentencePart = null;
+				// split current sentence into two if we are currently somewhere in the middle of it
+				if (position > 0) {
+					setDirtyInternal();
+
+					cutOffSentencePart = textEditorController.createSentence();
+				 	// put remaining tokens of current sentence as of current index into new sentence
+					while (position < currentSentence.getSentenceItems().size()) {
+						cutOffSentencePart.getSentenceItems().add(
+								currentSentence.getSentenceItems().remove(position));
+					}
+					// if we had to cut, move insertion cursor to next line
+					lineNumber++;
+				}
+
+				// take the sentence object from clipboard and squeeze it right in front of the line the insertion cursor is now in
+				lineNumber = insertSentenceIntoTextContentAtPosition(textContainer,
+						textEditorController.copySentence((BTSSenctence)item),
+						lineNumber);
+
+				// if we end up inserting the copied sentence object right into another sentence that was already there,
+				// shove the cut-off part right in front of the next line
+				insertSentenceIntoTextContentAtPosition(textContainer,
+						cutOffSentencePart, lineNumber);
+
+				// since we inserted at least one entire sentence, insertion cursor is now at the beginning of its line
+				position = 0;
+			}
+		}
+	}
+
+	/**
+	 * inserts given sentence object right above the specified line, provided given sentence is not empty.
+	 * Returns new line number where insertion cursor is gotta be after the operation. 
+	 * @param textContainer
+	 * @param sentence
+	 * @param lineNumber
+	 * @return
+	 */
+	private int insertSentenceIntoTextContentAtPosition(BTSTextContent textContainer, BTSSenctence sentence, int lineNumber) {
+		if (sentence != null && sentence.getSentenceItems().size() > 0) {
+			setDirtyInternal();
+			if (lineNumber < textContainer.getTextItems().size()) {
+				textContainer.getTextItems().add(lineNumber,
+						sentence);
+			} else {
+				textContainer.getTextItems().add(sentence);
+			}
+			// move cursor one line down in order to keep up with the original content we currently keep pushing in front of us
+			lineNumber++;
+		}
+		return lineNumber;
+	}
 
 	private BTSSenctence copySentence(BTSSenctence copyItem) {
 		return textEditorController.copySentence(copyItem);

@@ -152,8 +152,6 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 	@Inject
 	private IEclipseContext context;
 	
-	
-	private int idcounter = 0;
 	private Comparator<? super Object> glyphsStringComparator;
 	
 	@Inject
@@ -1726,9 +1724,14 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 	}
 
 
-
 	@Override
 	public BTSSenctence copySentence(BTSSenctence copyItem) {
 		return textService.copySentence(copyItem);
+	}
+
+
+	@Override
+	public BTSSenctence createSentence() {
+		return textService.createNewSentence();
 	}
 }

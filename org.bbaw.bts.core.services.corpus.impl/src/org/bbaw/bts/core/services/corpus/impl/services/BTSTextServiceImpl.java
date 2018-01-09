@@ -195,7 +195,9 @@ public class BTSTextServiceImpl extends AbstractCorpusObjectServiceImpl<BTSText,
 	@Override
 	public BTSSenctence createNewSentence()
 	{
-		return BtsCorpusModelFactory.eINSTANCE.createBTSSenctence();
+		BTSSenctence sentence = BtsCorpusModelFactory.eINSTANCE.createBTSSenctence();
+		sentence.set_id(idService.createId(null));
+		return sentence;
 	}
 
 	@Override
