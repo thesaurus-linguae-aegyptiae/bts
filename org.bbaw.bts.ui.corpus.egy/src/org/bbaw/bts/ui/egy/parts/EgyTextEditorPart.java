@@ -39,6 +39,7 @@ import java.nio.charset.Charset;
 import java.nio.charset.CharsetDecoder;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.EventObject;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -404,14 +405,13 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 
 	private BTSModelAnnotation highlightedSentenceAnnotation;
 
-	protected Object deepCopyCache;
+	protected BTSTextSelectionEvent deepCopyCache;
 
 	private BTSTextSelectionEvent btsTextEvent;
 
 	private long lastSelectionTimeStamp = 0;
 
 	private Job delaySelectionJob;
-
 
 	/**
 	 * Instantiates a new egy text editor part.
@@ -877,27 +877,79 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 		}
 	}
 
+	/**
+	 * Check if all of the given sentence's elements occur in the given list of items as well. 
+	 * @param sentence
+	 * @param itemList
+	 * @return true if the list contains all of the sentence's items 
+	 */
+	private boolean isEntireSentenceInList(BTSSenctence sentence, List<BTSIdentifiableItem> itemList) {
+		for (BTSSentenceItem item : sentence.getSentenceItems()) {
+			if (!itemList.contains(item)) {
+				return false;
+			}
+		}
+		return true;
+	}
+
 	private void copyTextWithLemmata() {
 		// action: set local copy text
 		// design:
 		// if all is selected: copy whole textContent
 		this.deepCopyCache = this.btsTextEvent;
+
+		final List<BTSIdentifiableItem> selectedItems = btsTextEvent.getSelectedItems();
+		selectedItems.sort(new Comparator<BTSIdentifiableItem>() {
+			@Override
+			public int compare(BTSIdentifiableItem o1, BTSIdentifiableItem o2) {
+				if (o1.eContainer().equals(o2)) {
+					return 1;
+				}
+				if (o2.eContainer().equals(o1)) {
+					return -1;
+				}
+				return selectedItems.indexOf(o1) - selectedItems.indexOf(o2);
+			}
+		});
+
+		// iterate through selected items
+		// if item is sentence, remove its sentence items if all of them are present
+		// but if not all of them are present, remove sentence and leave items
+		List<BTSIdentifiableItem> filteredSelection = new Vector<>();
+		//boolean containsSentences = false;
+		for (BTSIdentifiableItem item : selectedItems) {
+			if (item instanceof BTSSenctence) {
+				// check if ALL of its items are within selection
+				if (isEntireSentenceInList((BTSSenctence)item, btsTextEvent.getSelectedItems())) {
+					filteredSelection.add(item);
+					//containsSentences = true;
+				}
+			} else if (item instanceof BTSSentenceItem) {
+				// if containing sentence is already in filtered selection list, we don't need to add item
+				if (!filteredSelection.contains(item.eContainer())) {
+					filteredSelection.add(item);
+				}
+			}
+		}
+
+		deepCopyCache.setSelectedItems(filteredSelection);
+
 		// else if sentence and sentence items
 		// dont copy comments, annotations, rubra or any other relating object
-		
-		
+
 		// if local copy text set: deep paste action
 		// insert design:
 		// 
-		
+
 	}
+
 	private void pasteTextWithLemmata() {
 		if (deepCopyCache instanceof BTSTextSelectionEvent)
 		{
 			BTSTextSelectionEvent ev = (BTSTextSelectionEvent) deepCopyCache;
-			
+
 			if (ev.getSelectedItems().isEmpty()) return; // nothing to paste
-			
+
 			cachedCursor = embeddedEditor.getViewer().getTextWidget()
 					.getCaretOffset();
 			final int len = ev.y - ev.x;
