@@ -994,11 +994,29 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 		if (itemAtInsertPosition instanceof BTSText) {
 			//insertTextSelectionAtText(copiedItems, (BTSText)itemAtInsertPosition);
 		} else if (itemAtInsertPosition instanceof BTSSenctence) {
-			//insertTextSelectionAtSentence(copiedItems, (BTSSenctence)itemAtInsertPosition);
+			insertTextSelectionAtSentence(copiedItems, (BTSSenctence)itemAtInsertPosition);
 		} else if (itemAtInsertPosition instanceof BTSSentenceItem) {
 			insertTextSelectionAtSentenceItem(copiedItems, (BTSSentenceItem)itemAtInsertPosition);
 		} else {
 			throw new Exception("Could not determine model object at insertion position.");
+		}
+	}
+
+	private void insertTextSelectionAtSentence(List<BTSIdentifiableItem> copiedItems, BTSSenctence itemAtPosition) {
+		BTSTextContent textContainer = (BTSTextContent)itemAtPosition.eContainer();
+		int lineNumber = textContainer.getTextItems().indexOf(itemAtPosition);
+		for (BTSIdentifiableItem item : copiedItems) {
+			
+			if (item instanceof BTSSenctence) {
+				
+				lineNumber = insertSentenceIntoTextContentAtPosition(textContainer, 
+						textEditorController.copySentence((BTSSenctence)item), lineNumber);
+				
+			} else if (item instanceof BTSSentenceItem) {
+				
+				
+				
+			}
 		}
 	}
 
