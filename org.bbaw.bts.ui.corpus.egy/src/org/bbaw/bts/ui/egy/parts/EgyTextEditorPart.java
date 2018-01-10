@@ -640,11 +640,10 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 					};
 					painter = new AnnotationPainter(embeddedEditor.getViewer(),
 							annotationAccess);
-					
+
 					ruler = EmbeddedEditorFactory.getCpAnnotationRuler();
 					oruler = EmbeddedEditorFactory.getOverViewRuler();
-					
-					
+
 					configureEditorDrawingStrategies(oruler);
 					if (show_line_number_ruler)
 					{
@@ -653,20 +652,23 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 						embeddedEditor.getViewer()
 								.addVerticalRulerColumn(lineNumberRulerColumn);
 					}
-					
+
 					embeddedEditor.getViewer().addTextPresentationListener(painter);
 					embeddedEditor.getViewer().addPainter(painter);
-					
+
 					embeddedEditorParentComp.layout();
 
 					context.set(XtextSourceViewer.class, embeddedEditor.getViewer());
 					BTSE4ToGuiceXtextSourceViewerProvider.setContext(context);
-					
+
 					embeddedEditor.getViewer().getTextWidget()
 							.addCaretListener(new CaretListener() {
 
 								@Override
 								public void caretMoved(CaretEvent event) {
+									setUserMayEditInteral(permissionsController.userMayEditObject(
+											permissionsController.getAuthenticatedUser(), 
+											EgyTextEditorPart.this.text));
 									processTextSelection(event);
 									// get char right of caret and show utf-8
 									// code in status line
