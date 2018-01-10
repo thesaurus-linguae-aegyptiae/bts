@@ -1005,24 +1005,62 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 		}
 	}
 
+	/**
+	 * insert a list of BTS editor text model elements at a specified sentence object
+	 */
 	private void insertTextSelectionAtSentence(List<BTSIdentifiableItem> copiedItems, BTSSenctence itemAtPosition) {
 		BTSTextContent textContainer = (BTSTextContent)itemAtPosition.eContainer();
 		int lineNumber = textContainer.getTextItems().indexOf(itemAtPosition);
+		int position = 0;
+
 		for (BTSIdentifiableItem item : copiedItems) {
-			
+
 			if (item instanceof BTSSenctence) {
-				
+
+				if (position > 0) {
+					lineNumber++;
+					position = 0;
+				}
 				lineNumber = insertSentenceIntoTextContentAtPosition(textContainer, 
 						textEditorController.copySentence((BTSSenctence)item), lineNumber);
-				
+
 			} else if (item instanceof BTSSentenceItem) {
-				
-				
-				
+
+				// if this seems to be the first uncontained sentence item since beginning of insertion or since the latest sentence object,
+				// create a new sentence object and insert it at the current 
+				if (position < 1) {
+					insertSentenceIntoTextContentAtPosition(textContainer, textEditorController.createSentence(), lineNumber);
+				}
+
+				BTSSenctence currentSentence = textContainer.getTextItems().get(lineNumber);
+				position = insertTokenIntoSentenceContentAtPosition(currentSentence, (BTSSentenceItem) item, position);
+
 			}
 		}
 	}
 
+	/**
+	 * inserts a copy of a given sentence item right into the targetet sentence in front of the specified position.
+	 */
+	private int insertTokenIntoSentenceContentAtPosition(BTSSenctence currentSentence, BTSSentenceItem item, int position) {
+		if (item != null) {
+			if (position < currentSentence.getSentenceItems().size()) {
+				currentSentence.getSentenceItems().add(position, 
+						textEditorController.copySentenceItem((BTSSentenceItem) item));
+			} else {
+				currentSentence.getSentenceItems().add(
+						textEditorController.copySentenceItem((BTSSentenceItem) item));
+			}
+			position++;
+		}
+		return position;
+	}
+
+
+
+	/**
+	 * insert BTS editor text model elements at a specified sentence token.
+	 */
 	private void insertTextSelectionAtSentenceItem(List<BTSIdentifiableItem> copiedItems, BTSSentenceItem itemAtPosition) {
 		// items we want to insert
 		BTSSenctence currentSentence = (BTSSenctence)itemAtPosition.eContainer();
@@ -1050,15 +1088,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 					textContainer.getTextItems().add(currentSentence);
 				}
 
-				if (position < currentSentence.getSentenceItems().size()) {
-					currentSentence.getSentenceItems().add(position, 
-							textEditorController.copySentenceItem((BTSSentenceItem) item));
-				} else {
-					currentSentence.getSentenceItems().add(
-							textEditorController.copySentenceItem((BTSSentenceItem) item));
-				}
-				position++;
-
+				position = insertTokenIntoSentenceContentAtPosition(currentSentence, (BTSSentenceItem) item, position);
 			}
 
 			// if an entiren sentence object needs to be inserted next:
