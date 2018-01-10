@@ -54,8 +54,6 @@ import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import jsesh.editor.JMDCEditor;
-
 import org.bbaw.bts.btsmodel.BTSComment;
 import org.bbaw.bts.btsmodel.BTSIdentifiableItem;
 import org.bbaw.bts.btsmodel.BTSInterTextReference;
@@ -194,6 +192,8 @@ import org.osgi.service.prefs.BackingStoreException;
 import org.osgi.service.prefs.Preferences;
 
 import com.google.inject.Injector;
+
+import jsesh.editor.JMDCEditor;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -1500,7 +1500,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 						}
 					final BTSTextSelectionEvent btsEvent = btsTextEvent;
 					sync.asyncExec(new Runnable() {
-						
+
 						@Override
 						public void run() {
 							List<BTSModelAnnotation> annotations = getModelAnnotationAtSelection(
@@ -1508,7 +1508,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 							btsEvent.getTextAnnotations().addAll(annotations);
 							processSelection(annotations, false, btsEvent);
 							selectionService.setSelection(btsEvent);
-							
+
 						}
 					});
 					delaySelectionJob = null;
@@ -1519,14 +1519,17 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 					return family.equals(BTSTextSelectionEvent.class);
 				}
 			};
-			this.delaySelectionJob.schedule(400);
-		} else if (!(event instanceof CaretEvent) || (this.btsTextEvent == null)
-			|| (this.btsTextEvent.getOriginalEvent() instanceof CaretEvent))
-			this.btsTextEvent = btsEvent;
-		this.lastSelectionTimeStamp = System.nanoTime();
-	}
-	
 
+			this.delaySelectionJob.schedule(400);
+
+		} else if (!(event instanceof CaretEvent) || (this.btsTextEvent == null)
+			|| (this.btsTextEvent.getOriginalEvent() instanceof CaretEvent)) {
+			this.btsTextEvent = btsEvent;
+		}
+
+		this.lastSelectionTimeStamp = System.nanoTime();
+
+	}
 
 	/**
 	 * Process selection.
@@ -1739,16 +1742,17 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 	}
 
 	/**
-	 * Gets the model annotation at selection.
+	 * Gets the model annotations at selection or within.
 	 *
-	 * @param start the start
-	 * @param end the end
-	 * @param btsEvent the bts event
+	 * @param start the start position of selection
+	 * @param end the end position of selection
+	 * @param btsEvent text selection event that will be configured with the results of this method call
 	 * @return the model annotation at selection
 	 */
 	@SuppressWarnings("restriction")
 	private List<BTSModelAnnotation> getModelAnnotationAtSelection(int start,
 			int end, BTSTextSelectionEvent btsEvent) {
+
 		Iterator<Annotation> it = embeddedEditor.getViewer().getAnnotationModel()
 				.getAnnotationIterator();
 		List<BTSModelAnnotation> annotations = new Vector<BTSModelAnnotation>(4);
@@ -1757,16 +1761,17 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 		BTSSentenceItem endItem = null;
 		int endItemOffeset = 0;
 		List<BTSIdentifiableItem> textItems = new Vector<BTSIdentifiableItem>();
+
 		while (it.hasNext()) {
 			Annotation a = (Annotation) it.next();
+
 			if (a instanceof BTSModelAnnotation) {
 				Position pos = embeddedEditor.getViewer().getAnnotationModel()
 						.getPosition(a);
-				// System.out.println("pos " + pos.getOffset() + " " +
-				// pos.getOffset() + pos.getLength());
-				if ((pos.getOffset() <= start && start < pos.getOffset()
-						+ pos.getLength())
+
+				if ((pos.getOffset() <= start && pos.getOffset() + pos.getLength() > start)
 						|| (pos.getOffset() >= start && pos.getOffset() <= end)) {
+
 					List<BTSModelAnnotation> list = annotationOffsetMap.get(pos.getOffset());
 					if (list == null)
 					{
@@ -1774,8 +1779,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 						annotationOffsetMap.put(pos.getOffset(), list);
 					}
 					list.add((BTSModelAnnotation) a);
-					
-					
+
 					// nur sentenceitems oder alles?
 //					if (((BTSModelAnnotation) a).getModel() instanceof BTSSentenceItem) {
 //						BTSSentenceItem item = (BTSSentenceItem) ((BTSModelAnnotation) a)
@@ -1821,7 +1825,8 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 							startItem = item;
 						}
 						if (endItem == null
-								|| (!(item instanceof BTSAmbivalence) && pos.getOffset() + pos.getLength() > endItemOffeset)) {
+								|| (!(item instanceof BTSAmbivalence) 
+										&& endItemOffeset < pos.getOffset() + pos.getLength())) {
 							endItem = item;
 							endItemOffeset = pos.getOffset() + pos.getLength();
 						}
@@ -1829,7 +1834,6 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 			}
 		}
 
-		
 		if (btsEvent != null) {
 			if (startItem != null) {
 				btsEvent.setStartId(startItem.get_id());
