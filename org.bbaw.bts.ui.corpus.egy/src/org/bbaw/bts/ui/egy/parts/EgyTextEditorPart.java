@@ -587,7 +587,6 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 						}
 					});
 
-
 					embeddedEditorComp = new Composite(
 							embeddedEditorParentComp, SWT.None);
 					embeddedEditorComp.setLayout(new GridLayout());
@@ -598,13 +597,15 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 							SWT.FILL, true, true));
 
 					context.get(StaticAccessController.class);
-					
+
 					// new trial
 					injector = textEditorController.findEgyDslInjector();
-					
+
 					embeddedEditorFactory = injector
 							.getInstance(EmbeddedEditorFactory.class);
 
+					// XXX
+					// https://www.eclipse.org/forums/index.php/t/1067356/
 					embeddedEditor = embeddedEditorFactory
 							.newEditor(xtextResourceProvider)
 							.showAnnotations(
