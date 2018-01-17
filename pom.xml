@@ -76,15 +76,9 @@
 		<repository>
 			<id>bts-mvn-build-repository</id>
 			<name>BTS BUILD Rep</name>
-			<url>http://telota.bbaw.de/bts-update/bts-build-neon</url>
+			<url>http://aaew64.bbaw.de/bts/repository/neon-target</url>
 			<layout>p2</layout>
 		</repository> 
-		<!-- <repository>
-			<id>bts-mvn-build-extras</id>
-			<name>BTS BUILD Rep</name>
-			<url>http://telota.bbaw.de/bts-update/extras</url>
-			<layout>p2</layout>
-		</repository> -->
 		<repository>
 			<id>neon</id>
 			<url>http://download.eclipse.org/releases/neon</url>
