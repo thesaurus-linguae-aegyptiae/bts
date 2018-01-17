@@ -104,6 +104,7 @@ import org.bbaw.bts.ui.corpus.util.AnnotationToolbarItemCreator;
 import org.bbaw.bts.ui.egy.parts.egyTextEditor.BTSTextXtextEditedResourceProvider;
 import org.bbaw.bts.ui.egy.parts.egyTextEditor.EgyLineNumberRulerColumn;
 import org.bbaw.bts.ui.egy.parts.support.AbstractTextEditorLogic;
+import org.bbaw.bts.ui.egy.parts.support.BTSTokenizedTextSelection;
 import org.bbaw.bts.ui.egy.textSign.SignTextComposite;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
@@ -405,7 +406,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 
 	private BTSModelAnnotation highlightedSentenceAnnotation;
 
-	protected BTSTextSelectionEvent deepCopyCache;
+	protected BTSTokenizedTextSelection tokenizedTextSelection;
 
 	private BTSTextSelectionEvent btsTextEvent;
 
@@ -748,11 +749,11 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 									
 										@Override
 										public void widgetSelected(SelectionEvent e) {
-											copyTextWithLemmata();
+											copyTextWithLemmata(EgyTextEditorPart.this.btsTextEvent);
 										}
 						            });
 								}
-								if (deepCopyCache != null)
+								if (tokenizedTextSelection != null)
 								{
 									MenuItem itemPaste = new MenuItem((Menu) menu, SWT.NONE);
 									itemPaste.setText("Paste with Lemmata" );
@@ -880,60 +881,10 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 		}
 	}
 
-	/**
-	 * Check if all of the given sentence's elements occur in the given list of items as well. 
-	 * @param sentence
-	 * @param itemList
-	 * @return true if the list contains all of the sentence's items 
-	 */
-	private boolean isEntireSentenceInList(BTSSenctence sentence, List<BTSIdentifiableItem> itemList) {
-		for (BTSSentenceItem item : sentence.getSentenceItems()) {
-			if (!itemList.contains(item)) {
-				return false;
-			}
-		}
-		return true;
-	}
 
-	private void copyTextWithLemmata() {
+	private void copyTextWithLemmata(BTSTextSelectionEvent textSelectionEvent) {
 
-		this.deepCopyCache = this.btsTextEvent;
-
-		final List<BTSIdentifiableItem> selectedItems = btsTextEvent.getSelectedItems();
-		// make sure sentence objects come before their own tokens
-		selectedItems.sort(new Comparator<BTSIdentifiableItem>() {
-			@Override
-			public int compare(BTSIdentifiableItem o1, BTSIdentifiableItem o2) {
-				if (o1.eContainer().equals(o2)) {
-					return 1;
-				}
-				if (o2.eContainer().equals(o1)) {
-					return -1;
-				}
-				return selectedItems.indexOf(o1) - selectedItems.indexOf(o2);
-			}
-		});
-
-		// iterate through selected items
-		// if item is sentence, remove its sentence items if all of them are present
-		// but if not all of them are present, remove sentence and leave items
-		List<BTSIdentifiableItem> filteredSelection = new Vector<>();
-		for (BTSIdentifiableItem item : selectedItems) {
-			if (item instanceof BTSSenctence) {
-				// check if ALL of its items are within selection
-				if (isEntireSentenceInList((BTSSenctence)item, 
-						selectedItems)) {
-					filteredSelection.add(item);
-				}
-			} else if (item instanceof BTSSentenceItem) {
-				// if containing sentence is already in filtered selection list, we don't need to add item
-				if (!filteredSelection.contains(item.eContainer())) {
-					filteredSelection.add(item);
-				}
-			}
-		}
-
-		deepCopyCache.setSelectedItems(filteredSelection);
+		this.tokenizedTextSelection = new BTSTokenizedTextSelection(textSelectionEvent);
 
 		// dont copy comments, annotations, rubra or any other relating object
 
@@ -941,16 +892,16 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 
 
 	private void pasteTextWithLemmata() {
-		if (!deepCopyCache.getSelectedItems().isEmpty()) {
+		if (!tokenizedTextSelection.getSelectedItems().isEmpty()) {
 
 			cachedCursor = embeddedEditor.getViewer().getTextWidget().getCaretOffset();
 
-			final int len = deepCopyCache.y - deepCopyCache.x;
+			final int len = tokenizedTextSelection.getCharacterCount();
 
 			updateModelFromTranscription();
 
 			try {
-				insertTextSelectionItems(deepCopyCache.getSelectedItems(), selectedTextItem);
+				insertTextSelectionItems(tokenizedTextSelection.getSelectedItems(), selectedTextItem);
 			} catch (Exception e1) {
 				e1.printStackTrace();
 			}
