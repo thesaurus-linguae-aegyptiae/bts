@@ -1032,7 +1032,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 					insertSentenceIntoTextContentAtPosition(textContainer, textEditorController.createSentence(), lineNumber);
 				}
 
-				BTSSenctence currentSentence = textContainer.getTextItems().get(lineNumber);
+				BTSSenctence currentSentence = (BTSSenctence)textContainer.getTextItems().get(lineNumber);
 				position = insertTokenIntoSentenceContentAtPosition(currentSentence, (BTSSentenceItem) item, position);
 
 			}
