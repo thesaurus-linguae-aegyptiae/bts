@@ -91,24 +91,7 @@ public class GeneralBTSObjectControllerImpl implements
 //							.query(query, BTSConstants.OBJECT_STATE_ACTIVE,
 //									false));
 					corpus = true;
-				} else if (!corpus) {
-					
-					BTSQueryRequest query = new BTSQueryRequest();
-					QueryBuilder qb = QueryBuilders.prefixQuery("name", text);
-
-					SearchRequestBuilder sqb = projectService
-							.getSearchRequestBuilder();
-					sqb.setQuery(qb);
-
-					list.addAll(queryObjects(query, BTSConstants.OBJECT_STATE_ACTIVE,
-							false, "BTSCorpusObject", monitor));
-					
-//					list.addAll((Collection<? extends BTSObject>) corpusObjectService
-//							.query(query, BTSConstants.OBJECT_STATE_ACTIVE,
-//									false));
-					corpus = true;
-				
-			}
+				}
 		}
 
 		return list;
