@@ -67,15 +67,14 @@ public class GeneralBTSObjectControllerImpl implements
 		//FIXME aktualisieren und auf map umstellen
 
 		if (configItem != null && !configItem.getOwnerTypesMap().isEmpty()) {
-            if (configurationController.objectMayReferenceToThs(object, configItem)) {
+            if (configurationController.objectMayReferenceToThs(object, configItem))
                 list.addAll(getTypedObjectProposalsFor(text, "BTSThsEntry", monitor));
-            }
 
-            if (configurationController.objectMayReferenceToWList(object, configItem)) {
+            if (configurationController.objectMayReferenceToWList(object, configItem))
                 list.addAll(getTypedObjectProposalsFor(text, "BTSLemmaEntry", monitor));
-            } else if (configurationController.objectMayReferenceToCorpus(object, configItem)) {
+
+            if (configurationController.objectMayReferenceToCorpus(object, configItem))
                 list.addAll(getTypedObjectProposalsFor(text, "BTSCorpusObject", monitor));
-            }
 		}
 
 		return list;
