@@ -64,34 +64,17 @@ public class GeneralBTSObjectControllerImpl implements
 		//FIXME aktualisieren und auf map umstellen
 
 		if (configItem != null && !configItem.getOwnerTypesMap().isEmpty()) {
-			boolean corpus = false;
-
-				if (configurationController.objectMayReferenceToThs(object, configItem)) {
-					list.addAll(getTypedObjectProposalsFor(text, "BTSThsEntry", monitor));
-				}
-				if (configurationController.objectMayReferenceToWList(object, configItem)) {
-					list.addAll(getTypedObjectProposalsFor(text, "BTSLemmaEntry", monitor));
-
-				} else if (configurationController.objectMayReferenceToCorpus(object, configItem)) {
-					BTSQueryRequest query = new BTSQueryRequest();
-					QueryBuilder qb = QueryBuilders.prefixQuery("name", text);
-
-					SearchRequestBuilder sqb = projectService
-							.getSearchRequestBuilder();
-					sqb.setQuery(qb);
-					List<FilterBuilder> filters = makeFilterList(configItem, object);
-
-					FilterBuilder[] filterArray = filters
-							.toArray(new FilterBuilder[filters.size()]);
-					sqb.setPostFilter(FilterBuilders.orFilter(filterArray));
-					list.addAll(queryObjects(query, BTSConstants.OBJECT_STATE_ACTIVE,
-							false, "BTSCorpusObject", monitor));
-//					
-//					list.addAll((Collection<? extends BTSObject>) corpusObjectService
-//							.query(query, BTSConstants.OBJECT_STATE_ACTIVE,
-//									false));
-					corpus = true;
-				}
+            if (configurationController.objectMayReferenceToThs(object, configItem)) {
+                list.addAll(getTypedObjectProposalsFor(text, "BTSThsEntry", monitor));
+            }
+            if (configurationController.objectMayReferenceToWList(object, configItem)) {
+                list.addAll(getTypedObjectProposalsFor(text, "BTSLemmaEntry", monitor));
+            } else if (configurationController.objectMayReferenceToCorpus(object, configItem)) {
+                BTSQueryRequest query = new BTSQueryRequest(text, false, false);
+                query.setSize(50);
+                list.addAll(queryObjects(query, BTSConstants.OBJECT_STATE_ACTIVE,
+                        false, "BTSCorpusObject", monitor));
+            }
 		}
 
 		return list;
@@ -100,9 +83,7 @@ public class GeneralBTSObjectControllerImpl implements
 	@Override
 	public List<BTSObject> queryObjects(BTSQueryRequest query,
 			String objectState, boolean registerQuery, String className, IProgressMonitor monitor) {
-		return objectService.queryObjects(query,
-				objectState, registerQuery, className, monitor);
-		
+		return objectService.queryObjects(query, objectState, registerQuery, className, monitor);
 	}
 	
 
