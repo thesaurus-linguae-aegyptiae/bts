@@ -25,6 +25,8 @@ import org.elasticsearch.index.query.QueryBuilders;
 public class GeneralBTSObjectControllerImpl implements
 		GeneralBTSObjectController {
 
+    private static final int MAX_PROPOSALS = 50;
+
 	@Inject
 	private BTSConfigurationController configurationController;
 	
@@ -40,6 +42,7 @@ public class GeneralBTSObjectControllerImpl implements
 			.must(QueryBuilders.matchPhrasePrefixQuery("name", text)));
 		// try and lookup objects by id first
 		query.setIdQuery(true);
+        query.setSize(MAX_PROPOSALS);
 		List<BTSObject> result = queryObjects(query, BTSConstants.OBJECT_STATE_ACTIVE,
 				false, className, monitor);
 		if (result != null && !result.isEmpty()) {
@@ -67,13 +70,11 @@ public class GeneralBTSObjectControllerImpl implements
             if (configurationController.objectMayReferenceToThs(object, configItem)) {
                 list.addAll(getTypedObjectProposalsFor(text, "BTSThsEntry", monitor));
             }
+
             if (configurationController.objectMayReferenceToWList(object, configItem)) {
                 list.addAll(getTypedObjectProposalsFor(text, "BTSLemmaEntry", monitor));
             } else if (configurationController.objectMayReferenceToCorpus(object, configItem)) {
-                BTSQueryRequest query = new BTSQueryRequest(text, false, false);
-                query.setSize(50);
-                list.addAll(queryObjects(query, BTSConstants.OBJECT_STATE_ACTIVE,
-                        false, "BTSCorpusObject", monitor));
+                list.addAll(getTypedObjectProposalsFor(text, "BTSCorpusObject", monitor));
             }
 		}
 
