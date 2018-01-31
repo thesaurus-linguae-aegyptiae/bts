@@ -25,6 +25,8 @@ import org.elasticsearch.index.query.QueryBuilders;
 public class GeneralBTSObjectControllerImpl implements
 		GeneralBTSObjectController {
 
+    private static final int MAX_PROPOSALS = 50;
+
 	@Inject
 	private BTSConfigurationController configurationController;
 	
@@ -40,6 +42,7 @@ public class GeneralBTSObjectControllerImpl implements
 			.must(QueryBuilders.matchPhrasePrefixQuery("name", text)));
 		// try and lookup objects by id first
 		query.setIdQuery(true);
+        query.setSize(MAX_PROPOSALS);
 		List<BTSObject> result = queryObjects(query, BTSConstants.OBJECT_STATE_ACTIVE,
 				false, className, monitor);
 		if (result != null && !result.isEmpty()) {
@@ -64,34 +67,15 @@ public class GeneralBTSObjectControllerImpl implements
 		//FIXME aktualisieren und auf map umstellen
 
 		if (configItem != null && !configItem.getOwnerTypesMap().isEmpty()) {
-			boolean corpus = false;
+            if (configurationController.objectMayReferenceToThs(object, configItem))
+                list.addAll(getTypedObjectProposalsFor(text, "BTSThsEntry", monitor));
 
-				if (configurationController.objectMayReferenceToThs(object, configItem)) {
-					list.addAll(getTypedObjectProposalsFor(text, "BTSThsEntry", monitor));
-				}
-				if (configurationController.objectMayReferenceToWList(object, configItem)) {
-					list.addAll(getTypedObjectProposalsFor(text, "BTSLemmaEntry", monitor));
 
-				} else if (configurationController.objectMayReferenceToCorpus(object, configItem)) {
-					BTSQueryRequest query = new BTSQueryRequest();
-					QueryBuilder qb = QueryBuilders.prefixQuery("name", text);
+            if (configurationController.objectMayReferenceToWList(object, configItem))
+                list.addAll(getTypedObjectProposalsFor(text, "BTSLemmaEntry", monitor));
 
-					SearchRequestBuilder sqb = projectService
-							.getSearchRequestBuilder();
-					sqb.setQuery(qb);
-					List<FilterBuilder> filters = makeFilterList(configItem, object);
-
-					FilterBuilder[] filterArray = filters
-							.toArray(new FilterBuilder[filters.size()]);
-					sqb.setPostFilter(FilterBuilders.orFilter(filterArray));
-					list.addAll(queryObjects(query, BTSConstants.OBJECT_STATE_ACTIVE,
-							false, "BTSCorpusObject", monitor));
-//					
-//					list.addAll((Collection<? extends BTSObject>) corpusObjectService
-//							.query(query, BTSConstants.OBJECT_STATE_ACTIVE,
-//									false));
-					corpus = true;
-				}
+            if (configurationController.objectMayReferenceToCorpus(object, configItem))
+                list.addAll(getTypedObjectProposalsFor(text, "BTSCorpusObject", monitor));
 		}
 
 		return list;
@@ -100,9 +84,7 @@ public class GeneralBTSObjectControllerImpl implements
 	@Override
 	public List<BTSObject> queryObjects(BTSQueryRequest query,
 			String objectState, boolean registerQuery, String className, IProgressMonitor monitor) {
-		return objectService.queryObjects(query,
-				objectState, registerQuery, className, monitor);
-		
+		return objectService.queryObjects(query, objectState, registerQuery, className, monitor);
 	}
 	
 

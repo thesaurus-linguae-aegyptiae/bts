@@ -40,8 +40,7 @@ public class ObjectSelectionProposalProvider implements
 		List<ContentProposal> partialList = new Vector<ContentProposal>();
 		if (list != null && !list.isEmpty()) {
 			for (BTSObject o : list) {
-				if (o.getName() != null && o.getName().startsWith(contents)
-						|| o.get_id().equals(contents)) {
+				if (o.getName() != null) {
 					String desc = o.getName() + "\n" + o.get_id() + "\n" + o.getDBCollectionKey();
 					ContentProposal p = new ContentProposal(o.get_id(), o.getName(), desc);
 					partialList.add(p);
