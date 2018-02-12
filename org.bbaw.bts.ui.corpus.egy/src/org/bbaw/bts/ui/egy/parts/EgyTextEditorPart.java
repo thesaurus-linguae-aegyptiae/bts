@@ -1642,8 +1642,24 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
             BTSSentenceItem item = (BTSSentenceItem)iitem;
 
 
+            /* Check if selection interval [sel_l, sel_r] and annotation interval [ano_l, ano_r] overlap */
+            boolean intervals_overlap = ano_l <= sel_r && sel_l <= ano_r;
+
             /* Check if annotation interval [ano_l, ano_r] is contained within selection interval [sel_l, sel_r] */
-            if (sel_l <= ano_l && ano_r <= sel_r) {
+            boolean sel_contains_ano = sel_l <= ano_l && ano_r <= sel_r;
+
+            /* Dirty but simplest way of doing this */
+            boolean is_cursor_event = sel_l == sel_r;
+
+            /* For cursor events, add all items that the cursor is placed inside. This includes e.g. a containing
+             * ambivalence.  This is done so that when the cursor is placed somewhere, all comments that include that
+             * cursor position are highlighted.
+             *
+             * For selection events, only add items that are *fully contained* in the selection. This is done so you can
+             * place comments on parts of larger items, such as some words in one case of an ambivalence.
+             */
+            if ((is_cursor_event && intervals_overlap)
+            || (!is_cursor_event && sel_contains_ano)) {
                 /* Store leftmost and rightmost selected item */
                 if (ano_l <= min_l) {
                     minItem = (BTSSentenceItem)item;
