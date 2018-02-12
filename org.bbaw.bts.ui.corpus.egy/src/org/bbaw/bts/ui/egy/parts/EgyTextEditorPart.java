@@ -1605,8 +1605,8 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
             Position pos = amodel.getPosition(a);
             int ano_l = pos.getOffset(), ano_r = pos.getOffset() + pos.getLength();
 
-            /* Check if selection interval [sel_l, sel_r] and annotation interval [ano_l, ano_r] overlap */
-            if (ano_l <= sel_r && sel_l <= ano_r) {
+            /* Check if annotation interval [ano_l, ano_r] is contained within selection interval [sel_l, sel_r] */
+            if (sel_l <= ano_l && ano_r <= sel_r) {
                 /* Store leftmost and rightmost selected item */
                 if (ano_l <= min_l) {
                     minItem = (BTSSentenceItem)item;
