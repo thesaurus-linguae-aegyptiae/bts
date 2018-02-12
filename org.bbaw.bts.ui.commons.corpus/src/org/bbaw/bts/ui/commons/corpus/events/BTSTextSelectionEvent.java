@@ -4,11 +4,11 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Vector;
 
+import org.bbaw.bts.ui.commons.corpus.text.BTSModelAnnotation;
 import org.bbaw.bts.btsmodel.BTSIdentifiableItem;
 import org.bbaw.bts.btsmodel.BTSInterTextReference;
 import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSSentenceItem;
-import org.bbaw.bts.ui.commons.corpus.text.BTSModelAnnotation;
 import org.eclipse.jface.text.TextSelection;
 import org.eclipse.swt.custom.CaretEvent;
 import org.eclipse.swt.custom.StyledText;
@@ -134,7 +134,7 @@ public class BTSTextSelectionEvent extends Event {
 
 
 	public List<BTSIdentifiableItem> getSelectedItems() {
-		return Collections.unmodifiableList(selectedItems);
+		return new Vector<>(selectedItems);
 	}
 
 	public boolean addSelectedItem(BTSIdentifiableItem item) {
