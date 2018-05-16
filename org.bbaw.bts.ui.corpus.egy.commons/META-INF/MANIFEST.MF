@@ -15,7 +15,7 @@ Bundle-ClassPath: jseshlibs/bcmail-jdk14-138.jar,
  jseshlibs/jseshGlyphs-6.5.5.jar,
  jseshlibs/jvectClipboard-1.3.jar,
  jseshlibs/miglayout-3.7.4-swing.jar,
- jseshlibs/qenherkhopeshefUtils-6.3.2.jar,
+ jseshlibs/qenherkhopeshefUtils-6.5.5.jar,
  jseshlibs/quaqua-7.3.4.jar,
  jseshlibs/swing-layout-1.0.3.jar
 Export-Package: jsesh.editor,
