@@ -71,7 +71,10 @@ public class ApplicationUpdateControllerImpl extends Job implements
 			Table pendingUpdatesTable = new Table(container, SWT.BORDER);
 			pendingUpdatesTable.setHeaderVisible(true);
 			// create table columns
-			for (String label : Arrays.asList("Installable unit", "Current version", "", "Version available")){
+			for (String label : Arrays.asList("Installable unit",
+					"Current version",
+					"",
+					"Version available")){
 				TableColumn column = new TableColumn(pendingUpdatesTable, SWT.NULL);
 				column.setText(label);
 			}
@@ -278,8 +281,10 @@ public class ApplicationUpdateControllerImpl extends Job implements
 		}
 		if (workbench != null && agent != null) {
 			IStatus runStatus = checkForUpdates(monitor);
-			schedule(TIME_UNTIL_RECHECK);
-			askForConfirmationAndInstall();
+			if (!status.equals(EUpdateStatusType.UPDATE_REJECTED)) {
+				schedule(TIME_UNTIL_RECHECK);
+				askForConfirmationAndInstall();
+			}
 			return runStatus;
 		} else {
 			info("Update Checker: Waiting for Workbench initialization.");
@@ -287,7 +292,6 @@ public class ApplicationUpdateControllerImpl extends Job implements
 			return Status.CANCEL_STATUS;
 		}
 	}
-
 
 	@Override
 	public void askForConfirmationAndInstall() {
@@ -326,11 +330,9 @@ public class ApplicationUpdateControllerImpl extends Job implements
 		if (now - timeStamp < TIME_UNTIL_RECHECK) {
 			info("p2 update: last checked at "+timeStamp);
 			if (updateOperation.getPossibleUpdates() != null) {
-				if (status != EUpdateStatusType.UPDATE_REJECTED) {
-					setStatus((updateOperation.getPossibleUpdates().length > 0)
-							? EUpdateStatusType.UPDATE_AVAILABLE
-							: EUpdateStatusType.NO_UPDATE);
-				}
+				setStatus((updateOperation.getPossibleUpdates().length > 0)
+						? EUpdateStatusType.UPDATE_AVAILABLE
+						: EUpdateStatusType.NO_UPDATE);
 				return Status.CANCEL_STATUS;
 			} else {
 				logger.warn("Check for updates anyway.");
@@ -445,9 +447,11 @@ public class ApplicationUpdateControllerImpl extends Job implements
 
 	private boolean setStatus(EUpdateStatusType newStatus) {
 		if (newStatus != status) {
-			info("Change status from "+status+" to "+newStatus);
-			status = newStatus;
-			return true;
+			if (!status.equals(EUpdateStatusType.UPDATE_REJECTED)) {
+				info("Change status from "+status+" to "+newStatus);
+				status = newStatus;
+				return true;
+			}
 		}
 		return false;
 	}
