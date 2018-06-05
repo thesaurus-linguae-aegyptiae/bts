@@ -106,7 +106,7 @@ public class SimpleSearchQueryDialog extends TitleAreaDialog {
 			@Override
 			public void widgetDefaultSelected(SelectionEvent e) {}
 		});
-		setIdOnly(prefs.getBoolean(scopeId + "." + OPT_ID_SEARCH, false));
+		setIdOnly(false);
 		
 		exactButton = new Button(containerBot, SWT.CHECK);
 		exactButton.setText("Search for Names only");
