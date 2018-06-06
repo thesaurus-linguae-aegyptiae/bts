@@ -174,7 +174,7 @@ public class ApplicationUpdateControllerImpl extends Job implements
 		updateJob = null;
 		updates = null;
 		updatePending = false;
-		timeStamp = 0;
+		timeStamp = System.currentTimeMillis();
 		schedule();
 	}
 

@@ -59,8 +59,8 @@ public interface ApplicationUpdateController {
 		}
 	}
 	
-	
-	public final long TIME_UNTIL_RECHECK = 60*1000*2;
+	/** Set interval for software update to five minutes. **/
+	public final long TIME_UNTIL_RECHECK = 60*1000*5;
 	
 	public boolean isUpdateAvailable();
 	
