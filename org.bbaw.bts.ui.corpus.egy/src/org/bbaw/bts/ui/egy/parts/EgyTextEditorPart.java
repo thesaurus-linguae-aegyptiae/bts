@@ -39,7 +39,6 @@ import java.nio.charset.Charset;
 import java.nio.charset.CharsetDecoder;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.EventObject;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -80,7 +79,6 @@ import org.bbaw.bts.corpus.btsCorpusModel.BTSLemmaEntry;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSSenctence;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSSentenceItem;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSText;
-import org.bbaw.bts.corpus.btsCorpusModel.BTSTextContent;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSWord;
 import org.bbaw.bts.corpus.btsCorpusModel.BtsCorpusModelFactory;
 import org.bbaw.bts.corpus.btsCorpusModel.BtsCorpusModelPackage;
@@ -203,6 +201,22 @@ import jsesh.editor.JMDCEditor;
  * @author Christoph Plutte
  */
 public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEditor, EventHandler {
+
+	private class EditorUIUpdateJob implements Runnable {
+		private AnnotationModelEvent ev;
+		public EditorUIUpdateJob(AnnotationModelEvent event) {
+			this.ev = event;
+		}
+		public void run() {
+			// TODO this can be improved in order to reduce work load repainting large texts
+			painter.modelChanged(ev);
+			painter.paint(IPainter.INTERNAL);
+			ruler.update();
+			ruler.relayout();
+			oruler.update();
+			embeddedEditor.getViewer().getTextWidget().redraw();
+		}
+	}
 
 	/** The dirty. */
 	@Optional
@@ -1461,17 +1475,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 			for (Annotation a : toBeHighlightedAnnotations)
 				if (a != null) ev.annotationChanged(a);
 
-			sync.asyncExec(new Runnable() {
-				public void run() {
-					// TODO this can be improved in order to reduce work load repainting large texts					
-					painter.modelChanged(ev);
-					painter.paint(IPainter.INTERNAL);
-					ruler.update();
-					ruler.relayout();
-					oruler.update();
-					embeddedEditor.getViewer().getTextWidget().redraw();
-				}
-			});
+			sync.asyncExec(new EditorUIUpdateJob(ev));
 		}
 		
 		// calculate event data

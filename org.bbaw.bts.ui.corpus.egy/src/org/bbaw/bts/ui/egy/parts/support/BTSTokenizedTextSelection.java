@@ -100,7 +100,6 @@ public class BTSTokenizedTextSelection {
 		sortItems(selectedItems);
 
 		tokenSequence = filterItems(selectedItems);
-		
 	}
 
 	public List<BTSIdentifiableItem> getSelectedItems() {
@@ -115,9 +114,13 @@ public class BTSTokenizedTextSelection {
 		if (itemAtInsertPosition instanceof BTSText) {
 			//insertTextSelectionAtText(copiedItems, (BTSText)itemAtInsertPosition);
 		} else if (itemAtInsertPosition instanceof BTSSenctence) {
-			insertTextSelectionAtSentence(this.tokenSequence, (BTSSenctence)itemAtInsertPosition);
+			insertTextSelectionAtSentence(
+					this.tokenSequence,
+					(BTSSenctence)itemAtInsertPosition);
 		} else if (itemAtInsertPosition instanceof BTSSentenceItem) {
-			insertTextSelectionAtSentenceItem(this.tokenSequence, (BTSSentenceItem)itemAtInsertPosition);
+			insertTextSelectionAtSentenceItem(
+					this.tokenSequence,
+					(BTSSentenceItem)itemAtInsertPosition);
 		} else {
 			throw new Exception("Could not determine model object at insertion position.");
 		}
