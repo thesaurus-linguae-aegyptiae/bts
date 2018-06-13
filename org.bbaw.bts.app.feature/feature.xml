@@ -15,6 +15,7 @@ Change log
 Release 3.1.5
 -------------
 
+	- Fix: passport editor content assist bug (#9150, 577a988, c84c2e1, 24973a6)
 	- Fix: NPE in lemmatizer part (028bb75)
 	- Fix: bug in annotation part rubrum labeling (b20d33e)
 	- GUI: adjust search dialog size and deactivate ID search option checkbox by default (83001ae, 33a797a)
@@ -22,7 +23,8 @@ Release 3.1.5
 	- GUI: get rid of confirmation dialog before individual corpus reindex in DB manager (9885885)
 	- GUI: show changelog in software update dialog and improve update dialog in general (b92df7d, 8f4b06f, 50e635c)
 	- GUI: when manually invoking update from application menu, show update dialog instead of proceeding silently (dafc450)
-	- Improvement: platform independence / unix compatibility (54ca879)
+	- Feature: platform independence / unix compatibility (54ca879)
+	- Chore: move default P2 software update repository server locator (59ccae3)
 
 Release 3.1.4
 -------------
@@ -40,11 +42,11 @@ Release 3.1.2
 
 	- Fix: performance issue due to repeated DAO operations because of insufficient caching of user data. (#9086)
 	- Fix: lemma search result list sort order broken by processing of additional lemma relation types in result tree generation introduced in 3.1.1. (#9020)
-	- Fix: multiple typos.
 	- Fix: related object label update after making modifications in respective editor dialog.
 	- GUI: remove 'Delete' buttons from toolbars in navigator parts. (#8861, #6462)
 	- GUI: change labels of delete command menu entries. (#8862, #8863)
 	- GUI: rename 'Bin' tabs in navigator parts.
+	- GUI: multiple typos.
 	- Feature: add confirmation dialog for command (delete) that moves objects to trash.
 	- Feature: disable menu entries for delete/restore command where they don't have any effect.
 
