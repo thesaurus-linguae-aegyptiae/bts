@@ -580,49 +580,32 @@ public class PassportEntryItemEditor extends PassportEntryEditorComposite {
 		ths_select_text = new Text(this, SWT.BORDER | SWT.READ_ONLY);
 		ths_select_text.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 		final char[] autoActivationCharacters = new char[] { '.', '#' };
-		ths_select_text.addFocusListener(new FocusAdapter() {
 
-			@Override
-			public void focusGained(FocusEvent e) {
-				if (PassportEntryItemEditor.this.userMayEdit)
-				{
-				try {
-					KeyStroke keyStroke = KeyStroke.getInstance("Ctrl+Space");
-					ContentProposalAdapter adapter = new ContentProposalAdapter(
-							ths_select_text, new TextContentAdapter(),
-							getObjectProposalProvider(itemConfig), keyStroke,
-							autoActivationCharacters);
-					adapter.setProposalAcceptanceStyle(ContentProposalAdapter.PROPOSAL_REPLACE);
-					adapter.addContentProposalListener(new IContentProposalListener() {
-
-						@Override
-						public void proposalAccepted(IContentProposal proposal) {
-							System.out.println(proposal);
-							Command command = SetCommand.create(
-									editingDomain,
-									entry, BtsCorpusModelPackage.eINSTANCE.getBTSPassportEntry_Value(),
-									proposal.getContent());
-							editingDomain.getCommandStack().execute(
-									command);
-							entry.setValue(proposal.getContent());
-						}
-					});
-				} catch (ParseException e1) {
-					e1.printStackTrace();
+		try {
+			ContentProposalAdapter adapter = new ContentProposalAdapter(
+					ths_select_text,
+					new TextContentAdapter(),
+					getObjectProposalProvider(itemConfig),
+					KeyStroke.getInstance("Ctrl+Space"),
+					autoActivationCharacters);
+			adapter.setProposalAcceptanceStyle(ContentProposalAdapter.PROPOSAL_REPLACE);
+			adapter.addContentProposalListener(new IContentProposalListener() {
+				@Override
+				public void proposalAccepted(IContentProposal proposal) {
+					Command command = SetCommand.create(
+							editingDomain,
+							entry,
+							BtsCorpusModelPackage.eINSTANCE.getBTSPassportEntry_Value(),
+							proposal.getContent());
+					editingDomain.getCommandStack().execute(
+							command);
+					entry.setValue(proposal.getContent());
+					linkContentassistResultToTextField(entry);
 				}
-				}
-			}
-		});
-		BTSObject object = null;
-		if (entry.getValue() != null) {
-			object = thsNavigatorController.find(entry.getValue(), null);
-			ths_select_text.setData(object);
+			});
+		} catch (ParseException e1) {
+			e1.printStackTrace();
 		}
-		if (object != null) {
-			ths_select_text.setText(object.getName());
-		}
-		
-		ths_select_text.addKeyListener(new KeyAdapter() {
 
 		linkContentassistResultToTextField(entry);
 
