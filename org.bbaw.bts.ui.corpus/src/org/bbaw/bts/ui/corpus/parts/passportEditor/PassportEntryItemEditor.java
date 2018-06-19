@@ -612,28 +612,26 @@ public class PassportEntryItemEditor extends PassportEntryEditorComposite {
 		ths_select_text.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyReleased(KeyEvent e) {
-				if(e.keyCode == SWT.CR || e.keyCode == SWT.KEYPAD_CR){
+				// CTRL+F
+				if (((e.stateMask & SWT.CTRL) == SWT.CTRL) && (e.keyCode == 102)){
 					// open search dialog
 					IEclipseContext child = context.createChild("searchselect");
-
 					context.set(BTSConstants.OBJECT_TYPES_ARRAY, new String[]{BTSConstants.THS_ENTRY});
 					BTSObjectTypeSubtypeViewerFilter viewerFilter = passportConfigurationController.createObjectTypeSubtypeFilterByReferencedPath(corpusObject, itemConfig2);
 					context.set(BTSObjectTypeSubtypeViewerFilter.class, viewerFilter);
+
 					SearchSelectObjectDialog dialog = ContextInjectionFactory.make(
 							SearchSelectObjectDialog.class, child);
-					if (dialog.open() == dialog.OK) {
+					if (dialog.open() == Dialog.OK) {
 						BTSObject object = dialog.getObject();
-						System.out.println(object.get_id());
 						Command command = SetCommand.create(editingDomain,
 								entry, BtsCorpusModelPackage.eINSTANCE.getBTSPassportEntry_Value(),
 								object.get_id());
 						editingDomain.getCommandStack().execute(command);
 						ths_select_text.setText(object.getName());
 						ths_select_text.setData(object);
-
 					}
-			    } else if (e.keyCode == SWT.BS)
-			    {
+			    } else if (e.keyCode == SWT.BS) {
 			    	Command command = SetCommand.create(editingDomain,
 							entry, BtsCorpusModelPackage.eINSTANCE.getBTSPassportEntry_Value(),
 							null);
