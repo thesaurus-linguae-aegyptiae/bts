@@ -198,7 +198,7 @@ public class RelationEditorComposite extends Composite {
 		EMFUpdateValueStrategy modelToTarget = new EMFUpdateValueStrategy();
 		modelToTarget.setConverter(new BTSStringToConfigItemConverter(
 				selectComboViewer));
-		IObservableValue target_type_viewer = ViewersObservables
+		IObservableValue<?> target_type_viewer = ViewersObservables
 				.observeSingleSelection(selectComboViewer);
 		bindingContext.bindValue(
 				target_type_viewer,

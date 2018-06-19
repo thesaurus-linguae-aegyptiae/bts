@@ -16,7 +16,7 @@ import org.eclipse.jface.fieldassist.IContentProposalProvider;
 public class ObjectSelectionProposalProvider implements
 		IContentProposalProvider {
 
-	private GeneralBTSObjectController gernalObjectController;
+	private GeneralBTSObjectController generalObjectController;
 	private BTSConfig configItem;
 	private List<BTSObject> list;
 	private Comparator<IContentProposal> comparator;
@@ -26,7 +26,7 @@ public class ObjectSelectionProposalProvider implements
 			GeneralBTSObjectController passportEditorController,
 			BTSConfig configItem,
 			BTSObject object) {
-		this.gernalObjectController = passportEditorController;
+		this.generalObjectController = passportEditorController;
 		this.setConfigItem(configItem);
 		this.object = object;
 	}
@@ -73,7 +73,7 @@ public class ObjectSelectionProposalProvider implements
 
 	private List<BTSObject> loadList(final String contents) {
 
-		return gernalObjectController.getObjectProposalsFor(
+		return generalObjectController.getObjectProposalsFor(
 				(BTSConfigItem) configItem, contents, object, null);
 
 	}

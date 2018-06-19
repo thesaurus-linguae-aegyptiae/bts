@@ -666,44 +666,37 @@ public class PassportEntryItemEditor extends PassportEntryEditorComposite {
 				1, 1));
 		((GridData) lblSearch.getLayoutData()).verticalIndent = 3;
 		lblSearch.addMouseListener(new MouseAdapter() {
-
 			@Override
 			public void mouseDown(MouseEvent e) {
-				if (PassportEntryItemEditor.this.userMayEdit)
-				{
-				Label l = (Label) e.getSource();
-				l.setBackground(BTSUIConstants.VIEW_BACKGROUND_LABEL_PRESSED);
+				if (PassportEntryItemEditor.this.userMayEdit) {
+					Label l = (Label) e.getSource();
+					l.setBackground(BTSUIConstants.VIEW_BACKGROUND_LABEL_PRESSED);
 				}
 			}
-
 			@Override
 			public void mouseUp(MouseEvent e) {
-				if (PassportEntryItemEditor.this.userMayEdit)
-				{
-				Label l = (Label) e.getSource();
-				l.setBackground(l.getParent().getBackground());
-				// open search dialog
-				IEclipseContext child = context.createChild("searchselect");
-				context.set(BTSConstants.OBJECT_TYPES_ARRAY, new String[]{BTSConstants.THS_ENTRY});
-				BTSObjectTypeSubtypeViewerFilter viewerFilter = passportConfigurationController.createObjectTypeSubtypeFilterByReferencedPath(corpusObject, itemConfig2);
-				context.set(BTSObjectTypeSubtypeViewerFilter.class, viewerFilter);
-				SearchSelectObjectDialog dialog = ContextInjectionFactory.make(
-						SearchSelectObjectDialog.class, child);
-				if (dialog.open() == dialog.OK) {
-					BTSObject object = dialog.getObject();
-					System.out.println(object.get_id());
-					Command command = SetCommand.create(editingDomain,
-							entry, BtsCorpusModelPackage.eINSTANCE.getBTSPassportEntry_Value(),
-							object.get_id());
-					editingDomain.getCommandStack().execute(command);
-					ths_select_text.setText(object.getName());
-					ths_select_text.setData(object);
-
-				}
+				if (PassportEntryItemEditor.this.userMayEdit) {
+					Label l = (Label) e.getSource();
+					l.setBackground(l.getParent().getBackground());
+					// open search dialog
+					IEclipseContext child = context.createChild("searchselect");
+					context.set(BTSConstants.OBJECT_TYPES_ARRAY, new String[]{BTSConstants.THS_ENTRY});
+					BTSObjectTypeSubtypeViewerFilter viewerFilter = passportConfigurationController.createObjectTypeSubtypeFilterByReferencedPath(corpusObject, itemConfig2);
+					context.set(BTSObjectTypeSubtypeViewerFilter.class, viewerFilter);
+					SearchSelectObjectDialog dialog = ContextInjectionFactory.make(SearchSelectObjectDialog.class, child);
+					if (dialog.open() == Dialog.OK) {
+						BTSObject object = dialog.getObject();
+						Command command = SetCommand.create(editingDomain,
+								entry, BtsCorpusModelPackage.eINSTANCE.getBTSPassportEntry_Value(),
+								object.get_id());
+						editingDomain.getCommandStack().execute(command);
+						ths_select_text.setText(object.getName());
+						ths_select_text.setData(object);
+					}
 				}
 			}
 		});
-		
+
 		Label lblPassportDialog = new Label(this, SWT.NONE);
 		lblPassportDialog.setImage(resourceProvider.getImage(Display.getDefault(),
 				BTSResourceProvider.IMG_PASSPORT));
@@ -714,23 +707,17 @@ public class PassportEntryItemEditor extends PassportEntryEditorComposite {
 		((GridData) lblPassportDialog.getLayoutData()).horizontalIndent = 3;
 
 		lblPassportDialog.addMouseListener(new MouseAdapter() {
-
 			@Override
 			public void mouseDown(MouseEvent e) {
-				
-				Label l = (Label) e.getSource();
-					l.setBackground(BTSUIConstants.VIEW_BACKGROUND_LABEL_PRESSED);
+				 ((Label) e.getSource()).setBackground(BTSUIConstants.VIEW_BACKGROUND_LABEL_PRESSED);
 			}
-
 			@Override
 			public void mouseUp(MouseEvent e) {
-				
-				Label l = (Label) e.getSource();
+				Label l = ((Label) e.getSource());
 				l.setBackground(l.getParent().getBackground());
 				// open search dialog
 				Object o = ths_select_text.getData();
-				if (o != null && o instanceof BTSObject)
-				{
+				if (o != null && o instanceof BTSObject) {
 					BTSObject btso = (BTSObject) o;
 					IEclipseContext child = context.createChild();
 					child.set(BTSObject.class, btso);
@@ -739,14 +726,9 @@ public class PassportEntryItemEditor extends PassportEntryEditorComposite {
 							permissionController.userMayEditObject(
 									permissionController.getAuthenticatedUser(), 
 									btso));
-					
-					PassportEditorDialog dialog = ContextInjectionFactory.make(
-							PassportEditorDialog.class, child);
-					if (dialog.open() == dialog.OK) {
-						
-					}
+					PassportEditorDialog dialog = ContextInjectionFactory.make(PassportEditorDialog.class, child);
+					dialog.open();
 				}
-				
 			}
 		});
 
