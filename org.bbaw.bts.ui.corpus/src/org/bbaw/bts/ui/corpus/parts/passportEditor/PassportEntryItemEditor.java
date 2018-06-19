@@ -556,6 +556,18 @@ public class PassportEntryItemEditor extends PassportEntryEditorComposite {
 
 	}
 
+
+	private void linkContentassistResultToTextField(BTSPassportEntry entry) {
+		BTSObject object = null;
+		if (entry.getValue() != null) {
+			object = thsNavigatorController.find(entry.getValue(), null);
+			ths_select_text.setData(object);
+		}
+		if (object != null) {
+			ths_select_text.setText(object.getName());
+		}
+	}
+
 	private void loadSelectTHSWidget(final BTSConfigItem itemConfig2,
 			final BTSPassportEntry entry) {
 		Label label = new Label(this, SWT.NONE);
@@ -612,6 +624,9 @@ public class PassportEntryItemEditor extends PassportEntryEditorComposite {
 		
 		ths_select_text.addKeyListener(new KeyAdapter() {
 
+		linkContentassistResultToTextField(entry);
+
+		ths_select_text.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyReleased(KeyEvent e) {
 				if(e.keyCode == SWT.CR || e.keyCode == SWT.KEYPAD_CR){
