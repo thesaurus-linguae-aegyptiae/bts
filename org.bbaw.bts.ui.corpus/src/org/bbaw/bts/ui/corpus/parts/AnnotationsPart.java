@@ -235,19 +235,11 @@ public class AnnotationsPart implements EventHandler {
 			// save menu item selection flags from application model to context
 			for (MMenuElement mi : viewmenu.getChildren()) {
 				if (mi instanceof MHandledMenuItem) {
-					String key = null;
-					MParameter param = null;
-					for (MParameter p : ((MHandledMenuItem) mi).getParameters())
-					{
-						if ("annotationsPartFilterParam".equals(p.getName()))
-						{
-							param = p;
-							break;
+					for (MParameter p : ((MHandledMenuItem) mi).getParameters()) {
+						if (p.getName().equals("annotationsPartFilterParam")) {
+							filters.put(p.getValue(), ((MHandledMenuItem)mi).isSelected());
 						}
 					}
-					if (param == null) continue;
-					key = param.getValue();
-					filters.put(key, ((MHandledMenuItem)mi).isSelected());
 					// retrieve filter command in order to handle possible submenu entries
 					menuFilterCommand = ((MHandledMenuItem) mi).getCommand();
 				}
