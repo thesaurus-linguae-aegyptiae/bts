@@ -69,7 +69,6 @@ public class CorpusUtils {
 			}
 		}
 		return typeIdentifier;
-		
 	}
 	
 	public static String getTypeIdentifier(String elementType, BTSConfigItem typeConfigItem, 
@@ -95,29 +94,28 @@ public class CorpusUtils {
 	
 	public static String getObjectClassName(BTSIdentifiableItem object)
 	{
-		
 		if (object.eClass().getName().startsWith("BTSAbstractText")) {
-			return BTSConstants.BASIC_OBJECT_TYPES[0];
+			return BTSConstants.ABSTRACT_TEXT;
 		}else if (object.eClass().getName().startsWith("BTSAnnotation")) {
-			return BTSConstants.BASIC_OBJECT_TYPES[1];
+			return BTSConstants.ANNOTATION;
 		}
 		else if (object.eClass().getName().startsWith("BTSTCObject")) {
-			return BTSConstants.BASIC_OBJECT_TYPES[2];
+			return BTSConstants.CORPUS_OBJECT;
 		} else if (object.eClass().getName().startsWith("BTSImage")) {
-			return BTSConstants.BASIC_OBJECT_TYPES[3];
+			return BTSConstants.IMAGE;
 		} else if (object.eClass().getName().startsWith("BTSLemmaEntry")) {
-			return BTSConstants.BASIC_OBJECT_TYPES[4];
+			return BTSConstants.WLIST_ENTRY;
 		} 
 		else if (object.eClass().getName().startsWith("BTSTextCorpus")) {
-			return BTSConstants.BASIC_OBJECT_TYPES[6];
+			return BTSConstants.TEXT_CORPUS;
 		}
 		else if (object.eClass().getName().startsWith("BTSText")) {
-			return BTSConstants.BASIC_OBJECT_TYPES[5];
+			return BTSConstants.TEXT;
 		}
 		  else if (object.eClass().getName().startsWith("BTSThsEntry")) {
-			return BTSConstants.BASIC_OBJECT_TYPES[7];
+			return BTSConstants.THS_ENTRY;
 		} else if (object.eClass().getName().startsWith("BTSComment")) {
-			return BTSConstants.BASIC_OBJECT_TYPES[8];
+			return BTSConstants.COMMENT;
 		}
 		else
 		{

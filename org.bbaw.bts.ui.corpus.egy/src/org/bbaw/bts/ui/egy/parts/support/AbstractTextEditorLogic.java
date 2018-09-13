@@ -77,22 +77,22 @@ public abstract class AbstractTextEditorLogic {
 		// set basic rulers
 		if (oruler != null)
 		{
-			oruler.addAnnotationType(BTSConstants.ANNOTATION_SUBTEXT);
-			oruler.setAnnotationTypeLayer(BTSConstants.ANNOTATION_SUBTEXT, 12);
-			oruler.setAnnotationTypeColor(BTSConstants.ANNOTATION_SUBTEXT, BTSUIConstants.COLOR_SUBTEXT);
+			oruler.addAnnotationType(BTSConstants.TEXT + CorpusUtils.TYPE_PATH_DELIMITER + BTSConstants.ANNOTATION_SUBTEXT);
+			oruler.setAnnotationTypeLayer(BTSConstants.TEXT + CorpusUtils.TYPE_PATH_DELIMITER + BTSConstants.ANNOTATION_SUBTEXT, 12);
+			oruler.setAnnotationTypeColor(BTSConstants.TEXT + CorpusUtils.TYPE_PATH_DELIMITER + BTSConstants.ANNOTATION_SUBTEXT, BTSUIConstants.COLOR_SUBTEXT);
 	
-			oruler.addAnnotationType(BTSConstants.ANNOTATION_SUBTEXT + BTSModelAnnotation.HIGHLIGHTED);
-			oruler.setAnnotationTypeLayer(BTSConstants.ANNOTATION_SUBTEXT + BTSModelAnnotation.HIGHLIGHTED, 2);
-			oruler.setAnnotationTypeColor(BTSConstants.ANNOTATION_SUBTEXT + BTSModelAnnotation.HIGHLIGHTED, BTSUIConstants.COLOR_SUBTEXT);
+			oruler.addAnnotationType(BTSConstants.TEXT + CorpusUtils.TYPE_PATH_DELIMITER + BTSConstants.ANNOTATION_SUBTEXT + BTSModelAnnotation.HIGHLIGHTED);
+			oruler.setAnnotationTypeLayer(BTSConstants.TEXT + CorpusUtils.TYPE_PATH_DELIMITER + BTSConstants.ANNOTATION_SUBTEXT + BTSModelAnnotation.HIGHLIGHTED, 13);
+			oruler.setAnnotationTypeColor(BTSConstants.TEXT + CorpusUtils.TYPE_PATH_DELIMITER + BTSConstants.ANNOTATION_SUBTEXT + BTSModelAnnotation.HIGHLIGHTED, BTSUIConstants.COLOR_SUBTEXT);
 	
 			oruler.addAnnotationType(BTSConstants.COMMENT);
-			oruler.setAnnotationTypeLayer(BTSConstants.COMMENT, 11);
+			oruler.setAnnotationTypeLayer(BTSConstants.COMMENT, 13);
 			oruler.setAnnotationTypeColor(BTSConstants.COMMENT,
 					BTSUIConstants.COLOR_COMMENT);
 			
-			oruler.addAnnotationType(BTSConstants.COMMENT  + BTSModelAnnotation.HIGHLIGHTED);
-			oruler.setAnnotationTypeLayer(BTSConstants.COMMENT  + BTSModelAnnotation.HIGHLIGHTED, 14);
-			oruler.setAnnotationTypeColor(BTSConstants.COMMENT  + BTSModelAnnotation.HIGHLIGHTED,
+			oruler.addAnnotationType(BTSConstants.COMMENT + BTSModelAnnotation.HIGHLIGHTED);
+			oruler.setAnnotationTypeLayer(BTSConstants.COMMENT + BTSModelAnnotation.HIGHLIGHTED, 14);
+			oruler.setAnnotationTypeColor(BTSConstants.COMMENT + BTSModelAnnotation.HIGHLIGHTED,
 					BTSUIConstants.COLOR_COMMENT);
 	
 			oruler.addAnnotationType("org.eclipse.xtext.ui.editor.error");
