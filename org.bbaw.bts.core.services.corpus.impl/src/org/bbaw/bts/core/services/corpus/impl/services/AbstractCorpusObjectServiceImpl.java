@@ -269,6 +269,7 @@ implements GenericCorpusObjectService<E, K>{
 	}
 	
 	public String[] getActiveLemmaLists() {
+		System.out.println(active_lemmaLists);
 		if (active_lemmaLists == null || "".equals(active_lemmaLists))
 		{
 			return getActiveProjects();
