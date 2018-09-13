@@ -9,7 +9,50 @@
       arch="x86,x86_64">
 
    <description url="http://www.example.com/description">
-      [Enter Feature Description here.]
+Change log
+==========
+
+Release 3.1.5
+-------------
+
+	- Fix: passport editor content assist bug (#9150, 577a988, c84c2e1, 24973a6)
+	- Fix: NPE in lemmatizer part (028bb75)
+	- Fix: bug in annotation part rubrum labeling (b20d33e)
+	- Fix: error in local database view installation resulting in disability to load lemma lists (fd37bbc)
+	- GUI: adjust search dialog size and deactivate ID search option checkbox by default (83001ae, 33a797a)
+	- GUI: change appearance of comment ID in editor dialog (7e2ac8a)
+	- GUI: get rid of confirmation dialog before individual corpus reindex in DB manager (9885885)
+	- GUI: show changelog in software update dialog and improve update dialog in general (b92df7d, 8f4b06f, 50e635c)
+	- GUI: when manually invoking update from application menu, show update dialog instead of proceeding silently (dafc450)
+	- GUI: change keybinding for opening passport entry search from passport editor part text fields from &lt;CR$&gt; to &lt;CTRL-F&gt; (ed6d3de)
+	- GUI: fix missing subtext annotation marking in vertical overview ruler of text editor part (a699e53)
+	- Feature: platform independence / unix compatibility (54ca879)
+	- Chore: move default P2 software update repository server locator (59ccae3)
+
+Release 3.1.4
+-------------
+
+	- Fix: class cast exception while caching of BTSUserGroup objects during display name resolution of corpus object owner. (#9149)
+
+Release 3.1.3
+-------------
+
+	- Fix: NPE caused by accidental matches in BTSLemmaEntry registry during search result tree generation. (#9120)
+	- Feature: include assigned lemma entry in result list for searches invoked on already lemmatized token.
+
+Release 3.1.2
+-------------
+
+	- Fix: performance issue due to repeated DAO operations because of insufficient caching of user data. (#9086)
+	- Fix: lemma search result list sort order broken by processing of additional lemma relation types in result tree generation introduced in 3.1.1. (#9020)
+	- Fix: related object label update after making modifications in respective editor dialog.
+	- GUI: remove 'Delete' buttons from toolbars in navigator parts. (#8861, #6462)
+	- GUI: change labels of delete command menu entries. (#8862, #8863)
+	- GUI: rename 'Bin' tabs in navigator parts.
+	- GUI: multiple typos.
+	- Feature: add confirmation dialog for command (delete) that moves objects to trash.
+	- Feature: disable menu entries for delete/restore command where they don't have any effect.
+
    </description>
 
    <copyright url="http://www.example.com/copyright">
