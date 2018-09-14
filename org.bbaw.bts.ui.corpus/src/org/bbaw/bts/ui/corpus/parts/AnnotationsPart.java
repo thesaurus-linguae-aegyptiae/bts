@@ -215,6 +215,14 @@ public class AnnotationsPart implements EventHandler {
 	}
 
 
+	/**
+	 * Retrieves the annotation part's view menu, where menu items correspond to related object
+	 * types that are either to be shown or to be filtered out. Based on the check states of these
+	 * menu items, the related object type filter state flag map gets initiated.<br/><br/>
+	 * 
+	 * Next, annotation type and subtype definitions are retrieved from the active project configuration.
+	 * Each type and subtype gets a corresponding checkable menu item in a multi-level submenu.
+	 */
 	private void extendAnnotationsFilterMenu() {
 		// initialize filters from fragment model definition
 		HashMap<String, Boolean> filters = new HashMap<String, Boolean>();
@@ -343,6 +351,14 @@ public class AnnotationsPart implements EventHandler {
 	}
 
 
+	/**
+	 * Creates a new menu item with a checked checkmark corresponding to the key passed a parameter.
+	 * The newly created menu item also gets equipped with an attached menu parameter of type <code>annotationsPartFilterParam</code>,
+	 * where the specified key gets stored in.
+	 * @param key An identifier for the boolean filter flag.
+	 * @return A new {@link MHandledMenuItem} instance.
+	 * @see ItemType#CHECK
+	 */
 	private MHandledMenuItem newFilterMenuItem(String key) {
 		MHandledMenuItem menuItem = MMenuFactory.INSTANCE.createHandledMenuItem();
 		menuItem.setElementId("org.bbaw.bts.ui.corpus.part.annotations.viewmenu.showType.annotation.type." + key);
