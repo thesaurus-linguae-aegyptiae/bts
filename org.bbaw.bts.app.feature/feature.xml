@@ -19,6 +19,7 @@ Release 3.1.5
 	- Fix: NPE in lemmatizer part (028bb75)
 	- Fix: bug in annotation part rubrum labeling (b20d33e)
 	- Fix: error in local database view installation resulting in disability to load lemma lists (fd37bbc)
+	- Fix: allow annotation filtering by type and missing subtype (96b979e)
 	- GUI: adjust search dialog size and deactivate ID search option checkbox by default (83001ae, 33a797a)
 	- GUI: change appearance of comment ID in editor dialog (7e2ac8a)
 	- GUI: get rid of confirmation dialog before individual corpus reindex in DB manager (9885885)
@@ -58,12 +59,12 @@ Release 3.1.2
       [Enter Copyright Description here.]
    </copyright>
 
-   <license url="http://www.example.com/license">
+   <license url="https://www.gnu.org/licenses/lgpl-3.0.html">
       [Enter License Description here.]
    </license>
 
    <url>
-      <update url="http://teloata.bbaw.de/bts-update/update-3.x/repository/"/>
+      <update url="http://aaew64.bbaw.de/bts/updates/update-3.x/repository/"/>
    </url>
 
    <includes
