@@ -26,6 +26,7 @@ Release 3.1.5
 	- GUI: show changelog in software update dialog and improve update dialog in general (b92df7d, 8f4b06f, 50e635c)
 	- GUI: when manually invoking update from application menu, show update dialog instead of proceeding silently (dafc450)
 	- GUI: change keybinding for opening passport entry search from passport editor part text fields from &lt;CR$&gt; to &lt;CTRL-F&gt; (ed6d3de)
+	- GUI: fix missing subtext annotation marking in vertical overview ruler of text editor part (a699e53)
 	- Feature: platform independence / unix compatibility (54ca879)
 	- Chore: move default P2 software update repository server locator (59ccae3)
 
