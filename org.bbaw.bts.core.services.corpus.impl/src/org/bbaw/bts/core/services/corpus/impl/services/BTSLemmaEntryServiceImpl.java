@@ -204,7 +204,6 @@ implements BTSLemmaEntryService, BTSObjectSearchService
 	@Override
 	public List<BTSLemmaEntry> listRootEntries(IProgressMonitor monitor) {
 		List<BTSLemmaEntry> entries = new Vector<BTSLemmaEntry>();
-		System.out.println( getActiveLemmaLists());
 		for (String p : getActiveLemmaLists()) {
 			entries.addAll(lemmaEntryDao.list(p + BTSCorpusConstants.WLIST,
 					DaoConstants.VIEW_LEMMA_ROOT_ENTRIES, BTSConstants.OBJECT_STATE_ACTIVE));
