@@ -2,7 +2,7 @@
 <feature
       id="org.bbaw.bts.app.feature"
       label="Berlin Text System Core Application"
-      version="3.1.4.qualifier"
+      version="3.2.0.qualifier"
       provider-name="BBAW"
       os="linux,macosx,win32"
       ws="carbon,cocoa,gtk,win32"
@@ -12,7 +12,7 @@
 Change log
 ==========
 
-Release 3.1.5
+Release 3.2.0
 -------------
 
 	- Fix: passport editor content assist bug (#9150, 577a988, c84c2e1, 24973a6)
@@ -84,7 +84,7 @@ Release 3.1.2
       <import plugin="org.apache.httpcomponents.httpclient"/>
       <import plugin="org.apache.httpcomponents.httpcore"/>
       <import plugin="org.apache.lucene.core"/>
-      <import plugin="org.bbaw.bts.app" version="1.1.0" match="greaterOrEqual"/>
+      <import plugin="org.bbaw.bts.app" version="3.2.0" match="greaterOrEqual"/>
       <import plugin="org.bbaw.bts.commons.libs.elasticsearch" version="1.0.0" match="greaterOrEqual"/>
       <import plugin="org.bbaw.bts.core.commons" version="1.0.0" match="greaterOrEqual"/>
       <import plugin="org.bbaw.bts.core.dao" version="1.0.0" match="greaterOrEqual"/>
