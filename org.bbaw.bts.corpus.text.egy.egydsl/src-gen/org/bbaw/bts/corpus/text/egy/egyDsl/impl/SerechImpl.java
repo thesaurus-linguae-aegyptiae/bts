@@ -24,10 +24,10 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.bbaw.bts.corpus.text.egy.egyDsl.impl.SerechImpl#getWChar <em>WChar</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
