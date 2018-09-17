@@ -143,6 +143,16 @@
 						</environment>
 						
 					</environments>
+					<filters>
+						<!-- this is in order to prevent tycho to try resolving a dependency on the objectteams OTDT patch of org.eclipse.jdt.core. -->
+						<filter>
+							<type>eclipse-plugin</type>
+							<id>org.eclipse.jdt.core</id>
+							<restrictTo>
+								<version>3.12.0.v20160516-2131</version>
+							</restrictTo>
+						</filter>
+					</filters>
 				</configuration>
 			</plugin>
 		</plugins>
