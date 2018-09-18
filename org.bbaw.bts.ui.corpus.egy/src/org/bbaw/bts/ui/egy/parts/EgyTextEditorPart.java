@@ -605,6 +605,9 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 					embeddedEditorFactory = injector
 							.getInstance(EmbeddedEditorFactory.class);
 
+
+					// XXX
+					// https://www.eclipse.org/forums/index.php/t/1067356/
 					embeddedEditor = embeddedEditorFactory
 							.newEditor(xtextResourceProvider)
 							.showAnnotations(
@@ -645,6 +648,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 					
 					
 					configureEditorDrawingStrategies(oruler);
+
 					if (show_line_number_ruler)
 					{
 						lineNumberRulerColumn = new EgyLineNumberRulerColumn(LINE_SPACE);
@@ -1703,22 +1707,8 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 						annotationOffsetMap.put(pos.getOffset(), list);
 					}
 					list.add((BTSModelAnnotation) a);
-					
-					
-					// nur sentenceitems oder alles?
-//					if (((BTSModelAnnotation) a).getModel() instanceof BTSSentenceItem) {
-//						BTSSentenceItem item = (BTSSentenceItem) ((BTSModelAnnotation) a)
-//								.getModel();
-//						textItems.add(item);
-//						
-//					}
 
 				}
-				// else if (pos.getOffset() >= start && pos.getOffset() <= end)
-				// {
-				// annotations.add((ModelAnnotation) a);
-				//
-				// }
 			}
 		}
 		
