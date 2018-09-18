@@ -440,7 +440,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 		
 		if (parentShell == null)
 		{
-			parentShell = new Shell();
+			parentShell = Display.getDefault().getActiveShell();
 		}
 		this.parent = parent;
 		parent.setLayout(new GridLayout());
@@ -550,7 +550,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 									}});
 							}
 						};
-						new ProgressMonitorDialog(new Shell()).run(true, true, op);
+						new ProgressMonitorDialog(Display.getDefault().getActiveShell()).run(true, true, op);
 					} catch (InvocationTargetException ee) {
 						// handle exception
 					} catch (InterruptedException ee) {
@@ -1034,7 +1034,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 							});
 						}
 					};
-					new ProgressMonitorDialog(new Shell()).run(true, true,
+					new ProgressMonitorDialog(Display.getDefault().getActiveShell()).run(true, true,
 							op);
 				} catch (InvocationTargetException ee) {
 					// handle exception
@@ -1082,7 +1082,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 			boolean valid = checkResourceErrors(resource);
 			if (!valid)
 			{
-				if (shell == null) shell = new Shell();
+				if (shell == null) shell = Display.getDefault().getActiveShell();
 				MessageDialog dialog = new MessageDialog(shell, "Errors in Text - Possible Data Loss", null,
 					    "You are trying to save a text which contains errors, saving this text may lead to loss of data."
 					    + "\n\nIt is not recommended to save a text which contains errors!"
@@ -2352,7 +2352,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 								
 						}
 					};
-					new ProgressMonitorDialog(new Shell()).run(true, true, op);
+					new ProgressMonitorDialog(Display.getDefault().getActiveShell()).run(true, true, op);
 				} catch (InvocationTargetException e) {
 					// handle exception
 				} catch (InterruptedException e) {
@@ -2884,7 +2884,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 								});
 							}
 						};
-						new ProgressMonitorDialog(new Shell()).run(true, true,
+						new ProgressMonitorDialog(Display.getDefault().getActiveShell()).run(true, true,
 								op);
 					} catch (InvocationTargetException ee) {
 						// handle exception
