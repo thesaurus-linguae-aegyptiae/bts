@@ -440,7 +440,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 		
 		if (parentShell == null)
 		{
-			parentShell = new Shell();
+			parentShell = Display.getDefault().getActiveShell();
 		}
 		this.parent = parent;
 		parent.setLayout(new GridLayout());
@@ -550,7 +550,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 									}});
 							}
 						};
-						new ProgressMonitorDialog(new Shell()).run(true, true, op);
+						new ProgressMonitorDialog(Display.getDefault().getActiveShell()).run(true, true, op);
 					} catch (InvocationTargetException ee) {
 						// handle exception
 					} catch (InterruptedException ee) {
@@ -605,6 +605,9 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 					embeddedEditorFactory = injector
 							.getInstance(EmbeddedEditorFactory.class);
 
+
+					// XXX
+					// https://www.eclipse.org/forums/index.php/t/1067356/
 					embeddedEditor = embeddedEditorFactory
 							.newEditor(xtextResourceProvider)
 							.showAnnotations(
@@ -645,6 +648,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 					
 					
 					configureEditorDrawingStrategies(oruler);
+
 					if (show_line_number_ruler)
 					{
 						lineNumberRulerColumn = new EgyLineNumberRulerColumn(LINE_SPACE);
@@ -1034,7 +1038,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 							});
 						}
 					};
-					new ProgressMonitorDialog(new Shell()).run(true, true,
+					new ProgressMonitorDialog(Display.getDefault().getActiveShell()).run(true, true,
 							op);
 				} catch (InvocationTargetException ee) {
 					// handle exception
@@ -1082,7 +1086,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 			boolean valid = checkResourceErrors(resource);
 			if (!valid)
 			{
-				if (shell == null) shell = new Shell();
+				if (shell == null) shell = Display.getDefault().getActiveShell();
 				MessageDialog dialog = new MessageDialog(shell, "Errors in Text - Possible Data Loss", null,
 					    "You are trying to save a text which contains errors, saving this text may lead to loss of data."
 					    + "\n\nIt is not recommended to save a text which contains errors!"
@@ -1703,22 +1707,8 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 						annotationOffsetMap.put(pos.getOffset(), list);
 					}
 					list.add((BTSModelAnnotation) a);
-					
-					
-					// nur sentenceitems oder alles?
-//					if (((BTSModelAnnotation) a).getModel() instanceof BTSSentenceItem) {
-//						BTSSentenceItem item = (BTSSentenceItem) ((BTSModelAnnotation) a)
-//								.getModel();
-//						textItems.add(item);
-//						
-//					}
 
 				}
-				// else if (pos.getOffset() >= start && pos.getOffset() <= end)
-				// {
-				// annotations.add((ModelAnnotation) a);
-				//
-				// }
 			}
 		}
 		
@@ -2352,7 +2342,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 								
 						}
 					};
-					new ProgressMonitorDialog(new Shell()).run(true, true, op);
+					new ProgressMonitorDialog(Display.getDefault().getActiveShell()).run(true, true, op);
 				} catch (InvocationTargetException e) {
 					// handle exception
 				} catch (InterruptedException e) {
@@ -2884,7 +2874,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 								});
 							}
 						};
-						new ProgressMonitorDialog(new Shell()).run(true, true,
+						new ProgressMonitorDialog(Display.getDefault().getActiveShell()).run(true, true,
 								op);
 					} catch (InvocationTargetException ee) {
 						// handle exception

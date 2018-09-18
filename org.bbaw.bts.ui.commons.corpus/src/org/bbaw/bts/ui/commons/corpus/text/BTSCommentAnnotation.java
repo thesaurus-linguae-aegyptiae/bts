@@ -49,4 +49,5 @@ public class BTSCommentAnnotation extends BTSModelAnnotation {
 		}
 		return super.getText();
 	}
+
 }

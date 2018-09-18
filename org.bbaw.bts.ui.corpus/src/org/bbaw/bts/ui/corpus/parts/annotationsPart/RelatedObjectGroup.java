@@ -103,7 +103,7 @@ public abstract class RelatedObjectGroup extends Composite{
 	
 	@PostConstruct
 	public void postConstruct(){
-		
+
 		editingDomain = editingDomainController.getEditingDomain(object);
 		setLayout(new GridLayout(1, false));
 		((GridLayout)this.getLayout()).marginHeight = 0;
@@ -171,9 +171,8 @@ public abstract class RelatedObjectGroup extends Composite{
 			}
 		});
 		expandBar.addMouseListener(mouseListener);
-		
 
-		
+
 		xpndtmNewExpanditem = new ExpandItem(expandBar, SWT.NONE);
 		xpndtmNewExpanditem.setExpanded(false);
 		if (object.getName() != null)
