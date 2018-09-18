@@ -29,7 +29,7 @@ Release 3.2.0
 	- GUI: fix missing subtext annotation marking in vertical overview ruler of text editor part (a699e53)
 	- Feature: platform independence / unix compatibility (54ca879)
 	- Chore: move default P2 software update repository server locator (59ccae3)
-   	- Chore: upgrade JSesh library to version 7.2.0 (1292da9)
+	- Chore: upgrade JSesh library to version 7.2.0 (1292da9)
 
 Release 3.1.4
 -------------
