@@ -98,7 +98,7 @@ public class BTSConstants
 	public static final String DEFAULT_LOCAL_DB_URL_PORT = "9086";//"6984";//
 	public static final String DEFAULT_LOCAL_DB_URL_HOST = "127.0.0.1";
 	public static final String DEFAULT_LOCAL_DB_URL_PROTOCOL = "http";
-	public static final String DEFAULT_PREF_P2_UPDATE_SITE =  "http://telota.bbaw.de/bts-update/update-3.x/repository/";//
+	public static final String DEFAULT_PREF_P2_UPDATE_SITE =  "http://aaew64.bbaw.de/bts/updates/update-3.x/repository/";//
 	public static final String DEFAULT_SEARCH_HTTP_ENABLED = "true";
 	public static final String DEFAULT_LOCAL_SEARCH_CLUSTER_NAME = "btsElasticsearch";
 	/**
