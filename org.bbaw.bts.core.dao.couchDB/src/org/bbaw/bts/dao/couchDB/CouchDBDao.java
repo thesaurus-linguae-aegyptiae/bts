@@ -598,7 +598,7 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 
 	public void createView(String path, String sourcePath, String viewName)
 	{
-		logger.info("path " + path + " viewName " + viewName);
+		logger.info("create view from local source "+sourcePath+". path " + path + " viewName " + viewName);
 		CouchDbClient dbClient = connectionProvider.getDBClient(CouchDbClient.class, path);
 		// design documents stored on local .js files
 
@@ -1206,8 +1206,7 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 			allDocs = view.includeDocs(false).query();
 		} catch (NoDocumentException e)
 		{
-			e.printStackTrace();
-			System.out.println("create view, view id: " + viewId);
+			logger.warn(e, "Could not apply view "+viewId+" to collection "+path+". Trying to create view from local source "+sourcePath);
 			createView(path, sourcePath, viewId);
 			view = dbClient.view(viewId);
 			allDocs = view.includeDocs(false).query();
@@ -1221,16 +1220,16 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 		InputStream inStream = null;
 		try
 		{
+			logger.info("Trying to get stream for couchdb view "+viewId+" at "+path);
 			view = dbClient.view(viewId);
-
+			inStream = view.includeDocs(false).queryForStream();
 		} catch (NoDocumentException e)
 		{
-			e.printStackTrace();
-			System.out.println("create view, view id: " + viewId);
+			logger.warn(e, "Could not apply view "+viewId+" to collection "+path+". Trying to create view from local source "+sourcePath);
 			createView(path, sourcePath, viewId);
 			view = dbClient.view(viewId);
+			inStream = view.includeDocs(false).queryForStream();
 		}
-		inStream = view.includeDocs(false).queryForStream();
 		return inStream;
 	}
 	

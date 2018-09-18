@@ -4,6 +4,8 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.bbaw.bts.core.dao.util.BTSQueryRequest;
+import org.eclipse.core.runtime.preferences.IEclipsePreferences;
+import org.eclipse.core.runtime.preferences.InstanceScope;
 import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.dialogs.TitleAreaDialog;
@@ -19,6 +21,7 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
+import org.osgi.service.prefs.BackingStoreException;
 
 public class SimpleSearchQueryDialog extends TitleAreaDialog {
 	private Text text;
@@ -32,7 +35,14 @@ public class SimpleSearchQueryDialog extends TitleAreaDialog {
 	@Optional
 	@Named("org.bbaw.bts.ui.main.commandparameter.searchString")
 	private String searchString;
-	
+
+	private String scopeId = null;
+
+	final static String OPT_ID_SEARCH = "id_search";
+	final static String OPT_NAME_SEARCH = "name_search";
+
+	private IEclipsePreferences prefs;
+
 	/**
 	 * Create the dialog.
 	 * @param parentShell
@@ -49,7 +59,7 @@ public class SimpleSearchQueryDialog extends TitleAreaDialog {
 	@Override
 	protected void configureShell(Shell newShell) {
 		super.configureShell(newShell);
-		newShell.setMinimumSize(getInitialSize());
+		newShell.setMinimumSize(new Point(225, 150));
 	}
 
 	/**
@@ -58,6 +68,9 @@ public class SimpleSearchQueryDialog extends TitleAreaDialog {
 	 */
 	@Override
 	protected Control createDialogArea(final Composite parent) {
+
+		prefs = InstanceScope.INSTANCE.getNode("org.bbaw.bts.ui");
+
 		Composite area = (Composite) super.createDialogArea(parent);
 		Composite containerTop = new Composite(area, SWT.NONE);
 		containerTop.setLayout(new GridLayout(2, false));
@@ -93,6 +106,7 @@ public class SimpleSearchQueryDialog extends TitleAreaDialog {
 			@Override
 			public void widgetDefaultSelected(SelectionEvent e) {}
 		});
+		setIdOnly(false);
 		
 		exactButton = new Button(containerBot, SWT.CHECK);
 		exactButton.setText("Search for Names only");
@@ -109,6 +123,7 @@ public class SimpleSearchQueryDialog extends TitleAreaDialog {
 			public void widgetDefaultSelected(SelectionEvent e) {
 			}
 		});
+		setNameOnly(prefs.getBoolean(scopeId + "." + OPT_NAME_SEARCH, false));
 		
 		wildcardButton = new Button(containerBot, SWT.PUSH);
 		wildcardButton.setText("Add *-wildcard");
@@ -147,6 +162,7 @@ public class SimpleSearchQueryDialog extends TitleAreaDialog {
 				
 			}
 		});
+		area.pack();
 		return area;
 	}
 
@@ -167,6 +183,14 @@ public class SimpleSearchQueryDialog extends TitleAreaDialog {
 		String searchString = text.getText().trim();
 		if (searchString.length() > 0)
 		{
+			prefs.putBoolean(scopeId+"."+OPT_ID_SEARCH, idButton.getSelection());
+			prefs.putBoolean(scopeId+"."+OPT_NAME_SEARCH, exactButton.getSelection());
+			try {
+				prefs.flush();
+			} catch (BackingStoreException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			queryRequest = new BTSQueryRequest(searchString);
 			queryRequest.setIdQuery(idButton.getSelection());
 			if (exactButton.getSelection())
@@ -180,14 +204,6 @@ public class SimpleSearchQueryDialog extends TitleAreaDialog {
 		super.okPressed();
 	}
 
-
-	/**
-	 * Return the initial size of the dialog.
-	 */
-	@Override
-	protected Point getInitialSize() {
-		return new Point(450, 300);
-	}
 
 	public BTSQueryRequest getQueryRequest() {
 		return queryRequest;
@@ -211,6 +227,10 @@ public class SimpleSearchQueryDialog extends TitleAreaDialog {
 	public void setIdOnly(boolean checked) {
 		idButton.setSelection(checked);
 		idButton.setData(checked);
+	}
+
+	public void setScope(String identifier) {
+		this.scopeId = identifier;
 	}
 
 	@Override
