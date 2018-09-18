@@ -368,27 +368,7 @@ public class EgyLemmatizerPart implements SearchViewer {
 			@Override
 			public void mouseUp(MouseEvent e) {
 				if (userMayEdit || currentWord == null) {
-					lemmaViewer.getTree().setEnabled(true);
-					lblSearch
-							.setBackground(BTSUIConstants.VIEW_BACKGROUND_LABEL_PRESSED);
-
-					// run search command
-					Map<String, Object> map = new HashMap<String, Object>(1);
-					map.put("org.bbaw.bts.ui.main.commandparameter.viewerFilter",
-							"reviewState=new,reviewState=awaiting-review awaiting-update,"
-									+ "reviewState=reviewed,"
-									+ "reviewState=published,reviewState=published-awaiting-review,"
-									+ "reviewState=transformed_awaiting_update");
-					map.put("org.bbaw.bts.ui.main.commandparameter.searchOptions", OPT_NAME_ONLY);
-					String chars = textSelectedWord.getText().replaceAll(",", ".");
-					if (chars != null)
-					{
-						map.put("org.bbaw.bts.ui.main.commandparameter.searchString", chars);
-					}
-					ParameterizedCommand cmd = commandService.createCommand(
-							"org.bbaw.bts.ui.main.command.search", map);
-
-					handlerService.executeHandler(cmd);
+					invokeOpenSearchDialogCommand();
 				}
 			}
 		});
@@ -717,6 +697,34 @@ public class EgyLemmatizerPart implements SearchViewer {
 			setSelection((BTSText) selection);
 		}
 	}
+
+
+
+
+	private void invokeOpenSearchDialogCommand() {
+		lemmaViewer.getTree().setEnabled(true);
+		lblSearch
+				.setBackground(BTSUIConstants.VIEW_BACKGROUND_LABEL_PRESSED);
+
+		// run search command
+		Map<String, Object> map = new HashMap<String, Object>(1);
+		map.put("org.bbaw.bts.ui.main.commandparameter.viewerFilter",
+				"reviewState=new,reviewState=awaiting-review awaiting-update,"
+						+ "reviewState=reviewed,"
+						+ "reviewState=published,reviewState=published-awaiting-review,"
+						+ "reviewState=transformed_awaiting_update");
+		String chars = textSelectedWord.getText().replaceAll(",", ".");
+		if (chars != null)
+		{
+			map.put("org.bbaw.bts.ui.main.commandparameter.searchString", chars);
+		}
+		ParameterizedCommand cmd = commandService.createCommand(
+				"org.bbaw.bts.ui.main.command.search", map);
+
+		handlerService.executeHandler(cmd);
+	}
+
+
 
 	protected void loadChildren(final TreeNodeWrapper node, boolean b, String prefix) {
 		List<BTSLemmaEntry> children = lemmaNavigatorController
@@ -1258,7 +1266,7 @@ public class EgyLemmatizerPart implements SearchViewer {
 		}
 
 		// try to load lemma that has already be assigned to the word currently selected in text editor
-		final String assignedLemmaId = currentWord.getLKey();
+		final String assignedLemmaId = (currentWord != null) ? currentWord.getLKey() : null;
 
 		// fill lemmaViewer
 		searchjob = new Job("load input") {
