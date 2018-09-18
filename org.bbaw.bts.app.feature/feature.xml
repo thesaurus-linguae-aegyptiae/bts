@@ -12,7 +12,7 @@
 Change log
 ==========
 
-Release 3.1.5
+Release 3.2.0
 -------------
 
 	- Fix: passport editor content assist bug (#9150, 577a988, c84c2e1, 24973a6)
@@ -27,6 +27,7 @@ Release 3.1.5
 	- GUI: change keybinding for opening passport entry search from passport editor part text fields from &lt;CR$&gt; to &lt;CTRL-F&gt; (ed6d3de)
 	- Feature: platform independence / unix compatibility (54ca879)
 	- Chore: move default P2 software update repository server locator (59ccae3)
+   	- Chore: upgrade JSesh library to version 7.2.0 (1292da9)
 
 Release 3.1.4
 -------------
