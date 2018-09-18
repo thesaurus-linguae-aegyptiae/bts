@@ -7,7 +7,6 @@ import org.bbaw.bts.ui.commons.utils.BTSUIConstants;
 import org.bbaw.bts.ui.corpus.dialogs.PassportEditorDialog;
 import org.bbaw.bts.ui.resources.BTSResourceProvider;
 import org.eclipse.e4.core.contexts.ContextInjectionFactory;
-import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.MouseAdapter;
@@ -16,7 +15,6 @@ import org.eclipse.swt.layout.RowData;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
-import org.eclipse.swt.widgets.Shell;
 
 public class RelatedObjectGroupAnnotation extends RelatedObjectGroup {
 

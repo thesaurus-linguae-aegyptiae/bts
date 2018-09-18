@@ -70,6 +70,7 @@ import org.eclipse.swt.events.ControlEvent;
 import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Shell;
@@ -487,7 +488,7 @@ public class AnnotationsPart implements EventHandler {
 					});
 				}
 			};
-			new ProgressMonitorDialog(new Shell()).run(true, true, op);
+			new ProgressMonitorDialog(Display.getDefault().getActiveShell()).run(true, true, op);
 		} catch (InvocationTargetException e) {
 			// handle exception
 		} catch (InterruptedException e) {
@@ -508,34 +509,30 @@ public class AnnotationsPart implements EventHandler {
 				permissionsController.userMayEditObject(
 						permissionsController.getAuthenticatedUser(), o));
 
+		Class<?> widgetClass; 
 		if (o instanceof BTSAnnotation)
 		{
 			if (BTSConstants.ANNOTATION_RUBRUM.equalsIgnoreCase(o.getType()))
 			{
-				roGroup = ContextInjectionFactory
-						.make(RelatedObjectGroupRubrum.class, child);
+				widgetClass = RelatedObjectGroupRubrum.class;
 			}
 			else
 			{
-				roGroup = ContextInjectionFactory
-						.make(RelatedObjectGroupAnnotation.class, child);
+				widgetClass = RelatedObjectGroupAnnotation.class;
 			}
 		}
-		else if (o instanceof BTSText)
-		{
-			roGroup = ContextInjectionFactory
-					.make(RelatedObjectGroupSubtext.class, child);
+		else if (o instanceof BTSText) {
+			widgetClass = RelatedObjectGroupSubtext.class;
 		} 
-		else if (o instanceof BTSComment)
-		{
-			roGroup = ContextInjectionFactory
-					.make(RelatedObjectGroupComment.class, child);
+		else if (o instanceof BTSComment) {
+			widgetClass = RelatedObjectGroupComment.class;
 		}
-		else
-		{
-			roGroup = ContextInjectionFactory
-					.make(RelatedObjectGroupImpl.class, child);
+		else {
+			widgetClass = RelatedObjectGroupImpl.class;
 		}
+		roGroup = (RelatedObjectGroup) ContextInjectionFactory
+				.make(widgetClass, child);
+
 		roGroup.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 		roGroup.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1));
 //		roGroup.postConstruct();
