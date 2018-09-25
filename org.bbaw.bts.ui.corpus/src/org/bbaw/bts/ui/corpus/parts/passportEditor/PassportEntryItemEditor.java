@@ -16,7 +16,6 @@ import org.bbaw.bts.core.corpus.controller.generalController.PassportConfigurati
 import org.bbaw.bts.core.corpus.controller.partController.PassportEditorPartController;
 import org.bbaw.bts.core.corpus.controller.partController.ThsNavigatorController;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
-import org.bbaw.bts.corpus.btsCorpusModel.BTSPassport;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSPassportEntry;
 import org.bbaw.bts.corpus.btsCorpusModel.BtsCorpusModelFactory;
 import org.bbaw.bts.corpus.btsCorpusModel.BtsCorpusModelPackage;
@@ -125,18 +124,23 @@ public class PassportEntryItemEditor extends PassportEntryEditorComposite {
 
 	private IContentProposalProvider itemProposalProvider;
 	private boolean makingProposalProvider;
+
 	@Inject
 	private BTSResourceProvider resourceProvider;
+
 	@Inject
 	@Optional
 	@Preference(value = "locale_lang", nodePath = "org.bbaw.bts.app")
 	private String lang;
+
 	@Inject
 	private BTSCorpusObject corpusObject;
+
 	private Text ths_select_text;
 	
 	@Inject
 	private ThsNavigatorController thsNavigatorController;
+
 	private ObjectSelectionProposalProvider thsItemProposalProvider;
 	private Text textField;
 	private Button checkBox;
@@ -144,6 +148,7 @@ public class PassportEntryItemEditor extends PassportEntryEditorComposite {
 	private Text textSuggest;
 	private Combo combo;
 	private Text text;
+
 	@Inject
 	private PassportConfigurationController passportConfigurationController;
 	
@@ -159,6 +164,7 @@ public class PassportEntryItemEditor extends PassportEntryEditorComposite {
 	public PassportEntryItemEditor(PassportEntryEditorComposite parent) {
 		super(parent, SWT.NONE);
 	}
+
 	@PostConstruct
 	public void postConstruct() {
 		int hwidth = BTSUIConstants.PASSPORT_COLUMN_NUMBER;
@@ -643,18 +649,16 @@ public class PassportEntryItemEditor extends PassportEntryEditorComposite {
 		});
 		
 		ths_select_text.addModifyListener(new ModifyListener() {
-			
+
 			@Override
 			public void modifyText(ModifyEvent e) {
-				if (ths_select_text.getText().trim().length() == 0)
-				{
+				if (ths_select_text.getText().trim().length() == 0) {
 					Command command = SetCommand.create(editingDomain,
 							entry, BtsCorpusModelPackage.eINSTANCE.getBTSPassportEntry_Value(),
 							null);
 					editingDomain.getCommandStack().execute(command);
 					ths_select_text.setData(null);
 				}
-				
 			}
 		});
 
