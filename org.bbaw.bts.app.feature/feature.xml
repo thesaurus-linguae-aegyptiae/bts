@@ -12,6 +12,13 @@
 Change log
 ==========
 
+Release 3.2.1
+-------------
+
+	- Fix: font bundle resource resolution on windows (48c8ec2)
+	- Chore: upgrade font (9821757)
+
+
 Release 3.2.0
 -------------
 

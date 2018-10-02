@@ -2,7 +2,7 @@
 <feature
       id="org.bbaw.bts.corpus.egy.feature"
       label="EgyCorpusFeature"
-      version="3.2.0.qualifier"
+      version="3.2.1.qualifier"
       provider-name="BBAW">
 
    <description url="http://www.example.com/description">
