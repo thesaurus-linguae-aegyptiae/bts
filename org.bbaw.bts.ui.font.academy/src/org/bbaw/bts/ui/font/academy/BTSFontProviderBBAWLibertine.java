@@ -1,12 +1,8 @@
 package org.bbaw.bts.ui.font.academy;
 
 
-import java.io.File;
 import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.net.URL;
-import java.net.URLConnection;
 
 import org.bbaw.bts.ui.font.BTSFontProvider;
 import org.eclipse.core.runtime.FileLocator;
@@ -15,14 +11,13 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.FontData;
 import org.eclipse.swt.widgets.Display;
-import org.osgi.framework.Bundle;
 
 public class BTSFontProviderBBAWLibertine implements BTSFontProvider
 {
 
 	private static final String FONT_NAME = "BBAWLibertine";
 	private static final String[] FONT_STYLES = new String[] { "normal"};//, "bold", "italic", "bolditalic" };
-	private static final String FONT_FILE_NAME = "BBAWLibertine_ah.ttf"; //"BBAWLibertine_ah.ttf";
+	private static final String FONT_FILE_NAME = "BBAWLibertine_ah.ttf";
 	private static final String BUNDLE_NAME = "org.bbaw.bts.ui.font.academy";
 	private static final String FOLDER = "font/";
 	private static final int SIZE = 12;
@@ -58,7 +53,6 @@ public class BTSFontProviderBBAWLibertine implements BTSFontProvider
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			fontpath = fontpath.substring(1, fontpath.length());
 		}
 		boolean isLoaded = Display.getCurrent().loadFont(fontpath);
 		FontData fontdata = null;
@@ -107,7 +101,6 @@ public class BTSFontProviderBBAWLibertine implements BTSFontProvider
 	@Override
 	public String[] getFontStyles()
 	{
-		// TODO Auto-generated method stub
 		return FONT_STYLES;
 	}
 

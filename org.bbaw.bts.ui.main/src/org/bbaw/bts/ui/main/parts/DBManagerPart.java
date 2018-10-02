@@ -302,34 +302,24 @@ public class DBManagerPart {
 	private void reIndex(final DBCollectionStatusInformation info) {
 		if (info != null && info.getDbCollectionName() != null)
 		{
-			MessageDialog dialog = new MessageDialog(parentShell, "Database Collection Reindexing", null,
-				    "Do you want to delete and recreate the index of this database collection? Collection: "
-			+ info.getDbCollectionName()
-			+ "\n\nReindexing may take a while.", MessageDialog.WARNING, new String[] { "Reindex",
-				  "Cancel"}, 0);
-			if (dialog.open() == MessageDialog.OK)
-			{
-				try {
-				       IRunnableWithProgress op = new IRunnableWithProgress() {
-
-						@Override
-						public void run(IProgressMonitor monitor)
-								throws InvocationTargetException, InterruptedException {
-								reindexInternal(info, monitor);
-						}
-						};
-					       new ProgressMonitorDialog(new Shell()).run(true, true, op);
-					    } catch (InvocationTargetException e) {
-					       // handle exception
-					    } catch (InterruptedException e) {
-					       // handle cancelation
-					    }
+			try {
+				IRunnableWithProgress op = new IRunnableWithProgress() {
+					@Override
+					public void run(IProgressMonitor monitor)
+							throws InvocationTargetException, InterruptedException {
+						reindexInternal(info, monitor);
+					}
+				};
+				new ProgressMonitorDialog(parentShell).run(true, true, op);
+			} catch (InvocationTargetException e) {
+				// handle exception
+			} catch (InterruptedException e) {
+				// handle cancelation
 			}
 		}
-		
 	}
 
-	
+
 	private void reindexInternal(final DBCollectionStatusInformation info,
 			IProgressMonitor monitor) {
 

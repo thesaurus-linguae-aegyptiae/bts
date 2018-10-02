@@ -18,7 +18,6 @@ import org.bbaw.bts.ui.commons.utils.BTSUIConstants;
 import org.bbaw.bts.ui.commons.validator.StringNotEmptyValidator;
 import org.bbaw.bts.ui.main.widgets.CompoundRelationsEditorComposite;
 import org.bbaw.bts.ui.resources.BTSResourceProvider;
-import org.eclipse.core.databinding.Binding;
 import org.eclipse.core.databinding.DataBindingContext;
 import org.eclipse.e4.core.contexts.ContextInjectionFactory;
 import org.eclipse.e4.core.contexts.IEclipseContext;
@@ -35,14 +34,11 @@ import org.eclipse.jface.databinding.swt.WidgetProperties;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.dialogs.TitleAreaDialog;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.MouseAdapter;
-import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
-import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
@@ -119,22 +115,12 @@ public class CommentEditorDialog extends TitleAreaDialog {
 
 		Label lblCommentId = new Label(labelRow, SWT.NONE);
 		lblCommentId.setText("ID:");
-		lblCommentId.setForeground(Display.getCurrent().getSystemColor(SWT.COLOR_TITLE_INACTIVE_FOREGROUND));
 
-		txtCommentId = new Text(labelRow, SWT.NONE);
+		txtCommentId = new Text(labelRow, SWT.BORDER);
 		txtCommentId.setLayoutData(new GridData(SWT.END, SWT.FILL, false, false));
 		txtCommentId.setEditable(false);
-		txtCommentId.setEnabled(false);
-		txtCommentId.setForeground(Display.getCurrent().getSystemColor(SWT.COLOR_TITLE_INACTIVE_FOREGROUND));
 		txtCommentId.setDoubleClickEnabled(true);
-		labelRow.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseDoubleClick(MouseEvent e) {
-				txtCommentId.setEnabled(true);
-				super.mouseDoubleClick(e);
-			}
-		});
-		
+
 		txtCommenttxt = new Text(container, SWT.BORDER | SWT.WRAP | SWT.V_SCROLL | SWT.MULTI);
 		GridData gd = new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1);
 		gd.widthHint = 480;
@@ -160,7 +146,7 @@ public class CommentEditorDialog extends TitleAreaDialog {
 		us.setBeforeSetValidator(new StringNotEmptyValidator());
 		
 		// title
-		Binding binding_t = bindingContext.bindValue(
+		bindingContext.bindValue(
 				WidgetProperties.text(SWT.Modify).observeDelayed(
 						BTSUIConstants.DELAY, txtTitletxt),
 				EMFEditProperties.value(editingDomain,
@@ -171,7 +157,7 @@ public class CommentEditorDialog extends TitleAreaDialog {
 		txtCommentId.setText(comment.get_id());
 		
 		// comment
-		Binding binding = bindingContext.bindValue(
+		bindingContext.bindValue(
 				WidgetProperties.text(SWT.Modify).observeDelayed(
 						BTSUIConstants.DELAY, txtCommenttxt),
 				EMFEditProperties.value(editingDomain,

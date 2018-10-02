@@ -1032,7 +1032,6 @@ public class CouchDBManager implements DBManager {
 					+ "\"bulk_size\": 100,\r\n"
 					+ "\"bulk_timeout\": \"500ms\"\r\n" + "}\r\n}";
 			// FIXME suppress credentials in logging
-			logger.info(json);
 			esClient2.index(
 					Requests.indexRequest("_river").type(collectionName)
 							.id("_meta").source(json)).actionGet();

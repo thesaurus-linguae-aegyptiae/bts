@@ -78,4 +78,4 @@ Import-Package: com.opcoach.e4.preferences,
  org.elasticsearch.index.query,
  org.osgi.service.event;version="1.3.0"
 Bundle-ActivationPolicy: lazy
-Bundle-Version: 3.1.2.qualifier
+Bundle-Version: 3.2.0.qualifier

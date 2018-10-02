@@ -2,6 +2,8 @@ package org.bbaw.bts.core.controller.impl.generalController;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Arrays;
+import java.util.Iterator;
 
 import javax.inject.Inject;
 
@@ -24,60 +26,170 @@ import org.eclipse.e4.ui.di.UISynchronize;
 import org.eclipse.e4.ui.services.internal.events.EventBroker;
 import org.eclipse.e4.ui.workbench.IWorkbench;
 import org.eclipse.equinox.p2.core.IProvisioningAgent;
+import org.eclipse.equinox.p2.engine.IProvisioningPlan;
+import org.eclipse.equinox.p2.metadata.IInstallableUnit;
 import org.eclipse.equinox.p2.operations.ProvisioningSession;
 import org.eclipse.equinox.p2.operations.Update;
 import org.eclipse.equinox.p2.operations.UpdateOperation;
+import org.eclipse.equinox.p2.query.IQueryResult;
+import org.eclipse.equinox.p2.query.IQueryable;
+import org.eclipse.equinox.p2.query.QueryUtil;
+import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.jface.window.Window;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Control;
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Shell;
+import org.eclipse.swt.widgets.Table;
+import org.eclipse.swt.widgets.TableColumn;
+import org.eclipse.swt.widgets.TableItem;
+import org.eclipse.swt.widgets.Text;
 
 @SuppressWarnings("restriction")
 public class ApplicationUpdateControllerImpl extends Job implements
 		ApplicationUpdateController {
 
+	private static final String APP_FEATURE_GROUP_ID = "org.bbaw.bts.app.feature.feature.group";
+
+	private class ApplicationUpdateConfirmationDialog extends Dialog {
+		private Text changelogText;
+
+		protected ApplicationUpdateConfirmationDialog(Shell parentShell) {
+			super(parentShell);
+		}
+
+		@Override
+		protected Control createDialogArea(Composite parent) {
+			Composite container = (Composite) super.createDialogArea(parent);
+			Label messageLabel = new Label(container, SWT.BOLD);
+			messageLabel.setText("The following updates can be installed.");
+
+			Table pendingUpdatesTable = new Table(container, SWT.BORDER);
+			pendingUpdatesTable.setHeaderVisible(true);
+			// create table columns
+			for (String label : Arrays.asList("Installable unit",
+					"Current version",
+					"",
+					"Version available")){
+				TableColumn column = new TableColumn(pendingUpdatesTable, SWT.NULL);
+				column.setText(label);
+			}
+			// populate table
+			for (Update update : updateOperation.getPossibleUpdates()) {
+				TableItem row = new TableItem(pendingUpdatesTable, SWT.NULL);
+				row.setText(update.toString());
+				row.setText(0, update.toUpdate.getId());
+				row.setText(1, update.toUpdate.getVersion().toString());
+				row.setText(2, "==>");
+				row.setText(3, update.replacement.getVersion().toString());
+			}
+			// fit table in dialog composite
+			pendingUpdatesTable.setLayoutData(new GridData(SWT.FILL, SWT.NONE, true, false));
+			for (TableColumn column : pendingUpdatesTable.getColumns()) {
+				column.pack();
+			}
+
+			changelogText = new Text(container, SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL | SWT.BORDER);
+			changelogText.setEditable(false);
+			changelogText.setEnabled(true);
+			GridData changelogTextLayoutData = new GridData(SWT.FILL, SWT.FILL, true, true);
+			changelogTextLayoutData.widthHint = convertWidthInCharsToPixels(80);
+			changelogTextLayoutData.heightHint = 400;
+			changelogText.setLayoutData(changelogTextLayoutData);
+			changelogText.setTabs(2);
+			changelogText.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_LIST_BACKGROUND));
+
+			Label instructionLabel = new Label(container, SWT.NONE);
+			instructionLabel.setText("To install these updates, confirm with OK.");
+
+			initDialogArea();
+
+			container.pack();
+			return container;
+		}
+
+		protected void initDialogArea() {
+			IProvisioningPlan provisioningPlan = updateOperation.getProvisioningPlan();
+			IQueryable<IInstallableUnit> additions = provisioningPlan.getAdditions();
+			IQueryResult<IInstallableUnit> appFeatureUnit = additions.query(
+					QueryUtil.createMatchQuery("id == $0", APP_FEATURE_GROUP_ID),
+					null);
+
+			if (!appFeatureUnit.isEmpty()) {
+				IInstallableUnit feature = appFeatureUnit.iterator().next();
+				String description = feature.getProperty(IInstallableUnit.PROP_DESCRIPTION);
+				info("Description of feature "+feature.getId()+":\n"+description);
+				changelogText.append(description);
+			}
+		}
+
+		@Override
+		protected void configureShell(Shell newShell) {
+			super.configureShell(newShell);
+			newShell.setText("Software Update available");
+		}
+
+		@Override
+		protected boolean isResizable() {
+		    return true;
+		}
+	}
+
 	@Inject
 	private Logger logger;
-	
+
 	@Inject
 	private IProvisioningAgent agent;
-	
+
 	@Inject
 	private UISynchronize sync;
-	
+
 	@Inject
 	private IWorkbench workbench;
-	
+
 	@Inject
 	private EventBroker eventBroker;
-	
+
 	@Inject
 	private IEclipseContext context;
-	
+
 	private Job updateJob;
 	private Update[] updates;
-	private volatile EUpdateStatusType status;
+	private UpdateOperation updateOperation = null;
+	private volatile EUpdateStatusType status = EUpdateStatusType.NO_UPDATE;
 	private boolean updatePending;
 	private long timeStamp;
+
+	private ApplicationUpdateConfirmationDialog dialog = null;
+
+	final Update[] NULL_UPDATE = new Update[0];
+
 
 	public ApplicationUpdateControllerImpl() {
 		super("Application Update Check Job");
 		updateJob = null;
 		updates = null;
-		status = EUpdateStatusType.NO_UPDATE;
 		updatePending = false;
-		timeStamp = 0;
+		timeStamp = System.currentTimeMillis();
 		schedule();
 	}
-	
+
 	@Override
 	public boolean isUpdateAvailable() {
 		info("Return Software Update availability.");
-		if (updates != null) { 
-			if (updates.length > 0) {
-				assert status == EUpdateStatusType.UPDATE_AVAILABLE;
+		if (updateOperation != null && updateOperation.getPossibleUpdates() != null) { 
+			if (updateOperation.getPossibleUpdates().length > 0) {
+				assert status == EUpdateStatusType.UPDATE_AVAILABLE || status == EUpdateStatusType.UPDATE_REJECTED;
 				return true;
 			} else {
 				info("No software updates.");
 			}
 		} else {
+			info("Schedule check for update availability.");
 			scheduleCheck();
 		}
 		return false;
@@ -91,16 +203,18 @@ public class ApplicationUpdateControllerImpl extends Job implements
 	@Override
 	public IStatus scheduleUpdate() {
 		info("SOFTWARE UPDATE CONFIRMED.");
-		if (updates != null && updates.length > 0) {
-        	info("Updates available: "+updates.length);
-        	for (Update u : updates) {
-        		info(" "+u.toUpdate);
-        	}
+
+		if (updateOperation.getPossibleUpdates() != null 
+				&& updateOperation.getPossibleUpdates().length > 0) {
+			info("Updates available: "+updateOperation.getPossibleUpdates().length);
+			for (Update u : updateOperation.getPossibleUpdates()) {
+				info(" "+u.toUpdate);
+			}
 		}
-		
+
 		if (updateJob != null) {
 			updateJob.addJobChangeListener(new JobChangeAdapter() {
-				
+
 				@Override
 				public void scheduled(IJobChangeEvent event) {
 					info("update job is scheduled. "+event);
@@ -111,19 +225,20 @@ public class ApplicationUpdateControllerImpl extends Job implements
 				public void running(IJobChangeEvent event) {
 					info("update job is running. "+event);
 					sendStatusMessage("Installing updates...");
-					status = EUpdateStatusType.UPDATE_RUNNING;
+					setStatus(EUpdateStatusType.UPDATE_RUNNING);
 					super.running(event);
 				}
-				
+
 				@Override
 				public void done(IJobChangeEvent event) {
 					info("update job done. "+event);
-					status = event.getResult().isOK() ?
+					setStatus(event.getResult().isOK() ?
 							EUpdateStatusType.UPDATE_SUCCESS
-							: EUpdateStatusType.UPDATE_FAILED;
+							: EUpdateStatusType.UPDATE_FAILED);
 					updatePending = false;
 					updateJob = null;
 					updates = null;
+					updateOperation = null;
 					if (status == EUpdateStatusType.UPDATE_SUCCESS) {
 						sync.syncExec(new Runnable() {
 				            @Override
@@ -166,13 +281,9 @@ public class ApplicationUpdateControllerImpl extends Job implements
 		}
 		if (workbench != null && agent != null) {
 			IStatus runStatus = checkForUpdates(monitor);
-			schedule(TIME_UNTIL_RECHECK);
-			if (status == EUpdateStatusType.UPDATE_AVAILABLE) {
-				if (!updatePending) {
-					confirmInstallation();
-				} else {
-					scheduleUpdate();
-				}
+			if (!status.equals(EUpdateStatusType.UPDATE_REJECTED)) {
+				schedule(TIME_UNTIL_RECHECK);
+				askForConfirmationAndInstall();
 			}
 			return runStatus;
 		} else {
@@ -181,29 +292,31 @@ public class ApplicationUpdateControllerImpl extends Job implements
 			return Status.CANCEL_STATUS;
 		}
 	}
-	
-	private void confirmInstallation() {
-		sync.syncExec(new Runnable() {
-			 
-            @Override
-            public void run() {
-            	String msg = "";
-            	for (Update u : updates) {
-            		msg += "\n" + u;
-            	}
-                boolean performUpdate = MessageDialog.openQuestion(
-                        null,
-                        "Updates available",
-                        "There are updates available. Do you want to install them now?\n"+msg);
-                if (performUpdate) {
-                	info("Installation of Updates confirmed.");
-                	updatePending = true;
-                	scheduleUpdate();
-                } else {
-                	status = EUpdateStatusType.UPDATE_DECLINED;
-                }
-            }
-        });
+
+	@Override
+	public void askForConfirmationAndInstall() {
+		if (isUpdateAvailable() && !updatePending && dialog == null) {
+			sync.syncExec(new Runnable() {
+
+				@Override
+				public void run() {
+					dialog = new ApplicationUpdateConfirmationDialog(
+							Display.getDefault().getActiveShell());
+					int performUpdate = dialog.open();
+					dialog = null;
+					if (performUpdate == Window.OK) {
+						info("Installation of Updates confirmed.");
+						updatePending = true;
+						scheduleUpdate();
+					} else {
+						setStatus(EUpdateStatusType.UPDATE_REJECTED);
+					}
+				}
+			});
+
+		} else {
+			scheduleUpdate();
+		}
 	}
 	
 	@Override
@@ -216,24 +329,27 @@ public class ApplicationUpdateControllerImpl extends Job implements
 		// if latest check within specified time, return status
 		if (now - timeStamp < TIME_UNTIL_RECHECK) {
 			info("p2 update: last checked at "+timeStamp);
-			if (updates != null) {
-				if (status != EUpdateStatusType.UPDATE_DECLINED) {
-					status = (updates.length > 0)
-							? EUpdateStatusType.UPDATE_AVAILABLE
-							: EUpdateStatusType.NO_UPDATE;
-				}
+			if (updateOperation.getPossibleUpdates() != null) {
+				setStatus((updateOperation.getPossibleUpdates().length > 0)
+						? EUpdateStatusType.UPDATE_AVAILABLE
+						: EUpdateStatusType.NO_UPDATE);
 				return Status.CANCEL_STATUS;
 			} else {
 				logger.warn("Check for updates anyway.");
 			}
 		}
 		// if more than specified time since latest update, re-check
-		status = EUpdateStatusType.CHECK_RUNNING;
-		timeStamp = now;
+		// (unless installation of updates has already been declined)
+		if (status != EUpdateStatusType.UPDATE_REJECTED) {
+			setStatus(EUpdateStatusType.CHECK_RUNNING);
+			timeStamp = now;
+		} else {
+			return Status.CANCEL_STATUS;
+		}
 
 		// set up provisioning services
 		ProvisioningSession session = new ProvisioningSession(agent);
-		UpdateOperation operation = new UpdateOperation(session);
+		updateOperation = new UpdateOperation(session);
 
 		// lookup repository URL: try app configuration, use hard coded default
 		IEclipsePreferences prefs = ConfigurationScope.INSTANCE.getNode("org.bbaw.bts.app");
@@ -247,58 +363,71 @@ public class ApplicationUpdateControllerImpl extends Job implements
 		} catch (URISyntaxException e) {
 			logger.warn(e, "P2 Update site invalid.");
 			e.printStackTrace();
-			status = EUpdateStatusType.CHECK_FAILED;
+			setStatus(EUpdateStatusType.CHECK_FAILED);
 			return Status.CANCEL_STATUS;
 		}
-   		
+
         // set location of artifact and metadata repo
-        operation.getProvisioningContext().setArtifactRepositories(new URI[] { uri });
-        operation.getProvisioningContext().setMetadataRepositories(new URI[] { uri });
-        
+        updateOperation.getProvisioningContext().setArtifactRepositories(new URI[] { uri });
+        updateOperation.getProvisioningContext().setMetadataRepositories(new URI[] { uri });
+
         // perform operation
         IStatus updateStatus = null;
 		try {
-			updateStatus = operation.resolveModal(monitor);
+			updateStatus = updateOperation.resolveModal(monitor);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			info("P2 Update Status not OK due to errors: ");
 			e.printStackTrace();
-			status = EUpdateStatusType.CHECK_FAILED;
+			setStatus(EUpdateStatusType.CHECK_FAILED);
         	return Status.CANCEL_STATUS;
 		}
 		
-        // if nothing to do, do nothing
-        if (updateStatus.getCode() == UpdateOperation.STATUS_NOTHING_TO_UPDATE) {
-        	status = EUpdateStatusType.NO_UPDATE;
-        	return Status.OK_STATUS;
-        }
-        
-        // abort unless status ok
-        if (!updateStatus.isOK()) {
-        	status = EUpdateStatusType.CHECK_FAILED;
-        	return Status.CANCEL_STATUS;
-        }
-        
-        // try to retrieve update job
-        // obtain updates list
-		updateJob = operation.getProvisioningJob(monitor);
-        updates = operation.getPossibleUpdates();
-        
-        if (updates != null && updates.length > 0) {
-        	info("Updates available: "+updates.length);
-        	for (Update u : updates) {
-        		info(" "+u.toUpdate+" >> "+u.replacement);
-        	}
-        	info(operation.getResolutionDetails());
-        	if (status != EUpdateStatusType.UPDATE_DECLINED) {
-        		status = EUpdateStatusType.UPDATE_AVAILABLE;
-        	}
-        	sendStatusMessage("Updates available: "+updates.length);
-        	return Status.OK_STATUS;
-        }
-        
-        updates = new Update[0];
-        status = EUpdateStatusType.NO_UPDATE;
+		// if nothing to do, do nothing
+		if (updateStatus.getCode() == UpdateOperation.STATUS_NOTHING_TO_UPDATE) {
+			setStatus(EUpdateStatusType.NO_UPDATE);
+			return Status.OK_STATUS;
+		}
+
+		// abort unless status ok
+		if (!updateStatus.isOK()) {
+			setStatus(EUpdateStatusType.CHECK_FAILED);
+			return Status.CANCEL_STATUS;
+		}
+
+		IProvisioningPlan provisioningPlan = updateOperation.getProvisioningPlan();
+		IQueryable<IInstallableUnit> additions = provisioningPlan.getAdditions();
+		IQueryResult<IInstallableUnit> appFeatureUnit = additions.query(
+				QueryUtil.createIUGroupQuery(), null);
+		if (!appFeatureUnit.isEmpty()) {
+			Iterator<IInstallableUnit> iterator = appFeatureUnit.iterator();
+			while (iterator.hasNext()) {
+				IInstallableUnit feature = iterator.next();
+				String description = feature.getProperty(IInstallableUnit.PROP_DESCRIPTION);
+				info("Description of feature "+feature.getId()+":\n"+description);
+			}
+		}
+
+		// try to retrieve update job
+		// obtain updates list
+		updateJob = updateOperation.getProvisioningJob(monitor);
+		updates = updateOperation.getPossibleUpdates();
+
+		if (updateOperation.getPossibleUpdates() != null && updateOperation.getPossibleUpdates().length > 0) {
+			info("Updates available: "+updates.length);
+			for (Update u : updateOperation.getPossibleUpdates()) {
+				info(" "+u.toUpdate+" >> "+u.replacement);
+			}
+			info(updateOperation.getResolutionDetails());
+			if (status != EUpdateStatusType.UPDATE_REJECTED) {
+				setStatus(EUpdateStatusType.UPDATE_AVAILABLE);
+			}
+			sendStatusMessage("Updates available: "+updateOperation.getPossibleUpdates().length);
+			return Status.OK_STATUS;
+		}
+
+		updates = NULL_UPDATE;
+		setStatus(EUpdateStatusType.NO_UPDATE);
 		return Status.OK_STATUS;
 	}
 
@@ -314,6 +443,17 @@ public class ApplicationUpdateControllerImpl extends Job implements
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	private boolean setStatus(EUpdateStatusType newStatus) {
+		if (newStatus != status) {
+			if (!status.equals(EUpdateStatusType.UPDATE_REJECTED)) {
+				info("Change status from "+status+" to "+newStatus);
+				status = newStatus;
+				return true;
+			}
+		}
+		return false;
 	}
 	
 }

@@ -7,7 +7,6 @@ import org.bbaw.bts.ui.commons.utils.BTSUIConstants;
 import org.bbaw.bts.ui.corpus.dialogs.PassportEditorDialog;
 import org.bbaw.bts.ui.resources.BTSResourceProvider;
 import org.eclipse.e4.core.contexts.ContextInjectionFactory;
-import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.MouseAdapter;
@@ -57,7 +56,7 @@ public class RelatedObjectGroupRubrum extends RelatedObjectGroup {
 
 	@Override
 	protected void refreshContent(BTSObject object) {
-		setGroupTitle("Rubrum");
+		setExpandItemTitle(object.getName());
 	}
 
 	@Override
