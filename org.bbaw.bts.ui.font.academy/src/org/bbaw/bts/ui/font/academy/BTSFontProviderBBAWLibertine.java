@@ -1,11 +1,13 @@
 package org.bbaw.bts.ui.font.academy;
 
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 
 import org.bbaw.bts.ui.font.BTSFontProvider;
 import org.eclipse.core.runtime.FileLocator;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Font;
@@ -44,17 +46,17 @@ public class BTSFontProviderBBAWLibertine implements BTSFontProvider
 	private FontData getFontData()
 	{
 		URL entry = Platform.getBundle(BUNDLE_NAME).getEntry("/" + FOLDER + FONT_FILE_NAME);
-		String fontpath = null;
-		if (entry != null)
-		{
-			
+		Path fontpath = new Path("/" + FOLDER + FONT_FILE_NAME);
+		File fontFile = null;
+		if (entry != null) {
+			URL fontFileUrl = FileLocator.find(Platform.getBundle(BUNDLE_NAME), fontpath, null);
 			try {
-				fontpath = FileLocator.toFileURL(entry).getPath();
+				fontFile = new File(FileLocator.toFileURL(fontFileUrl).getPath());
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		}
-		boolean isLoaded = Display.getCurrent().loadFont(fontpath);
+		boolean isLoaded = Display.getCurrent().loadFont(fontFile.toString());
 		FontData fontdata = null;
 
 		if (isLoaded)

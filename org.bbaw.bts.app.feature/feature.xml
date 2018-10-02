@@ -15,7 +15,9 @@ Change log
 Release 3.2.1
 -------------
 
+	- Fix: font bundle resource resolution on windows (48c8ec2)
 	- GUI: show additional information on suggestions for object relationship fields (d0143af)
+	- Chore: upgrade font (9821757)
 
 Release 3.2.0
 -------------
