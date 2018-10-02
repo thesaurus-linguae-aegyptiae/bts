@@ -135,7 +135,7 @@
 
    <features>
       <feature id="org.bbaw.bts.app.feature" version="3.2.1.qualifier"/>
-      <feature id="org.bbaw.bts.corpus.egy.feature" version="3.2.0.qualifier"/>
+      <feature id="org.bbaw.bts.corpus.egy.feature" version="3.2.1.qualifier"/>
    </features>
 
    <configurations>

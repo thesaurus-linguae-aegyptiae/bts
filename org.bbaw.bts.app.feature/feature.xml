@@ -15,7 +15,9 @@ Change log
 Release 3.2.1
 -------------
 
+	- Fix: font bundle resource resolution on windows (48c8ec2)
 	- Feature: lemma search dialog emulates lemmatizer search unless searching for ID (3d4a9ff)
+	- Chore: upgrade font (9821757)
 
 Release 3.2.0
 -------------
