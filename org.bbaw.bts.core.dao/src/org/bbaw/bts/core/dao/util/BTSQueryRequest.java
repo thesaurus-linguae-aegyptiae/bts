@@ -108,8 +108,9 @@ public class BTSQueryRequest {
 	}
 	
 	/**
-	 * Sets up a {@link QueryBuilder} according to current configuration. The result can be retrieved via {@link #getQueryBuilder()}.
-	 * 
+	 * Sets up a {@link QueryBuilder} according to current configuration.
+	 * The result can be retrieved via {@link #getQueryBuilder()}.
+	 *
 	 */
 	public void initQueryBuilder() {
 		if (searchString.length() > 0)
@@ -135,7 +136,7 @@ public class BTSQueryRequest {
 				this.setAutocompletePrefix(searchString);
 			}
 			else {
-				this.setQueryBuilder(QueryBuilders.simpleQueryString(escapedString).defaultOperator(Operator.AND));
+				this.setQueryBuilder(QueryBuilders.simpleQueryStringQuery(escapedString).defaultOperator(Operator.AND));
 				this.setAutocompletePrefix(searchString);
 			}
 		}		
