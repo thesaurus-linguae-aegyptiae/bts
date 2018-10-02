@@ -16,6 +16,7 @@ Release 3.2.1
 -------------
 
 	- Fix: font bundle resource resolution on windows (48c8ec2)
+	- GUI: show additional information on suggestions for object relationship fields (d0143af)
 	- Feature: lemma search dialog emulates lemmatizer search unless searching for ID (3d4a9ff)
 	- Chore: upgrade font (9821757)
 
@@ -36,7 +37,7 @@ Release 3.2.0
 	- GUI: fix missing subtext annotation marking in vertical overview ruler of text editor part (a699e53)
 	- Feature: platform independence / unix compatibility (54ca879)
 	- Chore: move default P2 software update repository server locator (59ccae3)
-   	- Chore: upgrade JSesh library to version 7.2.0 (1292da9)
+	- Chore: upgrade JSesh library to version 7.2.0 (1292da9)
 
 Release 3.1.4
 -------------

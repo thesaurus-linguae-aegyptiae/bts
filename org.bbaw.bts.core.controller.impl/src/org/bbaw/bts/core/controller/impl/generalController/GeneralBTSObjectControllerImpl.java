@@ -62,20 +62,25 @@ public class GeneralBTSObjectControllerImpl implements
 	@Override
 	public List<BTSObject> getObjectProposalsFor(
 			BTSConfigItem configItem, String text, BTSObject object, IProgressMonitor monitor) {
-		List<BTSObject> list = new Vector<BTSObject>();
 
 		//FIXME aktualisieren und auf map umstellen
+		List<BTSObject> list = new Vector<BTSObject>();
 
 		if (configItem != null && !configItem.getOwnerTypesMap().isEmpty()) {
-            if (configurationController.objectMayReferenceToThs(object, configItem))
+			// suggest thesaurus matches
+            if (configurationController.objectMayReferenceToThs(object, configItem)) {
                 list.addAll(getTypedObjectProposalsFor(text, "BTSThsEntry", monitor));
+            }
 
-
-            if (configurationController.objectMayReferenceToWList(object, configItem))
+            // dictionary matches
+            if (configurationController.objectMayReferenceToWList(object, configItem)) {
                 list.addAll(getTypedObjectProposalsFor(text, "BTSLemmaEntry", monitor));
+            }
 
-            if (configurationController.objectMayReferenceToCorpus(object, configItem))
+            // corpus object matches
+            if (configurationController.objectMayReferenceToCorpus(object, configItem)){
                 list.addAll(getTypedObjectProposalsFor(text, "BTSCorpusObject", monitor));
+            }
 		}
 
 		return list;

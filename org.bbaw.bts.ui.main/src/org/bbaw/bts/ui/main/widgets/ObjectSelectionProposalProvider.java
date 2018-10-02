@@ -8,6 +8,7 @@ import java.util.Vector;
 import org.bbaw.bts.btsmodel.BTSConfig;
 import org.bbaw.bts.btsmodel.BTSConfigItem;
 import org.bbaw.bts.btsmodel.BTSObject;
+import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.core.controller.generalController.GeneralBTSObjectController;
 import org.eclipse.jface.fieldassist.ContentProposal;
 import org.eclipse.jface.fieldassist.IContentProposal;
@@ -38,11 +39,25 @@ public class ObjectSelectionProposalProvider implements
 		}
 
 		List<ContentProposal> partialList = new Vector<ContentProposal>();
+		// produce content assist proposal labels
 		if (list != null && !list.isEmpty()) {
 			for (BTSObject o : list) {
 				if (o.getName() != null) {
-					String desc = o.getName() + "\n(" + o.get_id() + " in " + o.getDBCollectionKey() + ")";
-					ContentProposal p = new ContentProposal(o.get_id(), o.getName(), desc);
+					String label = o.getName();
+					String description = o.getName();
+					description += "\n\n" + o.get_id();
+					description += "\nLocation: " + o.getDBCollectionKey();
+					if (o.getType() != null) {
+						label += " (" + o.getType() + ")";
+						description += "\nType: " + o.getType();
+					}
+					if (!o.getRevisionState().equals(BTSConstants.OBJECT_REVISION_STATE_PUBLISHED)) {
+						label += " (‼)";
+						description += "\n\n(‼) - revision state is " + o.getRevisionState();
+					}
+					//⚠
+					
+					ContentProposal p = new ContentProposal(o.get_id(), label, description);
 					partialList.add(p);
 				}
 			}
