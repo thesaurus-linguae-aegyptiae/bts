@@ -19,6 +19,8 @@ import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSPassportEntry;
 import org.bbaw.bts.corpus.btsCorpusModel.BtsCorpusModelFactory;
 import org.bbaw.bts.corpus.btsCorpusModel.BtsCorpusModelPackage;
+import org.bbaw.bts.corpus.btsCorpusModel.provider.BTSCorpusObjectItemProvider;
+import org.bbaw.bts.corpus.btsCorpusModel.provider.BtsCorpusModelItemProviderAdapterFactory;
 import org.bbaw.bts.ui.commons.controldecoration.BackgroundControlDecorationSupport;
 import org.bbaw.bts.ui.commons.converter.BTSBooleanToStringConverter;
 import org.bbaw.bts.ui.commons.converter.BTSConfigItemToStringConverter;
