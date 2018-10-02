@@ -232,7 +232,6 @@ public class EgyLemmatizerPart implements SearchViewer {
 		((GridLayout) parent.getLayout()).marginWidth = 0;
 		if (partService != null) {
 			Collection<MPart> parts = partService.getParts();
-
 		}
 
 		Composite composite = new Composite(parent, SWT.NONE);
@@ -1243,9 +1242,6 @@ public class EgyLemmatizerPart implements SearchViewer {
 	@Override
 	public void search(final BTSQueryRequest query, String queryName,
 			String viewerFilterString) {
-		// create root for lemma tree view
-		final TreeNodeWrapper lemmaRootNode = BtsviewmodelFactory.eINSTANCE
-				.createTreeNodeWrapper();
 
 		// cancel possibly running search
 		if (searchjob != null) {
@@ -1253,20 +1249,25 @@ public class EgyLemmatizerPart implements SearchViewer {
 			searchjob = null;
 		}
 
+		// if this call came from an external handler ('Lupensuche'), don't bother to do anything at all and just
+		// emulate auto search (lemma transliteration content assist) behaviour.
 		if (query.getType() != BTSQueryType.LEMMA) {
 			if (!query.isIdQuery() 
 					&& query.getAutocompletePrefix() != null) {
 				if (!query.isWildcardQuery()) {
-					if (query.getRequestFields().size() == 1 && query.getRequestFields().contains("name")) {
-						searchAuto(query.getSearchString().replaceAll("\\.", ","));
-						return;
-					}
+					searchAuto(query.getSearchString().replaceAll("\\.", ","));
+					return;
 				}
 			}
 		}
 
 		// try to load lemma that has already be assigned to the word currently selected in text editor
 		final String assignedLemmaId = (currentWord != null) ? currentWord.getLKey() : null;
+
+
+		// create root for lemma tree view
+		final TreeNodeWrapper lemmaRootNode = BtsviewmodelFactory.eINSTANCE
+				.createTreeNodeWrapper();
 
 		// fill lemmaViewer
 		searchjob = new Job("load input") {
