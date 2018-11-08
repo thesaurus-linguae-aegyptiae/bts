@@ -7,6 +7,7 @@ import java.util.Vector;
 
 import javax.inject.Inject;
 
+import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.btsmodel.BTSRelation;
 import org.bbaw.bts.btsviewmodel.TreeNodeWrapper;
 import org.bbaw.bts.commons.BTSConstants;
@@ -17,7 +18,9 @@ import org.bbaw.bts.core.corpus.controller.impl.util.BTSEgyObjectByNameComparato
 import org.bbaw.bts.core.corpus.controller.impl.util.BTSObjectTreeGenerator;
 import org.bbaw.bts.core.corpus.controller.partController.LemmaNavigatorController;
 import org.bbaw.bts.core.dao.util.BTSQueryRequest;
+import org.bbaw.bts.core.services.BTSCommentService;
 import org.bbaw.bts.core.services.corpus.BTSLemmaEntryService;
+import org.bbaw.bts.core.services.corpus.CorpusObjectService;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSAnnotation;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSLemmaEntry;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSLemmaSubentry;
@@ -33,7 +36,15 @@ public class LemmaNavigatorControllerImpl
 
 	@Inject
 	private BTSLemmaEntryService lemmaService;
-	
+
+	@Inject
+	protected CorpusObjectService corpusObjectService;
+
+	@Inject
+	protected BTSCommentService commentService;
+
+
+
 	@Override
 	protected List<BTSLemmaEntry> retrieveTypedRootEntries(IProgressMonitor monitor) {
 		return lemmaService.listRootEntries(monitor);
@@ -176,4 +187,18 @@ public class LemmaNavigatorControllerImpl
 		return anno;
 	}
 
+
+	@Override
+	public List<BTSObject> getRelatingObjects(BTSObject subject, IProgressMonitor monitor) {
+		// create query and configure it to query word list collections
+		BTSQueryRequest q = getRelatingObjectsQuery(subject);
+		q.setDbPath(BTSCorpusConstants.WLIST);
+		// use query services to run query twice (because comments are not a corpus object)
+		List<BTSObject> results = new Vector<BTSObject>();
+		results.addAll(corpusObjectService.query(q,
+				BTSConstants.OBJECT_STATE_ACTIVE, monitor));
+		results.addAll(commentService.query(q,
+				BTSConstants.OBJECT_STATE_ACTIVE, monitor));
+		return results;
+	}
 }

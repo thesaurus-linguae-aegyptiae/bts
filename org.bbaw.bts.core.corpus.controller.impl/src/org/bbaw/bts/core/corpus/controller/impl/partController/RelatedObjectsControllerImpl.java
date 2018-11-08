@@ -23,24 +23,24 @@ public class RelatedObjectsControllerImpl implements RelatedObjectsController {
 	@Inject
 	protected BTSCommentService commentService;
 
-
-	
 	@Override
-	public List<BTSObject> getRelatingObjects(BTSObject subject, IProgressMonitor monitor) {
+	public BTSQueryRequest getRelatingObjectsQuery(BTSObject subject) {
 		BTSQueryRequest query = new BTSQueryRequest();
 		query.setQueryBuilder(QueryBuilders.matchQuery("relations.objectId",
 				subject.get_id()));
+		return query;
+	}
+	
+	@Override
+	public List<BTSObject> getRelatingObjects(BTSObject subject, IProgressMonitor monitor) {
+		BTSQueryRequest query = getRelatingObjectsQuery(subject);
 		query.setQueryId("relations.objectId-" + subject.get_id());
-		System.out.println(query.getQueryId());
 		List<BTSObject> children = new Vector<BTSObject>();
-		List<BTSCorpusObject> obs = corpusObjectService.query(query,
-				BTSConstants.OBJECT_STATE_ACTIVE, monitor);
-		for (BTSCorpusObject o : obs)
-		{
-			children.add(o);
-		}
-		if (monitor != null)
-		{
+		children.addAll(
+				corpusObjectService.query(query,
+				BTSConstants.OBJECT_STATE_ACTIVE, monitor)
+				);
+		if (monitor != null) {
 			if (monitor.isCanceled()) return children;
 			monitor.beginTask("Load comments", IProgressMonitor.UNKNOWN);
 		}
