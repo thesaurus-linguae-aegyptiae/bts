@@ -306,6 +306,15 @@
             <children xsi:type="basic:PartStack" xmi:id="_zuT4Z6Y0EeSMm_n5aML7dg" elementId="org.bbaw.bts.corpus.lemma.partstack.right.top">
               <children xsi:type="basic:Part" xmi:id="_ABBnMKY1EeSMm_n5aML7dg" elementId="org.bbaw.bts.ui.corpus.part.AnnotationsPart" contributionURI="bundleclass://org.bbaw.bts.ui.corpus/org.bbaw.bts.ui.corpus.parts.AnnotationsPart" label="Annotations" iconURI="platform:/plugin/org.bbaw.bts.ui.resources.impl/icons/full/icon16/annotations.png" closeable="true">
                 <handlers xmi:id="_ABBnMaY1EeSMm_n5aML7dg" elementId="org.bbaw.bts.ui.corpus.handler.deleteInAnnotationPart" contributionURI="bundleclass://org.bbaw.bts.ui.corpus/org.bbaw.bts.ui.corpus.handlers.DeleteInAnnotationPartHandler" command="_QRJZIKRPEeO1QoiwGMOm0Q"/>
+                <menus xmi:id="_y7ezION2EeiLZItXtIV46g" elementId="org.bbaw.bts.ui.corpus.part.annotations.viewmenu">
+                  <tags>ViewMenu</tags>
+                  <children xsi:type="menu:HandledMenuItem" xmi:id="_1U0pEON2EeiLZItXtIV46g" elementId="org.bbaw.bts.ui.corpus.part.annotations.viewmenu.show.comment" label="Show Comments" type="Check" command="_ecT_0LlkEeWW7cLsp5AL_w">
+                    <parameters xmi:id="__56_gON2EeiLZItXtIV46g" elementId="annotationsPartFilterParam" name="annotationsPartFilterParam" value="Comment"/>
+                  </children>
+                  <children xsi:type="menu:HandledMenuItem" xmi:id="_FidVUON3EeiLZItXtIV46g" elementId="org.bbaw.bts.ui.corpus.part.annotations.viewmenu.show.annotation" label="Show Annotations" type="Check" command="_ecT_0LlkEeWW7cLsp5AL_w">
+                    <parameters xmi:id="_PHbrgON3EeiLZItXtIV46g" elementId="annotationsPartFilterParam" name="annotationsPartFilterParam" value="Annotation"/>
+                  </children>
+                </menus>
                 <toolbar xmi:id="_ABBnMqY1EeSMm_n5aML7dg" elementId="org.bbaw.bts.ui.corpus.toolbar.3">
                   <children xsi:type="menu:HandledToolItem" xmi:id="_ABBnM6Y1EeSMm_n5aML7dg" elementId="org.bbaw.bts.ui.corpus.handledtoolitem.10" iconURI="platform:/plugin/org.bbaw.bts.ui.resources.impl/icons/full/obj16/delete.png" tooltip="Delete" command="_QRJZIKRPEeO1QoiwGMOm0Q"/>
                 </toolbar>
