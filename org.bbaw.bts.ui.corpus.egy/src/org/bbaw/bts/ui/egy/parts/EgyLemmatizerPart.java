@@ -276,7 +276,7 @@ public class EgyLemmatizerPart implements SearchViewer {
 			@Override
 			public void modifyText(ModifyEvent e) {
 				//clearProposals();
-				searchAuto(textSelectedWord.getText());
+				autoSearch(textSelectedWord.getText());
 			}
 		};
 		textSelectedWord.addModifyListener(textSelectedWordModifyListener);
@@ -1225,7 +1225,10 @@ public class EgyLemmatizerPart implements SearchViewer {
 	}
 
 
-	private void searchAuto(final String input) {
+	/**
+	 * Initiates a lemma search by querying for results with the input string occuring in their name field.
+	 */
+	private void autoSearch(final String input) {
 		// abort if user unauthorized or lemmatizer disabled
 		if (!userMayEdit || !activateButton.getSelection())
 			return;
@@ -1255,7 +1258,7 @@ public class EgyLemmatizerPart implements SearchViewer {
 			if (!query.isIdQuery() 
 					&& query.getAutocompletePrefix() != null) {
 				if (!query.isWildcardQuery()) {
-					searchAuto(query.getSearchString().replaceAll("\\.", ","));
+					autoSearch(query.getSearchString().replaceAll("\\.", ","));
 					return;
 				}
 			}
