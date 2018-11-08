@@ -412,12 +412,8 @@ public class TextModelHelper {
 					String[] arr = basetype.split(":");
 					type = arr[0];
 					String name = arr[1].trim();
-					if (name != null) {
-						if (!name.equals(modelMarker.getName())) {
-							modelMarker.setName(name);
-						}
-					} else {
-						modelMarker.setName(null);
+					if (!name.equals(modelMarker.getName())) {
+						modelMarker.setName(name);
 					}
 				}
 				

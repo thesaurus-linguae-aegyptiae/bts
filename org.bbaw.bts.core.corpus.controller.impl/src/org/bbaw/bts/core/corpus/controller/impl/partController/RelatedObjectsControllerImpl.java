@@ -11,10 +11,15 @@ import org.bbaw.bts.core.corpus.controller.partController.RelatedObjectsControll
 import org.bbaw.bts.core.dao.util.BTSQueryRequest;
 import org.bbaw.bts.core.services.BTSCommentService;
 import org.bbaw.bts.core.services.corpus.CorpusObjectService;
-import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.elasticsearch.index.query.QueryBuilders;
 
+/**
+ * can be subclassed by controllers if they need to be able to load related objects. do not attempt tho.
+ * 
+ * @author jhoeper
+ *
+ */
 public class RelatedObjectsControllerImpl implements RelatedObjectsController {
 
 	@Inject
