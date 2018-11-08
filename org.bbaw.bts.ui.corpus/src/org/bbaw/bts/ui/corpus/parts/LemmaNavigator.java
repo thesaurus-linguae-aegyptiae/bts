@@ -31,6 +31,7 @@ import org.bbaw.bts.corpus.btsCorpusModel.BTSLemmaEntry;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSThsEntry;
 import org.bbaw.bts.searchModel.BTSModelUpdateNotification;
 import org.bbaw.bts.searchModel.BTSQueryResultAbstract;
+import org.bbaw.bts.ui.commons.corpus.events.BTSRelatingObjectsLoadingEvent;
 import org.bbaw.bts.ui.commons.navigator.StructuredViewerProvider;
 import org.bbaw.bts.ui.commons.search.SearchViewer;
 import org.bbaw.bts.ui.commons.utils.BTSUIConstants;
@@ -122,10 +123,7 @@ public class LemmaNavigator extends NavigatorPart implements ScatteredCachingPar
 	@Active
 	@Optional
 	private Shell parentShell;
-	
-	@Inject
-	private Logger logger;
-	
+
 	private TreeViewer mainTreeViewer;
 	private StructuredSelection selection;
 	private Map<String, BTSQueryResultAbstract> queryResultMap = new HashMap<String, BTSQueryResultAbstract>();
@@ -309,6 +307,18 @@ public class LemmaNavigator extends NavigatorPart implements ScatteredCachingPar
 								};
 								j.schedule(750);
 							}
+
+							// retrieve annotations from current projects word list collections
+							List<BTSObject> relatedObjects = 
+									lemmaNavigatorController.getRelatingObjects(o, null);
+							BTSRelatingObjectsLoadingEvent e = 
+									new BTSRelatingObjectsLoadingEvent((BTSCorpusObject) o);
+							e.setRelatingObjects(relatedObjects);
+							// send to annotations part
+							eventBroker.post(
+									BTSUIConstants.EVENT_TEXT_RELATING_OBJECTS_LOADED,
+									e);
+							
 							if (!BTSUIConstants.SELECTION_TYPE_SECONDARY
 									.equals(selectionType)) {
 								selectionService.setSelection(o);
