@@ -27,8 +27,9 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.jface.viewers.ContentViewer;
 import org.elasticsearch.index.query.QueryBuilders;
 
-public class LemmaNavigatorControllerImpl extends AbstractCorpusObjectNavigatorControllerImpl<BTSLemmaEntry, String> 
-implements LemmaNavigatorController{
+public class LemmaNavigatorControllerImpl 
+		extends AbstractCorpusObjectNavigatorControllerImpl<BTSLemmaEntry, String>
+		implements LemmaNavigatorController {
 
 	@Inject
 	private BTSLemmaEntryService lemmaService;

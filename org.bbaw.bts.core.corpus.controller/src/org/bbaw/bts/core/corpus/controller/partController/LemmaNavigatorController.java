@@ -11,7 +11,9 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.jface.viewers.ContentViewer;
 
-public interface LemmaNavigatorController extends GenericCorpusObjectNavigatorController<BTSLemmaEntry, String>{
+public interface LemmaNavigatorController
+		extends GenericCorpusObjectNavigatorController<BTSLemmaEntry, String>,
+		RelatedObjectsController {
 
 	BTSLemmaSubentry createNewSubEntry();
 
