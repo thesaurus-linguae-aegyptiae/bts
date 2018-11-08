@@ -386,6 +386,7 @@ GenericCorpusObjectNavigatorController<E, K>
 		{
 			monitor.beginTask("Load Elements to Treenodes", obs.size());
 		}
+		// XXX
 		if (asStructuredTree && obs.size() > 200)
 		{
 			nodes = new Vector<TreeNodeWrapper>();
@@ -408,7 +409,6 @@ GenericCorpusObjectNavigatorController<E, K>
 							{
 								tn.setLabel(tn.getLabel() + " - " + last.getName());
 							}
-							System.out.println("create tn");
 							tn = BtsviewmodelFactory.eINSTANCE
 										.createTreeNodeWrapper();
 							nodes.add(tn);
@@ -418,7 +418,6 @@ GenericCorpusObjectNavigatorController<E, K>
 						{
 							tn2.setLabel(tn2.getLabel() + " - " + last.getName());
 						}
-						System.out.println("create tn2");
 
 						tn2 = BtsviewmodelFactory.eINSTANCE
 									.createTreeNodeWrapper();
