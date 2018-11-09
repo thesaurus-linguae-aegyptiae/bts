@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: CorpusUI
 Bundle-SymbolicName: org.bbaw.bts.ui.corpus;singleton:=true
-Bundle-Version: 3.2.1.qualifier
+Bundle-Version: 3.2.2.qualifier
 Bundle-Activator: org.bbaw.bts.ui.corpus.internal.Activator
 Bundle-Vendor: BBAW
 Export-Package: org.bbaw.bts.ui.corpus.dialogs,
