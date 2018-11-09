@@ -171,7 +171,7 @@ public abstract class RemoteCouchDBDao<E extends BTSDBBaseObject, K extends Seri
 		InputStream stream = dbClient.find((String)key, revision);
 		
 		final JSONLoad loader = new JSONLoad(stream,
-				new HashMap<Object, Object>());
+				new HashMap<Object, Object>(), connectionProvider.getEmfResourceSet());
 		loader.fillResource(tempResource);
 		
 //		EObjectMapper objectMapper = new EObjectMapper();
@@ -204,7 +204,7 @@ public abstract class RemoteCouchDBDao<E extends BTSDBBaseObject, K extends Seri
 //		InputStream stream = new ByteArrayInputStream(objectAsString.getBytes(StandardCharsets.UTF_8));
 //		Object o = objectMapper.from(stream, resource, null);
 		final JSONLoad loader = new JSONLoad(new ByteArrayInputStream(objectAsString.getBytes(StandardCharsets.UTF_8)),
-				new HashMap<Object, Object>());
+				new HashMap<Object, Object>(), connectionProvider.getEmfResourceSet());
 		loader.fillResource(resource);
 		
 	}

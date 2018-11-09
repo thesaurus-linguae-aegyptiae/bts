@@ -7,7 +7,6 @@ import org.eclipse.e4.core.di.annotations.Execute;
 
 
 public class UpdateApplicationHandler {
-		      
 
 		@CanExecute
 		public boolean canExecute(ApplicationUpdateController updateController) {
@@ -16,7 +15,7 @@ public class UpdateApplicationHandler {
 	
 		@Execute
 		public void execute(ApplicationUpdateController updateController) {
-			updateController.scheduleUpdate();
+			updateController.askForConfirmationAndInstall();
 		}
 
 } 

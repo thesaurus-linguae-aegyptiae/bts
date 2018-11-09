@@ -48,7 +48,9 @@ public class RestoreDeletedHandler {
 			@Optional @Named(BTSCoreConstants.CORE_EXPRESSION_MAY_DELETE) Boolean mayDelete) {
 		if (mayDelete != null && mayDelete.booleanValue())
 		{
-			return selection != null;
+			if (selection != null && selection instanceof AdministrativDataObject) {
+				return ((AdministrativDataObject)selection).getState().equals(BTSConstants.OBJECT_STATE_TERMINATED);
+			}
 		}
 		return false;
 	}		

@@ -6,6 +6,7 @@ import java.net.URL;
 
 import org.bbaw.bts.core.controller.generalController.ISplashScreenController;
 import org.eclipse.core.runtime.FileLocator;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.util.Assert;
 import org.eclipse.osgi.util.NLS;
@@ -21,13 +22,14 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Monitor;
 import org.eclipse.swt.widgets.Shell;
+import org.osgi.framework.Version;
 
 public class SplashScreenControllerImpl implements ISplashScreenController
 {
 	private String pluginId = null;
 	private String splashPath = "splash.bmp";
 	private Shell splashShell = null;
-	private Label textLabel = null;
+	private Label msgTextLabel = null;
 	private String nextMessage = "Application Starting... ";
 
 	@Override
@@ -63,16 +65,16 @@ public class SplashScreenControllerImpl implements ISplashScreenController
 		shell.setBackgroundMode(SWT.INHERIT_DEFAULT);
 
 		final GridLayout layout = new GridLayout();
+		layout.marginWidth = 10;
 		layout.numColumns = 1;
-		layout.marginHeight = 40;
-		layout.marginWidth = 20;
 		layout.verticalSpacing = 6;
 		layout.horizontalSpacing = 6;
 		shell.setLayout(layout);
 
 		// TODO Set the postion and stlye of the text from outside to make the
 		// service reusable
-		textLabel = createTextLabel(shell);
+		Label versionTextLabel = createVersionLabel(shell);
+		msgTextLabel = createMessageLabel(shell);
 
 		Rectangle imageBounds = image.getBounds();
 		shell.setSize(imageBounds.width, imageBounds.height);
@@ -116,7 +118,7 @@ public class SplashScreenControllerImpl implements ISplashScreenController
 		}
 	}
 
-	private Label createTextLabel(Composite parent)
+	private Label createMessageLabel(Composite parent)
 	{
 		Label label = new Label(parent, SWT.WRAP);
 		GridData gd = new GridData();
@@ -126,7 +128,7 @@ public class SplashScreenControllerImpl implements ISplashScreenController
 		gd.grabExcessVerticalSpace = true;
 		label.setLayoutData(gd);
 
-		label.setForeground(parent.getDisplay().getSystemColor(SWT.COLOR_WHITE));
+		label.setForeground(parent.getDisplay().getSystemColor(SWT.COLOR_GRAY));
 		label.setFont(parent.getDisplay().getSystemFont());
 
 		if (nextMessage != null)
@@ -134,6 +136,21 @@ public class SplashScreenControllerImpl implements ISplashScreenController
 			label.setText(nextMessage);
 		}
 		return label;
+	}
+
+	private Label createVersionLabel(Composite parent) {
+		Label lbl = new Label(parent, SWT.NONE);
+		GridData gd = new GridData(SWT.RIGHT, SWT.TOP, false, true);
+		lbl.setLayoutData(gd);
+		lbl.setForeground(parent.getDisplay().getSystemColor(SWT.COLOR_RED));
+		lbl.setFont(parent.getDisplay().getSystemFont());
+		try {
+			Version v = Platform.getBundle(pluginId).getVersion();
+			lbl.setText("v"+v.getMajor()+"."+v.getMinor()+"."+v.getMicro());
+		} catch (Exception e) {
+			//
+		}
+		return lbl;
 	}
 
 	private Point getMonitorCenter(Shell shell)
@@ -159,14 +176,14 @@ public class SplashScreenControllerImpl implements ISplashScreenController
 	@Override
 	public void setMessage(final String message)
 	{
-		if (textLabel != null && !textLabel.isDisposed())
+		if (msgTextLabel != null && !msgTextLabel.isDisposed())
 		{
 			splashShell.getDisplay().syncExec(new Runnable()
 			{
 				@Override
 				public void run()
 				{
-					textLabel.setText(message);
+					msgTextLabel.setText(message);
 					splashShell.layout();
 					splashShell.update();
 				}

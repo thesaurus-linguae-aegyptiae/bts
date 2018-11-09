@@ -287,7 +287,11 @@ public class CompoundRelationsEditorComposite extends Composite {
 		return rel;
 	}
 	
-	
+	@Override
+	public void setEnabled(boolean enabled) {
+		super.setEnabled(enabled);
+		this.userMayEdit = enabled;
+	}
 	
 	
 }

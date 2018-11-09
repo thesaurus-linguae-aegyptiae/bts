@@ -30,8 +30,8 @@
 package org.bbaw.bts.core.commons.staticAccess;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
-import org.bbaw.bts.ui.resources.BTSResourceProvider;
 import org.eclipse.core.runtime.preferences.ConfigurationScope;
 import org.eclipse.core.runtime.preferences.IEclipsePreferences;
 import org.eclipse.e4.core.commands.EHandlerService;
@@ -40,7 +40,6 @@ import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.core.di.extensions.Preference;
 import org.eclipse.e4.core.services.log.Logger;
 import org.eclipse.e4.ui.services.EContextService;
-import org.eclipse.jface.preference.IPreferenceStore;
 
 /**
  * The Class StaticAccessController provides static access to EclipseContext.
@@ -69,7 +68,8 @@ public class StaticAccessController {
 	/** The preference store. */
 	private static IEclipsePreferences preferenceStore = ConfigurationScope.INSTANCE.getNode("org.bbaw.bts.app");
 	@Inject
-	private static BTSResourceProvider resourceProvider;
+	@Named("org.bbaw.bts.ui.resources.BTSResourceProvider")
+	private static Object resourceProvider;
 	
 	/** The logger. */
 	@Inject
@@ -125,7 +125,7 @@ public class StaticAccessController {
 	 *
 	 * @return the resource provider
 	 */
-	public static BTSResourceProvider getResourceProvider() {
+	public static Object getResourceProvider() {
 		return resourceProvider;
 	}
 
@@ -143,7 +143,7 @@ public class StaticAccessController {
 	 *
 	 * @return the preference store
 	 */
-	public static IPreferenceStore getPreferenceStore() {
+	public static Object getPreferenceStore() {
 		return null;
 	}
 

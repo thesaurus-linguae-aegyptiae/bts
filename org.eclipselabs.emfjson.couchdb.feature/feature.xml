@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="org.eclipselabs.emfjson.couchdb.feature"
+      id="org.bbaw.bts.eclipselabs.emfjson.couchdb.feature"
       label="EMFJs CouchDB"
       version="0.4.0.qualifier"
       provider-name="Eclipse Labs">
@@ -90,18 +90,18 @@ This Agreement is governed by the laws of the State of New York and the intellec
       <import plugin="org.eclipse.emf.common"/>
       <import plugin="org.eclipse.emf.ecore"/>
       <import plugin="org.eclipse.emf.ecore.xmi"/>
-      <import plugin="org.eclipselabs.emfjson"/>
+      <import plugin="org.bbaw.bts.eclipselabs.emfjson"/>
    </requires>
 
    <plugin
-         id="org.eclipselabs.emfjson.couchdb"
+         id="org.bbaw.bts.eclipselabs.emfjson.couchdb"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="org.eclipselabs.emfjson.couchdb.ui"
+         id="org.bbaw.bts.eclipselabs.emfjson.couchdb.ui"
          download-size="0"
          install-size="0"
          version="0.0.0"

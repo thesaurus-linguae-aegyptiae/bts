@@ -24,6 +24,7 @@ public class AddAnnotationHandler {
 	@Execute
 	public void execute(
 			@Named(IServiceConstants.ACTIVE_SELECTION) @Optional BTSTextSelectionEvent event,
+			@Optional @Named("annotationTypePath") String annotationTypePath,
 			@Named(IServiceConstants.ACTIVE_SHELL) final Shell shell,
 			CorpusNavigatorController corpusNavigatorController,
 			IEclipseContext context) {
@@ -32,7 +33,7 @@ public class AddAnnotationHandler {
 			if (dbbaseObject != null)
 			{
 				final BTSAnnotation object = corpusNavigatorController
-						.createNewAnnotation((BTSCorpusObject) dbbaseObject);
+						.createNewAnnotation((BTSCorpusObject) dbbaseObject, annotationTypePath);
 				BTSRelation rel = null;
 				if (object.getRelations().isEmpty())
 				{
@@ -55,6 +56,7 @@ public class AddAnnotationHandler {
 				child.set(Shell.class, shell);
 				PassportEditorDialog dialog = ContextInjectionFactory.make(
 						PassportEditorDialog.class, child);
+				dialog.setEditable(true);
 				int res = dialog.open();
 				if (res == SWT.DEFAULT || res == 1) {
 					// if cancelled, annotation does not get saved.

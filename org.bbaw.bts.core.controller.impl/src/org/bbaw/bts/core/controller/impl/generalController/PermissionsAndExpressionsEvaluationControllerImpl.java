@@ -1,5 +1,6 @@
 package org.bbaw.bts.core.controller.impl.generalController;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -9,7 +10,6 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.bbaw.bts.btsmodel.BTSDBBaseObject;
-import org.bbaw.bts.btsmodel.BTSDBCollectionRoleDesc;
 import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.btsmodel.BTSProject;
 import org.bbaw.bts.btsmodel.BTSProjectDBCollection;
@@ -47,10 +47,6 @@ public class PermissionsAndExpressionsEvaluationControllerImpl implements
 
 	@Inject
 	private IEventBroker eventBroker;
-	
-	private static final String FALSE = "false";
-
-	private static final String TRUE = "true";
 
 	private static final long LOCKING_DELAY = 600;
 
@@ -110,6 +106,8 @@ public class PermissionsAndExpressionsEvaluationControllerImpl implements
 	private BTSProjectService projecService;
 
 	private List<BTSProject> allProjects;
+
+	private Map<String, BTSProjectDBCollection> dbCollectionCache;
 
 
 	@Inject
@@ -664,7 +662,45 @@ public class PermissionsAndExpressionsEvaluationControllerImpl implements
 			}
 		}
 		return false;
-		
+	}
+
+	@Override
+	public boolean userMayCommentOnObject(BTSUser user, BTSObject object) {
+		if (user == null || object == null) {
+			return false;
+		} else {
+			if (userContextRole != null) {
+				if (userContextRole.equals(BTSCoreConstants.USER_ROLE_ADMINS)) {
+					return true;
+				}
+				if (userContextRole.equals(BTSCoreConstants.USER_ROLE_EDITORS)) {
+					if (object.getVisibility().equals(BTSCoreConstants.VISIBILITY_PUBLIC)) {
+						return true;
+					} else {
+						return evaluationService.userIsMember(user, object.getUpdaters());
+					}
+				}
+				if (userContextRole.equals(BTSCoreConstants.USER_ROLE_RESEARCHERS)) {
+					return evaluationService.userIsMember(user, object.getUpdaters());
+				}
+			}
+		}
+		return false;
+	}
+
+	private BTSProjectDBCollection getDBCollection(String dbCollectionName) {
+		if (dbCollectionCache == null) {
+			dbCollectionCache= new HashMap<String, BTSProjectDBCollection>();
+			for (BTSProject project : getAllProjects())
+			{
+				for (BTSProjectDBCollection c : project.getDbCollections()) {
+					if (c.getCollectionName() != null) {
+						dbCollectionCache.put(c.getCollectionName(), c);
+					}
+				}
+			}
+		}
+		return dbCollectionCache.get(dbCollectionName);
 	}
 
 	private boolean userRoleMayEdit(BTSUser user, BTSDBBaseObject object) {
@@ -672,19 +708,8 @@ public class PermissionsAndExpressionsEvaluationControllerImpl implements
 		if (user == null || object == null) {
 
 		} else {
-			for (BTSProject project : getAllProjects())
-			{
-				if (project.getPrefix() != null && project.getPrefix().equals(object.getProject()))
-				{
-					for (BTSProjectDBCollection c : project.getDbCollections()) {
-						if (c.getCollectionName() != null
-								&& c.getCollectionName().equals(object.getDBCollectionKey())) {
-							localUserContextRole = evaluationService.highestRoleOfUserInDBCollection(user, c);
-							break;
-						}
-					}
-				}
-			}
+			BTSProjectDBCollection c = getDBCollection(object.getDBCollectionKey());
+			localUserContextRole = evaluationService.highestRoleOfUserInDBCollection(user, c);
 		}
 		return (localUserContextRole != null && (localUserContextRole
 				.equals(BTSCoreConstants.USER_ROLE_ADMINS) || localUserContextRole
@@ -701,11 +726,36 @@ public class PermissionsAndExpressionsEvaluationControllerImpl implements
 
 	@Override
 	public boolean authenticatedUserMayAddToDBCollection(
+			String dbCollectionName) {
+		BTSProjectDBCollection dbCollection = getDBCollection(dbCollectionName);
+		return authenticatedUserMayAddToDBCollection(dbCollection);
+	}
+
+
+	@Override
+	public boolean authenticatedUserMayAddToDBCollection(
 			BTSProjectDBCollection dbCollection) {
 		String localUserContextRole = evaluationService.highestRoleOfUserInDBCollection(authenticatedUser, dbCollection);
-		return (localUserContextRole != null && (localUserContextRole
-				.equals(BTSCoreConstants.USER_ROLE_ADMINS) || localUserContextRole
-				.equals(BTSCoreConstants.USER_ROLE_EDITORS)));
+		return (localUserContextRole != null
+				&& (localUserContextRole.equals(BTSCoreConstants.USER_ROLE_ADMINS)
+					|| localUserContextRole.equals(BTSCoreConstants.USER_ROLE_EDITORS)
+					|| localUserContextRole.equals(BTSCoreConstants.USER_ROLE_RESEARCHERS)));
+	}
+
+	@Override
+	public boolean authenticatedUserMayReadDBCollection(String dbCollectionName) {
+		BTSProjectDBCollection dbCollection = getDBCollection(dbCollectionName);
+		return authenticatedUserMayReadDBCollection(dbCollection);
+	}
+
+	@Override
+	public boolean authenticatedUserMayReadDBCollection(
+			BTSProjectDBCollection dbCollection) {
+		String userRole = evaluationService.highestRoleOfUserInDBCollection(authenticatedUser, dbCollection);
+		return (userRole != null && (userRole.equals(BTSCoreConstants.USER_ROLE_ADMINS)
+				|| userRole.equals(BTSCoreConstants.USER_ROLE_EDITORS)
+				|| userRole.equals(BTSCoreConstants.USER_ROLE_RESEARCHERS)
+				|| userRole.equals(BTSCoreConstants.USER_ROLE_TRANSCRIBERS)));
 	}
 
 	@Override

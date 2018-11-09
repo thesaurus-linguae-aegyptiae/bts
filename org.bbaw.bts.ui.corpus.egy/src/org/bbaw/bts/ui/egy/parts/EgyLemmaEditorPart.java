@@ -10,24 +10,25 @@ import java.util.Map;
 import java.util.Set;
 import java.util.Vector;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.annotation.PostConstruct;
 
 import org.bbaw.bts.btsmodel.BTSIdentifiableItem;
+import org.bbaw.bts.btsmodel.BTSInterTextReference;
 import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.btsmodel.BTSTranslations;
 import org.bbaw.bts.btsmodel.BtsmodelFactory;
 import org.bbaw.bts.commons.BTSPluginIDs;
 import org.bbaw.bts.core.commons.BTSCoreConstants;
 import org.bbaw.bts.core.controller.generalController.EditingDomainController;
+import org.bbaw.bts.core.controller.generalController.PermissionsAndExpressionsEvaluationController;
 import org.bbaw.bts.core.corpus.controller.partController.LemmaEditorController;
-import org.bbaw.bts.corpus.btsCorpusModel.BTSAnnotation;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSLemmaEntry;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSSenctence;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSSentenceItem;
-import org.bbaw.bts.corpus.btsCorpusModel.BTSText;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSTextContent;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSTextItems;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSWord;
@@ -44,20 +45,9 @@ import org.bbaw.bts.ui.commons.corpus.text.BTSModelAnnotation;
 import org.bbaw.bts.ui.commons.corpus.text.BTSSubtextAnnotation;
 import org.bbaw.bts.ui.commons.utils.BTSUIConstants;
 import org.bbaw.bts.ui.commons.widgets.TranslationEditorComposite;
-import org.bbaw.bts.ui.egy.parts.egyTextEditor.AnnotationDrawingStrategy;
-import org.bbaw.bts.ui.egy.parts.egyTextEditor.AnnotationHighlightedDrawingStrategy;
 import org.bbaw.bts.ui.egy.parts.egyTextEditor.BTSTextXtextEditedResourceProvider;
-import org.bbaw.bts.ui.egy.parts.egyTextEditor.CommentDrawingStrategy;
-import org.bbaw.bts.ui.egy.parts.egyTextEditor.CommentHighlightedDrawingStrategy;
-import org.bbaw.bts.ui.egy.parts.egyTextEditor.RubrumDrawingStrategy;
-import org.bbaw.bts.ui.egy.parts.egyTextEditor.SubtextHighlightedDrawingStrategy;
-import org.bbaw.bts.ui.egy.parts.egyTextEditor.SubtextdrawingStrategy;
 import org.bbaw.bts.ui.egy.parts.support.AbstractTextEditorLogic;
 import org.bbaw.bts.ui.egy.textSign.SignTextComposite;
-import org.eclipse.swt.widgets.Composite;
-
-import javax.annotation.PreDestroy;
-
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
@@ -91,7 +81,7 @@ import org.eclipse.jface.text.source.AnnotationModel;
 import org.eclipse.jface.text.source.AnnotationPainter;
 import org.eclipse.jface.text.source.IAnnotationAccess;
 import org.eclipse.jface.text.source.IAnnotationModel;
-import org.eclipse.jface.text.source.AnnotationPainter.ITextStyleStrategy;
+import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CaretEvent;
 import org.eclipse.swt.custom.CaretListener;
 import org.eclipse.swt.events.FocusEvent;
@@ -99,13 +89,12 @@ import org.eclipse.swt.events.FocusListener;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.events.TypedEvent;
-import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.widgets.Label;
-import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
+import org.eclipse.swt.widgets.Label;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.ui.editor.embedded.EmbeddedEditor;
 import org.eclipse.xtext.ui.editor.embedded.EmbeddedEditorFactory;
 import org.eclipse.xtext.ui.editor.embedded.EmbeddedEditorModelAccess;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
@@ -168,13 +157,11 @@ public class EgyLemmaEditorPart extends AbstractTextEditorLogic implements IBTSE
 
 	private Group grpTransliteration;
 
-	private EmbeddedEditor embeddedEditor;
-	
 	private EmbeddedEditorModelAccess embeddedEditorModelAccess;
 
 	private IAnnotationModel annotationModel;
 
-	private Map relatingObjectsMap;
+	private Map<String, List<BTSInterTextReference>> relatingObjectsMap;
 
 	private BTSTextXtextEditedResourceProvider xtextResourceProvider = new BTSTextXtextEditedResourceProvider();
 	private Map<String, BTSModelAnnotation> modelAnnotationMap;
@@ -190,10 +177,9 @@ public class EgyLemmaEditorPart extends AbstractTextEditorLogic implements IBTSE
 	private Set<Command> localCommandCacheSet = new HashSet<Command>();
 	protected boolean loading;
 	private TranslationEditorComposite lemmaTranslate_Editor;
-	private AnnotationPainter painter;
 	private HashMap<String, List<Object>> lemmaAnnotationMap;
 	private Job processLemmaAnnotionsJob;
-
+	
 	// boolean if object is loaded into gui
 	private boolean loaded;
 
@@ -204,6 +190,9 @@ public class EgyLemmaEditorPart extends AbstractTextEditorLogic implements IBTSE
 	private boolean selectionCached;
 
 	@Inject
+	private PermissionsAndExpressionsEvaluationController permissionsController;
+
+	@Inject
 	public EgyLemmaEditorPart(EPartService partService) {
 		part = partService.findPart(BTSPluginIDs.PART_ID_EGY_LEMMAEDITOR);
 
@@ -212,7 +201,6 @@ public class EgyLemmaEditorPart extends AbstractTextEditorLogic implements IBTSE
 	@PostConstruct
 	public void postConstruct(Composite parent) {
 		parent.setLayout(new GridLayout(1, false));
-		
 		
 		// transliteration
 		grpTransliteration = new Group(parent, SWT.NONE);
@@ -242,10 +230,7 @@ public class EgyLemmaEditorPart extends AbstractTextEditorLogic implements IBTSE
 
 
 		embeddedEditor = embeddedEditorFactory.newEditor(xtextResourceProvider)
-				.showAnnotations(BTSAnnotationAnnotation.TYPE,
-						BTSCommentAnnotation.TYPE,
-						"org.eclipse.xtext.ui.editor.error",
-						"org.eclipse.xtext.ui.editor.warning")
+				.showAnnotations("org.eclipse.xtext.ui.editor.error")
 				.withParent(embeddedEditorComp);
 		embeddedEditor.getViewer().getTextWidget().setLineSpacing(LINE_SPACE);
 		embeddedEditorModelAccess = embeddedEditor.createPartialEditor("\r",
@@ -269,39 +254,32 @@ public class EgyLemmaEditorPart extends AbstractTextEditorLogic implements IBTSE
 		};
 		painter = new AnnotationPainter(embeddedEditor.getViewer(),
 				annotationAccess);
-		configureEditorDrawingStrategies(painter);
+		configureEditorDrawingStrategies(null);
 		embeddedEditor.getViewer().addTextPresentationListener(painter);
 		embeddedEditor.getViewer().addPainter(painter);
 		grpTransliteration.layout();
 		// embeddedEditor.getViewer().getControl().setFocus();
 
-		
-
 		embeddedEditor.getViewer().getTextWidget()
 				.addCaretListener(new CaretListener() {
-
 					@Override
 					public void caretMoved(CaretEvent event) {
 						processTextSelection(event);
-
 					}
 				});
+
 		embeddedEditor.getViewer().getTextWidget().addSelectionListener(new SelectionListener() {
-			
 			@Override
 			public void widgetSelected(SelectionEvent event) {
 				processTextSelection(event);
-
-				
 			}
 			
 			@Override
 			public void widgetDefaultSelected(SelectionEvent e) {
-				
 			}
 		});
+
 		embeddedEditor.getViewer().getTextWidget().addFocusListener(new FocusListener() {
-			
 			@Override
 			public void focusLost(FocusEvent e) {
 				updateModelFromTranscription();
@@ -309,17 +287,17 @@ public class EgyLemmaEditorPart extends AbstractTextEditorLogic implements IBTSE
 			
 			@Override
 			public void focusGained(FocusEvent e) {
-				contextService
-				.activateContext("org.eclipse.xtext.ui.embeddedTextEditorScope");
-				loadTextContent(selectedLemmaEntry);
-				loadTransliteration(selectedLemmaEntry);
+				contextService.activateContext("org.eclipse.xtext.ui.embeddedTextEditorScope");
+				// XXX why?
+				//loadTextContent(selectedLemmaEntry);
+				//loadTransliteration(selectedLemmaEntry);
 			}
 		});
 		
 //		
 		// sign - text
 		Group grpSigntext = new Group(parent, SWT.NONE);
-		grpSigntext.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
+		grpSigntext.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 2));
 		grpSigntext.setLayout(new GridLayout(1, false));
 		
 		grpSigntext.setText("Sign Text");
@@ -328,19 +306,17 @@ public class EgyLemmaEditorPart extends AbstractTextEditorLogic implements IBTSE
 		child.set(IBTSEditor.class, EgyLemmaEditorPart.this);
 		signTextEditor = ContextInjectionFactory.make(
 				SignTextComposite.class, child);
-		signTextEditor.setEventBroker(eventBroker);
 		signTextEditor.addFocusListener(new FocusListener() {
 			
 			@Override
 			public void focusLost(FocusEvent e) {
-
 			}
 			
 			@Override
 			public void focusGained(FocusEvent e) {
-				loadTextContent(selectedLemmaEntry);
-				loadSignText(selectedLemmaEntry);
-				
+				// XXX why?
+				//loadTextContent(selectedLemmaEntry);
+				//loadSignText(selectedLemmaEntry);
 			}
 		});
 		grpSigntext.layout();
@@ -348,13 +324,13 @@ public class EgyLemmaEditorPart extends AbstractTextEditorLogic implements IBTSE
 		
 		// tranlation		
 		Group grpTranslation = new Group(parent, SWT.NONE);
-		grpTranslation.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
+		grpTranslation.setLayoutData(new GridData(SWT.FILL, SWT.NONE, true, false, 1, 1));
 		grpTranslation.setText("Translation");
 		grpTranslation.setLayout(new GridLayout(1, false));
 
 		lemmaTranslate_Editor = new TranslationEditorComposite(
 				grpTranslation, SWT.WRAP | SWT.MULTI | SWT.V_SCROLL
-						| SWT.BORDER, null, null, false);
+						| SWT.BORDER, null, null, false, false);
 		lemmaTranslate_Editor.setLayoutData(new GridData(SWT.FILL, SWT.FILL,
 				true, true));
 		lemmaTranslate_Editor.layout();
@@ -366,8 +342,25 @@ public class EgyLemmaEditorPart extends AbstractTextEditorLogic implements IBTSE
 		{
 			loadInput(selectedLemmaEntry);
 		}
+
+		embeddedEditor.getDocument().addDocumentListener(
+			new IDocumentListener() {
+				@Override
+				public void documentChanged(DocumentEvent event) {
+					System.out.println("editor is currently loading content: "+loading);
+					if (!loading) {
+						setDirtyInternal();
+					}
+				}
+
+				@Override
+				public void documentAboutToBeChanged(DocumentEvent event) {
+				}
+			});
+
 	}
-	
+
+
 	
 	
 	@Inject
@@ -422,35 +415,32 @@ public class EgyLemmaEditorPart extends AbstractTextEditorLogic implements IBTSE
 			}
 		}
 	}
-	private void makePartActive(boolean activate) {
-	embeddedEditor.getViewer().setEditable(activate);
-	embeddedEditor.getViewer().getTextWidget().setEnabled(activate);
-	signTextEditor.setEnabled(activate);
-	lemmaTranslate_Editor.setEnabled(activate);
-	if (activate)
-	{
-		embeddedEditor.getViewer().getTextWidget().setBackground(BTSUIConstants.COLOR_WIHTE);
-		signTextEditor.setBackground(BTSUIConstants.COLOR_WIHTE);
-	}
-	else
-	{
-		embeddedEditor.getViewer().getTextWidget().setBackground(BTSUIConstants.COLOR_BACKGROUND_DISABLED);
-		signTextEditor.setBackground(BTSUIConstants.COLOR_BACKGROUND_DISABLED);
-	}
-	
-}
 
-private void bringPartToFront(boolean b) {
-	try {
-		partService.bringToTop(part);
-	} catch (Exception e) {
-	}
+	private void makePartActive(boolean activate) {
+		embeddedEditor.getViewer().setEditable(activate);
+		embeddedEditor.getViewer().getTextWidget().setEnabled(activate);
+		signTextEditor.setEnabled(activate);
+		lemmaTranslate_Editor.setEnabled(activate);
+		if (activate) {
+			embeddedEditor.getViewer().getTextWidget().setBackground(BTSUIConstants.COLOR_WIHTE);
+			signTextEditor.setBackground(BTSUIConstants.COLOR_WIHTE);
+		} else {
+			embeddedEditor.getViewer().getTextWidget().setBackground(BTSUIConstants.COLOR_BACKGROUND_DISABLED);
+			signTextEditor.setBackground(BTSUIConstants.COLOR_BACKGROUND_DISABLED);
+		}
 	
-}
+	}
+
+	private void bringPartToFront(boolean b) {
+		try {
+			partService.bringToTop(part);
+		} catch (Exception e) {}
+	}
 	
 	private void loadInput(final BTSLemmaEntry selection) {
 		
 		loading = true;
+
 		if (selection != null)
 		{
 			Job job = new Job("load children")
@@ -516,27 +506,11 @@ private void bringPartToFront(boolean b) {
 		annotationModel = embeddedEditor.getViewer().getAnnotationModel();
 
 		loadAnnotations2Editor(annotationModel, tempAnnotationModel);
-		if (selectedLemmaEntry != null) {
-			embeddedEditor.getDocument().addDocumentListener(
-					new IDocumentListener() {
 
-					@Override
-					public void documentChanged(DocumentEvent event) {
-						if (!loading)
-						{
-							setDirtyInternal();
-						}
-
-					}
-
-					@Override
-					public void documentAboutToBeChanged(DocumentEvent event) {
-
-					}
-				});
-		}
 		processLemmaAnnotions(lemmaAnnotationMap);
 	}
+
+
 	private void processLemmaAnnotions(
 			final HashMap<String, List<Object>> localLemmaAnnotationMap) {
 		
@@ -849,10 +823,13 @@ private void bringPartToFront(boolean b) {
 		l.add(ma);
 	}
 	protected void setDirtyInternal() {
-		if (selectedLemmaEntry != null && dirty != null && !dirty.isDirty()) {
-			dirty.setDirty(true);
+		if (permissionsController.userMayEditObject(
+				permissionsController.getAuthenticatedUser(), 
+				selectedLemmaEntry)) {
+			if (selectedLemmaEntry != null && dirty != null && !dirty.isDirty()) {
+				dirty.setDirty(true);
+			}
 		}
-		
 	}
 
 	private void loadSignText(BTSLemmaEntry lemma) {
@@ -1138,7 +1115,7 @@ private void bringPartToFront(boolean b) {
 	@Optional
 	void eventReceivedUpdates(@EventTopic("model_update/*") BTSModelUpdateNotification notification)
 	{
-		logger.info("EgyTextEditorPart eventReceivedUpdates. object: " + notification);
+		//logger.info("EgyTextEditorPart eventReceivedUpdates. object: " + notification);
 //		if (notification.getQueryIds() != null){
 //			for (String id : notification.getQueryIds())
 //			{

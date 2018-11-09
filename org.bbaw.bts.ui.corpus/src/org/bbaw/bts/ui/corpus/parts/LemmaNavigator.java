@@ -31,8 +31,6 @@ import org.bbaw.bts.corpus.btsCorpusModel.BTSLemmaEntry;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSThsEntry;
 import org.bbaw.bts.searchModel.BTSModelUpdateNotification;
 import org.bbaw.bts.searchModel.BTSQueryResultAbstract;
-import org.bbaw.bts.ui.commons.filter.SuppressDeletedViewerFilter;
-import org.bbaw.bts.ui.commons.filter.SuppressNondeletedViewerFilter;
 import org.bbaw.bts.ui.commons.navigator.StructuredViewerProvider;
 import org.bbaw.bts.ui.commons.search.SearchViewer;
 import org.bbaw.bts.ui.commons.utils.BTSUIConstants;
@@ -92,7 +90,7 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.Shell;
 
-public class LemmaNavigator implements ScatteredCachingPart, SearchViewer, StructuredViewerProvider
+public class LemmaNavigator extends NavigatorPart implements ScatteredCachingPart, SearchViewer, StructuredViewerProvider
 {
 
 	@Inject
@@ -144,7 +142,6 @@ public class LemmaNavigator implements ScatteredCachingPart, SearchViewer, Struc
 	private CTabItem binTabItem;
 	private Composite binTabItemComp;
 	private TreeViewer bintreeViewer;
-	private SuppressDeletedViewerFilter deletedFilter;
 	private boolean loaded;
 	protected TreeNodeWrapper orphanNode;
 	private ViewerSorter sorter;
@@ -239,7 +236,7 @@ public class LemmaNavigator implements ScatteredCachingPart, SearchViewer, Struc
 		
 		// create bin tab item
 		binTabItem = new CTabItem(tabFolder, SWT.NONE);
-		binTabItem.setText("Bin");
+		binTabItem.setText("Trash");
 		binTabItem.setData("key", "bin");
 		binTabItem.setImage(resourceProvider.getImage(Display.getDefault(),
 				BTSResourceProvider.IMG_BIN));
@@ -464,13 +461,7 @@ public class LemmaNavigator implements ScatteredCachingPart, SearchViewer, Struc
 							@Override
 							public void run() {
 								loadTree(treeViewer, rootNode, parentControl);
-								if (!deleted) {
-									treeViewer.addFilter(getDeletedFilter());
-								}
-								else {
-									treeViewer
-											.addFilter(new SuppressNondeletedViewerFilter());
-								}
+								treeViewer.addFilter(getDeletedFilter(deleted));
 								if (BTSUIConstants.SELECTION_TYPE_SECONDARY
 										.equals(selectionType)) {
 									// register context menu on the table
@@ -537,13 +528,6 @@ public class LemmaNavigator implements ScatteredCachingPart, SearchViewer, Struc
 		}
 	}
 	
-	
-	private ViewerFilter getDeletedFilter() {
-		if (deletedFilter == null) {
-			deletedFilter = new SuppressDeletedViewerFilter();
-		}
-		return deletedFilter;
-	}
 
 	private void loadChildren(final List<TreeNodeWrapper> parents,
 			boolean includeGrandChildren, final Control parentControl) {
@@ -702,7 +686,7 @@ public class LemmaNavigator implements ScatteredCachingPart, SearchViewer, Struc
 	@Inject
 	@Optional
 	void eventReceivedUpdates(@EventTopic("model_update/async") Object object) {
-		logger.info("LemmaNavigatorPart eventReceivedUpdates. object: " + object);
+		//logger.info("LemmaNavigatorPart eventReceivedUpdates. object: " + object);
 
 		if (object instanceof BTSLemmaEntry && selection != null
 				&& selection.getFirstElement() instanceof BTSLemmaEntry) {
@@ -751,7 +735,7 @@ public class LemmaNavigator implements ScatteredCachingPart, SearchViewer, Struc
 	}
 
 	@Override
-	public List<Map> getScatteredCashMaps() {
+	public List<Map> getScatteredCacheMaps() {
 		final List<Map> maps = new Vector<Map>(1);
 		for (Map map : cachingMap.values()) {
 			maps.add(map);
@@ -896,7 +880,7 @@ public class LemmaNavigator implements ScatteredCachingPart, SearchViewer, Struc
 							@Override
 							public void run() {
 								loadTree(treeViewer, rootNode, parentControl);
-								treeViewer.addFilter(getDeletedFilter());
+								treeViewer.addFilter(getDeletedFilter(false));
 								// register context menu on the table
 								menuService.registerContextMenu(
 										treeViewer.getControl(),

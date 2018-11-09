@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: CorpusDAO
 Bundle-SymbolicName: org.bbaw.bts.core.dao.corpus;singleton:=true
-Bundle-Version: 3.1.0.qualifier
+Bundle-Version: 3.1.1.qualifier
 Bundle-Activator: org.bbaw.bts.core.dao.corpus.internal.Activator
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Service-Component: OSGI-INF/*.xml
@@ -25,7 +25,6 @@ Require-Bundle: org.eclipse.e4.core.di.extensions,
  org.eclipse.e4.core.contexts,
  org.eclipse.emf.ecore,
  org.eclipse.equinox.registry,
- org.eclipse.e4.ui.model.workbench,
  org.eclipse.e4.core.di.extensions,
  org.eclipse.osgi,
  org.eclipse.equinox.common

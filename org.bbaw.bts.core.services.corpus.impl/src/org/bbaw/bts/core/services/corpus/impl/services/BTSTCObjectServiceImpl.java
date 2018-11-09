@@ -131,14 +131,10 @@ public class BTSTCObjectServiceImpl extends AbstractCorpusObjectServiceImpl<BTST
 			boolean registerQuery, IProgressMonitor monitor)
 	{
 		List<BTSTCObject> objects = new Vector<BTSTCObject>();
-		for (String p : getActiveProjects())
-		{
-			for (String c : getActive_corpora(p))
-			{
-				objects.addAll(bTSTCObjectDao.query(query, c, c, objectState,
-						registerQuery));
-			}
-		}
+		String[] indexArray = buildIndexArray();
+
+		objects.addAll(bTSTCObjectDao.query(query, indexArray, indexArray, objectState,
+				registerQuery));
 		return filter(objects);
 	}
 	@Override
@@ -172,6 +168,52 @@ public class BTSTCObjectServiceImpl extends AbstractCorpusObjectServiceImpl<BTST
 	@Override
 	public List<BTSTCObject> listRootEntries(IProgressMonitor monitor) {
 		throw new UnsupportedOperationException();
+	}
+
+	/* (non-Javadoc)
+	 * @see org.bbaw.bts.core.services.impl.generic.GenericObjectServiceImpl#findAsJsonString(java.io.Serializable, org.eclipse.core.runtime.IProgressMonitor)
+	 */
+	@Override
+	public String findAsJsonString(String key, IProgressMonitor monitor) {
+		String tcObject = null;
+		tcObject = bTSTCObjectDao.findAsJsonString(key, main_corpus_key);
+		if (tcObject != null)
+		{
+			return tcObject;
+		}
+		for (String c : getActive_corpora(main_project))
+		{
+			tcObject = bTSTCObjectDao.findAsJsonString(key, c);
+			if (tcObject != null)
+			{
+				return tcObject;
+			}
+		}
+		for (String p : getActiveProjects())
+		{
+			for (String c : getActive_corpora(p))
+			{
+				tcObject = bTSTCObjectDao.findAsJsonString(key, c);
+				if (tcObject != null)
+				{
+					return tcObject;
+				}
+			}
+		}
+		return tcObject;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.bbaw.bts.core.services.impl.generic.GenericObjectServiceImpl#queryAsJsonString(org.bbaw.bts.core.dao.util.BTSQueryRequest, java.lang.String, org.eclipse.core.runtime.IProgressMonitor)
+	 */
+	@Override
+	public List<String> queryAsJsonString(BTSQueryRequest query, String objectState, IProgressMonitor monitor) {
+		List<String> objects = new Vector<String>();
+		String[] indexArray = buildIndexArray();
+
+		objects.addAll(bTSTCObjectDao.queryAsJsonString(query, indexArray, indexArray, objectState,
+				false));
+		return objects;
 	}
 	
 }

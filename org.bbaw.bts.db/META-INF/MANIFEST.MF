@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Db
 Bundle-SymbolicName: org.bbaw.bts.db
-Bundle-Version: 3.1.0.qualifier
+Bundle-Version: 3.1.1.qualifier
 Bundle-Vendor: BBAW
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Export-Package: org.bbaw.bts.db

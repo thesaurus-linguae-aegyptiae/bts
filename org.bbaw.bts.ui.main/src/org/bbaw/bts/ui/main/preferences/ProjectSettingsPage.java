@@ -207,7 +207,7 @@ public class ProjectSettingsPage extends FieldEditorPreferencePage {
 			return super.performOk();
 		}
 		boolean saveRequired = false;
-		if (selectedProject != null && main_project != null && !main_project.equals(selectedProject.getPrefix()))
+		if (selectedProject != null && (main_project == null ||  (main_project != null && !main_project.equals(selectedProject.getPrefix()))))
 		{
 			prefs.put(BTSPluginIDs.PREF_MAIN_PROJECT_KEY, selectedProject.getPrefix());
 			// update instance scope so that new value is injected

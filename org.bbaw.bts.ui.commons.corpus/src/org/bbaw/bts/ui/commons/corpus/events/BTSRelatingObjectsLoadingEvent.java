@@ -4,13 +4,14 @@ import java.util.List;
 import java.util.Vector;
 
 import org.bbaw.bts.btsmodel.BTSObject;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
 
 public class BTSRelatingObjectsLoadingEvent {
 	private List<BTSObject> relatingObjects = new Vector<BTSObject>(4);
 	
-	private BTSObject object;
+	private BTSCorpusObject object;
 
-	public BTSRelatingObjectsLoadingEvent(BTSObject object) {
+	public BTSRelatingObjectsLoadingEvent(BTSCorpusObject object) {
 		this.object = object;
 	}
 
@@ -22,11 +23,11 @@ public class BTSRelatingObjectsLoadingEvent {
 		this.relatingObjects = relatingObjects;
 	}
 
-	public BTSObject getObject() {
+	public BTSCorpusObject getObject() {
 		return object;
 	}
 
-	public void setObject(BTSObject object) {
+	public void setObject(BTSCorpusObject object) {
 		this.object = object;
 	}
 

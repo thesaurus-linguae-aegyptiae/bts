@@ -1,5 +1,6 @@
 package org.bbaw.bts.ui.corpus.parts;
 
+import java.util.ArrayList;
 import java.util.EventObject;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -179,6 +180,9 @@ public class PassportEditorPart {
 	private PassportConfigurationController passportConfigurationController;
 
 	@Inject
+	private PermissionsAndExpressionsEvaluationController permissionsController;
+
+	@Inject
 	private ECommandService commandService;
 
 	@Inject
@@ -296,10 +300,6 @@ public class PassportEditorPart {
 			}
 		});
 
-		relationsComp.setLayout(new GridLayout(8, false));
-		((GridLayout) relationsComp.getLayout()).marginWidth = 0;
-		((GridLayout) relationsComp.getLayout()).marginHeight = 0;
-
 		relationsComp.setLayout(new GridLayout(
 				BTSUIConstants.PASSPORT_COLUMN_NUMBER, true));
 		((GridLayout) relationsComp.getLayout()).marginWidth = 0;
@@ -329,10 +329,6 @@ public class PassportEditorPart {
 						SWT.DEFAULT));
 			}
 		});
-
-		idsComp.setLayout(new GridLayout(8, false));
-		((GridLayout) idsComp.getLayout()).marginWidth = 0;
-		((GridLayout) idsComp.getLayout()).marginHeight = 0;
 
 		idsComp.setLayout(new GridLayout(
 				BTSUIConstants.PASSPORT_COLUMN_NUMBER, true));
@@ -560,17 +556,18 @@ public class PassportEditorPart {
 						Job job = new Job("My Job") {
 							@Override
 							protected IStatus run(IProgressMonitor monitor) {
-								// do something long running
-								// ...
-
-								// If you want to update the UI
 								sync.asyncExec(new Runnable() {
 									@Override
 									public void run() {
+										
+										// check if underlying widget has already been disposed - editor closed.
+										if (subtypeCMB_Main_viewer.getCombo().isDisposed()) return;
+										
 										subtypeCMB_Main_viewer
 												.setInput(passportConfigurationController
 														.getObjectSubtypeConfigItemProcessedClones(corpusObject));
 										subtypeCMB_Main_viewer.refresh();
+										updateGenericTabItems(tabFolder);
 									}
 								});
 								return Status.OK_STATUS;
@@ -611,6 +608,37 @@ public class PassportEditorPart {
 		subtypeCMB_Main_viewer.setInput(passportConfigurationController
 				.getObjectSubtypeConfigItemProcessedClones(corpusObject));
 		}
+		subtypeCMB_Main_viewer.addSelectionChangedListener(new ISelectionChangedListener() {
+
+			@Override
+			public void selectionChanged(SelectionChangedEvent event) {
+				if (!loading) {
+				Job job = new Job("My Job") {
+					@Override
+					protected IStatus run(IProgressMonitor monitor) {
+						sync.asyncExec(new Runnable() {
+							@Override
+							public void run() {
+								if (tabFolder == null || tabFolder.isDisposed()) return;
+								updateGenericTabItems(tabFolder);
+							}
+						});
+						return Status.OK_STATUS;
+					}
+				};
+
+				// Start the Job
+				job.schedule(450);
+				}
+				// problem is: emf sets selection of viewer in secondary
+				// thread
+				// this causes listener to notice selection
+				// and start unwanted reload on subtype viewer
+				// therefore first selection is suppressed as loading
+				loading = false;
+			}
+		});
+		
 		Label lblSortkey = new Label(compTBTM_Main, SWT.NONE);
 		lblSortkey.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false,
 				false, 1, 1));
@@ -857,6 +885,24 @@ public class PassportEditorPart {
 				SWT.DEFAULT, SWT.DEFAULT).y);
 
 	}
+	
+	private void updateGenericTabItems(CTabFolder tabFolder) {
+		List<CTabItem> toDispose = new ArrayList<>();
+		for (CTabItem c : tabFolder.getItems())
+		{
+			if (tabFolder.indexOf(c) > 2)
+			{
+				toDispose.add(c);
+			}
+		}
+		for(int i = 0; i < toDispose.size(); i++)
+		{
+			CTabItem c = toDispose.get(i);
+			c.dispose();
+		}
+		createGenericTabItems(tabFolder);
+		
+	}
 
 	protected void moveObjectAmongProjects() {
 
@@ -947,10 +993,12 @@ public class PassportEditorPart {
 
 	private void loadInput(BTSCorpusObject object) {
 
+		userMayEdit = permissionsController.userMayEditObject(permissionsController.getAuthenticatedUser(), object);
+//		context.set(BTSCoreConstants.CORE_EXPRESSION_MAY_EDIT, userMayEdit);
+
 		purgeAll();
 		if (object.getPassport() == null) {
 			object.setPassport(BtsCorpusModelFactory.eINSTANCE.createBTSPassport());
-			setDirty(true);
 		}
 		if (mainComposite == null || mainComposite.isDisposed())
 		{
@@ -1102,27 +1150,14 @@ public class PassportEditorPart {
 								.getCommandStack().getUndoCommand())) {
 							// normal command or redo executed
 							localCommandCacheSet.add(mostRecentCommand);
-							if (dirty != null)
-							{	
-								if (localCommandCacheSet.isEmpty()) {
-									dirty.setDirty(false);
-								} else if (!dirty.isDirty()) {
-									dirty.setDirty(true);
-								}
-							}
+							// XXX here
+							setDirty(true);
 							// if redo, check if reload required
 							checkAndReload(mostRecentCommand);
 						} else {
 							// undo executed
-							if (dirty != null)
-							{
-								if (localCommandCacheSet.remove(mostRecentCommand)
-										&& localCommandCacheSet.isEmpty()) {
-									dirty.setDirty(false);
-								} else if (!dirty.isDirty()) {
-									dirty.setDirty(true);
-								}
-							}
+							setDirty(!(localCommandCacheSet.remove(mostRecentCommand)
+										&& localCommandCacheSet.isEmpty()));
 							checkAndReload(mostRecentCommand);
 						}
 					}
@@ -1236,11 +1271,11 @@ public class PassportEditorPart {
 		// add plus and minus button
 	}
 
-	private void setDirty(boolean dirty) {
-		if (this.dirty != null)
-		{
-			this.dirty.setDirty(dirty);
-			System.out.println("passporteditor set dirty");
+	private void setDirty(boolean isDirty) {
+		if (evaluationController.userMayEditObject(
+				evaluationController.getAuthenticatedUser(), corpusObject) 
+				&& dirty != null) {
+			dirty.setDirty(isDirty);
 		}
 	}
 
@@ -1430,7 +1465,10 @@ public class PassportEditorPart {
 
 	@PreDestroy
 	public void preDestroy() {
-		editingDomain.getCommandStack().removeCommandStackListener(commandStackListener);
+		if (editingDomain != null)
+		{
+			editingDomain.getCommandStack().removeCommandStackListener(commandStackListener);
+		}
 	}
 
 	@Focus
@@ -1454,7 +1492,9 @@ public class PassportEditorPart {
 
 	@Persist
 	public boolean save() {
-		if (dirty != null && dirty.isDirty()) {
+		if (dirty != null && dirty.isDirty() &&
+			permissionsController.userMayEditObject(
+					permissionsController.getAuthenticatedUser(), corpusObject)) {
 
 			boolean success = passportEditorController.save(corpusObject);
 			dirty.setDirty(!success);
@@ -1463,7 +1503,7 @@ public class PassportEditorPart {
 			}
 			return success;
 		}
-		return true;
+		return false;
 	}
 	
 	@Inject

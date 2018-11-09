@@ -11,10 +11,10 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.bbaw.bts.corpus.text.egy.egyDsl.WordPart#getWChar <em>WChar</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.bbaw.bts.corpus.text.egy.egyDsl.EgyDslPackage#getWordPart()
  * @model

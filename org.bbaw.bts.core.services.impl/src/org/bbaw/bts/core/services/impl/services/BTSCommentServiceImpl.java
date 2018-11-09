@@ -1,5 +1,6 @@
 package org.bbaw.bts.core.services.impl.services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
@@ -26,24 +27,24 @@ public class BTSCommentServiceImpl extends GenericObjectServiceImpl<BTSComment, 
 	public List<BTSComment> query(BTSQueryRequest query, String objectState,
 			boolean registerQuery, IProgressMonitor monitor) {
 		List<BTSComment> objects = new Vector<BTSComment>();
-		for (String p : getActiveProjects())
+		
+		String[] indexArray = buildIndexArray();
+		
+		try {
+			objects.addAll(commentDao.query(query, indexArray, indexArray, objectState,
+					registerQuery));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		if (monitor != null)
 		{
-			try {
-				objects.addAll(commentDao.query(query, p + BTSCoreConstants.ADMIN_SUFFIX, p
-						+ BTSCoreConstants.ADMIN_SUFFIX, objectState,
-						registerQuery));
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			if (monitor != null)
-			{
-				if (monitor.isCanceled()) return filter(objects);
-				monitor.worked(20);
-			}
+			if (monitor.isCanceled()) return filter(objects);
+			monitor.worked(20);
 		}
 		return objects;
 	}
+
+	
 
 	@Override
 	public BTSComment createNew() {
@@ -134,6 +135,45 @@ public class BTSCommentServiceImpl extends GenericObjectServiceImpl<BTSComment, 
 	@Override
 	public <T> Class<T> getServedClass() {
 		return (Class<T>) BTSComment.class;
+	}
+
+	@Override
+	public String findAsJsonString(String key, IProgressMonitor monitor) {
+		String comment = commentDao.findAsJsonString(key, main_project + BTSCoreConstants.ADMIN_SUFFIX);
+		if (comment != null)
+		{
+			return comment;
+		}
+		for (String p : getActiveProjects())
+		{
+			comment = commentDao.findAsJsonString(key, p + BTSCoreConstants.ADMIN_SUFFIX);
+			if (comment != null)
+			{
+				return comment;
+			}
+		}
+		return comment;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.bbaw.bts.core.services.impl.generic.GenericObjectServiceImpl#queryAsJsonString(org.bbaw.bts.core.dao.util.BTSQueryRequest, java.lang.String, org.eclipse.core.runtime.IProgressMonitor)
+	 */
+	@Override
+	public List<String> queryAsJsonString(BTSQueryRequest query, String objectState, IProgressMonitor monitor) {
+		List<String> objects = new Vector<String>();
+		String[] indexArray = buildIndexArray();
+		try {
+			objects.addAll(commentDao.queryAsJsonString(query, indexArray, indexArray, objectState,
+					false));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		if (monitor != null)
+		{
+			if (monitor.isCanceled()) return objects;
+			monitor.worked(20);
+		}
+		return objects;
 	}
 
 	

@@ -83,8 +83,9 @@ public class BTSUserGroupServiceImpl extends GenericObjectServiceImpl<BTSUserGro
 	@Override
 	public List<BTSUserGroup> query(BTSQueryRequest query, String objectState,
 			boolean registerQuery, IProgressMonitor monitor) {
+		String[] indexArray = new String[]{BTSCoreConstants.ADMIN};
 		List<BTSUserGroup> objects = userGroupDao.query(query,
-				BTSCoreConstants.ADMIN, BTSCoreConstants.ADMIN, objectState,
+				indexArray, indexArray, objectState,
 				registerQuery);
 		return filter(objects);
 	}
@@ -111,6 +112,27 @@ public class BTSUserGroupServiceImpl extends GenericObjectServiceImpl<BTSUserGro
 	@Override
 	public <T> Class<T> getServedClass() {
 		return (Class<T>) BTSUserGroup.class;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.bbaw.bts.core.services.impl.generic.GenericObjectServiceImpl#findAsJsonString(java.io.Serializable, org.eclipse.core.runtime.IProgressMonitor)
+	 */
+	@Override
+	public String findAsJsonString(String key, IProgressMonitor monitor) {
+		return userGroupDao.findAsJsonString(key, BTSCoreConstants.ADMIN);
+	}
+
+	/* (non-Javadoc)
+	 * @see org.bbaw.bts.core.services.impl.generic.GenericObjectServiceImpl#queryAsJsonString(org.bbaw.bts.core.dao.util.BTSQueryRequest, java.lang.String, org.eclipse.core.runtime.IProgressMonitor)
+	 */
+	@Override
+	public List<String> queryAsJsonString(BTSQueryRequest query, String objectState, IProgressMonitor monitor) {
+		String[] indexArray = new String[]{BTSCoreConstants.ADMIN};
+
+		List<String> objects = userGroupDao.queryAsJsonString(query,
+				indexArray, indexArray, objectState,
+				false);
+		return objects;
 	}
 
 	

@@ -1,17 +1,17 @@
-package org.bbaw.bts.ui.corpus.parts.annotationsPart;
+ package org.bbaw.bts.ui.corpus.parts.annotationsPart;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import org.apache.commons.lang.WordUtils;
 import org.bbaw.bts.btsmodel.BTSComment;
 import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.btsmodel.BTSRevision;
-import org.bbaw.bts.core.controller.generalController.CommentController;
+import org.bbaw.bts.core.commons.BTSCoreConstants;
 import org.bbaw.bts.ui.commons.utils.BTSUIConstants;
 import org.bbaw.bts.ui.main.dialogs.CommentEditorDialog;
 import org.bbaw.bts.ui.resources.BTSResourceProvider;
 import org.eclipse.e4.core.contexts.ContextInjectionFactory;
-import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.MouseAdapter;
 import org.eclipse.swt.events.MouseEvent;
@@ -21,16 +21,16 @@ import org.eclipse.swt.layout.RowData;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
-import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
 public class RelatedObjectGroupComment extends RelatedObjectGroup {
 
 
 	private Text commentText;
-	
+
 	@Inject
-	private CommentController commentController;
+	@Named(BTSCoreConstants.CORE_EXPRESSION_MAY_COMMENT)
+	private boolean mayCommentObject;
 
 	@Inject
 	public RelatedObjectGroupComment(Composite parent, BTSObject object) {
@@ -41,54 +41,51 @@ public class RelatedObjectGroupComment extends RelatedObjectGroup {
 	protected void addButtons(Composite composite) {
 		Label editButton = new Label(composite, SWT.PUSH);
 		editButton.setImage(resourceProvider.getImage(Display.getCurrent(), BTSResourceProvider.IMG_EDIT));
-		editButton.setToolTipText("Edit Comment");
+		editButton.setToolTipText("Open Comment");
 		editButton.setLayoutData(new RowData());
 		editButton.addMouseListener(new MouseAdapter() {
 
 			@Override
 			public void mouseDown(MouseEvent e) {
-				if (mayEdit())
-				{
-					Label l = (Label) e.getSource();
-					l.setBackground(BTSUIConstants.VIEW_BACKGROUND_LABEL_PRESSED);
-				}
+				Label l = (Label) e.getSource();
+				l.setBackground(BTSUIConstants.VIEW_BACKGROUND_LABEL_PRESSED);
 			}
 
 			@Override
 			public void mouseUp(MouseEvent e) {
-				if (mayEdit())
-				{
-					Label l = (Label) e.getSource();
-					l.setBackground(l.getParent().getBackground());
-					editObject();
-				}
+				Label l = (Label) e.getSource();
+				l.setBackground(l.getParent().getBackground());
+				editObject();
 			}
 		});
 
 	}
 
-	protected void editObject() {
-		IEclipseContext child = context.createChild();
-		child.set(BTSComment.class, (BTSComment) getObject());
-		child.set(Shell.class, new Shell());
-		
-		CommentEditorDialog dialog = ContextInjectionFactory.make(
-				CommentEditorDialog.class, child);
-
-		if (dialog.open() == dialog.OK) {
-			refreschContent((BTSComment) getObject());
-		}
-		
+	@Override
+	protected boolean mayEdit() {
+		return super.mayEdit() || mayCommentObject;
 	}
 
-	private void refreschContent(BTSComment object) {
-		if (object.getComment() != null) commentText.setText(object.getComment());
-		if (object.getName() != null && !"".equals(object.getName())){
-			setExpandItemTitle(object.getName());
+	@Override
+	protected org.eclipse.jface.dialogs.Dialog createEditorDialog() {
+		// we need to replace flag in context because permission to comment
+		// must be taken into account
+		context.set(BTSCoreConstants.CORE_EXPRESSION_MAY_EDIT,
+				mayEdit());
+		context.set(BTSComment.class, (BTSComment)getObject());
+		return ContextInjectionFactory.make(CommentEditorDialog.class, context);
+	};
+	
+	@Override
+	protected void refreshContent(BTSObject obj) {
+		BTSComment comment = (BTSComment)obj;
+		if (comment.getComment() != null) commentText.setText(comment.getComment());
+		if (comment.getName() != null && !"".equals(comment.getName())){
+			setExpandItemTitle(comment.getName());
 		}
 		else
 		{
-			setExpandItemTitle(object.getComment().substring(0, Math.min(object.getComment().length(), TITLE_LENGTH)));
+			setExpandItemTitle(comment.getComment().substring(0, Math.min(comment.getComment().length(), TITLE_LENGTH)));
 		}
 		
 	}
@@ -107,7 +104,7 @@ public class RelatedObjectGroupComment extends RelatedObjectGroup {
 		BTSObject o = getObject();
 		if (o instanceof BTSComment)
 		{
-			refreschContent((BTSComment) getObject());
+			refreshContent((BTSComment) getObject());
 		}
 		commentText.setToolTipText( WordUtils.wrap(((BTSComment) getObject()).getComment(), 60));
 		setExpandBarIcon(resourceProvider.getImage(Display.getCurrent(), BTSResourceProvider.IMG_COMMENT));

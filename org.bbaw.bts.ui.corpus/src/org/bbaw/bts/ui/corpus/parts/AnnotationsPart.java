@@ -20,7 +20,10 @@ import org.bbaw.bts.btsmodel.BTSConfig;
 import org.bbaw.bts.btsmodel.BTSConfigItem;
 import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.commons.BTSConstants;
+import org.bbaw.bts.core.commons.BTSCoreConstants;
 import org.bbaw.bts.core.commons.comparator.BTSObjectTempSortKeyComparator;
+import org.bbaw.bts.core.commons.corpus.CorpusUtils;
+import org.bbaw.bts.core.controller.generalController.PermissionsAndExpressionsEvaluationController;
 import org.bbaw.bts.core.corpus.controller.partController.AnnotationPartController;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSAnnotation;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
@@ -67,6 +70,7 @@ import org.eclipse.swt.events.ControlEvent;
 import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Shell;
@@ -95,6 +99,10 @@ public class AnnotationsPart implements EventHandler {
 	
 	@Inject
 	private Logger logger;
+
+	@Inject
+	private PermissionsAndExpressionsEvaluationController permissionsController;
+
 	
 	/** The part service. */
 	@Inject
@@ -105,7 +113,7 @@ public class AnnotationsPart implements EventHandler {
 
 	private Map<BTSObject, RelatedObjectGroup> objectWidgetMap = new HashMap<BTSObject, RelatedObjectGroup>();
 
-	private List<RelatedObjectGroup> internalSelectedGroup = new Vector<RelatedObjectGroup>(2);
+	private List<RelatedObjectGroup> highlightedGroups = new Vector<RelatedObjectGroup>(2);
 
 	private BTSTextSelectionEvent textSelectionEvent;
 
@@ -119,7 +127,7 @@ public class AnnotationsPart implements EventHandler {
 
 	protected boolean selfselection;
 
-	private BTSObject parentObject;
+	private BTSCorpusObject currentCorpusObject;
 
 	private boolean allRelatedObjectsShowed;
 
@@ -168,7 +176,7 @@ public class AnnotationsPart implements EventHandler {
 					org.eclipse.swt.widgets.Event event) {
 				RelatedObjectGroup roGroup = (RelatedObjectGroup) event.widget;
 				selfselection = true;
-				setSelectedInternal(Arrays.asList(roGroup), true);
+				setSelectedInternal(new Vector<>(Arrays.asList(roGroup)), true);
 				selfselection = false;
 			}
 
@@ -208,83 +216,133 @@ public class AnnotationsPart implements EventHandler {
 	}
 
 
+	/**
+	 * Retrieves the annotation part's view menu, where menu items correspond to related object
+	 * types that are either to be shown or to be filtered out. Based on the check states of these
+	 * menu items, the related object type filter state flag map gets initiated.<br/><br/>
+	 * 
+	 * Next, annotation type and subtype definitions are retrieved from the active project configuration.
+	 * Each type and subtype gets a corresponding checkable menu item in a multi-level submenu.
+	 */
 	private void extendAnnotationsFilterMenu() {
 		// initialize filters from fragment model definition
 		HashMap<String, Boolean> filters = new HashMap<String, Boolean>();
 		// retrieve annotations part viewmenu
 		MMenu viewmenu = null;
-		for (MMenu m : part.getMenus())
-			if (m.getTags().contains("ViewMenu"))
+		for (MMenu m : part.getMenus()) {
+			if (m.getTags().contains("ViewMenu")) {
 				viewmenu = m;
+			}
+		}
 		if (viewmenu != null) {
+			/* first go through default annotation types defined in application model
+			this is being done so that the annotation part filter dictionary can be initialized
+			the respective filter keys corresponding to these built-in view menu
+			entries are defined by their `annotationsPartFilterParam` parameters */
 			MMenu submenu = null;
 			MCommand menuFilterCommand = null;
 			// save menu item selection flags from application model to context
 			for (MMenuElement mi : viewmenu.getChildren()) {
 				if (mi instanceof MHandledMenuItem) {
-					String key = mi.getElementId().replace("org.bbaw.bts.ui.corpus.part.annotations.viewmenu.show.", "");
-					filters.put(key, ((MHandledMenuItem)mi).isSelected());
+					for (MParameter p : ((MHandledMenuItem) mi).getParameters()) {
+						if (p.getName().equals("annotationsPartFilterParam")) {
+							filters.put(p.getValue(), ((MHandledMenuItem)mi).isSelected());
+						}
+					}
 					// retrieve filter command in order to handle possible submenu entries
 					menuFilterCommand = ((MHandledMenuItem) mi).getCommand();
 				}
-				if (mi.getElementId().equals("org.bbaw.bts.ui.corpus.part.annotations.viewmenu.showType.annotation.type"))
+
+				if (mi.getElementId().
+						equals("org.bbaw.bts.ui.corpus.part.annotations.viewmenu.showType.annotation.type")) {
 					submenu = (MMenu) mi;
+				}
 			}
+
+			/* now to the good part: the "annotation" menu entry in the aforementioned part view menu needs to be 
+			expanded into a submenu and populated with annotation types and subtypes from the active BTS configuration */
 			// remove submenu if already there
-			if (submenu != null)
+			if (submenu != null) {
 				submenu.setToBeRendered(false);
+			}
 			// populate menu items for annotation types
 			// retrieve configuration elements for object type annotation
 			BTSConfigItem typeConf = null;
 			try {
 				typeConf = annotationPartController.getAnnoTypesConfigItem();
-			} catch (Exception e){};
+			} catch (Exception e) {
+				logger.error(e, "Annotation type configurations could not be obtained.");
+			};
+
 			if (typeConf != null && !typeConf.getChildren().isEmpty()) {
 				// initialize submenu for annotation types
 				submenu = MMenuFactory.INSTANCE.createMenu();
 				submenu.setElementId("org.bbaw.bts.ui.corpus.part.annotations.viewmenu.show.annotation.type");
 				submenu.setLabel("Annotation Types");
+
 				// traverse annotation types configuration branch
-				for (BTSConfig c : typeConf.getChildren())
+				for (BTSConfig c : typeConf.getChildren()) {
 					if (c instanceof BTSConfigItem) {
 						BTSConfigItem confItem = (BTSConfigItem)c;
+						if (CorpusUtils.ANNOTATION_RUBRUM_TYPE.equals(confItem.getValue())) continue;
 						MMenuElement menuItemType = null;
+
 						// retrieve subtype definition from configuration node
 						BTSConfigItem subtypeConf = null;
 						try {
 							subtypeConf = annotationPartController.getAnnoSubtypesConfigItem(confItem);
-						} catch (Exception e){};
+						} catch (Exception e) {
+							logger.warn(e, "Annotation subtypes configurations could not be obtained for type "+
+									confItem.get_id()+" ("+confItem.getLabel()+")");
+						};
 						List<BTSConfigItem> subTypeConfItems = new Vector<BTSConfigItem>();
 						if (subtypeConf != null) {
 							// filter attached subtype definition nodes
-							for (BTSConfig cc : subtypeConf.getChildren())
-								if (cc instanceof BTSConfigItem)
-									if (((BTSConfigItem)cc).getValue() != null)
+							for (BTSConfig cc : subtypeConf.getChildren()) {
+								if (cc instanceof BTSConfigItem && ((BTSConfigItem)cc).getValue() != null) {
 										subTypeConfItems.add((BTSConfigItem)cc);
+								}
+							}
 						}
 						// if subtypes definitions exist, nest in submenu
+						String key = CorpusUtils.getTypeIdentifier(BTSConstants.ANNOTATION, confItem, null);
 						if (!subTypeConfItems.isEmpty()) {
+							// create submenu
 							menuItemType = MMenuFactory.INSTANCE.createMenu();
-							String key = null;
+
+							// first entry controls the type alone, without any subtype
+							MHandledMenuItem menuItemTypeWithoutSubtype = newFilterMenuItem(key);
+							((MHandledMenuItem)menuItemTypeWithoutSubtype).setCommand(menuFilterCommand);
+							menuItemTypeWithoutSubtype.setLabel(confItem.getLabel().getTranslation(lang));
+							((MMenu)menuItemType).getChildren().add(menuItemTypeWithoutSubtype);
+							filters.put(key, ((MHandledMenuItem)menuItemTypeWithoutSubtype).isSelected());
+							((MMenu)menuItemType).getChildren().add(MMenuFactory.INSTANCE.createMenuSeparator());
+							
+
+							// go through subtypes
 							for (BTSConfigItem subTypeConfItem : subTypeConfItems) {
-								key = "annotation." + confItem.getValue() + "." + subTypeConfItem.getValue();
+								// retrieve subtype key from configuration
+								key = CorpusUtils.getTypeIdentifier(BTSConstants.ANNOTATION, confItem, subTypeConfItem);
+								
 								// create annotation subtype menu entry and append to type submenu
 								MHandledMenuItem menuItemSubType = newFilterMenuItem(key);
 								menuItemSubType.setCommand(menuFilterCommand);
 								menuItemSubType.setLabel(subTypeConfItem.getLabel().getTranslation(lang));
 								((MMenu)menuItemType).getChildren().add(menuItemSubType);
+								// init subtype filter state
 								filters.put(key, ((MHandledMenuItem)menuItemSubType).isSelected());
 							}
-						} else { // create checkable menu entry for type without subtypes
-							String key = "annotation." + confItem.getValue();
+						} else { // create checkable menu entry for types that don't have subtypes
 							menuItemType = newFilterMenuItem(key);
 							((MHandledMenuItem)menuItemType).setCommand(menuFilterCommand);
+							// init type filter state
 							filters.put(key, ((MHandledMenuItem)menuItemType).isSelected());
 						}
 						// label annotation type menu entry and append to submenu
 						menuItemType.setLabel(confItem.getLabel().getTranslation(lang));
 						submenu.getChildren().add(menuItemType);
 					}
+				}
 				viewmenu.getChildren().add(submenu);
 			}
 		}
@@ -294,6 +352,14 @@ public class AnnotationsPart implements EventHandler {
 	}
 
 
+	/**
+	 * Creates a new menu item with a checked checkmark corresponding to the key passed a parameter.
+	 * The newly created menu item also gets equipped with an attached menu parameter of type <code>annotationsPartFilterParam</code>,
+	 * where the specified key gets stored in.
+	 * @param key An identifier for the boolean filter flag.
+	 * @return A new {@link MHandledMenuItem} instance.
+	 * @see ItemType#CHECK
+	 */
 	private MHandledMenuItem newFilterMenuItem(String key) {
 		MHandledMenuItem menuItem = MMenuFactory.INSTANCE.createHandledMenuItem();
 		menuItem.setElementId("org.bbaw.bts.ui.corpus.part.annotations.viewmenu.showType.annotation.type." + key);
@@ -309,11 +375,10 @@ public class AnnotationsPart implements EventHandler {
 
 	@Inject
 	@Optional
-	void eventReceivedRelatingObjectsLoadedEvents(
+	void eventReceivedRelatingObjectsLoaded(
 			@EventTopic("event_text_relating_objects/*") final BTSRelatingObjectsLoadingEvent event) {
-		parentObject = event.getObject();
-		queryId = "relations.objectId-" + parentObject.get_id();
 		if (event != null) {
+			setCorpusObject(event.getObject());
 			this.relatingObjectsEvent = event;
 			sync.syncExec(new Runnable() {
 				public void run() {
@@ -325,12 +390,14 @@ public class AnnotationsPart implements EventHandler {
 	}
 	
 	private void clearRelatingObjects(BTSCorpusObject selection) {
-		if(selection.equals(parentObject) || parentObject == null) return;
-//		System.out.println("clearRelatingObjects selection: " + ((BTSCorpusObject)selection).get_id() + " parentObject " + parentObject.get_id());
+		if (currentCorpusObject == null || selection.equals(currentCorpusObject)) {
+			return;
+		}
 		part.setLabel("Annotations");
 		part.setTooltip("Annotations");
 		relatingObjectsQueryIDMap.clear();
 		objectWidgetMap.clear();
+		highlightedGroups = new Vector<>();
 		if (composite != null)
 		{
 			composite.dispose();
@@ -349,7 +416,7 @@ public class AnnotationsPart implements EventHandler {
 		composite.layout();
 		scrollComposite.setMinSize(composite.computeSize(r.width,
 				SWT.DEFAULT));
-		parentObject = (BTSCorpusObject)selection;
+		setCorpusObject(selection);
 
 	}
 
@@ -421,7 +488,7 @@ public class AnnotationsPart implements EventHandler {
 					});
 				}
 			};
-			new ProgressMonitorDialog(new Shell()).run(true, true, op);
+			new ProgressMonitorDialog(Display.getDefault().getActiveShell()).run(true, true, op);
 		} catch (InvocationTargetException e) {
 			// handle exception
 		} catch (InterruptedException e) {
@@ -438,34 +505,34 @@ public class AnnotationsPart implements EventHandler {
 		child.set(Composite.class, composite);
 		child.set(AnnotationsPart.class, this);
 		child.set(BTSObject.class, (BTSObject) o);
+		child.set(BTSCoreConstants.CORE_EXPRESSION_MAY_EDIT, 
+				permissionsController.userMayEditObject(
+						permissionsController.getAuthenticatedUser(), o));
+
+		Class<?> widgetClass; 
 		if (o instanceof BTSAnnotation)
 		{
 			if (BTSConstants.ANNOTATION_RUBRUM.equalsIgnoreCase(o.getType()))
 			{
-				roGroup = ContextInjectionFactory
-						.make(RelatedObjectGroupRubrum.class, child);
+				widgetClass = RelatedObjectGroupRubrum.class;
 			}
 			else
 			{
-				roGroup = ContextInjectionFactory
-						.make(RelatedObjectGroupAnnotation.class, child);
+				widgetClass = RelatedObjectGroupAnnotation.class;
 			}
 		}
-		else if (o instanceof BTSText)
-		{
-			roGroup = ContextInjectionFactory
-					.make(RelatedObjectGroupSubtext.class, child);
+		else if (o instanceof BTSText) {
+			widgetClass = RelatedObjectGroupSubtext.class;
 		} 
-		else if (o instanceof BTSComment)
-		{
-			roGroup = ContextInjectionFactory
-					.make(RelatedObjectGroupComment.class, child);
+		else if (o instanceof BTSComment) {
+			widgetClass = RelatedObjectGroupComment.class;
 		}
-		else
-		{
-			roGroup = ContextInjectionFactory
-					.make(RelatedObjectGroupImpl.class, child);
+		else {
+			widgetClass = RelatedObjectGroupImpl.class;
 		}
+		roGroup = (RelatedObjectGroup) ContextInjectionFactory
+				.make(widgetClass, child);
+
 		roGroup.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 		roGroup.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1));
 //		roGroup.postConstruct();
@@ -478,27 +545,32 @@ public class AnnotationsPart implements EventHandler {
 
 	protected void setSelectedInternal(List<RelatedObjectGroup> selectedGroups, boolean postSelection) {
 		// TODO: equals heiszt same items in same order...
-		if (internalSelectedGroup != null && internalSelectedGroup.equals(selectedGroups))
+		if (highlightedGroups != null && highlightedGroups.equals(selectedGroups)) {
 			return;
+		}
 
 		// TODO: O(n^2) might be a bit expensive for avoidance of unnecessary deselection ...
-		for (RelatedObjectGroup roGroup : internalSelectedGroup)
-			if (!roGroup.isDisposed() && !selectedGroups.contains(roGroup))
+		for (RelatedObjectGroup roGroup : highlightedGroups) {
+			if (!roGroup.isDisposed() && !selectedGroups.contains(roGroup)) {
 				setGroupSelected(roGroup, false);
+			}
+		}
 
 		if (selectedGroups == null) {
-			internalSelectedGroup.clear();
+			highlightedGroups.clear();
 			return;
-		} else
-			internalSelectedGroup = selectedGroups;
-		List<BTSObject> selObjects = new Vector<BTSObject>(internalSelectedGroup.size());
+		} else {
+			highlightedGroups = selectedGroups;
+		}
+
+		List<BTSObject> selObjects = new Vector<BTSObject>(highlightedGroups.size());
 		
 		// reveal
-		if (!internalSelectedGroup.isEmpty()) {
+		if (!highlightedGroups.isEmpty()) {
 			// position scrollbar(s)
 			if (!selfselection && !scrollComposite.isDisposed())
-				scrollComposite.setOrigin(internalSelectedGroup.get(0).getLocation());
-			for (RelatedObjectGroup roGroup : internalSelectedGroup) {
+				scrollComposite.setOrigin(highlightedGroups.get(0).getLocation());
+			for (RelatedObjectGroup roGroup : highlightedGroups) {
 				selObjects.add(roGroup.getObject());
 				setGroupSelected(roGroup, true);
 			}
@@ -542,7 +614,7 @@ public class AnnotationsPart implements EventHandler {
 		}
 		case "event_text_relating_objects/selected" :
 		{
-			eventReceivedRelatingObjectsSelectedEvents(event.getProperty("org.eclipse.e4.data"));
+			eventReceivedRelatingObjectsSelected(event.getProperty("org.eclipse.e4.data"));
 			break;
 		}
 		}
@@ -556,9 +628,9 @@ public class AnnotationsPart implements EventHandler {
 		{
 			RelatedObjectGroup g = objectWidgetMap.get(selection);
 			if (g != null)
-				setSelectedInternal(Arrays.asList(g), false);
+				setSelectedInternal(new Vector<>(Arrays.asList(g)), false);
 		}
-		else if (selection instanceof BTSCorpusObject && !selection.equals(parentObject))
+		else if (selection instanceof BTSCorpusObject && !selection.equals(currentCorpusObject))
 		{
 			// empty the panel
 			sync.syncExec(new Runnable() {
@@ -566,11 +638,9 @@ public class AnnotationsPart implements EventHandler {
 					clearRelatingObjects((BTSCorpusObject)selection);
 				}
 			});
-			relatingObjectsQueryIDMap.clear();
 			List<BTSObject> relatingObjects = null;
 			List<BTSObject> filteredRelatingObjects = null;
-			queryId = "relations.objectId-" + ((BTSCorpusObject)selection).get_id();
-			parentObject = (BTSCorpusObject)selection;
+			setCorpusObject(selection);
 			// if BTSText wait to receive relationObjectLoadedEvent through eventBroker!
 			if (!(selection instanceof BTSText))
 			{
@@ -591,14 +661,14 @@ public class AnnotationsPart implements EventHandler {
 				if (filteredRelatingObjects != null && !filteredRelatingObjects.isEmpty())
 				{
 					relatingObjectsQueryIDMap.put(queryId, filteredRelatingObjects);
-					eventReceivedRelatingObjectsSelectedEvents(filteredRelatingObjects);
+					eventReceivedRelatingObjectsSelected(filteredRelatingObjects);
 				}
 			}
 		}
 		else if (selection instanceof BTSTextSelectionEvent)
 		{
 			this.textSelectionEvent = (BTSTextSelectionEvent) selection;
-			eventReceivedRelatingObjectsSelectedEvents(textSelectionEvent.getRelatingObjects());
+			eventReceivedRelatingObjectsSelected(textSelectionEvent.getRelatingObjects());
 		}
 		}
 		else
@@ -607,11 +677,25 @@ public class AnnotationsPart implements EventHandler {
 			{
 				this.textSelectionEvent = (BTSTextSelectionEvent) selection;
 			}
-			else if (selection instanceof BTSCorpusObject && !selection.equals(parentObject))
+			else if (selection instanceof BTSCorpusObject)
 			{
-				parentObject = (BTSCorpusObject)selection;
-
+				setCorpusObject(selection);
 			}
+		}
+	}
+
+	private void setCorpusObject(Object corpusObject) {
+		currentCorpusObject = (BTSCorpusObject)corpusObject;
+		if (currentCorpusObject != null) {
+			queryId = "relations.objectId-" + currentCorpusObject.get_id();
+			// XXX was sind requirements damit user commenten darf?
+			// wenn er researcher ist, musz er updater sein
+			// wenn er editor ist, musz er updater sein oder
+			// text musz public sein
+			context.set(BTSCoreConstants.CORE_EXPRESSION_MAY_COMMENT, 
+					permissionsController.userMayCommentOnObject(
+							permissionsController.getAuthenticatedUser(),
+							currentCorpusObject));
 		}
 	}
 
@@ -620,26 +704,8 @@ public class AnnotationsPart implements EventHandler {
 		@SuppressWarnings("unchecked")
 		HashMap<String, Boolean> filters = (HashMap<String, Boolean>) context.get("org.bbaw.bts.corpus.annotationsPart.filter");
 		//String key = "org.bbaw.bts.ui.corpus.part.annotations.viewmenu.show.";
-		String key = "";
-		if (o instanceof BTSCorpusObject) {
-			if (o instanceof BTSText) {
-				if (o.getType() != null)
-					if (BTSConstants.ANNOTATION_SUBTEXT.equalsIgnoreCase(o.getType()))
-						key += "subtext"; 
-			} else if (o instanceof BTSAnnotation)
-				if (BTSConstants.ANNOTATION_RUBRUM.equalsIgnoreCase(o.getType())) {
-					key += "rubrum";
-				} else { // check annotation type/subtype
-					key += "annotation";
-					if (o.getType() != null && !o.getType().isEmpty()) {
-						key += "." + o.getType();
-						if (o.getSubtype() != null && !o.getSubtype().isEmpty())
-							key += "." + o.getSubtype();
-					}
-				}
-		} else if (o instanceof BTSComment)
-			key += "comment";
-		return filters.containsKey(key) ? filters.get(key) : true;
+		String key = CorpusUtils.getTypeIdentifier(o);
+		return filters.containsKey(key) ? filters.get(key) : false;
 	}
 
 
@@ -670,14 +736,17 @@ public class AnnotationsPart implements EventHandler {
 		// toggle
 		//String key = "org.bbaw.bts.ui.corpus.part.annotations.viewmenu.show." + filter;
 		String key = filter;
-		filters.put(key, !filters.get(key));
-		if (this.relatingObjectsEvent != null)
-			eventReceivedRelatingObjectsLoadedEvents(relatingObjectsEvent);
-		BTSRelatingObjectsFilterEvent e = new BTSRelatingObjectsFilterEvent(filters);
-		eventBroker.post("event_anno_filters/anno_part", e);
+		if (filters.containsKey(key)) {
+			filters.put(key, !filters.get(key));
+		}
+		if (this.relatingObjectsEvent != null) {
+			eventReceivedRelatingObjectsLoaded(relatingObjectsEvent);
+		}
+		eventBroker.post("event_anno_filters/anno_part", 
+				new BTSRelatingObjectsFilterEvent(filters));
 	}
 
-	private void eventReceivedRelatingObjectsSelectedEvents(Object objects) {
+	private void eventReceivedRelatingObjectsSelected(Object objects) {
 		if (objects == null)
 		{
 			setSelectedInternal(null, false);
@@ -807,11 +876,15 @@ public class AnnotationsPart implements EventHandler {
 	
 	public BTSObject[] getSelectedObjects()
 	{
-		List<BTSObject> objects = new ArrayList<BTSObject>(internalSelectedGroup.size());
-		for (RelatedObjectGroup rog : internalSelectedGroup)
+		List<BTSObject> objects = new ArrayList<BTSObject>(highlightedGroups.size());
+		for (RelatedObjectGroup rog : highlightedGroups)
 		{
 			objects.add(rog.getObject());
 		}
 		return objects.toArray(new BTSObject[objects.size()]);
+	}
+
+	public BTSCorpusObject getCorpusObject() {
+		return currentCorpusObject;
 	}
 }

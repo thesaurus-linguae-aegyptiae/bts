@@ -20,4 +20,4 @@ Import-Package: org.apache.log4j,
  org.hamcrest.core
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: org.bbaw.bts.corpus.text.egy
-Bundle-Version: 3.1.0.qualifier
+Bundle-Version: 3.1.1.qualifier

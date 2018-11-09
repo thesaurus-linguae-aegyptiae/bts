@@ -7,8 +7,9 @@ Import-Package: org.bbaw.bts.core.commons.filter,
  org.bbaw.bts.core.dao.util,
  org.bbaw.bts.core.services,
  org.bbaw.bts.corpus.btsCorpusModel,
+ org.bbaw.bts.corpus.searchModel,
  org.bbaw.bts.searchModel,
  org.eclipse.core.runtime;version="3.4.0"
 Export-Package: org.bbaw.bts.core.services.corpus
 Require-Bundle: org.bbaw.bts.commons.libs.elasticsearch;bundle-version="1.0.0"
-Bundle-Version: 3.1.0.qualifier
+Bundle-Version: 3.1.1.qualifier

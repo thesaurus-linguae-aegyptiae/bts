@@ -1,5 +1,6 @@
 package org.bbaw.bts.core.services.corpus.impl.services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Vector;
@@ -16,6 +17,7 @@ import org.bbaw.bts.core.dao.util.DaoConstants;
 import org.bbaw.bts.core.services.corpus.BTSAnnotationService;
 import org.bbaw.bts.core.services.corpus.BTSThsEntryService;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSAnnotation;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSThsEntry;
 import org.bbaw.bts.corpus.btsCorpusModel.BtsCorpusModelFactory;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -131,18 +133,25 @@ implements BTSThsEntryService, BTSObjectSearchService {
 	public List<BTSThsEntry> query(BTSQueryRequest query, String objectState,
 			boolean registerQuery, IProgressMonitor monitor) {
 		List<BTSThsEntry> objects = new Vector<BTSThsEntry>();
-		for (String p : getActiveThss()) {
+		String[] indexArray = buildIndexArray();
 
-			try {
-				objects.addAll(thsEntryDao.query(query, p + BTSCorpusConstants.THS, p
-						+ BTSCorpusConstants.THS, objectState, registerQuery));
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
+		try {
+			objects.addAll(thsEntryDao.query(query, indexArray, indexArray, objectState, registerQuery));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return filter(objects);
+	}
+	
+	@Override
+	public String[] buildIndexArray() {
+		List<String> indexNames = new ArrayList<String>();
+		for (String p : getActiveThss())
+		{
+			indexNames.add(p + BTSCorpusConstants.THS);
+		}
+		return indexNames.toArray(new String[indexNames.size()]);
 	}
 	@Override
 	public List<BTSThsEntry> query(BTSQueryRequest query, String objectState, IProgressMonitor monitor) {
@@ -173,9 +182,11 @@ implements BTSThsEntryService, BTSObjectSearchService {
 			List<BTSFilter> btsFilters, IProgressMonitor monitor) {
 		return super.getOrphanEntries(map, btsFilters, monitor);
 	}
+	/* (non-Javadoc)
+	 * @see org.bbaw.bts.core.services.corpus.BTSThsEntryService#createNewAnnotationRelationPartOf(org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject)
+	 */
 	@Override
-	public BTSAnnotation createNewAnnotationRelationPartOf(
-			BTSThsEntry annotatedObject) {
+	public BTSAnnotation createNewAnnotationRelationPartOf(BTSCorpusObject annotatedObject) {
 		BTSAnnotation anno = annotationService
 				.createNewRelationPartOf(annotatedObject);
 		if (main_ths_key == null || "".equals(main_ths_key))
@@ -188,6 +199,46 @@ implements BTSThsEntryService, BTSObjectSearchService {
 		anno.setCorpusPrefix(main_ths_key + BTSCorpusConstants.THS);
 		anno.setProject(main_ths_key);
 		return anno;
+	}
+	/* (non-Javadoc)
+	 * @see org.bbaw.bts.core.services.impl.generic.GenericObjectServiceImpl#findAsJsonString(java.io.Serializable, org.eclipse.core.runtime.IProgressMonitor)
+	 */
+	@Override
+	public String findAsJsonString(String key, IProgressMonitor monitor) {
+		String entry = null;
+		try {
+			entry = thsEntryDao.findAsJsonString(key, main_project + BTSCorpusConstants.THS);
+		} catch (Exception e) {
+		}
+		if (entry != null) {
+			return entry;
+		}
+		for (String p : getActiveThss()) {
+			try {
+				entry = thsEntryDao.findAsJsonString(key, p + BTSCorpusConstants.THS);
+			} catch (Exception e) {
+			}
+			if (entry != null) {
+				return entry;
+			}
+		}
+		return null;
+	}
+	/* (non-Javadoc)
+	 * @see org.bbaw.bts.core.services.impl.generic.GenericObjectServiceImpl#queryAsJsonString(org.bbaw.bts.core.dao.util.BTSQueryRequest, java.lang.String, org.eclipse.core.runtime.IProgressMonitor)
+	 */
+	@Override
+	public List<String> queryAsJsonString(BTSQueryRequest query, String objectState, IProgressMonitor monitor) {
+		List<String> objects = new Vector<String>();
+		String[] indexArray = buildIndexArray();
+
+		try {
+			objects.addAll(thsEntryDao.queryAsJsonString(query, indexArray, indexArray, objectState, false));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return objects;
 	}
 	
 }

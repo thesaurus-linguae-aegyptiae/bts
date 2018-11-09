@@ -36,8 +36,7 @@ import org.bbaw.bts.corpus.btsCorpusModel.BTSThsEntry;
 import org.bbaw.bts.searchModel.BTSModelUpdateNotification;
 import org.bbaw.bts.searchModel.BTSQueryResultAbstract;
 import org.bbaw.bts.ui.commons.corpus.util.BTSEGYUIConstants;
-import org.bbaw.bts.ui.commons.filter.SuppressDeletedViewerFilter;
-import org.bbaw.bts.ui.commons.filter.SuppressNondeletedViewerFilter;
+import org.bbaw.bts.ui.commons.filter.BTSObjectStateViewerFilter;
 import org.bbaw.bts.ui.commons.navigator.StructuredViewerProvider;
 import org.bbaw.bts.ui.commons.search.SearchViewer;
 import org.bbaw.bts.ui.commons.utils.BTSUIConstants;
@@ -105,7 +104,7 @@ import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swt.widgets.Shell;
 import org.osgi.service.prefs.BackingStoreException;
 
-public class CorpusNavigatorPart implements ScatteredCachingPart, SearchViewer, StructuredViewerProvider {
+public class CorpusNavigatorPart extends NavigatorPart implements ScatteredCachingPart, SearchViewer, StructuredViewerProvider {
 
 	@Inject
 	private EventBroker eventBroker;
@@ -119,7 +118,7 @@ public class CorpusNavigatorPart implements ScatteredCachingPart, SearchViewer, 
 	private ESelectionService selectionService;
 
 	@Inject
-	private PermissionsAndExpressionsEvaluationController evaluationController;
+	private PermissionsAndExpressionsEvaluationController permissionController;
 
 	@Inject
 	private BTSResourceProvider resourceProvider;
@@ -149,7 +148,7 @@ public class CorpusNavigatorPart implements ScatteredCachingPart, SearchViewer, 
 	private ISelectionChangedListener selectionListener;
 	private Composite composite;
 
-	private Map<Control, Map> cachingMap = new HashMap<Control, Map>();
+	private Map<Control, Map<URI, Resource>> cachingMap = new HashMap<Control, Map<URI, Resource>>();
 	private TreeNodeWrapper mainRootNode;
 	private CTabFolder tabFolder;
 	private CTabItem mainTabItem;
@@ -157,7 +156,7 @@ public class CorpusNavigatorPart implements ScatteredCachingPart, SearchViewer, 
 	private CTabItem binTabItem;
 	private Composite binTabItemComp;
 	private TreeViewer bintreeViewer;
-	private SuppressDeletedViewerFilter deletedFilter;
+	private TreeNodeWrapper binRootNode;
 	private boolean loaded;
 	protected TreeNodeWrapper orphanNode;
 	protected TreeNodeWrapper selectedTreeNode;
@@ -203,8 +202,6 @@ public class CorpusNavigatorPart implements ScatteredCachingPart, SearchViewer, 
 		tabFolder.setLayoutData(new GridData(GridData.FILL_BOTH));
 		
 		tabFolder.addSelectionListener(new SelectionAdapter() {
-			
-			private TreeNodeWrapper binRootNode;
 
 			@Override
 			public void widgetSelected(SelectionEvent e) {
@@ -275,7 +272,7 @@ public class CorpusNavigatorPart implements ScatteredCachingPart, SearchViewer, 
 		
 		// create bin tab item
 		binTabItem = new CTabItem(tabFolder, SWT.NONE);
-		binTabItem.setText("Bin");
+		binTabItem.setText("Trash");
 		binTabItem.setData("key", "bin");
 		binTabItem.setImage(resourceProvider.getImage(Display.getDefault(),
 				BTSResourceProvider.IMG_BIN));
@@ -445,7 +442,8 @@ labelProvider));
 			mainTextCorpus = context.get(BTSPluginIDs.PREF_MAIN_CORPUS);
 		}
 		if (selectedTextCorpus != null && selectedTextCorpus.getDBCollectionKey() != null
-				&& (mainTextCorpus == null || !mainTextCorpus.equals(selectedTextCorpus)))
+				&& (mainTextCorpus == null || !mainTextCorpus.equals(selectedTextCorpus))
+				&& (corpusNavigatorController.isWriteable(selectedTextCorpus)))
 		{
 			ConfigurationScope.INSTANCE.getNode("org.bbaw.bts.app").put(BTSPluginIDs.PREF_MAIN_CORPUS_KEY, selectedTextCorpus.getDBCollectionKey()+ "_" + selectedTextCorpus.getCorpusPrefix());
 			// update instance scope so that new value is injected
@@ -469,7 +467,6 @@ labelProvider));
 				logger.error(e);
 			}
 		}
-		
 	}
 
 	private BTSTextCorpus findParentCorpusRecursively(
@@ -557,7 +554,7 @@ labelProvider));
 										treeViewer,
 										rootNode,
 										BtsviewmodelPackage.Literals.TREE_NODE_WRAPPER__CHILDREN,
-										BTSCorpusConstants.VIEW_THS_ROOT_ENTRIES, monitor);
+										BTSCorpusConstants.VIEW_ALL_ACTIVE_CORPUS_OBJECTS, monitor);
 						} else {
 							obs = corpusNavigatorController
 									.getDeletedEntries(
@@ -565,7 +562,7 @@ labelProvider));
 											treeViewer,
 											rootNode,
 											BtsviewmodelPackage.Literals.TREE_NODE_WRAPPER__CHILDREN,
-											BTSCorpusConstants.VIEW_ALL_TERMINATED_BTSTHSENTRIES, monitor);
+											BTSCorpusConstants.VIEW_ALL_TERMINATED_CORPUS_OBJECTS, monitor);
 						}
 						storeIntoMap(obs, parentControl, true);
 						List<TreeNodeWrapper> nodes = corpusNavigatorController.loadNodes(obs, monitor, true);
@@ -581,13 +578,7 @@ labelProvider));
 							@Override
 							public void run() {
 								loadTree(treeViewer, rootNode, parentControl);
-								if (!deleted) {
-									treeViewer.addFilter(getDeletedFilter());
-								}
-								else {
-									treeViewer
-											.addFilter(new SuppressNondeletedViewerFilter());
-								}
+								treeViewer.addFilter(getDeletedFilter(deleted));
 								if (BTSUIConstants.SELECTION_TYPE_SECONDARY
 										.equals(selectionType)) {
 									// register context menu on the table
@@ -654,13 +645,6 @@ labelProvider));
 				}
 			}
 		}
-	}
-	
-	private ViewerFilter getDeletedFilter() {
-		if (deletedFilter == null) {
-			deletedFilter = new SuppressDeletedViewerFilter();
-		}
-		return deletedFilter;
 	}
 
 	private void loadChildren(final List<TreeNodeWrapper> parents,
@@ -729,10 +713,10 @@ labelProvider));
 					{
 						parentControl.setData("objs", children);
 					}
-					Map map = null;
+					Map<URI, Resource> map = null;
 					if (cachingMap.get(parentControl) != null
 							&& cachingMap.get(parentControl) instanceof Map) {
-						map = (Map) cachingMap.get(parentControl);
+						map = cachingMap.get(parentControl);
 					} else {
 						map = new HashMap<URI, Resource>();
 						cachingMap.put(parentControl, map);
@@ -781,7 +765,7 @@ labelProvider));
 			loaded = true;
 			loadInput(mainTabItemComp, mainTreeViewer, mainRootNode, false);
 		}
-		evaluationController
+		permissionController
 				.activateDBCollectionContext("corpus");
 	}
 
@@ -934,7 +918,7 @@ labelProvider));
 	}
 
 	@Override
-	public List<Map> getScatteredCashMaps() {
+	public List<Map> getScatteredCacheMaps() {
 		final List<Map> maps = new Vector<Map>(1);
 		for (Map map : cachingMap.values()) {
 			maps.add(map);
@@ -1084,7 +1068,7 @@ labelProvider));
 							public void run() {
 
 								loadTree(treeViewer, rootNode, parentControl);
-								treeViewer.addFilter(getDeletedFilter());
+								treeViewer.addFilter(getDeletedFilter(false));
 								// register context menu on the table
 								menuService.registerContextMenu(
 										treeViewer.getControl(),

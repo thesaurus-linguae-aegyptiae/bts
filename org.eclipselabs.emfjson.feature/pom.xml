@@ -5,10 +5,9 @@
   <parent>
     <groupId>org.bbaw.bts</groupId>
     <artifactId>aaew-bts</artifactId>
-    <version>1.0.7</version>
+    <version>3.1.3</version>
   </parent>
-  <groupId>org.bbaw.bts</groupId>
-  <artifactId>org.eclipselabs.emfjson.feature</artifactId>
+  <artifactId>org.bbaw.bts.eclipselabs.emfjson.feature</artifactId>
   <version>0.4.0-SNAPSHOT</version>
   <packaging>eclipse-feature</packaging>
 </project>

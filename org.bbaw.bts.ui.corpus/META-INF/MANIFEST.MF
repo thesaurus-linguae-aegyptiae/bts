@@ -2,12 +2,13 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: CorpusUI
 Bundle-SymbolicName: org.bbaw.bts.ui.corpus;singleton:=true
-Bundle-Version: 3.1.0.qualifier
+Bundle-Version: 3.2.1.qualifier
 Bundle-Activator: org.bbaw.bts.ui.corpus.internal.Activator
 Bundle-Vendor: BBAW
 Export-Package: org.bbaw.bts.ui.corpus.dialogs,
  org.bbaw.bts.ui.corpus.parts,
- org.bbaw.bts.ui.corpus.parts.lemma
+ org.bbaw.bts.ui.corpus.parts.lemma,
+ org.bbaw.bts.ui.corpus.util
 Require-Bundle: org.eclipse.swt,
  org.eclipse.core.databinding;bundle-version="1.4.1",
  org.eclipse.emf.common;bundle-version="2.9.0",
@@ -52,6 +53,8 @@ Import-Package: javax.annotation;version="1.0.0",
  org.bbaw.bts.core.corpus.controller.partController,
  org.bbaw.bts.core.dao.util,
  org.bbaw.bts.corpus.btsCorpusModel,
+ org.bbaw.bts.corpus.btsCorpusModel.provider,
+ org.bbaw.bts.corpus.btsCorpusModel.util,
  org.bbaw.bts.searchModel,
  org.bbaw.bts.ui.commons.corpus.converter,
  org.bbaw.bts.ui.commons.corpus.events,

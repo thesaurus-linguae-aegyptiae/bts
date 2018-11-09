@@ -1,6 +1,5 @@
 package org.bbaw.bts.ui.egy.textSign.support;
 
-import java.util.Collection;
 import java.util.List;
 
 import org.bbaw.bts.btsmodel.BTSInterTextReference;

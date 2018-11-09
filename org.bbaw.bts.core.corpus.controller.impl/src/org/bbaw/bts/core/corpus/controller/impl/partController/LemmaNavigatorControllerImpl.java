@@ -1,7 +1,6 @@
 package org.bbaw.bts.core.corpus.controller.impl.partController;
 
 import java.util.Collections;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Vector;
@@ -9,17 +8,17 @@ import java.util.Vector;
 import javax.inject.Inject;
 
 import org.bbaw.bts.btsmodel.BTSRelation;
-import org.bbaw.bts.btsviewmodel.BtsviewmodelFactory;
 import org.bbaw.bts.btsviewmodel.TreeNodeWrapper;
 import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.core.commons.BTSCoreConstants;
+import org.bbaw.bts.core.commons.corpus.BTSCorpusConstants;
 import org.bbaw.bts.core.commons.filter.BTSFilter;
 import org.bbaw.bts.core.corpus.controller.impl.util.BTSEgyObjectByNameComparator;
+import org.bbaw.bts.core.corpus.controller.impl.util.BTSObjectTreeGenerator;
 import org.bbaw.bts.core.corpus.controller.partController.LemmaNavigatorController;
 import org.bbaw.bts.core.dao.util.BTSQueryRequest;
 import org.bbaw.bts.core.services.corpus.BTSLemmaEntryService;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSAnnotation;
-import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSLemmaEntry;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSLemmaSubentry;
 import org.bbaw.bts.searchModel.BTSQueryResultAbstract;
@@ -86,69 +85,11 @@ implements LemmaNavigatorController{
 	}
 
 	@Override
-	public BTSAnnotation createNewAnnotation(BTSCorpusObject annotatedObject) {
-		BTSAnnotation anno = lemmaService
-				.createNewAnnotationRelationPartOf(annotatedObject);
-		
-		return anno;
-	}
-
-	
-	@Override
-	public LinkedHashMap<String, TreeNodeWrapper> loadNodesWithChildren(
-			List<BTSLemmaEntry> subList, IProgressMonitor monitor, boolean b) {
-		LinkedHashMap<String, TreeNodeWrapper> nodeReg = new LinkedHashMap<String, TreeNodeWrapper>();
-		if (monitor != null)
-			monitor.beginTask("Load nodes", subList.size());
-
-		// initialize nodes registry with lemma wrappers
-		for (BTSLemmaEntry lemma : subList) {
-			TreeNodeWrapper node = BtsviewmodelFactory.eINSTANCE
-					.createTreeNodeWrapper();
-			node.setObject(lemma);
-			nodeReg.put(lemma.get_id(), node);
-		}
-
-		// nest wrappers according to subList interrelations
-		for (BTSLemmaEntry lemma : subList) {
-			TreeNodeWrapper node = nodeReg.get(lemma.get_id());
-			for (BTSRelation rel : lemma.getRelations())
-				if (BTSCoreConstants.BASIC_RELATIONS_CONTAINS.equals(rel.getType())
-						|| "successor".equals(rel.getType())) {
-					if (nodeReg.containsKey(rel.getObjectId())) {
-						TreeNodeWrapper childNode = nodeReg.get(rel.getObjectId());
-						if (!node.getChildren().contains(childNode) && !ancestry(node, childNode)) {
-							node.getChildren().add(childNode);
-							childNode.setParent(node);
-						}
-					}
-				} else if (BTSCoreConstants.BASIC_RELATIONS_PARTOF.equals(rel.getType())
-						|| "predecessor".equals(rel.getType()))
-					if (nodeReg.containsKey(rel.getObjectId())) {
-						TreeNodeWrapper parentNode = nodeReg.get(rel.getObjectId());
-						if (!parentNode.getChildren().contains(node) && !ancestry(parentNode, node)) {
-							parentNode.getChildren().add(node);
-							node.setParent(parentNode);
-						}
-					}
-			if (monitor != null)
-				monitor.worked(1);
-		}
-
-		return nodeReg;
-	}
-	
-	/**
-	 * Checks if <code>test</code> is an ancestor of <code>node</code>.
-	 * @param node
-	 * @param test
-	 * @return
-	 */
-	private static boolean ancestry(TreeNodeWrapper node, TreeNodeWrapper test) {
-		for (;node != null; node = node.getParent())
-			if (node.equals(test))
-				return true;
-		return false;
+	public List<TreeNodeWrapper> loadLemmataIntoTree(List<BTSLemmaEntry> entries,
+			Map<String, TreeNodeWrapper> registry,
+			IProgressMonitor monitor) {
+		BTSObjectTreeGenerator<BTSLemmaEntry> treeGen = new BTSObjectTreeGenerator<>(entries, registry, monitor);
+		return treeGen.getRootNodes();
 	}
 
 	@Override
@@ -158,8 +99,11 @@ implements LemmaNavigatorController{
 		BTSQueryRequest query = new BTSQueryRequest();
 		query.setQueryBuilder(QueryBuilders.boolQuery().must(
 				QueryBuilders.matchQuery("relations.objectId",	parent.get_id()))
-				.must(QueryBuilders.matchQuery("relations.type", "partOf"))
-				);
+				.must(QueryBuilders.boolQuery()
+					.should(QueryBuilders.matchQuery("relations.type", BTSCoreConstants.BASIC_RELATIONS_PARTOF))
+					.should(QueryBuilders.matchQuery("relations.type", BTSCoreConstants.BASIC_RELATIONS_SUCCESSOR_OF))
+					.should(QueryBuilders.matchQuery("relations.type", BTSCoreConstants.BASIC_RELATIONS_REFERENCED_BY))
+				));
 		query.setResponseFields(BTSConstants.SEARCH_BASIC_RESPONSE_FIELDS);
 		
 		query.setQueryId("relations.objectId-" + parent.get_id());
@@ -218,4 +162,17 @@ implements LemmaNavigatorController{
 		}
 		return children;
 	}
+
+	/* (non-Javadoc)
+	 * @see org.bbaw.bts.core.corpus.controller.partController.GenericCorpusObjectNavigatorController#createNewAnnotation(org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject)
+	 */
+	@Override
+	public BTSAnnotation createNewAnnotation(BTSLemmaEntry selection, String annotationTypePath) {
+		BTSAnnotation anno = lemmaService
+				.createNewAnnotationRelationPartOf(selection);
+		setObjectTypePath(anno, annotationTypePath);
+
+		return anno;
+	}
+
 }

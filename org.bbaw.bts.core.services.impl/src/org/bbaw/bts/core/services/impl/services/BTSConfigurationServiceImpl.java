@@ -15,6 +15,9 @@ import org.bbaw.bts.btsmodel.BTSConfig;
 import org.bbaw.bts.btsmodel.BTSConfigItem;
 import org.bbaw.bts.btsmodel.BTSConfiguration;
 import org.bbaw.bts.btsmodel.BTSObject;
+import org.bbaw.bts.btsmodel.BTSPassportEditorConfig;
+import org.bbaw.bts.btsmodel.BTSTranslation;
+import org.bbaw.bts.btsmodel.BTSTranslations;
 import org.bbaw.bts.btsmodel.BtsmodelFactory;
 import org.bbaw.bts.btsviewmodel.BTSObjectTypeTreeNode;
 import org.bbaw.bts.commons.BTSConstants;
@@ -25,14 +28,17 @@ import org.bbaw.bts.core.dao.BTSConfigurationDao;
 import org.bbaw.bts.core.dao.util.BTSQueryRequest;
 import org.bbaw.bts.core.services.BTSConfigurationService;
 import org.bbaw.bts.core.services.impl.generic.GenericObjectServiceImpl;
+import org.bbaw.bts.modelUtils.EmfModelHelper;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.preferences.ConfigurationScope;
+import org.eclipse.core.runtime.preferences.IEclipsePreferences;
 import org.eclipse.core.runtime.preferences.InstanceScope;
 import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.core.di.extensions.Preference;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.EcoreUtil.Copier;
+import org.osgi.service.prefs.BackingStoreException;
 
 public class BTSConfigurationServiceImpl extends GenericObjectServiceImpl<BTSConfiguration, String> implements
 		BTSConfigurationService
@@ -86,7 +92,7 @@ public class BTSConfigurationServiceImpl extends GenericObjectServiceImpl<BTSCon
 		context.set(BTSCoreConstants.CONTEXT_TYPE_SUBTYEPE_LABEL_MAP, null);
 		typeSubtypeAbbreviationLabelMap = null;
 		context.set(BTSCoreConstants.CONTEXT_TYPE_SUBTYEPE_ABBREVIATION_LABEL_MAP, typeSubtypeAbbreviationLabelMap);
-		
+		context.set("passportConfigLabelmap", null);
 	}
 
 	@Override
@@ -229,12 +235,9 @@ public class BTSConfigurationServiceImpl extends GenericObjectServiceImpl<BTSCon
 			String objectState, boolean registerQuery, IProgressMonitor monitor)
 	{
 		List<BTSConfiguration> objects = new Vector<BTSConfiguration>();
-		for (String p : getActiveProjects())
-		{
-			objects.addAll(configurationDao.query(query, p + BTSCoreConstants.ADMIN_SUFFIX, p
-							+ BTSCoreConstants.ADMIN_SUFFIX, objectState,
-							registerQuery));
-		}
+		String[] indexArray = buildIndexArray();
+		objects.addAll(configurationDao.query(query, indexArray, indexArray, objectState,
+				registerQuery));
 		return filter(objects);
 	}
 	@Override
@@ -337,10 +340,12 @@ public class BTSConfigurationServiceImpl extends GenericObjectServiceImpl<BTSCon
 	
 	public BTSConfigItem getVisibilityConfigItem() {
 		BTSConfiguration config = getActiveConfiguration();
-		for (BTSConfig c : config.getChildren()) {
-			if (BTSCoreConstants.VISIBILITY_CONFIG.equals(((BTSConfigItem) c)
-					.getValue())) {
-				return (BTSConfigItem) c;
+		if (config != null) {
+			for (BTSConfig c : config.getChildren()) {
+				if (BTSCoreConstants.VISIBILITY_CONFIG.equals(((BTSConfigItem) c)
+						.getValue())) {
+					return (BTSConfigItem) c;
+				}
 			}
 		}
 		return null;
@@ -679,8 +684,17 @@ public class BTSConfigurationServiceImpl extends GenericObjectServiceImpl<BTSCon
 
 	@Override
 	public BTSConfigItem getObjectTypeConfigItemProcessedClones(BTSObject object) {
-		BTSConfigItem typesCI = getObjectTypesConfigItem();
 		String className = findObjectClass(object);
+
+		return getObjectTypeConfigItemProcessedClonesInternal(className, object.getType());
+	}
+		/**
+	 * @param className
+	 * @param type
+	 * @return
+	 */
+	private BTSConfigItem getObjectTypeConfigItemProcessedClonesInternal(String className, String type) {
+		BTSConfigItem typesCI = getObjectTypesConfigItem();
 		BTSConfigItem typeClone = BtsmodelFactory.eINSTANCE
 				.createBTSConfigItem();
 		List<BTSConfig> children = new Vector<BTSConfig>();
@@ -698,26 +712,25 @@ public class BTSConfigurationServiceImpl extends GenericObjectServiceImpl<BTSCon
 										) {
 									children.add(
 											EcoreUtil.copy(ci));
-									if (object.getType() != null
-											&& !"".equals(object
-													.getType())
+									if (type != null
+											&& !"".equals(type)
 											&& ci.getValue() != null
 											&& ci.getValue().equals(
-													object.getType())) {
+													type)) {
 										found = true;
 									}
 								}
 							}
 						}
-						if (!found && object.getType() != null
-								&& !"".equals(object.getType())) {
+						if (!found && type != null
+								&& !"".equals(type)) {
 							BTSConfigItem ci = BtsmodelFactory.eINSTANCE
 									.createBTSConfigItem();
 							ci.setLabel(BtsmodelFactory.eINSTANCE
 									.createBTSTranslations());
 							ci.getLabel().setTranslation(
-									object.getType(), lang);
-							ci.setValue(object.getType());
+									type, lang);
+							ci.setValue(type);
 							children.add(ci);
 						}
 						Collections.sort(children, new BTSConfigSortKeyLabelSorter());
@@ -793,8 +806,18 @@ public class BTSConfigurationServiceImpl extends GenericObjectServiceImpl<BTSCon
 	@Override
 	public BTSConfigItem getObjectSubtypeConfigItemProcessedClones(
 			BTSObject object) {
-		BTSConfigItem typesCI = getObjectTypesConfigItem();
 		String className = findObjectClass(object);
+		return getObjectSubtypeConfigItemProcessedClones(className, object.getType(), object.getSubtype());
+	}
+		/**
+	 * @param className
+	 * @param type
+	 * @param subtype
+	 * @return
+	 */
+	private BTSConfigItem getObjectSubtypeConfigItemProcessedClones(String className, String type, String subtype) {
+		BTSConfigItem typesCI = getObjectTypesConfigItem();
+		
 		BTSConfigItem subtypeClone = BtsmodelFactory.eINSTANCE
 				.createBTSConfigItem();
 		List<BTSConfig> children = new Vector<BTSConfig>();
@@ -812,7 +835,7 @@ public class BTSConfigurationServiceImpl extends GenericObjectServiceImpl<BTSCon
 								if (!ci.isIgnore()
 										&& ci.getValue() != null
 										&& ci.getValue().equals(
-												object.getType())) {
+												type)) {
 									for (BTSConfig ccc : ci.getChildren()) {
 										if (cc instanceof BTSConfigItem) {
 											BTSConfigItem cci = (BTSConfigItem) ccc;
@@ -820,22 +843,19 @@ public class BTSConfigurationServiceImpl extends GenericObjectServiceImpl<BTSCon
 												children.add(
 														EcoreUtil
 														.copy(cci));
-												if (object.getSubtype() != null
-														&& !"".equals(object
-																.getSubtype())
+												if (subtype != null
+														&& !"".equals(subtype)
 														&& cci.getValue() != null
 														&& cci.getValue()
-																.equals(object
-																		.getSubtype())) {
+																.equals(subtype)) {
 													found = true;
 												}
 											}
 										}
 									}
 									if (!found
-											&& object.getSubtype() != null
-											&& !"".equals(object
-													.getSubtype())) {
+											&& subtype != null
+											&& !"".equals(subtype)) {
 										BTSConfigItem cci = BtsmodelFactory.eINSTANCE
 												.createBTSConfigItem();
 										cci.setLabel(BtsmodelFactory.eINSTANCE
@@ -843,10 +863,9 @@ public class BTSConfigurationServiceImpl extends GenericObjectServiceImpl<BTSCon
 
 										cci.getLabel()
 												.setTranslation(
-														object
-																.getSubtype(),
+														subtype,
 														lang);
-										cci.setValue(object.getSubtype());
+										cci.setValue(subtype);
 										subtypeClone.getChildren().add(cci);
 									}
 									BTSConfigItem ci2 = BtsmodelFactory.eINSTANCE
@@ -896,8 +915,8 @@ public class BTSConfigurationServiceImpl extends GenericObjectServiceImpl<BTSCon
 							{
 								BTSConfigItem ci = (BTSConfigItem) cc;
 								if (!ci.isIgnore()
-										&& objectTypesPathsContainsObjectype(
-										ci.getOwnerTypesMap(), object))
+										&& (objectTypesPathsContainsObjectype(
+										ci.getOwnerTypesMap(), object) || object == null))
 								{
 									categories.add(ci);
 								}
@@ -935,7 +954,20 @@ public class BTSConfigurationServiceImpl extends GenericObjectServiceImpl<BTSCon
 		InstanceScope.INSTANCE.getNode("org.bbaw.bts.app").put(BTSPluginIDs.ACTIVE_CONFIGURATION, configuration.getProvider());
 
 		context.set(BTSPluginIDs.ACTIVE_CONFIGURATION, configuration);
-		
+		IEclipsePreferences prefs = ConfigurationScope.INSTANCE.getNode("org.bbaw.bts.app");
+		prefs.put(BTSPluginIDs.ACTIVE_CONFIGURATION, configuration.getProvider());
+		try {
+			prefs.flush();
+		} catch (BackingStoreException e) {
+			e.printStackTrace();
+		}
+		prefs = InstanceScope.INSTANCE.getNode("org.bbaw.bts.app");
+		prefs.put(BTSPluginIDs.ACTIVE_CONFIGURATION, configuration.getProvider());
+		try {
+			prefs.flush();
+		} catch (BackingStoreException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
@@ -951,6 +983,7 @@ public class BTSConfigurationServiceImpl extends GenericObjectServiceImpl<BTSCon
 		config.getUpdaters().clear();
 
 		config.setDBCollectionKey(dbcoll);
+		config.setProject(main_project);
 		super.setId(config, config.getDBCollectionKey());
 		super.setRevision(config);
 
@@ -1118,10 +1151,11 @@ public class BTSConfigurationServiceImpl extends GenericObjectServiceImpl<BTSCon
 						BTSConfigItem configItem = findConfigItemByConfigPath(referencedType, configuration);
 						if (configItem != null)
 						{
-							for (BTSConfig cc : configItem.getChildren())
-							{
-								rootItem.getChildren().add(EcoreUtil.copy(cc));
-							}
+							rootItem.getChildren().add(EcoreUtil.copy(configItem));
+//							for (BTSConfig cc : configItem.getChildren())
+//							{
+//								rootItem.getChildren().add(EcoreUtil.copy(cc));
+//							}
 						}
 					}
 				}
@@ -1213,6 +1247,45 @@ public class BTSConfigurationServiceImpl extends GenericObjectServiceImpl<BTSCon
 			}
 		}
 		return result;
+	}
+
+	@Override
+	public String findAsJsonString(String key, IProgressMonitor monitor) {
+		String config = configurationDao.findAsJsonString(key, main_project + BTSCoreConstants.ADMIN_SUFFIX);
+		if (config != null)
+		{
+			return config;
+		}
+		for (String p : getActiveProjects())
+		{
+			config = configurationDao.findAsJsonString(key, p + BTSCoreConstants.ADMIN_SUFFIX);
+			if (config != null)
+			{
+				return config;
+			}
+		}
+		return null;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.bbaw.bts.core.services.impl.generic.GenericObjectServiceImpl#queryAsJsonString(org.bbaw.bts.core.dao.util.BTSQueryRequest, java.lang.String, org.eclipse.core.runtime.IProgressMonitor)
+	 */
+	@Override
+	public List<String> queryAsJsonString(BTSQueryRequest query, String objectState, IProgressMonitor monitor) {
+		List<String> objects = new Vector<String>();
+		String[] indexArray = buildIndexArray();
+		objects.addAll(configurationDao.queryAsJsonString(query, indexArray, indexArray, objectState,
+						false));
+		return objects;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.bbaw.bts.core.services.BTSConfigurationService#getObjectTypeConfigItemProcessedClones(java.lang.String, java.lang.String, java.lang.String)
+	 */
+	@Override
+	public BTSConfigItem getObjectTypeConfigItemProcessedClones(String className, String type) {
+		if (type == null) return getObjectTypeConfigItemProcessedClonesInternal(className, type);
+		else return getObjectSubtypeConfigItemProcessedClones(className, type, null);
 	}
 
 

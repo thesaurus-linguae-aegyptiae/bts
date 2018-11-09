@@ -1,8 +1,10 @@
 package org.bbaw.bts.ui.corpus.dialogs;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import org.bbaw.bts.btsmodel.BTSObject;
+import org.bbaw.bts.core.commons.BTSCoreConstants;
 import org.bbaw.bts.core.corpus.controller.partController.CorpusNavigatorController;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
 import org.bbaw.bts.ui.corpus.parts.PassportEditorPart;
@@ -16,6 +18,7 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Shell;
@@ -32,6 +35,12 @@ public class PassportEditorDialog extends TitleAreaDialog {
 	@Inject
 	private CorpusNavigatorController corpusNavigator;
 	private PassportEditorPart editor;
+
+	private Button okButton;
+
+	@Inject
+	@Named(BTSCoreConstants.CORE_EXPRESSION_MAY_EDIT)
+	private boolean editable;
 	/**
 	 * Create the dialog.
 	 * @param parentShell
@@ -64,12 +73,14 @@ public class PassportEditorDialog extends TitleAreaDialog {
 		{
 			corpusNavigator.checkAndFullyLoad((BTSCorpusObject) selectionObject, false);
 		}
+		setEditable(editable);
 		
 		IEclipseContext child = context.createChild("passportEditorDialog");
 		child.set(Composite.class, composite);
 		editor = ContextInjectionFactory.make(
 				PassportEditorPart.class, child);
 		editor.setInputObjectDirect((BTSCorpusObject) selectionObject);
+		editor.setUserMayEdit(editable);
 		return area;
 	}
 
@@ -79,8 +90,9 @@ public class PassportEditorDialog extends TitleAreaDialog {
 	 */
 	@Override
 	protected void createButtonsForButtonBar(Composite parent) {
-		createButton(parent, IDialogConstants.OK_ID, IDialogConstants.OK_LABEL,
+		okButton = createButton(parent, IDialogConstants.OK_ID, IDialogConstants.OK_LABEL,
 				true);
+		okButton.setEnabled(editable);
 		createButton(parent, IDialogConstants.CANCEL_ID,
 				IDialogConstants.CANCEL_LABEL, false);
 	}
@@ -105,4 +117,9 @@ public class PassportEditorDialog extends TitleAreaDialog {
 		super.okPressed();
 	}
 
+	public void setEditable(boolean editable)
+	{
+		this.editable = editable;
+		if (this.okButton != null) this.okButton.setEnabled(editable);
+	}
 }

@@ -127,7 +127,7 @@ public class ScatteredCachingMapService implements Map<URI, Resource> {
 				if (part.getObject() != null
 						&& part.getObject() instanceof ScatteredCachingPart) {
 					List<Map> maps = ((ScatteredCachingPart) part.getObject())
-							.getScatteredCashMaps();
+							.getScatteredCacheMaps();
 					for (Map map : maps) {
 						if (map != null && map.containsKey(key) && !((Resource) map.get(key)).getContents().isEmpty()) {
 							return true;
@@ -144,7 +144,7 @@ public class ScatteredCachingMapService implements Map<URI, Resource> {
 				if (part.getObject() != null
 						&& part.getObject() instanceof ScatteredCachingPart) {
 					List<Map> maps = ((ScatteredCachingPart) part.getObject())
-							.getScatteredCashMaps();
+							.getScatteredCacheMaps();
 					for (Map map : maps) {
 						if (map != null && map.containsKey(key) && !((Resource) map.get(key)).getContents().isEmpty()) {
 							return true;
@@ -177,7 +177,7 @@ public class ScatteredCachingMapService implements Map<URI, Resource> {
 				if (part.getObject() != null
 						&& part.getObject() instanceof ScatteredCachingPart) {
 					List<Map> maps = ((ScatteredCachingPart) part.getObject())
-							.getScatteredCashMaps();
+							.getScatteredCacheMaps();
 					for (Map map : maps) {
 						if (map.containsValue(value)) {
 							return true;
@@ -234,7 +234,7 @@ public class ScatteredCachingMapService implements Map<URI, Resource> {
 				if (part.getObject() != null
 						&& part.getObject() instanceof ScatteredCachingPart) {
 					List<Map> maps = ((ScatteredCachingPart) part.getObject())
-							.getScatteredCashMaps();
+							.getScatteredCacheMaps();
 					synchronized (maps)
 					{
 					for (Map map : maps) {
@@ -254,7 +254,7 @@ public class ScatteredCachingMapService implements Map<URI, Resource> {
 				if (part.getObject() != null
 						&& part.getObject() instanceof ScatteredCachingPart) {
 					List<Map> maps = ((ScatteredCachingPart) part.getObject())
-							.getScatteredCashMaps();
+							.getScatteredCacheMaps();
 					synchronized (maps)
 					{
 					for (Map map : maps) {
@@ -371,7 +371,7 @@ public class ScatteredCachingMapService implements Map<URI, Resource> {
 			if (part.getObject() != null
 					&& part.getObject() instanceof ScatteredCachingPart) {
 				List<Map> maps = ((ScatteredCachingPart) part.getObject())
-						.getScatteredCashMaps();
+						.getScatteredCacheMaps();
 				for (Map map : maps) {
 					size = size + map.size();
 				}

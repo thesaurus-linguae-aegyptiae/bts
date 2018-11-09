@@ -71,7 +71,6 @@ import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.e4.core.di.extensions.Preference;
 import org.eclipse.e4.ui.di.UISynchronize;
-import org.eclipse.e4.ui.services.internal.events.EventBroker;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
@@ -244,7 +243,7 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 		
 		canvas = new FigureCanvas(this);
 		// lightWeightSystem = new LightweightSystem(canvas);
-
+		canvas.setData("org.eclipse.e4.ui.css.CssClassName", "SignTextCanvas");
 		canvas.setBackground(COLOR_CANVAS_BACKGROUND);
 		canvas.setLayout(new FillLayout());
 		container = new Figure();
@@ -1094,10 +1093,11 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 			String language) {
 		TypedLabel l = new TypedLabel();
 		l.setTranslationLang(language);
-		if (word.getTranslation() != null 
-				&& word.getTranslation().getTranslation(language) != null 
-				&& !"".equals(word.getTranslation().getTranslation(language))) {
-			l.setText(language + ": " + word.getTranslation().getTranslation(language));
+		if (word.getTranslation() != null) {
+			String trans = word.getTranslation().getTranslationStrict(language);
+			if (trans != null && !"".equals(trans)) {
+				l.setText(language + ": " + trans);
+			}
 		}
 		rect.add(l);
 	}
@@ -1534,10 +1534,6 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 		return mdc; // mdc;
 	}
 
-	public void setEventBroker(EventBroker eventBroker2) {
-		// TODO
-	}
-
 	@Override
 	public void setEditorSelection(Object selection) {
 		// TODO Auto-generated method stub
@@ -1742,7 +1738,7 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 						case TypedLabel.TRANSLATION :
 							if (word.getTranslation() != null) {
 								String lang = l.getTranslationLang();
-								String trans = word.getTranslation().getTranslation(lang);
+								String trans = word.getTranslation().getTranslationStrict(lang);
 								l.setText(lang + ":" + (trans != null ? trans : ""));
 							}
 							break;
@@ -1797,6 +1793,7 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 						for (BTSInterTextReference ref : rel.getParts()) {
 								if (ref.getBeginId() != null)  {
 									ElementFigure fig = (ElementFigure) wordMap.get(ref.getBeginId());
+									if (fig == null) continue;
 									fig.addRelatingObject(object);
 									processStylingAnnotations(fig, object);
 									updateRelatingObjectFigureMap(object.get_id(), fig);

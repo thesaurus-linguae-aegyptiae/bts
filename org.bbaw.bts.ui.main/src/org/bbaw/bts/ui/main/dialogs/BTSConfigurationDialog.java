@@ -71,6 +71,7 @@ import org.eclipse.emf.edit.ui.provider.AdapterFactoryContentProvider;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.jface.databinding.swt.WidgetProperties;
 import org.eclipse.jface.dialogs.IDialogConstants;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.dialogs.TitleAreaDialog;
 import org.eclipse.jface.viewers.ComboViewer;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
@@ -236,6 +237,8 @@ public class BTSConfigurationDialog extends TitleAreaDialog {
 
 	private Text abbrText_CIEdit;
 
+	private Shell shell;
+
 
 
 	/**
@@ -245,8 +248,7 @@ public class BTSConfigurationDialog extends TitleAreaDialog {
 	 */
 	public BTSConfigurationDialog() {
 		super(new Shell());
-		System.out.println("construct BTSConfigurationDialog");
-
+		shell = getShell();
 	}
 
 	/**
@@ -359,15 +361,38 @@ public class BTSConfigurationDialog extends TitleAreaDialog {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				BTSConfig parent = null;
-				if (!(selectedConfig instanceof BTSConfiguration)) {
-					parent = (BTSConfig) selectedConfig.eContainer();
+				if (selectedConfig instanceof BTSConfiguration) {
+					// delete btsconfiguration
+					
+					// warn
+					MessageDialog dialog = new MessageDialog(shell, "Delete Configuration", null,
+						    "WARNING: You are about to delete the currently selected configuration."
+						    + "\n\nDo you really want to delete the configuration with"
+						    + "\nname '"+ ((BTSConfiguration)selectedConfig).getName() 
+						    +"'\nand provider '" +((BTSConfiguration)selectedConfig).getProvider()
+						    +"'?\n\nThis cannot be undone!", MessageDialog.WARNING, new String[] { "Cancel",
+						        "Delete", }, 0);
+						int result = dialog.open();
+						
+					// delete
+						if (result == 1)
+						{
+							configurationController.remove(((BTSConfiguration)selectedConfig));
+							IStructuredSelection sel = (IStructuredSelection) treeViewer.getSelection();
+							TreeNodeWrapper tn = (TreeNodeWrapper) sel.getFirstElement();
+							root.getChildren().remove(tn);
+						}
 				}
-				org.eclipse.emf.common.command.Command command = DeleteCommand
-						.create(getEditingDomain(selectedConfig),
-								selectedConfig);
-				getEditingDomain(selectedConfig).getCommandStack().execute(
-						command);
-				selectedConfig = parent;
+				else
+				{
+					parent = (BTSConfig) selectedConfig.eContainer();
+					org.eclipse.emf.common.command.Command command = DeleteCommand
+							.create(getEditingDomain(selectedConfig),
+									selectedConfig);
+					getEditingDomain(selectedConfig).getCommandStack().execute(
+							command);
+					selectedConfig = parent;
+				}
 				treeViewer.refresh();
 				if (parent == null && root.getChildren().get(0) != null && root.getChildren().get(0) instanceof BTSConfig) {
 					parent = (BTSConfig) root.getChildren().get(0);
@@ -797,7 +822,7 @@ public class BTSConfigurationDialog extends TitleAreaDialog {
 		lblLabel_1.setText("Label");
 
 		labelText_CIEdit = new TranslationEditorComposite(configItemEditComp,
-				SWT.BORDER, null, null, true);
+				SWT.BORDER, true);
 		labelText_CIEdit.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true,
 				false, 2, 1));
 
@@ -807,7 +832,7 @@ public class BTSConfigurationDialog extends TitleAreaDialog {
 		lblDescription.setText("Description");
 
 		descText_CIEdit = new TranslationEditorComposite(configItemEditComp,
-				SWT.BORDER, null, null, false);
+				SWT.BORDER, false);
 		descText_CIEdit.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true,
 				false, 2, 1));
 
@@ -1669,7 +1694,7 @@ public class BTSConfigurationDialog extends TitleAreaDialog {
 		lblLabel_1.setText("Label");
 
 		labelText_CIEdit = new TranslationEditorComposite(configItemEditComp,
-				SWT.BORDER, null, null, true);
+				SWT.BORDER, true);
 		labelText_CIEdit.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true,
 				false, 2, 1));
 
@@ -1679,7 +1704,7 @@ public class BTSConfigurationDialog extends TitleAreaDialog {
 		lblDescription.setText("Description");
 
 		descText_CIEdit = new TranslationEditorComposite(configItemEditComp,
-				SWT.BORDER, null, null, false);
+				SWT.BORDER, false);
 		descText_CIEdit.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true,
 				false, 2, 1));
 
@@ -1755,8 +1780,6 @@ public class BTSConfigurationDialog extends TitleAreaDialog {
 				{
 					ci.getOwnerReferencedTypesStringList().add(s);
 				}
-				ci.setType(((BTSConfigItem) selectedConfig).getType());
-				ci.setSubtype(((BTSConfigItem) selectedConfig).getSubtype());
 				CompoundCommand compoundCommand = new CompoundCommand();
 				org.eclipse.emf.common.command.Command command = AddCommand
 						.create(getEditingDomain(selectedConfig),

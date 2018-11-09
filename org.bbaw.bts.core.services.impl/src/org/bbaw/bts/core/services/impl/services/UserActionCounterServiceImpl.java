@@ -17,6 +17,9 @@ import org.bbaw.bts.core.dao.util.BTSQueryRequest;
 import org.bbaw.bts.core.services.UserActionCounterService;
 import org.bbaw.bts.core.services.impl.generic.GenericObjectServiceImpl;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.elasticsearch.index.query.QueryBuilders;
 
@@ -69,6 +72,7 @@ public class UserActionCounterServiceImpl extends
 		}
 		return null;
 	}
+	
 
 	@Override
 	public List<UserActionCounter> list(String objectState, IProgressMonitor monitor) {
@@ -100,8 +104,10 @@ public class UserActionCounterServiceImpl extends
 	public List<UserActionCounter> query(BTSQueryRequest query,
 			String objectState, boolean registerQuery, IProgressMonitor monitor) {
 		List<UserActionCounter> counters = new Vector<UserActionCounter>();
-		counters.addAll(counterDao.query(query, BTSCoreConstants.LOCAL,
-				BTSCoreConstants.LOCAL, objectState, registerQuery));
+		String[] indexArray = new String[]{BTSCoreConstants.LOCAL};
+
+		counters.addAll(counterDao.query(query, indexArray,
+				indexArray, objectState, registerQuery));
 		return counters;
 	}
 
@@ -110,30 +116,63 @@ public class UserActionCounterServiceImpl extends
 		List<UserActionCounter> counters = new Vector<UserActionCounter>();
 
 		BTSQueryRequest query = new BTSQueryRequest();
+		String[] indexArray = new String[]{BTSCoreConstants.LOCAL};
+
 		query.setQueryBuilder(QueryBuilders.prefixQuery("_id", code));
-		counters.addAll(counterDao.query(query, BTSCoreConstants.LOCAL,
- BTSCoreConstants.LOCAL,
+		counters.addAll(counterDao.query(query, indexArray,
+				indexArray,
 						BTSConstants.OBJECT_STATE_ACTIVE, false));
 		return counters;
 	}
 
 	@Override
-	public void updateCounters(List<String> counters) {
-		Set<UserActionCounter> toSave = new HashSet<UserActionCounter>(counters.size());
-		for (String id : counters)
-		{
-			UserActionCounter counter = find(id, null);
-			if (counter == null)
-			{
-				counter = BtsmodelFactory.eINSTANCE
-						.createUserActionCounter();
-				counter.set_id(id);
-				counter.setProject(main_project);
+	public void updateCounters(final List<String> counters) {
+		Job j = new Job("update_counters") {
+			@Override
+			protected IStatus run(IProgressMonitor monitor) {
+				// TODO Auto-generated method stub
+				Set<UserActionCounter> toSave = new HashSet<UserActionCounter>(counters.size());
+				for (String id : counters)
+				{
+					UserActionCounter counter = find(id, null);
+					if (counter == null)
+					{
+						counter = BtsmodelFactory.eINSTANCE
+								.createUserActionCounter();
+						counter.set_id(id);
+						counter.setProject(main_project);
+					}
+					counter.setCounter(counter.getCounter() + 1);
+					toSave.add(counter);
+				}
+				saveMultiple(toSave);
+				return Status.OK_STATUS;
 			}
-			counter.setCounter(counter.getCounter() + 1);
-			toSave.add(counter);
-		}
-		saveMultiple(toSave);
+
+		};
+		j.schedule();
+				
+	}
+
+	/* (non-Javadoc)
+	 * @see org.bbaw.bts.core.services.impl.generic.GenericObjectServiceImpl#findAsJsonString(java.io.Serializable, org.eclipse.core.runtime.IProgressMonitor)
+	 */
+	@Override
+	public String findAsJsonString(String key, IProgressMonitor monitor) {
+		return counterDao.findAsJsonString(key, BTSCoreConstants.LOCAL);
+	}
+
+	/* (non-Javadoc)
+	 * @see org.bbaw.bts.core.services.impl.generic.GenericObjectServiceImpl#queryAsJsonString(org.bbaw.bts.core.dao.util.BTSQueryRequest, java.lang.String, org.eclipse.core.runtime.IProgressMonitor)
+	 */
+	@Override
+	public List<String> queryAsJsonString(BTSQueryRequest query, String objectState, IProgressMonitor monitor) {
+		List<String> counters = new Vector<String>();
+		String[] indexArray = new String[]{BTSCoreConstants.LOCAL};
+
+		counters.addAll(counterDao.queryAsJsonString(query, indexArray,
+				indexArray, objectState, false));
+		return counters;
 	}
 
 

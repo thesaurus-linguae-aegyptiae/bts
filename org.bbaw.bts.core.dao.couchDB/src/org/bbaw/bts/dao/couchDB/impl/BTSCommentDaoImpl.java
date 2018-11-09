@@ -22,10 +22,10 @@ public class BTSCommentDaoImpl extends CouchDBDao<BTSComment, String> implements
 	}
 
 	@Override
-	public List<BTSComment> query(BTSQueryRequest query, String indexName,
-			String indexType, String objectState, boolean registerQuery) {
+	public List<BTSComment> query(BTSQueryRequest query, String[] indexNames,
+			String[] indexTypes, String objectState, boolean registerQuery) {
 		// TODO Auto-generated method stub
-		return super.query(query, indexName, indexType, objectState, registerQuery);
+		return super.query(query, indexNames, indexTypes, objectState, registerQuery);
 	}
 
 	

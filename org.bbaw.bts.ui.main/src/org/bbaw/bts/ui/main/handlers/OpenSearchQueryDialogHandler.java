@@ -23,6 +23,7 @@ public class OpenSearchQueryDialogHandler {
 		if (o instanceof SearchViewer) {
 			SearchViewer searchViewer = (SearchViewer) o;
 			SimpleSearchQueryDialog dialog = new SimpleSearchQueryDialog(shell);
+			dialog.setScope(searchViewer.getClass().getSimpleName());
 			ContextInjectionFactory.inject(dialog, context);
 			dialog.create();
 			dialog.setSearchString(searchString);

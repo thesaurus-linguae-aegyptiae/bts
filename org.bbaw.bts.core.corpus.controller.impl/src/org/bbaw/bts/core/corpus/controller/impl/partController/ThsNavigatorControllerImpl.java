@@ -10,6 +10,7 @@ import org.bbaw.bts.core.corpus.controller.partController.ThsNavigatorController
 import org.bbaw.bts.core.dao.util.BTSQueryRequest;
 import org.bbaw.bts.core.services.corpus.BTSThsEntryService;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSAnnotation;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSThsEntry;
 import org.eclipse.core.runtime.IProgressMonitor;
 
@@ -52,10 +53,11 @@ implements ThsNavigatorController {
 	}
 
 	@Override
-	public BTSAnnotation createNewAnnotation(BTSThsEntry annotatedObject) {
+	public BTSAnnotation createNewAnnotation(BTSThsEntry annotatedObject, String annotationTypePath) {
 		BTSAnnotation anno = thsService
 				.createNewAnnotationRelationPartOf(annotatedObject);
-		
+		setObjectTypePath(anno, annotationTypePath);
+
 		return anno;
 	}
 

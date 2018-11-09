@@ -572,7 +572,7 @@ public class UserManagementPart
 		
 		// create bin tab item
 		user_binTabItem = new CTabItem(user_tabFolder, SWT.NONE);
-		user_binTabItem.setText("Bin");
+		user_binTabItem.setText("Trash");
 		user_binTabItem.setData("key", "bin");
 		user_binTabItem.setImage(resourceProvider.getImage(Display.getDefault(),
 				BTSResourceProvider.IMG_BIN));

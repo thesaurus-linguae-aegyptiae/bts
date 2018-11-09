@@ -138,10 +138,11 @@ public class LemmaListSettingsPage extends FieldEditorPreferencePage {
 		if (active_lemmaLists != null && active_lemmaLists.trim().length() > 0)
 		{
 			String[] pros = active_lemmaLists.split("\\|");
-
+			
 			for (BTSProject pp : projects)
 			{
 				boolean found = false;
+				boolean chosen = false;
 
 				for (BTSProjectDBCollection col : pp.getDbCollections())
 				{
@@ -154,9 +155,8 @@ public class LemmaListSettingsPage extends FieldEditorPreferencePage {
 				if (!found)
 				{
 					// no lemma list in project
-					break;
+					continue;
 				}
-				found = false;
 				
 				if (main_lemmaList != null && main_lemmaList.equals(pp.getPrefix()))
 				{
@@ -169,10 +169,11 @@ public class LemmaListSettingsPage extends FieldEditorPreferencePage {
 					{
 						chosenProjects.add(pp);
 						found = true;
+						chosen = true;
 						break;
 					}
 				}
-				if (!found)
+				if (found && !chosen)
 				{
 					availableProjects.add(pp);
 				}

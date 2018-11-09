@@ -17,7 +17,6 @@ Bundle-ActivationPolicy: lazy
 Import-Package: javax.inject,
  org.bbaw.bts.btsmodel,
  org.bbaw.bts.searchModel,
- org.bbaw.bts.ui.resources,
  org.eclipse.core.runtime.preferences;version="3.3.0",
  org.eclipse.e4.core.commands,
  org.eclipse.e4.core.contexts,
@@ -27,11 +26,8 @@ Import-Package: javax.inject,
  org.eclipse.e4.ui.model.application.ui,
  org.eclipse.e4.ui.services,
  org.eclipse.e4.ui.workbench,
- org.eclipse.emf.ecore,
- org.eclipse.jface.preference,
- org.eclipse.jface.resource,
- org.eclipse.swt.graphics
+ org.eclipse.emf.ecore
 Require-Bundle: org.eclipse.e4.core.di;bundle-version="1.3.0"
 Bundle-ClassPath: lib/commons-net-3.3.jar,
  .
-Bundle-Version: 3.1.0.qualifier
+Bundle-Version: 3.1.2.qualifier

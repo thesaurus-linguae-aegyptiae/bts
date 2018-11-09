@@ -46,7 +46,7 @@ public class CouchDBHandler extends URIHandlerImpl {
 			public void loadResource(Resource resource) throws IOException {
 				final HttpURLConnection connection = getGetConnection(uri);
 				final InputStream inStream = connection.getInputStream();
-				final JSONLoad loader = new JSONLoad(inStream, options);
+				final JSONLoad loader = new JSONLoad(inStream, options, resource.getResourceSet());
 				loader.fillResource(resource);
 			}
 		};

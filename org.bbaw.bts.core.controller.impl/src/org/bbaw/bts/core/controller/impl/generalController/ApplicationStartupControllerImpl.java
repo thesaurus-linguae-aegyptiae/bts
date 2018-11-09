@@ -17,6 +17,7 @@ import org.bbaw.bts.app.login.Login;
 import org.bbaw.bts.btsmodel.BTSProject;
 import org.bbaw.bts.btsmodel.BTSUser;
 import org.bbaw.bts.commons.BTSConstants;
+import org.bbaw.bts.commons.fsaccess.BTSContstantsPlatformSpecific;
 import org.bbaw.bts.commons.BTSPluginIDs;
 import org.bbaw.bts.core.commons.BTSCoreConstants;
 import org.bbaw.bts.core.commons.staticAccess.StaticAccessController;
@@ -134,7 +135,7 @@ public class ApplicationStartupControllerImpl implements
 
 	private String localDBUrl;
 
-	private boolean listen2Backend = true; // XXX dev!!!!!!!!!!!!!
+	private boolean listen2Backend = true; 
 
 	protected Login login;
 
@@ -184,7 +185,7 @@ public class ApplicationStartupControllerImpl implements
 			splashController.setSplashImagePath("/" + "splash" + "/"
 					+ "btsStart.jpg");
 			splashController.open();
-			splashController.setMessage("Starting Applikation ...");
+			splashController.setMessage("Starting Application ...");
 		} catch (Exception e) {
 			System.out.println("Kein splash.");
 		}
@@ -195,14 +196,20 @@ public class ApplicationStartupControllerImpl implements
 		logger.info("db_installation_dir " + db_installation_dir);
 
 		if (db_installation_dir == null || "".equals(db_installation_dir)) {
-			String btsInsallationDir = BTSConstants.getInstallationDir();
-			logger.info("btsInsallationDir " + btsInsallationDir);
+			/// XXX retrieve db installation location from user by opening a dialog when in doubt
+			// XXX or at least make "dbdir" a constant amk
+			String btsInstallationDir = BTSContstantsPlatformSpecific.getInstallationDir()
+					+ BTSContstantsPlatformSpecific.FS + "dbdir";
+			logger.info("btsInstallationDir " + btsInstallationDir);
+			
+			// XXX if we don't know database location, we need to find out.
+			// if its not at expected location (installdir/dbdir/) then
+			// we have to ask the user
 
-			db_installation_dir = BTSConstants
-					.getDBInstallationDir(btsInsallationDir);
-			prefs.put(BTSPluginIDs.PREF_DB_DIR, db_installation_dir);
+			prefs.put(BTSPluginIDs.PREF_DB_DIR, btsInstallationDir);
 			try {
 				prefs.flush();
+				db_installation_dir = btsInstallationDir;
 			} catch (BackingStoreException e) {
 				logger.error(e);
 			}
@@ -519,6 +526,10 @@ public class ApplicationStartupControllerImpl implements
 
 		db_installation_dir = prefs.get(BTSPluginIDs.PREF_DB_DIR,
 				defaultPrefs.get(BTSPluginIDs.PREF_DB_DIR, null));
+		logger.info("db installation dir: "+db_installation_dir);
+		if (db_installation_dir != null) {
+			prefs.put(BTSPluginIDs.PREF_DB_DIR, db_installation_dir);
+		}
 
 		prefs.get(BTSPluginIDs.PREF_MAIN_CORPUS_KEY,
 				defaultPrefs.get(BTSPluginIDs.PREF_MAIN_CORPUS_KEY, null));
@@ -587,9 +598,8 @@ public class ApplicationStartupControllerImpl implements
 	protected boolean openInstallationWizard() {
 		InstallationWizard installWizard = new InstallationWizard(context,
 				ApplicationStartupControllerImpl.this, sync, userController);
-		WizardDialog dialog = new WizardDialog(new Shell(SWT.NO_TRIM
-				| SWT.ON_TOP), installWizard);
-		if (dialog.open() == dialog.OK) {
+		WizardDialog dialog = new WizardDialog(Display.getDefault().getActiveShell(), installWizard);
+		if (dialog.open() == WizardDialog.OK) {
 			logger.info("InstallationWizard returned OK");
 			localDBUrl = installWizard.getLocalDBUrl();
 			context.set(BTSPluginIDs.PREF_LOCAL_DB_URL, localDBUrl);
@@ -701,8 +711,9 @@ public class ApplicationStartupControllerImpl implements
 										context.declareModifiable(BTSCoreConstants.LISTEN_TO_BACKEND_UPDATES);
 										context.modify(
 												BTSCoreConstants.LISTEN_TO_BACKEND_UPDATES,
-												"true");// FIXME dev!
+												"true");// 
 										for (BTSProject project : projects) {
+											//XXX disable for dev
 											backend2ClientUpdateService
 													.startListening2Updates(project);
 										}
@@ -712,7 +723,7 @@ public class ApplicationStartupControllerImpl implements
 
 						}
 					};
-					new ProgressMonitorDialog(new Shell()).run(true, true, op);
+					new ProgressMonitorDialog(Display.getDefault().getActiveShell()).run(true, true, op);
 				} catch (InvocationTargetException e) {
 					// handle exception
 				} catch (InterruptedException e) {

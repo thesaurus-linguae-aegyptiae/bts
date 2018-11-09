@@ -55,6 +55,12 @@
           id="org.bbaw.bts.ui.corpus.atextnavigatorsettings"
           name="atextnavigatorsettings">
     </page>
+    <page
+          category="org.bbaw.bts.ui.main.btsgeneral.page"
+          class="org.bbaw.bts.ui.corpus.preferences.TextAnnotationSettingsPage"
+          id="org.bbaw.bts.ui.corpus.textannottionssettings"
+          name="Text Annotation Settings">
+    </page>
  </extension>
  <extension
        point="org.bbaw.bts.ui.commons.compareViewerFactory">

@@ -1,5 +1,6 @@
 package org.bbaw.bts.core.services.corpus.impl.services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Vector;
@@ -17,6 +18,7 @@ import org.bbaw.bts.core.services.corpus.BTSAbstractTextService;
 import org.bbaw.bts.core.services.corpus.BTSAnnotationService;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSAbstractText;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSAnnotation;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
 import org.bbaw.bts.corpus.btsCorpusModel.BtsCorpusModelFactory;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.e4.core.di.annotations.Optional;
@@ -131,19 +133,27 @@ implements BTSAbstractTextService, BTSObjectSearchService {
 	public List<BTSAbstractText> query(BTSQueryRequest query, String objectState,
 			boolean registerQuery, IProgressMonitor monitor) {
 		List<BTSAbstractText> objects = new Vector<BTSAbstractText>();
-		for (String p : getActiveProjects()) {
+		String[] indexArray = buildIndexArray();
 
-			try {
-				objects.addAll(atextDao.query(query, p + BTSCorpusConstants.ATEXT, p
-						+ BTSCorpusConstants.ATEXT, objectState, registerQuery));
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
+		try {
+			objects.addAll(atextDao.query(query, indexArray, indexArray, objectState, registerQuery));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return filter(objects);
 	}
+	
+	@Override
+	public String[] buildIndexArray() {
+		List<String> indexNames = new ArrayList<String>();
+		for (String p : getActiveProjects())
+		{
+			indexNames.add(p + BTSCorpusConstants.ATEXT);
+		}
+		return indexNames.toArray(new String[indexNames.size()]);
+	}
+	
 	@Override
 	public List<BTSAbstractText> query(BTSQueryRequest query, String objectState, IProgressMonitor monitor) {
 		return query(query, objectState, true, monitor);
@@ -173,9 +183,11 @@ implements BTSAbstractTextService, BTSObjectSearchService {
 			List<BTSFilter> btsFilters, IProgressMonitor monitor) {
 		return super.getOrphanEntries(map, btsFilters, monitor);
 	}
+	/* (non-Javadoc)
+	 * @see org.bbaw.bts.core.services.corpus.BTSAbstractTextService#createNewAnnotationRelationPartOf(org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject)
+	 */
 	@Override
-	public BTSAnnotation createNewAnnotationRelationPartOf(
-			BTSAbstractText annotatedObject) {
+	public BTSAnnotation createNewAnnotationRelationPartOf(BTSCorpusObject annotatedObject) {
 		BTSAnnotation anno = annotationService
 				.createNewRelationPartOf(annotatedObject);
 		if (main_atext_key == null || "".equals(main_atext_key))
@@ -188,6 +200,46 @@ implements BTSAbstractTextService, BTSObjectSearchService {
 		anno.setCorpusPrefix(main_atext_key + BTSCorpusConstants.ATEXT);
 		anno.setProject(main_atext_key);
 		return anno;
+	}
+	/* (non-Javadoc)
+	 * @see org.bbaw.bts.core.services.impl.generic.GenericObjectServiceImpl#findAsJsonString(java.io.Serializable, org.eclipse.core.runtime.IProgressMonitor)
+	 */
+	@Override
+	public String findAsJsonString(String key, IProgressMonitor monitor) {
+		String entry = null;
+		try {
+			entry = atextDao.findAsJsonString(key, main_project + BTSCorpusConstants.ATEXT);
+		} catch (Exception e) {
+		}
+		if (entry != null) {
+			return entry;
+		}
+		for (String p : getActiveProjects()) {
+			try {
+				entry = atextDao.findAsJsonString(key, p + BTSCorpusConstants.ATEXT);
+			} catch (Exception e) {
+			}
+			if (entry != null) {
+				return entry;
+			}
+		}
+		return null;
+	}
+	/* (non-Javadoc)
+	 * @see org.bbaw.bts.core.services.impl.generic.GenericObjectServiceImpl#queryAsJsonString(org.bbaw.bts.core.dao.util.BTSQueryRequest, java.lang.String, org.eclipse.core.runtime.IProgressMonitor)
+	 */
+	@Override
+	public List<String> queryAsJsonString(BTSQueryRequest query, String objectState, IProgressMonitor monitor) {
+		List<String> objects = new Vector<String>();
+		String[] indexArray = buildIndexArray();
+
+		try {
+			objects.addAll(atextDao.queryAsJsonString(query, indexArray, indexArray, objectState, false));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return objects;
 	}
 	
 }

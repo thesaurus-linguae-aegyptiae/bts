@@ -13,22 +13,28 @@ import org.eclipse.e4.core.di.annotations.Execute;
 import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.ui.model.application.ui.basic.MPart;
 import org.eclipse.e4.ui.services.IServiceConstants;
+import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.swt.widgets.Shell;
 
 public class DeletePermanentlyHandler {
 	@Execute
 	public void execute(
 			@Optional @Named(IServiceConstants.ACTIVE_SELECTION) Object selection,
-			CorpusCommandController commandController, @Optional @Active MPart activePart) {
+			CorpusCommandController commandController, @Optional @Active MPart activePart,
+			final Shell shell) {
 		if (selection instanceof BTSDBBaseObject) {
-			commandController.deleteFromDB((BTSDBBaseObject) selection);
-			if (activePart != null)
-			{
-			
-				Object o = activePart.getObject();
-				if (o instanceof StructuredViewerProvider)
+			if (MessageDialog.openConfirm(shell,
+					"Confirm deletion",
+					"Object will not be recoverable after deletion. Proceed?")) {
+				commandController.deleteFromDB((BTSDBBaseObject) selection);
+				if (activePart != null)
 				{
-					StructuredViewerProvider viewerProvider = (StructuredViewerProvider) o;
-					viewerProvider.getActiveStructuredViewer().refresh();
+					Object o = activePart.getObject();
+					if (o instanceof StructuredViewerProvider)
+					{
+						StructuredViewerProvider viewerProvider = (StructuredViewerProvider) o;
+						viewerProvider.getActiveStructuredViewer().refresh();
+					}
 				}
 			}
 		}

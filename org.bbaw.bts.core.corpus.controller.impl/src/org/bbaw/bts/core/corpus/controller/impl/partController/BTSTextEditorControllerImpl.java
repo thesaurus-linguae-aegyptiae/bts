@@ -27,12 +27,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.inject.Inject;
-import javax.naming.Context;
-
-import jsesh.mdc.MDCSyntaxError;
-import jsesh.mdcDisplayer.draw.MDCDrawingFacade;
-import jsesh.mdcDisplayer.preferences.DrawingSpecification;
-import jsesh.mdcDisplayer.preferences.DrawingSpecificationsImplementation;
 
 import org.bbaw.bts.btsmodel.BTSComment;
 import org.bbaw.bts.btsmodel.BTSIdentifiableItem;
@@ -61,10 +55,7 @@ import org.bbaw.bts.corpus.btsCorpusModel.BTSText;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSTextContent;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSTextItems;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSWord;
-import org.bbaw.bts.corpus.btsCorpusModel.BtsCorpusModelFactory;
 import org.bbaw.bts.corpus.btsCorpusModel.BtsCorpusModelPackage;
-import org.bbaw.bts.corpus.text.egy.EgyDslStandaloneSetup;
-import org.bbaw.bts.corpus.text.egy.egyDsl.TextContent;
 import org.bbaw.bts.corpus.text.egy.ui.internal.EgyDslActivator;
 import org.bbaw.bts.ui.commons.corpus.text.BTSAnnotationAnnotation;
 import org.bbaw.bts.ui.commons.corpus.text.BTSCommentAnnotation;
@@ -97,7 +88,6 @@ import org.eclipse.emf.edit.command.RemoveCommand;
 import org.eclipse.emf.edit.command.SetCommand;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.jface.text.Document;
-import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.Position;
 import org.eclipse.jface.text.source.Annotation;
 import org.eclipse.jface.text.source.IAnnotationModel;
@@ -106,14 +96,16 @@ import org.eclipse.swt.graphics.ImageData;
 import org.eclipse.swt.graphics.PaletteData;
 import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.widgets.Display;
-import org.eclipse.xtext.parser.IParseResult;
-import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
-import org.eclipse.xtext.util.StringInputStream;
 import org.elasticsearch.index.query.QueryBuilders;
 
 import com.google.inject.Injector;
+
+import jsesh.mdc.MDCSyntaxError;
+import jsesh.mdcDisplayer.draw.MDCDrawingFacade;
+import jsesh.mdcDisplayer.preferences.DrawingSpecification;
+import jsesh.mdcDisplayer.preferences.DrawingSpecificationsImplementation;
 
 public class BTSTextEditorControllerImpl implements BTSTextEditorController
 {
@@ -407,11 +399,10 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 				{
 					anno.setTempSortKey(counter + GAP);
 				}
-				modelAnnotation = new BTSAnnotationAnnotation(BTSAnnotationAnnotation.TYPE, item, reference, anno);
+				modelAnnotation = new BTSAnnotationAnnotation(item, reference, anno);
 				if (anno.getType() != null && anno.getType().equalsIgnoreCase("rubrum"))
 				{
 					modelAnnotation.setText( "org.bbaw.bts.ui.text.modelAnnotation.annotation.rubrum");
-					modelAnnotation.setType(BTSAnnotationAnnotation.TYPE_RUBRUM);
 				}
 			}
 			else if (reference.eContainer().eContainer() instanceof BTSText)
@@ -422,7 +413,7 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 				{
 					text.setTempSortKey(counter + GAP);
 				}
-				modelAnnotation = new BTSSubtextAnnotation(BTSSubtextAnnotation.TYPE, item, reference, text);
+				modelAnnotation = new BTSSubtextAnnotation(item, reference, text);
 			}
 			else if (reference.eContainer().eContainer() instanceof BTSComment)
 			{
@@ -432,7 +423,7 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 				{
 					comment.setTempSortKey(counter + GAP);
 				}
-				modelAnnotation = new BTSCommentAnnotation(BTSCommentAnnotation.TYPE, item, comment, reference);
+				modelAnnotation = new BTSCommentAnnotation(item, comment, reference);
 			}
 			counter = counter + GAP;
 		}
@@ -444,7 +435,7 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 			IAnnotationModel model, Position pos) {
 		if (model == null) return;
 
-		BTSModelAnnotation annotation = new BTSModelAnnotation(BTSModelAnnotation.TYPE,
+		BTSModelAnnotation annotation = new BTSModelAnnotation(BTSModelAnnotation.TOKEN,
 				(BTSIdentifiableItem) ambivalence);
 
 		model.addAnnotation(annotation, pos);
@@ -496,7 +487,7 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 		// append to model
 		if (model == null) return;
 
-		BTSModelAnnotation annotation = new BTSModelAnnotation(BTSModelAnnotation.TYPE,
+		BTSModelAnnotation annotation = new BTSModelAnnotation(BTSModelAnnotation.TOKEN,
 				(BTSIdentifiableItem) amCase);
 
 		model.addAnnotation(annotation, pos);
@@ -529,7 +520,7 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 			Position pos)
 	{
 		if (model == null) return;
-		BTSModelAnnotation annotation = new BTSModelAnnotation(BTSModelAnnotation.TYPE,
+		BTSModelAnnotation annotation = new BTSModelAnnotation(BTSModelAnnotation.TOKEN,
 				(BTSIdentifiableItem) marker);
 
 		model.addAnnotation(annotation, pos);
@@ -687,7 +678,7 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 			}
 			
 		} else {
-			annotation = new BTSModelAnnotation(BTSModelAnnotation.TYPE,
+			annotation = new BTSModelAnnotation(BTSModelAnnotation.TOKEN,
 					(BTSIdentifiableItem) word);
 		}
 		model.addAnnotation(annotation, position);
