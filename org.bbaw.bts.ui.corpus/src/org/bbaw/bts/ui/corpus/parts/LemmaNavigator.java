@@ -129,7 +129,6 @@ public class LemmaNavigator extends NavigatorPart implements ScatteredCachingPar
 	private Map<String, BTSQueryResultAbstract> queryResultMap = new HashMap<String, BTSQueryResultAbstract>();
 	private Map<String, List<TreeNodeWrapper>> viewHolderMap = new HashMap<String, List<TreeNodeWrapper>>();
 
-	private ISelectionChangedListener selectionListener;
 	private Composite composite;
 
 	private Map<Control, Map> cachingMap = new HashMap<Control, Map>();
@@ -261,6 +260,135 @@ public class LemmaNavigator extends NavigatorPart implements ScatteredCachingPar
 		loaded = true;
 	}
 
+
+	/**
+	 * Retrieves a list of objects (presumably annotations and comments) related to the one passed with the
+	 * <code>o</code> parameter from the controller, and sends it to the {@link AnnotationsPart} via the 
+	 * event broker using the {@link BTSUIConstants#EVENT_TEXT_RELATING_OBJECTS_LOADED} event identifier.
+	 *  
+	 * @param o
+	 */
+	private void loadAndPropagateRelatedObjectsToAnnotationPart(BTSObject o) {
+		// retrieve annotations from current projects word list collections
+		List<BTSObject> relatedObjects = 
+				lemmaNavigatorController.getRelatingObjects(o, null);
+		BTSRelatingObjectsLoadingEvent e = 
+				new BTSRelatingObjectsLoadingEvent((BTSCorpusObject) o);
+		e.setRelatingObjects(relatedObjects);
+		// send to annotations part
+		eventBroker.post(
+				BTSUIConstants.EVENT_TEXT_RELATING_OBJECTS_LOADED,
+				e);
+	}
+
+
+	/**
+	 * Listener that performs the following actions whenever the selection of the the current node
+	 * in the treeviewer it gets attached to:
+	 * <ul>
+	 * <li>load child nodes for selected lemma into tree</li>
+	 * <li>load related objects and broadcast them to the annotations part</li>
+	 * <li>some other stuff like load orphans</li>
+	 * </ul> 
+	 * @author jhoeper
+	 *
+	 */
+	private class LemmaNavigatorTreeSelectionChangedListener implements ISelectionChangedListener {
+		private TreeViewer treeviewer;
+		private Composite parentControl;
+
+		public LemmaNavigatorTreeSelectionChangedListener(TreeViewer treeviewer, Composite parentControl) {
+			super();
+			this.treeviewer = treeviewer;
+			this.parentControl = parentControl;
+		}
+
+		@Override
+		public void selectionChanged(SelectionChangedEvent event) {
+			selection = (StructuredSelection) event.getSelection();
+			System.out.println(event.getSelection());
+			if (selection.getFirstElement() != null
+					&& selection.getFirstElement() instanceof TreeNodeWrapper) {
+				final TreeNodeWrapper tn = (TreeNodeWrapper) selection
+						.getFirstElement();
+				if (tn.getObject() != null) {
+					BTSObject o = (BTSObject) tn.getObject();
+					if (o instanceof BTSCorpusObject) {
+						lemmaNavigatorController.checkAndFullyLoad((BTSCorpusObject) o, true);
+
+						if (!tn.isChildrenLoaded() || tn.getChildren().isEmpty()) {
+							List<TreeNodeWrapper> parents = new Vector<TreeNodeWrapper>(1);
+							parents.add(tn);
+							tn.setChildrenLoaded(true);
+							loadChildren(parents, false, parentControl);
+							Job j = new Job("expand") {
+								@Override
+								protected IStatus run(IProgressMonitor monitor) {
+									sync.asyncExec(new Runnable() {
+										public void run() {
+											treeviewer.setExpandedState(tn, true);
+										}
+									});
+									return Status.OK_STATUS;
+								}
+							};
+							j.schedule(750);
+						}
+
+						// load related objects and broadcast them to the annotations part
+						loadAndPropagateRelatedObjectsToAnnotationPart(o);
+
+						if (!BTSUIConstants.SELECTION_TYPE_SECONDARY
+								.equals(selectionType)) {
+							selectionService.setSelection(o);
+						} else {
+							eventBroker.send(
+									"ui_secondarySelection/lemmaNavigator",
+									o);
+						}
+					}
+				}
+
+				else if (tn.getLabel().equals(BTSConstants.ORPHANS_NODE_LABEL)) {
+					tn.setChildrenLoaded(true);
+					loadOrphans(parentControl, treeviewer, tn);
+				}
+
+				if (selection instanceof TreeSelection) {
+					TreeSelection ts = (TreeSelection) selection;
+					List<BTSObject> path = new ArrayList<BTSObject>(4);
+
+					for (Object o : ts.getPaths()) {
+						if (o instanceof TreePath)
+						{
+							TreePath tp = (TreePath) o;
+							for (int i = 0; i < tp.getSegmentCount(); i++) {
+								Object segment = tp.getSegment(i);
+								BTSObject btso = (BTSObject) ((TreeNodeWrapper)segment).getObject();
+								if (btso != null) {
+									path.add(btso);
+								}
+							}
+							break;
+						}
+					}
+
+					if (event.getSource().equals(mainTreeViewer))
+					{
+						eventBroker.post("navigator_path_event_with_root/lemma",
+								path.toArray(new BTSObject[path.size()]));
+					}
+					else
+					{
+						eventBroker.post("navigator_path_event_no_root/lemma",
+								path.toArray(new BTSObject[path.size()]));
+					}
+				}
+			}
+		}
+	}
+
+
 	private void prepareTreeViewer(final TreeViewer treeViewer,
 			final Composite parentControl) {
 		ComposedAdapterFactory factory = new ComposedAdapterFactory(
@@ -272,117 +400,23 @@ public class LemmaNavigator extends NavigatorPart implements ScatteredCachingPar
 
 		treeViewer.setContentProvider(contentProvider);
 		treeViewer.setLabelProvider(new DelegatingStyledCellLabelProvider(labelProvider));
-
 		treeViewer.setUseHashlookup(true);
-		selectionListener = new ISelectionChangedListener() {
 
-			@Override
-			public void selectionChanged(SelectionChangedEvent event) {
-				selection = (StructuredSelection) event.getSelection();
-				System.out.println(event.getSelection());
-				if (selection.getFirstElement() != null
-						&& selection.getFirstElement() instanceof TreeNodeWrapper) {
-					final TreeNodeWrapper tn = (TreeNodeWrapper) selection
-							.getFirstElement();
-					if (tn.getObject() != null) {
-						BTSObject o = (BTSObject) tn.getObject();
-						if (o instanceof BTSCorpusObject) {
-							lemmaNavigatorController.checkAndFullyLoad((BTSCorpusObject) o, true);
 
-							if (!tn.isChildrenLoaded() || tn.getChildren().isEmpty()) {
-								List<TreeNodeWrapper> parents = new Vector<TreeNodeWrapper>(1);
-								parents.add(tn);
-								tn.setChildrenLoaded(true);
-								loadChildren(parents, false, parentControl);
-								Job j = new Job("expand") {
-									@Override
-									protected IStatus run(IProgressMonitor monitor) {
-										sync.asyncExec(new Runnable() {
-											public void run() {
-												treeViewer.setExpandedState(tn, true);
-											}
-										});
-										return Status.OK_STATUS;
-									}
-								};
-								j.schedule(750);
-							}
-
-							// retrieve annotations from current projects word list collections
-							List<BTSObject> relatedObjects = 
-									lemmaNavigatorController.getRelatingObjects(o, null);
-							BTSRelatingObjectsLoadingEvent e = 
-									new BTSRelatingObjectsLoadingEvent((BTSCorpusObject) o);
-							e.setRelatingObjects(relatedObjects);
-							// send to annotations part
-							eventBroker.post(
-									BTSUIConstants.EVENT_TEXT_RELATING_OBJECTS_LOADED,
-									e);
-							
-							if (!BTSUIConstants.SELECTION_TYPE_SECONDARY
-									.equals(selectionType)) {
-								selectionService.setSelection(o);
-							} else {
-								eventBroker.send(
-										"ui_secondarySelection/lemmaNavigator", o);
-
-							}
-						}
-						
-					}
-					else if (tn.getLabel().equals(BTSConstants.ORPHANS_NODE_LABEL))
-					{
-						if (true || !tn.isChildrenLoaded())
-						{
-							tn.setChildrenLoaded(true);
-							loadOrphans(parentControl, treeViewer, tn);
-						}
-					}
-					if (selection instanceof TreeSelection)
-					{
-						TreeSelection ts = (TreeSelection) selection;
-						List<BTSObject> path = new ArrayList<BTSObject>(4);
-
-						for (Object o : ts.getPaths())
-						{
-							
-							if (o instanceof TreePath)
-							{
-								TreePath tp = (TreePath) o;
-								for (int i = 0; i < tp.getSegmentCount(); i++)
-								{
-									Object segment = tp.getSegment(i);
-									BTSObject btso = (BTSObject) ((TreeNodeWrapper)segment).getObject();
-									if (btso != null)
-									{
-										path.add(btso);
-									}
-								}
-								break;
-							}
-							
-						}
-						if (event.getSource().equals(mainTreeViewer))
-						{
-							eventBroker.post("navigator_path_event_with_root/lemma", path.toArray(new BTSObject[path.size()]));
-						}
-						else
-						{
-							eventBroker.post("navigator_path_event_no_root/lemma", path.toArray(new BTSObject[path.size()]));
-						}
-					}
-				}
-			}
-		};
 		if (sorter == null)
 		{
 			sorter = ContextInjectionFactory.make(BTSLemmaBySortKeyNameViewerSorter.class, context);
 		}
 
 		treeViewer.setSorter(sorter);
-		treeViewer.addSelectionChangedListener(selectionListener);
+		// add listener for child node and related object loading on selection change
+		treeViewer.addSelectionChangedListener(
+				new LemmaNavigatorTreeSelectionChangedListener(
+						treeViewer,
+						parentControl));
 	}
-	
+
+
 	private void loadOrphans(final Control parentControl,
 			final TreeViewer treeViewer, final TreeNodeWrapper localOrphanNode) {
 		try {
