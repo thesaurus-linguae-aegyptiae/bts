@@ -5,7 +5,6 @@ import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.draw2d.LineBorder;
 import org.eclipse.draw2d.ToolbarLayout;
 import org.eclipse.draw2d.geometry.Dimension;
-import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.swt.graphics.Color;
 
 public class MarkerFigure extends ElementFigureImpl {
@@ -25,11 +24,10 @@ public class MarkerFigure extends ElementFigureImpl {
 		super.setCornerDimensions(new Dimension(0, 0));
 		this.name = name;
 	}
-	
-	public int getLength() {
-		
-		int len = this.name.length() * 5;
-		return len > 15 ? len : 15;
+
+
+	public String getName() {
+		return name;
 	}
-	
+
 }

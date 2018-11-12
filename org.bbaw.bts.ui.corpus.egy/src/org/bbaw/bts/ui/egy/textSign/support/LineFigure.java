@@ -53,11 +53,12 @@ public class LineFigure extends Figure {
 		int len = 0;
 		for (IFigure fig : children) {
 			if (fig instanceof ElementFigure) {
-				len = len + ((ElementFigure) fig).getLength();
+				len = len + ((ElementFigure) fig).calculateWidth();
 			} else {
+				System.out.println("not an elementfigure: "+fig);
 				len = len + fig.getBounds().getSize().width;
 			}
 		}
-		return len;
+		return len + (children.size() - 1) * 2;
 	}
 }

@@ -80,6 +80,7 @@ import org.eclipse.swt.events.FocusListener;
 import org.eclipse.swt.events.TypedEvent;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Font;
+import org.eclipse.swt.graphics.FontData;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.ImageData;
 import org.eclipse.swt.graphics.PaletteData;
@@ -140,7 +141,7 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 	@Inject
 	@Preference(value = BTSEGYUIConstants.PREF_LEMMATIZER_FELXION_DEFAULT, nodePath = "org.bbaw.bts.ui.corpus.egy")
 	private Integer defaultFlexion;
-	
+
 	private ElementFigure selectedElement;
 
 	private Composite parentComposite;
@@ -311,7 +312,6 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 				} else if (ke.keycode == SWT.ARROW_UP) {
 					shiftLineSelection(-1);
 				}
-
 			}
 		};
 		container.setFocusTraversable(true);
@@ -322,16 +322,18 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 		
 		this.layout();
 		parentComposite.layout();
-		Double d = (canvas.getViewport().getBounds().width ) * 1.35;
-		max_line_length = d.intValue();
+
+		max_line_length = canvas.getViewport().getBounds().width;
 
 	}
-	
+
+
 	@Override
 	public void addFocusListener(FocusListener listener) {
 		super.addFocusListener(listener);
 		canvas.addFocusListener(listener);
 	}
+
 
 	private void shiftLineSelection(int shift) {
 		int newLineIndex = lineIndex + shift;
@@ -578,6 +580,7 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 	private void loadText() {
 		purgeAll();
 		max_line_length = canvas.getViewport().getBounds().width;
+		System.out.println("maximum line length: "+max_line_length);
 		continuingRelatingObjects = new Vector<BTSObject>();
 		// canvas = new FigureCanvas(this);
 		// canvas.setBackground(COLOR_CANVAS_BACKGROUND);
@@ -620,7 +623,7 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 					if (senItem instanceof BTSWord) {
 						BTSWord word = (BTSWord) senItem;
 						itemFigure = makeWordFigure(word);
-						// appendWord(word);
+						appendFigure(itemFigure);
 					}
 					else if (senItem instanceof BTSMarker) {
 						BTSMarker marker = (BTSMarker) senItem;
@@ -669,6 +672,11 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 		// layout.setMinorSpacing(3);
 		canvas.setContents(container);
 		// container.setLayoutManager(layout);
+		
+		System.out.println("max line length: "+max_line_length);
+		for (FontData fd : JFaceResources.getFont("BBAWLibertine").getFontData()) {
+			System.out.println(fd);
+		}
 
 		container.setFocusTraversable(true);
 		this.layout();
@@ -729,7 +737,7 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 				&& itemFigure instanceof WordFigure)
 		{
 			for (Object fig : itemFigure.getChildren()) {
-				if (fig instanceof TypedLabel && ((TypedLabel)fig).getType() == TypedLabel.TRANSLITATION) {
+				if (fig instanceof TypedLabel && ((TypedLabel)fig).getType() == TypedLabel.TRANSLITERATION) {
 					 ((TypedLabel)fig).setForegroundColor(BTSUIConstants.COLOR_RUBRUM);
 				}
 			}
@@ -1006,7 +1014,7 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 	private ElementFigure makeWordFigure(BTSWord word) {
 		TypedLabel label = new TypedLabel();
 		label.setText(word.getWChar());
-		label.setType(TypedLabel.TRANSLITATION);
+		label.setType(TypedLabel.TRANSLITERATION);
 
 		final WordFigure rect = new WordFigure(label);
 		rect.setBackgroundColor(colorWordDeselected(word));
@@ -1068,7 +1076,7 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 				addTransToWordFigure(word, rect, lang);
 			}
 		}
-		rect.setSize(90, 290);
+		rect.setSize(rect.calculateWidth(), 290);
 		rect.addFigureListener(new FigureListener() {
 
 			@Override
@@ -1081,7 +1089,6 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 		});
 		rect.addMouseListener(elementSelectionListener);
 		rect.setLayoutManager(tl);
-		appendFigure(rect);
 
 		if (!word.eAdapters().contains(notifier)) {
 			word.eAdapters().add(notifier);
@@ -1128,9 +1135,9 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 		if (currentLineFigure == null) {
 			currentLineFigure = makeLineFigure();
 		}
-		int len = calculateWordFigureLength(figure);
-		
-		System.out.println("line leng " + currentLineFigure.getSpaceLength() + len + " max " + max_line_length); 
+		int len = figure.calculateWidth() + 2;
+				
+		System.out.println("line leng " + (currentLineFigure.getSpaceLength() + len) + " max " + max_line_length); 
 		if (figure.getType().equals(ElementFigure.SENTENCE_START)) {
 			currentLineFigure = makeLineFigure();
 			currentLineFigure.add(figure);
@@ -1356,6 +1363,7 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 	}
 
 	private void setSelectionInternal(ElementFigure figure, int eventType) {
+		System.out.println("figure width: "+figure.calculateWidth());
 		if (figure.getParent() instanceof LineFigure) {
 			if (figure.getParent() != currentLineFigure) {
 				currentLineFigure = (LineFigure) figure.getParent();
@@ -1732,7 +1740,7 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 							l.setText(word.getFlexCode());
 							fset = true;
 							break;
-						case TypedLabel.TRANSLITATION :
+						case TypedLabel.TRANSLITERATION :
 							l.setText(word.getWChar());
 							break;
 						case TypedLabel.TRANSLATION :
