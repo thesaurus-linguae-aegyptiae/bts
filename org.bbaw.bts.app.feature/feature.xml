@@ -2,7 +2,7 @@
 <feature
       id="org.bbaw.bts.app.feature"
       label="Berlin Text System Core Application"
-      version="3.2.0.qualifier"
+      version="3.2.1.qualifier"
       provider-name="BBAW"
       os="linux,macosx,win32"
       ws="carbon,cocoa,gtk,win32"
@@ -11,6 +11,14 @@
    <description url="http://www.example.com/description">
 Change log
 ==========
+
+Release 3.2.1
+-------------
+
+	- Fix: font bundle resource resolution on windows (48c8ec2)
+	- GUI: show additional information on suggestions for object relationship fields (d0143af)
+	- Feature: lemma search dialog emulates lemmatizer search unless searching for ID (3d4a9ff)
+	- Chore: upgrade font (9821757)
 
 Release 3.2.0
 -------------

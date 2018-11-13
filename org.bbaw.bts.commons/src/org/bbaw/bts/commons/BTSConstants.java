@@ -80,6 +80,7 @@ public class BTSConstants
 	
 	public static final String OBJECT_STATE_ACTIVE = "active";
 	public static final String OBJECT_STATE_TERMINATED = "terminated";
+	public static final String OBJECT_REVISION_STATE_PUBLISHED = "published";
 	public static final String ANNOTATION = "Annotation";
 	public static final String CORPUS_OBJECT = "CorpusObject";
 	public static final String IMAGE = "Image";
