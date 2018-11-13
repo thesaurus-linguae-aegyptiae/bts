@@ -19,12 +19,12 @@ Require-Bundle: org.bbaw.bts.corpus.text.egy.egydsl;visibility:=reexport,
  org.bbaw.bts.core.corpus.controller,
  org.bbaw.bts.ui.commons.corpus,
  com.google.inject
-Import-Package: org.apache.log4j,
+Import-Package: com.google.common.base,
+ org.apache.log4j,
  org.bbaw.bts.core.commons.staticAccess,
  org.eclipse.e4.core.contexts,
  org.eclipse.xtext.xbase.lib
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6,
- JavaSE-1.7
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Export-Package: org.bbaw.bts.corpus.text.egy.ui,
  org.bbaw.bts.corpus.text.egy.ui.contentassist,
  org.bbaw.bts.corpus.text.egy.ui.contentassist.antlr,
