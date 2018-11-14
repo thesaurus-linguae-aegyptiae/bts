@@ -589,6 +589,7 @@ public class PassportEntryItemEditor extends PassportEntryEditorComposite {
 		ths_select_text.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 		final char[] autoActivationCharacters = new char[] { '.', '#' };
 
+		// attach content assist to textfield
 		try {
 			ContentProposalAdapter adapter = new ContentProposalAdapter(
 					ths_select_text,
@@ -622,26 +623,11 @@ public class PassportEntryItemEditor extends PassportEntryEditorComposite {
 			public void keyReleased(KeyEvent e) {
 				// CTRL+F
 				if (((e.stateMask & SWT.CTRL) == SWT.CTRL) && (e.keyCode == 102)){
-					// open search dialog
-					IEclipseContext child = context.createChild("searchselect");
-					context.set(BTSConstants.OBJECT_TYPES_ARRAY, new String[]{BTSConstants.THS_ENTRY});
-					BTSObjectTypeSubtypeViewerFilter viewerFilter = passportConfigurationController.createObjectTypeSubtypeFilterByReferencedPath(corpusObject, itemConfig2);
-					context.set(BTSObjectTypeSubtypeViewerFilter.class, viewerFilter);
-
-					SearchSelectObjectDialog dialog = ContextInjectionFactory.make(
-							SearchSelectObjectDialog.class, child);
-					if (dialog.open() == Dialog.OK) {
-						BTSObject object = dialog.getObject();
-						Command command = SetCommand.create(editingDomain,
-								entry, BtsCorpusModelPackage.eINSTANCE.getBTSPassportEntry_Value(),
-								object.get_id());
-						editingDomain.getCommandStack().execute(command);
-						ths_select_text.setText(object.getName());
-						ths_select_text.setData(object);
-					}
+					openThesaurusEntrySearchDialog(itemConfig2, entry);
 			    } else if (e.keyCode == SWT.BS) {
 			    	Command command = SetCommand.create(editingDomain,
-							entry, BtsCorpusModelPackage.eINSTANCE.getBTSPassportEntry_Value(),
+							entry,
+							BtsCorpusModelPackage.eINSTANCE.getBTSPassportEntry_Value(),
 							null);
 					editingDomain.getCommandStack().execute(command);
 					ths_select_text.setText("");
@@ -649,14 +635,16 @@ public class PassportEntryItemEditor extends PassportEntryEditorComposite {
 			    }
 			}
 		});
-		
-		ths_select_text.addModifyListener(new ModifyListener() {
 
+		ths_select_text.addModifyListener(new ModifyListener() {
 			@Override
 			public void modifyText(ModifyEvent e) {
 				if (ths_select_text.getText().trim().length() == 0) {
-					Command command = SetCommand.create(editingDomain,
-							entry, BtsCorpusModelPackage.eINSTANCE.getBTSPassportEntry_Value(),
+					System.out.println("text field value has length 0");
+					Command command = SetCommand.create(
+							editingDomain,
+							entry,
+							BtsCorpusModelPackage.eINSTANCE.getBTSPassportEntry_Value(),
 							null);
 					editingDomain.getCommandStack().execute(command);
 					ths_select_text.setData(null);
@@ -684,21 +672,7 @@ public class PassportEntryItemEditor extends PassportEntryEditorComposite {
 				if (PassportEntryItemEditor.this.userMayEdit) {
 					Label l = (Label) e.getSource();
 					l.setBackground(l.getParent().getBackground());
-					// open search dialog
-					IEclipseContext child = context.createChild("searchselect");
-					context.set(BTSConstants.OBJECT_TYPES_ARRAY, new String[]{BTSConstants.THS_ENTRY});
-					BTSObjectTypeSubtypeViewerFilter viewerFilter = passportConfigurationController.createObjectTypeSubtypeFilterByReferencedPath(corpusObject, itemConfig2);
-					context.set(BTSObjectTypeSubtypeViewerFilter.class, viewerFilter);
-					SearchSelectObjectDialog dialog = ContextInjectionFactory.make(SearchSelectObjectDialog.class, child);
-					if (dialog.open() == Dialog.OK) {
-						BTSObject object = dialog.getObject();
-						Command command = SetCommand.create(editingDomain,
-								entry, BtsCorpusModelPackage.eINSTANCE.getBTSPassportEntry_Value(),
-								object.get_id());
-						editingDomain.getCommandStack().execute(command);
-						ths_select_text.setText(object.getName());
-						ths_select_text.setData(object);
-					}
+					openThesaurusEntrySearchDialog(itemConfig2, entry);
 				}
 			}
 		});
@@ -737,15 +711,54 @@ public class PassportEntryItemEditor extends PassportEntryEditorComposite {
 				}
 			}
 		});
-
-
 	}
 
-	protected IContentProposalProvider getObjectProposalProvider(
-			BTSConfigItem configItem) {
+
+	/**
+	 * Creates a dialog that allows searching for thesaurus objects of the type/subtype that matches
+	 * the constraints defined in the configuration item passed as <code>configItem</config>.
+	 * 
+	 * @param configItem 
+	 * @param entry the owning {@link BTSPassportEntry} instance
+	 * @return the selected thesaurus object
+	 */
+	private BTSObject openThesaurusEntrySearchDialog(BTSConfigItem configItem, BTSPassportEntry entry) {
+		// spawn context node and configure for thesaurus search
+		IEclipseContext childContext = context.createChild("searchselect");
+		// limit to thesaurus entries
+		context.set(BTSConstants.OBJECT_TYPES_ARRAY,
+				new String[]{BTSConstants.THS_ENTRY});
+		// create type filter based on applicable configuration entry
+		context.set(BTSObjectTypeSubtypeViewerFilter.class,
+				passportConfigurationController.createObjectTypeSubtypeFilterByReferencedPath(
+						corpusObject,
+						configItem));
+		// create search dialog
+		SearchSelectObjectDialog dialog = ContextInjectionFactory.make(
+				SearchSelectObjectDialog.class,
+				childContext);
+		// open search dialog
+		if (dialog.open() == Dialog.OK) {
+			BTSObject object = dialog.getObject();
+			Command command = SetCommand.create(editingDomain,
+					entry,
+					BtsCorpusModelPackage.eINSTANCE.getBTSPassportEntry_Value(),
+					object.get_id());
+			editingDomain.getCommandStack().execute(command);
+			ths_select_text.setText(object.getName());
+			ths_select_text.setData(object);
+			return object;
+		}
+		return null;
+	}
+
+
+	protected IContentProposalProvider getObjectProposalProvider(BTSConfigItem configItem) {
 		if (thsItemProposalProvider == null) {
 			thsItemProposalProvider = new ObjectSelectionProposalProvider(
-					generalObjectController, configItem, corpusObject);
+					generalObjectController,
+					configItem,
+					corpusObject);
 		}
 		thsItemProposalProvider.setConfigItem(configItem);
 		return thsItemProposalProvider;
