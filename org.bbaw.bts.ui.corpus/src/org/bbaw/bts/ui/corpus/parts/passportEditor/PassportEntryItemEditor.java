@@ -421,39 +421,33 @@ public class PassportEntryItemEditor extends PassportEntryEditorComposite {
 		if (itemConfig.getPassportEditorConfig() != null) {
 
 			// first check and load standard widget types
-			if (BTSCoreConstants.WIDGET_TYPE_TEXT.equals(itemConfig
-					.getPassportEditorConfig().getWidgetType())) {
-				loadTextWidget(itemConfig, entry);
-			} else if (BTSCoreConstants.WIDGET_TYPE_TEXT_SUGGEST
-					.equals(itemConfig.getPassportEditorConfig()
-							.getWidgetType())) {
-				loadTextSuggestWidget(itemConfig, entry);
-			} else if (BTSCoreConstants.WIDGET_TYPE_TEXT_FIELD
-					.equals(itemConfig
-					.getPassportEditorConfig().getWidgetType())) {
-				loadTextFieldWidget(itemConfig, entry);
-			} else if (BTSCoreConstants.WIDGET_TYPE_SELECT_CONFIG
-					.equals(itemConfig.getPassportEditorConfig()
-							.getWidgetType())) {
-				loadSelectConfigWidget(itemConfig, entry);
-			} else if (BTSCoreConstants.WIDGET_TYPE_SELECT_INTEGER
-					.equals(itemConfig.getPassportEditorConfig()
-							.getWidgetType())) {
-				loadSelectIntegerWidget(itemConfig, entry);
-			} else if (BTSCoreConstants.WIDGET_TYPE_SELECT_THS
-					.equals(itemConfig
-					.getPassportEditorConfig().getWidgetType())) {
-				loadSelectTHSWidget(itemConfig, entry);
-			} else if (BTSCoreConstants.WIDGET_TYPE_BOOLEAN.equals(itemConfig
-					.getPassportEditorConfig().getWidgetType())) {
-				loadBooleanWidget(itemConfig, entry);
-			} else if (BTSCoreConstants.WIDGET_TYPE_DATE.equals(itemConfig
-					.getPassportEditorConfig().getWidgetType())) {
-				loadDateWidget(itemConfig, entry);
-			} else if (BTSCoreConstants.WIDGET_TYPE_REFERENCE_EXTERNAL
-					.equals(itemConfig
-					.getPassportEditorConfig().getWidgetType())) {
-				loadReferenceWidget(itemConfig, entry);
+			switch (itemConfig.getPassportEditorConfig().getWidgetType()) {
+				case BTSCoreConstants.WIDGET_TYPE_TEXT:
+					loadTextWidget(itemConfig, entry);
+					break;
+				case BTSCoreConstants.WIDGET_TYPE_TEXT_SUGGEST: 
+					loadTextSuggestWidget(itemConfig, entry);
+					break;
+				case BTSCoreConstants.WIDGET_TYPE_TEXT_FIELD:
+					loadTextFieldWidget(itemConfig, entry);
+					break;
+				case BTSCoreConstants.WIDGET_TYPE_SELECT_CONFIG:
+					loadSelectConfigWidget(itemConfig, entry);
+					break;
+				case BTSCoreConstants.WIDGET_TYPE_SELECT_INTEGER:
+					loadSelectIntegerWidget(itemConfig, entry);
+					break;
+				case BTSCoreConstants.WIDGET_TYPE_SELECT_THS:
+					loadSelectTHSWidget(itemConfig, entry);
+					break;
+				case BTSCoreConstants.WIDGET_TYPE_BOOLEAN:
+					loadBooleanWidget(itemConfig, entry);
+					break;
+				case BTSCoreConstants.WIDGET_TYPE_DATE:
+					loadDateWidget(itemConfig, entry);
+					break;
+				case BTSCoreConstants.WIDGET_TYPE_REFERENCE_EXTERNAL:
+					loadReferenceWidget(itemConfig, entry);
 			}
 
 			// TODO now check widget types from extension point
