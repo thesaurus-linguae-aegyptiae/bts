@@ -29,10 +29,7 @@ public class GeneralBTSObjectControllerImpl implements
 
 	@Inject
 	private BTSConfigurationController configurationController;
-	
-	@Inject
-	private BTSProjectService projectService;
-	
+
 	@Inject
 	private GeneralBTSObjectService objectService;
 
