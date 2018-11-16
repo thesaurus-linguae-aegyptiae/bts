@@ -126,6 +126,32 @@ public class BTSTokenizedTextSelection {
 		}
 	}
 
+
+
+	private void insertTextSelectionAtText(
+			List<BTSIdentifiableItem> copiedItems,
+			BTSText text,
+			int line,
+			int pos) throws Exception {
+		BTSTextContent textContent = text.getTextContent();
+
+		BTSSenctence sentence = null;
+		if (textContent.getTextItems().size() < 1) {
+			sentence = textEditorController.createSentence();
+			textContent.getTextItems().add(sentence);
+		} else {
+			if (textContent.getTextItems().get(0) instanceof BTSSenctence) {
+				sentence = (BTSSenctence) textContent.getTextItems().get(0);
+			} else {
+				throw new Exception("text content item is not a sentence!");
+			}
+		}
+
+		insertTextSelectionAtSentence(copiedItems, sentence, pos);
+
+	}
+
+
 	/**
 	 * insert a list of BTS editor text model elements at a specified sentence object
 	 */
