@@ -936,27 +936,42 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 	}
 
 
+	/**
+	 * creates a new {@link BTSTokenizedTextSelection} instance initialized with the given {@link BTSTextSelectionEvent},
+	 * and saves it for later.
+	 * @param textSelectionEvent
+	 */
 	private void copyTextWithLemmata(BTSTextSelectionEvent textSelectionEvent) {
 
-		this.tokenizedTextSelection = new BTSTokenizedTextSelection(textSelectionEvent,
+		this.tokenizedTextSelection = new BTSTokenizedTextSelection(
+				textSelectionEvent,
 				textEditorController);
 
 		// dont copy comments, annotations, rubra or any other relating object
-
 	}
 
 
+	/**
+	 * Takes a previously stored tokenized text selection (stored as a {@link BTSTokenizedTextSelection}) and
+	 * inserts it at the position where the cursor currently is.
+	 */
 	private void pasteTextWithLemmata() {
 		if (!tokenizedTextSelection.getSelectedItems().isEmpty()) {
 
-			cachedCursor = embeddedEditor.getViewer().getTextWidget().getCaretOffset();
-
-			final int len = tokenizedTextSelection.getCharacterCount();
+			final int cursorPosition = getTextWidget().getCaretOffset();
+			final int insertionLength = tokenizedTextSelection.getCharacterCount();
 
 			updateModelFromTranscription();
 
 			try {
-				tokenizedTextSelection.insertTextSelectionItems(selectedTextItem);
+
+				int lineNo = getTextWidget().getLineAtOffset(cursorPosition);
+				int inlineOffset = cursorPosition - getTextWidget().getOffsetAtLine(lineNo);
+
+				tokenizedTextSelection.insertTextSelectionItems(
+						selectedTextItem,
+						lineNo,
+						inlineOffset);
 				setDirtyInternal();
 			} catch (Exception e1) {
 				e1.printStackTrace();
