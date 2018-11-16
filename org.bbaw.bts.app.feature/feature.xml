@@ -12,6 +12,12 @@
 Change log
 ==========
 
+Release 3.2.2
+-------------
+
+   - Fix: rewrite tokenized copy/paste function in text editor part (08cf449, 5f99619, b19a374, 1ae177a)
+   - Fix: select-all feature in text editor, bind it to &lt;CTRL-A&gt; (537f8bb)
+
 Release 3.2.1
 -------------
 

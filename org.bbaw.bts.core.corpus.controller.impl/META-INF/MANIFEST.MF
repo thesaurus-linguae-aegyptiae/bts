@@ -12,7 +12,7 @@ Import-Package: javax.inject,
  org.bbaw.bts.commons,
  org.bbaw.bts.core.commons.corpus,
  org.bbaw.bts.core.corpus.controller.generalController,
- org.bbaw.bts.core.corpus.controller.partController;version="3.1.2",
+ org.bbaw.bts.core.corpus.controller.partController,
  org.bbaw.bts.core.corpus.controller.partController.text.model,
  org.bbaw.bts.core.dao.util,
  org.bbaw.bts.core.services,
@@ -68,4 +68,4 @@ Require-Bundle: org.eclipse.e4.core.di,
  org.bbaw.bts.corpus.text.egy.egydsl.ui;bundle-version="1.0.0",
  org.eclipse.xtext.ui;bundle-version="2.4.4"
 Bundle-ActivationPolicy: lazy
-Bundle-Version: 3.1.4.qualifier
+Bundle-Version: 3.2.2.qualifier
