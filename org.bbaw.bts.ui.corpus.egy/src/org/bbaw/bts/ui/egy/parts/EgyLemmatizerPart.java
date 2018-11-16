@@ -232,7 +232,6 @@ public class EgyLemmatizerPart implements SearchViewer {
 		((GridLayout) parent.getLayout()).marginWidth = 0;
 		if (partService != null) {
 			Collection<MPart> parts = partService.getParts();
-
 		}
 
 		Composite composite = new Composite(parent, SWT.NONE);
@@ -368,27 +367,7 @@ public class EgyLemmatizerPart implements SearchViewer {
 			@Override
 			public void mouseUp(MouseEvent e) {
 				if (userMayEdit || currentWord == null) {
-					lemmaViewer.getTree().setEnabled(true);
-					lblSearch
-							.setBackground(BTSUIConstants.VIEW_BACKGROUND_LABEL_PRESSED);
-
-					// run search command
-					Map<String, Object> map = new HashMap<String, Object>(1);
-					map.put("org.bbaw.bts.ui.main.commandparameter.viewerFilter",
-							"reviewState=new,reviewState=awaiting-review awaiting-update,"
-									+ "reviewState=reviewed,"
-									+ "reviewState=published,reviewState=published-awaiting-review,"
-									+ "reviewState=transformed_awaiting_update");
-					map.put("org.bbaw.bts.ui.main.commandparameter.searchOptions", OPT_NAME_ONLY);
-					String chars = textSelectedWord.getText().replaceAll(",", ".");
-					if (chars != null)
-					{
-						map.put("org.bbaw.bts.ui.main.commandparameter.searchString", chars);
-					}
-					ParameterizedCommand cmd = commandService.createCommand(
-							"org.bbaw.bts.ui.main.command.search", map);
-
-					handlerService.executeHandler(cmd);
+					invokeOpenSearchDialogCommand();
 				}
 			}
 		});
@@ -717,6 +696,34 @@ public class EgyLemmatizerPart implements SearchViewer {
 			setSelection((BTSText) selection);
 		}
 	}
+
+
+
+
+	private void invokeOpenSearchDialogCommand() {
+		lemmaViewer.getTree().setEnabled(true);
+		lblSearch
+				.setBackground(BTSUIConstants.VIEW_BACKGROUND_LABEL_PRESSED);
+
+		// run search command
+		Map<String, Object> map = new HashMap<String, Object>(1);
+		map.put("org.bbaw.bts.ui.main.commandparameter.viewerFilter",
+				"reviewState=new,reviewState=awaiting-review awaiting-update,"
+						+ "reviewState=reviewed,"
+						+ "reviewState=published,reviewState=published-awaiting-review,"
+						+ "reviewState=transformed_awaiting_update");
+		String chars = textSelectedWord.getText().replaceAll(",", ".");
+		if (chars != null)
+		{
+			map.put("org.bbaw.bts.ui.main.commandparameter.searchString", chars);
+		}
+		ParameterizedCommand cmd = commandService.createCommand(
+				"org.bbaw.bts.ui.main.command.search", map);
+
+		handlerService.executeHandler(cmd);
+	}
+
+
 
 	protected void loadChildren(final TreeNodeWrapper node, boolean b, String prefix) {
 		List<BTSLemmaEntry> children = lemmaNavigatorController
@@ -1235,9 +1242,6 @@ public class EgyLemmatizerPart implements SearchViewer {
 	@Override
 	public void search(final BTSQueryRequest query, String queryName,
 			String viewerFilterString) {
-		// create root for lemma tree view
-		final TreeNodeWrapper lemmaRootNode = BtsviewmodelFactory.eINSTANCE
-				.createTreeNodeWrapper();
 
 		// cancel possibly running search
 		if (searchjob != null) {
@@ -1245,20 +1249,25 @@ public class EgyLemmatizerPart implements SearchViewer {
 			searchjob = null;
 		}
 
+		// if this call came from an external handler ('Lupensuche'), don't bother to do anything at all and just
+		// emulate auto search (lemma transliteration content assist) behaviour.
 		if (query.getType() != BTSQueryType.LEMMA) {
 			if (!query.isIdQuery() 
 					&& query.getAutocompletePrefix() != null) {
 				if (!query.isWildcardQuery()) {
-					if (query.getRequestFields().size() == 1 && query.getRequestFields().contains("name")) {
-						searchAuto(query.getSearchString().replaceAll("\\.", ","));
-						return;
-					}
+					searchAuto(query.getSearchString().replaceAll("\\.", ","));
+					return;
 				}
 			}
 		}
 
 		// try to load lemma that has already be assigned to the word currently selected in text editor
-		final String assignedLemmaId = currentWord.getLKey();
+		final String assignedLemmaId = (currentWord != null) ? currentWord.getLKey() : null;
+
+
+		// create root for lemma tree view
+		final TreeNodeWrapper lemmaRootNode = BtsviewmodelFactory.eINSTANCE
+				.createTreeNodeWrapper();
 
 		// fill lemmaViewer
 		searchjob = new Job("load input") {

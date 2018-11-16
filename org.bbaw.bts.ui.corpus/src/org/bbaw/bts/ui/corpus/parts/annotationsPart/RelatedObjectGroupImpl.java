@@ -9,8 +9,7 @@ import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.swt.widgets.Composite;
 
 public class RelatedObjectGroupImpl extends RelatedObjectGroup {
-	
-	// XXX what??? warum haben wir das?
+
 
 	@Inject
 	public RelatedObjectGroupImpl(Composite parent, BTSObject object) {
@@ -25,8 +24,8 @@ public class RelatedObjectGroupImpl extends RelatedObjectGroup {
 
 	@Override
 	protected void fillContentComposite(Composite composite) {
-		// TODO Auto-generated method stub
-		
+		setGroupTitle(getObject().getType());
+		setExpandItemTitle(getObject().getName());
 	}
 
 	@Override

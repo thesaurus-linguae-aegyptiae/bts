@@ -61,15 +61,14 @@ public class BTSLemmaEntryDaoImpl extends AbstractCorpusObjectDaoImpl<BTSLemmaEn
 	}
 
 	private List<BTSLemmaEntry> listRootEntriesFromStream(String dbPath, String objectState) {
-		int lemmaListSize = 50000;
 		InputStream is = loadViewIntoInputStream(DaoConstants.VIEW_LEMMA_ROOT_ENTRIES, dbPath, "lemma");
 		List<BTSLemmaEntry> results; 
 		try {
 	        BufferedReader reader = new BufferedReader(new InputStreamReader(
-	                is, "UTF-8"), lemmaListSize);
+	                is, "UTF-8"));
 	        String line = null;
 	        Map<URI, Resource> cache = getObjectCache();
-	        results = new Vector<BTSLemmaEntry>(lemmaListSize);
+	        results = new Vector<BTSLemmaEntry>();
 	        BTSLemmaEntry entry;
 	        // ignore the first line containing metadata
 	        line = reader.readLine();

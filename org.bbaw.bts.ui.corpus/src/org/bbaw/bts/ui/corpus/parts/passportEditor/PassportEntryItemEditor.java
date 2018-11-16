@@ -8,21 +8,19 @@ import javax.inject.Named;
 
 import org.bbaw.bts.btsmodel.BTSConfigItem;
 import org.bbaw.bts.btsmodel.BTSObject;
-import org.bbaw.bts.btsmodel.BtsmodelFactory;
-import org.bbaw.bts.btsmodel.BtsmodelPackage;
 import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.core.commons.BTSCoreConstants;
-import org.bbaw.bts.core.controller.generalController.BTSConfigurationController;
 import org.bbaw.bts.core.controller.generalController.GeneralBTSObjectController;
 import org.bbaw.bts.core.controller.generalController.PermissionsAndExpressionsEvaluationController;
 import org.bbaw.bts.core.corpus.controller.generalController.PassportConfigurationController;
 import org.bbaw.bts.core.corpus.controller.partController.PassportEditorPartController;
 import org.bbaw.bts.core.corpus.controller.partController.ThsNavigatorController;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
-import org.bbaw.bts.corpus.btsCorpusModel.BTSPassport;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSPassportEntry;
 import org.bbaw.bts.corpus.btsCorpusModel.BtsCorpusModelFactory;
 import org.bbaw.bts.corpus.btsCorpusModel.BtsCorpusModelPackage;
+import org.bbaw.bts.corpus.btsCorpusModel.provider.BTSCorpusObjectItemProvider;
+import org.bbaw.bts.corpus.btsCorpusModel.provider.BtsCorpusModelItemProviderAdapterFactory;
 import org.bbaw.bts.ui.commons.controldecoration.BackgroundControlDecorationSupport;
 import org.bbaw.bts.ui.commons.converter.BTSBooleanToStringConverter;
 import org.bbaw.bts.ui.commons.converter.BTSConfigItemToStringConverter;
@@ -64,6 +62,7 @@ import org.eclipse.jface.bindings.keys.KeyStroke;
 import org.eclipse.jface.bindings.keys.ParseException;
 import org.eclipse.jface.databinding.swt.WidgetProperties;
 import org.eclipse.jface.databinding.viewers.ViewersObservables;
+import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.fieldassist.ContentProposalAdapter;
 import org.eclipse.jface.fieldassist.ControlDecoration;
 import org.eclipse.jface.fieldassist.FieldDecorationRegistry;
@@ -75,18 +74,14 @@ import org.eclipse.jface.viewers.ComboViewer;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.FocusAdapter;
 import org.eclipse.swt.events.FocusEvent;
-import org.eclipse.swt.events.FocusListener;
 import org.eclipse.swt.events.KeyAdapter;
 import org.eclipse.swt.events.KeyEvent;
-import org.eclipse.swt.events.KeyListener;
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.events.MouseAdapter;
 import org.eclipse.swt.events.MouseEvent;
-import org.eclipse.swt.events.MouseWheelListener;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
@@ -96,7 +91,6 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
-import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Spinner;
 import org.eclipse.swt.widgets.Text;
@@ -107,8 +101,6 @@ public class PassportEntryItemEditor extends PassportEntryEditorComposite {
 	private BTSConfigItem itemConfig;
 	@Inject
 	private IEclipseContext context;
-	@Inject
-	private BTSPassport passport;
 	@Inject
 	private EditingDomain editingDomain;
 	@Inject
@@ -134,18 +126,23 @@ public class PassportEntryItemEditor extends PassportEntryEditorComposite {
 
 	private IContentProposalProvider itemProposalProvider;
 	private boolean makingProposalProvider;
+
 	@Inject
 	private BTSResourceProvider resourceProvider;
+
 	@Inject
 	@Optional
 	@Preference(value = "locale_lang", nodePath = "org.bbaw.bts.app")
 	private String lang;
+
 	@Inject
 	private BTSCorpusObject corpusObject;
+
 	private Text ths_select_text;
 	
 	@Inject
 	private ThsNavigatorController thsNavigatorController;
+
 	private ObjectSelectionProposalProvider thsItemProposalProvider;
 	private Text textField;
 	private Button checkBox;
@@ -153,6 +150,7 @@ public class PassportEntryItemEditor extends PassportEntryEditorComposite {
 	private Text textSuggest;
 	private Combo combo;
 	private Text text;
+
 	@Inject
 	private PassportConfigurationController passportConfigurationController;
 	
@@ -168,6 +166,7 @@ public class PassportEntryItemEditor extends PassportEntryEditorComposite {
 	public PassportEntryItemEditor(PassportEntryEditorComposite parent) {
 		super(parent, SWT.NONE);
 	}
+
 	@PostConstruct
 	public void postConstruct() {
 		int hwidth = BTSUIConstants.PASSPORT_COLUMN_NUMBER;
@@ -327,6 +326,7 @@ public class PassportEntryItemEditor extends PassportEntryEditorComposite {
 		// }
 	}
 
+	@SuppressWarnings("restriction")
 	private void setButtonImage(Label button, BTSConfigItem ic, boolean isAdd) {
 		if (BTSCoreConstants.WIDGET_TYPE_TEXT.equals(ic
 				.getPassportEditorConfig()
@@ -564,6 +564,18 @@ public class PassportEntryItemEditor extends PassportEntryEditorComposite {
 
 	}
 
+
+	private void linkContentassistResultToTextField(BTSPassportEntry entry) {
+		BTSObject object = null;
+		if (entry.getValue() != null) {
+			object = thsNavigatorController.find(entry.getValue(), null);
+			ths_select_text.setData(object);
+		}
+		if (object != null) {
+			ths_select_text.setText(object.getName());
+		}
+	}
+
 	private void loadSelectTHSWidget(final BTSConfigItem itemConfig2,
 			final BTSPassportEntry entry) {
 		Label label = new Label(this, SWT.NONE);
@@ -576,74 +588,58 @@ public class PassportEntryItemEditor extends PassportEntryEditorComposite {
 		ths_select_text = new Text(this, SWT.BORDER | SWT.READ_ONLY);
 		ths_select_text.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 		final char[] autoActivationCharacters = new char[] { '.', '#' };
-		ths_select_text.addFocusListener(new FocusAdapter() {
 
-			@Override
-			public void focusGained(FocusEvent e) {
-				if (PassportEntryItemEditor.this.userMayEdit)
-				{
-				try {
-					KeyStroke keyStroke = KeyStroke.getInstance("Ctrl+Space");
-					ContentProposalAdapter adapter = new ContentProposalAdapter(
-							ths_select_text, new TextContentAdapter(),
-							getObjectProposalProvider(itemConfig), keyStroke,
-							autoActivationCharacters);
-					adapter.setProposalAcceptanceStyle(ContentProposalAdapter.PROPOSAL_REPLACE);
-					adapter.addContentProposalListener(new IContentProposalListener() {
+		try {
+			ContentProposalAdapter adapter = new ContentProposalAdapter(
+					ths_select_text,
+					new TextContentAdapter(),
+					getObjectProposalProvider(itemConfig),
+					KeyStroke.getInstance("Ctrl+Space"),
+					autoActivationCharacters);
+			adapter.setProposalAcceptanceStyle(ContentProposalAdapter.PROPOSAL_REPLACE);
+			adapter.addContentProposalListener(new IContentProposalListener() {
+				@Override
+				public void proposalAccepted(IContentProposal proposal) {
+					Command command = SetCommand.create(
+							editingDomain,
+							entry,
+							BtsCorpusModelPackage.eINSTANCE.getBTSPassportEntry_Value(),
+							proposal.getContent());
+					editingDomain.getCommandStack().execute(
+							command);
+					entry.setValue(proposal.getContent());
+					linkContentassistResultToTextField(entry);
+				}
+			});
+		} catch (ParseException e1) {
+			e1.printStackTrace();
+		}
 
-						@Override
-						public void proposalAccepted(IContentProposal proposal) {
-							System.out.println(proposal);
-							Command command = SetCommand.create(
-									editingDomain,
-									entry, BtsCorpusModelPackage.eINSTANCE.getBTSPassportEntry_Value(),
-									proposal.getContent());
-							editingDomain.getCommandStack().execute(
-									command);
-							entry.setValue(proposal.getContent());
-						}
-					});
-				} catch (ParseException e1) {
-					e1.printStackTrace();
-				}
-				}
-			}
-		});
-		BTSObject object = null;
-		if (entry.getValue() != null) {
-			object = thsNavigatorController.find(entry.getValue(), null);
-			ths_select_text.setData(object);
-		}
-		if (object != null) {
-			ths_select_text.setText(object.getName());
-		}
-		
+		linkContentassistResultToTextField(entry);
+
 		ths_select_text.addKeyListener(new KeyAdapter() {
-
 			@Override
 			public void keyReleased(KeyEvent e) {
-				if(e.keyCode == SWT.CR || e.keyCode == SWT.KEYPAD_CR){
+				// CTRL+F
+				if (((e.stateMask & SWT.CTRL) == SWT.CTRL) && (e.keyCode == 102)){
 					// open search dialog
 					IEclipseContext child = context.createChild("searchselect");
-
 					context.set(BTSConstants.OBJECT_TYPES_ARRAY, new String[]{BTSConstants.THS_ENTRY});
 					BTSObjectTypeSubtypeViewerFilter viewerFilter = passportConfigurationController.createObjectTypeSubtypeFilterByReferencedPath(corpusObject, itemConfig2);
 					context.set(BTSObjectTypeSubtypeViewerFilter.class, viewerFilter);
+
 					SearchSelectObjectDialog dialog = ContextInjectionFactory.make(
 							SearchSelectObjectDialog.class, child);
-					if (dialog.open() == dialog.OK) {
+					if (dialog.open() == Dialog.OK) {
 						BTSObject object = dialog.getObject();
-						System.out.println(object.get_id());
 						Command command = SetCommand.create(editingDomain,
 								entry, BtsCorpusModelPackage.eINSTANCE.getBTSPassportEntry_Value(),
 								object.get_id());
 						editingDomain.getCommandStack().execute(command);
 						ths_select_text.setText(object.getName());
 						ths_select_text.setData(object);
-
 					}
-			    } else if (e.keyCode == SWT.BS)
-			    {
+			    } else if (e.keyCode == SWT.BS) {
 			    	Command command = SetCommand.create(editingDomain,
 							entry, BtsCorpusModelPackage.eINSTANCE.getBTSPassportEntry_Value(),
 							null);
@@ -655,18 +651,16 @@ public class PassportEntryItemEditor extends PassportEntryEditorComposite {
 		});
 		
 		ths_select_text.addModifyListener(new ModifyListener() {
-			
+
 			@Override
 			public void modifyText(ModifyEvent e) {
-				if (ths_select_text.getText().trim().length() == 0)
-				{
+				if (ths_select_text.getText().trim().length() == 0) {
 					Command command = SetCommand.create(editingDomain,
 							entry, BtsCorpusModelPackage.eINSTANCE.getBTSPassportEntry_Value(),
 							null);
 					editingDomain.getCommandStack().execute(command);
 					ths_select_text.setData(null);
 				}
-				
 			}
 		});
 
@@ -678,44 +672,37 @@ public class PassportEntryItemEditor extends PassportEntryEditorComposite {
 				1, 1));
 		((GridData) lblSearch.getLayoutData()).verticalIndent = 3;
 		lblSearch.addMouseListener(new MouseAdapter() {
-
 			@Override
 			public void mouseDown(MouseEvent e) {
-				if (PassportEntryItemEditor.this.userMayEdit)
-				{
-				Label l = (Label) e.getSource();
-				l.setBackground(BTSUIConstants.VIEW_BACKGROUND_LABEL_PRESSED);
+				if (PassportEntryItemEditor.this.userMayEdit) {
+					Label l = (Label) e.getSource();
+					l.setBackground(BTSUIConstants.VIEW_BACKGROUND_LABEL_PRESSED);
 				}
 			}
-
 			@Override
 			public void mouseUp(MouseEvent e) {
-				if (PassportEntryItemEditor.this.userMayEdit)
-				{
-				Label l = (Label) e.getSource();
-				l.setBackground(l.getParent().getBackground());
-				// open search dialog
-				IEclipseContext child = context.createChild("searchselect");
-				context.set(BTSConstants.OBJECT_TYPES_ARRAY, new String[]{BTSConstants.THS_ENTRY});
-				BTSObjectTypeSubtypeViewerFilter viewerFilter = passportConfigurationController.createObjectTypeSubtypeFilterByReferencedPath(corpusObject, itemConfig2);
-				context.set(BTSObjectTypeSubtypeViewerFilter.class, viewerFilter);
-				SearchSelectObjectDialog dialog = ContextInjectionFactory.make(
-						SearchSelectObjectDialog.class, child);
-				if (dialog.open() == dialog.OK) {
-					BTSObject object = dialog.getObject();
-					System.out.println(object.get_id());
-					Command command = SetCommand.create(editingDomain,
-							entry, BtsCorpusModelPackage.eINSTANCE.getBTSPassportEntry_Value(),
-							object.get_id());
-					editingDomain.getCommandStack().execute(command);
-					ths_select_text.setText(object.getName());
-					ths_select_text.setData(object);
-
-				}
+				if (PassportEntryItemEditor.this.userMayEdit) {
+					Label l = (Label) e.getSource();
+					l.setBackground(l.getParent().getBackground());
+					// open search dialog
+					IEclipseContext child = context.createChild("searchselect");
+					context.set(BTSConstants.OBJECT_TYPES_ARRAY, new String[]{BTSConstants.THS_ENTRY});
+					BTSObjectTypeSubtypeViewerFilter viewerFilter = passportConfigurationController.createObjectTypeSubtypeFilterByReferencedPath(corpusObject, itemConfig2);
+					context.set(BTSObjectTypeSubtypeViewerFilter.class, viewerFilter);
+					SearchSelectObjectDialog dialog = ContextInjectionFactory.make(SearchSelectObjectDialog.class, child);
+					if (dialog.open() == Dialog.OK) {
+						BTSObject object = dialog.getObject();
+						Command command = SetCommand.create(editingDomain,
+								entry, BtsCorpusModelPackage.eINSTANCE.getBTSPassportEntry_Value(),
+								object.get_id());
+						editingDomain.getCommandStack().execute(command);
+						ths_select_text.setText(object.getName());
+						ths_select_text.setData(object);
+					}
 				}
 			}
 		});
-		
+
 		Label lblPassportDialog = new Label(this, SWT.NONE);
 		lblPassportDialog.setImage(resourceProvider.getImage(Display.getDefault(),
 				BTSResourceProvider.IMG_PASSPORT));
@@ -726,23 +713,17 @@ public class PassportEntryItemEditor extends PassportEntryEditorComposite {
 		((GridData) lblPassportDialog.getLayoutData()).horizontalIndent = 3;
 
 		lblPassportDialog.addMouseListener(new MouseAdapter() {
-
 			@Override
 			public void mouseDown(MouseEvent e) {
-				
-				Label l = (Label) e.getSource();
-					l.setBackground(BTSUIConstants.VIEW_BACKGROUND_LABEL_PRESSED);
+				 ((Label) e.getSource()).setBackground(BTSUIConstants.VIEW_BACKGROUND_LABEL_PRESSED);
 			}
-
 			@Override
 			public void mouseUp(MouseEvent e) {
-				
-				Label l = (Label) e.getSource();
+				Label l = ((Label) e.getSource());
 				l.setBackground(l.getParent().getBackground());
 				// open search dialog
 				Object o = ths_select_text.getData();
-				if (o != null && o instanceof BTSObject)
-				{
+				if (o != null && o instanceof BTSObject) {
 					BTSObject btso = (BTSObject) o;
 					IEclipseContext child = context.createChild();
 					child.set(BTSObject.class, btso);
@@ -751,14 +732,9 @@ public class PassportEntryItemEditor extends PassportEntryEditorComposite {
 							permissionController.userMayEditObject(
 									permissionController.getAuthenticatedUser(), 
 									btso));
-					
-					PassportEditorDialog dialog = ContextInjectionFactory.make(
-							PassportEditorDialog.class, child);
-					if (dialog.open() == dialog.OK) {
-						
-					}
+					PassportEditorDialog dialog = ContextInjectionFactory.make(PassportEditorDialog.class, child);
+					dialog.open();
 				}
-				
 			}
 		});
 

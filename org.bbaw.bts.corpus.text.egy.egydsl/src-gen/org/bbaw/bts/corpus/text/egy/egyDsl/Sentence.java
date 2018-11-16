@@ -11,10 +11,10 @@ import org.eclipse.emf.common.util.EList;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.bbaw.bts.corpus.text.egy.egyDsl.Sentence#getItems <em>Items</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.bbaw.bts.corpus.text.egy.egyDsl.EgyDslPackage#getSentence()
  * @model

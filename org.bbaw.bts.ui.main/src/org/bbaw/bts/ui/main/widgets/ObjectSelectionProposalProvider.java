@@ -8,6 +8,7 @@ import java.util.Vector;
 import org.bbaw.bts.btsmodel.BTSConfig;
 import org.bbaw.bts.btsmodel.BTSConfigItem;
 import org.bbaw.bts.btsmodel.BTSObject;
+import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.core.controller.generalController.GeneralBTSObjectController;
 import org.eclipse.jface.fieldassist.ContentProposal;
 import org.eclipse.jface.fieldassist.IContentProposal;
@@ -16,7 +17,7 @@ import org.eclipse.jface.fieldassist.IContentProposalProvider;
 public class ObjectSelectionProposalProvider implements
 		IContentProposalProvider {
 
-	private GeneralBTSObjectController gernalObjectController;
+	private GeneralBTSObjectController generalObjectController;
 	private BTSConfig configItem;
 	private List<BTSObject> list;
 	private Comparator<IContentProposal> comparator;
@@ -26,7 +27,7 @@ public class ObjectSelectionProposalProvider implements
 			GeneralBTSObjectController passportEditorController,
 			BTSConfig configItem,
 			BTSObject object) {
-		this.gernalObjectController = passportEditorController;
+		this.generalObjectController = passportEditorController;
 		this.setConfigItem(configItem);
 		this.object = object;
 	}
@@ -38,12 +39,25 @@ public class ObjectSelectionProposalProvider implements
 		}
 
 		List<ContentProposal> partialList = new Vector<ContentProposal>();
+		// produce content assist proposal labels
 		if (list != null && !list.isEmpty()) {
 			for (BTSObject o : list) {
-				if (o.getName() != null && o.getName().startsWith(contents)
-						|| o.get_id().equals(contents)) {
-					String desc = o.getName() + "\n" + o.get_id() + "\n" + o.getDBCollectionKey();
-					ContentProposal p = new ContentProposal(o.get_id(), o.getName(), desc);
+				if (o.getName() != null) {
+					String label = o.getName();
+					String description = o.getName();
+					description += "\n\n" + o.get_id();
+					description += "\nLocation: " + o.getDBCollectionKey();
+					if (o.getType() != null) {
+						label += " (" + o.getType() + ")";
+						description += "\nType: " + o.getType();
+					}
+					if (!o.getRevisionState().equals(BTSConstants.OBJECT_REVISION_STATE_PUBLISHED)) {
+						label += " (‼)";
+						description += "\n\n(‼) - revision state is " + o.getRevisionState();
+					}
+					//⚠
+					
+					ContentProposal p = new ContentProposal(o.get_id(), label, description);
 					partialList.add(p);
 				}
 			}
@@ -74,7 +88,7 @@ public class ObjectSelectionProposalProvider implements
 
 	private List<BTSObject> loadList(final String contents) {
 
-		return gernalObjectController.getObjectProposalsFor(
+		return generalObjectController.getObjectProposalsFor(
 				(BTSConfigItem) configItem, contents, object, null);
 
 	}

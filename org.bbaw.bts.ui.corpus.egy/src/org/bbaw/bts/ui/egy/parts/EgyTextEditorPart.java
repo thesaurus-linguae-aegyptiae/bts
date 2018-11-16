@@ -455,7 +455,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 		
 		if (parentShell == null)
 		{
-			parentShell = new Shell();
+			parentShell = Display.getDefault().getActiveShell();
 		}
 		this.parent = parent;
 		parent.setLayout(new GridLayout());
@@ -565,7 +565,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 									}});
 							}
 						};
-						new ProgressMonitorDialog(new Shell()).run(true, true, op);
+						new ProgressMonitorDialog(Display.getDefault().getActiveShell()).run(true, true, op);
 					} catch (InvocationTargetException ee) {
 						// handle exception
 					} catch (InterruptedException ee) {
@@ -619,6 +619,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 					embeddedEditorFactory = injector
 							.getInstance(EmbeddedEditorFactory.class);
 
+
 					// XXX
 					// https://www.eclipse.org/forums/index.php/t/1067356/
 					embeddedEditor = embeddedEditorFactory
@@ -660,6 +661,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 					oruler = EmbeddedEditorFactory.getOverViewRuler();
 
 					configureEditorDrawingStrategies(oruler);
+
 					if (show_line_number_ruler)
 					{
 						lineNumberRulerColumn = new EgyLineNumberRulerColumn(LINE_SPACE);
@@ -783,12 +785,11 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 							} else
 							{
 								MenuItem itemCollectionFolder = new MenuItem((Menu) menu, SWT.NONE);
-					            itemCollectionFolder.setText("Correct Errors before Copy/Paste!" );
-					            
+								itemCollectionFolder.setText("Correct Errors before Copy/Paste!" );
 							}
-							
+
 						}
-						
+
 						@Override
 						public void menuHidden(MenuEvent e) {
 							// TODO Auto-generated method stub
@@ -924,38 +925,43 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 
 			// update
 			try {
-				// load updated model into selected editor
+				// prepare job
 				IRunnableWithProgress op = new IRunnableWithProgress() {
-
 					@Override
 					public void run(final IProgressMonitor monitor)
 							throws InvocationTargetException,
 							InterruptedException {
 						sync.asyncExec(new Runnable() {
 							public void run() {
-								loadInputTranscription(text,
-										relatingObjects, monitor);
+								loadInputTranscription(
+										text,
+										relatingObjects,
+										monitor);
 								try {
 									embeddedEditor
 											.getViewer()
 											.getTextWidget()
-											.setCaretOffset(
-													cachedCursor);
+											.setCaretOffset(cachedCursor);
 									embeddedEditor.getViewer().revealRange(cachedCursor, len);
 								} catch (Exception e) {
 								}
 							}
-
 						});
 					}
 				};
-				new ProgressMonitorDialog(new Shell()).run(true, true,
-						op);
+				// load updated model into selected editor
+				new ProgressMonitorDialog(
+						Display.getDefault().getActiveShell()
+						).run(
+								true,
+								true,
+								op);
 			} catch (InvocationTargetException ee) {
-				// handle exception
+				// TODO handle exception
 			} catch (InterruptedException ee) {
-				// handle cancelation
+				// TODO handle cancellation
 			}
+
 		}
 
 	}
@@ -996,7 +1002,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 			boolean valid = checkResourceErrors(resource);
 			if (!valid)
 			{
-				if (shell == null) shell = new Shell();
+				if (shell == null) shell = Display.getDefault().getActiveShell();
 				MessageDialog dialog = new MessageDialog(shell, "Errors in Text - Possible Data Loss", null,
 					    "You are trying to save a text which contains errors, saving this text may lead to loss of data."
 					    + "\n\nIt is not recommended to save a text which contains errors!"
@@ -1614,19 +1620,14 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 					list.add((BTSModelAnnotation) a);
 
 					// nur sentenceitems oder alles?
-//					if (((BTSModelAnnotation) a).getModel() instanceof BTSSentenceItem) {
-//						BTSSentenceItem item = (BTSSentenceItem) ((BTSModelAnnotation) a)
-//								.getModel();
-//						textItems.add(item);
-//						
-//					}
+					/*if (((BTSModelAnnotation) a).getModel() instanceof BTSSentenceItem) {
+						BTSSentenceItem item = (BTSSentenceItem) ((BTSModelAnnotation) a)
+								.getModel();
+						textItems.add(item);
+						
+					}*/
 
 				}
-				// else if (pos.getOffset() >= start && pos.getOffset() <= end)
-				// {
-				// annotations.add((ModelAnnotation) a);
-				//
-				// }
 			}
 		}
 		
@@ -2260,7 +2261,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 								
 						}
 					};
-					new ProgressMonitorDialog(new Shell()).run(true, true, op);
+					new ProgressMonitorDialog(Display.getDefault().getActiveShell()).run(true, true, op);
 				} catch (InvocationTargetException e) {
 					// handle exception
 				} catch (InterruptedException e) {
@@ -2792,7 +2793,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 								});
 							}
 						};
-						new ProgressMonitorDialog(new Shell()).run(true, true,
+						new ProgressMonitorDialog(Display.getDefault().getActiveShell()).run(true, true,
 								op);
 					} catch (InvocationTargetException ee) {
 						// handle exception
