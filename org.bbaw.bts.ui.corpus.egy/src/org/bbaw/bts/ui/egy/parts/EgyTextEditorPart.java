@@ -160,6 +160,7 @@ import org.eclipse.swt.custom.CaretListener;
 import org.eclipse.swt.custom.SashForm;
 import org.eclipse.swt.custom.ScrolledComposite;
 import org.eclipse.swt.custom.StyleRange;
+import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.events.DisposeEvent;
 import org.eclipse.swt.events.DisposeListener;
 import org.eclipse.swt.events.MenuEvent;
@@ -214,7 +215,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 			ruler.update();
 			ruler.relayout();
 			oruler.update();
-			embeddedEditor.getViewer().getTextWidget().redraw();
+			getTextWidget().redraw();
 		}
 	}
 
@@ -328,7 +329,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 	private StyleRange selectionRange;
 
 	/** The selected text item. */
-	protected Object selectedTextItem;
+	protected BTSIdentifiableItem selectedTextItem;
 
 	/** The pre selection ranges. */
 	private StyleRange[] preSelectionRanges;
@@ -449,7 +450,6 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 	 *
 	 * @param parent the parent
 	 */
-	@SuppressWarnings("restriction")
 	@PostConstruct
 	public void postConstruct(Composite parent) {
 		
@@ -492,7 +492,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 						// update model from old selection editor
 						switch (oldSelection) {
 						case 0: {
-							cachedCursor = embeddedEditor.getViewer().getTextWidget().getCaretOffset();
+							cachedCursor = getTextWidget().getCaretOffset();
 							canSwitch = updateModelFromTranscription();
 							break;
 						}
@@ -536,8 +536,8 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 										{
 											Position pos = annotationModel.getPosition(an);
 											try {
-												embeddedEditor.getViewer().getTextWidget().setCaretOffset(pos.getOffset());
-												embeddedEditor.getViewer().revealRange(pos.getOffset(), pos.getLength());
+												getTextWidget().setCaretOffset(pos.getOffset());
+												getViewer().revealRange(pos.getOffset(), pos.getLength());
 											} catch (Exception e) {
 											}
 										}
@@ -545,7 +545,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 									else
 									{
 										try {
-											embeddedEditor.getViewer().getTextWidget().setCaretOffset(cachedCursor);
+											getViewer().getTextWidget().setCaretOffset(cachedCursor);
 										} catch (Exception e) {
 										}
 									}
@@ -631,7 +631,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 
 					embeddedEditorModelAccess = embeddedEditor
 							.createPartialEditor("", "§§", "", false);
-					embeddedEditor.getViewer().getTextWidget()
+					getTextWidget()
 							.setLineSpacing(LINE_SPACE);
 
 
@@ -654,7 +654,8 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 							return true;
 						}
 					};
-					painter = new AnnotationPainter(embeddedEditor.getViewer(),
+					painter = new AnnotationPainter(
+							getViewer(),
 							annotationAccess);
 
 					ruler = EmbeddedEditorFactory.getCpAnnotationRuler();
@@ -666,56 +667,24 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 					{
 						lineNumberRulerColumn = new EgyLineNumberRulerColumn(LINE_SPACE);
 						//lineNumberRulerColumn.setModel(annotationModel); // does nothing
-						embeddedEditor.getViewer()
+						getViewer()
 								.addVerticalRulerColumn(lineNumberRulerColumn);
 					}
 
-					embeddedEditor.getViewer().addTextPresentationListener(painter);
-					embeddedEditor.getViewer().addPainter(painter);
+					getViewer().addTextPresentationListener(painter);
+					getViewer().addPainter(painter);
 
 					embeddedEditorParentComp.layout();
 
-					context.set(XtextSourceViewer.class, embeddedEditor.getViewer());
+					context.set(XtextSourceViewer.class, getViewer());
 					BTSE4ToGuiceXtextSourceViewerProvider.setContext(context);
 
-					embeddedEditor.getViewer().getTextWidget()
-							.addCaretListener(new CaretListener() {
+					// add listener to text editor widget's caret
+					getTextWidget().addCaretListener(
+							textEditorWidgetCaretListener());
 
-								@Override
-								public void caretMoved(CaretEvent event) {
-									setUserMayEditInteral(permissionsController.userMayEditObject(
-											permissionsController.getAuthenticatedUser(), 
-											EgyTextEditorPart.this.text));
-									processTextSelection(event);
-									// get char right of caret and show utf-8
-									// code in status line
-									if (event.caretOffset < embeddedEditor
-											.getViewer().getTextWidget()
-											.getText().length()) {
-										String sign = embeddedEditor
-												.getViewer()
-												.getTextWidget()
-												.getText(event.caretOffset,
-														event.caretOffset);
-										if (sign != null && !"".equals(sign)) {
-											int lineIndex = embeddedEditor
-													.getViewer()
-													.getTextWidget()
-													.getLineAtOffset(
-															event.caretOffset);
-											int offset = event.caretOffset
-													- embeddedEditor
-															.getViewer()
-															.getTextWidget()
-															.getOffsetAtLine(
-																	lineIndex);
-											showCurrentSignUnicode(sign,
-													lineIndex, offset);
-										}
-									}
-								}
-							});
-					embeddedEditor.getViewer().getTextWidget()
+					// add listener for text range selection event
+					getTextWidget()
 							.addSelectionListener(new SelectionListener() {
 
 								@Override
@@ -750,52 +719,10 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 
 								}
 							});
-					final Menu menu = embeddedEditor.getViewer().getTextWidget().getMenu();
-					menu.addMenuListener(new MenuListener() {
-						
-						@Override
-						public void menuShown(MenuEvent e) {
-							
-							
-							if (checkTransliterationHasNoErrors(text)) {
-								if (!btsTextEvent.getSelectedItems().isEmpty()) {
-									MenuItem itemCopy = new MenuItem((Menu) menu, SWT.NONE);
-						            itemCopy.setText("Copy with Lemmata" );
-						            itemCopy.addSelectionListener(new SelectionAdapter() {
-									
-										@Override
-										public void widgetSelected(SelectionEvent e) {
-											copyTextWithLemmata(EgyTextEditorPart.this.btsTextEvent);
-										}
-						            });
-								}
-								if (tokenizedTextSelection != null)
-								{
-									MenuItem itemPaste = new MenuItem((Menu) menu, SWT.NONE);
-									itemPaste.setText("Paste with Lemmata" );
-									itemPaste.addSelectionListener(new SelectionAdapter() {
-										
-										@Override
-										public void widgetSelected(SelectionEvent e) {
-											pasteTextWithLemmata();
-										}
-									});
-								}
-								
-							} else
-							{
-								MenuItem itemCollectionFolder = new MenuItem((Menu) menu, SWT.NONE);
-								itemCollectionFolder.setText("Correct Errors before Copy/Paste!" );
-							}
 
-						}
-
-						@Override
-						public void menuHidden(MenuEvent e) {
-							// TODO Auto-generated method stub
-							
-						}
-					});
+					// add hook for dynamic population of context menu
+					Menu menu = getTextWidget().getMenu();
+					menu.addMenuListener(dynamicContextMenuHook(menu));
 
 
 				}
@@ -897,6 +824,118 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 	}
 
 
+	/**
+	 * Returns a listener that adds item(s) to the context menu bound to the tokenized copy/paste commands,
+	 * when applicable.
+	 * @param menu
+	 * @return
+	 */
+	private MenuListener dynamicContextMenuHook(final Menu menu) {
+		return new MenuListener() {
+			@Override
+			public void menuShown(MenuEvent e) {
+				if (checkTransliterationHasNoErrors(text)) {
+					if (!btsTextEvent.getSelectedItems().isEmpty()) {
+						MenuItem itemCopy = new MenuItem(menu, SWT.NONE);
+			            itemCopy.setText("Copy with Lemmata" );
+			            itemCopy.addSelectionListener(new SelectionAdapter() {
+							@Override
+							public void widgetSelected(SelectionEvent e) {
+								copyTextWithLemmata(EgyTextEditorPart.this.btsTextEvent);
+							}
+			            });
+					}
+					if (tokenizedTextSelection != null)
+					{
+						MenuItem itemPaste = new MenuItem(menu, SWT.NONE);
+						itemPaste.setText("Paste with Lemmata" );
+						itemPaste.addSelectionListener(new SelectionAdapter() {
+							@Override
+							public void widgetSelected(SelectionEvent e) {
+								pasteTextWithLemmata();
+							}
+						});
+					}
+				} else
+				{
+					MenuItem itemCollectionFolder = new MenuItem(menu, SWT.NONE);
+					itemCollectionFolder.setText("Correct Errors before Copy/Paste!" );
+				}
+			}
+			@Override
+			public void menuHidden(MenuEvent e) {
+				// TODO Auto-generated method stub
+			}
+		};
+	}
+
+
+	/**
+	 * Returns a caret listener handling the event of a moving text editor cursor. 
+	 * @return
+	 */
+	private CaretListener textEditorWidgetCaretListener() {
+		return new CaretListener() {
+			@Override
+			public void caretMoved(CaretEvent event) {
+				StyledText textWidget = getTextWidget();
+				int o = textWidget.getCaretOffset();
+				System.out.println("offset at line: "+
+						textWidget.getOffsetAtLine(textWidget.getLineAtOffset(o)));
+				System.out.println("char count: "+
+						textWidget.getCharCount());
+				System.out.println("text length: "+textWidget.getText().length());
+				System.out.println("in-line offset: "+
+						(o - textWidget.getOffsetAtLine(textWidget.getLineAtOffset(o)))
+				);
+				setUserMayEditInteral(permissionsController.userMayEditObject(
+						permissionsController.getAuthenticatedUser(), 
+						EgyTextEditorPart.this.text));
+				processTextSelection(event);
+				// get char right of caret and show utf-8
+				// code in status line
+				if (event.caretOffset < textWidget.getCharCount()) {
+					String sign = textWidget
+							.getText(event.caretOffset,
+									event.caretOffset);
+					if (sign != null && !"".equals(sign)) {
+						int lineIndex = textWidget
+								.getLineAtOffset(
+										event.caretOffset);
+						int inLineOffset = event.caretOffset
+								- textWidget
+										.getOffsetAtLine(
+												lineIndex);
+						showCurrentSignUnicode(sign,
+								lineIndex, inLineOffset);
+					}
+				}
+			}
+		};
+	}
+
+
+	/**
+	 * returns the embedded editor's viewer's text widget.
+	 * 
+	 * @return
+	 */
+	@SuppressWarnings("restriction")
+	private StyledText getTextWidget() {
+		return embeddedEditor.getViewer().getTextWidget();
+	}
+
+
+	/**
+	 * returns the embedded editor's viewer.
+	 * @return
+	 */
+	@SuppressWarnings("restriction")
+	private XtextSourceViewer getViewer() {
+		return embeddedEditor.getViewer();
+	}
+
+
 	private void copyTextWithLemmata(BTSTextSelectionEvent textSelectionEvent) {
 
 		this.tokenizedTextSelection = new BTSTokenizedTextSelection(textSelectionEvent,
@@ -938,12 +977,15 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 										relatingObjects,
 										monitor);
 								try {
-									embeddedEditor
-											.getViewer()
-											.getTextWidget()
-											.setCaretOffset(cachedCursor);
-									embeddedEditor.getViewer().revealRange(cachedCursor, len);
+									// set cursor back to where it was
+									getTextWidget()
+											.setCaretOffset(cursorPosition);
+									// reveal what we expect to be the inserted portion
+									getViewer().revealRange(
+											cursorPosition,
+											insertionLength);
 								} catch (Exception e) {
+									// XXX
 								}
 							}
 						});
@@ -985,8 +1027,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 	@SuppressWarnings("restriction")
 	protected boolean updateModelFromTranscription() {
 		if (text != null) {
-			IAnnotationModel am = embeddedEditor.getViewer()
-					.getAnnotationModel();
+			IAnnotationModel am = getViewer().getAnnotationModel();
 			IXtextDocument document = embeddedEditor.getDocument();
 
 			EList<EObject> objects = document
@@ -1003,11 +1044,16 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 			if (!valid)
 			{
 				if (shell == null) shell = Display.getDefault().getActiveShell();
-				MessageDialog dialog = new MessageDialog(shell, "Errors in Text - Possible Data Loss", null,
-					    "You are trying to save a text which contains errors, saving this text may lead to loss of data."
-					    + "\n\nIt is not recommended to save a text which contains errors!"
-					    + "\n\nAre you sure that you want to risk data loss and save with errors?", MessageDialog.WARNING,
-					    new String[] { "Save with Errors", "Don't Save" }, 1);
+				MessageDialog dialog = new MessageDialog(
+						shell,
+						"Errors in Text - Possible Data Loss",
+						null,
+						"You are trying to save a text which contains errors, saving this text may lead to loss of data."
+						+ "\n\nIt is not recommended to save a text which contains errors!"
+						+ "\n\nAre you sure that you want to risk data loss and save with errors?",
+						MessageDialog.WARNING,
+						new String[] { "Save with Errors", "Don't Save" },
+						1);
 				int result = dialog.open();
 				if (result != MessageDialog.OK) return false;
 				
@@ -1114,7 +1160,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 	 * @param localRelatingObjects the local relating objects
 	 * @param monitor 
 	 */
-	@SuppressWarnings({ "rawtypes", "restriction" })
+	@SuppressWarnings({ "rawtypes" })
 	protected void loadInputTranscription(BTSText localtext,
 			List<BTSObject> localRelatingObjects, IProgressMonitor monitor) {
 
@@ -1136,7 +1182,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 		text = localtext;
 		loading = true;
 		lemmaAnnotationMap = new HashMap<String, List<Object>>();
-		annotationModel = embeddedEditor.getViewer().getAnnotationModel();
+		annotationModel = getViewer().getAnnotationModel();
 
 		if (monitor != null) monitor.beginTask("Load text into Transliteration-Editor.", IProgressMonitor.UNKNOWN);
 
@@ -1176,12 +1222,12 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 			}
 			int fontSize = 12;
 			try {
-				FontData[] fds = embeddedEditor.getViewer().getTextWidget().getFont().getFontData();
+				FontData[] fds = getTextWidget().getFont().getFontData();
 				fontSize = fds[0].getHeight();
 				fontSize = fontSize - 2;
 			} catch (Exception e) {
 			}
-			int lineWith = embeddedEditor.getViewer().getTextWidget().getSize().x / fontSize;
+			int lineWith = getTextWidget().getSize().x / fontSize;
 			textEditorController.transformToDocument(
 					localtext.getTextContent(), document, tempAnnotationModel,
 					localRelatingObjects, relatingObjectsMap, lemmaAnnotationMap, monitor, lineWith);
@@ -1201,7 +1247,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 //		annotationModel.connect(document);
 //		embeddedEditor.getViewer().addPainter(painter);
 		painter.paint(IPainter.INTERNAL);
-		painter.modelChanged(embeddedEditor.getViewer().getAnnotationModel());
+		painter.modelChanged(getViewer().getAnnotationModel());
 		embeddedEditorParentComp.layout();
 
 		// connect ruler to annotationModel
@@ -1529,23 +1575,21 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 			
 			if (pos != null)
 				sync.asyncExec(new Runnable() {
-					@SuppressWarnings("restriction")
 					public void run() {
-						XtextSourceViewer viewer = embeddedEditor.getViewer();
 						if (!force) {
-							int topLine = viewer.getTopIndex();
-							int botLine = viewer.getBottomIndex();
-							int caretPos = viewer.getTextWidget().getCaretOffset();
-							int curLine = viewer.getTextWidget().getLineAtOffset(caretPos);
-							int annoLineTop = viewer.getTextWidget().getLineAtOffset(pos.offset);
-							int annoLineBot = viewer.getTextWidget().getLineAtOffset(pos.offset+pos.length);
+							int topLine = getViewer().getTopIndex();
+							int botLine = getViewer().getBottomIndex();
+							int caretPos = getTextWidget().getCaretOffset();
+							int curLine = getTextWidget().getLineAtOffset(caretPos);
+							int annoLineTop = getTextWidget().getLineAtOffset(pos.offset);
+							int annoLineBot = getTextWidget().getLineAtOffset(pos.offset+pos.length);
 							// consider changing displayed range if annotation exceeds current range
 							// only jump if cursor would likely remain in visible range
 							if ((topLine > annoLineTop) || (botLine < annoLineBot))
 								if (botLine - curLine >= topLine - annoLineTop)
-									viewer.revealRange(pos.getOffset(), pos.length);
+									getViewer().revealRange(pos.getOffset(), pos.length);
 						} else // jump regardless of cursor position
-							viewer.revealRange(pos.getOffset(), pos.length);
+							getViewer().revealRange(pos.getOffset(), pos.length);
 					}
 				});	
 		} catch (Exception e) {
@@ -1588,11 +1632,10 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 	 * @param btsEvent text selection event that will be configured with the results of this method call
 	 * @return the model annotation at selection
 	 */
-	@SuppressWarnings("restriction")
 	private List<BTSModelAnnotation> getModelAnnotationAtSelection(int start,
 			int end, BTSTextSelectionEvent btsEvent) {
 
-		Iterator<Annotation> it = embeddedEditor.getViewer().getAnnotationModel()
+		Iterator<Annotation> it = getViewer().getAnnotationModel()
 				.getAnnotationIterator();
 		List<BTSModelAnnotation> annotations = new Vector<BTSModelAnnotation>(4);
 		Map<Integer, List<BTSModelAnnotation>> annotationOffsetMap = new HashMap<Integer, List<BTSModelAnnotation>>(4);
@@ -1605,7 +1648,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 			Annotation a = (Annotation) it.next();
 
 			if (a instanceof BTSModelAnnotation) {
-				Position pos = embeddedEditor.getViewer().getAnnotationModel()
+				Position pos = getViewer().getAnnotationModel()
 						.getPosition(a);
 
 				if ((pos.getOffset() <= start && pos.getOffset() + pos.getLength() > start)
@@ -1650,7 +1693,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 				if (a.getModel() instanceof BTSSentenceItem) 
 					if  (!a.getClass().getSuperclass().equals(BTSModelAnnotation.class) 
 							|| a instanceof BTSLemmaAnnotation) {
-						Position pos = embeddedEditor.getViewer().getAnnotationModel()
+						Position pos = getViewer().getAnnotationModel()
 								.getPosition(a);
 						BTSSentenceItem item = (BTSSentenceItem) a.getModel();
 
@@ -1950,22 +1993,21 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 	 *
 	 * @param activate the activate
 	 */
-	@SuppressWarnings("restriction")
 	private void makePartActive(boolean activate) {
-		embeddedEditor.getViewer().setEditable(activate);
-		embeddedEditor.getViewer().getTextWidget().setEnabled(activate);
+		getViewer().setEditable(activate);
+		getTextWidget().setEnabled(activate);
 		signTextEditor.setEnabled(activate);
 		jseshEditor.setEnabled(activate);
 		sentenceTranslate_Editor.setEnabled(activate && userMayEdit);
 		tabFolder.setEnabled(activate);
 		if (activate)
 		{
-			embeddedEditor.getViewer().getTextWidget().setBackground(BTSUIConstants.COLOR_WIHTE);
+			getTextWidget().setBackground(BTSUIConstants.COLOR_WIHTE);
 			signTextEditor.setBackground(BTSUIConstants.COLOR_WIHTE);
 		}
 		else
 		{
-			embeddedEditor.getViewer().getTextWidget().setBackground(BTSUIConstants.COLOR_BACKGROUND_DISABLED);
+			getTextWidget().setBackground(BTSUIConstants.COLOR_BACKGROUND_DISABLED);
 			signTextEditor.setBackground(BTSUIConstants.COLOR_BACKGROUND_DISABLED);
 		}
 		
@@ -2035,27 +2077,22 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 	 *
 	 * @param selectedItem the new sentence item selected
 	 */
-	@SuppressWarnings("restriction")
 	private void setSentenceItemSelected(BTSSentenceItem selectedItem) {
 		if (selectionRange != null) {
-			embeddedEditor
-					.getViewer()
-					.getTextWidget()
+			getTextWidget()
 					.replaceStyleRanges(selectionRange.start,
 							selectionRange.length, preSelectionRanges);
 		}
 		BTSModelAnnotation annotation = getModelAnnotationAtModelObject(selectedItem);
 		if (annotation != null) {
-			Position pos = embeddedEditor.getViewer().getAnnotationModel()
+			Position pos = getViewer().getAnnotationModel()
 					.getPosition(annotation);
 			int start = pos.getOffset() - 1;
 			int len = pos.getLength();
 			selectionRange = new StyleRange(start, len, null,
 					BTSUIConstants.COLOR_SUBTEXT);
-			preSelectionRanges = embeddedEditor.getViewer().getTextWidget()
-					.getStyleRanges(start, len);
-			embeddedEditor.getViewer().getTextWidget()
-					.setStyleRange(selectionRange);
+			preSelectionRanges = getTextWidget().getStyleRanges(start, len);
+			getTextWidget().setStyleRange(selectionRange);
 		}
 
 	}
@@ -2121,7 +2158,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 					// make sure annotation is visible in text editor 
 					Position pos = annotationModel.getPosition(am);
 					if (pos != null)
-						embeddedEditor.getViewer().revealRange(pos.getOffset(), pos.length);
+						getViewer().revealRange(pos.getOffset(), pos.length);
 
 					// In order to limit workload, only repaint text editor (including highlight of line(s)
 					// containing this sentence) if method call seems to come from selection listener
@@ -2131,13 +2168,13 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 						public void run() {
 							// TODO this can be improved in order to reduce work load repainting large texts
 							
-							if (painter == null || embeddedEditor.getViewer().getTextWidget().isDisposed()) return;
+							if (painter == null || getTextWidget().isDisposed()) return;
 							painter.modelChanged(ev);
 							painter.paint(IPainter.INTERNAL);
 							ruler.update();
 							ruler.relayout();
 							oruler.update();
-							embeddedEditor.getViewer().getTextWidget().redraw();
+							getTextWidget().redraw();
 						}
 					});
 					return null;
@@ -2380,7 +2417,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 		if (tabFolder != null && text != null) {
 			switch (tabFolder.getSelectionIndex()) {
 			case 0: {
-				embeddedEditor.getViewer().getControl().setFocus();
+				getViewer().getControl().setFocus();
 				break;
 			}
 			case 1: {
@@ -2762,7 +2799,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 		//		+ BTSUIConstants.EVENT_EGY_TEXT_EDITOR_LOAD_LEMMATA);
 		sync.asyncExec(new Runnable() {
 			public void run() {
-				cachedCursor = embeddedEditor.getViewer().getTextWidget()
+				cachedCursor = getTextWidget()
 						.getCaretOffset();
 				boolean canUpdate = updateModelFromTranscription();
 
@@ -2780,12 +2817,10 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 										loadInputTranscription(text,
 												relatingObjects, monitor);
 										try {
-											embeddedEditor
-													.getViewer()
-													.getTextWidget()
+											getTextWidget()
 													.setCaretOffset(
 															cachedCursor);
-											embeddedEditor.getViewer().revealRange(cachedCursor, 0);
+											getViewer().revealRange(cachedCursor, 0);
 										} catch (Exception e) {
 										}
 									}
@@ -2998,7 +3033,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 	protected void setUserMayEditInteral(boolean mayEdit) {
 		if (parent != null && !parent.isDisposed())
 		{
-			embeddedEditor.getViewer().setEditable(mayEdit);
+			getViewer().setEditable(mayEdit);
 			signTextEditor.setEnabled(mayEdit);
 			sentenceTranslate_Editor.setEnabled(mayEdit);
 			this.userMayEdit = mayEdit;
