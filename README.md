@@ -1,6 +1,5 @@
 # Berlin Text System 
 ## Collaborative Editing of Ancient Egyptian Texts and Dictionaries
 
-[build status](https://api.travis-ci.org/JKatzwinkel/bts.svg?branch=master "Build Status")
-
+[![Build Status](https://travis-ci.org/JKatzwinkel/bts.svg?branch=travis_CI_xtext)](https://travis-ci.org/JKatzwinkel/bts)
 
