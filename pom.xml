@@ -69,7 +69,8 @@
 	<properties>
 		<tycho.version>0.19.0</tycho.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<project.build.resourceEncoding>UTF-8</project.build.resourceEncoding>
+		<kepler-repo.url>http://download.eclipse.org/eclipse/updates/4.4</kepler-repo.url>
+		<xtext.version>2.9.0</xtext.version>
 	</properties>
 
 	<repositories>
@@ -84,9 +85,58 @@
 			<url>http://download.eclipse.org/releases/neon</url>
 			<layout>p2</layout>
 		</repository>
+		
+		<repository>
+			<id>Xtext Update Site</id>
+			<layout>p2</layout>
+			<url>http://download.eclipse.org/modeling/tmf/xtext/updates/releases/${xtext.version}/</url>
+		</repository>
 	</repositories>
 
 	<build>
+		<pluginManagement>
+	  		<plugins>
+	  			<plugin>
+	  				<groupId>org.eclipse.xtend</groupId>
+	  				<artifactId>xtend-maven-plugin</artifactId>
+						<version>${xtext.version}</version>
+						<executions>
+							<execution>
+								<goals>
+									<goal>compile</goal>
+									<goal>xtend-install-debug-info</goal>
+									<goal>testCompile</goal>
+									<goal>xtend-test-install-debug-info</goal>
+								</goals>
+							</execution>
+						</executions>
+						<configuration>
+							<outputDirectory>xtend-gen</outputDirectory>
+						</configuration>
+	  			</plugin>
+	  			<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-clean-plugin</artifactId>
+					<version>2.5</version>
+					<executions>
+						<execution>
+							<id>gen-clean</id>
+							<goals>
+								<goal>clean</goal>
+							</goals>
+							<configuration>
+								<filesets>
+									<fileset>
+										<directory>${basedir}/xtend-gen</directory>
+									</fileset>
+								</filesets>
+							</configuration>
+						</execution>
+					</executions>
+				</plugin>
+	  		</plugins>
+  		</pluginManagement>
+
 		<plugins>
 			<plugin>
 				<groupId>org.eclipse.tycho</groupId>

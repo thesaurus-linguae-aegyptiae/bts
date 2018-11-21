@@ -18,18 +18,19 @@ Require-Bundle: org.bbaw.bts.corpus.text.egy.egydsl;visibility:=reexport,
  org.bbaw.bts.model.corpus,
  org.bbaw.bts.core.corpus.controller,
  org.bbaw.bts.ui.commons.corpus,
- com.google.inject
+ com.google.inject,
+ org.eclipse.xtext.xbase.lib
 Import-Package: org.apache.log4j,
  org.bbaw.bts.core.commons.staticAccess,
  org.eclipse.e4.core.contexts,
  org.eclipse.xtext.xbase.lib
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6,
- JavaSE-1.7
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6,JavaSE-1.7
 Export-Package: org.bbaw.bts.corpus.text.egy.ui,
  org.bbaw.bts.corpus.text.egy.ui.contentassist,
  org.bbaw.bts.corpus.text.egy.ui.contentassist.antlr,
  org.bbaw.bts.corpus.text.egy.ui.custom,
  org.bbaw.bts.corpus.text.egy.ui.internal,
- org.bbaw.bts.corpus.text.egy.ui.quickfix
+ org.bbaw.bts.corpus.text.egy.ui.quickfix,
+ org.bbaw.bts.corpus.text.egy.ui.contentassist.antlr.internal
 Bundle-Activator: org.bbaw.bts.corpus.text.egy.ui.internal.EgyDslActivator
 Bundle-Version: 3.1.1.qualifier

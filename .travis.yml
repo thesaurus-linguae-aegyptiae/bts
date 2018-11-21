@@ -1,0 +1,9 @@
+dist: precise
+os: linux
+group: stable
+language: java
+jdk:
+  - oraclejdk8
+script:
+  mvn clean install
+
