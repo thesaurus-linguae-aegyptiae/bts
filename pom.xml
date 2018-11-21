@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.bbaw.bts</groupId>
 	<artifactId>aaew-bts</artifactId>
-	<version>3.1.0</version>
+	<version>3.1.3</version>
 	<packaging>pom</packaging>
 
 	<modules>
@@ -60,6 +60,10 @@
 		<module>org.eclipse.e4.ui.workbench.perspectiveswitcher</module>
 		<module>org.ramo.klevis.p2.core.service</module>
 		<module>org.bbaw.bts.app.product</module>
+		
+		<!-- optional: text annotations extension -->
+		<module>org.fuberlin.bts.ui.corpus.egy.annotations</module>
+		
 	</modules>
 
 	<properties>
@@ -73,15 +77,9 @@
 		<repository>
 			<id>bts-mvn-build-repository</id>
 			<name>BTS BUILD Rep</name>
-			<url>http://telota.bbaw.de/bts-update/bts-build-neon</url>
+			<url>http://aaew64.bbaw.de/bts/repository/neon-target</url>
 			<layout>p2</layout>
 		</repository> 
-		<!-- <repository>
-			<id>bts-mvn-build-extras</id>
-			<name>BTS BUILD Rep</name>
-			<url>http://telota.bbaw.de/bts-update/extras</url>
-			<layout>p2</layout>
-		</repository> -->
 		<repository>
 			<id>neon</id>
 			<url>http://download.eclipse.org/releases/neon</url>
@@ -163,7 +161,7 @@
 			<plugin>
 				<groupId>org.eclipse.tycho</groupId>
 				<artifactId>target-platform-configuration</artifactId>
-				<version>1.0.0</version>
+				<version>${tycho.version}</version>
 				<configuration>
 					<environments>
 						<!--
@@ -187,7 +185,24 @@
 							<ws>win32</ws>
 							<arch>x86_64</arch>
 						</environment>
+						
+						<environment>
+							<os>macosx</os>
+							<ws>cocoa</ws>
+							<arch>x86_64</arch>
+						</environment>
+						
 					</environments>
+					<filters>
+						<!-- this is in order to prevent tycho to try resolving a dependency on the objectteams OTDT patch of org.eclipse.jdt.core. -->
+						<filter>
+							<type>eclipse-plugin</type>
+							<id>org.eclipse.jdt.core</id>
+							<restrictTo>
+								<version>3.12.0.v20160516-2131</version>
+							</restrictTo>
+						</filter>
+					</filters>
 				</configuration>
 			</plugin>
 		</plugins>

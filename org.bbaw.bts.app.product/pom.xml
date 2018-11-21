@@ -3,27 +3,21 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.bbaw.bts</groupId>
 	<artifactId>org.bbaw.bts.app.product</artifactId>
-	<version>3.1.0-SNAPSHOT</version>
+	<version>3.1.3-SNAPSHOT</version>
 	<packaging>eclipse-repository</packaging>
 
 	<properties>
-		<tycho.version>0.19.0</tycho.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<tycho.version>0.19.0</tycho.version>
 	</properties>
 
 	<repositories>
 		<repository>
 			<id>bts-mvn-build-repository</id>
-			<name>BTS BUILD Rep</name>
-			<url>http://telota.bbaw.de/bts-update/bts-build-neon</url>
+			<name>BTS BUILD Repo</name>
+			<url>http://aaew64.bbaw.de/bts/repository/neon-target</url>
 			<layout>p2</layout>
 		</repository>
-		<!--<repository>
-			<id>bts-mvn-build-extras</id>
-			<name>BTS BUILD Rep</name>
-			<url>http://telota.bbaw.de/bts-update/extras</url>
-			<layout>p2</layout>
-		</repository>-->
 		<repository>
 			<id>neon</id>
 			<url>http://download.eclipse.org/releases/neon</url>
@@ -33,7 +27,7 @@
 
 	<build>
 		<plugins>
-			<plugin>
+			<!--<plugin>
 				<groupId>org.eclipse.tycho</groupId>
 				<artifactId>tycho-versions-plugin</artifactId>
 				<version>${tycho.version}</version>
@@ -46,7 +40,7 @@
 						</goals>
 					</execution>
 				</executions>
-			</plugin>
+			</plugin>-->
 
 			<plugin>
 				<groupId>org.eclipse.tycho</groupId>
@@ -58,6 +52,7 @@
 			<plugin>
 				<groupId>org.eclipse.tycho</groupId>
 				<artifactId>target-platform-configuration</artifactId>
+				<version>${tycho.version}</version>
 				<configuration>
 					<environments>
 						<environment>
@@ -70,13 +65,13 @@
 							<ws>win32</ws>
 							<arch>x86_64</arch>
 						</environment>
-						<!--
+
 						<environment>
 							<os>macosx</os>
 							<ws>cocoa</ws>
 							<arch>x86_64</arch>
 						</environment>
-						<environment>
+						<!--<environment>
 							<os>linux</os>
 							<ws>gtk</ws>
 							<arch>x86</arch>
@@ -98,7 +93,7 @@
 					<includeAllDependencies>true</includeAllDependencies>
 				</configuration>
 			</plugin>
-			
+
 			<plugin>
 				<groupId>org.eclipse.tycho</groupId>
 				<artifactId>tycho-p2-director-plugin</artifactId>

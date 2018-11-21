@@ -241,7 +241,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 
 	/** The evaluation controller. */
 	@Inject
-	private PermissionsAndExpressionsEvaluationController evaluationController;
+	private PermissionsAndExpressionsEvaluationController permissionsController;
 
 	/** The Constant EDITOR_PREFIX_LENGTH. */
 	private static final int EDITOR_PREFIX_LENGTH = 1;
@@ -440,7 +440,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 		
 		if (parentShell == null)
 		{
-			parentShell = new Shell();
+			parentShell = Display.getDefault().getActiveShell();
 		}
 		this.parent = parent;
 		parent.setLayout(new GridLayout());
@@ -482,12 +482,10 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 							break;
 						}
 						case 1: {
-							updateModelFromSignText();
 							signTextEditor.clearContent();
 							break;
 						}
 						case 2: {
-							updateModelFromJSesh();
 							break;
 						}
 						}
@@ -552,7 +550,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 									}});
 							}
 						};
-						new ProgressMonitorDialog(new Shell()).run(true, true, op);
+						new ProgressMonitorDialog(Display.getDefault().getActiveShell()).run(true, true, op);
 					} catch (InvocationTargetException ee) {
 						// handle exception
 					} catch (InterruptedException ee) {
@@ -607,6 +605,9 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 					embeddedEditorFactory = injector
 							.getInstance(EmbeddedEditorFactory.class);
 
+
+					// XXX
+					// https://www.eclipse.org/forums/index.php/t/1067356/
 					embeddedEditor = embeddedEditorFactory
 							.newEditor(xtextResourceProvider)
 							.showAnnotations(
@@ -647,6 +648,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 					
 					
 					configureEditorDrawingStrategies(oruler);
+
 					if (show_line_number_ruler)
 					{
 						lineNumberRulerColumn = new EgyLineNumberRulerColumn(LINE_SPACE);
@@ -931,7 +933,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 								{
 									index = index + 1;
 									targetSentence.getSentenceItems().add(index, copiedItem);
-									dirty.setDirty(true);
+									setDirtyInternal();
 								}
 							}
 						}
@@ -953,7 +955,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 								{
 									index = index + 1;
 									targetSentence.getSentenceItems().add(index, copiedItem);
-									dirty.setDirty(true);
+									setDirtyInternal();
 								}
 							}
 						}
@@ -979,7 +981,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 								{
 									index = index + 1;
 									targettextcontent.getTextItems().add(index, copiedItem);
-									dirty.setDirty(true);
+									setDirtyInternal();
 								}
 							}
 						}
@@ -1000,7 +1002,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 							{
 								index = index + 1;
 								targettextcontent.getTextItems().add(index, copiedItem);
-								dirty.setDirty(true);
+								setDirtyInternal();
 							}
 						}
 					}
@@ -1036,7 +1038,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 							});
 						}
 					};
-					new ProgressMonitorDialog(new Shell()).run(true, true,
+					new ProgressMonitorDialog(Display.getDefault().getActiveShell()).run(true, true,
 							op);
 				} catch (InvocationTargetException ee) {
 					// handle exception
@@ -1060,21 +1062,6 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 
 	
 
-	/**
-	 * Update model from sign text.
-	 */
-	protected void updateModelFromSignText() {
-		// TODO Auto-generated method stub
-
-	}
-
-	/**
-	 * Update model from j sesh.
-	 */
-	protected void updateModelFromJSesh() {
-		// TODO Auto-generated method stub
-
-	}
 
 	/**
 	 * Update model from transcription.
@@ -1099,7 +1086,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 			boolean valid = checkResourceErrors(resource);
 			if (!valid)
 			{
-				if (shell == null) shell = new Shell();
+				if (shell == null) shell = Display.getDefault().getActiveShell();
 				MessageDialog dialog = new MessageDialog(shell, "Errors in Text - Possible Data Loss", null,
 					    "You are trying to save a text which contains errors, saving this text may lead to loss of data."
 					    + "\n\nIt is not recommended to save a text which contains errors!"
@@ -1677,10 +1664,11 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 	 * Sets the dirty internal.
 	 */
 	protected void setDirtyInternal() {
-		if (text != null && dirty != null && !dirty.isDirty()) {
-			dirty.setDirty(true);
+		if (permissionsController.userMayEditObject(permissionsController.getAuthenticatedUser(), text)) {
+			if (text != null && dirty != null && !dirty.isDirty()) {
+				dirty.setDirty(true);
+			}
 		}
-
 	}
 
 	/**
@@ -1694,7 +1682,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 	@SuppressWarnings("restriction")
 	private List<BTSModelAnnotation> getModelAnnotationAtSelection(int start,
 			int end, BTSTextSelectionEvent btsEvent) {
-		Iterator it = embeddedEditor.getViewer().getAnnotationModel()
+		Iterator<Annotation> it = embeddedEditor.getViewer().getAnnotationModel()
 				.getAnnotationIterator();
 		List<BTSModelAnnotation> annotations = new Vector<BTSModelAnnotation>(4);
 		Map<Integer, List<BTSModelAnnotation>> annotationOffsetMap = new HashMap<Integer, List<BTSModelAnnotation>>(4);
@@ -1719,22 +1707,8 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 						annotationOffsetMap.put(pos.getOffset(), list);
 					}
 					list.add((BTSModelAnnotation) a);
-					
-					
-					// nur sentenceitems oder alles?
-//					if (((BTSModelAnnotation) a).getModel() instanceof BTSSentenceItem) {
-//						BTSSentenceItem item = (BTSSentenceItem) ((BTSModelAnnotation) a)
-//								.getModel();
-//						textItems.add(item);
-//						
-//					}
 
 				}
-				// else if (pos.getOffset() >= start && pos.getOffset() <= end)
-				// {
-				// annotations.add((ModelAnnotation) a);
-				//
-				// }
 			}
 		}
 		
@@ -1827,7 +1801,6 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 	 * @param pos the pos
 	 * @param issue the issue
 	 */
-	@SuppressWarnings("restriction")
 	protected void loadSingleAnnotation2Editor(IAnnotationModel editorModel,
 			 BTSModelAnnotation a, Position pos, Issue issue) {
 		if (a instanceof BTSLemmaAnnotation) {
@@ -1909,15 +1882,6 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 		l.add(ma);
 	}
 
-	/**
-	 * Event received new.
-	 *
-	 * @param object the object
-	 */
-	@Inject
-	@Optional
-	void eventReceivedNew(@EventTopic("model_new/BTSWord*") Object object) {
-	}
 
 	/**
 	 * Event received caret events.
@@ -2126,7 +2090,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 							localCommandCacheSet.add(mostRecentCommand);
 							if (dirty != null && localCommandCacheSet.isEmpty()) {
 								dirty.setDirty(false);
-							} else if (dirty != null && !dirty.isDirty()) {
+							} else  {
 								setDirtyInternal();
 							}
 						} else {
@@ -2134,7 +2098,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 							if (localCommandCacheSet.remove(mostRecentCommand)
 									&& localCommandCacheSet.isEmpty() && dirty != null) {
 								dirty.setDirty(false);
-							} else if (dirty != null && !dirty.isDirty()) {
+							} else  {
 								setDirtyInternal();
 							}
 						}
@@ -2378,7 +2342,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 								
 						}
 					};
-					new ProgressMonitorDialog(new Shell()).run(true, true, op);
+					new ProgressMonitorDialog(Display.getDefault().getActiveShell()).run(true, true, op);
 				} catch (InvocationTargetException e) {
 					// handle exception
 				} catch (InterruptedException e) {
@@ -2510,7 +2474,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 			}
 
 		}
-		evaluationController
+		permissionsController
 				.activateDBCollectionContext(BTSPluginIDs.PREF_MAIN_CORPUS_KEY);
 	}
 
@@ -2521,7 +2485,9 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 	 */
 	@Persist
 	public boolean save() {
-		if (text != null && dirty != null && dirty.isDirty()) {
+		if (text != null && dirty != null && dirty.isDirty() && 
+			permissionsController.userMayEditObject(
+					permissionsController.getAuthenticatedUser(), this.text)) {
 			boolean canSave = true;
 			switch (tabFolder.getSelectionIndex()) {
 			case 0: {
@@ -2529,11 +2495,9 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 				break;
 			}
 			case 1: {
-				updateModelFromSignText();
 				break;
 			}
 			case 2: {
-				updateModelFromJSesh();
 				break;
 			}
 			}
@@ -2547,12 +2511,13 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 			signTextEditor.setNotifyWords(false);
 			sentenceTranslate_Editor.save();
 			boolean success = textEditorController.save(this.text);
+			
 			dirty.setDirty(!success);
 			// turn word-wise update back on
 			signTextEditor.setNotifyWords(true);
 			return success;
 		}
-		return true;
+		return false;
 	}
 
 	/**
@@ -2909,7 +2874,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 								});
 							}
 						};
-						new ProgressMonitorDialog(new Shell()).run(true, true,
+						new ProgressMonitorDialog(Display.getDefault().getActiveShell()).run(true, true,
 								op);
 					} catch (InvocationTargetException ee) {
 						// handle exception
@@ -3003,7 +2968,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 
 			// relObject ist neu
 			for (BTSRelation rel : object.getRelations()) {
-				if (rel.getObjectId() != null
+				if (rel.getObjectId() != null && text != null
 						&& rel.getObjectId().equals(text.get_id())) {
 					for (BTSInterTextReference ref : rel.getParts()) {
 						int offset = 0;

@@ -33,4 +33,4 @@ Export-Package: org.bbaw.bts.corpus.text.egy.ui,
  org.bbaw.bts.corpus.text.egy.ui.quickfix,
  org.bbaw.bts.corpus.text.egy.ui.contentassist.antlr.internal
 Bundle-Activator: org.bbaw.bts.corpus.text.egy.ui.internal.EgyDslActivator
-Bundle-Version: 3.1.0.qualifier
+Bundle-Version: 3.1.1.qualifier

@@ -104,8 +104,10 @@ public class UserActionCounterServiceImpl extends
 	public List<UserActionCounter> query(BTSQueryRequest query,
 			String objectState, boolean registerQuery, IProgressMonitor monitor) {
 		List<UserActionCounter> counters = new Vector<UserActionCounter>();
-		counters.addAll(counterDao.query(query, BTSCoreConstants.LOCAL,
-				BTSCoreConstants.LOCAL, objectState, registerQuery));
+		String[] indexArray = new String[]{BTSCoreConstants.LOCAL};
+
+		counters.addAll(counterDao.query(query, indexArray,
+				indexArray, objectState, registerQuery));
 		return counters;
 	}
 
@@ -114,9 +116,11 @@ public class UserActionCounterServiceImpl extends
 		List<UserActionCounter> counters = new Vector<UserActionCounter>();
 
 		BTSQueryRequest query = new BTSQueryRequest();
+		String[] indexArray = new String[]{BTSCoreConstants.LOCAL};
+
 		query.setQueryBuilder(QueryBuilders.prefixQuery("_id", code));
-		counters.addAll(counterDao.query(query, BTSCoreConstants.LOCAL,
- BTSCoreConstants.LOCAL,
+		counters.addAll(counterDao.query(query, indexArray,
+				indexArray,
 						BTSConstants.OBJECT_STATE_ACTIVE, false));
 		return counters;
 	}
@@ -164,8 +168,10 @@ public class UserActionCounterServiceImpl extends
 	@Override
 	public List<String> queryAsJsonString(BTSQueryRequest query, String objectState, IProgressMonitor monitor) {
 		List<String> counters = new Vector<String>();
-		counters.addAll(counterDao.queryAsJsonString(query, BTSCoreConstants.LOCAL,
-				BTSCoreConstants.LOCAL, objectState, false));
+		String[] indexArray = new String[]{BTSCoreConstants.LOCAL};
+
+		counters.addAll(counterDao.queryAsJsonString(query, indexArray,
+				indexArray, objectState, false));
 		return counters;
 	}
 

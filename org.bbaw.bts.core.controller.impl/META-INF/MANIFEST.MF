@@ -30,6 +30,7 @@ Import-Package: javax.inject,
  org.eclipse.equinox.p2.engine,
  org.eclipse.equinox.p2.metadata,
  org.eclipse.equinox.p2.operations,
+ org.eclipse.equinox.p2.query;version="2.0.0",
  org.eclipse.osgi.util,
  org.osgi.framework
 Bundle-ActivationPolicy: lazy
@@ -52,4 +53,4 @@ Require-Bundle: org.eclipse.e4.core.di,
  org.eclipse.e4.core.services,
  org.eclipse.equinox.security;bundle-version="1.2.0",
  org.bbaw.bts.commons.fsaccess;bundle-version="1.0.0"
-Bundle-Version: 3.1.0.qualifier
+Bundle-Version: 3.2.0.qualifier

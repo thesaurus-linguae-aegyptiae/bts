@@ -74,13 +74,9 @@ public class Backend2ClientUpdateDaoImpl implements Backend2ClientUpdateDao {
 
 	private void signalUpdate(Row feed, String docId, String dbCollection) {
 
-		// FIXME dynamisieren für Import!
-		// System.out.println(context.get(BTSCoreConstants.LISTEN_TO_BACKEND_UPDATES));
 		if (listen2Updates == null && !TRUE.equals(listen2Updates)) {
 			return;
 		}
-//		logger.info("Backend2DB listener on dbCollection: " + dbCollection
-//				+ ", Changed object id: " + docId);
 
 		BTSDBBaseObject object = null;
 		List<String> queryIds = null;
@@ -88,8 +84,8 @@ public class Backend2ClientUpdateDaoImpl implements Backend2ClientUpdateDao {
 		notification.setDbCollection(dbCollection);
 		if (feed.isDeleted()) {
 			notification.setDeleted(true);
-			logger.info("Notify Listener object is deleted. object id: "
-					+ docId);
+			//logger.info("Notify Listener object is deleted. object id: "
+			//		+ docId);
 		} else
 		// object not deleted
 		{
@@ -109,10 +105,11 @@ public class Backend2ClientUpdateDaoImpl implements Backend2ClientUpdateDao {
 			}
 			
 			JsonObject jso = feed.getDoc();
+			
+			// check for query ids with elasticsearch percolator
 			try {
 				queryIds = findQueryIdsInternal(jso.toString(), docId, dbCollection);
 			} catch (ElasticsearchException e1) {
-//				e1.printStackTrace();
 				return;
 			}
 			if (queryIds != null && !queryIds.isEmpty() && object == null) {
@@ -132,8 +129,6 @@ public class Backend2ClientUpdateDaoImpl implements Backend2ClientUpdateDao {
 			notification.setObject(object);
 			notification.setQueryIds(queryIds);
 			for (Backend2ClientUpdateListener l : listeners) {
-				//logger.info("Notify Listener about change: " + dbCollection
-				//		+ ", Changed object id: " + docId);
 
 				l.handleUpdate(notification);
 			}
@@ -145,31 +140,15 @@ public class Backend2ClientUpdateDaoImpl implements Backend2ClientUpdateDao {
 		JsonObject jso = feed.getDoc();
 		URI uri = URI.createURI(connectionProvider.getLocalDBURL() + "/"
 				+ dbCollection + "/" + feed.getId());
-		System.out.println("loadFromFeed " + uri);
+
 		Resource resource = null;
-		// try {
-		// resource = connectionProvider.getEmfResourceSet().getResource(uri,
-		// true);
-		// } catch (Exception e) {
-		// logger.error(e);
-		// }
-		// if (resource != null && !resource.getContents().isEmpty())
-		// {
-		// return ((BTSDBBaseObject) resource.getContents().get(0));
-		// }
 
 		resource = connectionProvider.getEmfResourceSet().createResource(uri);
 		logger.info(jso.toString());
 		InputStream inputStream;
 		if (resource.getContents().isEmpty()) {
-			// EmfModelHelper.loadFromString(jso.toString(), classType)
-
-			// inputStream = new
-			// ByteArrayInputStream(jso.toString().getBytes(BTSConstants.ENCODING));
 			generalPurposeDao.fillResource(resource, jso.toString());
-			// final JSONLoad loader = new JSONLoad(inputStream, new
-			// HashMap<Object, Object>());
-			// loader.fillResource(resource);
+
 		}
 		if (!resource.getContents().isEmpty()) {
 			return ((BTSDBBaseObject) resource.getContents().get(0));
@@ -200,6 +179,7 @@ public class Backend2ClientUpdateDaoImpl implements Backend2ClientUpdateDao {
 		final CouchDbClient client = c;
 		CouchDbInfo dbInfo = client.context().info();
 		since = dbInfo.getUpdateSeq();
+		
 		// feed type continuous
 		Runnable runnable = new Runnable() {
 
@@ -212,7 +192,7 @@ public class Backend2ClientUpdateDaoImpl implements Backend2ClientUpdateDao {
 				changesMap.put(dbCollection, changes);
 				try {
 					while (changes.hasNext()) {
-						// System.out.println("check for changes");
+						
 						ChangesResult.Row feed = changes.next();
 
 						if (feed != null) {
@@ -273,8 +253,6 @@ public class Backend2ClientUpdateDaoImpl implements Backend2ClientUpdateDao {
 
 	private List<String> findQueryIdsInternal(String objectAsString, String id,
 			String dbCollection) {
-		// System.out.println("dbCollection " + dbCollection
-		// + " doc string percolate: " + objectAsString);
 		if (!objectAsString.startsWith("{\"doc\":"))
 		{
 			objectAsString = "{\r\n" + "\"doc\":" + objectAsString + "\r\n}";

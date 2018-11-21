@@ -147,24 +147,4 @@ public class BTSContstantsPlatformSpecific {
 		return userEnvPath;
 	}
 
-	
-	/** Returns the Database Installation directory within the given btsInstallation directory. 
-	 * DBInstallationDir is the directory where the folder 'CouchDB' is located. 
-	 * Under an installation of CouchDB using e.g. msi-installer that would be the Programs/Apache Software...
-	 * In bts case it is the <code>btsInstallationDir</code>/dbdir
-	 * 
-	 * @deprecated
-	 * 
-	 * @param btsInsallationDir BTS Installation Directory
-	 * @return Database Installation Directory
-	 */
-	public static String getDBInstallationDir(String btsInsallationDir) {
-		if (btsInsallationDir == null)
-		{
-			btsInsallationDir = getInstallationDir();
-		}
-		String dbdir = btsInsallationDir + BTSContstantsPlatformSpecific.FS + BTSConstants.DB_DIR;
-
-		return dbdir;
-	}
 }

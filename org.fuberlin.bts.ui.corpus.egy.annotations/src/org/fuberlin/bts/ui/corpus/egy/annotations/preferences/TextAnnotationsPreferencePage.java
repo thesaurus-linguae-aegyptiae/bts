@@ -31,6 +31,9 @@ public class TextAnnotationsPreferencePage extends FieldEditorPreferencePage {
 		addField(new BooleanFieldEditor("SHOWALLPROPERTIES", "Show all properties",
                 getFieldEditorParent()));
 		
+		addField(new BooleanFieldEditor("SHOWALLPROPERTIES_ONHOVER", "Show all properties on hover",
+                getFieldEditorParent()));
+		
 	}
 
 }

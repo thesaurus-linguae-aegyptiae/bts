@@ -27,4 +27,4 @@ Import-Package: javax.inject,
  org.bbaw.bts.ui.resources,
  org.eclipse.swt.graphics,
  org.eclipse.swt.widgets
-Bundle-Version: 3.1.0.qualifier
+Bundle-Version: 3.1.1.qualifier

@@ -40,6 +40,7 @@ import java.util.Vector;
 import org.apache.lucene.queryParser.QueryParser;
 import org.bbaw.bts.btsmodel.BTSObject;
 import org.elasticsearch.action.search.SearchRequestBuilder;
+import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
@@ -83,6 +84,14 @@ public class BTSQueryRequest {
 	
 	private boolean fuzzy;
 	
+	private int from = 0;
+	
+	private int size = 1000;
+	
+	private long totalResultSize = 0;
+
+	private SearchResponse queryResponse;
+	
 	public BTSQueryRequest() {
 		this.requestFields = new HashSet<String>();
 	}
@@ -99,8 +108,9 @@ public class BTSQueryRequest {
 	}
 	
 	/**
-	 * Sets up a {@link QueryBuilder} according to current configuration. The result can be retrieved via {@link #getQueryBuilder()}.
-	 * 
+	 * Sets up a {@link QueryBuilder} according to current configuration.
+	 * The result can be retrieved via {@link #getQueryBuilder()}.
+	 *
 	 */
 	public void initQueryBuilder() {
 		if (searchString.length() > 0)
@@ -126,7 +136,7 @@ public class BTSQueryRequest {
 				this.setAutocompletePrefix(searchString);
 			}
 			else {
-				this.setQueryBuilder(QueryBuilders.simpleQueryString(escapedString).defaultOperator(Operator.AND));
+				this.setQueryBuilder(QueryBuilders.simpleQueryStringQuery(escapedString).defaultOperator(Operator.AND));
 				this.setAutocompletePrefix(searchString);
 			}
 		}		
@@ -299,6 +309,54 @@ public class BTSQueryRequest {
 	public void setFuzzy(boolean fuzzy) {
 		this.fuzzy = fuzzy;
 	}
+
+	/**
+	 * @return the from
+	 */
+	public int getFrom() {
+		return from;
+	}
+
+	/**
+	 * @param from the from to set
+	 */
+	public void setFrom(int from) {
+		this.from = from;
+	}
+
+	/**
+	 * @return the size
+	 */
+	public int getSize() {
+		return size;
+	}
+
+	/**
+	 * @param size the size to set
+	 */
+	public void setSize(int size) {
+		this.size = size;
+	}
+
+	public void setQueryResponse(SearchResponse response) {
+		this.queryResponse = response;
+	}
+
+	/**
+	 * @return the queryResponse
+	 */
+	public SearchResponse getQueryResponse() {
+		return queryResponse;
+	}
+
+	public long getTotalResultSize() {
+		return totalResultSize;
+	}
+
+	public void setTotalResultSize(long totalResultSize) {
+		this.totalResultSize = totalResultSize;
+	}
+
 
 
 }

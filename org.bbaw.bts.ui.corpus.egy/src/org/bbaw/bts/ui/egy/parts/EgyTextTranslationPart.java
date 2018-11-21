@@ -365,42 +365,42 @@ public class EgyTextTranslationPart {
 			boolean highlighted) {
 		if (annotationModel == null) return;
 		for (BTSModelAnnotation a : relatingObjectsAnnotations) {
-//			Position pos = annotationModel.getPosition(a);
-//			if (pos == null) return;
-//			StyleRange[] ranges = textViewer
-//					.getTextWidget()
-//					.getStyleRanges(pos.getOffset(), pos.getLength());
-//			Color color;
-//			if (highlighted)
-//			{
-//				color = BTSUIConstants.COLOR_SENTENCE;
-//			}
-//			else
-//			{
-//				color = BTSUIConstants.COLOR_WIHTE;
-//			}
-//			if (ranges != null && !(ranges.length == 0))
-//			{
-//				
-//				for (StyleRange sr : ranges)
-//				{
-//					sr.background = color;
-//					try {
-//						textViewer
-//						.getTextWidget().setStyleRange(sr);
-//					} catch (Exception e) {
-//						e.printStackTrace();
-//					}
-//				}
-//			}
-//			else
-//			{
-//				StyleRange sr = new StyleRange(pos.getOffset(), pos.getLength(), BTSUIConstants.COLOR_BLACK, color);
-//				textViewer
-//				.getTextWidget().setStyleRange(sr);
-//			}
-//			textViewer.getTextWidget().update();
-			a.setHighlighted(highlighted);
+			Position pos = annotationModel.getPosition(a);
+			if (pos == null) return;
+			StyleRange[] ranges = textViewer
+					.getTextWidget()
+					.getStyleRanges(pos.getOffset(), pos.getLength());
+			Color color;
+			if (highlighted)
+			{
+				color = BTSUIConstants.COLOR_SENTENCE;
+			}
+			else
+			{
+				color = BTSUIConstants.COLOR_WIHTE;
+			}
+			if (ranges != null && !(ranges.length == 0))
+			{
+				for (StyleRange sr : ranges)
+				{
+					sr.background = color;
+					try {
+						textViewer
+						.getTextWidget().setStyleRange(sr);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+			}
+			else
+			{
+				StyleRange sr = new StyleRange(pos.getOffset(), pos.getLength(), BTSUIConstants.COLOR_BLACK, color);
+				textViewer.getTextWidget().setStyleRange(sr);
+			}
+			textViewer.getTextWidget().update();
+			if (a != null) {
+				a.setHighlighted(highlighted);
+			}
 		}
 	}
 
@@ -419,7 +419,6 @@ public class EgyTextTranslationPart {
 		List<BTSModelAnnotation> annotations = new Vector<BTSModelAnnotation>(4);
 		Map<Integer, List<BTSModelAnnotation>> annotationOffsetMap = new HashMap<Integer, List<BTSModelAnnotation>>(4);
 		BTSSentenceItem startItem = null;
-		int startItemOffeset = 0;
 		BTSSentenceItem endItem = null;
 		int endItemOffeset = 0;
 		List<BTSSentenceItem> textItems = new Vector<BTSSentenceItem>();
@@ -477,7 +476,6 @@ public class EgyTextTranslationPart {
 							// move selection offset to right if within an Ambivalence
 							|| (item.eContainer() instanceof BTSLemmaCase)) {
 						startItem = item;
-						startItemOffeset = pos.getOffset();
 					}
 					if (endItem == null
 							// move selection end to right if not within an Ambivalence
@@ -683,7 +681,9 @@ public class EgyTextTranslationPart {
 	private void unobserveTextContent() {
 		if (observableSentences != null) {
 			for (IObservableValue<?> valProp : observableSentences) {
-				valProp.removeChangeListener(getSentenceTranslationChangeListener());
+				if (!valProp.isDisposed()) {
+					valProp.dispose();
+				}
 			}
 			observableSentences.clear();
 		} else {
@@ -709,7 +709,7 @@ public class EgyTextTranslationPart {
 
 			IDocument document = new Document();
 			document.set(stringText);
-			loadAnnotations2Editor(annotationModel, tempAnnotationModel);
+			loadAnnotations2Editor(tempAnnotationModel);
 
 			textViewer.setDocument(document, annotationModel);
 //			annotationModel.connect(document);
@@ -722,8 +722,7 @@ public class EgyTextTranslationPart {
 	}
 	
 	@SuppressWarnings("rawtypes")
-	private void loadAnnotations2Editor(IAnnotationModel editorModel,
-			IAnnotationModel model) {
+	private void loadAnnotations2Editor(IAnnotationModel model) {
 		modelAnnotationMap.clear();
 		Iterator i = model.getAnnotationIterator();
 		Issue issue;
@@ -731,7 +730,7 @@ public class EgyTextTranslationPart {
 		while (i.hasNext()) {
 			Object a = i.next();
 			Position pos = model.getPosition((Annotation) a);
-			loadSingleAnnotation2Editor(editorModel, (BTSModelAnnotation)a, pos, issue);
+			loadSingleAnnotation2Editor((BTSModelAnnotation)a, pos, issue);
 		}
 
 	}
@@ -744,13 +743,13 @@ public class EgyTextTranslationPart {
 	 * @param pos the pos
 	 * @param issue the issue
 	 */
-	protected void loadSingleAnnotation2Editor(IAnnotationModel editorModel,
+	protected void loadSingleAnnotation2Editor(
 			 BTSModelAnnotation a, Position pos, Issue issue) {
 		if (a instanceof BTSModelAnnotation && ((BTSModelAnnotation)a).getModel() instanceof BTSSenctence) {
 
 			// Position pos = model.getPosition((Annotation) a);
 			Position pos2 = new Position(pos.getOffset() + EDITOR_PREFIX.length(), pos.getLength());
-			editorModel.addAnnotation((Annotation) a, pos2);
+			annotationModel.addAnnotation((Annotation) a, pos2);
 			modelAnnotationMap.put(
 					((BTSIdentifiableItem) a.getModel()).get_id(), a);
 		}

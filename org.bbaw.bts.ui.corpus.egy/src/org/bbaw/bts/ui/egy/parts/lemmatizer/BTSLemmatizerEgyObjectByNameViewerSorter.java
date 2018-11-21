@@ -9,9 +9,9 @@ import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.core.commons.comparator.AlphanumComparator;
 import org.bbaw.bts.ui.commons.corpus.util.BTSEGYUIConstants;
 import org.eclipse.jface.viewers.Viewer;
-import org.eclipse.jface.viewers.ViewerSorter;
+import org.eclipse.jface.viewers.ViewerComparator;
 
-public class BTSLemmatizerEgyObjectByNameViewerSorter extends ViewerSorter {
+public class BTSLemmatizerEgyObjectByNameViewerSorter extends ViewerComparator {
 	private RuleBasedCollator egyCollator;
 	private AlphanumComparator alphaNumComp;
 	private String wordChars;
@@ -24,21 +24,52 @@ public class BTSLemmatizerEgyObjectByNameViewerSorter extends ViewerSorter {
 		}
 		alphaNumComp = new AlphanumComparator(egyCollator);
 	}
-	
+
+	public boolean thisOrAnyDescendentsStartWithPrefix(TreeNodeWrapper node) {
+		if (node.getLabel().toLowerCase().startsWith(wordChars)) {
+			return true;
+		} else {
+			for (TreeNodeWrapper child : node.getChildren()) {
+				if (this.thisOrAnyDescendentsStartWithPrefix(child)) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
 
 	@Override
 	public int compare(Viewer viewer, Object e1, Object e2) {
 		String s1 = null;
 		String s2 = null;
 		if (e1 instanceof TreeNodeWrapper && e2 instanceof TreeNodeWrapper) {
-			// this actually happens
+
 			TreeNodeWrapper t1 = (TreeNodeWrapper) e1;
-			if (t1.getObject() != null && t1.getObject() instanceof BTSObject) {
+			TreeNodeWrapper t2 = (TreeNodeWrapper) e2;
+
+			boolean vip1 = this.thisOrAnyDescendentsStartWithPrefix(t1);
+			boolean vip2 = this.thisOrAnyDescendentsStartWithPrefix(t2);
+			
+			if (vip1) {
+				if (vip2) {
+					return alphaNumComp.compare(t1.getLabel(), t2.getLabel());
+				} else {
+					return -1;
+				}
+			} else {
+				if (vip2) {
+					return 1;
+				} else {
+					return alphaNumComp.compare(t1.getLabel(), t2.getLabel());
+				}
+			}
+			
+			/*if (t1.getObject() != null && t1.getObject() instanceof BTSObject) {
 				s1 = ((BTSObject) t1.getObject()).getName().toLowerCase();
 			} else {
 				s1 = t1.getLabel().toLowerCase();
 			}
-			TreeNodeWrapper t2 = (TreeNodeWrapper) e2;
+			
 			if (t2.getObject() != null && t2.getObject() instanceof BTSObject) {
 				s2 = ((BTSObject) t2.getObject()).getName().toLowerCase();
 			} else {
@@ -49,7 +80,7 @@ public class BTSLemmatizerEgyObjectByNameViewerSorter extends ViewerSorter {
 			}
 			if (t2.getLabel() != null) { // XXX ???
 				s2 = t2.getLabel().toLowerCase();
-			}
+			}*/
 
 		} else if (e1 instanceof BTSObject && e2 instanceof BTSObject) {
 			BTSObject b1 = (BTSObject) e1;
@@ -95,7 +126,8 @@ public class BTSLemmatizerEgyObjectByNameViewerSorter extends ViewerSorter {
 
 
 	public void setLemmatizerWordChar(String wordChars) {
-		this.wordChars = wordChars;
-		System.out.println("viewer sorter prefix set to: "+wordChars);
+		if (wordChars != null) {
+			this.wordChars = wordChars.toLowerCase();
+		}
 	}
 }

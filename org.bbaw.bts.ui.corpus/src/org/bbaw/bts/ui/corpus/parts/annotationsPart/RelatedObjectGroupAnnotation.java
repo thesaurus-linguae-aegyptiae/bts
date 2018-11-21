@@ -7,7 +7,7 @@ import org.bbaw.bts.ui.commons.utils.BTSUIConstants;
 import org.bbaw.bts.ui.corpus.dialogs.PassportEditorDialog;
 import org.bbaw.bts.ui.resources.BTSResourceProvider;
 import org.eclipse.e4.core.contexts.ContextInjectionFactory;
-import org.eclipse.e4.core.contexts.IEclipseContext;
+import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.MouseAdapter;
 import org.eclipse.swt.events.MouseEvent;
@@ -15,7 +15,6 @@ import org.eclipse.swt.layout.RowData;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
-import org.eclipse.swt.widgets.Shell;
 
 public class RelatedObjectGroupAnnotation extends RelatedObjectGroup {
 
@@ -28,14 +27,7 @@ public class RelatedObjectGroupAnnotation extends RelatedObjectGroup {
 	protected void addButtons(Composite composite) {
 		Label editButton = new Label(composite, SWT.PUSH);
 		editButton.setImage(resourceProvider.getImage(Display.getCurrent(), BTSResourceProvider.IMG_EDIT));
-		if (mayEdit())
-		{
-			editButton.setToolTipText("Edit Annotation");
-		}
-		else
-		{
-			editButton.setToolTipText("Open Annotation");
-		}
+		editButton.setToolTipText("Open Annotation");
 		editButton.setLayoutData(new RowData());
 		editButton.addMouseListener(new MouseAdapter() {
 
@@ -56,23 +48,15 @@ public class RelatedObjectGroupAnnotation extends RelatedObjectGroup {
 
 	}
 
-	protected void editObject() {
-		IEclipseContext child = context.createChild();
-		child.set(BTSObject.class, (BTSObject) getObject());
-		child.set(Shell.class, new Shell());
-		
-		PassportEditorDialog dialog = ContextInjectionFactory.make(
-				PassportEditorDialog.class, child);
-		dialog.setEditable(mayEdit());
 
-		if (dialog.open() == SWT.OK)
-			refreshContent((BTSObject) getObject());
-
-		child.dispose();
-		
+	@Override
+	protected Dialog createEditorDialog() {
+		return ContextInjectionFactory.make(
+				PassportEditorDialog.class, context);
 	}
 
-	private void refreshContent(BTSObject object) {
+	@Override
+	protected void refreshContent(BTSObject object) {
 		setExpandItemTitle(object.getName());
 	}
 

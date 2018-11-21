@@ -20,8 +20,10 @@ import org.bbaw.bts.btsmodel.BTSConfig;
 import org.bbaw.bts.btsmodel.BTSConfigItem;
 import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.commons.BTSConstants;
+import org.bbaw.bts.core.commons.BTSCoreConstants;
 import org.bbaw.bts.core.commons.comparator.BTSObjectTempSortKeyComparator;
 import org.bbaw.bts.core.commons.corpus.CorpusUtils;
+import org.bbaw.bts.core.controller.generalController.PermissionsAndExpressionsEvaluationController;
 import org.bbaw.bts.core.corpus.controller.partController.AnnotationPartController;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSAnnotation;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
@@ -68,6 +70,7 @@ import org.eclipse.swt.events.ControlEvent;
 import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Shell;
@@ -96,6 +99,10 @@ public class AnnotationsPart implements EventHandler {
 	
 	@Inject
 	private Logger logger;
+
+	@Inject
+	private PermissionsAndExpressionsEvaluationController permissionsController;
+
 	
 	/** The part service. */
 	@Inject
@@ -120,7 +127,7 @@ public class AnnotationsPart implements EventHandler {
 
 	protected boolean selfselection;
 
-	private BTSObject parentObject;
+	private BTSCorpusObject currentCorpusObject;
 
 	private boolean allRelatedObjectsShowed;
 
@@ -209,6 +216,14 @@ public class AnnotationsPart implements EventHandler {
 	}
 
 
+	/**
+	 * Retrieves the annotation part's view menu, where menu items correspond to related object
+	 * types that are either to be shown or to be filtered out. Based on the check states of these
+	 * menu items, the related object type filter state flag map gets initiated.<br/><br/>
+	 * 
+	 * Next, annotation type and subtype definitions are retrieved from the active project configuration.
+	 * Each type and subtype gets a corresponding checkable menu item in a multi-level submenu.
+	 */
 	private void extendAnnotationsFilterMenu() {
 		// initialize filters from fragment model definition
 		HashMap<String, Boolean> filters = new HashMap<String, Boolean>();
@@ -220,32 +235,32 @@ public class AnnotationsPart implements EventHandler {
 			}
 		}
 		if (viewmenu != null) {
+			/* first go through default annotation types defined in application model
+			this is being done so that the annotation part filter dictionary can be initialized
+			the respective filter keys corresponding to these built-in view menu
+			entries are defined by their `annotationsPartFilterParam` parameters */
 			MMenu submenu = null;
 			MCommand menuFilterCommand = null;
 			// save menu item selection flags from application model to context
 			for (MMenuElement mi : viewmenu.getChildren()) {
 				if (mi instanceof MHandledMenuItem) {
-					String key = null;
-					MParameter param = null;
-					for (MParameter p : ((MHandledMenuItem) mi).getParameters())
-					{
-						if ("annotationsPartFilterParam".equals(p.getName()))
-						{
-							param = p;
-							break;
+					for (MParameter p : ((MHandledMenuItem) mi).getParameters()) {
+						if (p.getName().equals("annotationsPartFilterParam")) {
+							filters.put(p.getValue(), ((MHandledMenuItem)mi).isSelected());
 						}
 					}
-					if (param == null) continue;
-					key = param.getValue();
-					filters.put(key, ((MHandledMenuItem)mi).isSelected());
 					// retrieve filter command in order to handle possible submenu entries
 					menuFilterCommand = ((MHandledMenuItem) mi).getCommand();
 				}
+
 				if (mi.getElementId().
 						equals("org.bbaw.bts.ui.corpus.part.annotations.viewmenu.showType.annotation.type")) {
 					submenu = (MMenu) mi;
 				}
 			}
+
+			/* now to the good part: the "annotation" menu entry in the aforementioned part view menu needs to be 
+			expanded into a submenu and populated with annotation types and subtypes from the active BTS configuration */
 			// remove submenu if already there
 			if (submenu != null) {
 				submenu.setToBeRendered(false);
@@ -256,49 +271,71 @@ public class AnnotationsPart implements EventHandler {
 			try {
 				typeConf = annotationPartController.getAnnoTypesConfigItem();
 			} catch (Exception e) {
+				logger.error(e, "Annotation type configurations could not be obtained.");
 			};
+
 			if (typeConf != null && !typeConf.getChildren().isEmpty()) {
 				// initialize submenu for annotation types
 				submenu = MMenuFactory.INSTANCE.createMenu();
 				submenu.setElementId("org.bbaw.bts.ui.corpus.part.annotations.viewmenu.show.annotation.type");
 				submenu.setLabel("Annotation Types");
+
 				// traverse annotation types configuration branch
 				for (BTSConfig c : typeConf.getChildren()) {
 					if (c instanceof BTSConfigItem) {
 						BTSConfigItem confItem = (BTSConfigItem)c;
 						if (CorpusUtils.ANNOTATION_RUBRUM_TYPE.equals(confItem.getValue())) continue;
 						MMenuElement menuItemType = null;
+
 						// retrieve subtype definition from configuration node
 						BTSConfigItem subtypeConf = null;
 						try {
 							subtypeConf = annotationPartController.getAnnoSubtypesConfigItem(confItem);
-						} catch (Exception e){};
+						} catch (Exception e) {
+							logger.warn(e, "Annotation subtypes configurations could not be obtained for type "+
+									confItem.get_id()+" ("+confItem.getLabel()+")");
+						};
 						List<BTSConfigItem> subTypeConfItems = new Vector<BTSConfigItem>();
 						if (subtypeConf != null) {
 							// filter attached subtype definition nodes
 							for (BTSConfig cc : subtypeConf.getChildren()) {
 								if (cc instanceof BTSConfigItem && ((BTSConfigItem)cc).getValue() != null) {
 										subTypeConfItems.add((BTSConfigItem)cc);
-									}
 								}
+							}
 						}
 						// if subtypes definitions exist, nest in submenu
+						String key = CorpusUtils.getTypeIdentifier(BTSConstants.ANNOTATION, confItem, null);
 						if (!subTypeConfItems.isEmpty()) {
+							// create submenu
 							menuItemType = MMenuFactory.INSTANCE.createMenu();
-							String key = null;
+
+							// first entry controls the type alone, without any subtype
+							MHandledMenuItem menuItemTypeWithoutSubtype = newFilterMenuItem(key);
+							((MHandledMenuItem)menuItemTypeWithoutSubtype).setCommand(menuFilterCommand);
+							menuItemTypeWithoutSubtype.setLabel(confItem.getLabel().getTranslation(lang));
+							((MMenu)menuItemType).getChildren().add(menuItemTypeWithoutSubtype);
+							filters.put(key, ((MHandledMenuItem)menuItemTypeWithoutSubtype).isSelected());
+							((MMenu)menuItemType).getChildren().add(MMenuFactory.INSTANCE.createMenuSeparator());
+							
+
+							// go through subtypes
 							for (BTSConfigItem subTypeConfItem : subTypeConfItems) {
+								// retrieve subtype key from configuration
 								key = CorpusUtils.getTypeIdentifier(BTSConstants.ANNOTATION, confItem, subTypeConfItem);
+								
 								// create annotation subtype menu entry and append to type submenu
 								MHandledMenuItem menuItemSubType = newFilterMenuItem(key);
 								menuItemSubType.setCommand(menuFilterCommand);
 								menuItemSubType.setLabel(subTypeConfItem.getLabel().getTranslation(lang));
 								((MMenu)menuItemType).getChildren().add(menuItemSubType);
+								// init subtype filter state
 								filters.put(key, ((MHandledMenuItem)menuItemSubType).isSelected());
 							}
-						} else { // create checkable menu entry for type without subtypes
-							String key = CorpusUtils.getTypeIdentifier(BTSConstants.ANNOTATION, confItem, null);
+						} else { // create checkable menu entry for types that don't have subtypes
 							menuItemType = newFilterMenuItem(key);
 							((MHandledMenuItem)menuItemType).setCommand(menuFilterCommand);
+							// init type filter state
 							filters.put(key, ((MHandledMenuItem)menuItemType).isSelected());
 						}
 						// label annotation type menu entry and append to submenu
@@ -315,6 +352,14 @@ public class AnnotationsPart implements EventHandler {
 	}
 
 
+	/**
+	 * Creates a new menu item with a checked checkmark corresponding to the key passed a parameter.
+	 * The newly created menu item also gets equipped with an attached menu parameter of type <code>annotationsPartFilterParam</code>,
+	 * where the specified key gets stored in.
+	 * @param key An identifier for the boolean filter flag.
+	 * @return A new {@link MHandledMenuItem} instance.
+	 * @see ItemType#CHECK
+	 */
 	private MHandledMenuItem newFilterMenuItem(String key) {
 		MHandledMenuItem menuItem = MMenuFactory.INSTANCE.createHandledMenuItem();
 		menuItem.setElementId("org.bbaw.bts.ui.corpus.part.annotations.viewmenu.showType.annotation.type." + key);
@@ -333,10 +378,7 @@ public class AnnotationsPart implements EventHandler {
 	void eventReceivedRelatingObjectsLoaded(
 			@EventTopic("event_text_relating_objects/*") final BTSRelatingObjectsLoadingEvent event) {
 		if (event != null) {
-			parentObject = event.getObject();
-			if (parentObject != null) {
-				queryId = "relations.objectId-" + parentObject.get_id();
-			}			
+			setCorpusObject(event.getObject());
 			this.relatingObjectsEvent = event;
 			sync.syncExec(new Runnable() {
 				public void run() {
@@ -348,7 +390,9 @@ public class AnnotationsPart implements EventHandler {
 	}
 	
 	private void clearRelatingObjects(BTSCorpusObject selection) {
-		if(selection.equals(parentObject) || parentObject == null) return;
+		if (currentCorpusObject == null || selection.equals(currentCorpusObject)) {
+			return;
+		}
 		part.setLabel("Annotations");
 		part.setTooltip("Annotations");
 		relatingObjectsQueryIDMap.clear();
@@ -372,7 +416,7 @@ public class AnnotationsPart implements EventHandler {
 		composite.layout();
 		scrollComposite.setMinSize(composite.computeSize(r.width,
 				SWT.DEFAULT));
-		parentObject = (BTSCorpusObject)selection;
+		setCorpusObject(selection);
 
 	}
 
@@ -444,7 +488,7 @@ public class AnnotationsPart implements EventHandler {
 					});
 				}
 			};
-			new ProgressMonitorDialog(new Shell()).run(true, true, op);
+			new ProgressMonitorDialog(Display.getDefault().getActiveShell()).run(true, true, op);
 		} catch (InvocationTargetException e) {
 			// handle exception
 		} catch (InterruptedException e) {
@@ -461,34 +505,34 @@ public class AnnotationsPart implements EventHandler {
 		child.set(Composite.class, composite);
 		child.set(AnnotationsPart.class, this);
 		child.set(BTSObject.class, (BTSObject) o);
+		child.set(BTSCoreConstants.CORE_EXPRESSION_MAY_EDIT, 
+				permissionsController.userMayEditObject(
+						permissionsController.getAuthenticatedUser(), o));
+
+		Class<?> widgetClass; 
 		if (o instanceof BTSAnnotation)
 		{
 			if (BTSConstants.ANNOTATION_RUBRUM.equalsIgnoreCase(o.getType()))
 			{
-				roGroup = ContextInjectionFactory
-						.make(RelatedObjectGroupRubrum.class, child);
+				widgetClass = RelatedObjectGroupRubrum.class;
 			}
 			else
 			{
-				roGroup = ContextInjectionFactory
-						.make(RelatedObjectGroupAnnotation.class, child);
+				widgetClass = RelatedObjectGroupAnnotation.class;
 			}
 		}
-		else if (o instanceof BTSText)
-		{
-			roGroup = ContextInjectionFactory
-					.make(RelatedObjectGroupSubtext.class, child);
+		else if (o instanceof BTSText) {
+			widgetClass = RelatedObjectGroupSubtext.class;
 		} 
-		else if (o instanceof BTSComment)
-		{
-			roGroup = ContextInjectionFactory
-					.make(RelatedObjectGroupComment.class, child);
+		else if (o instanceof BTSComment) {
+			widgetClass = RelatedObjectGroupComment.class;
 		}
-		else
-		{
-			roGroup = ContextInjectionFactory
-					.make(RelatedObjectGroupImpl.class, child);
+		else {
+			widgetClass = RelatedObjectGroupImpl.class;
 		}
+		roGroup = (RelatedObjectGroup) ContextInjectionFactory
+				.make(widgetClass, child);
+
 		roGroup.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 		roGroup.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1));
 //		roGroup.postConstruct();
@@ -586,7 +630,7 @@ public class AnnotationsPart implements EventHandler {
 			if (g != null)
 				setSelectedInternal(new Vector<>(Arrays.asList(g)), false);
 		}
-		else if (selection instanceof BTSCorpusObject && !selection.equals(parentObject))
+		else if (selection instanceof BTSCorpusObject && !selection.equals(currentCorpusObject))
 		{
 			// empty the panel
 			sync.syncExec(new Runnable() {
@@ -594,11 +638,9 @@ public class AnnotationsPart implements EventHandler {
 					clearRelatingObjects((BTSCorpusObject)selection);
 				}
 			});
-			relatingObjectsQueryIDMap.clear();
 			List<BTSObject> relatingObjects = null;
 			List<BTSObject> filteredRelatingObjects = null;
-			queryId = "relations.objectId-" + ((BTSCorpusObject)selection).get_id();
-			parentObject = (BTSCorpusObject)selection;
+			setCorpusObject(selection);
 			// if BTSText wait to receive relationObjectLoadedEvent through eventBroker!
 			if (!(selection instanceof BTSText))
 			{
@@ -635,11 +677,25 @@ public class AnnotationsPart implements EventHandler {
 			{
 				this.textSelectionEvent = (BTSTextSelectionEvent) selection;
 			}
-			else if (selection instanceof BTSCorpusObject && !selection.equals(parentObject))
+			else if (selection instanceof BTSCorpusObject)
 			{
-				parentObject = (BTSCorpusObject)selection;
-
+				setCorpusObject(selection);
 			}
+		}
+	}
+
+	private void setCorpusObject(Object corpusObject) {
+		currentCorpusObject = (BTSCorpusObject)corpusObject;
+		if (currentCorpusObject != null) {
+			queryId = "relations.objectId-" + currentCorpusObject.get_id();
+			// XXX was sind requirements damit user commenten darf?
+			// wenn er researcher ist, musz er updater sein
+			// wenn er editor ist, musz er updater sein oder
+			// text musz public sein
+			context.set(BTSCoreConstants.CORE_EXPRESSION_MAY_COMMENT, 
+					permissionsController.userMayCommentOnObject(
+							permissionsController.getAuthenticatedUser(),
+							currentCorpusObject));
 		}
 	}
 
@@ -826,5 +882,9 @@ public class AnnotationsPart implements EventHandler {
 			objects.add(rog.getObject());
 		}
 		return objects.toArray(new BTSObject[objects.size()]);
+	}
+
+	public BTSCorpusObject getCorpusObject() {
+		return currentCorpusObject;
 	}
 }

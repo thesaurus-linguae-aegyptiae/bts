@@ -78,7 +78,10 @@ public class BTSEvaluationServiceImpl implements BTSEvaluationService
 	@Named(BTSCoreConstants.USERGROUPS_OF_AUTHENTICATED_USER)
 	private List<BTSUserGroup> userGroups;
 
+	// registries for faster lookup	
 	private Map<String, BTSProjectDBCollection> dbCollectionCache;
+
+	private Map<String, BTSUserGroup> userGroupCache;
 
 	private BTSProjectService projectService;
 
@@ -345,6 +348,22 @@ public class BTSEvaluationServiceImpl implements BTSEvaluationService
 		}
 	}
 
+	private BTSUserGroup findUserGroupInCacheOrElse(String usergroupId) {
+		if (userGroupCache == null) {
+			userGroupCache = new HashMap<>();
+		}
+		BTSUserGroup userGroup = userGroupCache.getOrDefault(usergroupId, null);
+		if (userGroup == null) {
+			try {
+				userGroup = userGroupService.find(usergroupId, null);
+				userGroupCache.put(usergroupId, userGroup);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return userGroup;
+	}
+
 	private boolean userIsReader(BTSDBBaseObject object) {
 		if (object == null) return false;
 		
@@ -399,7 +418,7 @@ public class BTSEvaluationServiceImpl implements BTSEvaluationService
 			for (String id : user.getGroupIds()) {
 				BTSUserGroup g = null;
 				try {
-					g = userGroupService.find(id, null);
+					g = findUserGroupInCacheOrElse(id);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

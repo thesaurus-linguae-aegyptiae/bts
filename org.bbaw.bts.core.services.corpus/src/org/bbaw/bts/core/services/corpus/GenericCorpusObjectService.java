@@ -21,4 +21,6 @@ extends GenericObjectService<E, K>{
 	public String[] getActive_corpora(String projecPrefix);
 	
 	public String[] getActiveLemmaLists();
+	
+	public String[] buildIndexArray();
 }

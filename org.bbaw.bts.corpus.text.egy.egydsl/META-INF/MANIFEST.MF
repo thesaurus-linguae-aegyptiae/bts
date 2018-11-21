@@ -14,6 +14,7 @@ Require-Bundle: org.eclipse.xtext;visibility:=reexport,
  org.eclipse.xtext.util,
  org.eclipse.emf.ecore,
  org.eclipse.emf.common,
+ org.eclipse.equinox.common,
  org.antlr.runtime,
  org.eclipse.xtext.common.types,
  org.eclipse.emf.mwe2.runtime,
@@ -35,4 +36,4 @@ Export-Package: org.bbaw.bts.corpus.text.egy,
  org.bbaw.bts.corpus.text.egy.scoping,
  org.bbaw.bts.corpus.text.egy.generator,
  org.bbaw.bts.corpus.text.egy.formatting
-Bundle-Version: 3.1.0.qualifier
+Bundle-Version: 3.1.1.qualifier

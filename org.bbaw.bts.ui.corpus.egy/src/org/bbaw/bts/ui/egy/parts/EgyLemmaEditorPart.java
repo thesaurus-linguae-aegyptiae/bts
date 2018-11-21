@@ -16,12 +16,14 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.bbaw.bts.btsmodel.BTSIdentifiableItem;
+import org.bbaw.bts.btsmodel.BTSInterTextReference;
 import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.btsmodel.BTSTranslations;
 import org.bbaw.bts.btsmodel.BtsmodelFactory;
 import org.bbaw.bts.commons.BTSPluginIDs;
 import org.bbaw.bts.core.commons.BTSCoreConstants;
 import org.bbaw.bts.core.controller.generalController.EditingDomainController;
+import org.bbaw.bts.core.controller.generalController.PermissionsAndExpressionsEvaluationController;
 import org.bbaw.bts.core.corpus.controller.partController.LemmaEditorController;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSLemmaEntry;
@@ -159,7 +161,7 @@ public class EgyLemmaEditorPart extends AbstractTextEditorLogic implements IBTSE
 
 	private IAnnotationModel annotationModel;
 
-	private Map relatingObjectsMap;
+	private Map<String, List<BTSInterTextReference>> relatingObjectsMap;
 
 	private BTSTextXtextEditedResourceProvider xtextResourceProvider = new BTSTextXtextEditedResourceProvider();
 	private Map<String, BTSModelAnnotation> modelAnnotationMap;
@@ -186,6 +188,9 @@ public class EgyLemmaEditorPart extends AbstractTextEditorLogic implements IBTSE
 
 	// boolean if selection is cached and can be loaded when gui becomes visible or constructed
 	private boolean selectionCached;
+
+	@Inject
+	private PermissionsAndExpressionsEvaluationController permissionsController;
 
 	@Inject
 	public EgyLemmaEditorPart(EPartService partService) {
@@ -255,33 +260,26 @@ public class EgyLemmaEditorPart extends AbstractTextEditorLogic implements IBTSE
 		grpTransliteration.layout();
 		// embeddedEditor.getViewer().getControl().setFocus();
 
-		
-
 		embeddedEditor.getViewer().getTextWidget()
 				.addCaretListener(new CaretListener() {
-
 					@Override
 					public void caretMoved(CaretEvent event) {
 						processTextSelection(event);
-
 					}
 				});
+
 		embeddedEditor.getViewer().getTextWidget().addSelectionListener(new SelectionListener() {
-			
 			@Override
 			public void widgetSelected(SelectionEvent event) {
 				processTextSelection(event);
-
-				
 			}
 			
 			@Override
 			public void widgetDefaultSelected(SelectionEvent e) {
-				
 			}
 		});
+
 		embeddedEditor.getViewer().getTextWidget().addFocusListener(new FocusListener() {
-			
 			@Override
 			public void focusLost(FocusEvent e) {
 				updateModelFromTranscription();
@@ -289,10 +287,10 @@ public class EgyLemmaEditorPart extends AbstractTextEditorLogic implements IBTSE
 			
 			@Override
 			public void focusGained(FocusEvent e) {
-				contextService
-				.activateContext("org.eclipse.xtext.ui.embeddedTextEditorScope");
-				loadTextContent(selectedLemmaEntry);
-				loadTransliteration(selectedLemmaEntry);
+				contextService.activateContext("org.eclipse.xtext.ui.embeddedTextEditorScope");
+				// XXX why?
+				//loadTextContent(selectedLemmaEntry);
+				//loadTransliteration(selectedLemmaEntry);
 			}
 		});
 		
@@ -312,14 +310,13 @@ public class EgyLemmaEditorPart extends AbstractTextEditorLogic implements IBTSE
 			
 			@Override
 			public void focusLost(FocusEvent e) {
-
 			}
 			
 			@Override
 			public void focusGained(FocusEvent e) {
-				loadTextContent(selectedLemmaEntry);
-				loadSignText(selectedLemmaEntry);
-				
+				// XXX why?
+				//loadTextContent(selectedLemmaEntry);
+				//loadSignText(selectedLemmaEntry);
 			}
 		});
 		grpSigntext.layout();
@@ -345,8 +342,25 @@ public class EgyLemmaEditorPart extends AbstractTextEditorLogic implements IBTSE
 		{
 			loadInput(selectedLemmaEntry);
 		}
+
+		embeddedEditor.getDocument().addDocumentListener(
+			new IDocumentListener() {
+				@Override
+				public void documentChanged(DocumentEvent event) {
+					System.out.println("editor is currently loading content: "+loading);
+					if (!loading) {
+						setDirtyInternal();
+					}
+				}
+
+				@Override
+				public void documentAboutToBeChanged(DocumentEvent event) {
+				}
+			});
+
 	}
-	
+
+
 	
 	
 	@Inject
@@ -401,35 +415,32 @@ public class EgyLemmaEditorPart extends AbstractTextEditorLogic implements IBTSE
 			}
 		}
 	}
-	private void makePartActive(boolean activate) {
-	embeddedEditor.getViewer().setEditable(activate);
-	embeddedEditor.getViewer().getTextWidget().setEnabled(activate);
-	signTextEditor.setEnabled(activate);
-	lemmaTranslate_Editor.setEnabled(activate);
-	if (activate)
-	{
-		embeddedEditor.getViewer().getTextWidget().setBackground(BTSUIConstants.COLOR_WIHTE);
-		signTextEditor.setBackground(BTSUIConstants.COLOR_WIHTE);
-	}
-	else
-	{
-		embeddedEditor.getViewer().getTextWidget().setBackground(BTSUIConstants.COLOR_BACKGROUND_DISABLED);
-		signTextEditor.setBackground(BTSUIConstants.COLOR_BACKGROUND_DISABLED);
-	}
-	
-}
 
-private void bringPartToFront(boolean b) {
-	try {
-		partService.bringToTop(part);
-	} catch (Exception e) {
-	}
+	private void makePartActive(boolean activate) {
+		embeddedEditor.getViewer().setEditable(activate);
+		embeddedEditor.getViewer().getTextWidget().setEnabled(activate);
+		signTextEditor.setEnabled(activate);
+		lemmaTranslate_Editor.setEnabled(activate);
+		if (activate) {
+			embeddedEditor.getViewer().getTextWidget().setBackground(BTSUIConstants.COLOR_WIHTE);
+			signTextEditor.setBackground(BTSUIConstants.COLOR_WIHTE);
+		} else {
+			embeddedEditor.getViewer().getTextWidget().setBackground(BTSUIConstants.COLOR_BACKGROUND_DISABLED);
+			signTextEditor.setBackground(BTSUIConstants.COLOR_BACKGROUND_DISABLED);
+		}
 	
-}
+	}
+
+	private void bringPartToFront(boolean b) {
+		try {
+			partService.bringToTop(part);
+		} catch (Exception e) {}
+	}
 	
 	private void loadInput(final BTSLemmaEntry selection) {
 		
 		loading = true;
+
 		if (selection != null)
 		{
 			Job job = new Job("load children")
@@ -495,27 +506,11 @@ private void bringPartToFront(boolean b) {
 		annotationModel = embeddedEditor.getViewer().getAnnotationModel();
 
 		loadAnnotations2Editor(annotationModel, tempAnnotationModel);
-		if (selectedLemmaEntry != null) {
-			embeddedEditor.getDocument().addDocumentListener(
-					new IDocumentListener() {
 
-					@Override
-					public void documentChanged(DocumentEvent event) {
-						if (!loading)
-						{
-							setDirtyInternal();
-						}
-
-					}
-
-					@Override
-					public void documentAboutToBeChanged(DocumentEvent event) {
-
-					}
-				});
-		}
 		processLemmaAnnotions(lemmaAnnotationMap);
 	}
+
+
 	private void processLemmaAnnotions(
 			final HashMap<String, List<Object>> localLemmaAnnotationMap) {
 		
@@ -828,10 +823,13 @@ private void bringPartToFront(boolean b) {
 		l.add(ma);
 	}
 	protected void setDirtyInternal() {
-		if (selectedLemmaEntry != null && dirty != null && !dirty.isDirty()) {
-			dirty.setDirty(true);
+		if (permissionsController.userMayEditObject(
+				permissionsController.getAuthenticatedUser(), 
+				selectedLemmaEntry)) {
+			if (selectedLemmaEntry != null && dirty != null && !dirty.isDirty()) {
+				dirty.setDirty(true);
+			}
 		}
-		
 	}
 
 	private void loadSignText(BTSLemmaEntry lemma) {

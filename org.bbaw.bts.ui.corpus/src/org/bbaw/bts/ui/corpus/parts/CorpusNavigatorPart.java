@@ -272,7 +272,7 @@ public class CorpusNavigatorPart extends NavigatorPart implements ScatteredCachi
 		
 		// create bin tab item
 		binTabItem = new CTabItem(tabFolder, SWT.NONE);
-		binTabItem.setText("Bin");
+		binTabItem.setText("Trash");
 		binTabItem.setData("key", "bin");
 		binTabItem.setImage(resourceProvider.getImage(Display.getDefault(),
 				BTSResourceProvider.IMG_BIN));
@@ -918,7 +918,7 @@ labelProvider));
 	}
 
 	@Override
-	public List<Map> getScatteredCashMaps() {
+	public List<Map> getScatteredCacheMaps() {
 		final List<Map> maps = new Vector<Map>(1);
 		for (Map map : cachingMap.values()) {
 			maps.add(map);

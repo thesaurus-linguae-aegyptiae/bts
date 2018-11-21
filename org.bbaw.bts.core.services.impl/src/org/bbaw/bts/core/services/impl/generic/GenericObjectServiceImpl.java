@@ -2,6 +2,7 @@ package org.bbaw.bts.core.services.impl.generic;
 
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -313,17 +314,17 @@ public abstract class GenericObjectServiceImpl<E extends BTSDBBaseObject, K exte
 	}
 	
 	
-	public String getDisplayName(String userId, IProgressMonitor monitor)
+	public String getDisplayName(String objectId, IProgressMonitor monitor)
 	{
 		BTSObject o = null;
 		try {
-			o = (BTSObject) find((K) userId, monitor);
+			o = (BTSObject) find((K) objectId, monitor);
 		} catch (Exception e) {
 		}
 		if (o != null) {
 			return o.getName();
 		}
-		return userId;
+		return objectId;
 		
 	}
 	protected String[] getActiveProjects() {
@@ -342,5 +343,18 @@ public abstract class GenericObjectServiceImpl<E extends BTSDBBaseObject, K exte
 			}
 		}
 		return projectPrefixes.toArray(new String[projectPrefixes.size()]);
+	}
+	
+	/**
+	 * @return
+	 */
+	protected String[] buildIndexArray() {
+		List<String> indexNames = new ArrayList<String>();
+		for (String p : getActiveProjects())
+		{
+			String n = p + BTSCoreConstants.ADMIN_SUFFIX;
+			indexNames.add(n);
+		}
+		return indexNames.toArray(new String[indexNames.size()]);
 	}
 }

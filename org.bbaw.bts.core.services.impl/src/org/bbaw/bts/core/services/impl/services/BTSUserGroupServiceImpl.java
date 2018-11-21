@@ -83,8 +83,9 @@ public class BTSUserGroupServiceImpl extends GenericObjectServiceImpl<BTSUserGro
 	@Override
 	public List<BTSUserGroup> query(BTSQueryRequest query, String objectState,
 			boolean registerQuery, IProgressMonitor monitor) {
+		String[] indexArray = new String[]{BTSCoreConstants.ADMIN};
 		List<BTSUserGroup> objects = userGroupDao.query(query,
-				BTSCoreConstants.ADMIN, BTSCoreConstants.ADMIN, objectState,
+				indexArray, indexArray, objectState,
 				registerQuery);
 		return filter(objects);
 	}
@@ -126,8 +127,10 @@ public class BTSUserGroupServiceImpl extends GenericObjectServiceImpl<BTSUserGro
 	 */
 	@Override
 	public List<String> queryAsJsonString(BTSQueryRequest query, String objectState, IProgressMonitor monitor) {
+		String[] indexArray = new String[]{BTSCoreConstants.ADMIN};
+
 		List<String> objects = userGroupDao.queryAsJsonString(query,
-				BTSCoreConstants.ADMIN, BTSCoreConstants.ADMIN, objectState,
+				indexArray, indexArray, objectState,
 				false);
 		return objects;
 	}

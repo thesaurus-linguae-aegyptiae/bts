@@ -4,7 +4,9 @@ import java.util.List;
 import java.util.Vector;
 
 import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import org.bbaw.bts.btsmodel.BTSIdentifiableItem;
 import org.bbaw.bts.btsmodel.BTSInterTextReference;
@@ -23,6 +25,7 @@ import org.bbaw.bts.ui.resources.BTSResourceProvider;
 import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.core.services.log.Logger;
 import org.eclipse.emf.edit.domain.EditingDomain;
+import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.ControlEvent;
 import org.eclipse.swt.events.ControlListener;
@@ -44,6 +47,7 @@ import org.eclipse.swt.widgets.ExpandItem;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Listener;
+import org.eclipse.swt.widgets.Shell;
 
 public abstract class RelatedObjectGroup extends Composite{
 
@@ -87,6 +91,11 @@ public abstract class RelatedObjectGroup extends Composite{
 	protected Logger logger;
 
 	@Inject
+	@Named(BTSCoreConstants.CORE_EXPRESSION_MAY_EDIT)
+	private boolean mayEditObject = false;
+
+
+	@Inject
 	public RelatedObjectGroup(Composite parent, BTSObject object) {
 		super(parent, SWT.None);
 		this.object = object;
@@ -94,7 +103,7 @@ public abstract class RelatedObjectGroup extends Composite{
 	
 	@PostConstruct
 	public void postConstruct(){
-		
+
 		editingDomain = editingDomainController.getEditingDomain(object);
 		setLayout(new GridLayout(1, false));
 		((GridLayout)this.getLayout()).marginHeight = 0;
@@ -162,9 +171,8 @@ public abstract class RelatedObjectGroup extends Composite{
 			}
 		});
 		expandBar.addMouseListener(mouseListener);
-		
 
-		
+
 		xpndtmNewExpanditem = new ExpandItem(expandBar, SWT.NONE);
 		xpndtmNewExpanditem.setExpanded(false);
 		if (object.getName() != null)
@@ -209,6 +217,16 @@ public abstract class RelatedObjectGroup extends Composite{
 		this.layout();
 	}
 
+	@PreDestroy
+	public void preDestroy() {
+		// TODO dispose of all that stuff
+		context.dispose();
+	}
+
+	protected boolean mayEdit() {
+		return mayEditObject;
+	}
+
 	protected abstract void addButtons(Composite composite);
 
 	protected abstract void fillContentComposite(Composite composite);
@@ -219,27 +237,25 @@ public abstract class RelatedObjectGroup extends Composite{
 		addButton.setImage(resourceProvider.getImage(Display.getCurrent(), BTSResourceProvider.IMG_RELATION_ADD));
 		addButton.setToolTipText("Add Current Text Selection as Reference");
 		addButton.setLayoutData(new RowData());
-		addButton.addMouseListener(new MouseAdapter() {
+		if (mayEdit()) {
+			addButton.addMouseListener(new MouseAdapter() {
 
-			@Override
-			public void mouseDown(MouseEvent e) {
-				if (mayEdit())
-				{
+				@Override
+				public void mouseDown(MouseEvent e) {
 					Label l = (Label) e.getSource();
 					l.setBackground(BTSUIConstants.VIEW_BACKGROUND_LABEL_PRESSED);
 				}
-			}
 
-			@Override
-			public void mouseUp(MouseEvent e) {
-				if (mayEdit())
-				{
+				@Override
+				public void mouseUp(MouseEvent e) {
 					Label l = (Label) e.getSource();
 					l.setBackground(l.getParent().getBackground());
 					addReference();
 				}
-			}
-		});
+			});
+		} else {
+			addButton.setEnabled(false);
+		}
 		
 		
 		/*Label editButton = new Label(composite, SWT.PUSH);
@@ -272,34 +288,61 @@ public abstract class RelatedObjectGroup extends Composite{
 		delButton.setImage(resourceProvider.getImage(Display.getCurrent(), BTSResourceProvider.IMG_RELATION_DELETE));
 		delButton.setToolTipText("Remove Current Reference");
 		delButton.setLayoutData(new RowData());
-		delButton.addMouseListener(new MouseAdapter() {
+		if (mayEdit()) {
+			delButton.addMouseListener(new MouseAdapter() {
 
-			@Override
-			public void mouseDown(MouseEvent e) {
-				if (mayEdit())
-				{
+				@Override
+				public void mouseDown(MouseEvent e) {
 					Label l = (Label) e.getSource();
 					l.setBackground(BTSUIConstants.VIEW_BACKGROUND_LABEL_PRESSED);
 				}
-			}
 
-			@Override
-			public void mouseUp(MouseEvent e) {
-				if (mayEdit())
-				{
+				@Override
+				public void mouseUp(MouseEvent e) {
 					Label l = (Label) e.getSource();
 					l.setBackground(l.getParent().getBackground());
 					removeReference();
 				}
-			}
-		});
+			});
+		} else {
+			delButton.setEnabled(false);
+		}
 
 		
 	}
 
-	protected boolean mayEdit() {
-		return permissionsController.authenticatedUserMayEditObject(object);
+
+	/**
+	 * Make whatever dialog seems suitable for editing the related object in question.
+	 * Should be done using <code>ContextInjectionFactory.make</code>.
+	 * @return
+	 */
+	protected abstract Dialog createEditorDialog();
+
+	/**
+	 * Create dialog for object editing, open it and refresh GUI according to result.
+	 */
+	protected void editObject() {
+		context.set(Shell.class, new Shell());
+		boolean editable = permissionsController.userMayEditObject(
+				permissionsController.getAuthenticatedUser(),
+				getObject());
+		System.out.println("Can dialog edit object? "+editable);
+		context.set(BTSCoreConstants.CORE_EXPRESSION_MAY_EDIT, editable);
+
+		Dialog editDialog = createEditorDialog();
+
+		if (editDialog.open() == Dialog.OK) {
+			refreshContent(getObject());
+		}
+
 	}
+
+	/**
+	 * Update GUI elements representing object.
+	 * @param obj
+	 */
+	protected abstract void refreshContent(BTSObject obj);
 
 	protected void editReference() {
 		BTSTextSelectionEvent selectionEvent = parentPart.getTextSelectionEvent();

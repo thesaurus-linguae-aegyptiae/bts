@@ -219,7 +219,7 @@ public interface GenericDao<E extends BTSDBBaseObject, K>
 	 * @param registerQuery whether the query should be registered e.g. with percolator.
 	 * @return the list of matching entities
 	 */
-	List<E> query(BTSQueryRequest query, String indexName, String indexType,
+	List<E> query(BTSQueryRequest query, String[] indexNames, String[] indexTypes,
 			String objectState, boolean registerQuery);
 	
 	/**
@@ -233,7 +233,7 @@ public interface GenericDao<E extends BTSDBBaseObject, K>
 	 * @param registerQuery whether the query should be registered e.g. with percolator.
 	 * @return the list of matching entities
 	 */
-	List<String> queryAsJsonString(BTSQueryRequest query, String indexName, String indexType,
+	List<String> queryAsJsonString(BTSQueryRequest query, String[] indexNames, String[] indexTypes,
 			String objectState, boolean registerQuery);
 
 	/**

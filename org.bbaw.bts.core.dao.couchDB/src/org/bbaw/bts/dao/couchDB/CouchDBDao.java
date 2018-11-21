@@ -329,14 +329,17 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 		try {
 			sourceStream = client.find((String)key);
 		} catch (NoDocumentException e) {
-			logger.error("Failed to loadFully object with path: " + uri.toString());
-			logger.debug(e);
-			return null;
+			logger.warn("Failed to loadFully object with path: " + uri.toString()+"\n "+e.getMessage());
 		}
 		
-		final JSONLoad loader = new JSONLoad(sourceStream,
-				new HashMap<Object, Object>(), connectionProvider.getEmfResourceSet());
-		loader.fillResource(resource);
+		try {
+			final JSONLoad loader = new JSONLoad(sourceStream,
+					new HashMap<Object, Object>(), connectionProvider.getEmfResourceSet());
+			loader.fillResource(resource);
+		} catch (Exception e) {
+			logger.warn("Failed to deserialize object from JSON: "+e.getMessage());
+			return null;
+		}
 		
 		try {
 			sourceStream.close();
@@ -363,6 +366,7 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 	@SuppressWarnings("unchecked")
 	@Override
 	public E find(K key, String path, String revision)
+	// XXX apparently not used at all ever
 	{
 		CouchDbClient dbClient = connectionProvider.getDBClient(
 				CouchDbClient.class, path);
@@ -594,7 +598,7 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 
 	public void createView(String path, String sourcePath, String viewName)
 	{
-		logger.info("path " + path + " viewName " + viewName);
+		logger.info("create view from local source "+sourcePath+". path " + path + " viewName " + viewName);
 		CouchDbClient dbClient = connectionProvider.getDBClient(CouchDbClient.class, path);
 		// design documents stored on local .js files
 
@@ -715,25 +719,47 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 		return null;
 	}
 
+	private String[] existingIndexNamesOnly(String[] indexNames) {
+		Vector<String> existingIndexNames = new Vector<>();
+		for (String indexName : indexNames) {
+			if (connectionProvider.getSearchClient(Client.class).admin().indices().exists(
+					new IndicesExistsRequest(indexName))
+					.actionGet().isExists()) {
+				existingIndexNames.add(indexName);
+			}
+		}
+		indexNames = existingIndexNames.toArray(new String[existingIndexNames.size()]);
+		return indexNames;
+	}
 	
 	@Override
-	public List<E> query(BTSQueryRequest query, String indexName,
-			String indexType, String objectState, boolean registerQuery) {
+	public List<E> query(BTSQueryRequest query, String[] indexNames,
+			String[] indexTypes, String objectState, boolean registerQuery) {
 		
 		// check if index exists
-		boolean hasIndex = connectionProvider.getSearchClient(Client.class).admin().indices().exists(new IndicesExistsRequest(indexName)).actionGet()
-				.isExists();
-		if (!hasIndex)
-		{
-			return new Vector<E>(0);
+		// only use indexes that actually exist
+		indexNames = existingIndexNamesOnly(indexNames);
+
+		//if those don't actually exist, beat it
+		if (indexNames.length < 1) {
+			return new Vector<E>(); 
 		}
+
 		// check for ID Query
 		if (query.isIdQuery())
 		{
 			List<E> result = new Vector<E>();
-			E o = find((K) query.getSearchString(), indexName);
-			result.add(o);
-			return result;
+			E o = null;
+			for (String s : indexNames)
+			{
+				o = find((K) query.getSearchString(), s);
+				if (o != null)
+				{
+					result.add(o);
+					return result;
+				}
+			}
+			
 		}
 		
 		// normal query
@@ -744,8 +770,8 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 			// connectionProvider.getSearchClient(Client.class).admin().cluster().prepareHealth().setWaitForGreenStatus().execute().actionGet();
 
 			srq = connectionProvider.getSearchClient(Client.class)
-					.prepareSearch(indexName)
-					// .setTypes(indexType)
+					.prepareSearch(indexNames)
+					//.setTypes(indexTypes)
 					.setSearchType(SearchType.QUERY_AND_FETCH)
 					.setQuery(query.getQueryBuilder());
 			// Query
@@ -776,7 +802,7 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 		} else {
 			
 			srq = query.getSearchRequestBuilder()
-					.setIndices(indexName)
+					.setIndices(indexNames)
 //					.setTypes(indexType)
 					.setSearchType(SearchType.QUERY_AND_FETCH);
 			
@@ -794,16 +820,18 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 		}
 					
 		//execute query
-		response = srq.setFrom(0)
-				.setSize(1000)
+		response = srq.setFrom(query.getFrom())
+				.setSize(query.getSize())
 				.setExplain(true)
 				.execute()
 				.actionGet();
-		List<E> result = loadResultFromSearchResponse(response, indexName);
+		List<E> result = loadResultFromSearchResponse(response);
 		
+		query.setQueryResponse(response);
+		query.setTotalResultSize(response.getHits().getTotalHits());
 		if (registerQuery) {
 			try {
-				registerQueryWithPercolator(query, indexName, indexType);
+				registerQueryWithPercolator(query, indexNames, indexTypes);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -813,23 +841,27 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 	}
 	
 	@Override
-	public List<String> queryAsJsonString(BTSQueryRequest query, String indexName,
-			String indexType, String objectState, boolean registerQuery) {
+	public List<String> queryAsJsonString(BTSQueryRequest query, String[] indexNames,
+			String[] indexTypes, String objectState, boolean registerQuery) {
 		
 		// check if index exists
-		boolean hasIndex = connectionProvider.getSearchClient(Client.class).admin().indices().exists(new IndicesExistsRequest(indexName)).actionGet()
-				.isExists();
-		if (!hasIndex)
-		{
-			return new Vector<String>(0);
-		}
+		indexNames = existingIndexNamesOnly(indexNames);
+
 		// check for ID Query
 		if (query.isIdQuery())
 		{
 			List<String> result = new Vector<String>();
-			String o = findAsJsonString((K) query.getSearchString(), indexName);
-			result.add(o);
-			return result;
+			String o = null;
+			for (String s : indexNames)
+			{
+				o = findAsJsonString((K) query.getSearchString(), s);
+				if (o != null)
+				{
+					result.add(o);
+					return result;
+				}
+			}
+			
 		}
 		
 		// normal query
@@ -840,7 +872,7 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 			// connectionProvider.getSearchClient(Client.class).admin().cluster().prepareHealth().setWaitForGreenStatus().execute().actionGet();
 
 			srq = connectionProvider.getSearchClient(Client.class)
-					.prepareSearch(indexName)
+					.prepareSearch(indexNames)
 					// .setTypes(indexType)
 					.setSearchType(SearchType.QUERY_AND_FETCH)
 					.setQuery(query.getQueryBuilder());
@@ -860,7 +892,7 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 		} else {
 			
 			srq = query.getSearchRequestBuilder()
-					.setIndices(indexName)
+					.setIndices(indexNames)
 //					.setTypes(indexType)
 					.setSearchType(SearchType.QUERY_AND_FETCH);
 			
@@ -871,8 +903,8 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 		srq.setFetchSource(true);
 					
 		//execute query
-		response = srq.setFrom(0)
-				.setSize(1000)
+		response = srq.setFrom(query.getFrom())
+				.setSize(query.getSize())
 				.setExplain(true)
 				.execute()
 				.actionGet();
@@ -887,7 +919,7 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 		
 		if (registerQuery) {
 			try {
-				registerQueryWithPercolator(query, indexName, indexType);
+				registerQueryWithPercolator(query, indexNames, indexTypes);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -896,21 +928,22 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 		return result;
 	}
 
-	private List<E> loadResultFromSearchResponse(SearchResponse response, String indexName) {
+	private List<E> loadResultFromSearchResponse(SearchResponse response) {
 		List<E> result = new Vector<E>();
 		Map<URI, Resource> cache = ((ResourceSetImpl)connectionProvider.getEmfResourceSet()).getURIResourceMap();
 		for (SearchHit hit : response.getHits()) {
+			
 			try {
 				E o = null;
-				URI uri = URI.createURI(getLocalDBURL() + "/" + indexName + "/" + hit.getId());
+				URI uri = URI.createURI(getLocalDBURL() + "/" + hit.getIndex() + "/" + hit.getId());
 				o = retrieveFromCache(uri, cache);
 				if (o != null)
 				{
-					checkAndLoadFullyFromHit(o, hit, uri, indexName);
+					checkAndLoadFullyFromHit(o, hit, uri, hit.getIndex());
 				}
 				else
 				{
-					o = loadObjectFromHit(hit, uri, indexName);
+					o = loadObjectFromHit(hit, uri, hit.getIndex());
 					if (o != null)
 					{
 						addEntityToCache(uri, cache, o);
@@ -935,7 +968,7 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 			}
 		}
 		if (!result.isEmpty())
-			logger.info("Query indexName "+ indexName + " result size: " + result.size());
+			logger.info("Query result size: " + result.size());
 		return result;
 	}
 
@@ -968,22 +1001,24 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 		cache.put(uri, resource);
 	}
 	
-	protected void registerQueryWithPercolator(final BTSQueryRequest query, final String indexName, String indexType)
+	protected void registerQueryWithPercolator(final BTSQueryRequest query, final String [] indexNames, String[] indexTypes)
 	{
 		// register query with percolator
 		// Index the query = register it in the percolator
-//		
 		Job job = new Job("register with percolator"){
 			@Override
 			  protected IStatus run(IProgressMonitor monitor) {
 				try
 				{
-					connectionProvider
-							.getSearchClient(Client.class)
-							.prepareIndex(indexName, DaoConstants.PERCOLATOR, query.getQueryId())
-							.setSource(
-									XContentFactory.jsonBuilder().startObject().field("query", query.getQueryBuilder())
-											.endObject()).setRefresh(true).execute().actionGet();
+					for (String indexName : indexNames)
+					{
+						connectionProvider
+								.getSearchClient(Client.class)
+								.prepareIndex(indexName, DaoConstants.PERCOLATOR, query.getQueryId())
+								.setSource(
+										XContentFactory.jsonBuilder().startObject().field("query", query.getQueryBuilder())
+												.endObject()).setRefresh(true).execute().actionGet();
+					}
 				} catch (ElasticsearchException e)
 				{
 					// TODO Auto-generated catch block
@@ -996,7 +1031,10 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 			    return Status.OK_STATUS;
 			  }
 		};
-		job.schedule();
+
+		if (query != null) { 
+			job.schedule();
+		}
 
 	}
 
@@ -1168,8 +1206,7 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 			allDocs = view.includeDocs(false).query();
 		} catch (NoDocumentException e)
 		{
-			e.printStackTrace();
-			System.out.println("create view, view id: " + viewId);
+			logger.warn(e, "Could not apply view "+viewId+" to collection "+path+". Trying to create view from local source "+sourcePath);
 			createView(path, sourcePath, viewId);
 			view = dbClient.view(viewId);
 			allDocs = view.includeDocs(false).query();
@@ -1183,16 +1220,16 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 		InputStream inStream = null;
 		try
 		{
+			logger.info("Trying to get stream for couchdb view "+viewId+" at "+path);
 			view = dbClient.view(viewId);
-
+			inStream = view.includeDocs(false).queryForStream();
 		} catch (NoDocumentException e)
 		{
-			e.printStackTrace();
-			System.out.println("create view, view id: " + viewId);
+			logger.warn(e, "Could not apply view "+viewId+" to collection "+path+". Trying to create view from local source "+sourcePath);
 			createView(path, sourcePath, viewId);
 			view = dbClient.view(viewId);
+			inStream = view.includeDocs(false).queryForStream();
 		}
-		inStream = view.includeDocs(false).queryForStream();
 		return inStream;
 	}
 	

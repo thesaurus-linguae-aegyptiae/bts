@@ -151,3 +151,7 @@ RelatedObjectGroup.selected {
 }
 
 
+// STE background
+.SignTextCanvas {
+	background-color: COLOR-WHITE;
+}
