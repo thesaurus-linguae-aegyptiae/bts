@@ -666,8 +666,7 @@ public class TextAnnotationsComposite extends Composite implements IBTSEditor {
 			
 			Event e = new Event();
 			e.widget = this;
-			TypedEvent ev = new TypedEvent(e);
-			BTSTextSelectionEvent event = new BTSTextSelectionEvent(ev, btsObject);
+			BTSTextSelectionEvent event = new BTSTextSelectionEvent(e, btsObject);
 			event.type = eventType;
 			event.data = textContent.eContainer();
 			int firstIndex = - 1;
@@ -678,22 +677,15 @@ public class TextAnnotationsComposite extends Composite implements IBTSEditor {
 			{
 				if (el instanceof AnnotationFigure)
 				{
-					event.getRelatingObjects().add((BTSObject) el.getModelObject());
+					event.addRelatingObject(((BTSObject) el.getModelObject()));
 				}
 				else
 				{
-					event.getRelatingObjects().addAll(((ElementFigure)el).getRelatingObjects());
+					event.addRelatingObjects(((ElementFigure)el).getRelatingObjects());
 				}
-				BTSIdentifiableItem item = (BTSIdentifiableItem) el.getModelObject();
-				event.getSelectedItems().add(item);
-	
-				if (item instanceof BTSSentenceItem)
-				{
-					event.setEndId(item.get_id());
-					event.setStartId(item.get_id());
-				}
-				
-				event.getInterTextReferences().addAll(((ElementFigure)el).getInterTextReferences());
+
+				event.addSelectedItem((BTSIdentifiableItem) el.getModelObject());
+				event.addInterTextReferences(((ElementFigure)el).getInterTextReferences());
 				
 				if (sentenceLineFigure.getChildren().contains(el))
 				{
@@ -711,18 +703,17 @@ public class TextAnnotationsComposite extends Composite implements IBTSEditor {
 				}
 				
 			}
-			
+
 			// find first and last and set endId and startId
 			if (firstFigure != null && lastFigure != null)
 			{
 				event.setEndId(((BTSIdentifiableItem) lastFigure.getModelObject()).get_id());
 				event.setStartId(((BTSIdentifiableItem) firstFigure.getModelObject()).get_id());
 			}
-			
-			
+
 			parentEditor.setEditorSelection(event);
 		}
-		
+
 	}
 
 

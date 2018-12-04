@@ -1415,7 +1415,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 						public void run() {
 							List<BTSModelAnnotation> annotations = getModelAnnotationAtSelection(
 									btsEvent.x, btsEvent.y, btsEvent);							
-							btsEvent.getTextAnnotations().addAll(annotations);
+							btsEvent.addTextAnnotations(annotations);
 							processSelection(annotations, false, btsEvent);
 							selectionService.setSelection(btsEvent);
 
@@ -1450,6 +1450,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 	 */
 	protected void processSelection(List<BTSModelAnnotation> annotations,
 			boolean postSelection, BTSTextSelectionEvent btsEvent) {
+		// XXX move to superclass shared with egylemmaeditorpart, texttranslationpart... 
 		List<BTSModelAnnotation> relatingObjectsAnnotations = new Vector<BTSModelAnnotation>(
 				annotations.size());
 		AnnotationModelEvent ev_trans = null;
@@ -1471,19 +1472,19 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 				} else if (ma instanceof BTSAnnotationAnnotation) {
 					relatingObjectsAnnotations.add(ma);
 					if (btsEvent != null) {
-						btsEvent.getInterTextReferences().add(
+						btsEvent.addInterTextReference(
 								ma.getInterTextReference());
 					}
 				} else if (ma instanceof BTSCommentAnnotation) {
 					relatingObjectsAnnotations.add(ma);
 					if (btsEvent != null) {
-						btsEvent.getInterTextReferences().add(
+						btsEvent.addInterTextReference(
 								ma.getInterTextReference());
 					}
 				} else if (ma instanceof BTSSubtextAnnotation) {
 					relatingObjectsAnnotations.add(ma);
 					if (btsEvent != null) {
-						btsEvent.getInterTextReferences().add(
+						btsEvent.addInterTextReference(
 								ma.getInterTextReference());
 					}
 				} else if (ma instanceof BTSModelAnnotation)
@@ -1649,6 +1650,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 	 */
 	private List<BTSModelAnnotation> getModelAnnotationAtSelection(int start,
 			int end, BTSTextSelectionEvent btsEvent) {
+		// XXX move this to BTSTextSelectionEvent?
 
 		Iterator<Annotation> it = getViewer().getAnnotationModel()
 				.getAnnotationIterator();
@@ -1733,7 +1735,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 			if (endItem != null) {
 				btsEvent.setEndId(endItem.get_id());
 			}
-			btsEvent.getSelectedItems().addAll(textItems);
+			btsEvent.addSelectedItems(textItems);
 		}
 		return annotations;
 	}

@@ -247,7 +247,7 @@ public class EgyTextTranslationPart {
 
 							List<BTSModelAnnotation> annotations = getModelAnnotationAtSelection(
 									btsEvent.x, btsEvent.y, btsEvent);							
-							btsEvent.getTextAnnotations().addAll(annotations);
+							btsEvent.addTextAnnotations(annotations);
 							processSelection(annotations, false, btsEvent);
 //							selectionService.setSelection(btsEvent);
 							
@@ -414,6 +414,7 @@ public class EgyTextTranslationPart {
 	 */
 	private List<BTSModelAnnotation> getModelAnnotationAtSelection(int start,
 			int end, BTSTextSelectionEvent btsEvent) {
+		// XXX this is copy-and-pasted from egytexteditorpart??
 		Iterator<Annotation> it = textViewer.getAnnotationModel()
 				.getAnnotationIterator();
 		List<BTSModelAnnotation> annotations = new Vector<BTSModelAnnotation>(4);
@@ -421,7 +422,7 @@ public class EgyTextTranslationPart {
 		BTSSentenceItem startItem = null;
 		BTSSentenceItem endItem = null;
 		int endItemOffeset = 0;
-		List<BTSSentenceItem> textItems = new Vector<BTSSentenceItem>();
+		List<BTSIdentifiableItem> textItems = new Vector<BTSIdentifiableItem>();
 		while (it.hasNext()) {
 			Annotation a = (Annotation) it.next();
 			if (a instanceof BTSModelAnnotation) {
@@ -496,7 +497,7 @@ public class EgyTextTranslationPart {
 			if (endItem != null) {
 				btsEvent.setEndId(endItem.get_id());
 			}
-			btsEvent.getSelectedItems().addAll(textItems);
+			btsEvent.addSelectedItems(textItems);
 		}
 		return annotations;
 	}
