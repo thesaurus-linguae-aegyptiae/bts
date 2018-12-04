@@ -446,10 +446,127 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 	}
 
 	/**
-	 * Creates the composite.
-	 *
-	 * @param parent the parent
+	 * Creates the {@link CTabFolder} element serving as a container for the three editor tabs
+	 * (which are showing transliteration, token properties, and Jsesh-rendered hieroglyphs, respectively).
+	 * Sets up some logic concerning switching from one tab to another by attaching a {@link SelectionListener}.
+	 * Returns the element, which is supposed to be stored in this part's {@link #tabFolder} field.
+	 * 
+	 * @param composite the containing UI element
+	 * @return the editor tabs container element
 	 */
+	private CTabFolder createAndInitializeEditorTabsFolder(Composite composite) {
+		tabFolder = new CTabFolder(composite, SWT.BORDER);
+		tabFolder.setSimple(false);
+		tabFolder.setLayoutData(new GridData(GridData.FILL_BOTH));
+		tabFolder.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				// XXX put all this switch-tabs logic someplace more meaningful
+				int oldSelection = EgyTextEditorPart.this.tabSelection;
+				EgyTextEditorPart.this.tabSelection = tabFolder.getSelectionIndex();
+				boolean canSwitch = true;
+				if (tabSelection == oldSelection) {
+					return;
+				} else {
+					// update model from old selection editor
+					switch (oldSelection) {
+						case 0: {
+							cachedCursor = getTextWidget().getCaretOffset();
+							canSwitch = updateModelFromTranscription();
+							break;
+						}
+						case 1: {
+							signTextEditor.clearContent();
+							break;
+						}
+					}
+					
+					// reset selection if switching selection is not permitted!
+					if (!canSwitch)
+					{
+						tabFolder.setSelection(oldSelection);
+						tabSelection = oldSelection;
+						return;
+					}
+
+					try {
+						// load updated model into selected editor
+						IRunnableWithProgress op = new IRunnableWithProgress() {
+	
+							@Override
+							public void run(final IProgressMonitor monitor)
+									throws InvocationTargetException,
+									InterruptedException {
+								sync.asyncExec(new Runnable() {
+									public void run() {
+										switch (tabSelection) {
+											case 0: {
+												contextService.activateContext(
+														"org.eclipse.xtext.ui.embeddedTextEditorScope");
+	
+												loadInputTranscription(text, relatingObjects, monitor);
+	
+												if (selectedTextItem != null)
+												{
+													Annotation an = modelAnnotationMap.get(((BTSIdentifiableItem) selectedTextItem).get_id());
+													if (an != null)
+													{
+														Position pos = annotationModel.getPosition(an);
+														try {
+															getTextWidget().setCaretOffset(pos.getOffset());
+															getViewer().revealRange(pos.getOffset(), pos.getLength());
+														} catch (Exception e) {
+														}
+													}
+												}
+												else
+												{
+													try {
+														getTextWidget().setCaretOffset(cachedCursor);
+													} catch (Exception e) {
+														//TODO
+													}
+												}
+												break;
+											}
+											case 1: {
+		
+												loadInputSignText(
+														text,
+														relatingObjects,
+														relatingObjectsMap,
+														monitor,
+														selectedTextItem);
+												break;
+											}
+											case 2: {
+												loadInputJSesh(text, relatingObjects);
+												break;
+											}	
+										}
+									}
+								});
+							}
+						};
+						new ProgressMonitorDialog(parentShell).run(
+								true,
+								true,
+								op);
+					} catch (Exception ee) {
+						// XXX
+					}						
+				}
+			}
+		});
+
+		tabFolder.setSelectionBackground(Display.getCurrent()
+				.getSystemColor(
+						SWT.COLOR_TITLE_INACTIVE_BACKGROUND_GRADIENT));
+
+		return tabFolder;
+	}
+
+
 	@PostConstruct
 	public void postConstruct(Composite parent) {
 		
@@ -464,8 +581,9 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 		contextService
 				.activateContext("org.eclipse.ui.contexts.dialogAndWindow");
 		
-		// load annotatin styling settings node
-		AnnotationToolbarItemCreator.processAndUpateToolbarItemsAnnotationShortcut(part, 
+		// load annotation styling settings node
+		AnnotationToolbarItemCreator.processAndUpateToolbarItemsAnnotationShortcut(
+				part, 
 				getAnnotationPreferences());
 		
 		SashForm sashForm = new SashForm(parent, SWT.VERTICAL);
@@ -475,329 +593,224 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 		composite.setLayout(new GridLayout());
 		((GridLayout) composite.getLayout()).marginHeight = 0;
 		((GridLayout) composite.getLayout()).marginWidth = 0;
-		{
-			tabFolder = new CTabFolder(composite, SWT.BORDER);
-			tabFolder.setSimple(false);
-			tabFolder.setLayoutData(new GridData(GridData.FILL_BOTH));
-			tabFolder.addSelectionListener(new SelectionAdapter() {
 
-				@Override
-				public void widgetSelected(SelectionEvent e) {
-					int oldSelection = tabSelection;
-					tabSelection = tabFolder.getSelectionIndex();
-					boolean canSwitch = true;
-					if (tabSelection == oldSelection) {
-						return;
-					} else {
-						// update model from old selection editor
-						switch (oldSelection) {
-						case 0: {
-							cachedCursor = getTextWidget().getCaretOffset();
-							canSwitch = updateModelFromTranscription();
-							break;
-						}
-						case 1: {
-							signTextEditor.clearContent();
-							break;
-						}
-						case 2: {
-							break;
-						}
-						}
-						
-						// reset selection if switching selection is not permitted!
-						if (!canSwitch)
-						{
-							tabFolder.setSelection(oldSelection);
-							tabSelection = oldSelection;
-							return;
-						}
-
-						try{
-						// load updated model into selected editor
-						IRunnableWithProgress op = new IRunnableWithProgress() {
-
-							@Override
-							public void run(final IProgressMonitor monitor)
-									throws InvocationTargetException,
-									InterruptedException {
-								sync.asyncExec(new Runnable() {
-									public void run() {
-								switch (tabSelection) {
-								case 0: {
-									contextService
-											.activateContext("org.eclipse.xtext.ui.embeddedTextEditorScope");
-
-									loadInputTranscription(text, relatingObjects, monitor);
-									if (selectedTextItem != null)
-									{
-										Annotation an = modelAnnotationMap.get(((BTSIdentifiableItem) selectedTextItem).get_id());
-										if (an != null)
-										{
-											Position pos = annotationModel.getPosition(an);
-											try {
-												getTextWidget().setCaretOffset(pos.getOffset());
-												getViewer().revealRange(pos.getOffset(), pos.getLength());
-											} catch (Exception e) {
-											}
-										}
-									}
-									else
-									{
-										try {
-											getViewer().getTextWidget().setCaretOffset(cachedCursor);
-										} catch (Exception e) {
-										}
-									}
-									break;
-								}
-								case 1: {
+		tabFolder = createAndInitializeEditorTabsFolder(composite);
 		
-									loadInputSignText(text, relatingObjects,
-											relatingObjectsMap, monitor, selectedTextItem);
-									break;
-								}
-								case 2: {
-									loadInputJSesh(text, relatingObjects);
-									break;
-								}
-								}
-									}});
-							}
-						};
-						new ProgressMonitorDialog(Display.getDefault().getActiveShell()).run(true, true, op);
-					} catch (InvocationTargetException ee) {
-						// handle exception
-					} catch (InterruptedException ee) {
-						// handle cancelation
-					}				
-										
+		CTabItem tbtmPlaintext2 = new CTabItem(tabFolder, SWT.NONE);
+		tbtmPlaintext2.setText("Transliteration");
+
+		embeddedEditorParentComp = new Composite(tabFolder,
+				SWT.NONE | SWT.BORDER);
+		embeddedEditorParentComp.setLayout(new GridLayout());
+		((GridLayout) embeddedEditorParentComp.getLayout()).marginHeight = 0;
+		((GridLayout) embeddedEditorParentComp.getLayout()).marginWidth = 0;
+		tbtmPlaintext2.setControl(embeddedEditorParentComp);
+
+		embeddedEditorParentComp.addDisposeListener(new DisposeListener() {
+			@Override
+			public void widgetDisposed(DisposeEvent e) {
+				// remove translit editor contents (including annotation model)
+				// before xtext HighlightingHelper gets a chance
+				// to clog main thread with its painful editor dismantling.
+				loadInputTranscription(null, relatingObjects, null);
+			}
+		});
+
+		embeddedEditorComp = new Composite(
+				embeddedEditorParentComp, SWT.None);
+		embeddedEditorComp.setLayout(new GridLayout());
+		embeddedEditorComp.setLayout(new GridLayout());
+		((GridLayout) embeddedEditorComp.getLayout()).marginHeight = 0;
+		((GridLayout) embeddedEditorComp.getLayout()).marginWidth = 0;
+		embeddedEditorComp.setLayoutData(new GridData(SWT.FILL,
+				SWT.FILL, true, true));
+
+		context.get(StaticAccessController.class);
+
+		// new trial
+		injector = textEditorController.findEgyDslInjector();
+
+		embeddedEditorFactory = injector
+				.getInstance(EmbeddedEditorFactory.class);
+
+
+		// XXX
+		// https://www.eclipse.org/forums/index.php/t/1067356/
+		embeddedEditor = embeddedEditorFactory
+				.newEditor(xtextResourceProvider)
+				.showAnnotations(
+						"org.eclipse.xtext.ui.editor.error",
+						"org.eclipse.xtext.ui.editor.warning",
+						BTSSentenceAnnotation.TYPE_HIGHLIGHTED
+						)
+				.withParent(embeddedEditorComp);
+
+		embeddedEditorModelAccess = embeddedEditor
+				.createPartialEditor("", "§§", "", false);
+		getTextWidget()
+				.setLineSpacing(LINE_SPACE);
+
+
+		// embeddedEditor.getViewer().getTextWidget().setFont(font);
+		// keep the partialEditor as instance var to read / write
+		// the edited
+		// text
+		
+
+		IAnnotationAccess annotationAccess = new IAnnotationAccess() {
+			public Object getType(Annotation annotation) {
+				return annotation.getType();
+			}
+
+			public boolean isMultiLine(Annotation annotation) {
+				return true;
+			}
+
+			public boolean isTemporary(Annotation annotation) {
+				return true;
+			}
+		};
+		painter = new AnnotationPainter(
+				getViewer(),
+				annotationAccess);
+
+		ruler = EmbeddedEditorFactory.getCpAnnotationRuler();
+		oruler = EmbeddedEditorFactory.getOverViewRuler();
+
+		configureEditorDrawingStrategies(oruler);
+
+		if (show_line_number_ruler)
+		{
+			lineNumberRulerColumn = new EgyLineNumberRulerColumn(LINE_SPACE);
+			//lineNumberRulerColumn.setModel(annotationModel); // does nothing
+			getViewer()
+					.addVerticalRulerColumn(lineNumberRulerColumn);
+		}
+
+		getViewer().addTextPresentationListener(painter);
+		getViewer().addPainter(painter);
+
+		embeddedEditorParentComp.layout();
+
+		context.set(XtextSourceViewer.class, getViewer());
+		BTSE4ToGuiceXtextSourceViewerProvider.setContext(context);
+
+		// add listener to text editor widget's caret
+		getTextWidget().addCaretListener(
+				textEditorWidgetCaretListener());
+
+		// add listener for text range selection event
+		getTextWidget()
+				.addSelectionListener(new SelectionListener() {
+
+					@Override
+					public void widgetSelected(SelectionEvent event) {
+						processTextSelection(event);
 					}
 
-				}
-			});
+					@Override
+					public void widgetDefaultSelected(
+							SelectionEvent e) {
+						// TODO Auto-generated method stub
 
-			tabFolder.setSelectionBackground(Display.getCurrent()
-					.getSystemColor(
-							SWT.COLOR_TITLE_INACTIVE_BACKGROUND_GRADIENT));
-			{
-				CTabItem tbtmPlaintext2 = new CTabItem(tabFolder, SWT.NONE);
-				tbtmPlaintext2.setText("Transliteration");
-				{
+					}
+				});
+		loadInputTranscription(null, relatingObjects, null);
 
-					embeddedEditorParentComp = new Composite(tabFolder,
-							SWT.NONE | SWT.BORDER);
-					embeddedEditorParentComp.setLayout(new GridLayout());
-					((GridLayout) embeddedEditorParentComp.getLayout()).marginHeight = 0;
-					((GridLayout) embeddedEditorParentComp.getLayout()).marginWidth = 0;
-					tbtmPlaintext2.setControl(embeddedEditorParentComp);
+		embeddedEditor.getDocument().addDocumentListener(
+				new IDocumentListener() {
 
-					embeddedEditorParentComp.addDisposeListener(new DisposeListener() {
+					@Override
+					public void documentChanged(DocumentEvent event) {
+						if (!loading) {
+							setDirtyInternal();
+						}
+
+					}
+
+					@Override
+					public void documentAboutToBeChanged(
+							DocumentEvent event) {
+						// TODO Auto-generated method stub
+
+					}
+				});
+
+		// add hook for dynamic population of context menu
+		Menu menu = getTextWidget().getMenu();
+		menu.addMenuListener(dynamicContextMenuHook(menu));
+
+
+		CTabItem signTextTab = new CTabItem(tabFolder, SWT.NONE);
+		signTextTab.setText("Sign Text Editor");
+		{
+			Composite plainTextComp = new Composite(tabFolder, SWT.NONE
+					| SWT.BORDER);
+			plainTextComp.setLayout(new GridLayout());
+			((GridLayout) plainTextComp.getLayout()).marginHeight = 0;
+			((GridLayout) plainTextComp.getLayout()).marginWidth = 0;
+			signTextTab.setControl(plainTextComp);
+			IEclipseContext child = context.createChild();
+			child.set(Composite.class, plainTextComp);
+			child.set(IBTSEditor.class, EgyTextEditorPart.this);
+			signTextEditor = ContextInjectionFactory.make(
+					SignTextComposite.class, child);
+			plainTextComp.layout();
+			plainTextComp.pack();
+		}
+		CTabItem tbtm5 = new CTabItem(tabFolder, SWT.NONE);
+		tbtm5.setText("JSesh View");
+		{
+			scrolledCompJSesh = new ScrolledComposite(tabFolder, SWT.HORIZONTAL
+					| SWT.VERTICAL);
+			scrolledCompJSesh.setMinWidth(800);
+			scrolledCompJSesh.setMinHeight(400);
+			scrolledCompJSesh.setExpandHorizontal(true);
+			scrolledCompJSesh.setExpandVertical(true);
+			tbtm5.setControl(scrolledCompJSesh);
+
+			final Composite comEmbeded = new Composite(scrolledCompJSesh,
+					SWT.EMBEDDED | SWT.NO_BACKGROUND | SWT.BORDER);
+			scrolledCompJSesh.setContent(comEmbeded);
+			
+			Frame frame = SWT_AWT.new_Frame(comEmbeded);
+
+			jseshEditor = new JMDCEditor();
+			jseshEditor.setMDCText("");
+			jseshEditor.setPreferredSize(new Dimension(500, 500));
+			jseshEditor
+					.addKeyListener(new java.awt.event.KeyListener() {
+
 						@Override
-						public void widgetDisposed(DisposeEvent e) {
-							// remove translit editor contents (including annotation model)
-							// before xtext HighlightingHelper gets a chance
-							// to clog main thread with its painful editor dismantling.
-							loadInputTranscription(null, relatingObjects, null);
+						public void keyTyped(java.awt.event.KeyEvent e) {
+						}
+
+						@Override
+						public void keyReleased(
+								java.awt.event.KeyEvent e) {
+							Display.getDefault().asyncExec(
+									new Runnable() {
+
+										@Override
+										public void run() {
+
+										}
+									});
+
+						}
+
+						@Override
+						public void keyPressed(java.awt.event.KeyEvent e) {
+
 						}
 					});
 
-					embeddedEditorComp = new Composite(
-							embeddedEditorParentComp, SWT.None);
-					embeddedEditorComp.setLayout(new GridLayout());
-					embeddedEditorComp.setLayout(new GridLayout());
-					((GridLayout) embeddedEditorComp.getLayout()).marginHeight = 0;
-					((GridLayout) embeddedEditorComp.getLayout()).marginWidth = 0;
-					embeddedEditorComp.setLayoutData(new GridData(SWT.FILL,
-							SWT.FILL, true, true));
+			frame.add(jseshEditor);
 
-					context.get(StaticAccessController.class);
+			comEmbeded.layout();
 
-					// new trial
-					injector = textEditorController.findEgyDslInjector();
-
-					embeddedEditorFactory = injector
-							.getInstance(EmbeddedEditorFactory.class);
-
-
-					// XXX
-					// https://www.eclipse.org/forums/index.php/t/1067356/
-					embeddedEditor = embeddedEditorFactory
-							.newEditor(xtextResourceProvider)
-							.showAnnotations(
-									"org.eclipse.xtext.ui.editor.error",
-									"org.eclipse.xtext.ui.editor.warning")
-							.withParent(embeddedEditorComp);
-
-					embeddedEditorModelAccess = embeddedEditor
-							.createPartialEditor("", "§§", "", false);
-					getTextWidget()
-							.setLineSpacing(LINE_SPACE);
-
-
-					// embeddedEditor.getViewer().getTextWidget().setFont(font);
-					// keep the partialEditor as instance var to read / write
-					// the edited
-					// text
-					
-
-					IAnnotationAccess annotationAccess = new IAnnotationAccess() {
-						public Object getType(Annotation annotation) {
-							return annotation.getType();
-						}
-
-						public boolean isMultiLine(Annotation annotation) {
-							return true;
-						}
-
-						public boolean isTemporary(Annotation annotation) {
-							return true;
-						}
-					};
-					painter = new AnnotationPainter(
-							getViewer(),
-							annotationAccess);
-
-					ruler = EmbeddedEditorFactory.getCpAnnotationRuler();
-					oruler = EmbeddedEditorFactory.getOverViewRuler();
-
-					configureEditorDrawingStrategies(oruler);
-
-					if (show_line_number_ruler)
-					{
-						lineNumberRulerColumn = new EgyLineNumberRulerColumn(LINE_SPACE);
-						//lineNumberRulerColumn.setModel(annotationModel); // does nothing
-						getViewer()
-								.addVerticalRulerColumn(lineNumberRulerColumn);
-					}
-
-					getViewer().addTextPresentationListener(painter);
-					getViewer().addPainter(painter);
-
-					embeddedEditorParentComp.layout();
-
-					context.set(XtextSourceViewer.class, getViewer());
-					BTSE4ToGuiceXtextSourceViewerProvider.setContext(context);
-
-					// add listener to text editor widget's caret
-					getTextWidget().addCaretListener(
-							textEditorWidgetCaretListener());
-
-					// add listener for text range selection event
-					getTextWidget()
-							.addSelectionListener(new SelectionListener() {
-
-								@Override
-								public void widgetSelected(SelectionEvent event) {
-									processTextSelection(event);
-								}
-
-								@Override
-								public void widgetDefaultSelected(
-										SelectionEvent e) {
-									// TODO Auto-generated method stub
-
-								}
-							});
-					loadInputTranscription(null, relatingObjects, null);
-
-					embeddedEditor.getDocument().addDocumentListener(
-							new IDocumentListener() {
-
-								@Override
-								public void documentChanged(DocumentEvent event) {
-									if (!loading) {
-										setDirtyInternal();
-									}
-
-								}
-
-								@Override
-								public void documentAboutToBeChanged(
-										DocumentEvent event) {
-									// TODO Auto-generated method stub
-
-								}
-							});
-
-					// add hook for dynamic population of context menu
-					Menu menu = getTextWidget().getMenu();
-					menu.addMenuListener(dynamicContextMenuHook(menu));
-
-
-				}
-				CTabItem signTextTab = new CTabItem(tabFolder, SWT.NONE);
-				signTextTab.setText("Sign Text Editor");
-				{
-					Composite plainTextComp = new Composite(tabFolder, SWT.NONE
-							| SWT.BORDER);
-					plainTextComp.setLayout(new GridLayout());
-					((GridLayout) plainTextComp.getLayout()).marginHeight = 0;
-					((GridLayout) plainTextComp.getLayout()).marginWidth = 0;
-					signTextTab.setControl(plainTextComp);
-					IEclipseContext child = context.createChild();
-					child.set(Composite.class, plainTextComp);
-					child.set(IBTSEditor.class, EgyTextEditorPart.this);
-					signTextEditor = ContextInjectionFactory.make(
-							SignTextComposite.class, child);
-					plainTextComp.layout();
-					plainTextComp.pack();
-				}
-				CTabItem tbtm5 = new CTabItem(tabFolder, SWT.NONE);
-				tbtm5.setText("JSesh View");
-				{
-					scrolledCompJSesh = new ScrolledComposite(tabFolder, SWT.HORIZONTAL
-							| SWT.VERTICAL);
-					scrolledCompJSesh.setMinWidth(800);
-					scrolledCompJSesh.setMinHeight(400);
-					scrolledCompJSesh.setExpandHorizontal(true);
-					scrolledCompJSesh.setExpandVertical(true);
-					tbtm5.setControl(scrolledCompJSesh);
-
-					final Composite comEmbeded = new Composite(scrolledCompJSesh,
-							SWT.EMBEDDED | SWT.NO_BACKGROUND | SWT.BORDER);
-					scrolledCompJSesh.setContent(comEmbeded);
-					
-					Frame frame = SWT_AWT.new_Frame(comEmbeded);
-
-					jseshEditor = new JMDCEditor();
-					jseshEditor.setMDCText("");
-					jseshEditor.setPreferredSize(new Dimension(500, 500));
-					jseshEditor
-							.addKeyListener(new java.awt.event.KeyListener() {
-
-								@Override
-								public void keyTyped(java.awt.event.KeyEvent e) {
-								}
-
-								@Override
-								public void keyReleased(
-										java.awt.event.KeyEvent e) {
-									Display.getDefault().asyncExec(
-											new Runnable() {
-
-												@Override
-												public void run() {
-
-												}
-											});
-
-								}
-
-								@Override
-								public void keyPressed(java.awt.event.KeyEvent e) {
-
-								}
-							});
-
-					frame.add(jseshEditor);
-
-					comEmbeded.layout();
-
-					scrolledCompJSesh.layout();
-					scrolledCompJSesh.pack();
-				}
-			}
+			scrolledCompJSesh.layout();
+			scrolledCompJSesh.pack();
 		}
 		tabFolder.setSelection(0);
 		composite.layout();
@@ -1074,10 +1087,11 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 				
 			}
 
-			
 			if (eo instanceof TextContent) {
 				text.setTextContent(textEditorController
-						.updateModelFromTextContent(text.getTextContent(), eo,
+						.updateModelFromTextContent(
+								text.getTextContent(),
+								eo,
 								am));
 			}
 		}
@@ -1874,19 +1888,19 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 			@EventTopic("event_text_selection/*") final Object event) {
 		if (text != null && event instanceof String && event != null) {
 			switch (tabFolder.getSelectionIndex()) {
-			case 0: {
-				setTextSelectionEvent((String) event);
-				break;
-			}
-			case 1: // signtextEditor
-			{
-				sync.asyncExec(new Runnable() {
-					public void run() {
-						signTextEditor.setTextSelectionEvent((String) event);
-					}
-				});
-				break;
-			}
+				case 0: {
+					setTextSelectionEvent((String) event);
+					break;
+				}
+				case 1: // signtextEditor
+				{
+					sync.asyncExec(new Runnable() {
+						public void run() {
+							signTextEditor.setTextSelectionEvent((String) event);
+						}
+					});
+					break;
+				}
 			}
 
 		}
@@ -2589,14 +2603,14 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 			return;
 		}
 		switch (event.getTopic()) {
-		case "event_text_relating_objects/loaded": {
-			break;
-		}
-		case "event_relating_objects/selected": {
-			eventReceivedRelatingObjectsLoadedEvents(event
-					.getProperty("org.eclipse.e4.data"));
-			break;
-		}
+			case "event_text_relating_objects/loaded": {
+				break;
+			}
+			case "event_relating_objects/selected": {
+				eventReceivedRelatingObjectsLoadedEvents(event
+						.getProperty("org.eclipse.e4.data"));
+				break;
+			}
 		}
 
 	}
