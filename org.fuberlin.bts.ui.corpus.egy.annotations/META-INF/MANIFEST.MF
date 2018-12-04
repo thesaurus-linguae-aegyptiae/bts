@@ -8,6 +8,7 @@ Bundle-Vendor: CPlutte
 Require-Bundle: javax.inject,
  org.eclipse.osgi,
  org.eclipse.jface,
+ org.eclipse.jface.text,
  org.eclipse.e4.ui.di,
  org.eclipse.e4.ui.services,
  org.eclipse.e4.core.di.annotations,
@@ -35,7 +36,7 @@ Require-Bundle: javax.inject,
  org.bbaw.bts.ui.corpus.egy.commons,
  org.bbaw.bts.core.commons.corpus,
  com.opcoach.e4.preferences
-Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Import-Package: javax.annotation,
  jsesh.mdc,
  jsesh.mdcDisplayer.draw,

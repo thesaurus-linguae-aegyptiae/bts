@@ -9,6 +9,7 @@ import org.bbaw.bts.btsmodel.BTSInterTextReference;
 import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSSentenceItem;
 import org.bbaw.bts.ui.commons.corpus.text.BTSModelAnnotation;
+import org.eclipse.jface.text.TextSelection;
 import org.eclipse.swt.custom.CaretEvent;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.events.SelectionEvent;
@@ -19,9 +20,7 @@ public class BTSTextSelectionEvent extends Event {
 	
 	private List<BTSObject> relatingObjects = new Vector<BTSObject>(4);
 	private List<BTSModelAnnotation> textAnnotations = new Vector<BTSModelAnnotation>(4);
-	
 	private List<BTSInterTextReference> interTextReferences = new Vector<BTSInterTextReference>(4);
-	
 	private List<BTSIdentifiableItem> selectedItems = new Vector<BTSIdentifiableItem>(4);
 	
 	private String startId;
@@ -36,31 +35,32 @@ public class BTSTextSelectionEvent extends Event {
 		this.widget = event.widget;
 		this.time = event.time;
 		this.parentObject = parentObject;
-	}
-
-
-	public BTSTextSelectionEvent(SelectionEvent event, BTSObject parentObject) {
-		this((TypedEvent)event, parentObject);
-		this.x = event.x;
-		this.y = event.y;
-		this.text = event.text;
-	}
-
-
-	public BTSTextSelectionEvent(CaretEvent event, BTSObject parentObject) {
-		this((TypedEvent)event, parentObject);
-		StyledText sourceAsStyledText = 
-				event.getSource() instanceof StyledText 
-				? (StyledText)event.getSource() : null;
-		if (sourceAsStyledText != null && 
-				sourceAsStyledText.getSelection().x != sourceAsStyledText.getSelection().y) {
-			// catch select all with ctrl+a
-			this.x = sourceAsStyledText.getSelection().x;
-			this.y = sourceAsStyledText.getSelection().y;
-		} else {
-			this.x = event.caretOffset;
-			this.y = event.caretOffset;
+		if (event instanceof SelectionEvent) {
+			this.x = ((SelectionEvent)event).x;
+			this.y = ((SelectionEvent)event).y;
+			this.text = ((SelectionEvent)event).text;
+		} else if (event instanceof CaretEvent) {
+			StyledText sourceAsStyledText = 
+					event.getSource() instanceof StyledText 
+					? (StyledText)event.getSource() : null;
+			if (sourceAsStyledText != null && 
+					sourceAsStyledText.getSelection().x != sourceAsStyledText.getSelection().y) {
+				// catch select all with ctrl+a
+				this.x = sourceAsStyledText.getSelection().x;
+				this.y = sourceAsStyledText.getSelection().y;
+			} else {
+				this.x = ((CaretEvent)event).caretOffset;
+				this.y = ((CaretEvent)event).caretOffset;
+			}
 		}
+	}
+
+
+	public BTSTextSelectionEvent(TextSelection event, BTSObject parentObject) {
+		this.parentObject = parentObject;
+		this.x = event.getOffset();
+		this.y = event.getLength() + x;
+		this.text = event.getText();
 	}
 
 
@@ -98,7 +98,13 @@ public class BTSTextSelectionEvent extends Event {
 		return Collections.unmodifiableList(textAnnotations);
 	}
 
+	/**
+	 * @deprecated
+	 * @param annotations
+	 * @return
+	 */
 	public boolean addTextAnnotations(List<BTSModelAnnotation> annotations) {
+		// XXX we probably don't need this as this field is never retrieved from anywhere
 		if (annotations != null && annotations.size() > 0) {
 			textAnnotations.addAll(annotations);
 			return true;
@@ -139,6 +145,7 @@ public class BTSTextSelectionEvent extends Event {
 				setEndId(item.get_id());
 				setStartId(item.get_id());
 			}
+			return true;
 		}
 		return false;
 	}
