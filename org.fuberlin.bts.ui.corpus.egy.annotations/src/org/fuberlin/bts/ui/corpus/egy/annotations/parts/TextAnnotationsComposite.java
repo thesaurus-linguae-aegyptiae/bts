@@ -1943,24 +1943,27 @@ public class TextAnnotationsComposite extends Composite implements IBTSEditor {
 	}
 
 	private ElementFigure makeSentenceStartFigure(BTSSenctence sentence) {
-		MarkerFigure fig = new MarkerFigure(" ง ");
-		fig.setModelObject(sentence);
-		fig.setType(ElementFigure.SENTENCE_START);
-		fig.setSize(15, 90);
-		fig.addMouseListener(elementSelectionListener);
-		return fig;
+		return makeSentenceBoundaryFigure(sentence, ElementFigure.SENTENCE_START);
 	}
 
 	private ElementFigure makeSentenceEndFigure(BTSSenctence sentence) {
-		MarkerFigure fig = new MarkerFigure(" ง ");
+		return makeSentenceBoundaryFigure(sentence, ElementFigure.SENTENCE_END);
+	}
+
+	/**
+	 * Makes a {@link MarkerFigure} labeled with a <code>ยง</code> character. 
+	 * @param sentence
+	 * @param type has to be either {@value ElementFigure#SENTENCE_START} or {@value ElementFigure#SENTENCE_END}. 
+	 * @return
+	 */
+	private ElementFigure makeSentenceBoundaryFigure(BTSSenctence sentence, String type) {
+		MarkerFigure fig = new MarkerFigure(BTSConstants.SENTENCE_BOUNDARY_SIGN);
 		fig.setModelObject(sentence);
 		fig.setType(ElementFigure.SENTENCE_END);
 		fig.setSize(15, 90);
 		fig.addMouseListener(elementSelectionListener);
 		return fig;
 	}
-
-
 
 	
 

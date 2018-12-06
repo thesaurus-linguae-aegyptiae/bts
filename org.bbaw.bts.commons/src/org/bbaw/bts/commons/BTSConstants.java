@@ -46,6 +46,9 @@ public class BTSConstants
 	public static final String  DELETEDDESTROYEDVERSMARKER  = "DeletedDestroyedVersMarker";
 
 
+	// §
+	public static final String SENTENCE_BOUNDARY_SIGN = " § ";
+
 	public static final String VERS_BREAK_MARKER_SIGN = "\uDB80\uDC80"; //v
 	public static final String VERS_FRONTER_MARKER_SIGN = "\uDB80\uDC81"; //mv
 
