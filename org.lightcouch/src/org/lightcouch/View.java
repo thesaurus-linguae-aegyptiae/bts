@@ -37,7 +37,6 @@ import java.util.List;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.http.HttpResponse;
 import org.lightcouch.DesignDocument.MapReduce;
 
 import com.google.gson.Gson;
@@ -147,8 +146,7 @@ public class View
 		URI uri = uriBuilder.build();
 		if (allDocsKeys != null)
 		{ // bulk docs
-			HttpResponse response = dbc.post(uri, allDocsKeys);
-			return dbc.getStream(response);
+			return dbc.getStream(dbc.post(uri, allDocsKeys));
 		}
 		if (tempView != null)
 		{ // temp view
