@@ -17,6 +17,7 @@ Release 3.2.2
 
 	- Fix: line breaks in Sign Text Editor (3a1c6b2)
 	- Feature: load lemma annotations to annotations part (9f84c8c)
+	- Chore: include BTS user manual v3 (1b86589)
 
 Release 3.2.1
 -------------
