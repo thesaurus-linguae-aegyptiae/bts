@@ -22,8 +22,6 @@ public interface ElementFigure extends IFigure {
 
 	String AMBIVALENCE_END = "AMBIVALENCE_END";
 
-	public int getLength();
-
 	public Object getModelObject();
 
 	public void setModelObject(Object modelObject);
@@ -37,4 +35,8 @@ public interface ElementFigure extends IFigure {
 	void addRelatingObject(BTSObject relatingObject);
 
 	List<BTSInterTextReference> getInterTextReferences();
+
+	/** returns approximate width in pixels **/
+	int calculateWidth();
+	
 }

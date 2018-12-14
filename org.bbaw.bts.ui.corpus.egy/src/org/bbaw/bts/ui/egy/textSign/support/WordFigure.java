@@ -16,6 +16,8 @@ public class WordFigure extends ElementFigureImpl
 	private String mdc;
 	int imageWidth;
 	private ImageFigure imageFigure;
+
+
 	public WordFigure(Label name)
 	{
 		ToolbarLayout layout = new ToolbarLayout();
@@ -44,13 +46,10 @@ public class WordFigure extends ElementFigureImpl
 	}
 
 	@Override
-	public int getLength() {
-		if (imageFigure != null && imageWidth > 0) {
-			return imageWidth + 6;
-		} else {
-			return super.getLength();
-		}
+	public int calculateWidth() {
+		return super.calculateWidth() + 6;
 	}
+
 
 	public int getImageWidth() {
 		return imageWidth;
@@ -66,7 +65,6 @@ public class WordFigure extends ElementFigureImpl
 
 	public void setImageFigure(ImageFigure imageFigure) {
 		this.imageFigure = imageFigure;
-		
 	}
 
 	public ImageFigure getImageFigure() {
