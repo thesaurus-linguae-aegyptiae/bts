@@ -1655,7 +1655,16 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 	}
 
 	/**
-	 * Gets the model annotations at selection or within.
+	 * Returns the in-text-position of a jface annotation representing an object from the bts text model.
+	 * @return
+	 */
+	private Position textModelPositionOf(Annotation a) {
+		return getViewer().getAnnotationModel()
+				.getPosition(a);
+	}
+
+	/**
+	 * Gets the jface text model objects at selection or within.
 	 *
 	 * @param start the start position of selection
 	 * @param end the end position of selection
@@ -1679,8 +1688,8 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 			Annotation a = (Annotation) it.next();
 
 			if (a instanceof BTSModelAnnotation) {
-				Position pos = getViewer().getAnnotationModel()
-						.getPosition(a);
+				Position pos = textModelPositionOf(a);
+
 
 				if ((pos.getOffset() <= start && pos.getOffset() + pos.getLength() > start)
 						|| (pos.getOffset() >= start && pos.getOffset() <= end)) {
@@ -1724,8 +1733,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 				if (a.getModel() instanceof BTSSentenceItem) 
 					if  (!a.getClass().getSuperclass().equals(BTSModelAnnotation.class) 
 							|| a instanceof BTSLemmaAnnotation) {
-						Position pos = getViewer().getAnnotationModel()
-								.getPosition(a);
+						Position pos = textModelPositionOf(a);
 						BTSSentenceItem item = (BTSSentenceItem) a.getModel();
 
 						if (startItem == null
@@ -2116,8 +2124,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 		}
 		BTSModelAnnotation annotation = getModelAnnotationAtModelObject(selectedItem);
 		if (annotation != null) {
-			Position pos = getViewer().getAnnotationModel()
-					.getPosition(annotation);
+			Position pos = textModelPositionOf(annotation);
 			int start = pos.getOffset() - 1;
 			int len = pos.getLength();
 			selectionRange = new StyleRange(start, len, null,

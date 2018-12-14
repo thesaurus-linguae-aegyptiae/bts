@@ -257,6 +257,7 @@ public abstract class AbstractTextEditorLogic {
 			annotationStrategySet.add(BTSConstants.ANNOTATION);
 
 			// Annotation highlighted
+			// XXX use addStrategy
 			AnnotationHighlightedDrawingStrategy annotationHighlightedStrategy = new AnnotationHighlightedDrawingStrategy();
 			painter.addDrawingStrategy(BTSConstants.ANNOTATION + BTSModelAnnotation.HIGHLIGHTED,
 					annotationHighlightedStrategy);
