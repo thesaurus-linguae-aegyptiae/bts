@@ -36,11 +36,8 @@ import org.bbaw.bts.btsmodel.BTSRelation;
 import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.core.corpus.controller.impl.partController.support.TextModelHelper;
 import org.bbaw.bts.core.corpus.controller.partController.BTSTextEditorController;
-import org.bbaw.bts.core.dao.util.BTSQueryRequest;
-import org.bbaw.bts.core.services.BTSCommentService;
 import org.bbaw.bts.core.services.corpus.BTSLemmaEntryService;
 import org.bbaw.bts.core.services.corpus.BTSTextService;
-import org.bbaw.bts.core.services.corpus.CorpusObjectService;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSAmbivalence;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSAmbivalenceItem;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSAnnotation;
@@ -70,16 +67,6 @@ import org.eclipse.e4.core.services.log.Logger;
 import org.eclipse.emf.common.command.Command;
 import org.eclipse.emf.common.command.CompoundCommand;
 import org.eclipse.emf.common.util.URI;
-//import org.eclipse.emf.compare.Comparison;
-//import org.eclipse.emf.compare.EMFCompare;
-//import org.eclipse.emf.compare.match.DefaultComparisonFactory;
-//import org.eclipse.emf.compare.match.DefaultEqualityHelperFactory;
-//import org.eclipse.emf.compare.match.DefaultMatchEngine;
-//import org.eclipse.emf.compare.match.IComparisonFactory;
-//import org.eclipse.emf.compare.match.IMatchEngine;
-//import org.eclipse.emf.compare.match.eobject.IEObjectMatcher;
-//import org.eclipse.emf.compare.scope.IComparisonScope;
-//import org.eclipse.emf.compare.utils.UseIdentifiers;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -98,7 +85,6 @@ import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
-import org.elasticsearch.index.query.QueryBuilders;
 
 import com.google.inject.Injector;
 
@@ -107,10 +93,11 @@ import jsesh.mdcDisplayer.draw.MDCDrawingFacade;
 import jsesh.mdcDisplayer.preferences.DrawingSpecification;
 import jsesh.mdcDisplayer.preferences.DrawingSpecificationsImplementation;
 
-public class BTSTextEditorControllerImpl implements BTSTextEditorController
-{
+public class BTSTextEditorControllerImpl
+		extends RelatedObjectsControllerImpl
+		implements BTSTextEditorController {
 
-	private static final String MDC_DELIMETERS = ":-<>*";
+	public static final String MDC_DELIMETERS = ":-<>*";
 	private static final String SENTENCE_SIGN = "\u00A7";
 	private static final String AMBIVALENCE_START_SIGN = "\u0025";
 	private static final String AMBIVALENCE_END_SIGN = "\u0025";
@@ -148,13 +135,8 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 	private int idcounter = 0;
 	private Comparator<? super Object> glyphsStringComparator;
 	
-	@Inject
-	private CorpusObjectService corpusObjectService;
 	private Map<BTSInterTextReference, AnnotationCache> annotationRangeMap;
-	
-	@Inject
-	private BTSCommentService commentService;
-	
+
 	@Inject
 	private BTSLemmaEntryService lemmaService;
 	
@@ -1299,29 +1281,7 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 		return splitAndKeep(mdCString, 1);
 	}
 
-	@Override
-	public List<BTSObject> getRelatingObjects(BTSText text, IProgressMonitor monitor) {
-		BTSQueryRequest query = new BTSQueryRequest();
-		query.setQueryBuilder(QueryBuilders.matchQuery("relations.objectId",
-				text.get_id()));
-		query.setQueryId("relations.objectId-" + text.get_id());
-		System.out.println(query.getQueryId());
-		List<BTSObject> children = new Vector<BTSObject>();
-		List<BTSCorpusObject> obs = corpusObjectService.query(query,
-				BTSConstants.OBJECT_STATE_ACTIVE, monitor);
-		for (BTSCorpusObject o : obs)
-		{
-			children.add(o);
-		}
-		if (monitor != null)
-		{
-			if (monitor.isCanceled()) return children;
-			monitor.beginTask("Load comments", IProgressMonitor.UNKNOWN);
-		}
-		children.addAll(commentService.query(query, BTSConstants.OBJECT_STATE_ACTIVE, true, monitor));
-		return children;
-	}
-	
+
 	@Override
 	public boolean checkAndFullyLoad(BTSCorpusObject object, boolean checkForConflicts)
 	{
@@ -1723,4 +1683,5 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 	public BTSSenctence copySentence(BTSSenctence copyItem) {
 		return textService.copySentence(copyItem);
 	}
+
 }

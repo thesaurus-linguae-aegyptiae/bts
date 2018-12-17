@@ -15,7 +15,8 @@ Change log
 Release 3.2.2
 -------------
 
-   - Chore: include BTS user manual v3 (1b86589)
+	- Feature: load lemma annotations to annotations part (9f84c8c)
+	- Chore: include BTS user manual v3 (1b86589)
 
 Release 3.2.1
 -------------
@@ -97,7 +98,7 @@ Release 3.1.2
       <import plugin="org.apache.httpcomponents.httpclient"/>
       <import plugin="org.apache.httpcomponents.httpcore"/>
       <import plugin="org.apache.lucene.core"/>
-      <import plugin="org.bbaw.bts.app" version="3.2.0" match="greaterOrEqual"/>
+      <import plugin="org.bbaw.bts.app" version="3.2.2" match="greaterOrEqual"/>
       <import plugin="org.bbaw.bts.commons.libs.elasticsearch" version="1.0.0" match="greaterOrEqual"/>
       <import plugin="org.bbaw.bts.core.commons" version="1.0.0" match="greaterOrEqual"/>
       <import plugin="org.bbaw.bts.core.dao" version="1.0.0" match="greaterOrEqual"/>
