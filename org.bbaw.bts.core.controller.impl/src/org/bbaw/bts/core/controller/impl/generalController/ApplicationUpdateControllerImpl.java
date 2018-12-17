@@ -266,11 +266,13 @@ public class ApplicationUpdateControllerImpl extends Job implements
 		}
 		return null;
 	}
-	
+
+
 	@Override
 	public void scheduleCheck() {
 		schedule();
 	}
+
 
 	@Override
 	protected IStatus run(IProgressMonitor monitor) {
@@ -292,6 +294,7 @@ public class ApplicationUpdateControllerImpl extends Job implements
 			return Status.CANCEL_STATUS;
 		}
 	}
+
 
 	@Override
 	public void askForConfirmationAndInstall() {
@@ -318,18 +321,24 @@ public class ApplicationUpdateControllerImpl extends Job implements
 			scheduleUpdate();
 		}
 	}
-	
+
+
 	@Override
 	public boolean shouldSchedule() {
 		return !(status == EUpdateStatusType.CHECK_RUNNING || status == EUpdateStatusType.UPDATE_RUNNING);
 	}
-	
+
+
 	private synchronized IStatus checkForUpdates(IProgressMonitor monitor) { 
+		// set up provisioning services
+		ProvisioningSession session = new ProvisioningSession(agent);
+		updateOperation = new UpdateOperation(session);
+
 		long now = System.currentTimeMillis();
 		// if latest check within specified time, return status
 		if (now - timeStamp < TIME_UNTIL_RECHECK) {
 			info("p2 update: last checked at "+timeStamp);
-			if (updateOperation.getPossibleUpdates() != null) {
+			if (updateOperation != null && updateOperation.getPossibleUpdates() != null) {
 				setStatus((updateOperation.getPossibleUpdates().length > 0)
 						? EUpdateStatusType.UPDATE_AVAILABLE
 						: EUpdateStatusType.NO_UPDATE);
@@ -338,6 +347,7 @@ public class ApplicationUpdateControllerImpl extends Job implements
 				logger.warn("Check for updates anyway.");
 			}
 		}
+
 		// if more than specified time since latest update, re-check
 		// (unless installation of updates has already been declined)
 		if (status != EUpdateStatusType.UPDATE_REJECTED) {
@@ -346,10 +356,6 @@ public class ApplicationUpdateControllerImpl extends Job implements
 		} else {
 			return Status.CANCEL_STATUS;
 		}
-
-		// set up provisioning services
-		ProvisioningSession session = new ProvisioningSession(agent);
-		updateOperation = new UpdateOperation(session);
 
 		// lookup repository URL: try app configuration, use hard coded default
 		IEclipsePreferences prefs = ConfigurationScope.INSTANCE.getNode("org.bbaw.bts.app");
@@ -431,11 +437,13 @@ public class ApplicationUpdateControllerImpl extends Job implements
 		return Status.OK_STATUS;
 	}
 
+
 	private void sendStatusMessage(String msg) {
     	StatusMessage sm = BtsviewmodelFactory.eINSTANCE.createInfoMessage();
     	sm.setMessage(msg);
     	eventBroker.post("status_info/current_text_code", sm);
 	}
+
 
 	private void info(String msg) {
 		try {
@@ -444,6 +452,7 @@ public class ApplicationUpdateControllerImpl extends Job implements
 			e.printStackTrace();
 		}
 	}
+
 
 	private boolean setStatus(EUpdateStatusType newStatus) {
 		if (newStatus != status) {
