@@ -15,7 +15,8 @@ Change log
 Release 3.2.2
 -------------
 
-   - Feature: load lemma annotations to annotations part (9f84c8c)
+	- Feature: load lemma annotations to annotations part (9f84c8c)
+	- Chore: include BTS user manual v3 (1b86589)
 
 Release 3.2.1
 -------------
