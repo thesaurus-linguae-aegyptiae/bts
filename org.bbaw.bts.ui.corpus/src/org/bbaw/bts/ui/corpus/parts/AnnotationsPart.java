@@ -422,7 +422,6 @@ public class AnnotationsPart implements EventHandler {
 
 	
 	private void loadRelatingObjects(final BTSRelatingObjectsLoadingEvent event) {
-
 		try {
 			IRunnableWithProgress op = new IRunnableWithProgress() {
 
@@ -512,14 +511,8 @@ public class AnnotationsPart implements EventHandler {
 		Class<?> widgetClass; 
 		if (o instanceof BTSAnnotation)
 		{
-			if (BTSConstants.ANNOTATION_RUBRUM.equalsIgnoreCase(o.getType()))
-			{
-				widgetClass = RelatedObjectGroupRubrum.class;
-			}
-			else
-			{
-				widgetClass = RelatedObjectGroupAnnotation.class;
-			}
+			widgetClass = BTSConstants.ANNOTATION_RUBRUM.equalsIgnoreCase(o.getType())
+					? RelatedObjectGroupRubrum.class : RelatedObjectGroupAnnotation.class;
 		}
 		else if (o instanceof BTSText) {
 			widgetClass = RelatedObjectGroupSubtext.class;
@@ -700,18 +693,34 @@ public class AnnotationsPart implements EventHandler {
 	}
 
 
+	/**
+	 * Determines whether or not to show the given object based on its corresponding type identifier as
+	 * extracted by {@link CorpusUtils#getTypeIdentifier(org.bbaw.bts.btsmodel.BTSIdentifiableItem)}
+	 * and the current configuration of the <code>"org.bbaw.bts.corpus.annotationsPart.filter"</code>
+	 * filter map in the E4 context.
+	 * 
+	 * @param o object that we want to know if it should be shown (probably annotation or comment)
+	 * @return true if filter flag in eclipse context says so
+	 */
 	private boolean isRelatedObjVisible(BTSObject o) {
 		@SuppressWarnings("unchecked")
-		HashMap<String, Boolean> filters = (HashMap<String, Boolean>) context.get("org.bbaw.bts.corpus.annotationsPart.filter");
-		//String key = "org.bbaw.bts.ui.corpus.part.annotations.viewmenu.show.";
+		HashMap<String, Boolean> filters = (HashMap<String, Boolean>) context.get(
+				"org.bbaw.bts.corpus.annotationsPart.filter");
 		String key = CorpusUtils.getTypeIdentifier(o);
 		return filters.containsKey(key) ? filters.get(key) : false;
 	}
 
 
+	/**
+	 * go through object list and checks {@link #isRelatedObjVisible(BTSObject)} for if they should be displayed,
+	 * and then limits the resulting list to a certain length ({@value #MAX_RELATED_OBJECTS}).
+	 * @param relatingObjects
+	 * @param monitor
+	 * @return
+	 */
 	private List<BTSObject> filterAndCutRelatingObjects(
 			List<BTSObject> relatingObjects, IProgressMonitor monitor) {
-		List<BTSObject> filteredRelatingObjects = new Vector<BTSObject>(relatingObjects.size() / 2);
+		List<BTSObject> filteredRelatingObjects = new Vector<BTSObject>(relatingObjects.size());
 		if (monitor != null) monitor.beginTask("Filter related objects", relatingObjects.size());
 		allRelatedObjectsShowed = true;
 		for (BTSObject o : relatingObjects) {
@@ -732,9 +741,9 @@ public class AnnotationsPart implements EventHandler {
 	void eventReceivedRelatingObjectsFilterChanged(
 			@UIEventTopic(BTSUIConstants.EVENT_TEXT_RELATING_OBJECTS_TOGGLE_FILTER) final String filter) {
 		@SuppressWarnings("unchecked")
-		HashMap<String, Boolean> filters = (HashMap<String, Boolean>) context.get("org.bbaw.bts.corpus.annotationsPart.filter");
+		HashMap<String, Boolean> filters = (HashMap<String, Boolean>) context.get(
+				"org.bbaw.bts.corpus.annotationsPart.filter");
 		// toggle
-		//String key = "org.bbaw.bts.ui.corpus.part.annotations.viewmenu.show." + filter;
 		String key = filter;
 		if (filters.containsKey(key)) {
 			filters.put(key, !filters.get(key));
@@ -766,9 +775,8 @@ public class AnnotationsPart implements EventHandler {
 				if (g != null)
 				{
 					groups.add(g);
-				}
-				else // group not found because was not loaded earlier
-				if (isRelatedObjVisible((BTSObject)o)) {
+				} else if (isRelatedObjVisible((BTSObject)o)) {
+				// group not found because was not loaded earlier
 					RelatedObjectGroup roGroup = makeRelatedObjectGroup(
 							(BTSObject) o, composite);
 					if (roGroup != null) {
@@ -778,8 +786,7 @@ public class AnnotationsPart implements EventHandler {
 					}
 				}
 			}
-			if (resizeRequired)
-			{
+			if (resizeRequired) {
 				Rectangle r = scrollComposite.getClientArea();
 				composite.layout();
 				scrollComposite.setMinSize(composite.computeSize(
@@ -798,7 +805,6 @@ public class AnnotationsPart implements EventHandler {
 	@Optional
 	void eventReceivedUpdates(@EventTopic("model_update/*") BTSModelUpdateNotification notification)
 	{
-		//logger.info("AnnotationsPart eventReceivedUpdates. object: " + notification);
 		if (notification.getQueryIds() != null){
 			for (String id : notification.getQueryIds())
 			{

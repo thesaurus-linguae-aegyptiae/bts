@@ -5,7 +5,6 @@ import java.util.Map;
 
 import org.bbaw.bts.btsviewmodel.TreeNodeWrapper;
 import org.bbaw.bts.core.dao.util.BTSQueryRequest;
-import org.bbaw.bts.corpus.btsCorpusModel.BTSAbstractText;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSAnnotation;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
 import org.bbaw.bts.searchModel.BTSModelUpdateNotification;
@@ -17,7 +16,8 @@ import org.eclipse.jface.viewers.StructuredViewer;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.ViewerFilter;
 
-public interface GenericCorpusObjectNavigatorController <E extends BTSCorpusObject, K>{
+public interface GenericCorpusObjectNavigatorController <E extends BTSCorpusObject, K>
+		extends RelatedObjectsController {
 
 	List<E> getRootEntries(
 			Map<String, BTSQueryResultAbstract> queryResultMap,

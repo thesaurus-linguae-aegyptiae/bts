@@ -1504,7 +1504,7 @@ public class TextAnnotationsComposite extends Composite implements IBTSEditor {
 				&& itemFigure instanceof WordFigure)
 		{
 			for (Object fig : itemFigure.getChildren()) {
-				if (fig instanceof TypedLabel && ((TypedLabel)fig).getType() == TypedLabel.TRANSLITATION) {
+				if (fig instanceof TypedLabel && ((TypedLabel)fig).getType() == TypedLabel.TRANSLITERATION) {
 					 ((TypedLabel)fig).setForegroundColor(BTSUIConstants.COLOR_RUBRUM);
 				}
 			}
@@ -1790,7 +1790,7 @@ public class TextAnnotationsComposite extends Composite implements IBTSEditor {
 	private ElementFigure makeWordFigure(BTSWord word) {
 		TypedLabel label = new TypedLabel();
 		label.setText(word.getWChar());
-		label.setType(TypedLabel.TRANSLITATION);
+		label.setType(TypedLabel.TRANSLITERATION);
 
 		final WordFigure rect = new WordFigure(label);
 		rect.setBackgroundColor(colorWordDeselected(word));
@@ -2272,7 +2272,7 @@ public class TextAnnotationsComposite extends Composite implements IBTSEditor {
 								l.setText(word.getFlexCode());
 								fset = true;
 								break;
-							case TypedLabel.TRANSLITATION :
+							case TypedLabel.TRANSLITERATION :
 								l.setText(word.getWChar());
 								break;
 							case TypedLabel.TRANSLATION :

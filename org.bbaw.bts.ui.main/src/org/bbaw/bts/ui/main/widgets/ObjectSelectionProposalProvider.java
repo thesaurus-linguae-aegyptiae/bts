@@ -32,6 +32,7 @@ public class ObjectSelectionProposalProvider implements
 		this.object = object;
 	}
 
+
 	@Override
 	public IContentProposal[] getProposals(String contents, int position) {
 		if (contents.length() > 1) {
@@ -87,10 +88,11 @@ public class ObjectSelectionProposalProvider implements
 	}
 
 	private List<BTSObject> loadList(final String contents) {
-
 		return generalObjectController.getObjectProposalsFor(
-				(BTSConfigItem) configItem, contents, object, null);
-
+				(BTSConfigItem) configItem,
+				contents,
+				object,
+				null);
 	}
 
 	public BTSConfig getConfigItem() {

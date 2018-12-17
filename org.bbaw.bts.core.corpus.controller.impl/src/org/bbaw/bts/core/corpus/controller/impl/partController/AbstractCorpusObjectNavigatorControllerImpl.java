@@ -40,6 +40,7 @@ import org.eclipse.jface.viewers.ViewerFilter;
 import org.elasticsearch.index.query.QueryBuilders;
 
 public abstract class AbstractCorpusObjectNavigatorControllerImpl<E extends BTSCorpusObject, K extends Serializable>
+extends RelatedObjectsControllerImpl
 implements
 GenericCorpusObjectNavigatorController<E, K>
 {
@@ -53,8 +54,6 @@ GenericCorpusObjectNavigatorController<E, K>
 	@Inject
 	private Backend2ClientUpdateService updateService;
 
-
-	
 	@Inject
 	private CorpusObjectService corpusObjectService;
 	
@@ -117,14 +116,14 @@ GenericCorpusObjectNavigatorController<E, K>
 		}
 		eventBroker.post("model_update/async", "Hallo");
 		return childNode;
-
 	}
+
 
 	@Override
 	public void save(BTSCorpusObject o) {
 		corpusObjectService.save(o);
-
 	}
+
 
 	@Override
 	public List<E> findChildren(E parent,
@@ -137,7 +136,7 @@ GenericCorpusObjectNavigatorController<E, K>
 		query.setResponseFields(BTSConstants.SEARCH_BASIC_RESPONSE_FIELDS);
 		for (String relationType : getChildRelationTypes())
 		{
-			
+			//XXX
 		}
 		query.setQueryId("relations.objectId-" + parent.get_id());
 		System.out.println(query.getQueryId());
@@ -387,6 +386,7 @@ GenericCorpusObjectNavigatorController<E, K>
 		{
 			monitor.beginTask("Load Elements to Treenodes", obs.size());
 		}
+		// XXX
 		if (asStructuredTree && obs.size() > 200)
 		{
 			nodes = new Vector<TreeNodeWrapper>();
@@ -409,7 +409,6 @@ GenericCorpusObjectNavigatorController<E, K>
 							{
 								tn.setLabel(tn.getLabel() + " - " + last.getName());
 							}
-							System.out.println("create tn");
 							tn = BtsviewmodelFactory.eINSTANCE
 										.createTreeNodeWrapper();
 							nodes.add(tn);
@@ -419,7 +418,6 @@ GenericCorpusObjectNavigatorController<E, K>
 						{
 							tn2.setLabel(tn2.getLabel() + " - " + last.getName());
 						}
-						System.out.println("create tn2");
 
 						tn2 = BtsviewmodelFactory.eINSTANCE
 									.createTreeNodeWrapper();

@@ -185,7 +185,8 @@ public class RelationEditorComposite extends Composite {
 		selectComboViewer.setContentProvider(contentProvider);
 		selectComboViewer.setLabelProvider(labelProvider);
 		selectComboViewer.setInput(configurationController
-				.getRelationPathConfigItemProcessedClones(itemConfig2,
+				.getRelationPathConfigItemProcessedClones(
+						itemConfig2,
 						corpusObject));
 
 		DataBindingContext bindingContext = new DataBindingContext();
@@ -204,7 +205,9 @@ public class RelationEditorComposite extends Composite {
 				target_type_viewer,
 				EMFEditProperties.value(getEditingDomain(),
 						BtsmodelPackage.Literals.BTS_RELATION__TYPE).observe(
-						relation), targetToModel, modelToTarget);
+						relation),
+				targetToModel,
+				modelToTarget);
 
 		// if (false) {
 		// bindingContext.addValidationStatusProvider(binding);

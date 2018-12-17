@@ -139,9 +139,11 @@ public class SearchSelectObjectDialog extends TitleAreaDialog implements
 
 			// child.set(Composite.class, composite_CorpusNavigator);
 
-			SearchViewer searchViewer = makeSearchViewer(
-					composite_CorpusNavigator, relationConfig,
-					"CorpusNavigator", context);
+			makeSearchViewer(
+					composite_CorpusNavigator,
+					relationConfig,
+					"CorpusNavigator",
+					context);
 		}
 
 		// wlist
@@ -174,8 +176,12 @@ public class SearchSelectObjectDialog extends TitleAreaDialog implements
 			// child_wlist.set(BTSUIConstants.SELECTION_TYPE,
 			// BTSUIConstants.SELECTION_TYPE_SECONDARY);
 
-			SearchViewer searchViewer = makeSearchViewer(
-					composite_wlistNavigator, relationConfig, "LemmaNavigator", context);
+			makeSearchViewer(
+					composite_wlistNavigator,
+					relationConfig,
+					"LemmaNavigator",
+					context);
+
 			// WordListNavigator wlistNavigator = ContextInjectionFactory.make(
 			// WordListNavigator.class, child_wlist);
 		}
@@ -212,8 +218,11 @@ public class SearchSelectObjectDialog extends TitleAreaDialog implements
 			// ThsNavigator thsNavigator = ContextInjectionFactory.make(
 			// ThsNavigator.class, child_ths);
 
-			SearchViewer searchViewer = makeSearchViewer(
-					composite_thsNavigator, relationConfig, "ThsNavigator", context);
+			makeSearchViewer(
+					composite_thsNavigator,
+					relationConfig,
+					"ThsNavigator",
+					context);
 
 		}
 
