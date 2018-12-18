@@ -102,4 +102,10 @@ public interface BTSTextEditorController extends RelatedObjectsController
 	BTSSentenceItem copySentenceItem(BTSSentenceItem copyItem);
 
 	BTSSenctence copySentence(BTSSenctence copyItem);
+
+	/**
+	 * Creates a new sentence object, gives it an ID and returns it.
+	 * @return
+	 */
+	BTSSenctence createSentence();
 }

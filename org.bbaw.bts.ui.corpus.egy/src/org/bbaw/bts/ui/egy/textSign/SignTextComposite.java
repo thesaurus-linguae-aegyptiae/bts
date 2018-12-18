@@ -1253,24 +1253,15 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 		// }
 
 		if (parentEditor != null) {
-			
 			Event e = new Event();
 			e.widget = this;
-			TypedEvent ev = new TypedEvent(e);
-			BTSTextSelectionEvent event = new BTSTextSelectionEvent(ev, btsObject);
+			BTSTextSelectionEvent event = new BTSTextSelectionEvent(e,
+					btsObject);
 			event.type = eventType;
 			event.data = textContent.eContainer();
-			event.getRelatingObjects().addAll(((ElementFigure)figure).getRelatingObjects());
-			BTSIdentifiableItem item = (BTSIdentifiableItem) figure.getModelObject();
-			event.getSelectedItems().add(item);
-
-			if (item instanceof BTSSentenceItem)
-			{
-				event.setEndId(item.get_id());
-				event.setStartId(item.get_id());
-			}
-			
-			event.getInterTextReferences().addAll(((ElementFigure)figure).getInterTextReferences());
+			event.addRelatingObjects(((ElementFigure)figure).getRelatingObjects());
+			event.addSelectedItem((BTSIdentifiableItem) figure.getModelObject());
+			event.addInterTextReferences(((ElementFigure)figure).getInterTextReferences());
 			parentEditor.setEditorSelection(event);
 		}
 	}

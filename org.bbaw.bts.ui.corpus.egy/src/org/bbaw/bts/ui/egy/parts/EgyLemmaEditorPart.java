@@ -590,7 +590,7 @@ public class EgyLemmaEditorPart extends AbstractTextEditorLogic implements IBTSE
 //		System.out.println("Textselection x y : " + btsEvent.x + " " + btsEvent.y);
 		btsEvent.data = selectedLemmaEntry;
 		List<BTSModelAnnotation> annotations = getModelAnnotationAtSelection(btsEvent.x, btsEvent.y, btsEvent);
-		btsEvent.getTextAnnotations().addAll(annotations);
+		btsEvent.addTextAnnotations(annotations);
 		processSelection(annotations, false, btsEvent);
 		selectionService.setSelection(btsEvent);
 		
@@ -602,13 +602,14 @@ public class EgyLemmaEditorPart extends AbstractTextEditorLogic implements IBTSE
 //		System.out.println("Textselection x y : " + btsEvent.x + " " + btsEvent.y);
 		btsEvent.data = selectedLemmaEntry;
 		List<BTSModelAnnotation> annotations = getModelAnnotationAtSelection(btsEvent.x, btsEvent.y, btsEvent);
-		btsEvent.getTextAnnotations().addAll(annotations);
+		btsEvent.addTextAnnotations(annotations);
 		processSelection(annotations, false, btsEvent);
 		selectionService.setSelection(btsEvent);
 		
 	}
 	
 	protected void processSelection(List<BTSModelAnnotation> annotations, boolean postSelection, BTSTextSelectionEvent btsEvent) {
+		// XXX move to superclass shared with egytexteditorpart, texttranslationpart... 
 		List<BTSModelAnnotation> relatingObjectsAnnotations = new Vector<BTSModelAnnotation>(annotations.size());
 		for (BTSModelAnnotation ma : annotations) {
 			if (ma != null && ma instanceof BTSLemmaAnnotation
@@ -623,19 +624,19 @@ public class EgyLemmaEditorPart extends AbstractTextEditorLogic implements IBTSE
 			} else if (ma instanceof BTSAnnotationAnnotation) {
 				relatingObjectsAnnotations.add(ma);
 				if (btsEvent != null) {
-					btsEvent.getInterTextReferences().add(
+					btsEvent.addInterTextReference(
 							ma.getInterTextReference());
 				}
 			} else if (ma instanceof BTSCommentAnnotation) {
 				relatingObjectsAnnotations.add(ma);
 				if (btsEvent != null) {
-					btsEvent.getInterTextReferences().add(
+					btsEvent.addInterTextReference(
 							ma.getInterTextReference());
 				}
 			} else if (ma instanceof BTSSubtextAnnotation) {
 				relatingObjectsAnnotations.add(ma);
 				if (btsEvent != null) {
-					btsEvent.getInterTextReferences().add(
+					btsEvent.addInterTextReference(
 							ma.getInterTextReference());
 				}
 			}
@@ -694,14 +695,15 @@ public class EgyLemmaEditorPart extends AbstractTextEditorLogic implements IBTSE
 			}
 		}
 	private List<BTSModelAnnotation> getModelAnnotationAtSelection(int start, int end, BTSTextSelectionEvent btsEvent) {
-		Iterator it = embeddedEditor.getViewer().getAnnotationModel()
+		// XXX this is copy-and-pasted from egytexteditor
+		Iterator<Annotation> it = embeddedEditor.getViewer().getAnnotationModel()
 				.getAnnotationIterator();
 		List<BTSModelAnnotation> annotations = new Vector<BTSModelAnnotation>(4);
 		BTSSentenceItem startItem = null;
 		int startItemOffeset = 0;
 		BTSSentenceItem endItem = null;
 		int endItemOffeset = 0;
-		List<BTSSentenceItem> textItems = new Vector<BTSSentenceItem>();
+		List<BTSIdentifiableItem> textItems = new Vector<BTSIdentifiableItem>();
 		while (it.hasNext()) {
 			Annotation a = (Annotation) it.next();
 			if (a instanceof BTSModelAnnotation) {
@@ -744,7 +746,7 @@ public class EgyLemmaEditorPart extends AbstractTextEditorLogic implements IBTSE
 			{
 				btsEvent.setEndId(endItem.get_id());
 			}
-			btsEvent.getSelectedItems().addAll(textItems);
+			btsEvent.addSelectedItems(textItems);
 		}
 		return annotations;
 	}
@@ -989,7 +991,11 @@ public class EgyLemmaEditorPart extends AbstractTextEditorLogic implements IBTSE
 						// get selected item, add listener to domain
 						if (!((BTSTextSelectionEvent)selection).getSelectedItems().isEmpty())
 						{
-							editingDomain = getEditingDomain((EObject)  ((BTSTextSelectionEvent)selection).getSelectedItems().get(0));
+							editingDomain = getEditingDomain(
+									(EObject) ((BTSTextSelectionEvent) selection)
+									.getSelectedItems()
+									.get(0)
+									);
 							editingDomain.getCommandStack().addCommandStackListener(
 									getCommandStackListener());
 						}

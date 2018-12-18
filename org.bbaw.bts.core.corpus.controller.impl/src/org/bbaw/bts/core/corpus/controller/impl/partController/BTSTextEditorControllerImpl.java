@@ -131,8 +131,6 @@ public class BTSTextEditorControllerImpl
 	@Inject
 	private IEclipseContext context;
 	
-	
-	private int idcounter = 0;
 	private Comparator<? super Object> glyphsStringComparator;
 	
 	private Map<BTSInterTextReference, AnnotationCache> annotationRangeMap;
@@ -1678,10 +1676,14 @@ public class BTSTextEditorControllerImpl
 	}
 
 
-
 	@Override
 	public BTSSenctence copySentence(BTSSenctence copyItem) {
 		return textService.copySentence(copyItem);
 	}
 
+
+	@Override
+	public BTSSenctence createSentence() {
+		return textService.createNewSentence();
+	}
 }

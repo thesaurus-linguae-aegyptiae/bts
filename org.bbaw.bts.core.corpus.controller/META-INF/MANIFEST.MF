@@ -5,7 +5,7 @@ Bundle-SymbolicName: org.bbaw.bts.core.corpus.controller
 Bundle-Vendor: BBAW
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Export-Package: org.bbaw.bts.core.corpus.controller.generalController,
- org.bbaw.bts.core.corpus.controller.partController;version="3.2.2",
+ org.bbaw.bts.core.corpus.controller.partController,
  org.bbaw.bts.core.corpus.controller.partController.text.model
 Import-Package: org.bbaw.bts.btsmodel,
  org.bbaw.bts.btsviewmodel,
