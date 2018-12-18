@@ -65,6 +65,7 @@ import org.eclipse.equinox.security.storage.StorageException;
 import org.eclipse.jface.databinding.swt.DisplayRealm;
 import org.eclipse.jface.dialogs.ProgressMonitorDialog;
 import org.eclipse.jface.operation.IRunnableWithProgress;
+import org.eclipse.jface.resource.FontDescriptor;
 import org.eclipse.jface.resource.JFaceResources;
 import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.swt.SWT;
@@ -171,13 +172,28 @@ public class ApplicationStartupControllerImpl implements
 		// load font
 		Font font = null;
 
-		font = fontManager.getFont("BBAWLibertine");// "BBAWLibertine");
-		logger.info("Font loadded - font: " + font);
-		if (font != null && font.getFontData() != null
-				&& font.getFontData()[0] != null) {
-			font.getFontData()[0].setHeight(12);
-			JFaceResources.getFontRegistry().put(JFaceResources.DEFAULT_FONT,
-					new FontData[] { font.getFontData()[0] });
+		// retrieve bbawlibertine font via extension point
+		font = fontManager.getFont("BBAWLibertine");
+
+		if (font != null && font.getFontData() != null) {
+			// retrieve or create fontdata object for registration in jface font registry
+			FontData fd = (FontData) ((font.getFontData()[0] != null)
+					? font.getFontData()[0]
+							: FontDescriptor.createFrom(font));
+
+			logger.info("font data first element: "+fd);
+
+			// register font with jface
+			JFaceResources.getFontRegistry().put(
+					JFaceResources.DEFAULT_FONT,
+					new FontData[] { fd });
+
+			// log font configuration to debug output
+			logger.info("jface font registry at key "+JFaceResources.DEFAULT_FONT+":");
+			for (FontData fd_ : JFaceResources.getFontRegistry().get(
+					JFaceResources.DEFAULT_FONT).getFontData()) {
+				logger.info(fd_.getName() + fd_);
+			}
 		}
 
 		try {

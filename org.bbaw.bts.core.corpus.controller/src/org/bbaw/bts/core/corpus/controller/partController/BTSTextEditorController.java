@@ -40,7 +40,7 @@ import org.eclipse.swt.graphics.Image;
 
 import com.google.inject.Injector;
 
-public interface BTSTextEditorController
+public interface BTSTextEditorController extends RelatedObjectsController
 {
 
 	void transformToDocument(BTSTextContent textContent, Document doc, IAnnotationModel model, 
@@ -68,9 +68,7 @@ public interface BTSTextEditorController
 	String[] splitSignsKeepDelimeters(String mdC);
 
 	String insertMarkerBehindSingleCode(String mdcString, String marker);
-	
-	List<BTSObject> getRelatingObjects(BTSText text, IProgressMonitor monitor);
-	
+
 	BTSText createNewText(BTSCorpusObject parentObject);
 	
 	Image transformToSWT(BufferedImage bufferedImage);

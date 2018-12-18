@@ -82,8 +82,6 @@ implements 	CorpusObjectService, BTSObjectSearchService, MoveObjectAmongProjectD
 	@Inject
 	private BTSThsEntryService thsService;
 
-	@Inject
-	private GeneralPurposeDao generalPurposeDao;
 	// services
 
 	@Inject
@@ -384,6 +382,7 @@ implements 	CorpusObjectService, BTSObjectSearchService, MoveObjectAmongProjectD
 			String objectState,
 			boolean registerQuery, IProgressMonitor monitor) {
 		List<BTSCorpusObject> objects = new Vector<BTSCorpusObject>();
+		// XXX pls
 		if (query.getDbPath() != null && query.getDbPath().endsWith(BTSCorpusConstants.THS))
 		{
 			String[] indexArray = thsService.buildIndexArray();

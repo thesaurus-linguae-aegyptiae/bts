@@ -327,6 +327,11 @@ public abstract class GenericObjectServiceImpl<E extends BTSDBBaseObject, K exte
 		return objectId;
 		
 	}
+
+	/**
+	 * get list of currently active projects (as defined by user in the preferences)
+	 * @return
+	 */
 	protected String[] getActiveProjects() {
 		return  active_projects.split(BTSCoreConstants.SPLIT_PATTERN);
 	}

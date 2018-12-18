@@ -1996,6 +1996,11 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 								.getEditingDomain(text);
 						editingDomain.getCommandStack().addCommandStackListener(
 								getCommandStackListener());
+						setUserMayEditInteral(
+								permissionsController.userMayEditObject(
+										permissionsController.getAuthenticatedUser(),
+										(BTSText) selection)
+								);
 
 					} else if (loaded) { // requires clear
 						purgeCacheAndEditingDomain();

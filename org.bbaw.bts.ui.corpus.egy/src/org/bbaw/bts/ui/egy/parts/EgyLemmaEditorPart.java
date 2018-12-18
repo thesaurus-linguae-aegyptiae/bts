@@ -330,7 +330,7 @@ public class EgyLemmaEditorPart extends AbstractTextEditorLogic implements IBTSE
 
 		lemmaTranslate_Editor = new TranslationEditorComposite(
 				grpTranslation, SWT.WRAP | SWT.MULTI | SWT.V_SCROLL
-						| SWT.BORDER, null, null, false, false);
+						| SWT.BORDER, null, null, false, true);
 		lemmaTranslate_Editor.setLayoutData(new GridData(SWT.FILL, SWT.FILL,
 				true, true));
 		lemmaTranslate_Editor.layout();
@@ -493,7 +493,13 @@ public class EgyLemmaEditorPart extends AbstractTextEditorLogic implements IBTSE
 		Document doc = new Document();
 		AnnotationModel tempAnnotationModel = new AnnotationModel();
 		lemmaAnnotationMap = new HashMap<String, List<Object>>();
-		lemmaEditorController.transformToDocument(textContent, doc, tempAnnotationModel, relatingObjects, relatingObjectsMap, lemmaAnnotationMap);
+		lemmaEditorController.transformToDocument(
+				textContent,
+				doc,
+				tempAnnotationModel,
+				relatingObjects,
+				relatingObjectsMap,
+				lemmaAnnotationMap);
 
 		String textString = doc.get();
 		// take care of empty input

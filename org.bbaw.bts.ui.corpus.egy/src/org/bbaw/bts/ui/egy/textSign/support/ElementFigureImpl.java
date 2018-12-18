@@ -5,8 +5,11 @@ import java.util.Vector;
 
 import org.bbaw.bts.btsmodel.BTSInterTextReference;
 import org.bbaw.bts.btsmodel.BTSObject;
+import org.eclipse.draw2d.FigureUtilities;
+import org.eclipse.draw2d.ImageFigure;
+import org.eclipse.draw2d.Label;
 import org.eclipse.draw2d.RoundedRectangle;
-import org.eclipse.draw2d.geometry.Rectangle;
+import org.eclipse.jface.resource.JFaceResources;
 import org.eclipse.swt.graphics.Color;
 
 public class ElementFigureImpl extends RoundedRectangle implements
@@ -22,11 +25,7 @@ public class ElementFigureImpl extends RoundedRectangle implements
 
 	private Color baseBackgroundcolor;
 
-	public int getLength() {
-		Rectangle rec = getBounds();
-		Double d = rec.getSize().width * 0.7;
-		return d.intValue();
-	}
+
 
 	public Object getModelObject() {
 		return modelObject;
@@ -98,4 +97,36 @@ public class ElementFigureImpl extends RoundedRectangle implements
 	public Color getBaseBackgroundcolor() {
 		return baseBackgroundcolor;
 	}
+
+	@Override
+	public int calculateWidth() {
+		// tries to find the maximum width of all child elements 
+		int w = 0;
+		for (Object o : getChildren()) {
+			if (o instanceof Label) {
+				// if its a label, simulate size using default font
+				// (should have been initializes in startup controller)
+				Label l = (Label) o;
+				int labelWidth = FigureUtilities.getTextWidth(
+						l.getText(),
+						JFaceResources.getFont(
+								JFaceResources.DEFAULT_FONT));
+				if (l.getIcon() != null) {
+					labelWidth += l.getIconBounds().width + 3;
+				}
+				w = Math.max(
+						labelWidth,
+						w);
+			} else if (o instanceof ImageFigure) {
+				// if its a figure, use figure dimensions
+				ImageFigure i = (ImageFigure) o;
+				if (i.getImage() != null) {
+					int imageWidth = i.getImage().getBounds().width;
+					w = Math.max(imageWidth, w);
+				}
+			}
+		}
+		return w;
+	}
+
 }

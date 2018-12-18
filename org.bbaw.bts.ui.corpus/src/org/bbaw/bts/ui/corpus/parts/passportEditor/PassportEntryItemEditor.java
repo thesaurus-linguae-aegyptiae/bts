@@ -19,8 +19,6 @@ import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSPassportEntry;
 import org.bbaw.bts.corpus.btsCorpusModel.BtsCorpusModelFactory;
 import org.bbaw.bts.corpus.btsCorpusModel.BtsCorpusModelPackage;
-import org.bbaw.bts.corpus.btsCorpusModel.provider.BTSCorpusObjectItemProvider;
-import org.bbaw.bts.corpus.btsCorpusModel.provider.BtsCorpusModelItemProviderAdapterFactory;
 import org.bbaw.bts.ui.commons.controldecoration.BackgroundControlDecorationSupport;
 import org.bbaw.bts.ui.commons.converter.BTSBooleanToStringConverter;
 import org.bbaw.bts.ui.commons.converter.BTSConfigItemToStringConverter;
@@ -421,39 +419,33 @@ public class PassportEntryItemEditor extends PassportEntryEditorComposite {
 		if (itemConfig.getPassportEditorConfig() != null) {
 
 			// first check and load standard widget types
-			if (BTSCoreConstants.WIDGET_TYPE_TEXT.equals(itemConfig
-					.getPassportEditorConfig().getWidgetType())) {
-				loadTextWidget(itemConfig, entry);
-			} else if (BTSCoreConstants.WIDGET_TYPE_TEXT_SUGGEST
-					.equals(itemConfig.getPassportEditorConfig()
-							.getWidgetType())) {
-				loadTextSuggestWidget(itemConfig, entry);
-			} else if (BTSCoreConstants.WIDGET_TYPE_TEXT_FIELD
-					.equals(itemConfig
-					.getPassportEditorConfig().getWidgetType())) {
-				loadTextFieldWidget(itemConfig, entry);
-			} else if (BTSCoreConstants.WIDGET_TYPE_SELECT_CONFIG
-					.equals(itemConfig.getPassportEditorConfig()
-							.getWidgetType())) {
-				loadSelectConfigWidget(itemConfig, entry);
-			} else if (BTSCoreConstants.WIDGET_TYPE_SELECT_INTEGER
-					.equals(itemConfig.getPassportEditorConfig()
-							.getWidgetType())) {
-				loadSelectIntegerWidget(itemConfig, entry);
-			} else if (BTSCoreConstants.WIDGET_TYPE_SELECT_THS
-					.equals(itemConfig
-					.getPassportEditorConfig().getWidgetType())) {
-				loadSelectTHSWidget(itemConfig, entry);
-			} else if (BTSCoreConstants.WIDGET_TYPE_BOOLEAN.equals(itemConfig
-					.getPassportEditorConfig().getWidgetType())) {
-				loadBooleanWidget(itemConfig, entry);
-			} else if (BTSCoreConstants.WIDGET_TYPE_DATE.equals(itemConfig
-					.getPassportEditorConfig().getWidgetType())) {
-				loadDateWidget(itemConfig, entry);
-			} else if (BTSCoreConstants.WIDGET_TYPE_REFERENCE_EXTERNAL
-					.equals(itemConfig
-					.getPassportEditorConfig().getWidgetType())) {
-				loadReferenceWidget(itemConfig, entry);
+			switch (itemConfig.getPassportEditorConfig().getWidgetType()) {
+				case BTSCoreConstants.WIDGET_TYPE_TEXT:
+					loadTextWidget(itemConfig, entry);
+					break;
+				case BTSCoreConstants.WIDGET_TYPE_TEXT_SUGGEST: 
+					loadTextSuggestWidget(itemConfig, entry);
+					break;
+				case BTSCoreConstants.WIDGET_TYPE_TEXT_FIELD:
+					loadTextFieldWidget(itemConfig, entry);
+					break;
+				case BTSCoreConstants.WIDGET_TYPE_SELECT_CONFIG:
+					loadSelectConfigWidget(itemConfig, entry);
+					break;
+				case BTSCoreConstants.WIDGET_TYPE_SELECT_INTEGER:
+					loadSelectIntegerWidget(itemConfig, entry);
+					break;
+				case BTSCoreConstants.WIDGET_TYPE_SELECT_THS:
+					loadSelectTHSWidget(itemConfig, entry);
+					break;
+				case BTSCoreConstants.WIDGET_TYPE_BOOLEAN:
+					loadBooleanWidget(itemConfig, entry);
+					break;
+				case BTSCoreConstants.WIDGET_TYPE_DATE:
+					loadDateWidget(itemConfig, entry);
+					break;
+				case BTSCoreConstants.WIDGET_TYPE_REFERENCE_EXTERNAL:
+					loadReferenceWidget(itemConfig, entry);
 			}
 
 			// TODO now check widget types from extension point
@@ -589,6 +581,7 @@ public class PassportEntryItemEditor extends PassportEntryEditorComposite {
 		ths_select_text.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 		final char[] autoActivationCharacters = new char[] { '.', '#' };
 
+		// attach content assist to textfield
 		try {
 			ContentProposalAdapter adapter = new ContentProposalAdapter(
 					ths_select_text,
@@ -622,26 +615,11 @@ public class PassportEntryItemEditor extends PassportEntryEditorComposite {
 			public void keyReleased(KeyEvent e) {
 				// CTRL+F
 				if (((e.stateMask & SWT.CTRL) == SWT.CTRL) && (e.keyCode == 102)){
-					// open search dialog
-					IEclipseContext child = context.createChild("searchselect");
-					context.set(BTSConstants.OBJECT_TYPES_ARRAY, new String[]{BTSConstants.THS_ENTRY});
-					BTSObjectTypeSubtypeViewerFilter viewerFilter = passportConfigurationController.createObjectTypeSubtypeFilterByReferencedPath(corpusObject, itemConfig2);
-					context.set(BTSObjectTypeSubtypeViewerFilter.class, viewerFilter);
-
-					SearchSelectObjectDialog dialog = ContextInjectionFactory.make(
-							SearchSelectObjectDialog.class, child);
-					if (dialog.open() == Dialog.OK) {
-						BTSObject object = dialog.getObject();
-						Command command = SetCommand.create(editingDomain,
-								entry, BtsCorpusModelPackage.eINSTANCE.getBTSPassportEntry_Value(),
-								object.get_id());
-						editingDomain.getCommandStack().execute(command);
-						ths_select_text.setText(object.getName());
-						ths_select_text.setData(object);
-					}
+					openThesaurusEntrySearchDialog(itemConfig2, entry);
 			    } else if (e.keyCode == SWT.BS) {
 			    	Command command = SetCommand.create(editingDomain,
-							entry, BtsCorpusModelPackage.eINSTANCE.getBTSPassportEntry_Value(),
+							entry,
+							BtsCorpusModelPackage.eINSTANCE.getBTSPassportEntry_Value(),
 							null);
 					editingDomain.getCommandStack().execute(command);
 					ths_select_text.setText("");
@@ -649,14 +627,16 @@ public class PassportEntryItemEditor extends PassportEntryEditorComposite {
 			    }
 			}
 		});
-		
-		ths_select_text.addModifyListener(new ModifyListener() {
 
+		ths_select_text.addModifyListener(new ModifyListener() {
 			@Override
 			public void modifyText(ModifyEvent e) {
 				if (ths_select_text.getText().trim().length() == 0) {
-					Command command = SetCommand.create(editingDomain,
-							entry, BtsCorpusModelPackage.eINSTANCE.getBTSPassportEntry_Value(),
+					System.out.println("text field value has length 0");
+					Command command = SetCommand.create(
+							editingDomain,
+							entry,
+							BtsCorpusModelPackage.eINSTANCE.getBTSPassportEntry_Value(),
 							null);
 					editingDomain.getCommandStack().execute(command);
 					ths_select_text.setData(null);
@@ -684,21 +664,7 @@ public class PassportEntryItemEditor extends PassportEntryEditorComposite {
 				if (PassportEntryItemEditor.this.userMayEdit) {
 					Label l = (Label) e.getSource();
 					l.setBackground(l.getParent().getBackground());
-					// open search dialog
-					IEclipseContext child = context.createChild("searchselect");
-					context.set(BTSConstants.OBJECT_TYPES_ARRAY, new String[]{BTSConstants.THS_ENTRY});
-					BTSObjectTypeSubtypeViewerFilter viewerFilter = passportConfigurationController.createObjectTypeSubtypeFilterByReferencedPath(corpusObject, itemConfig2);
-					context.set(BTSObjectTypeSubtypeViewerFilter.class, viewerFilter);
-					SearchSelectObjectDialog dialog = ContextInjectionFactory.make(SearchSelectObjectDialog.class, child);
-					if (dialog.open() == Dialog.OK) {
-						BTSObject object = dialog.getObject();
-						Command command = SetCommand.create(editingDomain,
-								entry, BtsCorpusModelPackage.eINSTANCE.getBTSPassportEntry_Value(),
-								object.get_id());
-						editingDomain.getCommandStack().execute(command);
-						ths_select_text.setText(object.getName());
-						ths_select_text.setData(object);
-					}
+					openThesaurusEntrySearchDialog(itemConfig2, entry);
 				}
 			}
 		});
@@ -737,15 +703,54 @@ public class PassportEntryItemEditor extends PassportEntryEditorComposite {
 				}
 			}
 		});
-
-
 	}
 
-	protected IContentProposalProvider getObjectProposalProvider(
-			BTSConfigItem configItem) {
+
+	/**
+	 * Creates a dialog that allows searching for thesaurus objects of the type/subtype that matches
+	 * the constraints defined in the configuration item passed as <code>configItem</config>.
+	 * 
+	 * @param configItem 
+	 * @param entry the owning {@link BTSPassportEntry} instance
+	 * @return the selected thesaurus object
+	 */
+	private BTSObject openThesaurusEntrySearchDialog(BTSConfigItem configItem, BTSPassportEntry entry) {
+		// spawn context node and configure for thesaurus search
+		IEclipseContext childContext = context.createChild("searchselect");
+		// limit to thesaurus entries
+		context.set(BTSConstants.OBJECT_TYPES_ARRAY,
+				new String[]{BTSConstants.THS_ENTRY});
+		// create type filter based on applicable configuration entry
+		context.set(BTSObjectTypeSubtypeViewerFilter.class,
+				passportConfigurationController.createObjectTypeSubtypeFilterByReferencedPath(
+						corpusObject,
+						configItem));
+		// create search dialog
+		SearchSelectObjectDialog dialog = ContextInjectionFactory.make(
+				SearchSelectObjectDialog.class,
+				childContext);
+		// open search dialog
+		if (dialog.open() == Dialog.OK) {
+			BTSObject object = dialog.getObject();
+			Command command = SetCommand.create(editingDomain,
+					entry,
+					BtsCorpusModelPackage.eINSTANCE.getBTSPassportEntry_Value(),
+					object.get_id());
+			editingDomain.getCommandStack().execute(command);
+			ths_select_text.setText(object.getName());
+			ths_select_text.setData(object);
+			return object;
+		}
+		return null;
+	}
+
+
+	protected IContentProposalProvider getObjectProposalProvider(BTSConfigItem configItem) {
 		if (thsItemProposalProvider == null) {
 			thsItemProposalProvider = new ObjectSelectionProposalProvider(
-					generalObjectController, configItem, corpusObject);
+					generalObjectController,
+					configItem,
+					corpusObject);
 		}
 		thsItemProposalProvider.setConfigItem(configItem);
 		return thsItemProposalProvider;
@@ -1064,9 +1069,10 @@ public class PassportEntryItemEditor extends PassportEntryEditorComposite {
 		Binding binding = bindingContext.bindValue(
 				WidgetProperties.text(SWT.Modify).observeDelayed(
 						BTSUIConstants.DELAY, text),
-				EMFEditProperties.value(editingDomain,
-						BtsCorpusModelPackage.Literals.BTS_PASSPORT_ENTRY__VALUE)
-						.observe(entry), us, null);
+				EMFEditProperties.value(
+						editingDomain,BtsCorpusModelPackage.Literals.BTS_PASSPORT_ENTRY__VALUE).observe(entry),
+				us,
+				null);
 
 		if (itemConfig.getPassportEditorConfig().isRequired() || regex) {
 			bindingContext.addValidationStatusProvider(binding);
