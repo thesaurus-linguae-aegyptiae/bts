@@ -38,7 +38,6 @@ import java.nio.charset.CharacterCodingException;
 import java.nio.charset.Charset;
 import java.nio.charset.CharsetDecoder;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.EventObject;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -220,7 +219,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 		}
 	}
 
-    public static final int SELECTION_EVENT_PROCESSING_DELAY_MS = 400;
+    public static final int SELECTION_EVENT_PROCESSING_DELAY_MS = 300;
 
 	/** The dirty. */
 	@Optional
@@ -544,7 +543,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 													Annotation an = modelAnnotationMap.get(((BTSIdentifiableItem) selectedTextItem).get_id());
 													if (an != null)
 													{
-														Position pos = annotationModel.getPosition(an);
+														Position pos = textModelPositionOf(an);
 														try {
 															getTextWidget().setCaretOffset(pos.getOffset());
 															getViewer().revealRange(pos.getOffset(), pos.getLength());
@@ -1424,9 +1423,11 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 	protected void processSelection(List<BTSModelAnnotation> annotations,
 			boolean postSelection, BTSTextSelectionEvent btsEvent) {
 		// XXX move to superclass shared with egylemmaeditorpart, texttranslationpart... 
+		System.out.println("ok processing selection");
 		List<BTSModelAnnotation> relatingObjectsAnnotations = new Vector<BTSModelAnnotation>(
 				annotations.size());
 		AnnotationModelEvent ev_trans = null;
+		System.out.println("number of model annotations: "+annotations.size());
 		if (!annotations.isEmpty())
 		{
 			BTSSenctence sentence = null;
@@ -1457,8 +1458,11 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 						selectedTextItem = item;
 				}
 			}
-			if (sentence != null)
+			if (sentence != null) {
+				System.out.println("selected sentence is: "+sentence);
+				System.out.println(text.getTextContent().getTextItems().indexOf(sentence));
 				ev_trans = setSentenceTranslation(sentence, true);
+			}
 		}
 		else
 		{
@@ -1525,7 +1529,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 		try {
 			// TODO annotations should be sorted based on startpos?
 			Annotation anno = relatingObjectsAnnotations.get(0);
-			final Position pos = annotationModel.getPosition(anno);
+			final Position pos = textModelPositionOf(anno);
 			
 			if (pos != null)
 				sync.asyncExec(new Runnable() {
@@ -1568,6 +1572,37 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 	}
 
 
+	/**
+	 * Takes a JFace {@link Annotation} and checks if it fits entirely into 
+	 * a text selection range represented by a {@link BTSTextSelectionEvent} object.
+	 * @param evt
+	 * @param a
+	 * @return whether the entire annotation fits into the selected text range
+	 */
+	private boolean entireAnnotationWithinSelection(BTSTextSelectionEvent evt, Annotation a) {
+		int sel_l = evt.x + EDITOR_PREFIX_LENGTH,
+			sel_r = evt.y + EDITOR_PREFIX_LENGTH;
+        Position pos = textModelPositionOf(a);
+        int ano_l = pos.getOffset(), ano_r = pos.getOffset() + pos.getLength();
+
+        /* Check if annotation interval [ano_l, ano_r] is contained within selection interval [sel_l, sel_r] */
+        return (sel_l <= ano_l && ano_r <= sel_r);
+	}
+
+
+	/**
+	 * Checks whether the first interval fits into the second interval.
+	 * @param start1 start position of first interval
+	 * @param end1 end position of first interval
+	 * @param start2 start position of second interval
+	 * @param end2 end position of second interval
+	 * @return whether first interval fits into the second one
+	 */
+	private boolean fitsIntoRange(int start1, int end1, int start2, int end2) {
+		return start2 <= start1 && end1 <= end2;
+	}
+
+
     /** 
      * Populate a BTSTextSelectionEvent with the annotations and BTSSentenceItems that are selected.
      *
@@ -1585,25 +1620,27 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
          *
          * TODO I don't quite understand just *why* things are this way. - Sebastian
          */
-        int sel_l = evt.x+1, sel_r = evt.y+1;
+        int sel_l = evt.x + EDITOR_PREFIX_LENGTH, sel_r = evt.y + EDITOR_PREFIX_LENGTH;
 
         ArrayList<BTSModelAnnotation> annotations = new ArrayList<BTSModelAnnotation>(128);
         ArrayList<BTSIdentifiableItem> items = new ArrayList<BTSIdentifiableItem>(128);
 
-        IAnnotationModel amodel = embeddedEditor.getViewer().getAnnotationModel();
-        for (Iterator<Annotation> it = amodel.getAnnotationIterator(); it.hasNext();) {
+        for (Iterator<Annotation> it = getViewer().getAnnotationModel().getAnnotationIterator(); it.hasNext();) {
             Annotation a = it.next();
 
 			if (! (a instanceof BTSModelAnnotation))
                 continue;
 
+            Position pos = textModelPositionOf(a);
+            int ano_l = pos.getOffset(), ano_r = pos.getOffset() + pos.getLength();
             BTSIdentifiableItem iitem = ((BTSModelAnnotation)a).getModel();
-            if (! (iitem instanceof BTSSentenceItem)) /* FIXME This check should be redundant */
-                continue;
+
+            if (iitem instanceof BTSSenctence) {
+				System.out.println(text.getTextContent().getTextItems().indexOf(iitem));
+				continue;
+            }
             BTSSentenceItem item = (BTSSentenceItem)iitem;
 
-            Position pos = amodel.getPosition(a);
-            int ano_l = pos.getOffset(), ano_r = pos.getOffset() + pos.getLength();
 
             /* Check if annotation interval [ano_l, ano_r] is contained within selection interval [sel_l, sel_r] */
             if (sel_l <= ano_l && ano_r <= sel_r) {
@@ -2084,7 +2121,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 				}
 				if (!postSelection) {
 					// make sure annotation is visible in text editor 
-					Position pos = annotationModel.getPosition(am);
+					Position pos = textModelPositionOf(am);
 					if (pos != null)
 						getViewer().revealRange(pos.getOffset(), pos.length);
 
@@ -2859,7 +2896,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 								&& ref.getBeginId().equals(ref.getEndId())) {
 							BTSModelAnnotation ma1 = modelAnnotationMap.get(ref
 									.getBeginId());
-							Position pos = annotationModel.getPosition(ma1);
+							Position pos = textModelPositionOf(ma1);
 							offset = pos.getOffset();
 							len = pos.getLength();
 						} else {
@@ -2867,8 +2904,8 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 									.getBeginId());
 							BTSModelAnnotation ma2 = modelAnnotationMap.get(ref
 									.getEndId());
-							Position pos = annotationModel.getPosition(ma1);
-							Position pos2 = annotationModel.getPosition(ma2);
+							Position pos = textModelPositionOf(ma1);
+							Position pos2 = textModelPositionOf(ma2);
 							if (pos2 != null)
 								if (pos != null) {
 									offset = pos.getOffset();
