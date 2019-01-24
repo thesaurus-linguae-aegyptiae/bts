@@ -17,6 +17,7 @@ import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.btsmodel.BTSRelation;
 import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.core.commons.BTSCoreConstants;
+import org.bbaw.bts.core.commons.corpus.CorpusUtils;
 import org.bbaw.bts.core.corpus.controller.partController.BTSTextEditorController;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSAmbivalence;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSAmbivalenceItem;
@@ -117,7 +118,7 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 	@Inject
 	@Preference(value = BTSEGYUIConstants.SIGN_TEXT_SHOW_HIEROGLYPHS, nodePath = "org.bbaw.bts.ui.corpus.egy")
 	private Boolean showHieroglyphs;
-	
+
 	@Inject
 	@Preference(value = BTSEGYUIConstants.SIGN_TEXT_SHOW_FLEXION, nodePath = "org.bbaw.bts.ui.corpus.egy")
 	private Boolean showFlexion;
@@ -673,11 +674,6 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 		// layout.setMinorSpacing(3);
 		canvas.setContents(container);
 		// container.setLayoutManager(layout);
-		
-		System.out.println("max line length: "+max_line_length);
-		for (FontData fd : JFaceResources.getFont("BBAWLibertine").getFontData()) {
-			System.out.println(fd);
-		}
 
 		container.setFocusTraversable(true);
 		this.layout();
@@ -734,7 +730,8 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 	 */
 	private void processStylingAnnotations(ElementFigure itemFigure,
 			BTSObject relatingObject) {
-		if (relatingObject instanceof BTSAnnotation && "rubrum".equals(relatingObject.getType()) 
+		if (relatingObject instanceof BTSAnnotation 
+				&& relatingObject.getType().equals(CorpusUtils.ANNOTATION_RUBRUM_TYPE) 
 				&& itemFigure instanceof WordFigure)
 		{
 			for (Object fig : itemFigure.getChildren()) {
@@ -1135,7 +1132,6 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 		}
 		int len = figure.calculateWidth() + 2;
 				
-		System.out.println("line leng " + (currentLineFigure.getSpaceLength() + len) + " max " + max_line_length); 
 		if (figure.getType().equals(ElementFigure.SENTENCE_START)) {
 			currentLineFigure = makeLineFigure();
 			currentLineFigure.add(figure);
