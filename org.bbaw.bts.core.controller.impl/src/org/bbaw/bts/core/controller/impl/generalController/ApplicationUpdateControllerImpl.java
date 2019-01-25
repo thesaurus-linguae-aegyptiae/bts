@@ -58,8 +58,8 @@ public class ApplicationUpdateControllerImpl extends Job implements
 	private class ApplicationUpdateConfirmationDialog extends Dialog {
 		private Text changelogText;
 
-		protected ApplicationUpdateConfirmationDialog(Shell parentShell) {
-			super(parentShell);
+		protected ApplicationUpdateConfirmationDialog() {
+			super(Display.getDefault().getActiveShell());
 		}
 
 		@Override
@@ -304,8 +304,7 @@ public class ApplicationUpdateControllerImpl extends Job implements
 	
 					@Override
 					public void run() {
-						dialog = new ApplicationUpdateConfirmationDialog(
-								Display.getDefault().getActiveShell());
+						dialog = new ApplicationUpdateConfirmationDialog();
 						int performUpdate = dialog.open();
 						dialog = null;
 						if (performUpdate == Window.OK) {
