@@ -58,8 +58,8 @@ public class ApplicationUpdateControllerImpl extends Job implements
 	private class ApplicationUpdateConfirmationDialog extends Dialog {
 		private Text changelogText;
 
-		protected ApplicationUpdateConfirmationDialog(Shell parentShell) {
-			super(parentShell);
+		protected ApplicationUpdateConfirmationDialog() {
+			super(Display.getDefault().getActiveShell());
 		}
 
 		@Override
@@ -261,7 +261,7 @@ public class ApplicationUpdateControllerImpl extends Job implements
 			info("Schedule update job");
 			updateJob.schedule();
 		} else {
-			sendStatusMessage("Software Update failed: no job.");
+			info("Software Update failed: no job.");			
 			return Status.CANCEL_STATUS;
 		}
 		return null;
@@ -298,27 +298,25 @@ public class ApplicationUpdateControllerImpl extends Job implements
 
 	@Override
 	public void askForConfirmationAndInstall() {
-		if (isUpdateAvailable() && !updatePending && dialog == null) {
-			sync.syncExec(new Runnable() {
-
-				@Override
-				public void run() {
-					dialog = new ApplicationUpdateConfirmationDialog(
-							Display.getDefault().getActiveShell());
-					int performUpdate = dialog.open();
-					dialog = null;
-					if (performUpdate == Window.OK) {
-						info("Installation of Updates confirmed.");
-						updatePending = true;
-						scheduleUpdate();
-					} else {
-						setStatus(EUpdateStatusType.UPDATE_REJECTED);
+		if (isUpdateAvailable()) {
+			if (!updatePending && dialog == null) {
+				sync.syncExec(new Runnable() {
+	
+					@Override
+					public void run() {
+						dialog = new ApplicationUpdateConfirmationDialog();
+						int performUpdate = dialog.open();
+						dialog = null;
+						if (performUpdate == Window.OK) {
+							info("Installation of Updates confirmed.");
+							updatePending = true;
+							scheduleUpdate();
+						} else {
+							setStatus(EUpdateStatusType.UPDATE_REJECTED);
+						}
 					}
-				}
-			});
-
-		} else {
-			scheduleUpdate();
+				});
+			}
 		}
 	}
 
