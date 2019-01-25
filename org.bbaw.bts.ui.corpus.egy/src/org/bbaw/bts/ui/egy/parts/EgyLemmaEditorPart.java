@@ -22,6 +22,7 @@ import org.bbaw.bts.btsmodel.BTSTranslations;
 import org.bbaw.bts.btsmodel.BtsmodelFactory;
 import org.bbaw.bts.commons.BTSPluginIDs;
 import org.bbaw.bts.core.commons.BTSCoreConstants;
+import org.bbaw.bts.core.commons.corpus.CorpusUtils;
 import org.bbaw.bts.core.controller.generalController.EditingDomainController;
 import org.bbaw.bts.core.controller.generalController.PermissionsAndExpressionsEvaluationController;
 import org.bbaw.bts.core.corpus.controller.partController.LemmaEditorController;
@@ -779,7 +780,7 @@ public class EgyLemmaEditorPart extends AbstractTextEditorLogic implements IBTSE
 					&& ((BTSAnnotationAnnotation) a).getRelatingObject()
 							.getType() != null
 					&& ((BTSAnnotationAnnotation) a).getRelatingObject()
-							.getType().equalsIgnoreCase("rubrum")) {
+							.getType().equalsIgnoreCase(CorpusUtils.ANNOTATION_RUBRUM_TYPE)) {
 
 				// Position pos = model.getPosition((Annotation) a);
 				Position pos2 = new Position(pos.getOffset()

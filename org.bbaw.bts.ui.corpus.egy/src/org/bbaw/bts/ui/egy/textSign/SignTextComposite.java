@@ -17,6 +17,7 @@ import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.btsmodel.BTSRelation;
 import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.core.commons.BTSCoreConstants;
+import org.bbaw.bts.core.commons.corpus.CorpusUtils;
 import org.bbaw.bts.core.corpus.controller.partController.BTSTextEditorController;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSAmbivalence;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSAmbivalenceItem;
@@ -117,7 +118,7 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 	@Inject
 	@Preference(value = BTSEGYUIConstants.SIGN_TEXT_SHOW_HIEROGLYPHS, nodePath = "org.bbaw.bts.ui.corpus.egy")
 	private Boolean showHieroglyphs;
-	
+
 	@Inject
 	@Preference(value = BTSEGYUIConstants.SIGN_TEXT_SHOW_FLEXION, nodePath = "org.bbaw.bts.ui.corpus.egy")
 	private Boolean showFlexion;
@@ -615,8 +616,9 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 				BTSSenctence sentence = (BTSSenctence) item;
 
 				// insert start Sentence
-				ElementFigure sentenceStart = makeSentenceStartFigure(sentence);
-				appendFigure(sentenceStart);
+				appendFigure(
+						makeSentenceBoundsFigure(sentence, ElementFigure.SENTENCE_START)
+						);
 				for (BTSSentenceItem senItem : sentence.getSentenceItems()) {
 					ElementFigure itemFigure = null;
 					if (senItem instanceof BTSWord) {
@@ -632,7 +634,7 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 					}
 					else if (senItem instanceof BTSAmbivalence) {
 						BTSAmbivalence ambivalence = (BTSAmbivalence) senItem;
-						itemFigure = makeAmbivalenceFigure(ambivalence);
+						makeAmbivalenceFigures(ambivalence);
 
 					}
 					
@@ -656,8 +658,9 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 					}
 
 				}
-				ElementFigure sentenceEnd = makeSentenceEndFigure(sentence);
-				appendFigure(sentenceEnd);
+				appendFigure(
+						makeSentenceBoundsFigure(sentence, ElementFigure.SENTENCE_END)
+						);
 
 			}
 		}
@@ -671,11 +674,6 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 		// layout.setMinorSpacing(3);
 		canvas.setContents(container);
 		// container.setLayoutManager(layout);
-		
-		System.out.println("max line length: "+max_line_length);
-		for (FontData fd : JFaceResources.getFont("BBAWLibertine").getFontData()) {
-			System.out.println(fd);
-		}
 
 		container.setFocusTraversable(true);
 		this.layout();
@@ -732,7 +730,8 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 	 */
 	private void processStylingAnnotations(ElementFigure itemFigure,
 			BTSObject relatingObject) {
-		if (relatingObject instanceof BTSAnnotation && "rubrum".equals(relatingObject.getType()) 
+		if (relatingObject instanceof BTSAnnotation 
+				&& relatingObject.getType().equals(CorpusUtils.ANNOTATION_RUBRUM_TYPE) 
 				&& itemFigure instanceof WordFigure)
 		{
 			for (Object fig : itemFigure.getChildren()) {
@@ -762,10 +761,11 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 		}
 	}
 
-	private ElementFigure makeAmbivalenceFigure(BTSAmbivalence ambivalence) {
+	private void makeAmbivalenceFigures(BTSAmbivalence ambivalence) {
 
-		ElementFigure ambivalenceStart = makeAmbivalenceStartFigure(ambivalence);
-		appendFigure(ambivalenceStart);
+		appendFigure(
+				makeAmbivalenceBoundsFigure(ambivalence, ElementFigure.AMBIVALENCE_START)
+				);
 
 		for (BTSLemmaCase lemmaCase : ambivalence.getCases()) {
 			ElementFigure caseFigure = makeCaseFigure(lemmaCase);
@@ -776,7 +776,7 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 				if (amItem instanceof BTSWord) {
 					BTSWord word = (BTSWord) amItem;
 					itemFigure = makeWordFigure(word);
-					// appendWord(word);
+					appendFigure(itemFigure);
 				} else if (amItem instanceof BTSMarker) {
 					BTSMarker marker = (BTSMarker) amItem;
 					itemFigure = makeMarkerFigure(marker);
@@ -803,13 +803,13 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 				// process relating Objects
 				}
 			}
-
 		}
-		ElementFigure ambivalenceEnd = makeAmbivalenceEndFigure(ambivalence);
-		appendFigure(ambivalenceEnd);
 
-		return null;
+		appendFigure(
+				makeAmbivalenceBoundsFigure(ambivalence, ElementFigure.AMBIVALENCE_END)
+				);
 	}
+
 
 	private ElementFigure makeCaseFigure(BTSLemmaCase lemmaCase) {
 		MarkerFigure fig = new MarkerFigure("case");
@@ -826,20 +826,16 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 		return fig;
 	}
 
-	private ElementFigure makeAmbivalenceEndFigure(BTSAmbivalence ambivalence) {
-		AmbivalenceEndFigure fig = new AmbivalenceEndFigure("");
 
-		fig.setType(ElementFigure.AMBIVALENCE_END);
-		fig.setModelObject(ambivalence);
-		fig.setSize(15, 90);
-		fig.addMouseListener(elementSelectionListener);
-		return fig;
-	}
-
-	private ElementFigure makeAmbivalenceStartFigure(BTSAmbivalence ambivalence) {
+	/**
+	 * Creates an {@link ElementFigure} instance representing the beginning or the end of an ambivalence
+	 * @param ambivalence the {@link BTSAmbivalence} represented by the to-be-returned figure
+	 * @param type either {@link ElementFigure#AMBIVALENCE_START} or {@link ElementFigure#AMBIVALENCE_END}
+	 * @return
+	 */
+	private ElementFigure makeAmbivalenceBoundsFigure(BTSAmbivalence ambivalence, String type) {
 		AmbivalenceStartFigure fig = new AmbivalenceStartFigure("");
-
-		fig.setType(ElementFigure.AMBIVALENCE_START);
+		fig.setType(type);
 		fig.setModelObject(ambivalence);
 		fig.setSize(15, 90);
 		fig.addMouseListener(elementSelectionListener);
@@ -1136,7 +1132,6 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 		}
 		int len = figure.calculateWidth() + 2;
 				
-		System.out.println("line leng " + (currentLineFigure.getSpaceLength() + len) + " max " + max_line_length); 
 		if (figure.getType().equals(ElementFigure.SENTENCE_START)) {
 			currentLineFigure = makeLineFigure();
 			currentLineFigure.add(figure);
@@ -1168,19 +1163,17 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 		return fig;
 	}
 
-	private ElementFigure makeSentenceStartFigure(BTSSenctence sentence) {
-		MarkerFigure fig = new MarkerFigure(" § ");
-		fig.setModelObject(sentence);
-		fig.setType(ElementFigure.SENTENCE_START);
-		fig.setSize(15, 90);
-		fig.addMouseListener(elementSelectionListener);
-		return fig;
-	}
 
-	private ElementFigure makeSentenceEndFigure(BTSSenctence sentence) {
+	/**
+	 * Creates an {@link ElementFigure} instance representing the beginning or end of a sentence. 
+	 * @param sentence
+	 * @param type either {@link ElementFigure#SENTENCE_START} or {@link ElementFigure#SENTENCE_END}
+	 * @return
+	 */
+	private ElementFigure makeSentenceBoundsFigure(BTSSenctence sentence, String type) {
 		MarkerFigure fig = new MarkerFigure(" § ");
 		fig.setModelObject(sentence);
-		fig.setType(ElementFigure.SENTENCE_END);
+		fig.setType(type);
 		fig.setSize(15, 90);
 		fig.addMouseListener(elementSelectionListener);
 		return fig;

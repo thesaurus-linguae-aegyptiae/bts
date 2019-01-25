@@ -34,6 +34,7 @@ import org.bbaw.bts.btsmodel.BTSInterTextReference;
 import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.btsmodel.BTSRelation;
 import org.bbaw.bts.commons.BTSConstants;
+import org.bbaw.bts.core.commons.corpus.CorpusUtils;
 import org.bbaw.bts.core.corpus.controller.impl.partController.support.TextModelHelper;
 import org.bbaw.bts.core.corpus.controller.partController.BTSTextEditorController;
 import org.bbaw.bts.core.services.corpus.BTSLemmaEntryService;
@@ -382,7 +383,8 @@ public class BTSTextEditorControllerImpl
 					anno.setTempSortKey(counter + GAP);
 				}
 				modelAnnotation = new BTSAnnotationAnnotation(item, reference, anno);
-				if (anno.getType() != null && anno.getType().equalsIgnoreCase("rubrum"))
+				if (anno.getType() != null 
+						&& anno.getType().equalsIgnoreCase(CorpusUtils.ANNOTATION_RUBRUM_TYPE))
 				{
 					modelAnnotation.setText( "org.bbaw.bts.ui.text.modelAnnotation.annotation.rubrum");
 				}

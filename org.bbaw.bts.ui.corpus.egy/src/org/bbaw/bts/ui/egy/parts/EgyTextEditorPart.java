@@ -1817,7 +1817,10 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 					&& ((BTSAnnotationAnnotation) a).getRelatingObject()
 							.getType() != null
 					&& ((BTSAnnotationAnnotation) a).getRelatingObject()
-							.getType().equalsIgnoreCase("rubrum")) {
+							.getType().equalsIgnoreCase(
+									CorpusUtils.ANNOTATION_RUBRUM_TYPE
+									)
+							) {
 
 				// Position pos = model.getPosition((Annotation) a);
 				Position pos2 = new Position(pos.getOffset()
@@ -2750,6 +2753,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 					strategyId = typeId;
 				}
 				else{
+					// TODO
 					if (typeId.startsWith(BTSConstants.COMMENT))
 					{
 						strategyId = BTSConstants.COMMENT;
@@ -3030,7 +3034,9 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 		if (object instanceof BTSAnnotation) {
 			if (((BTSAnnotation) object).getType() != null
 					&& ((BTSAnnotation) object).getType().equalsIgnoreCase(
-							"rubrum")) {
+							CorpusUtils.ANNOTATION_RUBRUM_TYPE
+							)
+					) {
 				ta = new BTSAnnotationAnnotation(embeddedEditor.getDocument(),
 						issue, object,
 						(BTSAnnotation) object);
