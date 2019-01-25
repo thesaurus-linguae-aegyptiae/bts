@@ -834,13 +834,16 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 	 * @return
 	 */
 	private ElementFigure makeAmbivalenceBoundsFigure(BTSAmbivalence ambivalence, String type) {
-		AmbivalenceStartFigure fig = new AmbivalenceStartFigure("");
+		// TODO make this go away pls!!!
+		ElementFigure fig = type.equals(ElementFigure.AMBIVALENCE_START) ?
+				new AmbivalenceStartFigure("") : new AmbivalenceEndFigure("");
 		fig.setType(type);
 		fig.setModelObject(ambivalence);
 		fig.setSize(15, 90);
 		fig.addMouseListener(elementSelectionListener);
 		return fig;
 	}
+
 
 	private ElementFigure makeMarkerFigure(BTSMarker marker) {
 		String mType = marker.getType();
