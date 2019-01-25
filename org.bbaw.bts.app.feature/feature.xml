@@ -16,7 +16,7 @@ Release 3.2.3
 -------------
 
 	- Fix: broken ambivalence rendering in Sign Text Editor (d065b27)
-	- GUI: change misleading status message after successful software update (8f93e5f)
+	- GUI: change misleading software update check status message (8f93e5f)
 
 Release 3.2.2
 -------------
