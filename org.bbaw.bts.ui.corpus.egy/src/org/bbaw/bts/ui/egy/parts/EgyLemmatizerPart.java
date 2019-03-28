@@ -28,7 +28,6 @@ import org.bbaw.bts.core.corpus.controller.partController.BTSTextEditorControlle
 import org.bbaw.bts.core.corpus.controller.partController.LemmaNavigatorController;
 import org.bbaw.bts.core.corpus.controller.partController.LemmatizerPartController;
 import org.bbaw.bts.core.dao.util.BTSQueryRequest;
-import org.bbaw.bts.core.dao.util.BTSQueryRequest.BTSQueryType;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSLemmaEntry;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSText;
@@ -159,6 +158,10 @@ public class EgyLemmatizerPart implements SearchViewer {
 	private Boolean autoLemmaProposalSelection;
 
 	@Inject
+	@Preference(value = BTSEGYUIConstants.PREF_LEMMATIZER_SEARCH_INCLUDE_PERSON_NAMES, nodePath = "org.bbaw.bts.ui.corpus.egy")
+	private Boolean includePersonNamesInSearchResults;
+
+	@Inject
 	private EMenuService menuService;
 
 	protected static final String TRANSLATIONS_SUB_DELIMITER = BTSCoreConstants.TRANSLATIONS_SUB_DELIMITER + " ";
@@ -252,7 +255,6 @@ public class EgyLemmatizerPart implements SearchViewer {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				setUserMayEditInteral(userMayEdit && activateButton.getSelection());
-				System.out.println(activateButton.getSelection());
 			}
 			@Override
 			public void widgetDefaultSelected(SelectionEvent e) {
@@ -280,6 +282,9 @@ public class EgyLemmatizerPart implements SearchViewer {
 		includePersonNamesCheckbox.setText("Include Persons");
 		includePersonNamesCheckbox.setLayoutData(new GridData(SWT.RIGHT, SWT.BOTTOM, false,
 				false, 1, 1));
+		includePersonNamesCheckbox.setSelection(
+				includePersonNamesInSearchResults
+			);
 		includePersonNamesCheckbox.addSelectionListener(new SelectionListener() {
 			@Override
 			public void widgetSelected(SelectionEvent arg0) {
