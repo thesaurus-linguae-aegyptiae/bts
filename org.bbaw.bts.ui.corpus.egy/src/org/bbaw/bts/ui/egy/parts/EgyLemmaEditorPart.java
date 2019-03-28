@@ -477,6 +477,10 @@ public class EgyLemmaEditorPart extends AbstractTextEditorLogic implements IBTSE
 		loading = false;
 	}
 
+	/**
+	 * actually loads annotations, doesn't bother with transcription, which seems to be taken care of in {@link #loadTextContent(BTSLemmaEntry)}
+	 * @param lemma
+	 */
 	private void loadTransliteration(BTSLemmaEntry lemma) {
 //		if (lemma == null)
 //		{

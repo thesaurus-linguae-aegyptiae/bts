@@ -1258,21 +1258,8 @@ public class EgyLemmatizerPart implements SearchViewer {
 			searchjob = null;
 		}
 
-		// if this call came from an external handler ('Lupensuche'), don't bother to do anything at all and just
-		// emulate auto search (lemma transliteration content assist) behaviour.
-		if (query.getType() != BTSQueryType.LEMMA) {
-			if (!query.isIdQuery() 
-					&& query.getAutocompletePrefix() != null) {
-				if (!query.isWildcardQuery()) {
-					autoSearch(query.getSearchString().replaceAll("\\.", ","));
-					return;
-				}
-			}
-		}
-
 		// try to load lemma that has already be assigned to the word currently selected in text editor
 		final String assignedLemmaId = (currentWord != null) ? currentWord.getLKey() : null;
-
 
 		// create root for lemma tree view
 		final TreeNodeWrapper lemmaRootNode = BtsviewmodelFactory.eINSTANCE

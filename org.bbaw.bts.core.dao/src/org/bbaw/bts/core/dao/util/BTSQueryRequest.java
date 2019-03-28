@@ -77,6 +77,8 @@ public class BTSQueryRequest {
 	private String dbPath;
 	
 	private boolean idQuery;
+
+	private boolean prefixQuery;
 	
 	private boolean wildcardQuery;
 	
@@ -99,6 +101,8 @@ public class BTSQueryRequest {
 	public BTSQueryRequest(String searchString) {
 		this();
 		this.searchString = searchString;
+		this.idQuery = false;
+		this.prefixQuery = false;
 	}
 	
 	public BTSQueryRequest(String searchString, boolean idQuery, boolean wildcardQuery) {
@@ -118,6 +122,7 @@ public class BTSQueryRequest {
 			String escapedString = this.escapeSearchString().toLowerCase();
 			Date now = Calendar.getInstance(Locale.getDefault()).getTime();
 			this.setQueryId("timestamp-" + now.toString());
+			idQuery = idQuery && !(wildcardQuery || prefixQuery);
 			if (idQuery)
 			{
 				// allows DAO to retrieve object directly from DB
@@ -125,13 +130,18 @@ public class BTSQueryRequest {
 			}
 			else if (!requestFields.isEmpty())
 			{
-				// "Search for Names only"
 				BoolQueryBuilder qb = QueryBuilders.boolQuery();
-				for (String field : requestFields)
-					qb = qb.should(wildcardQuery ?
-							QueryBuilders.wildcardQuery(field, escapedString) :
-							QueryBuilders.matchQuery(field, escapedString)
-							);
+				for (String field : requestFields) {
+					if (wildcardQuery) {
+						qb = qb.should(QueryBuilders.wildcardQuery(field, escapedString));
+					} else if (prefixQuery) {
+						qb = qb.should(QueryBuilders.prefixQuery(field, searchString))
+								.should(QueryBuilders.prefixQuery(field, escapedString));
+					} else {
+						qb = qb.should(QueryBuilders.termQuery(field, escapedString))
+								.should(QueryBuilders.matchQuery(field, escapedString));
+					}
+				}
 				this.setQueryBuilder(qb);
 				this.setAutocompletePrefix(searchString);
 			}
@@ -288,6 +298,14 @@ public class BTSQueryRequest {
 
 	public void setIdQuery(boolean idQuery) {
 		this.idQuery = idQuery;
+	}
+
+	public void setPrefixQuery(boolean prefixQuery) {
+		this.prefixQuery = prefixQuery;
+	}
+
+	public boolean isPrefixQuery() {
+		return prefixQuery;
 	}
 	
 	public void setWildcardQuery(boolean wildcardQuery) {
