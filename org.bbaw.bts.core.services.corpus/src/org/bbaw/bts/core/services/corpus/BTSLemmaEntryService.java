@@ -20,5 +20,18 @@ GenericCorpusObjectService<BTSLemmaEntry, String> {
 
 	List<BTSLemmaEntry> filterLemmaProposals(List<BTSLemmaEntry> obs);
 
-	BTSQueryRequest createLemmaSearchQuery(String chars);
+	/**
+	 * Build an elasticsearch query searching for lemma entries that
+	 * match these criteria:
+	 *
+	 * - name matches (as a prefix, unless search term length is < 2)
+	 * - passport values match (on a certain nesting level)
+	 * - type is not root
+	 * - revisionState is either published or published-awaiting-review
+	 * - are or are not of subtype person_name, depending on parameter
+	 * 
+	 * @param term search term
+	 * @return elasticsearch query in a container
+	 */
+	BTSQueryRequest createLemmaSearchQuery(String term, boolean includePersonNames);
 }

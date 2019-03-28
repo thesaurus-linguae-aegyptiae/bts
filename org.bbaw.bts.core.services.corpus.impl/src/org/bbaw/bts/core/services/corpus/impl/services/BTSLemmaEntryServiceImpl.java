@@ -24,6 +24,7 @@ import org.bbaw.bts.corpus.btsCorpusModel.BtsCorpusModelFactory;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.core.di.extensions.Preference;
+import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 
 public class BTSLemmaEntryServiceImpl 
@@ -214,7 +215,7 @@ implements BTSLemmaEntryService, BTSObjectSearchService
 
 	@Override
 	public List<BTSLemmaEntry> findLemmaProposals(String prefix, IProgressMonitor monitor) {
-		BTSQueryRequest query = createLemmaSearchQuery(prefix);
+		BTSQueryRequest query = createLemmaSearchQuery(prefix, true);
 //		query.setResponseFields(BTSConstants.SEARCH_BASIC_RESPONSE_FIELDS);
 		System.out.println(query.getQueryId());
 		List<BTSLemmaEntry> children = query(query, BTSConstants.OBJECT_STATE_ACTIVE, monitor);
@@ -225,25 +226,63 @@ implements BTSLemmaEntryService, BTSObjectSearchService
 	}
 	
 	@Override
-	public BTSQueryRequest createLemmaSearchQuery(String chars) {
-		BTSQueryRequest query = new BTSQueryRequest(chars);
+	public BTSQueryRequest createLemmaSearchQuery(String term, boolean includePersonNames) {
+		BTSQueryRequest query = new BTSQueryRequest(term);
 		query.setType(BTSQueryType.LEMMA);
-		query.setQueryBuilder(QueryBuilders.boolQuery()
-					.should(QueryBuilders.matchQuery("name", chars))
-					.should(QueryBuilders.termQuery("name",chars))
-					);
-		query.setAutocompletePrefix(chars);
+		BoolQueryBuilder queryBuilder = QueryBuilders.boolQuery();
+		queryBuilder.mustNot(
+				QueryBuilders.termQuery("type", "root")
+			);
+		if (!includePersonNames) {
+			queryBuilder.mustNot(
+					QueryBuilders.termQuery("subtype", "person_name")
+				);
+		}
+		queryBuilder.must(
+				QueryBuilders.boolQuery()
+				.should(
+						QueryBuilders.termQuery("revisionState", "published-awaiting-review")
+				)
+				.should(
+						QueryBuilders.termQuery("revisionState", "published")
+				)
+			);
+		if (term.trim().length() < 2) {
+			queryBuilder.must(
+					QueryBuilders.boolQuery()
+					.should(
+							QueryBuilders.termQuery("name", term).boost(2)
+					)
+					.should(
+							QueryBuilders.matchQuery("passport.children.children.children.value", term)
+					)
+			);
+		} else {
+			queryBuilder.must(
+					QueryBuilders.boolQuery()
+					.should(
+							QueryBuilders.matchPhrasePrefixQuery("name", term).boost(2)
+					)
+					.should(
+							QueryBuilders.matchQuery("passport.children.children.children.value", term)
+					)
+			);
+		}
+		query.setQueryBuilder(queryBuilder);
+		query.setAutocompletePrefix(term);
 		return query;
 	}
+
 
 	private List<BTSLemmaEntry> lemmaFilterReviewStateType(
 			List<BTSLemmaEntry> children) {
 		List<BTSLemmaEntry> filtered = new Vector<BTSLemmaEntry>(children.size());
-		for (BTSCorpusObject entry : children)
+		for (BTSCorpusObject entry : children) {
 			if (entry instanceof BTSLemmaEntry 
 					&& (entry.getRevisionState() == null || !entry.getRevisionState().contains("obsolete"))
 					&& (entry.getType() == null || !entry.getType().equals("root")))
 				filtered.add((BTSLemmaEntry) entry);
+		}
 		return filtered;
 	}
 
