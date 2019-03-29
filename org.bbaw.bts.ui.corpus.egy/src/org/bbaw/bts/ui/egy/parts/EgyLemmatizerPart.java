@@ -521,7 +521,7 @@ public class EgyLemmatizerPart implements SearchViewer {
 					if (!tn.isChildrenLoaded() || tn.getChildren().isEmpty()) {
 						tn.setChildrenLoaded(true);
 						if (tn.getObject() instanceof BTSLemmaEntry)
-							loadChildren(tn, false, null);
+							loadChildren(tn, null);
 						if (!tn.getChildren().isEmpty()) {
 							lemmaViewer.setExpandedState(tn, true);
 						}
@@ -734,7 +734,7 @@ public class EgyLemmatizerPart implements SearchViewer {
 
 
 
-	protected void loadChildren(final TreeNodeWrapper node, boolean b, String prefix) {
+	protected void loadChildren(final TreeNodeWrapper node, String prefix) {
 		List<BTSLemmaEntry> children = lemmaNavigatorController
 				.findChildrenOnlySubEntries(
 						(BTSLemmaEntry) node.getObject(),
