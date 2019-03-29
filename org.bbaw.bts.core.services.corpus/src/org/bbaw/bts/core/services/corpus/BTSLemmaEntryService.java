@@ -37,4 +37,6 @@ GenericCorpusObjectService<BTSLemmaEntry, String> {
 	 * @return elasticsearch query in a container
 	 */
 	BTSQueryRequest createLemmaSearchQuery(String term, boolean includePersonNames);
+
+	BTSQueryRequest createLemmaSearchQuery(String term);
 }

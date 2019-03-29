@@ -224,7 +224,12 @@ implements BTSLemmaEntryService, BTSObjectSearchService
 		
 		return filter(children);
 	}
-	
+
+	@Override
+	public BTSQueryRequest createLemmaSearchQuery(String term) {
+		return createLemmaSearchQuery(term, true);
+	}
+
 	@Override
 	public BTSQueryRequest createLemmaSearchQuery(String term, boolean includePersonNames) {
 		BTSQueryRequest query = new BTSQueryRequest(term);

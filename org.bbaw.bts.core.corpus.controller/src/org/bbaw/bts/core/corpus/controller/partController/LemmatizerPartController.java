@@ -16,4 +16,6 @@ public interface LemmatizerPartController {
 
 	BTSQueryRequest getLemmaSearchQuery(String searchString, boolean includePersonNames);
 
+	BTSQueryRequest getLemmaSearchQuery(String searchString);
+
 }
