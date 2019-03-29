@@ -14,6 +14,6 @@ public interface LemmatizerPartController {
 
 	List<BTSLemmaEntry> filterAndSortLemmaProposals(List<BTSLemmaEntry> obs, String searchString);
 
-	BTSQueryRequest getLemmaSearchQuery(String searchString);
+	BTSQueryRequest getLemmaSearchQuery(String searchString, boolean includePersonNames);
 
 }
