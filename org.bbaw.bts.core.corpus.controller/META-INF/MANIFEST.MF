@@ -21,4 +21,4 @@ Import-Package: org.bbaw.bts.btsmodel,
  org.eclipse.swt.graphics
 Require-Bundle: org.eclipse.jface.text;bundle-version="3.8.101",
  org.eclipse.xtext.ui
-Bundle-Version: 3.2.2.qualifier
+Bundle-Version: 3.2.4.qualifier
