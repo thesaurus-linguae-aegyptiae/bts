@@ -2,7 +2,7 @@
 <feature
       id="org.bbaw.bts.app.feature"
       label="Berlin Text System Core Application"
-      version="3.2.2.qualifier"
+      version="3.2.4.qualifier"
       provider-name="BBAW"
       os="linux,macosx,win32"
       ws="carbon,cocoa,gtk,win32"
@@ -11,6 +11,13 @@
    <description url="http://www.example.com/description">
 Change log
 ==========
+
+Release 3.2.4
+-------------
+
+	- Fix: limitations in lemmatizer lemma search (76d4538)
+	- GUI: redesign general search dialog (b784628)
+	- Feature: option in lemmatizer for excluding person names from lemma search results (4da71ef)
 
 Release 3.2.2
 -------------
