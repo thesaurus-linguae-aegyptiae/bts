@@ -23,12 +23,15 @@ GenericCorpusObjectService<BTSLemmaEntry, String> {
 	/**
 	 * Build an elasticsearch query searching for lemma entries that
 	 * match these criteria:
-	 *
-	 * - name matches (as a prefix, unless search term length is < 2)
-	 * - passport values match (on a certain nesting level)
-	 * - type is not root
-	 * - revisionState is either published or published-awaiting-review
-	 * - are or are not of subtype person_name, depending on parameter
+	 * <ul>
+	 * <li> name matches (as a prefix, unless search term length is < 2)</li>
+	 * <li> passport values match (on a certain nesting level)</li>
+	 * <li> translations match</li>
+	 * <li> words match </li>
+	 * <li> type is not root</li>
+	 * <li> revisionState is either published or published-awaiting-review</li>
+	 * <li> are or are not of subtype person_name, depending on parameter</li>
+	 * </ul>
 	 * 
 	 * @param term search term
 	 * @return elasticsearch query in a container

@@ -247,27 +247,26 @@ implements BTSLemmaEntryService, BTSObjectSearchService
 						QueryBuilders.termQuery("revisionState", "published")
 				)
 			);
+		BoolQueryBuilder shouldClause = QueryBuilders.boolQuery()
+				.should(
+						QueryBuilders.matchQuery("passport.children.children.children.value", term)
+				)
+				.should(
+						QueryBuilders.matchQuery("translations.translations.value", term)
+				)
+				.should(
+						QueryBuilders.matchQuery("words.wChar", term)
+				);
 		if (term.trim().length() < 2) {
-			queryBuilder.must(
-					QueryBuilders.boolQuery()
-					.should(
-							QueryBuilders.termQuery("name", term).boost(2)
-					)
-					.should(
-							QueryBuilders.matchQuery("passport.children.children.children.value", term)
-					)
-			);
+			shouldClause.should(
+					QueryBuilders.termQuery("name", term).boost(2)
+				);
 		} else {
-			queryBuilder.must(
-					QueryBuilders.boolQuery()
-					.should(
-							QueryBuilders.matchPhrasePrefixQuery("name", term).boost(2)
-					)
-					.should(
-							QueryBuilders.matchQuery("passport.children.children.children.value", term)
-					)
-			);
+			shouldClause.should(
+					QueryBuilders.matchPhrasePrefixQuery("name", term).boost(2)
+				);
 		}
+		queryBuilder.must(shouldClause);
 		query.setQueryBuilder(queryBuilder);
 		query.setAutocompletePrefix(term);
 		return query;
