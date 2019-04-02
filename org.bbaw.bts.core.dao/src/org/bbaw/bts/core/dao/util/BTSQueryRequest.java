@@ -81,6 +81,8 @@ public class BTSQueryRequest {
 	private boolean prefixQuery;
 	
 	private boolean wildcardQuery;
+
+	private boolean phraseQuery;
 	
 	private String lang;
 	
@@ -96,13 +98,15 @@ public class BTSQueryRequest {
 	
 	public BTSQueryRequest() {
 		this.requestFields = new HashSet<String>();
+		this.idQuery = false;
+		this.prefixQuery = false;
+		this.phraseQuery = false;
+		this.wildcardQuery = false;
 	}
 	
 	public BTSQueryRequest(String searchString) {
 		this();
 		this.searchString = searchString;
-		this.idQuery = false;
-		this.prefixQuery = false;
 	}
 	
 	public BTSQueryRequest(String searchString, boolean idQuery, boolean wildcardQuery) {
@@ -135,11 +139,21 @@ public class BTSQueryRequest {
 					if (wildcardQuery) {
 						qb = qb.should(QueryBuilders.wildcardQuery(field, escapedString));
 					} else if (prefixQuery) {
-						qb = qb.should(QueryBuilders.prefixQuery(field, searchString))
-								.should(QueryBuilders.prefixQuery(field, escapedString));
+						if (phraseQuery) {
+							qb = qb.should(QueryBuilders.matchPhrasePrefixQuery(field, searchString))
+									.should(QueryBuilders.matchPhrasePrefixQuery(field, escapedString));
+						} else {
+							qb = qb.should(QueryBuilders.prefixQuery(field, searchString))
+									.should(QueryBuilders.prefixQuery(field, escapedString));
+						}
 					} else {
-						qb = qb.should(QueryBuilders.termQuery(field, escapedString))
-								.should(QueryBuilders.matchQuery(field, escapedString));
+						if (phraseQuery) {
+							qb = qb.should(QueryBuilders.matchPhraseQuery(field, escapedString))
+									.should(QueryBuilders.matchPhraseQuery(field, searchString));
+						} else {
+							qb = qb.should(QueryBuilders.termQuery(field, escapedString))
+									.should(QueryBuilders.matchQuery(field, escapedString));
+						}
 					}
 				}
 				this.setQueryBuilder(qb);
@@ -307,7 +321,15 @@ public class BTSQueryRequest {
 	public boolean isPrefixQuery() {
 		return prefixQuery;
 	}
-	
+
+	public void setPhraseQuery(boolean phraseQuery) {
+		this.phraseQuery = phraseQuery;
+	}
+
+	public boolean isPhraseQuery() {
+		return phraseQuery;
+	}
+
 	public void setWildcardQuery(boolean wildcardQuery) {
 		this.wildcardQuery = wildcardQuery;
 	}

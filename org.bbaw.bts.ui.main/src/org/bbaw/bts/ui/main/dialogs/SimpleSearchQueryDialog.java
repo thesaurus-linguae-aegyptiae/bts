@@ -34,6 +34,7 @@ public class SimpleSearchQueryDialog extends TitleAreaDialog {
 	private Button prefixButton;
 	private Button simpleQueryButton;
 	private Button wildcardQueryButton;
+	private Button phraseQueryButton;
 	private Button[] specificFieldButtons;
 	
 	@Inject
@@ -47,6 +48,7 @@ public class SimpleSearchQueryDialog extends TitleAreaDialog {
 	final static String OPT_NAME_SEARCH = "name_search";
 	final static String OPT_PREFIX_QUERY = "prefix_query";
 	final static String OPT_WILDCARD_QUERY = "wildcard_query";
+	final static String OPT_PHRASE_QUERY = "phrase_query";
 
 	private IEclipsePreferences prefs;
 
@@ -100,9 +102,7 @@ public class SimpleSearchQueryDialog extends TitleAreaDialog {
 		text.addModifyListener(new ModifyListener() {
 			@Override
 			public void modifyText(ModifyEvent e) {
-				wildcardQueryButton.setEnabled(
-						!simpleQueryButton.getSelection() && text.getText().matches("^.*[*?].*$")
-				);
+				enableConditionalOptions();
 				formStateChanged();
 			}
 		});
@@ -132,13 +132,13 @@ public class SimpleSearchQueryDialog extends TitleAreaDialog {
 
 		Group fieldsGroup = new Group(group, SWT.NONE);
 		fieldsGroup.setText("Exact Search");
-		fieldsGroup.setLayout(new GridLayout(2, false));
+		fieldsGroup.setLayout(new GridLayout(3, false));
 		fieldsGroup.setLayoutData(new GridData(SWT.FILL, SWT.BOTTOM, true, false, 2, 1));
 
 		Group fieldSelectionGroup = new Group(fieldsGroup, SWT.NONE);
 		fieldSelectionGroup.setText("Specific Field");
 		fieldSelectionGroup.setLayout(new GridLayout(2, false));
-		fieldSelectionGroup.setLayoutData(new GridData(SWT.FILL, SWT.BOTTOM, true, false, 2, 1));
+		fieldSelectionGroup.setLayoutData(new GridData(SWT.FILL, SWT.BOTTOM, true, false, 3, 1));
 		
 		idButton = new Button(fieldSelectionGroup, SWT.CHECK);
 		idButton.setText("IDs");
@@ -177,8 +177,12 @@ public class SimpleSearchQueryDialog extends TitleAreaDialog {
 		prefixButton.setLayoutData(new GridData(SWT.FILL, SWT.BOTTOM, true, false, 1, 1));
 
 		wildcardQueryButton = new Button(fieldsGroup, SWT.CHECK);
-		wildcardQueryButton.setText("Wildcard Search");
+		wildcardQueryButton.setText("Wildcard");
 		wildcardQueryButton.setLayoutData(new GridData(SWT.FILL, SWT.BOTTOM, true, false, 1, 1));
+
+		phraseQueryButton = new Button(fieldsGroup, SWT.CHECK);
+		phraseQueryButton.setText("Phrase");
+		phraseQueryButton.setLayoutData(new GridData(SWT.FILL, SWT.BOTTOM, true, false, 1, 1));
 
 		// init search options
 		idButton.setSelection(
@@ -211,8 +215,17 @@ public class SimpleSearchQueryDialog extends TitleAreaDialog {
 						false)
 		);
 		wildcardQueryButton.setEnabled(
-				!simpleQueryButton.getSelection() && text.getText().matches("^.*[*?].*$")
+				enableWildcardOptionCondition()
 		);
+		phraseQueryButton.setSelection(
+				prefs.getBoolean(
+						scopeId + "." + OPT_PHRASE_QUERY,
+						false
+				)
+		);
+		phraseQueryButton.setEnabled(
+				enablePhraseOptionCondition()
+			);
 
 		area.pack();
 		return area;
@@ -242,6 +255,7 @@ public class SimpleSearchQueryDialog extends TitleAreaDialog {
 			prefs.putBoolean(scopeId+"."+OPT_NAME_SEARCH, nameButton.getSelection());
 			prefs.putBoolean(scopeId+"."+OPT_PREFIX_QUERY, prefixButton.getSelection());
 			prefs.putBoolean(scopeId+"."+OPT_WILDCARD_QUERY, wildcardQueryButton.getSelection());
+			prefs.putBoolean(scopeId+"."+OPT_PHRASE_QUERY, phraseQueryButton.getSelection());
 			try {
 				prefs.flush();
 			} catch (BackingStoreException e) {}
@@ -257,8 +271,15 @@ public class SimpleSearchQueryDialog extends TitleAreaDialog {
 					queryRequest.addRequestField("_id");
 				}
 			}
-			queryRequest.setPrefixQuery(prefixButton.getSelection());
-			queryRequest.setWildcardQuery(wildcardQueryButton.getSelection());
+			queryRequest.setPrefixQuery(
+					prefixButton.getSelection() && prefixButton.isEnabled()
+				);
+			queryRequest.setWildcardQuery(
+					wildcardQueryButton.getSelection() && wildcardQueryButton.isEnabled()
+				);
+			queryRequest.setPhraseQuery(
+					phraseQueryButton.getSelection() && phraseQueryButton.isEnabled()
+				);
 			queryRequest.initQueryBuilder();
 		}
 		else
@@ -310,9 +331,7 @@ public class SimpleSearchQueryDialog extends TitleAreaDialog {
 				simpleQueryButton.setSelection(true);
 			}
 		}
-		wildcardQueryButton.setEnabled(
-				!simpleQueryButton.getSelection() && text.getText().matches("^.*[*?].*$")
-		);
+		enableConditionalOptions();
 		formStateChanged();
 	}
 
@@ -334,5 +353,22 @@ public class SimpleSearchQueryDialog extends TitleAreaDialog {
 	@Override
 	protected boolean isResizable() {
 		return true;
+	}
+
+	private boolean enableWildcardOptionCondition() {
+		return !simpleQueryButton.getSelection() && text.getText().matches("^.*[*?].*$");
+	}
+
+	private boolean enablePhraseOptionCondition() {
+		return !simpleQueryButton.getSelection() && text.getText().matches("^.*[ -.].*$");
+	}
+
+	private void enableConditionalOptions() {
+		wildcardQueryButton.setEnabled(
+				enableWildcardOptionCondition()
+		);
+		phraseQueryButton.setEnabled(
+				enablePhraseOptionCondition()
+		);
 	}
 }
