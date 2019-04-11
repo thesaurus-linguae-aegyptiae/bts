@@ -16,6 +16,7 @@ Release 3.2.4
 -------------
 
 	- Fix: limitations in lemmatizer lemma search (76d4538)
+	- Fix: show more than 1000 child nodes in navigator trees (dee36147d)
 	- GUI: redesign general search dialog (b784628)
 	- Feature: option in lemmatizer for excluding person names from lemma search results (4da71ef)
 
