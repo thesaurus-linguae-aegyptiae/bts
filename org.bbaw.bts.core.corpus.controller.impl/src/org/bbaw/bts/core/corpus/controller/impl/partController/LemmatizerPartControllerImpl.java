@@ -38,8 +38,12 @@ public class LemmatizerPartControllerImpl implements LemmatizerPartController {
 	}
 	
 	@Override
+	public BTSQueryRequest getLemmaSearchQuery(String searchString, boolean includePersonNames) {
+		return lemmaService.createLemmaSearchQuery(searchString, includePersonNames);
+	}
+
+	@Override
 	public BTSQueryRequest getLemmaSearchQuery(String searchString) {
 		return lemmaService.createLemmaSearchQuery(searchString);
 	}
-
 }

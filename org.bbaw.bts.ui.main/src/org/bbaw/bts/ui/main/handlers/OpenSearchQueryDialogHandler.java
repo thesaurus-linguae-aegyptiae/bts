@@ -28,8 +28,8 @@ public class OpenSearchQueryDialogHandler {
 			dialog.create();
 			dialog.setSearchString(searchString);
 			if (searchOptions != null) {
-				dialog.setNameOnly(searchOptions.contains(SearchViewer.OPT_NAME_ONLY));
-				dialog.setIdOnly(searchOptions.contains(SearchViewer.OPT_ID_ONLY));
+				dialog.setNameSearch(searchOptions.contains(SearchViewer.OPT_NAME_ONLY));
+				dialog.setIdSearch(searchOptions.contains(SearchViewer.OPT_ID_ONLY));
 			}
 			dialog.setTitle("Object Search");
 			if (dialog.open() == SimpleSearchQueryDialog.OK) {

@@ -13,8 +13,13 @@ Change log
 ==========
 
 Release 3.2.4
+-------------
 
 	- Fix: NPE in Sign Text Editor caused by untyped annotations (666f02c)
+	- Fix: limitations in lemmatizer lemma search (76d4538)
+	- Fix: show more than 1000 child nodes in navigator trees (dee36147d)
+	- GUI: redesign general search dialog (b784628)
+	- Feature: option in lemmatizer for excluding person names from lemma search results (4da71ef)
 
 Release 3.2.3
 -------------

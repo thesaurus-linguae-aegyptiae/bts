@@ -71,6 +71,7 @@ public class BTSEGYUIConstants {
 	public static final String PREF_LEMMATIZER_FELXION_DEFAULT = "pref_lemmatizer_flexion_default";
 	public static final String EVENT_CLEAR_TOKEN_DATA = "event_clear_token_data";
 	public static final String PREF_LEMMATIZER_AUTO_LEMMA_PROPOSAL_SELECTION = "pref_lemmatizer_auto_lemma_proposal_selection";
+	public static final String PREF_LEMMATIZER_SEARCH_INCLUDE_PERSON_NAMES = "pref_lemmatizer_search_include_person_names";
 	public static final String PREF_TRANSLITERATION_EDITOR_ACTIVATE_HOVER_INFO = "pref_transliteration_editor_active_hover_info";
 	public static final String PREF_TRANSLITERATION_EDITOR_SHOW_LINE_NUMBER_RULER = "pref_transliteration_editor_show_line_number_ruler";
 
