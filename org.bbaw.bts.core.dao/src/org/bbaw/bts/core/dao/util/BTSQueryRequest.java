@@ -92,7 +92,7 @@ public class BTSQueryRequest {
 	
 	private int from = 0;
 	
-	private int size = 1000;
+	private int size = 2000;
 	
 	private long totalResultSize = 0;
 
@@ -110,7 +110,13 @@ public class BTSQueryRequest {
 		this();
 		this.searchString = searchString;
 	}
-	
+
+	/**
+	 * Creates a new query container instance for the given search string, and ID and wildcard flags.
+	 * @param searchString
+	 * @param idQuery whether this is supposed to be an exact ID search (just match <code>_id</code> field)
+	 * @param wildcardQuery Whether this is supposed to use wildcard search
+	 */
 	public BTSQueryRequest(String searchString, boolean idQuery, boolean wildcardQuery) {
 		this(searchString);
 		this.idQuery = idQuery;
@@ -188,9 +194,6 @@ public class BTSQueryRequest {
 		this.queryBuilder = queryBuilder;
 	}
 
-	/**
-	 * @return the queryId
-	 */
 	public String getQueryId()
 	{
 		return queryId;
@@ -416,7 +419,5 @@ public class BTSQueryRequest {
 	public void setTotalResultSize(long totalResultSize) {
 		this.totalResultSize = totalResultSize;
 	}
-
-
 
 }
