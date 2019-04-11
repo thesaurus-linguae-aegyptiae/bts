@@ -730,7 +730,8 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 	 */
 	private void processStylingAnnotations(ElementFigure itemFigure,
 			BTSObject relatingObject) {
-		if (relatingObject instanceof BTSAnnotation 
+		if (relatingObject instanceof BTSAnnotation
+				&& relatingObject.getType() != null
 				&& relatingObject.getType().equals(CorpusUtils.ANNOTATION_RUBRUM_TYPE) 
 				&& itemFigure instanceof WordFigure)
 		{
