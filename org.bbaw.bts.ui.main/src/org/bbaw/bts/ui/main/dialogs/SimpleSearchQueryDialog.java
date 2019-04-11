@@ -123,6 +123,7 @@ public class SimpleSearchQueryDialog extends TitleAreaDialog {
 					nameButton.setSelection(false);
 					prefixButton.setEnabled(false);
 					wildcardQueryButton.setEnabled(false);
+					phraseQueryButton.setEnabled(false);
 				}
 				formStateChanged();
 			}
@@ -360,7 +361,7 @@ public class SimpleSearchQueryDialog extends TitleAreaDialog {
 	}
 
 	private boolean enablePhraseOptionCondition() {
-		return !simpleQueryButton.getSelection() && text.getText().matches("^.*[ -.].*$");
+		return !simpleQueryButton.getSelection() && text.getText().matches("^.*[ -.:,].*$");
 	}
 
 	private void enableConditionalOptions() {
