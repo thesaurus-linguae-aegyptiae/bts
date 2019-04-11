@@ -3,8 +3,6 @@ package org.bbaw.bts.core.services.corpus.impl.services;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import javax.inject.Inject;
 
@@ -33,14 +31,6 @@ extends AbstractCorpusObjectServiceImpl<BTSLemmaEntry, String>
 implements BTSLemmaEntryService, BTSObjectSearchService
 {
 
-	private final static Pattern doublePointPattern = Pattern.compile(BTSCorpusConstants.LEMMATIZER_DOUBLE_POINT_PATTERN);
-	
-	private final static Pattern pointPattern = Pattern.compile(BTSCorpusConstants.LEMMATIZER_POINT_PATTERN);
-	
-	private final static Pattern deletionPattern = Pattern.compile(BTSCorpusConstants.LEMMATIZER_DELETION_PATTERN);
-	
-
-	
 	@Inject
 	private BTSLemmaEntryDao lemmaEntryDao;
 
@@ -303,11 +293,12 @@ implements BTSLemmaEntryService, BTSObjectSearchService
 	* <li>Wandle für die Suche ein ,tdu in ein ,tj um.</li>
 	* <li>Wandle für die Suche ein pl in ein w um</li>
 	* <li>Wandle für die Suche ein du in ein wj um.</li>
+	* <li>Verwirf alles ab dem . einschließlich.</li>
+	* <li>Verwirf alles ab dem : einschließlich.</li>
 	* <li>Wandle für die Suche ein , in ein . um.</li>
 	* <li>Wandle für die Suche ein ≡ in ein = um.</li>
 	* <li>Wandle für die Suche ein ⁝ in ein : um.</li>
 	* <li>Wandle das Zeichen vor einem ! in ein i̯ um und verwirf alles ab dem ! einschließlich.</li>
-	* <li>Verwirf alles ab dem . einschließlich.</li>
 	* </ul>
 	* Die Transformationsregeln gelten pro Token, d.h. ein ḥm.w-nṯr wird in die Token ḥm und nṯr transformiert.
 	 * 
@@ -328,13 +319,12 @@ implements BTSLemmaEntryService, BTSObjectSearchService
 			.replaceAll(",t,?du", ",tj")
 			.replaceAll("pl", "w")
 			.replaceAll("du", "wj")
-			.replaceAll("(.*)\\.[^- ]*", "$1")
+			.replaceAll("([^.]*)\\.[^- ]*", "$1")
+			.replaceAll("([^- :]*):[^- ]*", "$1")
 			.replaceAll(",", ".")
 			.replaceAll("≡", "=")
 			.replaceAll("\u205D", ":")
 			.replaceAll("(.*).!.*", "$1i̯");
-
-		// TODO: alles rechts von doppelpunkt weg? (siehe doublePointPattern)
 
 		System.out.println("search for lemma proposals for: "  + searchString);
 		return searchString;
