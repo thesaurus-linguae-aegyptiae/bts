@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Vector;
 
 import javax.inject.Inject;
+import javax.naming.OperationNotSupportedException;
 
 import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.core.commons.BTSObjectSearchService;
@@ -229,11 +230,6 @@ implements BTSLemmaEntryService, BTSObjectSearchService
 		queryBuilder.mustNot(
 				QueryBuilders.termQuery("type", "root")
 			);
-		if (!includePersonNames) {
-			queryBuilder.mustNot(
-					QueryBuilders.termQuery("subtype", "person_name")
-				);
-		}
 		queryBuilder.must(
 				QueryBuilders.boolQuery()
 				.should(
@@ -264,6 +260,13 @@ implements BTSLemmaEntryService, BTSObjectSearchService
 		}
 		queryBuilder.must(shouldClause);
 		query.setQueryBuilder(queryBuilder);
+		if (!includePersonNames) {
+			try {
+				query.excludeTerm("subtype", "person_name");
+			} catch (OperationNotSupportedException e) {
+				e.printStackTrace();
+			}
+		}
 		query.setAutocompletePrefix(term);
 		return query;
 	}

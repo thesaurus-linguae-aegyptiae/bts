@@ -37,6 +37,8 @@ import java.util.Locale;
 import java.util.Set;
 import java.util.Vector;
 
+import javax.naming.OperationNotSupportedException;
+
 import org.apache.lucene.queryParser.QueryParser;
 import org.bbaw.bts.btsmodel.BTSObject;
 import org.elasticsearch.action.search.SearchRequestBuilder;
@@ -291,6 +293,24 @@ public class BTSQueryRequest {
 		if (!responseFields.contains(responseFieldName))
 		{
 			responseFields.add(responseFieldName);
+		}
+	}
+
+	/**
+	 * If {@link #getQueryBuilder()} is a {@link BoolQueryBuilder}, add a <code>must_not</code> clause with a term query
+	 * excluding objects with the specified field matching the specified value.
+	 * 
+	 * @param field elasticsearch field selector
+	 * @param value the value that we don't want to see in our results
+	 * @throws OperationNotSupportedException if this query didn't use a bool query builder
+	 */
+	public void excludeTerm(String field, String value) throws OperationNotSupportedException {
+		if (BoolQueryBuilder.class.isInstance(queryBuilder)) {
+			((BoolQueryBuilder)queryBuilder).mustNot(
+					QueryBuilders.termQuery(field, value)
+				);
+		} else {
+			throw new OperationNotSupportedException("You can only exclude terms from queries that are actually bool queries.");
 		}
 	}
 

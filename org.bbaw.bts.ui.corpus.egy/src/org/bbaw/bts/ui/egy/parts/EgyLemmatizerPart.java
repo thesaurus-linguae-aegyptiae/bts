@@ -1,6 +1,5 @@
 package org.bbaw.bts.ui.egy.parts;
 
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -28,6 +27,7 @@ import org.bbaw.bts.core.corpus.controller.partController.BTSTextEditorControlle
 import org.bbaw.bts.core.corpus.controller.partController.LemmaNavigatorController;
 import org.bbaw.bts.core.corpus.controller.partController.LemmatizerPartController;
 import org.bbaw.bts.core.dao.util.BTSQueryRequest;
+import org.bbaw.bts.core.dao.util.BTSQueryRequest.BTSQueryType;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSLemmaEntry;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSText;
@@ -44,6 +44,7 @@ import org.bbaw.bts.ui.corpus.parts.lemma.BTSLemmaEntryNameTranslationViewerFilt
 import org.bbaw.bts.ui.egy.parts.lemmatizer.BTSEgyObjectByNameViewerSorter;
 import org.bbaw.bts.ui.egy.parts.lemmatizer.BTSLemmatizerEgyObjectByNameViewerSorter;
 import org.bbaw.bts.ui.main.dialogs.SearchSelectObjectDialog;
+import org.bbaw.bts.ui.main.dialogs.SimpleSearchQueryDialog;
 import org.bbaw.bts.ui.resources.BTSResourceProvider;
 import org.eclipse.core.commands.ParameterizedCommand;
 import org.eclipse.core.databinding.Binding;
@@ -86,6 +87,8 @@ import org.eclipse.jface.viewers.ListViewer;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.TreeViewer;
+import org.eclipse.jface.viewers.Viewer;
+import org.eclipse.jface.viewers.ViewerFilter;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.SashForm;
 import org.eclipse.swt.events.FocusEvent;
@@ -108,12 +111,40 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
-import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.TreeItem;
 import org.mihalis.opal.promptSupport.PromptSupport;
 
 public class EgyLemmatizerPart implements SearchViewer {
+
+	/**
+	 * A simple viewer filter for the lemma search result tree viewer which supresses lemma entries
+	 * with <code>subtype=="person_name"</code> according to the 'include persons' flag set via checkbox.
+	 * 
+	 * This does not have any effect on the lemmatizer lemma search invoked automatically whenever a token is being
+	 * selected in the Sign Text Editor (STE), because the elasticsearch query used by this automatic search
+	 * suppresses person names anyway (if 'include persons' checkbox is not set).
+	 * In case the lemma search result viewer has been populated with results of a search query built by
+	 * the {@link SimpleSearchQueryDialog}, however, it is not reasonable to modify and replay that query, but
+	 * just don't show those results that are person names (again, only if 'include persons' flag is not set,
+	 * otherwise this filter does nothing at all obviously).
+	 * @author jhoeper
+	 *
+	 */
+	private class PersonNameFilter extends ViewerFilter {
+		@Override
+		public boolean select(Viewer viewer, Object parentElement, Object element) {
+			if (element instanceof TreeNodeWrapper
+					&& ((TreeNodeWrapper)element).getObject() instanceof BTSLemmaEntry) {
+				BTSLemmaEntry e = (BTSLemmaEntry)((TreeNodeWrapper)element).getObject();
+				return includePersonNamesCheckbox.getSelection()
+						|| e.getSubtype() == null
+						|| !e.getSubtype().equals("person_name");
+			}
+			return true;
+		}
+	}
+
 	@Inject
 	private UISynchronize sync;
 	@Inject
@@ -159,7 +190,7 @@ public class EgyLemmatizerPart implements SearchViewer {
 
 	@Inject
 	@Preference(value = BTSEGYUIConstants.PREF_LEMMATIZER_SEARCH_INCLUDE_PERSON_NAMES, nodePath = "org.bbaw.bts.ui.corpus.egy")
-	private Boolean includePersonNamesInSearchResults;
+	private Boolean includePersonNamesInSearchResultsPreference;
 
 	@Inject
 	private EMenuService menuService;
@@ -201,7 +232,6 @@ public class EgyLemmatizerPart implements SearchViewer {
 	// boolean if selection is cached and can be loaded when gui becomes visible
 	// or constructed
 	private boolean selectionCached;
-	private Table table;
 	private BTSLemmaEntryNameTranslationViewerFilter lemmaViewerSearchFilter = new BTSLemmaEntryNameTranslationViewerFilter();
 	private BTSLemmatizerEgyObjectByNameViewerSorter sorter;
 	private DataBindingContext word_bindingContext;
@@ -213,9 +243,12 @@ public class EgyLemmatizerPart implements SearchViewer {
 	
 	private HashMap<String, TreeNodeWrapper> lemmaNodeRegistry;
 
+	private BTSQueryRequest lastQuery;
+
 	@Inject
 	public EgyLemmatizerPart() {
 		lemmaNodeRegistry = new HashMap<String, TreeNodeWrapper>();
+		lastQuery = null;
 	}
 
 	@PostConstruct
@@ -234,9 +267,6 @@ public class EgyLemmatizerPart implements SearchViewer {
 		parent.setLayout(new GridLayout(1, false));
 		((GridLayout) parent.getLayout()).marginHeight = 0;
 		((GridLayout) parent.getLayout()).marginWidth = 0;
-		if (partService != null) {
-			Collection<MPart> parts = partService.getParts();
-		}
 
 		Composite composite = new Composite(parent, SWT.NONE);
 		composite.setLayout(new GridLayout(4, false));
@@ -283,12 +313,12 @@ public class EgyLemmatizerPart implements SearchViewer {
 		includePersonNamesCheckbox.setLayoutData(new GridData(SWT.RIGHT, SWT.BOTTOM, false,
 				false, 1, 1));
 		includePersonNamesCheckbox.setSelection(
-				includePersonNamesInSearchResults
+				includePersonNamesInSearchResultsPreference
 			);
 		includePersonNamesCheckbox.addSelectionListener(new SelectionListener() {
 			@Override
 			public void widgetSelected(SelectionEvent arg0) {
-				autoSearch(textSelectedWord.getText());
+				repeatLastQuery();
 			}
 			@Override
 			public void widgetDefaultSelected(SelectionEvent arg0) {}
@@ -458,39 +488,6 @@ public class EgyLemmatizerPart implements SearchViewer {
 		AdapterFactoryContentProvider contentProvider = new AdapterFactoryContentProvider(
 				factory);
 
-		// table = lemmaViewer.getTable();
-		// table.setHeaderVisible(false);
-		// table.setLinesVisible(false);
-		// // table.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true,
-		// 1, 1));
-		//
-		// // Define one exmaple column Columns
-		// TableViewerColumn viewerColumn;
-		// viewerColumn = new TableViewerColumn(lemmaViewer, SWT.NONE);
-		// viewerColumn.getColumn().setText("Lemma Proposals");
-		// viewerColumn.getColumn().setWidth(800);
-		// viewerColumn.getColumn().setMoveable(true);
-		// // for simplification I use the standard labelprovider
-		// viewerColumn.setLabelProvider(new ColumnLabelProvider() {
-		// @Override
-		// public String getText(Object element) {
-		// return labelProvider.getText(element);
-		// }
-		//
-		// @Override
-		// public Color getBackground(Object element) {
-		// return super.getBackground(element);
-		// }
-		//
-		// });
-		// // alternatively use relative size
-		// // last parameter defines if the column is allowed
-		// // to be resized
-		// TableColumnLayout tableColumnLayout = new TableColumnLayout();
-		// tableColumnLayout.setColumnData(viewerColumn.getColumn(),
-		// new ColumnWeightData(400, 800, true));
-		//
-
 		lemmaViewer.setContentProvider(contentProvider);
 		lemmaViewer.setLabelProvider(labelProvider);
 		sorter = ContextInjectionFactory.make(
@@ -531,6 +528,7 @@ public class EgyLemmatizerPart implements SearchViewer {
 		};
 		lemmaViewer.addSelectionChangedListener(lemmaSelectionListener);
 		lemmaViewer.addFilter(lemmaViewerSearchFilter);
+		lemmaViewer.addFilter(new PersonNameFilter());
 		// register context menu on the table
 		menuService.registerContextMenu(lemmaViewer.getControl(),
 				BTSPluginIDs.POPMENU_LEMMATIZER_LEMMAPROPOSAL_MENU);
@@ -1235,6 +1233,26 @@ public class EgyLemmatizerPart implements SearchViewer {
 
 
 	/**
+	 * Apply 'include persons' flag to the results of the last search query.
+	 *  
+	 * If the last query came from the general search dialog, then nothing needs to be done, because
+	 * the result list viewer's {@link PersonNameFilter} will filter out any person names if the flag is not set.
+	 * 
+	 * If the the last query came from autosearch, then just perform another autosearch, because then person names
+	 * will be excluded from the elasticsearch response if the flag is not set. 
+	 */
+	private void repeatLastQuery() {
+		if (lastQuery != null
+				&& (lastQuery.getType() == null
+					|| !lastQuery.getType().equals(BTSQueryType.LEMMA)
+				)) {
+			lemmaViewer.refresh();
+		} else {
+			autoSearch(textSelectedWord.getText());
+		}
+	}
+
+	/**
 	 * Initiates a lemma search by querying for results with the input string occuring in their name field.
 	 */
 	private void autoSearch(final String input) {
@@ -1244,6 +1262,7 @@ public class EgyLemmatizerPart implements SearchViewer {
 		// extract search string from word transliteration
 		String term = lemmatizerController.processWordCharForLemmatizing(input);
 		// build query based on word prefix
+		// forbid person names if person names flag is not set
 		BTSQueryRequest query = lemmatizerController.getLemmaSearchQuery(
 				term,
 				includePersonNamesCheckbox.getSelection()
@@ -1262,6 +1281,9 @@ public class EgyLemmatizerPart implements SearchViewer {
 			searchjob.cancel();
 			searchjob = null;
 		}
+
+		// save query so that in case user toggles `include persons` flag we know where it came from
+		lastQuery = query;
 
 		// try to load lemma that has already be assigned to the word currently selected in text editor
 		final String assignedLemmaId = (currentWord != null) ? currentWord.getLKey() : null;
@@ -1348,9 +1370,12 @@ public class EgyLemmatizerPart implements SearchViewer {
 	}
 
 	/**
-	 * Has given list of {@link BTSLemmaEntry} objects filtered based on their review state,
+	 * Filter a list of {@link BTSLemmaEntry} objects based on their review state,
 	 * brings remaining elements in an order defined by {@link BTSEgyLemmaEntryComparator} 
-	 * (which varies based on the given prefix) and returns the first <code>n</code> elements of the resulting collection.  
+	 * (which varies based on the given prefix) and returns the first <code>n</code> elements of the resulting collection.
+	 * 
+	 * Excludes person names if 'include persons' flag is not set.
+	 * 
 	 * @param obs elements to be filtered, sorted and cut down to fixed number of items
 	 * @param searchString prefix determining sort order of filtered results
 	 * @param n maximum number of elements
