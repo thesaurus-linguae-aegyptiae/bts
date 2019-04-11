@@ -3,10 +3,9 @@ package org.bbaw.bts.core.services.corpus.impl.services;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import javax.inject.Inject;
+import javax.naming.OperationNotSupportedException;
 
 import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.core.commons.BTSObjectSearchService;
@@ -24,6 +23,7 @@ import org.bbaw.bts.corpus.btsCorpusModel.BtsCorpusModelFactory;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.core.di.extensions.Preference;
+import org.elasticsearch.common.lang3.StringUtils;
 import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 
@@ -32,14 +32,6 @@ extends AbstractCorpusObjectServiceImpl<BTSLemmaEntry, String>
 implements BTSLemmaEntryService, BTSObjectSearchService
 {
 
-	private final static Pattern doublePointPattern = Pattern.compile(BTSCorpusConstants.LEMMATIZER_DOUBLE_POINT_PATTERN);
-	
-	private final static Pattern pointPattern = Pattern.compile(BTSCorpusConstants.LEMMATIZER_POINT_PATTERN);
-	
-	private final static Pattern deletionPattern = Pattern.compile(BTSCorpusConstants.LEMMATIZER_DELETION_PATTERN);
-	
-
-	
 	@Inject
 	private BTSLemmaEntryDao lemmaEntryDao;
 
@@ -238,11 +230,6 @@ implements BTSLemmaEntryService, BTSObjectSearchService
 		queryBuilder.mustNot(
 				QueryBuilders.termQuery("type", "root")
 			);
-		if (!includePersonNames) {
-			queryBuilder.mustNot(
-					QueryBuilders.termQuery("subtype", "person_name")
-				);
-		}
 		queryBuilder.must(
 				QueryBuilders.boolQuery()
 				.should(
@@ -273,6 +260,13 @@ implements BTSLemmaEntryService, BTSObjectSearchService
 		}
 		queryBuilder.must(shouldClause);
 		query.setQueryBuilder(queryBuilder);
+		if (!includePersonNames) {
+			try {
+				query.excludeTerm("subtype", "person_name");
+			} catch (OperationNotSupportedException e) {
+				e.printStackTrace();
+			}
+		}
 		query.setAutocompletePrefix(term);
 		return query;
 	}
@@ -291,66 +285,52 @@ implements BTSLemmaEntryService, BTSObjectSearchService
 	}
 
 
+	/**
+	* Der Suchterm unterliegt bestimmten Transformationsregeln:
+	* <ul>
+	* <li>Geschweifte Klammern werden mitsamt ihrem Inhalt unberücksichtigt gelassen.</li>
+	* <li>Andere Klammern werden als nicht vorhanden angesehen.</li>
+	* <li>Wandle für die Suche ein ,t,pl in ein ,wt um.</li>
+	* <li>Wandle für die Suche ein ,tpl in ein ,wt um.</li>
+	* <li>Wandle für die Suche ein ,t,du in ein ,tj um.</li>
+	* <li>Wandle für die Suche ein ,tdu in ein ,tj um.</li>
+	* <li>Wandle für die Suche ein pl in ein w um</li>
+	* <li>Wandle für die Suche ein du in ein wj um.</li>
+	* <li>Verwirf alles ab dem . einschließlich.</li>
+	* <li>Verwirf alles ab dem : einschließlich.</li>
+	* <li>Wandle für die Suche ein , in ein . um.</li>
+	* <li>Wandle für die Suche ein ≡ in ein = um.</li>
+	* <li>Wandle für die Suche ein ⁝ in ein : um.</li>
+	* <li>Wandle das Zeichen vor einem ! in ein i̯ um und verwirf alles ab dem ! einschließlich.</li>
+	* </ul>
+	* Die Transformationsregeln gelten pro Token, d.h. ein ḥm.w-nṯr wird in die Token ḥm und nṯr transformiert.
+	 * 
+	 */
 	public String processWordCharForLemmatizing(String chars) {
-		
 		if (chars == null)
 			return null;
-		
-		// cut left side
-		Matcher m = doublePointPattern.matcher(chars);
-		if (m.find())
-		{
-			chars = m.group(2); 
-		}
-		
-		// cut right side
-		if (chars.contains("."))
-		{
-			m = pointPattern.matcher(chars);
-			if (m.find())
-			{
-				chars = m.group(1); 
-			}
-		}
-		
-		// cut right side
-		if (chars.contains("{"))
-		{
-			m = deletionPattern.matcher(chars);
-			if (m.find())
-			{
-				chars = m.replaceAll(""); 
-			}
-		}
-		
-		// replace
-		chars = chars.replaceAll(BTSCorpusConstants.LEMMATIZER_TRIPLE_POINT, ":");
-		
-		chars = chars.replaceAll(",", ".");
-		
-		chars = chars.replaceAll(BTSCorpusConstants.LEMMATIZER_TRIPLE_EQUALS, "=");
-		
-		// remove brackets
-		for (String b : BTSCorpusConstants.LEMMATIZER_ESCAPED_BRACKETS_ARRAY)
-		{
-			chars = chars.replaceAll(b, "");
-		}
-		
 
-		// XXX
-		if (chars.length() > 3 && chars.startsWith("\"") && chars.endsWith("\""))
-		{
-			chars = chars.substring(1, chars.length() -1);
-		}
-		else if (chars.length() > 1 && chars.startsWith("*"))
-		{
-			chars = chars.substring(1, chars.length());
-		}else if (chars.length() > 1 && chars.endsWith("*"))
-		{
-			chars = chars.substring(0, chars.length()-1);
-		}
-		System.out.println("search for lemma proposals for: "  + chars);
-		return chars;
+		String searchString = chars
+			.replaceAll("\\{[^\\{]*\\}", "")
+			.replaceAll("[\\(\\[\\)\\]]", "")
+			.replaceAll(
+					"["
+					+ StringUtils.join(BTSCorpusConstants.LEMMATIZER_ESCAPED_BRACKETS_ARRAY, "")
+					+ "]",
+					"")
+			.replaceAll(",t,?pl", ",wt")
+			.replaceAll(",t,?du", ",tj")
+			.replaceAll("pl", "w")
+			.replaceAll("du", "wj")
+			.replaceAll("([^.]*)\\.[^- ]*", "$1")
+			.replaceAll("([^- :]*):[^- ]*", "$1")
+			.replaceAll(",", ".")
+			.replaceAll("≡", "=")
+			.replaceAll("\u205D", ":")
+			.replaceAll("(.*).!.*", "$1i̯");
+
+		System.out.println("search for lemma proposals for: "  + searchString);
+		return searchString;
 	}
 
 	@Override

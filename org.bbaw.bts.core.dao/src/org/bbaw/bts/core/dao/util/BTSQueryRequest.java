@@ -37,6 +37,8 @@ import java.util.Locale;
 import java.util.Set;
 import java.util.Vector;
 
+import javax.naming.OperationNotSupportedException;
+
 import org.apache.lucene.queryParser.QueryParser;
 import org.bbaw.bts.btsmodel.BTSObject;
 import org.elasticsearch.action.search.SearchRequestBuilder;
@@ -81,6 +83,8 @@ public class BTSQueryRequest {
 	private boolean prefixQuery;
 	
 	private boolean wildcardQuery;
+
+	private boolean phraseQuery;
 	
 	private String lang;
 	
@@ -88,7 +92,7 @@ public class BTSQueryRequest {
 	
 	private int from = 0;
 	
-	private int size = 1000;
+	private int size = 2000;
 	
 	private long totalResultSize = 0;
 
@@ -96,15 +100,23 @@ public class BTSQueryRequest {
 	
 	public BTSQueryRequest() {
 		this.requestFields = new HashSet<String>();
+		this.idQuery = false;
+		this.prefixQuery = false;
+		this.phraseQuery = false;
+		this.wildcardQuery = false;
 	}
 	
 	public BTSQueryRequest(String searchString) {
 		this();
 		this.searchString = searchString;
-		this.idQuery = false;
-		this.prefixQuery = false;
 	}
-	
+
+	/**
+	 * Creates a new query container instance for the given search string, and ID and wildcard flags.
+	 * @param searchString
+	 * @param idQuery whether this is supposed to be an exact ID search (just match <code>_id</code> field)
+	 * @param wildcardQuery Whether this is supposed to use wildcard search
+	 */
 	public BTSQueryRequest(String searchString, boolean idQuery, boolean wildcardQuery) {
 		this(searchString);
 		this.idQuery = idQuery;
@@ -135,11 +147,21 @@ public class BTSQueryRequest {
 					if (wildcardQuery) {
 						qb = qb.should(QueryBuilders.wildcardQuery(field, escapedString));
 					} else if (prefixQuery) {
-						qb = qb.should(QueryBuilders.prefixQuery(field, searchString))
-								.should(QueryBuilders.prefixQuery(field, escapedString));
+						if (phraseQuery) {
+							qb = qb.should(QueryBuilders.matchPhrasePrefixQuery(field, searchString))
+									.should(QueryBuilders.matchPhrasePrefixQuery(field, escapedString));
+						} else {
+							qb = qb.should(QueryBuilders.prefixQuery(field, searchString))
+									.should(QueryBuilders.prefixQuery(field, escapedString));
+						}
 					} else {
-						qb = qb.should(QueryBuilders.termQuery(field, escapedString))
-								.should(QueryBuilders.matchQuery(field, escapedString));
+						if (phraseQuery) {
+							qb = qb.should(QueryBuilders.matchPhraseQuery(field, escapedString))
+									.should(QueryBuilders.matchPhraseQuery(field, searchString));
+						} else {
+							qb = qb.should(QueryBuilders.termQuery(field, escapedString))
+									.should(QueryBuilders.matchQuery(field, escapedString));
+						}
 					}
 				}
 				this.setQueryBuilder(qb);
@@ -172,9 +194,6 @@ public class BTSQueryRequest {
 		this.queryBuilder = queryBuilder;
 	}
 
-	/**
-	 * @return the queryId
-	 */
 	public String getQueryId()
 	{
 		return queryId;
@@ -280,6 +299,24 @@ public class BTSQueryRequest {
 		}
 	}
 
+	/**
+	 * If {@link #getQueryBuilder()} is a {@link BoolQueryBuilder}, add a <code>must_not</code> clause with a term query
+	 * excluding objects with the specified field matching the specified value.
+	 * 
+	 * @param field elasticsearch field selector
+	 * @param value the value that we don't want to see in our results
+	 * @throws OperationNotSupportedException if this query didn't use a bool query builder
+	 */
+	public void excludeTerm(String field, String value) throws OperationNotSupportedException {
+		if (BoolQueryBuilder.class.isInstance(queryBuilder)) {
+			((BoolQueryBuilder)queryBuilder).mustNot(
+					QueryBuilders.termQuery(field, value)
+				);
+		} else {
+			throw new OperationNotSupportedException("You can only exclude terms from queries that are actually bool queries.");
+		}
+	}
+
 	public String getDbPath() {
 		return dbPath;
 	}
@@ -307,7 +344,15 @@ public class BTSQueryRequest {
 	public boolean isPrefixQuery() {
 		return prefixQuery;
 	}
-	
+
+	public void setPhraseQuery(boolean phraseQuery) {
+		this.phraseQuery = phraseQuery;
+	}
+
+	public boolean isPhraseQuery() {
+		return phraseQuery;
+	}
+
 	public void setWildcardQuery(boolean wildcardQuery) {
 		this.wildcardQuery = wildcardQuery;
 	}
@@ -374,7 +419,5 @@ public class BTSQueryRequest {
 	public void setTotalResultSize(long totalResultSize) {
 		this.totalResultSize = totalResultSize;
 	}
-
-
 
 }
